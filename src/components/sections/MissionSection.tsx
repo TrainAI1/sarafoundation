@@ -1,43 +1,54 @@
-import { Lightbulb, Users, Heart, Target } from "lucide-react";
+import { Lightbulb, Users, Heart, Target, TrendingUp } from "lucide-react";
 
 const coreValues = [
   {
     icon: Lightbulb,
     title: "Innovation",
     description: "Fostering creative solutions and cutting-edge technology to address Africa's unique challenges.",
-    color: "bg-primary/10 text-primary",
+    gradient: "from-primary to-primary/60",
   },
   {
     icon: Users,
     title: "Collaboration",
     description: "Building strong partnerships across sectors to amplify our collective impact on the continent.",
-    color: "bg-accent/10 text-accent",
+    gradient: "from-accent to-accent/60",
   },
   {
     icon: Heart,
     title: "DEI",
     description: "Championing Diversity, Equity, and Inclusion to ensure everyone has a seat at the table.",
-    color: "bg-success/10 text-success",
+    gradient: "from-success to-success/60",
   },
   {
     icon: Target,
     title: "Do Well, Do Good",
     description: "Creating sustainable impact while driving excellence in everything we do.",
-    color: "bg-primary/10 text-primary",
+    gradient: "from-primary to-accent",
   },
+];
+
+const stats = [
+  { value: "500+", label: "Students Empowered", icon: TrendingUp },
+  { value: "50+", label: "University Partners", icon: Users },
+  { value: "100+", label: "Mentors & Coaches", icon: Heart },
+  { value: "10+", label: "African Countries", icon: Target },
 ];
 
 export function MissionSection() {
   return (
-    <section className="py-20 md:py-32 bg-secondary">
-      <div className="section-container">
+    <section className="py-24 md:py-32 bg-background relative overflow-hidden">
+      {/* Subtle background pattern */}
+      <div className="absolute inset-0 mesh-gradient opacity-50" />
+      
+      <div className="section-container relative z-10">
         {/* Mission Statement */}
-        <div className="text-center max-w-4xl mx-auto mb-16 md:mb-24">
-          <span className="inline-block px-4 py-2 bg-primary/10 text-primary font-semibold rounded-full text-sm mb-6">
+        <div className="text-center max-w-4xl mx-auto mb-20">
+          <span className="section-badge mb-6">
             Our Mission
           </span>
-          <h2 className="section-title text-foreground mb-6">
-            Fostering Diversity, Equity & Inclusion in African Tech
+          <h2 className="section-title text-foreground mb-6 text-balance">
+            Fostering Diversity, Equity & Inclusion in{" "}
+            <span className="gradient-text">African Tech</span>
           </h2>
           <p className="section-subtitle mx-auto">
             Sara Foundation Africa is dedicated to empowering young Africans to thrive in 
@@ -47,15 +58,15 @@ export function MissionSection() {
         </div>
 
         {/* Core Values */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
           {coreValues.map((value, index) => (
             <div 
               key={value.title}
-              className="card-elevated p-6 md:p-8 text-center group"
+              className="card-modern p-8 text-center group"
               style={{ animationDelay: `${index * 0.1}s` }}
             >
-              <div className={`w-16 h-16 mx-auto rounded-2xl ${value.color} flex items-center justify-center mb-6 group-hover:scale-110 transition-transform`}>
-                <value.icon className="w-8 h-8" />
+              <div className={`w-16 h-16 mx-auto rounded-2xl bg-gradient-to-br ${value.gradient} flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg`}>
+                <value.icon className="w-8 h-8 text-white" />
               </div>
               <h3 className="font-display font-bold text-xl mb-3 text-foreground">
                 {value.title}
@@ -67,25 +78,23 @@ export function MissionSection() {
           ))}
         </div>
 
-        {/* Impact Numbers */}
-        <div className="mt-16 md:mt-24 bg-primary rounded-3xl p-8 md:p-12">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center text-white">
-            <div>
-              <div className="text-4xl md:text-5xl font-bold mb-2">500+</div>
-              <div className="text-white/70">Students Empowered</div>
-            </div>
-            <div>
-              <div className="text-4xl md:text-5xl font-bold mb-2">50+</div>
-              <div className="text-white/70">University Partners</div>
-            </div>
-            <div>
-              <div className="text-4xl md:text-5xl font-bold mb-2">100+</div>
-              <div className="text-white/70">Mentors & Coaches</div>
-            </div>
-            <div>
-              <div className="text-4xl md:text-5xl font-bold mb-2">10+</div>
-              <div className="text-white/70">African Countries</div>
-            </div>
+        {/* Impact Stats */}
+        <div className="mt-20 relative">
+          <div className="absolute inset-0 bg-gradient-to-r from-primary via-primary/90 to-[hsl(240,80%,50%)] rounded-[2rem]" />
+          <div className="absolute inset-0 opacity-20">
+            <div className="absolute top-0 right-0 w-64 h-64 rounded-full bg-white blur-3xl" />
+            <div className="absolute bottom-0 left-0 w-48 h-48 rounded-full bg-accent blur-3xl" />
+          </div>
+          <div className="relative grid grid-cols-2 md:grid-cols-4 gap-8 p-10 md:p-14 text-center text-white">
+            {stats.map((stat) => (
+              <div key={stat.label} className="group">
+                <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-white/10 mb-4 group-hover:scale-110 transition-transform">
+                  <stat.icon className="w-6 h-6" />
+                </div>
+                <div className="text-4xl md:text-5xl font-bold font-display mb-2">{stat.value}</div>
+                <div className="text-white/70 text-sm">{stat.label}</div>
+              </div>
+            ))}
           </div>
         </div>
       </div>

@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Mail, MapPin, Phone, Facebook, Twitter, Linkedin, Instagram, Youtube } from "lucide-react";
+import { Mail, MapPin, Phone, Facebook, Twitter, Linkedin, Instagram, Youtube, Send } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 
@@ -28,13 +28,19 @@ const socialLinks = [
 
 export function Footer() {
   return (
-    <footer className="bg-foreground text-white">
-      <div className="section-container py-16">
+    <footer className="bg-foreground text-white relative overflow-hidden">
+      {/* Background decoration */}
+      <div className="absolute inset-0 opacity-5">
+        <div className="absolute top-0 right-0 w-[500px] h-[500px] rounded-full bg-primary blur-3xl" />
+        <div className="absolute bottom-0 left-0 w-[400px] h-[400px] rounded-full bg-accent blur-3xl" />
+      </div>
+
+      <div className="section-container py-20 relative z-10">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
           {/* Brand & Newsletter */}
           <div className="lg:col-span-1">
-            <div className="flex items-center gap-2 mb-4">
-              <div className="w-10 h-10 rounded-lg bg-primary flex items-center justify-center">
+            <div className="flex items-center gap-3 mb-6">
+              <div className="w-11 h-11 rounded-xl bg-gradient-to-br from-primary to-primary/80 flex items-center justify-center">
                 <span className="text-primary-foreground font-bold text-lg">SF</span>
               </div>
               <div>
@@ -42,21 +48,21 @@ export function Footer() {
                 <span className="text-primary font-display font-bold text-lg"> Africa</span>
               </div>
             </div>
-            <p className="text-white/70 text-sm mb-6">
+            <p className="text-white/60 text-sm mb-8 leading-relaxed">
               Empowering the next generation of African tech entrepreneurs through innovation, diversity, and inclusion.
             </p>
             
             {/* Newsletter */}
-            <div className="space-y-3">
+            <div className="space-y-4">
               <p className="font-semibold">Subscribe to our newsletter</p>
               <div className="flex gap-2">
                 <Input 
                   type="email" 
                   placeholder="Enter your email" 
-                  className="bg-white/10 border-white/20 text-white placeholder:text-white/50"
+                  className="bg-white/5 border-white/10 text-white placeholder:text-white/40 rounded-xl focus:border-primary"
                 />
-                <Button variant="accent" size="sm">
-                  Subscribe
+                <Button variant="accent" size="icon" className="rounded-xl flex-shrink-0">
+                  <Send className="w-4 h-4" />
                 </Button>
               </div>
             </div>
@@ -64,13 +70,13 @@ export function Footer() {
 
           {/* Quick Links */}
           <div>
-            <h4 className="font-display font-bold text-lg mb-4">Quick Links</h4>
-            <ul className="space-y-3">
+            <h4 className="font-display font-bold text-lg mb-6">Quick Links</h4>
+            <ul className="space-y-4">
               {quickLinks.map((link) => (
                 <li key={link.title}>
                   <Link 
                     to={link.href} 
-                    className="text-white/70 hover:text-primary transition-colors"
+                    className="text-white/60 hover:text-primary transition-colors text-sm"
                   >
                     {link.title}
                   </Link>
@@ -81,13 +87,13 @@ export function Footer() {
 
           {/* Programs */}
           <div>
-            <h4 className="font-display font-bold text-lg mb-4">Our Programs</h4>
-            <ul className="space-y-3">
+            <h4 className="font-display font-bold text-lg mb-6">Our Programs</h4>
+            <ul className="space-y-4">
               {programLinks.map((link) => (
                 <li key={link.title}>
                   <Link 
                     to={link.href} 
-                    className="text-white/70 hover:text-primary transition-colors"
+                    className="text-white/60 hover:text-primary transition-colors text-sm"
                   >
                     {link.title}
                   </Link>
@@ -98,36 +104,42 @@ export function Footer() {
 
           {/* Contact Info */}
           <div>
-            <h4 className="font-display font-bold text-lg mb-4">Contact Us</h4>
-            <ul className="space-y-4">
-              <li className="flex items-start gap-3">
-                <MapPin className="w-5 h-5 text-primary mt-0.5 flex-shrink-0" />
-                <span className="text-white/70 text-sm">Lagos, Nigeria</span>
+            <h4 className="font-display font-bold text-lg mb-6">Contact Us</h4>
+            <ul className="space-y-5">
+              <li className="flex items-start gap-4">
+                <div className="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center flex-shrink-0">
+                  <MapPin className="w-5 h-5 text-primary" />
+                </div>
+                <span className="text-white/60 text-sm pt-2">Lagos, Nigeria</span>
               </li>
-              <li className="flex items-center gap-3">
-                <Mail className="w-5 h-5 text-primary flex-shrink-0" />
-                <a href="mailto:info@sarafoundation.africa" className="text-white/70 hover:text-primary text-sm transition-colors">
+              <li className="flex items-center gap-4">
+                <div className="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center flex-shrink-0">
+                  <Mail className="w-5 h-5 text-primary" />
+                </div>
+                <a href="mailto:info@sarafoundation.africa" className="text-white/60 hover:text-primary text-sm transition-colors">
                   info@sarafoundation.africa
                 </a>
               </li>
-              <li className="flex items-center gap-3">
-                <Phone className="w-5 h-5 text-primary flex-shrink-0" />
-                <span className="text-white/70 text-sm">+234 xxx xxx xxxx</span>
+              <li className="flex items-center gap-4">
+                <div className="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center flex-shrink-0">
+                  <Phone className="w-5 h-5 text-primary" />
+                </div>
+                <span className="text-white/60 text-sm">+234 xxx xxx xxxx</span>
               </li>
             </ul>
 
             {/* Social Links */}
-            <div className="mt-6">
-              <p className="font-semibold mb-3">Follow Us</p>
-              <div className="flex gap-3">
+            <div className="mt-8">
+              <p className="font-semibold mb-4">Follow Us</p>
+              <div className="flex gap-2">
                 {socialLinks.map((social) => (
                   <a
                     key={social.label}
                     href={social.href}
-                    className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-primary transition-colors"
+                    className="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center hover:bg-primary transition-all duration-300"
                     aria-label={social.label}
                   >
-                    <social.icon className="w-5 h-5" />
+                    <social.icon className="w-4 h-4" />
                   </a>
                 ))}
               </div>
@@ -136,15 +148,15 @@ export function Footer() {
         </div>
 
         {/* Bottom Bar */}
-        <div className="mt-12 pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-4">
-          <p className="text-white/50 text-sm">
+        <div className="mt-16 pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-4">
+          <p className="text-white/40 text-sm">
             © {new Date().getFullYear()} Sara Foundation Africa. All rights reserved.
           </p>
           <div className="flex gap-6 text-sm">
-            <Link to="/privacy" className="text-white/50 hover:text-white transition-colors">
+            <Link to="/privacy" className="text-white/40 hover:text-white transition-colors">
               Privacy Policy
             </Link>
-            <Link to="/terms" className="text-white/50 hover:text-white transition-colors">
+            <Link to="/terms" className="text-white/40 hover:text-white transition-colors">
               Terms of Service
             </Link>
           </div>
