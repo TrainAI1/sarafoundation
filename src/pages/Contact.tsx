@@ -11,10 +11,10 @@ import {
 import { useToast } from "@/hooks/use-toast";
 
 const contactInfo = [
-  { icon: Mail, title: "Email Us", value: "info@sarafoundation.africa", href: "mailto:info@sarafoundation.africa" },
-  { icon: Phone, title: "Call Us", value: "+234 xxx xxx xxxx", href: "tel:+234xxxxxxxx" },
-  { icon: MapPin, title: "Visit Us", value: "Lagos, Nigeria", href: "#" },
-  { icon: Clock, title: "Office Hours", value: "Mon - Fri, 9am - 5pm WAT", href: null },
+  { icon: Mail, title: "Email Us", value: "info@sarafoundationafrica.com", href: "mailto:info@sarafoundationafrica.com" },
+  { icon: Phone, title: "Call Us (UK)", value: "+44 7435 126104", href: "tel:+447435126104" },
+  { icon: Phone, title: "Call Us (NG)", value: "+234 9076 66404", href: "tel:+234907666404" },
+  { icon: Clock, title: "Office Hours", value: "Mon - Fri, 9am - 5pm", href: null },
 ];
 
 const socialLinks = [
@@ -247,11 +247,10 @@ export default function Contact() {
             </h2>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-6">
+          <div className="grid md:grid-cols-2 gap-6 max-w-2xl mx-auto">
             {[
-              { city: "Lagos", country: "Nigeria", address: "Victoria Island, Lagos" },
-              { city: "Nairobi", country: "Kenya", address: "Westlands, Nairobi" },
-              { city: "Cape Town", country: "South Africa", address: "Cape Town CBD" },
+              { city: "London", country: "United Kingdom", address: "E14 8AT, London" },
+              { city: "Lagos", country: "Nigeria", address: "Bafaj Crescent, Awoyaya-Eputu, Ibeju Lekki" },
             ].map((office) => (
               <div key={office.city} className="card-modern p-6 text-center">
                 <div className="w-12 h-12 mx-auto rounded-xl bg-gradient-to-br from-primary to-accent flex items-center justify-center mb-4">

@@ -110,21 +110,27 @@ export function Footer() {
                 <div className="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center flex-shrink-0">
                   <MapPin className="w-5 h-5 text-primary" />
                 </div>
-                <span className="text-white/60 text-sm pt-2">Lagos, Nigeria</span>
+                <div className="text-white/60 text-sm pt-2">
+                  <p>E14 8AT, London, UK</p>
+                  <p>Bafaj Crescent, Awoyaya-Eputu, Ibeju Lekki, Lagos, Nigeria</p>
+                </div>
               </li>
               <li className="flex items-center gap-4">
                 <div className="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center flex-shrink-0">
                   <Mail className="w-5 h-5 text-primary" />
                 </div>
-                <a href="mailto:info@sarafoundation.africa" className="text-white/60 hover:text-primary text-sm transition-colors">
-                  info@sarafoundation.africa
+                <a href="mailto:info@sarafoundationafrica.com" className="text-white/60 hover:text-primary text-sm transition-colors">
+                  info@sarafoundationafrica.com
                 </a>
               </li>
               <li className="flex items-center gap-4">
                 <div className="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center flex-shrink-0">
                   <Phone className="w-5 h-5 text-primary" />
                 </div>
-                <span className="text-white/60 text-sm">+234 xxx xxx xxxx</span>
+                <div className="text-white/60 text-sm">
+                  <p>+44 7435 126104</p>
+                  <p>+234 9076 66404</p>
+                </div>
               </li>
             </ul>
 
