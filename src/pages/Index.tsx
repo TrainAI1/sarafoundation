@@ -3,8 +3,13 @@ import { Footer } from "@/components/layout/Footer";
 import { HeroSection } from "@/components/sections/HeroSection";
 import { MissionSection } from "@/components/sections/MissionSection";
 import { ProgramsSection } from "@/components/sections/ProgramsSection";
+import { ImpactSection } from "@/components/sections/ImpactSection";
+import { TestimonialsSection } from "@/components/sections/TestimonialsSection";
 import { DonationSection } from "@/components/sections/DonationSection";
+import { PartnersSection } from "@/components/sections/PartnersSection";
 import { TeamSection } from "@/components/sections/TeamSection";
+import { FAQSection } from "@/components/sections/FAQSection";
+import { NewsletterSection } from "@/components/sections/NewsletterSection";
 import { CTASection } from "@/components/sections/CTASection";
 
 const Index = () => {
@@ -15,8 +20,13 @@ const Index = () => {
         <HeroSection />
         <MissionSection />
         <ProgramsSection />
+        <ImpactSection />
+        <TestimonialsSection />
         <DonationSection />
+        <PartnersSection />
         <TeamSection />
+        <FAQSection />
+        <NewsletterSection />
         <CTASection />
       </main>
       <Footer />
