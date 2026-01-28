@@ -30,17 +30,17 @@ export function SDGSection() {
       {sdgGoals.map((goal) => (
         <div
           key={goal.number}
-          className={`py-16 bg-gradient-to-r ${goal.color}`}
+          className={`py-12 md:py-16 bg-gradient-to-r ${goal.color}`}
         >
           <div className="section-container text-center">
-            <div className="max-w-3xl mx-auto">
-              <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-white/10 backdrop-blur-sm mb-6">
-                <goal.icon className="w-8 h-8 text-white" />
+            <div className="max-w-3xl mx-auto px-4">
+              <div className="inline-flex items-center justify-center w-12 h-12 md:w-16 md:h-16 rounded-xl md:rounded-2xl bg-white/10 backdrop-blur-sm mb-4 md:mb-6">
+                <goal.icon className="w-6 h-6 md:w-8 md:h-8 text-white" />
               </div>
-              <h3 className="font-display text-4xl md:text-5xl font-bold text-white mb-4">
+              <h3 className="font-display text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-3 md:mb-4">
                 SDG {goal.number}
               </h3>
-              <p className="text-lg md:text-xl text-white/80 leading-relaxed">
+              <p className="text-base md:text-lg lg:text-xl text-white/80 leading-relaxed">
                 {goal.description}
               </p>
             </div>

@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { Mail, MapPin, Phone, Facebook, Twitter, Linkedin, Instagram, Youtube, Send } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import logoWhite from "@/assets/logo-white.png";
 
 const quickLinks = [
   { title: "Home", href: "/" },
@@ -35,19 +36,17 @@ export function Footer() {
         <div className="absolute bottom-0 left-0 w-[400px] h-[400px] rounded-full bg-accent blur-3xl" />
       </div>
 
-      <div className="section-container py-20 relative z-10">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
+      <div className="section-container py-16 md:py-20 relative z-10">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-12">
           {/* Brand & Newsletter */}
-          <div className="lg:col-span-1">
-            <div className="flex items-center gap-3 mb-6">
-              <div className="w-11 h-11 rounded-xl bg-gradient-to-br from-primary to-primary/80 flex items-center justify-center">
-                <span className="text-primary-foreground font-bold text-lg">SF</span>
-              </div>
-              <div>
-                <span className="font-display font-bold text-lg">Sara Foundation</span>
-                <span className="text-primary font-display font-bold text-lg"> Africa</span>
-              </div>
-            </div>
+          <div className="sm:col-span-2 lg:col-span-1">
+            <Link to="/" className="inline-block mb-6">
+              <img 
+                src={logoWhite} 
+                alt="Sara Foundation Africa" 
+                className="h-10 md:h-12 w-auto"
+              />
+            </Link>
             <p className="text-white/60 text-sm mb-8 leading-relaxed">
               Empowering the next generation of African tech entrepreneurs through innovation, diversity, and inclusion.
             </p>

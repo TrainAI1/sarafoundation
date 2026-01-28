@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Menu, X, ChevronDown } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   NavigationMenu,
@@ -10,6 +10,8 @@ import {
   NavigationMenuList,
   NavigationMenuTrigger,
 } from "@/components/ui/navigation-menu";
+import logoDark from "@/assets/logo-dark.png";
+import logoWhite from "@/assets/logo-white.png";
 
 const partnershipItems = [
   { title: "School Community", href: "/partnership/school-community", description: "Partner with educational institutions" },
@@ -36,6 +38,7 @@ export function Navbar() {
   }, []);
 
   const isHome = location.pathname === "/";
+  const showDarkLogo = scrolled || !isHome;
 
   return (
     <header 
@@ -50,19 +53,12 @@ export function Navbar() {
       <nav className="section-container">
         <div className="flex items-center justify-between h-16 md:h-20">
           {/* Logo */}
-          <Link to="/" className="flex items-center gap-3 group">
-            <div className="relative w-10 h-10">
-              <div className="absolute inset-0 rounded-xl bg-gradient-to-br from-primary to-primary/80 group-hover:scale-110 transition-transform duration-300" />
-              <div className="absolute inset-0 rounded-xl flex items-center justify-center">
-                <span className="text-primary-foreground font-bold text-lg">SF</span>
-              </div>
-            </div>
-            <div className="hidden sm:block">
-              <span className={`font-display font-bold text-lg ${scrolled || !isHome ? 'text-foreground' : 'text-white'}`}>
-                Sara Foundation
-              </span>
-              <span className="text-primary font-display font-bold text-lg"> Africa</span>
-            </div>
+          <Link to="/" className="flex items-center">
+            <img 
+              src={showDarkLogo ? logoDark : logoWhite} 
+              alt="Sara Foundation Africa" 
+              className="h-10 md:h-12 w-auto"
+            />
           </Link>
 
           {/* Desktop Navigation */}

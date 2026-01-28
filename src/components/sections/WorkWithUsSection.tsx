@@ -4,36 +4,36 @@ import { Link } from "react-router-dom";
 
 export function WorkWithUsSection() {
   return (
-    <section className="py-24 bg-gradient-to-br from-primary via-primary/90 to-[hsl(240,80%,50%)] relative overflow-hidden">
+    <section className="py-16 md:py-24 bg-gradient-to-br from-primary via-primary/90 to-[hsl(240,80%,50%)] relative overflow-hidden">
       {/* Background effects */}
       <div className="absolute inset-0 opacity-30">
-        <div className="absolute top-1/4 right-1/4 w-[400px] h-[400px] rounded-full bg-accent blur-[120px]" />
-        <div className="absolute bottom-1/4 left-1/4 w-[300px] h-[300px] rounded-full bg-white/20 blur-[100px]" />
+        <div className="absolute top-1/4 right-1/4 w-[300px] md:w-[400px] h-[300px] md:h-[400px] rounded-full bg-accent blur-[100px] md:blur-[120px]" />
+        <div className="absolute bottom-1/4 left-1/4 w-[200px] md:w-[300px] h-[200px] md:h-[300px] rounded-full bg-white/20 blur-[80px] md:blur-[100px]" />
       </div>
 
       <div className="section-container relative z-10">
-        <div className="max-w-3xl mx-auto text-center">
-          <div className="inline-flex items-center gap-2 px-4 py-2 glass-card-dark rounded-full text-white/90 text-sm font-medium mb-6">
+        <div className="max-w-3xl mx-auto text-center px-4">
+          <div className="inline-flex items-center gap-2 px-4 py-2 glass-card-dark rounded-full text-white/90 text-sm font-medium mb-4 md:mb-6">
             <Heart className="w-4 h-4 text-accent" />
             Work with Us
           </div>
           
-          <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-6">
+          <h2 className="font-display text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4 md:mb-6 leading-tight">
             We are on a mission to empower the next generation of tech founders and professionals.
           </h2>
           
-          <p className="text-xl text-white/70 mb-10">
+          <p className="text-lg md:text-xl text-white/70 mb-8 md:mb-10">
             Join Us, Partner with Us, and Donate for Africa's Future.
           </p>
 
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button variant="hero" size="lg" className="group" asChild>
+          <div className="flex flex-col sm:flex-row gap-3 md:gap-4 justify-center">
+            <Button variant="hero" size="lg" className="group w-full sm:w-auto" asChild>
               <Link to="/donation">
                 Donate
                 <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </Link>
             </Button>
-            <Button variant="heroSecondary" size="lg" asChild>
+            <Button variant="heroSecondary" size="lg" className="w-full sm:w-auto" asChild>
               <Link to="/partnership">
                 Partner with Us
               </Link>
