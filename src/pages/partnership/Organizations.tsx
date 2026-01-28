@@ -62,30 +62,30 @@ export default function Organizations() {
       <Navbar />
       
       {/* Hero */}
-      <section className="pt-32 pb-20 bg-gradient-to-br from-primary via-primary/90 to-[hsl(240,80%,50%)] relative overflow-hidden">
+      <section className="pt-28 md:pt-32 pb-16 md:pb-20 bg-gradient-to-br from-primary via-primary/90 to-[hsl(240,80%,50%)] relative overflow-hidden">
         <div className="absolute inset-0 opacity-30">
-          <div className="absolute top-1/4 right-1/4 w-[500px] h-[500px] rounded-full bg-accent blur-[150px]" />
+          <div className="absolute top-1/4 right-1/4 w-[300px] md:w-[500px] h-[300px] md:h-[500px] rounded-full bg-accent blur-[100px] md:blur-[150px]" />
         </div>
         <div className="section-container relative z-10">
-          <div className="max-w-4xl mx-auto text-center">
-            <span className="inline-flex items-center gap-2 px-4 py-2 glass-card-dark rounded-full text-white/90 text-sm font-medium mb-6">
+          <div className="max-w-4xl mx-auto text-center px-4">
+            <span className="inline-flex items-center gap-2 px-4 py-2 glass-card-dark rounded-full text-white/90 text-sm font-medium mb-4 md:mb-6">
               <Building className="w-4 h-4 text-accent" />
               Partners & Collaborators
             </span>
-            <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight">
+            <h1 className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 md:mb-6 leading-tight">
               Partner with Sara Foundation Africa
             </h1>
-            <p className="text-xl text-white/70 leading-relaxed mb-8 max-w-3xl mx-auto">
+            <p className="text-base md:text-xl text-white/70 leading-relaxed mb-6 md:mb-8 max-w-3xl mx-auto">
               We are a non-profit organization established to promote SDG 4, SDG 5 and SDG 8 in Africa 
               with a focus on technology and entrepreneurship. Our goal is to foster Diversity, Equity 
               and Inclusion in technology and accelerate tech opportunities in Africa leveraging our 
               initiatives: the Career Advancement Program (CAP) and Female Leadership Initiative Program (FLIP).
             </p>
-            <p className="text-lg text-white/60 mb-8 max-w-3xl mx-auto">
+            <p className="text-sm md:text-lg text-white/60 mb-6 md:mb-8 max-w-3xl mx-auto">
               Through CAP, we establish tech hubs across African universities. Through FLIP, we empower 
               women tech professionals and tech founders for continued success in Africa.
             </p>
-            <Button variant="hero" size="lg" asChild>
+            <Button variant="hero" size="lg" className="w-full sm:w-auto" asChild>
               <Link to="/contact">
                 Contact Us
                 <ArrowRight className="w-5 h-5" />
@@ -96,27 +96,27 @@ export default function Organizations() {
       </section>
 
       {/* Current Partners */}
-      <section className="py-24 bg-background">
+      <section className="py-16 md:py-24 bg-background">
         <div className="section-container">
-          <div className="text-center max-w-3xl mx-auto mb-16">
-            <span className="section-badge mb-6">
+          <div className="text-center max-w-3xl mx-auto mb-10 md:mb-16 px-4">
+            <span className="section-badge mb-4 md:mb-6">
               <Handshake className="w-4 h-4" />
               Our Partners
             </span>
-            <h2 className="section-title text-foreground mb-6">
+            <h2 className="section-title text-foreground mb-4 md:mb-6">
               Organizations We <span className="gradient-text">Work With</span>
             </h2>
           </div>
 
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 md:gap-4">
             {currentPartners.map((partner) => (
-              <div key={partner} className="card-modern p-4 text-center">
-                <div className="w-12 h-12 mx-auto rounded-xl bg-gradient-to-br from-primary/10 to-accent/10 flex items-center justify-center mb-3">
-                  <span className="text-lg font-bold text-primary">
+              <div key={partner} className="card-modern p-3 md:p-4 text-center">
+                <div className="w-10 h-10 md:w-12 md:h-12 mx-auto rounded-lg md:rounded-xl bg-gradient-to-br from-primary/10 to-accent/10 flex items-center justify-center mb-2 md:mb-3">
+                  <span className="text-sm md:text-lg font-bold text-primary">
                     {partner.split(' ').map(w => w[0]).join('').slice(0, 2)}
                   </span>
                 </div>
-                <p className="font-medium text-foreground text-sm">{partner}</p>
+                <p className="font-medium text-foreground text-xs md:text-sm">{partner}</p>
               </div>
             ))}
           </div>
@@ -124,45 +124,45 @@ export default function Organizations() {
       </section>
 
       {/* Partner Categories */}
-      <section className="py-24 bg-secondary/50">
+      <section className="py-16 md:py-24 bg-secondary/50">
         <div className="section-container">
-          <div className="text-center max-w-3xl mx-auto mb-16">
-            <span className="section-badge mb-6">
+          <div className="text-center max-w-3xl mx-auto mb-10 md:mb-16 px-4">
+            <span className="section-badge mb-4 md:mb-6">
               <CheckCircle2 className="w-4 h-4" />
               Benefits
             </span>
-            <h2 className="section-title text-foreground mb-6">
+            <h2 className="section-title text-foreground mb-4 md:mb-6">
               Why You Should <span className="gradient-text">Partner with Us</span>
             </h2>
           </div>
 
-          <div className="grid lg:grid-cols-3 gap-8">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
             {partnerCategories.map((category) => (
               <div key={category.number} className="card-modern overflow-hidden flex flex-col">
-                <div className={`p-6 bg-gradient-to-r ${category.color} text-white`}>
-                  <div className="flex items-center gap-4 mb-4">
-                    <div className="w-14 h-14 rounded-2xl bg-white/20 backdrop-blur-sm flex items-center justify-center">
-                      <category.icon className="w-7 h-7" />
+                <div className={`p-5 md:p-6 bg-gradient-to-r ${category.color} text-white`}>
+                  <div className="flex items-center gap-3 md:gap-4 mb-3 md:mb-4">
+                    <div className="w-12 h-12 md:w-14 md:h-14 rounded-xl md:rounded-2xl bg-white/20 backdrop-blur-sm flex items-center justify-center">
+                      <category.icon className="w-6 h-6 md:w-7 md:h-7" />
                     </div>
                     <div>
-                      <span className="text-white/60 text-sm">{category.number}</span>
-                      <h3 className="font-display font-bold text-xl">{category.title}</h3>
+                      <span className="text-white/60 text-xs md:text-sm">{category.number}</span>
+                      <h3 className="font-display font-bold text-lg md:text-xl">{category.title}</h3>
                     </div>
                   </div>
                 </div>
 
-                <div className="p-6 flex-1">
-                  <ul className="space-y-3">
+                <div className="p-5 md:p-6 flex-1">
+                  <ul className="space-y-2 md:space-y-3">
                     {category.benefits.map((benefit, idx) => (
-                      <li key={idx} className="flex items-start gap-3 text-sm text-foreground">
-                        <CheckCircle2 className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
+                      <li key={idx} className="flex items-start gap-2 md:gap-3 text-xs md:text-sm text-foreground">
+                        <CheckCircle2 className="w-4 h-4 md:w-5 md:h-5 text-primary flex-shrink-0 mt-0.5" />
                         <span>{benefit}</span>
                       </li>
                     ))}
                   </ul>
                 </div>
 
-                <div className="p-6 pt-0">
+                <div className="p-5 md:p-6 pt-0">
                   <Button variant="outline" className="w-full group" asChild>
                     <Link to="/contact">
                       Get Started
@@ -177,15 +177,15 @@ export default function Organizations() {
       </section>
 
       {/* CTA */}
-      <section className="py-24 bg-gradient-to-br from-primary via-primary/90 to-[hsl(240,80%,50%)]">
-        <div className="section-container text-center">
-          <h2 className="font-display text-3xl md:text-4xl font-bold text-white mb-6">
+      <section className="py-16 md:py-24 bg-gradient-to-br from-primary via-primary/90 to-[hsl(240,80%,50%)]">
+        <div className="section-container text-center px-4">
+          <h2 className="font-display text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-4 md:mb-6">
             Ready to Make an Impact Together?
           </h2>
-          <p className="text-white/70 text-lg mb-8 max-w-2xl mx-auto">
+          <p className="text-white/70 text-base md:text-lg mb-6 md:mb-8 max-w-2xl mx-auto">
             Partner with us to drive tech talent development and promote diversity in Africa's tech ecosystem.
           </p>
-          <Button variant="hero" size="lg" asChild>
+          <Button variant="hero" size="lg" className="w-full sm:w-auto" asChild>
             <Link to="/contact">
               Contact Our Partnership Team
               <ArrowRight className="w-5 h-5" />
