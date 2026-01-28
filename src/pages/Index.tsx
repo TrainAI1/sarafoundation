@@ -1,6 +1,8 @@
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { HeroSection } from "@/components/sections/HeroSection";
+import { SDGSection } from "@/components/sections/SDGSection";
+import { WorkWithUsSection } from "@/components/sections/WorkWithUsSection";
 import { MissionSection } from "@/components/sections/MissionSection";
 import { ProgramsSection } from "@/components/sections/ProgramsSection";
 import { ImpactSection } from "@/components/sections/ImpactSection";
@@ -16,6 +18,8 @@ const Index = () => {
       <Navbar />
       <main>
         <HeroSection />
+        <SDGSection />
+        <WorkWithUsSection />
         <MissionSection />
         <ProgramsSection />
         <ImpactSection />

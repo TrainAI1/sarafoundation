@@ -10,6 +10,9 @@ import Blog from "./pages/Blog";
 import ProgramCAP from "./pages/programs/CAP";
 import ProgramFLIP from "./pages/programs/FLIP";
 import Partnership from "./pages/Partnership";
+import SchoolCommunity from "./pages/partnership/SchoolCommunity";
+import Organizations from "./pages/partnership/Organizations";
+import Sponsors from "./pages/partnership/Sponsors";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -28,9 +31,9 @@ const App = () => (
           <Route path="/programs/cap" element={<ProgramCAP />} />
           <Route path="/programs/flip" element={<ProgramFLIP />} />
           <Route path="/partnership" element={<Partnership />} />
-          <Route path="/partnership/school-community" element={<Partnership />} />
-          <Route path="/partnership/organizations" element={<Partnership />} />
-          <Route path="/partnership/sponsors" element={<Partnership />} />
+          <Route path="/partnership/school-community" element={<SchoolCommunity />} />
+          <Route path="/partnership/organizations" element={<Organizations />} />
+          <Route path="/partnership/sponsors" element={<Sponsors />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
