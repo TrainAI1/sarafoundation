@@ -36,13 +36,13 @@ const stats = [
 
 export function MissionSection() {
   return (
-    <section className="py-24 md:py-32 bg-background relative overflow-hidden">
+    <section className="py-16 md:py-24 lg:py-32 bg-background relative overflow-hidden">
       {/* Subtle background pattern */}
       <div className="absolute inset-0 mesh-gradient opacity-50" />
       
       <div className="section-container relative z-10">
         {/* Mission Statement */}
-        <div className="text-center max-w-4xl mx-auto mb-20">
+        <div className="text-center max-w-4xl mx-auto mb-12 md:mb-20 px-4">
           <span className="section-badge mb-6">
             Our Mission
           </span>
@@ -58,20 +58,20 @@ export function MissionSection() {
         </div>
 
         {/* Core Values */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
           {coreValues.map((value, index) => (
             <div 
               key={value.title}
-              className="card-modern p-8 text-center group"
+              className="card-modern p-5 md:p-8 text-center group"
               style={{ animationDelay: `${index * 0.1}s` }}
             >
-              <div className={`w-16 h-16 mx-auto rounded-2xl bg-gradient-to-br ${value.gradient} flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg`}>
-                <value.icon className="w-8 h-8 text-white" />
+              <div className={`w-12 h-12 md:w-16 md:h-16 mx-auto rounded-xl md:rounded-2xl bg-gradient-to-br ${value.gradient} flex items-center justify-center mb-4 md:mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg`}>
+                <value.icon className="w-6 h-6 md:w-8 md:h-8 text-white" />
               </div>
-              <h3 className="font-display font-bold text-xl mb-3 text-foreground">
+              <h3 className="font-display font-bold text-lg md:text-xl mb-2 md:mb-3 text-foreground">
                 {value.title}
               </h3>
-              <p className="text-muted-foreground text-sm leading-relaxed">
+              <p className="text-muted-foreground text-xs md:text-sm leading-relaxed">
                 {value.description}
               </p>
             </div>
@@ -79,20 +79,20 @@ export function MissionSection() {
         </div>
 
         {/* Impact Stats */}
-        <div className="mt-20 relative">
-          <div className="absolute inset-0 bg-gradient-to-r from-primary via-primary/90 to-[hsl(240,80%,50%)] rounded-[2rem]" />
+        <div className="mt-12 md:mt-20 relative">
+          <div className="absolute inset-0 bg-gradient-to-r from-primary via-primary/90 to-[hsl(240,80%,50%)] rounded-2xl md:rounded-[2rem]" />
           <div className="absolute inset-0 opacity-20">
             <div className="absolute top-0 right-0 w-64 h-64 rounded-full bg-white blur-3xl" />
             <div className="absolute bottom-0 left-0 w-48 h-48 rounded-full bg-accent blur-3xl" />
           </div>
-          <div className="relative grid grid-cols-2 md:grid-cols-4 gap-8 p-10 md:p-14 text-center text-white">
+          <div className="relative grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8 p-6 md:p-10 lg:p-14 text-center text-white">
             {stats.map((stat) => (
               <div key={stat.label} className="group">
-                <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-white/10 mb-4 group-hover:scale-110 transition-transform">
-                  <stat.icon className="w-6 h-6" />
+                <div className="inline-flex items-center justify-center w-10 h-10 md:w-12 md:h-12 rounded-lg md:rounded-xl bg-white/10 mb-2 md:mb-4 group-hover:scale-110 transition-transform">
+                  <stat.icon className="w-5 h-5 md:w-6 md:h-6" />
                 </div>
-                <div className="text-4xl md:text-5xl font-bold font-display mb-2">{stat.value}</div>
-                <div className="text-white/70 text-sm">{stat.label}</div>
+                <div className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold font-display mb-1 md:mb-2">{stat.value}</div>
+                <div className="text-white/70 text-xs md:text-sm">{stat.label}</div>
               </div>
             ))}
           </div>

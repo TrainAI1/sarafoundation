@@ -93,21 +93,21 @@ export default function Partnership() {
       <Navbar />
       
       {/* Hero */}
-      <section className="pt-32 pb-20 bg-gradient-to-br from-primary via-primary/90 to-[hsl(240,80%,50%)] relative overflow-hidden">
+      <section className="pt-24 md:pt-32 pb-12 md:pb-20 bg-gradient-to-br from-primary via-primary/90 to-[hsl(240,80%,50%)] relative overflow-hidden">
         <div className="absolute inset-0 opacity-30">
-          <div className="absolute top-1/4 right-1/4 w-[500px] h-[500px] rounded-full bg-accent blur-[150px]" />
+          <div className="absolute top-1/4 right-1/4 w-[300px] md:w-[500px] h-[300px] md:h-[500px] rounded-full bg-accent blur-[100px] md:blur-[150px]" />
         </div>
         <div className="section-container relative z-10">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <div>
-              <span className="inline-flex items-center gap-2 px-4 py-2 glass-card-dark rounded-full text-white/90 text-sm font-medium mb-6">
-                <Handshake className="w-4 h-4 text-accent" />
+          <div className="grid lg:grid-cols-2 gap-8 md:gap-12 items-center">
+            <div className="px-4 lg:px-0">
+              <span className="inline-flex items-center gap-2 px-3 md:px-4 py-1.5 md:py-2 glass-card-dark rounded-full text-white/90 text-xs md:text-sm font-medium mb-4 md:mb-6">
+                <Handshake className="w-3 h-3 md:w-4 md:h-4 text-accent" />
                 Partnership Opportunities
               </span>
-              <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight">
+              <h1 className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 md:mb-6 leading-tight">
                 Partner with Sara Foundation Africa
               </h1>
-              <p className="text-xl text-white/70 leading-relaxed mb-8">
+              <p className="text-base md:text-xl text-white/70 leading-relaxed mb-6 md:mb-8">
                 Join us in our mission to empower the next generation of African tech talent. 
                 Explore partnership opportunities that align with your goals.
               </p>
@@ -120,14 +120,14 @@ export default function Partnership() {
             </div>
 
             {/* Impact Stats */}
-            <div className="glass-card-dark p-8 rounded-3xl">
-              <h3 className="text-white font-semibold mb-6 text-center">Our Collective Impact</h3>
-              <div className="grid grid-cols-2 gap-6">
+            <div className="glass-card-dark p-6 md:p-8 rounded-2xl md:rounded-3xl mx-4 lg:mx-0">
+              <h3 className="text-white font-semibold mb-4 md:mb-6 text-center text-sm md:text-base">Our Collective Impact</h3>
+              <div className="grid grid-cols-2 gap-4 md:gap-6">
                 {impactAreas.map((stat) => (
-                  <div key={stat.label} className="text-center p-4">
-                    <stat.icon className="w-8 h-8 text-accent mx-auto mb-2" />
-                    <div className="text-3xl font-bold font-display text-white mb-1">{stat.value}</div>
-                    <div className="text-white/60 text-sm">{stat.label}</div>
+                  <div key={stat.label} className="text-center p-2 md:p-4">
+                    <stat.icon className="w-6 h-6 md:w-8 md:h-8 text-accent mx-auto mb-2" />
+                    <div className="text-2xl md:text-3xl font-bold font-display text-white mb-1">{stat.value}</div>
+                    <div className="text-white/60 text-xs md:text-sm">{stat.label}</div>
                   </div>
                 ))}
               </div>
@@ -137,14 +137,14 @@ export default function Partnership() {
       </section>
 
       {/* Partnership Types */}
-      <section className="py-24 bg-background">
+      <section className="py-16 md:py-24 bg-background">
         <div className="section-container">
-          <div className="text-center max-w-3xl mx-auto mb-16">
-            <span className="section-badge mb-6">
+          <div className="text-center max-w-3xl mx-auto mb-10 md:mb-16 px-4">
+            <span className="section-badge mb-4 md:mb-6">
               <Target className="w-4 h-4" />
               Partnership Types
             </span>
-            <h2 className="section-title text-foreground mb-6">
+            <h2 className="section-title text-foreground mb-4 md:mb-6">
               Ways to{" "}
               <span className="gradient-text">Partner with Us</span>
             </h2>
@@ -153,7 +153,7 @@ export default function Partnership() {
             </p>
           </div>
 
-          <div className="grid lg:grid-cols-3 gap-8">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
             {partnerTypes.map((type) => (
               <div key={type.title} className="card-modern overflow-hidden flex flex-col">
                 {/* Header */}
@@ -273,15 +273,15 @@ export default function Partnership() {
       </section>
 
       {/* CTA */}
-      <section className="py-24 bg-gradient-to-br from-primary via-primary/90 to-[hsl(240,80%,50%)]">
-        <div className="section-container text-center">
-          <h2 className="font-display text-3xl md:text-4xl font-bold text-white mb-6">
+      <section className="py-16 md:py-24 bg-gradient-to-br from-primary via-primary/90 to-[hsl(240,80%,50%)]">
+        <div className="section-container text-center px-4">
+          <h2 className="font-display text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-4 md:mb-6">
             Let's Create Impact Together
           </h2>
-          <p className="text-white/70 text-lg mb-8 max-w-2xl mx-auto">
+          <p className="text-white/70 text-base md:text-lg mb-6 md:mb-8 max-w-2xl mx-auto">
             Ready to partner with us? Get in touch to explore collaboration opportunities.
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <div className="flex flex-col sm:flex-row gap-3 md:gap-4 justify-center">
             <Button variant="hero" size="lg" asChild>
               <Link to="/contact">
                 Contact Our Partnership Team

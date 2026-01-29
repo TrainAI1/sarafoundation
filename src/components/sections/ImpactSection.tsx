@@ -41,7 +41,7 @@ const impactStats = [
 
 export function ImpactSection() {
   return (
-    <section className="py-24 bg-gradient-to-br from-foreground via-foreground/95 to-[hsl(240,20%,15%)] relative overflow-hidden">
+    <section className="py-16 md:py-24 bg-gradient-to-br from-foreground via-foreground/95 to-[hsl(240,20%,15%)] relative overflow-hidden">
       {/* Background effects */}
       <div className="absolute inset-0 opacity-20">
         <div className="absolute top-0 right-1/4 w-[500px] h-[500px] rounded-full bg-primary blur-[200px]" />
@@ -66,20 +66,20 @@ export function ImpactSection() {
           </p>
         </div>
 
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4 md:gap-6">
           {impactStats.map((stat) => (
             <div
               key={stat.label}
-              className="glass-card-dark p-6 text-center group hover:bg-white/10 transition-colors"
+              className="glass-card-dark p-4 md:p-6 text-center group hover:bg-white/10 transition-colors"
             >
-              <div className="w-12 h-12 mx-auto rounded-xl bg-gradient-to-br from-primary/30 to-accent/30 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                <stat.icon className="w-6 h-6 text-white" />
+              <div className="w-10 h-10 md:w-12 md:h-12 mx-auto rounded-xl bg-gradient-to-br from-primary/30 to-accent/30 flex items-center justify-center mb-3 md:mb-4 group-hover:scale-110 transition-transform">
+                <stat.icon className="w-5 h-5 md:w-6 md:h-6 text-white" />
               </div>
-              <div className="text-3xl md:text-4xl font-bold font-display text-white mb-1">
+              <div className="text-2xl sm:text-3xl md:text-4xl font-bold font-display text-white mb-1">
                 {stat.value}
               </div>
-              <div className="text-white font-medium text-sm mb-1">{stat.label}</div>
-              <div className="text-white/50 text-xs">{stat.description}</div>
+              <div className="text-white font-medium text-xs md:text-sm mb-1">{stat.label}</div>
+              <div className="text-white/50 text-xs hidden sm:block">{stat.description}</div>
             </div>
           ))}
         </div>

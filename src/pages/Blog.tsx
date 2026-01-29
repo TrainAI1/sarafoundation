@@ -121,20 +121,20 @@ export default function Blog() {
       <Navbar />
       
       {/* Hero */}
-      <section className="pt-32 pb-20 bg-gradient-to-br from-primary via-primary/90 to-[hsl(240,80%,50%)] relative overflow-hidden">
+      <section className="pt-24 md:pt-32 pb-12 md:pb-20 bg-gradient-to-br from-primary via-primary/90 to-[hsl(240,80%,50%)] relative overflow-hidden">
         <div className="absolute inset-0 opacity-30">
-          <div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] rounded-full bg-accent blur-[150px]" />
+          <div className="absolute top-1/4 left-1/4 w-[300px] md:w-[500px] h-[300px] md:h-[500px] rounded-full bg-accent blur-[100px] md:blur-[150px]" />
         </div>
         <div className="section-container relative z-10">
-          <div className="max-w-3xl">
-            <span className="inline-flex items-center gap-2 px-4 py-2 glass-card-dark rounded-full text-white/90 text-sm font-medium mb-6">
-              <Newspaper className="w-4 h-4 text-accent" />
+          <div className="max-w-3xl px-4">
+            <span className="inline-flex items-center gap-2 px-3 md:px-4 py-1.5 md:py-2 glass-card-dark rounded-full text-white/90 text-xs md:text-sm font-medium mb-4 md:mb-6">
+              <Newspaper className="w-3 h-3 md:w-4 md:h-4 text-accent" />
               Our Blog
             </span>
-            <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight">
+            <h1 className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 md:mb-6 leading-tight">
               Stories, Insights & Updates
             </h1>
-            <p className="text-xl text-white/70 leading-relaxed">
+            <p className="text-base md:text-xl text-white/70 leading-relaxed">
               Stay updated with the latest news, success stories, and insights from 
               the African tech ecosystem.
             </p>
@@ -143,7 +143,7 @@ export default function Blog() {
       </section>
 
       {/* Featured Post */}
-      <section className="py-16 bg-background">
+      <section className="py-10 md:py-16 bg-background">
         <div className="section-container">
           <div className="card-modern overflow-hidden">
             <div className="grid lg:grid-cols-2">
@@ -185,10 +185,10 @@ export default function Blog() {
       </section>
 
       {/* Blog Content */}
-      <section className="py-16 bg-secondary/30">
+      <section className="py-10 md:py-16 bg-secondary/30">
         <div className="section-container">
           {/* Search & Filter */}
-          <div className="flex flex-col lg:flex-row gap-4 mb-12">
+          <div className="flex flex-col gap-4 mb-8 md:mb-12">
             <div className="relative flex-1 max-w-md">
               <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
               <Input 
@@ -203,7 +203,7 @@ export default function Blog() {
                 <button
                   key={category}
                   onClick={() => setSelectedCategory(category)}
-                  className={`px-4 py-2 rounded-xl text-sm font-medium transition-all ${
+                  className={`px-3 md:px-4 py-1.5 md:py-2 rounded-lg md:rounded-xl text-xs md:text-sm font-medium transition-all ${
                     category === selectedCategory 
                       ? "bg-primary text-primary-foreground shadow-lg shadow-primary/25" 
                       : "bg-card text-foreground hover:bg-secondary border border-border"
@@ -216,7 +216,7 @@ export default function Blog() {
           </div>
 
           {/* Blog Grid */}
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
             {filteredPosts.map((post) => (
               <article key={post.id} className="card-modern overflow-hidden group">
                 {/* Image placeholder */}
@@ -278,15 +278,15 @@ export default function Blog() {
       </section>
 
       {/* Newsletter CTA */}
-      <section className="py-24 bg-gradient-to-br from-primary via-primary/90 to-[hsl(240,80%,50%)]">
-        <div className="section-container text-center">
-          <h2 className="font-display text-3xl md:text-4xl font-bold text-white mb-6">
+      <section className="py-16 md:py-24 bg-gradient-to-br from-primary via-primary/90 to-[hsl(240,80%,50%)]">
+        <div className="section-container text-center px-4">
+          <h2 className="font-display text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-4 md:mb-6">
             Never Miss an Update
           </h2>
-          <p className="text-white/70 text-lg mb-8 max-w-2xl mx-auto">
+          <p className="text-white/70 text-base md:text-lg mb-6 md:mb-8 max-w-2xl mx-auto">
             Subscribe to our newsletter and get the latest articles delivered to your inbox.
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center max-w-md mx-auto">
+          <div className="flex flex-col sm:flex-row gap-3 md:gap-4 justify-center max-w-md mx-auto">
             <Input
               type="email"
               placeholder="Enter your email"

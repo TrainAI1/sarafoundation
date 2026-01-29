@@ -13,9 +13,9 @@ const partners = [
 
 export function PartnersSection() {
   return (
-    <section className="py-24 bg-background">
+    <section className="py-16 md:py-24 bg-background">
       <div className="section-container">
-        <div className="text-center max-w-3xl mx-auto mb-16">
+        <div className="text-center max-w-3xl mx-auto mb-10 md:mb-16 px-4">
           <span className="section-badge mb-6">
             <Handshake className="w-4 h-4" />
             Our Partners
@@ -30,18 +30,18 @@ export function PartnersSection() {
           </p>
         </div>
 
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 md:gap-6">
           {partners.map((partner) => (
             <div
               key={partner.name}
-              className="card-modern p-6 flex flex-col items-center justify-center text-center group hover:border-primary/30 transition-colors"
+              className="card-modern p-4 md:p-6 flex flex-col items-center justify-center text-center group hover:border-primary/30 transition-colors"
             >
-              <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-primary/10 to-accent/10 flex items-center justify-center mb-4 group-hover:from-primary/20 group-hover:to-accent/20 transition-colors">
-                <span className="text-2xl font-bold text-primary">
+              <div className="w-12 h-12 md:w-16 md:h-16 rounded-xl md:rounded-2xl bg-gradient-to-br from-primary/10 to-accent/10 flex items-center justify-center mb-3 md:mb-4 group-hover:from-primary/20 group-hover:to-accent/20 transition-colors">
+                <span className="text-lg md:text-2xl font-bold text-primary">
                   {partner.name.split(' ').map(w => w[0]).join('').slice(0, 2)}
                 </span>
               </div>
-              <h3 className="font-semibold text-foreground text-sm mb-1">{partner.name}</h3>
+              <h3 className="font-semibold text-foreground text-xs md:text-sm mb-1">{partner.name}</h3>
               <span className="text-xs text-muted-foreground">{partner.type}</span>
             </div>
           ))}

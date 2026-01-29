@@ -58,25 +58,25 @@ export default function ProgramFLIP() {
       <Navbar />
       
       {/* Hero */}
-      <section className="pt-32 pb-20 bg-gradient-to-br from-accent via-accent/90 to-[hsl(350,80%,55%)] relative overflow-hidden">
+      <section className="pt-24 md:pt-32 pb-12 md:pb-20 bg-gradient-to-br from-accent via-accent/90 to-[hsl(350,80%,55%)] relative overflow-hidden">
         <div className="absolute inset-0 opacity-30">
-          <div className="absolute bottom-0 left-0 w-[600px] h-[600px] rounded-full bg-primary blur-[150px]" />
+          <div className="absolute bottom-0 left-0 w-[400px] md:w-[600px] h-[400px] md:h-[600px] rounded-full bg-primary blur-[100px] md:blur-[150px]" />
         </div>
         <div className="section-container relative z-10">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <div>
-              <span className="inline-flex items-center gap-2 px-4 py-2 glass-card-dark rounded-full text-white/90 text-sm font-medium mb-6">
-                <Users className="w-4 h-4" />
+          <div className="grid lg:grid-cols-2 gap-8 md:gap-12 items-center">
+            <div className="px-4 lg:px-0">
+              <span className="inline-flex items-center gap-2 px-3 md:px-4 py-1.5 md:py-2 glass-card-dark rounded-full text-white/90 text-xs md:text-sm font-medium mb-4 md:mb-6">
+                <Users className="w-3 h-3 md:w-4 md:h-4" />
                 Women-Focused Tech Community
               </span>
-              <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight">
+              <h1 className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 md:mb-6 leading-tight">
                 Female Leadership Initiative Program (FLIP)
               </h1>
-              <p className="text-xl text-white/70 leading-relaxed mb-8">
+              <p className="text-base md:text-xl text-white/70 leading-relaxed mb-6 md:mb-8">
                 A membership-based program empowering women in tech to grow and succeed in Africa 
                 through mentorship, networking, and opportunities.
               </p>
-              <div className="flex flex-col sm:flex-row gap-4">
+              <div className="flex flex-col sm:flex-row gap-3 md:gap-4">
                 <Button variant="hero" size="lg" className="group">
                   Join FLIP
                   <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
@@ -88,12 +88,12 @@ export default function ProgramFLIP() {
             </div>
 
             {/* Stats */}
-            <div className="glass-card-dark p-8 rounded-3xl">
-              <div className="grid grid-cols-2 gap-6">
+            <div className="glass-card-dark p-6 md:p-8 rounded-2xl md:rounded-3xl mx-4 lg:mx-0">
+              <div className="grid grid-cols-2 gap-4 md:gap-6">
                 {stats.map((stat) => (
-                  <div key={stat.label} className="text-center p-4">
-                    <div className="text-4xl font-bold font-display text-white mb-2">{stat.value}</div>
-                    <div className="text-white/60 text-sm">{stat.label}</div>
+                  <div key={stat.label} className="text-center p-2 md:p-4">
+                    <div className="text-2xl sm:text-3xl md:text-4xl font-bold font-display text-white mb-1 md:mb-2">{stat.value}</div>
+                    <div className="text-white/60 text-xs md:text-sm">{stat.label}</div>
                   </div>
                 ))}
               </div>
@@ -103,26 +103,26 @@ export default function ProgramFLIP() {
       </section>
 
       {/* Pillars */}
-      <section className="py-24 bg-background">
+      <section className="py-16 md:py-24 bg-background">
         <div className="section-container">
-          <div className="text-center max-w-3xl mx-auto mb-16">
-            <span className="section-badge mb-6">Our Pillars</span>
-            <h2 className="section-title text-foreground mb-6">
+          <div className="text-center max-w-3xl mx-auto mb-10 md:mb-16 px-4">
+            <span className="section-badge mb-4 md:mb-6">Our Pillars</span>
+            <h2 className="section-title text-foreground mb-4 md:mb-6">
               Built on Three{" "}
               <span className="gradient-text-accent">Core Pillars</span>
             </h2>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-4 md:gap-8">
             {pillars.map((pillar) => (
-              <div key={pillar.title} className="card-modern p-8 text-center group">
-                <div className="w-16 h-16 mx-auto rounded-2xl bg-gradient-to-br from-accent to-accent/60 flex items-center justify-center mb-6 shadow-lg group-hover:scale-110 transition-transform">
-                  <pillar.icon className="w-8 h-8 text-white" />
+              <div key={pillar.title} className="card-modern p-5 md:p-8 text-center group">
+                <div className="w-12 h-12 md:w-16 md:h-16 mx-auto rounded-xl md:rounded-2xl bg-gradient-to-br from-accent to-accent/60 flex items-center justify-center mb-4 md:mb-6 shadow-lg group-hover:scale-110 transition-transform">
+                  <pillar.icon className="w-6 h-6 md:w-8 md:h-8 text-white" />
                 </div>
-                <h3 className="font-display font-bold text-xl text-foreground mb-3">
+                <h3 className="font-display font-bold text-lg md:text-xl text-foreground mb-2 md:mb-3">
                   {pillar.title}
                 </h3>
-                <p className="text-muted-foreground">
+                <p className="text-muted-foreground text-sm">
                   {pillar.description}
                 </p>
               </div>
@@ -132,14 +132,14 @@ export default function ProgramFLIP() {
       </section>
 
       {/* Communities */}
-      <section className="py-24 bg-secondary/50">
+      <section className="py-16 md:py-24 bg-secondary/50">
         <div className="section-container">
-          <div className="text-center max-w-3xl mx-auto mb-16">
-            <span className="section-badge mb-6">
+          <div className="text-center max-w-3xl mx-auto mb-10 md:mb-16 px-4">
+            <span className="section-badge mb-4 md:mb-6">
               <Star className="w-4 h-4" />
               Our Communities
             </span>
-            <h2 className="section-title text-foreground mb-6">
+            <h2 className="section-title text-foreground mb-4 md:mb-6">
               Two Niche Communities
             </h2>
             <p className="section-subtitle mx-auto">
@@ -147,7 +147,7 @@ export default function ProgramFLIP() {
             </p>
           </div>
 
-          <div className="grid lg:grid-cols-2 gap-8">
+          <div className="grid md:grid-cols-2 gap-6 md:gap-8">
             {communities.map((community) => (
               <div key={community.name} className="card-modern overflow-hidden">
                 <div className={`p-8 bg-gradient-to-r ${community.color} text-white`}>
@@ -221,15 +221,15 @@ export default function ProgramFLIP() {
       </section>
 
       {/* CTA */}
-      <section className="py-24 bg-gradient-to-br from-accent via-accent/90 to-[hsl(350,80%,55%)]">
-        <div className="section-container text-center">
-          <h2 className="font-display text-3xl md:text-4xl font-bold text-white mb-6">
+      <section className="py-16 md:py-24 bg-gradient-to-br from-accent via-accent/90 to-[hsl(350,80%,55%)]">
+        <div className="section-container text-center px-4">
+          <h2 className="font-display text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-4 md:mb-6">
             Join Our Community of Women Leaders
           </h2>
-          <p className="text-white/70 text-lg mb-8 max-w-2xl mx-auto">
+          <p className="text-white/70 text-base md:text-lg mb-6 md:mb-8 max-w-2xl mx-auto">
             Connect with inspiring women who are shaping the future of tech in Africa.
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <div className="flex flex-col sm:flex-row gap-3 md:gap-4 justify-center">
             <Button variant="hero" size="lg" className="group">
               Become a Member
               <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />

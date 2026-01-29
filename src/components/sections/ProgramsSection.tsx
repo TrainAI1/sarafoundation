@@ -34,14 +34,14 @@ const programs = [
 
 export function ProgramsSection() {
   return (
-    <section className="py-24 md:py-32 bg-secondary/50 relative overflow-hidden">
+    <section className="py-16 md:py-24 lg:py-32 bg-secondary/50 relative overflow-hidden">
       {/* Background decoration */}
       <div className="absolute top-0 right-0 w-[500px] h-[500px] rounded-full bg-primary/5 blur-3xl" />
       <div className="absolute bottom-0 left-0 w-[400px] h-[400px] rounded-full bg-accent/5 blur-3xl" />
 
       <div className="section-container relative z-10">
         {/* Header */}
-        <div className="text-center max-w-3xl mx-auto mb-16">
+        <div className="text-center max-w-3xl mx-auto mb-10 md:mb-16 px-4">
           <span className="section-badge mb-6">
             <Star className="w-4 h-4" />
             Our Initiatives
@@ -57,25 +57,25 @@ export function ProgramsSection() {
         </div>
 
         {/* Programs Grid */}
-        <div className="grid lg:grid-cols-2 gap-8">
+        <div className="grid lg:grid-cols-2 gap-6 md:gap-8">
           {programs.map((program) => (
             <div 
               key={program.id}
               className="card-modern overflow-hidden group"
             >
               {/* Card Header */}
-              <div className={`p-8 bg-gradient-to-r ${program.gradient} text-white relative overflow-hidden`}>
+              <div className={`p-5 md:p-8 bg-gradient-to-r ${program.gradient} text-white relative overflow-hidden`}>
                 {/* Decorative circles */}
                 <div className="absolute -top-12 -right-12 w-32 h-32 rounded-full bg-white/10" />
                 <div className="absolute -bottom-8 -left-8 w-24 h-24 rounded-full bg-white/10" />
                 
-                <div className="relative flex items-start gap-5">
-                  <div className="w-16 h-16 rounded-2xl bg-white/20 backdrop-blur-sm flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300">
-                    <program.icon className="w-8 h-8" />
+                <div className="relative flex items-start gap-4 md:gap-5">
+                  <div className="w-12 h-12 md:w-16 md:h-16 rounded-xl md:rounded-2xl bg-white/20 backdrop-blur-sm flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300">
+                    <program.icon className="w-6 h-6 md:w-8 md:h-8" />
                   </div>
                   <div>
-                    <span className="text-white/80 text-sm font-medium">{program.subtitle}</span>
-                    <h3 className="font-display font-bold text-xl md:text-2xl mt-1">
+                    <span className="text-white/80 text-xs md:text-sm font-medium">{program.subtitle}</span>
+                    <h3 className="font-display font-bold text-lg md:text-xl lg:text-2xl mt-1">
                       {program.title}
                     </h3>
                   </div>
@@ -83,26 +83,26 @@ export function ProgramsSection() {
               </div>
 
               {/* Card Content */}
-              <div className="p-8">
-                <p className="text-muted-foreground mb-8">
+              <div className="p-5 md:p-8">
+                <p className="text-muted-foreground text-sm md:text-base mb-6 md:mb-8">
                   {program.description}
                 </p>
 
                 {/* Program Phases (CAP) */}
                 {program.phases && (
-                  <div className="space-y-4 mb-8">
-                    <h4 className="font-semibold text-foreground flex items-center gap-2">
-                      <span className="w-8 h-0.5 bg-primary rounded-full" />
+                  <div className="space-y-3 md:space-y-4 mb-6 md:mb-8">
+                    <h4 className="font-semibold text-foreground flex items-center gap-2 text-sm md:text-base">
+                      <span className="w-6 md:w-8 h-0.5 bg-primary rounded-full" />
                       Program Phases
                     </h4>
-                    <div className="grid grid-cols-3 gap-4">
+                    <div className="grid grid-cols-3 gap-2 md:gap-4">
                       {program.phases.map((phase) => (
-                        <div key={phase.name} className="text-center p-4 rounded-2xl bg-secondary/50 hover:bg-secondary transition-colors">
-                          <div className="w-12 h-12 mx-auto rounded-xl bg-primary/10 text-primary flex items-center justify-center mb-3">
-                            <phase.icon className="w-6 h-6" />
+                        <div key={phase.name} className="text-center p-2 md:p-4 rounded-xl md:rounded-2xl bg-secondary/50 hover:bg-secondary transition-colors">
+                          <div className="w-8 h-8 md:w-12 md:h-12 mx-auto rounded-lg md:rounded-xl bg-primary/10 text-primary flex items-center justify-center mb-2 md:mb-3">
+                            <phase.icon className="w-4 h-4 md:w-6 md:h-6" />
                           </div>
-                          <div className="font-semibold text-sm text-foreground">{phase.name}</div>
-                          <div className="text-xs text-muted-foreground mt-1">{phase.description}</div>
+                          <div className="font-semibold text-xs md:text-sm text-foreground">{phase.name}</div>
+                          <div className="text-xs text-muted-foreground mt-1 hidden sm:block">{phase.description}</div>
                         </div>
                       ))}
                     </div>
@@ -111,16 +111,16 @@ export function ProgramsSection() {
 
                 {/* Communities (FLIP) */}
                 {program.communities && (
-                  <div className="space-y-4 mb-8">
-                    <h4 className="font-semibold text-foreground flex items-center gap-2">
-                      <span className="w-8 h-0.5 bg-accent rounded-full" />
+                  <div className="space-y-3 md:space-y-4 mb-6 md:mb-8">
+                    <h4 className="font-semibold text-foreground flex items-center gap-2 text-sm md:text-base">
+                      <span className="w-6 md:w-8 h-0.5 bg-accent rounded-full" />
                       Our Communities
                     </h4>
-                    <div className="space-y-3">
+                    <div className="space-y-2 md:space-y-3">
                       {program.communities.map((community) => (
-                        <div key={community.name} className="p-4 bg-secondary/50 rounded-2xl border border-border/50 hover:border-accent/30 transition-colors">
-                          <div className="font-medium text-sm text-foreground">{community.name}</div>
-                          <div className="text-xs text-muted-foreground mt-1">{community.description}</div>
+                        <div key={community.name} className="p-3 md:p-4 bg-secondary/50 rounded-xl md:rounded-2xl border border-border/50 hover:border-accent/30 transition-colors">
+                          <div className="font-medium text-xs md:text-sm text-foreground">{community.name}</div>
+                          <div className="text-xs text-muted-foreground mt-1 hidden sm:block">{community.description}</div>
                         </div>
                       ))}
                     </div>

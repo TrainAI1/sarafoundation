@@ -35,9 +35,9 @@ const faqs = [
 
 export function FAQSection() {
   return (
-    <section className="py-24 bg-background">
+    <section className="py-16 md:py-24 bg-background">
       <div className="section-container">
-        <div className="text-center max-w-3xl mx-auto mb-16">
+        <div className="text-center max-w-3xl mx-auto mb-10 md:mb-16 px-4">
           <span className="section-badge mb-6">
             <HelpCircle className="w-4 h-4" />
             FAQ

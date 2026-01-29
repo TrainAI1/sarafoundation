@@ -58,20 +58,20 @@ export default function Contact() {
       <Navbar />
       
       {/* Hero */}
-      <section className="pt-32 pb-20 bg-gradient-to-br from-primary via-primary/90 to-[hsl(240,80%,50%)] relative overflow-hidden">
+      <section className="pt-24 md:pt-32 pb-12 md:pb-20 bg-gradient-to-br from-primary via-primary/90 to-[hsl(240,80%,50%)] relative overflow-hidden">
         <div className="absolute inset-0 opacity-30">
-          <div className="absolute bottom-0 left-1/4 w-[500px] h-[500px] rounded-full bg-accent blur-[150px]" />
+          <div className="absolute bottom-0 left-1/4 w-[300px] md:w-[500px] h-[300px] md:h-[500px] rounded-full bg-accent blur-[100px] md:blur-[150px]" />
         </div>
         <div className="section-container relative z-10">
-          <div className="max-w-3xl">
-            <span className="inline-flex items-center gap-2 px-4 py-2 glass-card-dark rounded-full text-white/90 text-sm font-medium mb-6">
-              <MessageSquare className="w-4 h-4 text-accent" />
+          <div className="max-w-3xl px-4">
+            <span className="inline-flex items-center gap-2 px-3 md:px-4 py-1.5 md:py-2 glass-card-dark rounded-full text-white/90 text-xs md:text-sm font-medium mb-4 md:mb-6">
+              <MessageSquare className="w-3 h-3 md:w-4 md:h-4 text-accent" />
               Get in Touch
             </span>
-            <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight">
+            <h1 className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 md:mb-6 leading-tight">
               Let's Start a Conversation
             </h1>
-            <p className="text-xl text-white/70 leading-relaxed">
+            <p className="text-base md:text-xl text-white/70 leading-relaxed">
               Have questions about our programs or want to partner with us? 
               We'd love to hear from you.
             </p>
@@ -80,9 +80,9 @@ export default function Contact() {
       </section>
 
       {/* Contact Section */}
-      <section className="py-24">
+      <section className="py-16 md:py-24">
         <div className="section-container">
-          <div className="grid lg:grid-cols-2 gap-16">
+          <div className="grid lg:grid-cols-2 gap-10 md:gap-16">
             {/* Contact Form */}
             <div>
               <div className="card-modern p-8 md:p-10">
@@ -235,30 +235,30 @@ export default function Contact() {
       </section>
 
       {/* Office Locations */}
-      <section className="py-24 bg-secondary/50">
+      <section className="py-16 md:py-24 bg-secondary/50">
         <div className="section-container">
-          <div className="text-center max-w-3xl mx-auto mb-16">
-            <span className="section-badge mb-6">
+          <div className="text-center max-w-3xl mx-auto mb-10 md:mb-16 px-4">
+            <span className="section-badge mb-4 md:mb-6">
               <MapPin className="w-4 h-4" />
               Our Offices
             </span>
-            <h2 className="section-title text-foreground mb-6">
+            <h2 className="section-title text-foreground mb-4 md:mb-6">
               Find Us Across Africa
             </h2>
           </div>
 
-          <div className="grid md:grid-cols-2 gap-6 max-w-2xl mx-auto">
+          <div className="grid sm:grid-cols-2 gap-4 md:gap-6 max-w-2xl mx-auto">
             {[
               { city: "London", country: "United Kingdom", address: "E14 8AT, London" },
               { city: "Lagos", country: "Nigeria", address: "Bafaj Crescent, Awoyaya-Eputu, Ibeju Lekki" },
             ].map((office) => (
-              <div key={office.city} className="card-modern p-6 text-center">
-                <div className="w-12 h-12 mx-auto rounded-xl bg-gradient-to-br from-primary to-accent flex items-center justify-center mb-4">
-                  <MapPin className="w-6 h-6 text-white" />
+              <div key={office.city} className="card-modern p-5 md:p-6 text-center">
+                <div className="w-10 h-10 md:w-12 md:h-12 mx-auto rounded-lg md:rounded-xl bg-gradient-to-br from-primary to-accent flex items-center justify-center mb-3 md:mb-4">
+                  <MapPin className="w-5 h-5 md:w-6 md:h-6 text-white" />
                 </div>
-                <h3 className="font-display font-bold text-lg text-foreground mb-1">{office.city}</h3>
-                <p className="text-primary text-sm font-medium mb-2">{office.country}</p>
-                <p className="text-muted-foreground text-sm">{office.address}</p>
+                <h3 className="font-display font-bold text-base md:text-lg text-foreground mb-1">{office.city}</h3>
+                <p className="text-primary text-xs md:text-sm font-medium mb-1 md:mb-2">{office.country}</p>
+                <p className="text-muted-foreground text-xs md:text-sm">{office.address}</p>
               </div>
             ))}
           </div>

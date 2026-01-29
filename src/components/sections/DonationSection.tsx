@@ -31,12 +31,12 @@ const donationMethods = [
 
 export function DonationSection() {
   return (
-    <section className="py-24 md:py-32 bg-background relative overflow-hidden">
+    <section className="py-16 md:py-24 lg:py-32 bg-background relative overflow-hidden">
       {/* Background */}
       <div className="absolute inset-0 mesh-gradient opacity-30" />
       
       <div className="section-container relative z-10">
-        <div className="grid lg:grid-cols-2 gap-16 items-center">
+        <div className="grid lg:grid-cols-2 gap-10 md:gap-16 items-center">
           {/* Content */}
           <div>
             <span className="section-badge mb-6">
