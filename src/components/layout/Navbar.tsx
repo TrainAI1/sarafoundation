@@ -152,11 +152,11 @@ export function Navbar() {
 
           {/* CTA Button */}
           <div className="hidden lg:flex items-center gap-3">
-            <Button variant={scrolled || !isHome ? "outline" : "outlineWhite"} size="sm">
-              Partner with Us
+            <Button variant={scrolled || !isHome ? "outline" : "outlineWhite"} size="sm" asChild>
+              <Link to="/partnership">Partner with Us</Link>
             </Button>
-            <Button size="sm" className="glow-effect">
-              Donate Now
+            <Button size="sm" className="glow-effect" asChild>
+              <Link to="/contact">Donate Now</Link>
             </Button>
           </div>
 
@@ -221,11 +221,11 @@ export function Navbar() {
               ))}
 
               <div className="flex flex-col gap-2 pt-4 mt-2 border-t border-border">
-                <Button variant="outline" className="w-full">
-                  Partner with Us
+                <Button variant="outline" className="w-full" asChild>
+                  <Link to="/partnership" onClick={() => setMobileMenuOpen(false)}>Partner with Us</Link>
                 </Button>
-                <Button className="w-full glow-effect">
-                  Donate Now
+                <Button className="w-full glow-effect" asChild>
+                  <Link to="/contact" onClick={() => setMobileMenuOpen(false)}>Donate Now</Link>
                 </Button>
               </div>
             </div>

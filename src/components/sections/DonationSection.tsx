@@ -1,5 +1,6 @@
 import { Heart, CreditCard, Wallet, ExternalLink, Gift } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Link } from "react-router-dom";
 
 const donationMethods = [
   {
@@ -64,10 +65,12 @@ export function DonationSection() {
               </div>
             </div>
 
-            <Button size="lg" className="glow-effect group">
-              <Heart className="w-5 h-5" />
-              Donate Now
-              <span className="ml-2 opacity-60 group-hover:opacity-100 transition-opacity">→</span>
+            <Button size="lg" className="glow-effect group" asChild>
+              <Link to="/contact">
+                <Heart className="w-5 h-5" />
+                Donate Now
+                <span className="ml-2 opacity-60 group-hover:opacity-100 transition-opacity">→</span>
+              </Link>
             </Button>
           </div>
 

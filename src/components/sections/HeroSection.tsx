@@ -1,5 +1,6 @@
 import { ArrowRight, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Link } from "react-router-dom";
 
 export function HeroSection() {
   return (
@@ -46,12 +47,14 @@ export function HeroSection() {
             </p>
 
             <div className="flex flex-col sm:flex-row gap-3 md:gap-4 justify-center lg:justify-start animate-fade-up" style={{ animationDelay: '0.3s' }}>
-              <Button variant="hero" size="lg" className="group w-full sm:w-auto">
-                Join Our Mission
-                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+              <Button variant="hero" size="lg" className="group w-full sm:w-auto" asChild>
+                <Link to="/programs/cap">
+                  Join Our Mission
+                  <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                </Link>
               </Button>
-              <Button variant="heroSecondary" size="lg" className="w-full sm:w-auto">
-                Partner with Us
+              <Button variant="heroSecondary" size="lg" className="w-full sm:w-auto" asChild>
+                <Link to="/partnership">Partner with Us</Link>
               </Button>
             </div>
 
