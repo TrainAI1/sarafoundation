@@ -127,8 +127,8 @@ export function Footer() {
                   <Phone className="w-5 h-5 text-primary" />
                 </div>
                 <div className="text-white/60 text-sm">
-                  <p>+44 7435 126104</p>
-                  <p>+234 9076 66404</p>
+                  <p>+44 7435 126104 (UK)</p>
+                  <p>+234 9076 664049 (NG)</p>
                 </div>
               </li>
             </ul>

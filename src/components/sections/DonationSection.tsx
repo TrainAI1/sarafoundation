@@ -1,23 +1,35 @@
-import { Heart, CreditCard, Wallet, ExternalLink, Gift } from "lucide-react";
+import { Heart, CreditCard, Wallet, ExternalLink, Gift, Copy } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
+import { toast } from "sonner";
 
 const donationMethods = [
   {
     icon: CreditCard,
-    title: "Bank Transfer",
+    title: "Bank Transfer (Naira)",
     provider: "MoniePoint",
-    description: "Direct bank transfer to our MoniePoint account",
-    action: "Get Account Details",
+    description: "Account Number: 9076 664049",
+    action: "Copy Account",
+    copyValue: "9076664049",
     gradient: "from-primary to-primary/60",
   },
   {
     icon: Wallet,
-    title: "Cryptocurrency",
-    provider: "ETH (BEP20)",
-    description: "Donate using Ethereum on the BEP20 network",
-    action: "Copy Wallet Address",
+    title: "USDT",
+    provider: "TRC20",
+    description: "TMdq8t9WYCvgJA9aftXDzA3XUNX9V4MMG6",
+    action: "Copy Address",
+    copyValue: "TMdq8t9WYCvgJA9aftXDzA3XUNX9V4MMG6",
     gradient: "from-accent to-accent/60",
+  },
+  {
+    icon: Wallet,
+    title: "Ethereum",
+    provider: "BEP20",
+    description: "0xe7dae2ef9740beacde6d9f584f67ecf2b8f396365",
+    action: "Copy Address",
+    copyValue: "0xe7dae2ef9740beacde6d9f584f67ecf2b8f396365",
+    gradient: "from-primary/80 to-accent/80",
   },
   {
     icon: ExternalLink,
@@ -25,9 +37,15 @@ const donationMethods = [
     provider: "GoFundMe",
     description: "Support us through our GoFundMe campaign",
     action: "Donate on GoFundMe",
-    gradient: "from-success to-success/60",
+    link: "https://gofund.me/9559a00e",
+    gradient: "from-[hsl(var(--success))] to-[hsl(var(--success))]/60",
   },
 ];
+
+const handleCopy = (value: string, label: string) => {
+  navigator.clipboard.writeText(value);
+  toast.success(`${label} copied to clipboard!`);
+};
 
 export function DonationSection() {
   return (
@@ -38,34 +56,38 @@ export function DonationSection() {
       <div className="section-container relative z-10">
         <div className="grid lg:grid-cols-2 gap-10 md:gap-16 items-center">
           {/* Content */}
-          <div>
-            <span className="section-badge mb-6">
+          <div className="px-4 lg:px-0">
+            <span className="section-badge mb-4 md:mb-6">
               <Gift className="w-4 h-4" />
               Support Our Mission
             </span>
-            <h2 className="section-title text-foreground mb-6 text-balance">
+            <h2 className="section-title text-foreground mb-4 md:mb-6 text-balance">
               Help Us Empower{" "}
               <span className="gradient-text">African Tech Talent</span>
             </h2>
-            <p className="text-muted-foreground text-lg mb-10 leading-relaxed">
+            <p className="text-muted-foreground text-base md:text-lg mb-8 md:mb-10 leading-relaxed">
               Your donation directly supports scholarships, mentorship programs, 
               and resources for young African tech entrepreneurs. Together, we can 
               break barriers and create opportunities.
             </p>
 
             {/* Impact Cards */}
-            <div className="grid grid-cols-2 gap-4 mb-10">
-              <div className="card-modern p-6 group hover:border-primary/30">
-                <div className="text-4xl font-bold font-display gradient-text mb-2">$50</div>
-                <div className="text-sm text-muted-foreground">Sponsors a student for one month</div>
+            <div className="grid grid-cols-3 gap-3 md:gap-4 mb-8 md:mb-10">
+              <div className="card-modern p-4 md:p-6 group hover:border-primary/30 text-center">
+                <div className="text-2xl md:text-4xl font-bold font-display gradient-text mb-1 md:mb-2">₦10k</div>
+                <div className="text-xs md:text-sm text-muted-foreground">Sponsors one student</div>
               </div>
-              <div className="card-modern p-6 group hover:border-accent/30">
-                <div className="text-4xl font-bold font-display gradient-text-accent mb-2">$500</div>
-                <div className="text-sm text-muted-foreground">Funds a full scholarship</div>
+              <div className="card-modern p-4 md:p-6 group hover:border-accent/30 text-center">
+                <div className="text-2xl md:text-4xl font-bold font-display gradient-text-accent mb-1 md:mb-2">$7</div>
+                <div className="text-xs md:text-sm text-muted-foreground">One student's training</div>
+              </div>
+              <div className="card-modern p-4 md:p-6 group hover:border-primary/30 text-center">
+                <div className="text-2xl md:text-4xl font-bold font-display gradient-text mb-1 md:mb-2">£5</div>
+                <div className="text-xs md:text-sm text-muted-foreground">Tech skills access</div>
               </div>
             </div>
 
-            <Button size="lg" className="glow-effect group" asChild>
+            <Button size="lg" className="glow-effect group w-full sm:w-auto" asChild>
               <Link to="/contact">
                 <Heart className="w-5 h-5" />
                 Donate Now
@@ -75,28 +97,42 @@ export function DonationSection() {
           </div>
 
           {/* Donation Methods */}
-          <div className="space-y-4">
+          <div className="space-y-3 md:space-y-4 px-4 lg:px-0">
             {donationMethods.map((method, index) => (
               <div 
                 key={method.title}
-                className="card-modern p-6 flex items-center gap-5"
+                className="card-modern p-4 md:p-6 flex flex-col sm:flex-row items-start sm:items-center gap-4"
                 style={{ animationDelay: `${index * 0.1}s` }}
               >
-                <div className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${method.gradient} flex items-center justify-center flex-shrink-0 shadow-lg`}>
-                  <method.icon className="w-7 h-7 text-white" />
+                <div className={`w-12 h-12 md:w-16 md:h-16 rounded-xl md:rounded-2xl bg-gradient-to-br ${method.gradient} flex items-center justify-center flex-shrink-0 shadow-lg`}>
+                  <method.icon className="w-5 h-5 md:w-7 md:h-7 text-white" />
                 </div>
                 <div className="flex-1 min-w-0">
-                  <div className="flex items-center gap-2 mb-1">
-                    <h4 className="font-semibold text-foreground">{method.title}</h4>
-                    <span className="text-xs px-2.5 py-1 bg-secondary rounded-full text-muted-foreground font-medium">
+                  <div className="flex flex-wrap items-center gap-2 mb-1">
+                    <h4 className="font-semibold text-foreground text-sm md:text-base">{method.title}</h4>
+                    <span className="text-xs px-2 py-0.5 bg-secondary rounded-full text-muted-foreground font-medium">
                       {method.provider}
                     </span>
                   </div>
-                  <p className="text-sm text-muted-foreground">{method.description}</p>
+                  <p className="text-xs md:text-sm text-muted-foreground break-all">{method.description}</p>
                 </div>
-                <Button variant="outline" size="sm" className="flex-shrink-0">
-                  {method.action}
-                </Button>
+                {method.link ? (
+                  <Button variant="outline" size="sm" className="flex-shrink-0 w-full sm:w-auto" asChild>
+                    <a href={method.link} target="_blank" rel="noopener noreferrer">
+                      {method.action}
+                    </a>
+                  </Button>
+                ) : (
+                  <Button 
+                    variant="outline" 
+                    size="sm" 
+                    className="flex-shrink-0 w-full sm:w-auto"
+                    onClick={() => handleCopy(method.copyValue!, method.title)}
+                  >
+                    <Copy className="w-3 h-3 mr-1" />
+                    {method.action}
+                  </Button>
+                )}
               </div>
             ))}
           </div>

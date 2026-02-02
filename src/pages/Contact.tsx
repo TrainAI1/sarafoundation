@@ -13,7 +13,7 @@ import { useToast } from "@/hooks/use-toast";
 const contactInfo = [
   { icon: Mail, title: "Email Us", value: "info@sarafoundationafrica.com", href: "mailto:info@sarafoundationafrica.com" },
   { icon: Phone, title: "Call Us (UK)", value: "+44 7435 126104", href: "tel:+447435126104" },
-  { icon: Phone, title: "Call Us (NG)", value: "+234 9076 66404", href: "tel:+234907666404" },
+  { icon: Phone, title: "Call Us (NG)", value: "+234 9076 664049", href: "tel:+2349076664049" },
   { icon: Clock, title: "Office Hours", value: "Mon - Fri, 9am - 5pm", href: null },
 ];
 

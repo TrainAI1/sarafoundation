@@ -4,15 +4,16 @@ import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { 
   Target, Heart, Lightbulb, Globe, Users, Award, 
-  ArrowRight, Sparkles, Eye, Quote
+  ArrowRight, Sparkles, Eye, Quote, Trophy, MapPin
 } from "lucide-react";
 
 const milestones = [
   { year: "2020", title: "Foundation Established", description: "Sara Foundation Africa was founded with a vision to transform tech in Africa" },
   { year: "2021", title: "First CAP Cohort", description: "Launched our Career Advancement Program in 5 Nigerian universities" },
   { year: "2022", title: "FLIP Launch", description: "Introduced the Female Leadership Initiative Program" },
-  { year: "2023", title: "Pan-African Expansion", description: "Expanded to 10+ African countries with 50+ partner institutions" },
-  { year: "2024", title: "500+ Alumni", description: "Celebrated our growing community of tech professionals and founders" },
+  { year: "2023", title: "Pan-African Expansion", description: "Expanded across multiple African countries with partner institutions" },
+  { year: "2024", title: "Growing Community", description: "Celebrated our growing community of tech professionals and founders" },
+  { year: "2025", title: "Prestige Award", description: "Honored with the London & South East England Prestige Awards 2025/26" },
 ];
 
 const values = [
@@ -22,19 +23,38 @@ const values = [
   { icon: Globe, title: "Pan-African Vision", description: "We're building bridges across the continent to create a unified tech ecosystem." },
 ];
 
-const leadership = [
-  { name: "Dr. Sarah Okafor", role: "Executive Director", bio: "Former tech executive with 15+ years of experience in African tech ecosystems." },
-  { name: "Michael Adeyemi", role: "Director of Programs", bio: "Expert in tech education and youth development across Sub-Saharan Africa." },
-  { name: "Fatima Hassan", role: "Director of Partnerships", bio: "Specializes in building strategic partnerships with universities and corporations." },
-  { name: "James Mwangi", role: "Director of Operations", bio: "Operational excellence leader with experience scaling nonprofits across Africa." },
+const coreTeam = [
+  { 
+    name: "Kalu Sarah", 
+    role: "Founder", 
+    bio: "Leading professional with expertise in finance, technology, and strategy. Works in global fintech and has served as a global advisor to several foundations." 
+  },
+  { 
+    name: "Inem Emmanuel", 
+    role: "Public Relations Specialist", 
+    bio: "Years of experience in social media management, designs, marketing, and communications. Skilled in creating and executing PR strategies." 
+  },
+  { 
+    name: "Emediong Joel", 
+    role: "Program Manager", 
+    bio: "Leads tech-driven initiatives such as CAP and FLIP. Champions inclusive programs that provide emerging talents with mentorship and opportunities." 
+  },
 ];
 
 const advisors = [
-  { name: "Prof. Ngozi Okonjo-Iweala", affiliation: "WTO", expertise: "Global Economics" },
-  { name: "Iyinoluwa Aboyeji", affiliation: "Andela Co-founder", expertise: "Tech Entrepreneurship" },
-  { name: "Dr. Rebecca Enonchong", affiliation: "AppsTech CEO", expertise: "Women in Tech" },
-  { name: "Sim Shagaya", affiliation: "uLesson Founder", expertise: "EdTech Innovation" },
+  { name: "Toby Nwanede", affiliation: "Scintilla Innovations", expertise: "Startup Founder" },
+  { name: "Ayoola Ademoye", affiliation: "Jisc (UK)", expertise: "Business Analyst" },
+  { name: "Dolapo Dahunsi", affiliation: "Career Pinnacle", expertise: "HR Professional" },
+  { name: "Fisayo Adeyemi", affiliation: "Rayne Consults", expertise: "Business Analyst" },
+  { name: "Ayodeji Babatunde", affiliation: "VC Dialogues", expertise: "VC Investor" },
 ];
+
+const keyInitiatives = [
+  { title: "CAP Tech Hub", description: "Empowering tech leaders, innovators, and experts through comprehensive career advancement programs." },
+  { title: "FLIP Communities", description: "Women Professionals in Tech Africa and Women Founders in Tech Africa - building leadership pipelines." },
+];
+
+const countries = ["Nigeria", "Zambia", "Burundi", "Ghana", "Kenya", "South Africa", "Rwanda", "Uganda"];
 
 export default function About() {
   return (
@@ -56,9 +76,43 @@ export default function About() {
               Transforming Africa's Tech Landscape
             </h1>
             <p className="text-base md:text-xl text-white/70 leading-relaxed">
-              Sara Foundation Africa is dedicated to empowering the next generation of 
-              African tech leaders through education, mentorship, and community building.
+              Sara Foundation is a Non-Profit Organization dedicated to driving technology-focused 
+              impact in Africa through Diversity, Equity, and Inclusion (DEI).
             </p>
+          </div>
+        </div>
+      </section>
+
+      {/* Recognition Banner */}
+      <section className="py-6 md:py-8 bg-accent/10 border-y border-accent/20">
+        <div className="section-container">
+          <div className="flex flex-col md:flex-row items-center justify-center gap-4 text-center">
+            <Trophy className="w-8 h-8 text-accent" />
+            <div>
+              <p className="font-display font-bold text-foreground text-lg md:text-xl">
+                London & South East England Prestige Awards 2025/26
+              </p>
+              <p className="text-muted-foreground text-sm">
+                Honored for contributions to technology, education, and women's leadership
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Reach */}
+      <section className="py-8 md:py-12 bg-background">
+        <div className="section-container">
+          <div className="flex flex-wrap items-center justify-center gap-3 md:gap-4">
+            <span className="flex items-center gap-2 text-muted-foreground font-medium">
+              <MapPin className="w-4 h-4 text-primary" />
+              Trusted in 8 countries:
+            </span>
+            {countries.map((country) => (
+              <span key={country} className="px-3 py-1 bg-secondary rounded-full text-sm text-foreground">
+                {country}
+              </span>
+            ))}
           </div>
         </div>
       </section>
@@ -80,12 +134,11 @@ export default function About() {
                   dreams into reality.
                 </p>
                 <p>
-                  We recognized that while Africa has an abundance of talent and creativity, there 
-                  was a gap in access to quality tech education, mentorship, and professional networks. 
-                  We set out to bridge that gap.
+                  We promote Sustainable Development Goals SDG 4 (Quality Education), SDG 5 (Gender Equality), 
+                  and SDG 8 (Decent Work and Economic Growth) through tech clubs and women's communities.
                 </p>
                 <p>
-                  Today, we operate across 10+ African countries, partnering with universities, 
+                  Today, we operate across 8 African countries, partnering with universities, 
                   organizations, and industry leaders to create pathways for young Africans to 
                   thrive in the global tech ecosystem.
                 </p>
@@ -100,8 +153,8 @@ export default function About() {
                   <div>
                     <h3 className="font-display font-bold text-xl text-foreground mb-2">Our Mission</h3>
                     <p className="text-muted-foreground">
-                      To foster Diversity, Equity, and Inclusion in African tech by providing 
-                      accessible education, mentorship, and opportunities for aspiring tech professionals and entrepreneurs.
+                      To foster Diversity, Equity, and Inclusion in African tech and develop the next 
+                      generation of African tech founders and entrepreneurs.
                     </p>
                   </div>
                 </div>
@@ -125,8 +178,28 @@ export default function About() {
         </div>
       </section>
 
-      {/* Values */}
+      {/* Key Initiatives */}
       <section className="py-16 md:py-24 bg-secondary/50">
+        <div className="section-container">
+          <div className="text-center max-w-3xl mx-auto mb-10 md:mb-16 px-4">
+            <span className="section-badge mb-4 md:mb-6">Key Initiatives</span>
+            <h2 className="section-title text-foreground mb-4 md:mb-6">
+              Our Flagship Programs
+            </h2>
+          </div>
+          <div className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+            {keyInitiatives.map((initiative) => (
+              <div key={initiative.title} className="card-modern p-8 text-center">
+                <h3 className="font-display font-bold text-xl text-foreground mb-3">{initiative.title}</h3>
+                <p className="text-muted-foreground">{initiative.description}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Values */}
+      <section className="py-16 md:py-24 bg-background">
         <div className="section-container">
           <div className="text-center max-w-3xl mx-auto mb-10 md:mb-16 px-4">
             <span className="section-badge mb-4 md:mb-6">Our Values</span>
@@ -149,7 +222,7 @@ export default function About() {
       </section>
 
       {/* Timeline */}
-      <section className="py-16 md:py-24 bg-background">
+      <section className="py-16 md:py-24 bg-secondary/50">
         <div className="section-container">
           <div className="text-center max-w-3xl mx-auto mb-10 md:mb-16 px-4">
             <span className="section-badge mb-4 md:mb-6">
@@ -182,7 +255,7 @@ export default function About() {
       </section>
 
       {/* Leadership Team */}
-      <section className="py-16 md:py-24 bg-secondary/50">
+      <section className="py-16 md:py-24 bg-background">
         <div className="section-container">
           <div className="text-center max-w-3xl mx-auto mb-10 md:mb-16 px-4">
             <span className="section-badge mb-4 md:mb-6">
@@ -190,15 +263,15 @@ export default function About() {
               Leadership
             </span>
             <h2 className="section-title text-foreground mb-4 md:mb-6">
-              Meet Our Team
+              Meet Our Core Team
             </h2>
             <p className="section-subtitle mx-auto">
               Dedicated leaders driving our mission to empower African tech talent.
             </p>
           </div>
 
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 mb-10 md:mb-16">
-            {leadership.map((member) => (
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 mb-10 md:mb-16 max-w-4xl mx-auto">
+            {coreTeam.map((member) => (
               <div key={member.name} className="card-modern p-4 md:p-6 text-center group">
                 <div className="w-16 h-16 md:w-24 md:h-24 mx-auto rounded-full bg-gradient-to-br from-primary to-accent flex items-center justify-center mb-3 md:mb-4 group-hover:scale-105 transition-transform">
                   <span className="text-lg md:text-2xl font-bold text-white">
@@ -207,7 +280,7 @@ export default function About() {
                 </div>
                 <h3 className="font-display font-bold text-sm md:text-lg text-foreground mb-0.5 md:mb-1">{member.name}</h3>
                 <p className="text-primary text-xs md:text-sm font-medium mb-1 md:mb-2">{member.role}</p>
-                <p className="text-muted-foreground text-xs md:text-sm hidden sm:block">{member.bio}</p>
+                <p className="text-muted-foreground text-xs md:text-sm">{member.bio}</p>
               </div>
             ))}
           </div>
@@ -222,7 +295,7 @@ export default function About() {
             </p>
           </div>
 
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4">
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 md:gap-4">
             {advisors.map((advisor) => (
               <div key={advisor.name} className="card-modern p-4 md:p-5 text-center">
                 <div className="w-12 h-12 md:w-16 md:h-16 mx-auto rounded-full bg-gradient-to-br from-primary/10 to-accent/10 flex items-center justify-center mb-2 md:mb-3">
@@ -242,7 +315,7 @@ export default function About() {
       </section>
 
       {/* Quote Section */}
-      <section className="py-16 md:py-24 bg-background">
+      <section className="py-16 md:py-24 bg-secondary/50">
         <div className="section-container">
           <div className="max-w-4xl mx-auto text-center px-4">
             <Quote className="w-12 h-12 md:w-16 md:h-16 mx-auto text-primary/20 mb-6 md:mb-8" />
@@ -250,7 +323,7 @@ export default function About() {
               "We believe that Africa's next generation of tech leaders are not just participants in the global tech economy – they are the ones who will shape its future."
             </blockquote>
             <p className="text-muted-foreground font-medium text-sm md:text-base">
-              — Dr. Sarah Okafor, Executive Director
+              — Kalu Sarah, Founder
             </p>
           </div>
         </div>
