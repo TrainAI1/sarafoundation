@@ -6,6 +6,8 @@ import {
   Target, Heart, Lightbulb, Globe, Users, Award, 
   ArrowRight, Sparkles, Eye, Quote, Trophy, MapPin
 } from "lucide-react";
+import communityWorkshop from "@/assets/community-workshop.jpg";
+import techEntrepreneurs from "@/assets/tech-entrepreneurs.jpg";
 
 const milestones = [
   { year: "2020", title: "Foundation Established", description: "Sara Foundation Africa was founded with a vision to transform tech in Africa" },
@@ -143,6 +145,13 @@ export default function About() {
                   thrive in the global tech ecosystem.
                 </p>
               </div>
+              <div className="mt-6 rounded-2xl overflow-hidden shadow-lg">
+                <img 
+                  src={communityWorkshop} 
+                  alt="Sara Foundation community workshop"
+                  className="w-full h-48 md:h-64 object-cover"
+                />
+              </div>
             </div>
             <div className="grid gap-6">
               <div className="card-modern p-8">
@@ -172,6 +181,13 @@ export default function About() {
                     </p>
                   </div>
                 </div>
+              </div>
+              <div className="rounded-2xl overflow-hidden shadow-lg">
+                <img 
+                  src={techEntrepreneurs} 
+                  alt="Tech entrepreneurs collaborating"
+                  className="w-full h-40 object-cover"
+                />
               </div>
             </div>
           </div>

@@ -4,6 +4,8 @@ import { DonationSection } from "@/components/sections/DonationSection";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { Heart, Sparkles, Users, GraduationCap, Lightbulb, ArrowRight } from "lucide-react";
+import graduatesCelebration from "@/assets/graduates-celebration.jpg";
+import mentorshipSession from "@/assets/mentorship-session.jpg";
 
 const impactStories = [
   {
@@ -85,6 +87,32 @@ export default function Donation() {
             <p className="section-subtitle mx-auto">
               Hear from the students and entrepreneurs whose lives have been transformed by your generosity.
             </p>
+          </div>
+
+          {/* Impact Images */}
+          <div className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto mb-10">
+            <div className="rounded-2xl overflow-hidden shadow-lg">
+              <img 
+                src={graduatesCelebration} 
+                alt="CAP program graduates celebrating their achievements"
+                className="w-full h-48 md:h-64 object-cover"
+              />
+              <div className="p-4 bg-card">
+                <p className="font-semibold text-foreground">CAP Graduates 2023</p>
+                <p className="text-sm text-muted-foreground">Students celebrating their program completion</p>
+              </div>
+            </div>
+            <div className="rounded-2xl overflow-hidden shadow-lg">
+              <img 
+                src={mentorshipSession} 
+                alt="Mentorship session between advisor and student"
+                className="w-full h-48 md:h-64 object-cover"
+              />
+              <div className="p-4 bg-card">
+                <p className="font-semibold text-foreground">Mentorship in Action</p>
+                <p className="text-sm text-muted-foreground">One-on-one guidance with industry professionals</p>
+              </div>
+            </div>
           </div>
 
           <div className="grid md:grid-cols-2 gap-4 md:gap-6 max-w-4xl mx-auto">

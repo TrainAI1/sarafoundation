@@ -1,4 +1,5 @@
-import { Sparkles, Users, Rocket, DollarSign, Eye } from "lucide-react";
+import { Users, Rocket, DollarSign, Eye } from "lucide-react";
+import womanFounderPitch from "@/assets/woman-founder-pitch.jpg";
 
 const features = [
   {
@@ -61,8 +62,12 @@ export function FLIPWFTASection() {
               of female entrepreneurs. By providing access to funding opportunities, mentorship, training, 
               networking, and advocacy, we empower women to lead successful tech startups.
             </p>
-            <div className="w-24 h-24 md:w-32 md:h-32 rounded-2xl md:rounded-3xl bg-gradient-to-br from-accent to-accent/60 flex items-center justify-center shadow-xl">
-              <Sparkles className="w-12 h-12 md:w-16 md:h-16 text-white" />
+            <div className="rounded-2xl md:rounded-3xl overflow-hidden shadow-xl">
+              <img 
+                src={womanFounderPitch} 
+                alt="Woman founder pitching to investors"
+                className="w-full h-48 md:h-64 object-cover"
+              />
             </div>
           </div>
         </div>

@@ -1,4 +1,5 @@
-import { Briefcase, Users, Network, Megaphone, BookOpen, CheckCircle2 } from "lucide-react";
+import { Briefcase, Users, Network, Megaphone, BookOpen } from "lucide-react";
+import womenTechLeaders from "@/assets/women-tech-leaders.jpg";
 
 const features = [
   {
@@ -46,8 +47,12 @@ export function FLIPWPTASection() {
               Our initiative fosters a vibrant community that empowers women professionals in African tech, 
               bridging the gender gap, and propelling them towards leadership positions and career development.
             </p>
-            <div className="w-24 h-24 md:w-32 md:h-32 rounded-2xl md:rounded-3xl bg-gradient-to-br from-primary to-primary/60 flex items-center justify-center shadow-xl">
-              <Briefcase className="w-12 h-12 md:w-16 md:h-16 text-white" />
+            <div className="rounded-2xl md:rounded-3xl overflow-hidden shadow-xl">
+              <img 
+                src={womenTechLeaders} 
+                alt="Women professionals in tech Africa"
+                className="w-full h-48 md:h-64 object-cover"
+              />
             </div>
           </div>
 
