@@ -76,21 +76,16 @@ export function HeroSection() {
           {/* Hero Visual */}
           <div className="relative hidden lg:block">
             <div className="relative aspect-square">
-              {/* Main circle */}
-              <div className="absolute inset-0 rounded-full border-2 border-white/10 animate-[spin_30s_linear_infinite]" />
-              <div className="absolute inset-8 rounded-full border border-white/20 animate-[spin_25s_linear_infinite_reverse]" />
-              
-              {/* Center content */}
-              <div className="absolute inset-16 rounded-full glass-card-dark flex items-center justify-center">
-                <div className="text-center p-8">
-                  <div className="w-20 h-20 mx-auto mb-4 rounded-2xl bg-gradient-to-br from-accent to-accent/80 flex items-center justify-center shadow-lg">
-                    <span className="text-4xl">🚀</span>
-                  </div>
-                  <p className="text-white font-semibold text-lg">Tech Innovation</p>
-                  <p className="text-white/60 text-sm mt-1">Building Africa's Future</p>
-                </div>
+              {/* Main image with overlay */}
+              <div className="absolute inset-0 rounded-3xl overflow-hidden">
+                <img 
+                  src="/hero-students.jpg" 
+                  alt="African students collaborating on technology projects"
+                  className="w-full h-full object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-primary/60 via-primary/20 to-transparent" />
               </div>
-
+              
               {/* Floating cards */}
               <div className="absolute top-8 -left-4 glass-card p-5 animate-float shadow-xl">
                 <div className="flex items-center gap-4">

@@ -1,4 +1,6 @@
 import { Users, Lightbulb, TrendingUp, Award, MapPin } from "lucide-react";
+import graduatesCelebration from "@/assets/graduates-celebration.jpg";
+import mentorshipSession from "@/assets/mentorship-session.jpg";
 
 const benefits = [
   {
@@ -29,25 +31,38 @@ export function CAPImpactSection() {
   return (
     <section className="py-16 md:py-24 bg-gradient-to-br from-primary/5 to-accent/5">
       <div className="section-container">
-        <div className="text-center max-w-3xl mx-auto mb-10 md:mb-16 px-4">
-          <span className="section-badge mb-4 md:mb-6">Our Impact</span>
-          <h2 className="section-title text-foreground mb-4 md:mb-6">
-            What Students <span className="gradient-text-accent">Gain</span>
-          </h2>
-          <p className="section-subtitle mx-auto">
-            We have a vibrant presence in over 35 universities with 763 students across 
-            the last 2 cohorts, continuously expanding into more institutions.
-          </p>
-        </div>
-
-        {/* Countries */}
-        <div className="flex flex-wrap justify-center gap-3 mb-10 md:mb-16 px-4">
-          {countries.map((country) => (
-            <span key={country} className="inline-flex items-center gap-2 px-4 py-2 bg-card border border-border rounded-full text-sm text-foreground">
-              <MapPin className="w-4 h-4 text-primary" />
-              {country}
-            </span>
-          ))}
+        <div className="grid lg:grid-cols-2 gap-8 md:gap-12 items-center mb-12 md:mb-16 px-4 lg:px-0">
+          <div>
+            <span className="section-badge mb-4 md:mb-6">Our Impact</span>
+            <h2 className="section-title text-foreground mb-4 md:mb-6">
+              What Students <span className="gradient-text-accent">Gain</span>
+            </h2>
+            <p className="section-subtitle mb-6">
+              We have a vibrant presence in over 35 universities with 763 students across 
+              the last 2 cohorts, continuously expanding into more institutions.
+            </p>
+            {/* Countries */}
+            <div className="flex flex-wrap gap-2">
+              {countries.map((country) => (
+                <span key={country} className="inline-flex items-center gap-2 px-3 py-1.5 bg-card border border-border rounded-full text-xs md:text-sm text-foreground">
+                  <MapPin className="w-3 h-3 text-primary" />
+                  {country}
+                </span>
+              ))}
+            </div>
+          </div>
+          <div className="grid grid-cols-2 gap-4">
+            <img 
+              src={graduatesCelebration} 
+              alt="CAP graduates celebrating"
+              className="w-full h-40 md:h-56 object-cover rounded-2xl shadow-lg"
+            />
+            <img 
+              src={mentorshipSession} 
+              alt="Mentorship session"
+              className="w-full h-40 md:h-56 object-cover rounded-2xl shadow-lg mt-6"
+            />
+          </div>
         </div>
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 px-4 lg:px-0">
