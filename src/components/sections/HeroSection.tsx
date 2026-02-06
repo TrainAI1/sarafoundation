@@ -35,7 +35,7 @@ export function HeroSection() {
             <h1 className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-[1.05] animate-fade-up" style={{ animationDelay: '0.1s' }}>
               Breaking Barriers,
               <br />
-              <span className="text-accent">Igniting Innovation,</span>
+              <span className="text-white/90 italic">Igniting Innovation,</span>
               <br />
               Empowering Dreams.
             </h1>

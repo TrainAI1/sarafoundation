@@ -8,12 +8,18 @@ import {
   Newspaper, Search, ChevronRight
 } from "lucide-react";
 import { Input } from "@/components/ui/input";
+import studentsLabImg from "@/assets/students-tech-lab.jpg";
+import womenTechLeaders from "@/assets/women-tech-leaders.jpg";
+import communityWorkshop from "@/assets/community-workshop.jpg";
+import techEntrepreneurs from "@/assets/tech-entrepreneurs.jpg";
+import techConferenceSpeaker from "@/assets/tech-conference-speaker.jpg";
+import graduatesCelebration from "@/assets/graduates-celebration.jpg";
 
 const featuredPost = {
   id: 0,
   title: "2024 Year in Review: How We Impacted 500+ African Tech Talents",
   excerpt: "A comprehensive look at our achievements, partnerships, and the inspiring stories of transformation from across the continent this year.",
-  image: null,
+  image: studentsLabImg,
   author: "Dr. Sarah Okafor",
   date: "Dec 20, 2024",
   readTime: "10 min read",
@@ -25,7 +31,7 @@ const blogPosts = [
     id: 1,
     title: "How CAP is Transforming Tech Education in African Universities",
     excerpt: "Discover how our Career Advancement Program is creating new pathways for students across the continent.",
-    image: null,
+    image: communityWorkshop,
     author: "Sarah Adekunle",
     date: "Dec 15, 2024",
     readTime: "5 min read",
@@ -35,7 +41,7 @@ const blogPosts = [
     id: 2,
     title: "Women in Tech: Breaking Barriers in Nigeria's Startup Ecosystem",
     excerpt: "A deep dive into the challenges and triumphs of women entrepreneurs building tech companies in Nigeria.",
-    image: null,
+    image: womenTechLeaders,
     author: "Fatima Hassan",
     date: "Dec 10, 2024",
     readTime: "7 min read",
@@ -45,7 +51,7 @@ const blogPosts = [
     id: 3,
     title: "5 Essential Skills Every Tech Professional Needs in 2025",
     excerpt: "From AI literacy to soft skills, here's what you need to stay competitive in the evolving tech landscape.",
-    image: null,
+    image: techEntrepreneurs,
     author: "Michael Obi",
     date: "Dec 5, 2024",
     readTime: "4 min read",
@@ -55,7 +61,7 @@ const blogPosts = [
     id: 4,
     title: "Partnership Spotlight: How Universities are Embracing Tech Innovation",
     excerpt: "Highlighting our partnership with leading African universities to create tech-focused curricula.",
-    image: null,
+    image: techConferenceSpeaker,
     author: "Sarah Adekunle",
     date: "Nov 28, 2024",
     readTime: "6 min read",
@@ -65,7 +71,7 @@ const blogPosts = [
     id: 5,
     title: "From Student to Founder: Success Stories from Our Alumni",
     excerpt: "Inspiring journeys of CAP graduates who have launched successful tech startups.",
-    image: null,
+    image: graduatesCelebration,
     author: "Michael Obi",
     date: "Nov 20, 2024",
     readTime: "8 min read",
@@ -75,30 +81,10 @@ const blogPosts = [
     id: 6,
     title: "The Future of Tech in Africa: Trends to Watch",
     excerpt: "Exploring the technologies and innovations shaping Africa's digital transformation.",
-    image: null,
+    image: studentsLabImg,
     author: "Fatima Hassan",
     date: "Nov 15, 2024",
     readTime: "5 min read",
-    category: "Industry",
-  },
-  {
-    id: 7,
-    title: "Mentorship That Works: Lessons from FLIP's Success",
-    excerpt: "How structured mentorship programs are accelerating women's careers in tech.",
-    image: null,
-    author: "Amara Diop",
-    date: "Nov 10, 2024",
-    readTime: "6 min read",
-    category: "Women in Tech",
-  },
-  {
-    id: 8,
-    title: "Building a Pan-African Tech Community",
-    excerpt: "The importance of cross-border collaboration in strengthening Africa's tech ecosystem.",
-    image: null,
-    author: "Dr. Sarah Okafor",
-    date: "Nov 5, 2024",
-    readTime: "7 min read",
     category: "Industry",
   },
 ];
@@ -122,8 +108,13 @@ export default function Blog() {
       
       {/* Hero */}
       <section className="pt-24 md:pt-32 pb-12 md:pb-20 bg-gradient-to-br from-primary via-primary/90 to-[hsl(240,80%,50%)] relative overflow-hidden">
-        <div className="absolute inset-0 opacity-30">
-          <div className="absolute top-1/4 left-1/4 w-[300px] md:w-[500px] h-[300px] md:h-[500px] rounded-full bg-accent blur-[100px] md:blur-[150px]" />
+        <div className="absolute inset-0">
+          <img 
+            src={techConferenceSpeaker} 
+            alt="Tech conference"
+            className="w-full h-full object-cover opacity-15"
+          />
+          <div className="absolute inset-0 bg-gradient-to-br from-primary via-primary/90 to-[hsl(240,80%,50%)]" />
         </div>
         <div className="section-container relative z-10">
           <div className="max-w-3xl px-4">
@@ -144,14 +135,18 @@ export default function Blog() {
 
       {/* Featured Post */}
       <section className="py-10 md:py-16 bg-background">
-        <div className="section-container">
+        <div className="section-container px-4 lg:px-0">
           <div className="card-modern overflow-hidden">
             <div className="grid lg:grid-cols-2">
-              <div className="aspect-video lg:aspect-auto bg-gradient-to-br from-primary/20 to-accent/20 flex items-center justify-center">
-                <Newspaper className="w-24 h-24 text-primary/30" />
+              <div className="aspect-video lg:aspect-auto overflow-hidden">
+                <img 
+                  src={featuredPost.image} 
+                  alt={featuredPost.title}
+                  className="w-full h-full object-cover"
+                />
               </div>
-              <div className="p-8 lg:p-10 flex flex-col justify-center">
-                <div className="flex items-center gap-3 mb-4">
+              <div className="p-6 md:p-8 lg:p-10 flex flex-col justify-center">
+                <div className="flex flex-wrap items-center gap-2 md:gap-3 mb-4">
                   <span className="px-3 py-1 bg-accent/10 text-accent rounded-full text-xs font-semibold">
                     Featured
                   </span>
@@ -159,21 +154,21 @@ export default function Blog() {
                     {featuredPost.category}
                   </span>
                 </div>
-                <h2 className="font-display font-bold text-2xl lg:text-3xl text-foreground mb-4">
+                <h2 className="font-display font-bold text-xl md:text-2xl lg:text-3xl text-foreground mb-3 md:mb-4">
                   {featuredPost.title}
                 </h2>
-                <p className="text-muted-foreground mb-6">{featuredPost.excerpt}</p>
-                <div className="flex items-center justify-between">
+                <p className="text-muted-foreground text-sm md:text-base mb-4 md:mb-6">{featuredPost.excerpt}</p>
+                <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
                   <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-full bg-gradient-to-br from-primary to-accent flex items-center justify-center text-white text-sm font-bold">
+                    <div className="w-8 h-8 md:w-10 md:h-10 rounded-full bg-gradient-to-br from-primary to-accent flex items-center justify-center text-white text-xs md:text-sm font-bold">
                       {featuredPost.author.split(' ').map(n => n[0]).join('')}
                     </div>
                     <div>
-                      <p className="text-sm font-medium text-foreground">{featuredPost.author}</p>
+                      <p className="text-xs md:text-sm font-medium text-foreground">{featuredPost.author}</p>
                       <p className="text-xs text-muted-foreground">{featuredPost.date} · {featuredPost.readTime}</p>
                     </div>
                   </div>
-                  <Button variant="outline" className="group">
+                  <Button variant="outline" className="group w-full sm:w-auto">
                     Read More
                     <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                   </Button>
@@ -186,7 +181,7 @@ export default function Blog() {
 
       {/* Blog Content */}
       <section className="py-10 md:py-16 bg-secondary/30">
-        <div className="section-container">
+        <div className="section-container px-4 lg:px-0">
           {/* Search & Filter */}
           <div className="flex flex-col gap-4 mb-8 md:mb-12">
             <div className="relative flex-1 max-w-md">
@@ -216,18 +211,21 @@ export default function Blog() {
           </div>
 
           {/* Blog Grid */}
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 lg:gap-8">
             {filteredPosts.map((post) => (
               <article key={post.id} className="card-modern overflow-hidden group">
-                {/* Image placeholder */}
-                <div className="aspect-video bg-gradient-to-br from-primary/10 to-accent/10 flex items-center justify-center relative overflow-hidden">
-                  <Newspaper className="w-12 h-12 text-primary/30" />
+                <div className="aspect-video overflow-hidden relative">
+                  <img 
+                    src={post.image} 
+                    alt={post.title}
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  />
                   <div className="absolute inset-0 bg-gradient-to-t from-foreground/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
                 </div>
                 
-                <div className="p-6">
-                  <div className="flex items-center gap-3 mb-4">
-                    <span className="px-3 py-1 bg-primary/10 text-primary rounded-full text-xs font-medium">
+                <div className="p-4 md:p-6">
+                  <div className="flex flex-wrap items-center gap-2 md:gap-3 mb-3 md:mb-4">
+                    <span className="px-2 md:px-3 py-1 bg-primary/10 text-primary rounded-full text-xs font-medium">
                       {post.category}
                     </span>
                     <span className="text-xs text-muted-foreground flex items-center gap-1">
@@ -236,19 +234,19 @@ export default function Blog() {
                     </span>
                   </div>
 
-                  <h3 className="font-display font-bold text-lg text-foreground mb-3 group-hover:text-primary transition-colors line-clamp-2">
+                  <h3 className="font-display font-bold text-base md:text-lg text-foreground mb-2 md:mb-3 group-hover:text-primary transition-colors line-clamp-2">
                     {post.title}
                   </h3>
-                  <p className="text-muted-foreground text-sm mb-4 line-clamp-2">
+                  <p className="text-muted-foreground text-xs md:text-sm mb-3 md:mb-4 line-clamp-2">
                     {post.excerpt}
                   </p>
 
-                  <div className="flex items-center justify-between pt-4 border-t border-border">
+                  <div className="flex items-center justify-between pt-3 md:pt-4 border-t border-border">
                     <div className="flex items-center gap-2">
-                      <div className="w-8 h-8 rounded-full bg-gradient-to-br from-primary to-accent flex items-center justify-center text-white text-xs font-bold">
+                      <div className="w-7 h-7 md:w-8 md:h-8 rounded-full bg-gradient-to-br from-primary to-accent flex items-center justify-center text-white text-xs font-bold">
                         {post.author.split(' ').map(n => n[0]).join('')}
                       </div>
-                      <span className="text-sm text-foreground">{post.author}</span>
+                      <span className="text-xs md:text-sm text-foreground">{post.author}</span>
                     </div>
                     <span className="text-xs text-muted-foreground">{post.date}</span>
                   </div>
@@ -267,7 +265,7 @@ export default function Blog() {
 
           {/* Load More */}
           {filteredPosts.length > 0 && (
-            <div className="text-center mt-12">
+            <div className="text-center mt-8 md:mt-12">
               <Button variant="outline" size="lg">
                 Load More Articles
                 <ArrowRight className="w-5 h-5" />
