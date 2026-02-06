@@ -1,6 +1,8 @@
 import { GraduationCap, Users, ArrowRight, Rocket, BookOpen, Zap, Star } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
+import studentsLabImg from "@/assets/students-tech-lab.jpg";
+import womenTechLeaders from "@/assets/women-tech-leaders.jpg";
 
 const programs = [
   {
@@ -9,6 +11,7 @@ const programs = [
     title: "Career Advancement Program (CAP)",
     subtitle: "9-Month Rotational Program",
     description: "A comprehensive program implemented through CAP TECH CLUBS in African universities, nurturing young Africans to become tech professionals and founders.",
+    image: studentsLabImg,
     phases: [
       { name: "Learn", icon: BookOpen, description: "Build foundational tech skills" },
       { name: "Build", icon: Rocket, description: "Create real-world projects" },
@@ -23,6 +26,7 @@ const programs = [
     title: "Female Leadership Initiative Program (FLIP)",
     subtitle: "Women-Focused Tech Community",
     description: "A membership-based program empowering women in tech to grow and succeed in Africa through mentorship, networking, and opportunities.",
+    image: womenTechLeaders,
     communities: [
       { name: "Women Professionals in Tech Africa (WPTA)", description: "Empowering women professionals, bridging the gender gap" },
       { name: "Women Founders in Tech Africa", description: "Supporting women-led startups and ventures" },
@@ -63,21 +67,25 @@ export function ProgramsSection() {
               key={program.id}
               className="card-modern overflow-hidden group"
             >
-              {/* Card Header */}
-              <div className={`p-5 md:p-8 bg-gradient-to-r ${program.gradient} text-white relative overflow-hidden`}>
-                {/* Decorative circles */}
-                <div className="absolute -top-12 -right-12 w-32 h-32 rounded-full bg-white/10" />
-                <div className="absolute -bottom-8 -left-8 w-24 h-24 rounded-full bg-white/10" />
-                
-                <div className="relative flex items-start gap-4 md:gap-5">
-                  <div className="w-12 h-12 md:w-16 md:h-16 rounded-xl md:rounded-2xl bg-white/20 backdrop-blur-sm flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300">
-                    <program.icon className="w-6 h-6 md:w-8 md:h-8" />
-                  </div>
-                  <div>
-                    <span className="text-white/80 text-xs md:text-sm font-medium">{program.subtitle}</span>
-                    <h3 className="font-display font-bold text-lg md:text-xl lg:text-2xl mt-1">
-                      {program.title}
-                    </h3>
+              {/* Card Image */}
+              <div className="relative h-48 md:h-56 overflow-hidden">
+                <img 
+                  src={program.image} 
+                  alt={program.title}
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                />
+                <div className={`absolute inset-0 bg-gradient-to-t ${program.gradient} opacity-70`} />
+                <div className="absolute bottom-0 left-0 right-0 p-5 md:p-8">
+                  <div className="flex items-start gap-4 md:gap-5">
+                    <div className="w-12 h-12 md:w-14 md:h-14 rounded-xl md:rounded-2xl bg-white/20 backdrop-blur-sm flex items-center justify-center flex-shrink-0">
+                      <program.icon className="w-6 h-6 md:w-7 md:h-7 text-white" />
+                    </div>
+                    <div>
+                      <span className="text-white/80 text-xs md:text-sm font-medium">{program.subtitle}</span>
+                      <h3 className="font-display font-bold text-lg md:text-xl lg:text-2xl text-white mt-1">
+                        {program.title}
+                      </h3>
+                    </div>
                   </div>
                 </div>
               </div>

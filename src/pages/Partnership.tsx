@@ -6,6 +6,8 @@ import {
   Building, Users, GraduationCap, ArrowRight, CheckCircle2,
   Handshake, Target, Sparkles, TrendingUp, Globe, Award
 } from "lucide-react";
+import partnershipMeeting from "@/assets/partnership-meeting.jpg";
+import techConferenceSpeaker from "@/assets/tech-conference-speaker.jpg";
 
 const partnerTypes = [
   {
@@ -92,10 +94,15 @@ export default function Partnership() {
     <div className="min-h-screen bg-background">
       <Navbar />
       
-      {/* Hero */}
+      {/* Hero with Image */}
       <section className="pt-24 md:pt-32 pb-12 md:pb-20 bg-gradient-to-br from-primary via-primary/90 to-[hsl(240,80%,50%)] relative overflow-hidden">
-        <div className="absolute inset-0 opacity-30">
-          <div className="absolute top-1/4 right-1/4 w-[300px] md:w-[500px] h-[300px] md:h-[500px] rounded-full bg-accent blur-[100px] md:blur-[150px]" />
+        <div className="absolute inset-0">
+          <img 
+            src={partnershipMeeting} 
+            alt="Partnership meeting"
+            className="w-full h-full object-cover opacity-15"
+          />
+          <div className="absolute inset-0 bg-gradient-to-br from-primary via-primary/90 to-[hsl(240,80%,50%)]" />
         </div>
         <div className="section-container relative z-10">
           <div className="grid lg:grid-cols-2 gap-8 md:gap-12 items-center">
@@ -153,7 +160,7 @@ export default function Partnership() {
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 px-4 lg:px-0">
             {partnerTypes.map((type) => (
               <div key={type.title} className="card-modern overflow-hidden flex flex-col">
                 {/* Header */}
@@ -200,10 +207,25 @@ export default function Partnership() {
         </div>
       </section>
 
+      {/* Image Break */}
+      <section className="relative h-48 md:h-64 overflow-hidden">
+        <img 
+          src={techConferenceSpeaker} 
+          alt="Tech conference speaker"
+          className="w-full h-full object-cover"
+        />
+        <div className="absolute inset-0 bg-gradient-to-r from-primary/60 to-accent/40" />
+        <div className="absolute inset-0 flex items-center justify-center">
+          <p className="text-white text-xl md:text-3xl font-display font-bold text-center px-4">
+            Together, we create lasting impact across Africa
+          </p>
+        </div>
+      </section>
+
       {/* Process */}
-      <section className="py-24 bg-secondary/50">
+      <section className="py-16 md:py-24 bg-secondary/50">
         <div className="section-container">
-          <div className="text-center max-w-3xl mx-auto mb-16">
+          <div className="text-center max-w-3xl mx-auto mb-10 md:mb-16 px-4">
             <span className="section-badge mb-6">
               <TrendingUp className="w-4 h-4" />
               Partnership Process
@@ -216,15 +238,15 @@ export default function Partnership() {
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 px-4 lg:px-0">
             {process.map((item, index) => (
               <div key={item.step} className="relative">
-                <div className="card-modern p-6 text-center h-full">
-                  <div className="w-12 h-12 mx-auto rounded-xl bg-gradient-to-br from-primary to-accent flex items-center justify-center text-white font-bold text-lg mb-4">
+                <div className="card-modern p-5 md:p-6 text-center h-full">
+                  <div className="w-10 h-10 md:w-12 md:h-12 mx-auto rounded-xl bg-gradient-to-br from-primary to-accent flex items-center justify-center text-white font-bold text-sm md:text-lg mb-3 md:mb-4">
                     {item.step}
                   </div>
-                  <h3 className="font-display font-bold text-lg text-foreground mb-2">{item.title}</h3>
-                  <p className="text-muted-foreground text-sm">{item.description}</p>
+                  <h3 className="font-display font-bold text-sm md:text-lg text-foreground mb-1 md:mb-2">{item.title}</h3>
+                  <p className="text-muted-foreground text-xs md:text-sm">{item.description}</p>
                 </div>
                 {index < process.length - 1 && (
                   <div className="hidden lg:block absolute top-1/2 -right-3 w-6 h-0.5 bg-border" />
@@ -236,9 +258,9 @@ export default function Partnership() {
       </section>
 
       {/* Testimonials */}
-      <section className="py-24 bg-background">
+      <section className="py-16 md:py-24 bg-background">
         <div className="section-container">
-          <div className="text-center max-w-3xl mx-auto mb-16">
+          <div className="text-center max-w-3xl mx-auto mb-10 md:mb-16 px-4">
             <span className="section-badge mb-6">
               <Sparkles className="w-4 h-4" />
               Partner Testimonials
@@ -248,21 +270,21 @@ export default function Partnership() {
             </h2>
           </div>
 
-          <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+          <div className="grid md:grid-cols-2 gap-6 md:gap-8 max-w-4xl mx-auto px-4 lg:px-0">
             {testimonials.map((testimonial) => (
-              <div key={testimonial.author} className="card-modern p-8">
+              <div key={testimonial.author} className="card-modern p-6 md:p-8">
                 <span className="inline-block px-3 py-1 bg-primary/10 text-primary rounded-full text-xs font-medium mb-4">
                   {testimonial.type}
                 </span>
-                <p className="text-foreground text-lg italic mb-6">
+                <p className="text-foreground text-base md:text-lg italic mb-6">
                   "{testimonial.quote}"
                 </p>
                 <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 rounded-full bg-gradient-to-br from-primary to-accent flex items-center justify-center text-white font-bold">
+                  <div className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-gradient-to-br from-primary to-accent flex items-center justify-center text-white font-bold text-sm">
                     {testimonial.author.split(' ').map(n => n[0]).join('')}
                   </div>
                   <div>
-                    <p className="font-semibold text-foreground">{testimonial.author}</p>
+                    <p className="font-semibold text-foreground text-sm md:text-base">{testimonial.author}</p>
                     <p className="text-sm text-muted-foreground">{testimonial.role}</p>
                   </div>
                 </div>

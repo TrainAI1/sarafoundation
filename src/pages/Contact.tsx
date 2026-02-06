@@ -9,6 +9,7 @@ import {
   Clock, Sparkles, CheckCircle2, Linkedin, Twitter, Instagram
 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import communityWorkshop from "@/assets/community-workshop.jpg";
 
 const contactInfo = [
   { icon: Mail, title: "Email Us", value: "info@sarafoundationafrica.com", href: "mailto:info@sarafoundationafrica.com" },
@@ -40,13 +41,9 @@ export default function Contact() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-    
-    // Simulate API call
     await new Promise(resolve => setTimeout(resolve, 1500));
-    
     setIsSubmitting(false);
     setIsSubmitted(true);
-    
     toast({
       title: "Message sent successfully!",
       description: "We'll get back to you within 24 hours.",
@@ -57,10 +54,15 @@ export default function Contact() {
     <div className="min-h-screen bg-background">
       <Navbar />
       
-      {/* Hero */}
+      {/* Hero with Image */}
       <section className="pt-24 md:pt-32 pb-12 md:pb-20 bg-gradient-to-br from-primary via-primary/90 to-[hsl(240,80%,50%)] relative overflow-hidden">
-        <div className="absolute inset-0 opacity-30">
-          <div className="absolute bottom-0 left-1/4 w-[300px] md:w-[500px] h-[300px] md:h-[500px] rounded-full bg-accent blur-[100px] md:blur-[150px]" />
+        <div className="absolute inset-0">
+          <img 
+            src={communityWorkshop} 
+            alt="Sara Foundation community"
+            className="w-full h-full object-cover opacity-15"
+          />
+          <div className="absolute inset-0 bg-gradient-to-br from-primary via-primary/90 to-[hsl(240,80%,50%)]" />
         </div>
         <div className="section-container relative z-10">
           <div className="max-w-3xl px-4">
@@ -81,11 +83,11 @@ export default function Contact() {
 
       {/* Contact Section */}
       <section className="py-16 md:py-24">
-        <div className="section-container">
+        <div className="section-container px-4 lg:px-0">
           <div className="grid lg:grid-cols-2 gap-10 md:gap-16">
             {/* Contact Form */}
             <div>
-              <div className="card-modern p-8 md:p-10">
+              <div className="card-modern p-6 md:p-8 lg:p-10">
                 {isSubmitted ? (
                   <div className="text-center py-12">
                     <div className="w-20 h-20 mx-auto rounded-full bg-gradient-to-br from-primary to-accent flex items-center justify-center mb-6">
@@ -103,14 +105,14 @@ export default function Contact() {
                   </div>
                 ) : (
                   <>
-                    <h2 className="font-display font-bold text-2xl text-foreground mb-2">
+                    <h2 className="font-display font-bold text-xl md:text-2xl text-foreground mb-2">
                       Send us a Message
                     </h2>
-                    <p className="text-muted-foreground mb-8">
+                    <p className="text-muted-foreground text-sm md:text-base mb-6 md:mb-8">
                       Fill out the form below and we'll get back to you within 24 hours.
                     </p>
 
-                    <form onSubmit={handleSubmit} className="space-y-6">
+                    <form onSubmit={handleSubmit} className="space-y-4 md:space-y-6">
                       <div className="grid sm:grid-cols-2 gap-4">
                         <div>
                           <label className="block text-sm font-medium text-foreground mb-2">
@@ -150,7 +152,7 @@ export default function Contact() {
                         </label>
                         <Textarea 
                           placeholder="Tell us more about your inquiry..." 
-                          className="rounded-xl min-h-[150px]" 
+                          className="rounded-xl min-h-[120px] md:min-h-[150px]" 
                           required
                         />
                       </div>
@@ -175,30 +177,30 @@ export default function Contact() {
             </div>
 
             {/* Contact Info */}
-            <div className="space-y-6">
+            <div className="space-y-4 md:space-y-6">
               <div>
-                <h2 className="font-display font-bold text-2xl text-foreground mb-2">
+                <h2 className="font-display font-bold text-xl md:text-2xl text-foreground mb-2">
                   Contact Information
                 </h2>
-                <p className="text-muted-foreground">
+                <p className="text-muted-foreground text-sm md:text-base">
                   Reach out through any of these channels.
                 </p>
               </div>
 
-              <div className="grid gap-4">
+              <div className="grid gap-3 md:gap-4">
                 {contactInfo.map((item) => (
-                  <div key={item.title} className="card-modern p-6 flex items-center gap-5">
-                    <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-primary to-primary/60 flex items-center justify-center shadow-lg flex-shrink-0">
-                      <item.icon className="w-6 h-6 text-white" />
+                  <div key={item.title} className="card-modern p-4 md:p-6 flex items-center gap-4 md:gap-5">
+                    <div className="w-12 h-12 md:w-14 md:h-14 rounded-xl md:rounded-2xl bg-gradient-to-br from-primary to-primary/60 flex items-center justify-center shadow-lg flex-shrink-0">
+                      <item.icon className="w-5 h-5 md:w-6 md:h-6 text-white" />
                     </div>
-                    <div>
-                      <p className="text-sm text-muted-foreground">{item.title}</p>
+                    <div className="min-w-0">
+                      <p className="text-xs md:text-sm text-muted-foreground">{item.title}</p>
                       {item.href ? (
-                        <a href={item.href} className="font-semibold text-foreground hover:text-primary transition-colors">
+                        <a href={item.href} className="font-semibold text-foreground hover:text-primary transition-colors text-sm md:text-base break-all">
                           {item.value}
                         </a>
                       ) : (
-                        <p className="font-semibold text-foreground">{item.value}</p>
+                        <p className="font-semibold text-foreground text-sm md:text-base">{item.value}</p>
                       )}
                     </div>
                   </div>
@@ -206,27 +208,32 @@ export default function Contact() {
               </div>
 
               {/* Social Links */}
-              <div className="card-modern p-6">
-                <h3 className="font-semibold text-foreground mb-4">Follow Us</h3>
+              <div className="card-modern p-4 md:p-6">
+                <h3 className="font-semibold text-foreground mb-3 md:mb-4 text-sm md:text-base">Follow Us</h3>
                 <div className="flex gap-3">
                   {socialLinks.map((social) => (
                     <a
                       key={social.name}
                       href={social.href}
-                      className="w-12 h-12 rounded-xl bg-secondary flex items-center justify-center hover:bg-primary hover:text-white transition-colors"
+                      className="w-10 h-10 md:w-12 md:h-12 rounded-xl bg-secondary flex items-center justify-center hover:bg-primary hover:text-white transition-colors"
                       aria-label={social.name}
                     >
-                      <social.icon className="w-5 h-5" />
+                      <social.icon className="w-4 h-4 md:w-5 md:h-5" />
                     </a>
                   ))}
                 </div>
               </div>
 
-              {/* Map placeholder */}
-              <div className="card-modern aspect-video flex items-center justify-center bg-secondary/50 overflow-hidden">
-                <div className="text-center p-8">
-                  <MapPin className="w-12 h-12 text-primary mx-auto mb-4" />
-                  <p className="text-muted-foreground">Interactive map coming soon</p>
+              {/* Image instead of map */}
+              <div className="rounded-2xl overflow-hidden shadow-lg">
+                <img 
+                  src={communityWorkshop} 
+                  alt="Sara Foundation community event"
+                  className="w-full h-40 md:h-56 object-cover"
+                />
+                <div className="p-4 bg-card">
+                  <p className="font-semibold text-foreground text-sm">Our Community</p>
+                  <p className="text-xs text-muted-foreground">Connecting with students and professionals across Africa</p>
                 </div>
               </div>
             </div>
@@ -236,8 +243,8 @@ export default function Contact() {
 
       {/* Office Locations */}
       <section className="py-16 md:py-24 bg-secondary/50">
-        <div className="section-container">
-          <div className="text-center max-w-3xl mx-auto mb-10 md:mb-16 px-4">
+        <div className="section-container px-4 lg:px-0">
+          <div className="text-center max-w-3xl mx-auto mb-10 md:mb-16">
             <span className="section-badge mb-4 md:mb-6">
               <MapPin className="w-4 h-4" />
               Our Offices

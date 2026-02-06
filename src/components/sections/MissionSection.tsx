@@ -1,4 +1,6 @@
 import { Lightbulb, Users, Heart, Target, TrendingUp } from "lucide-react";
+import studentsLabImg from "@/assets/students-tech-lab.jpg";
+import communityWorkshopImg from "@/assets/community-workshop.jpg";
 
 const coreValues = [
   {
@@ -41,20 +43,34 @@ export function MissionSection() {
       <div className="absolute inset-0 mesh-gradient opacity-50" />
       
       <div className="section-container relative z-10">
-        {/* Mission Statement */}
-        <div className="text-center max-w-4xl mx-auto mb-12 md:mb-20 px-4">
-          <span className="section-badge mb-6">
-            Our Mission
-          </span>
-          <h2 className="section-title text-foreground mb-6 text-balance">
-            Fostering Diversity, Equity & Inclusion in{" "}
-            <span className="gradient-text">African Tech</span>
-          </h2>
-          <p className="section-subtitle mx-auto">
-            Sara Foundation Africa is dedicated to empowering young Africans to thrive in 
-            the global tech ecosystem. We believe that diversity drives innovation, and 
-            inclusion creates opportunities for all.
-          </p>
+        {/* Mission Statement with Image */}
+        <div className="grid lg:grid-cols-2 gap-8 md:gap-12 items-center mb-12 md:mb-20 px-4 lg:px-0">
+          <div>
+            <span className="section-badge mb-6">
+              Our Mission
+            </span>
+            <h2 className="section-title text-foreground mb-6 text-balance">
+              Fostering Diversity, Equity & Inclusion in{" "}
+              <span className="gradient-text">African Tech</span>
+            </h2>
+            <p className="section-subtitle">
+              Sara Foundation Africa is dedicated to empowering young Africans to thrive in 
+              the global tech ecosystem. We believe that diversity drives innovation, and 
+              inclusion creates opportunities for all.
+            </p>
+          </div>
+          <div className="grid grid-cols-2 gap-4">
+            <img 
+              src={studentsLabImg} 
+              alt="Students working in a tech lab"
+              className="w-full h-40 md:h-56 object-cover rounded-2xl shadow-lg"
+            />
+            <img 
+              src={communityWorkshopImg} 
+              alt="Community workshop session"
+              className="w-full h-40 md:h-56 object-cover rounded-2xl shadow-lg mt-6"
+            />
+          </div>
         </div>
 
         {/* Core Values */}
