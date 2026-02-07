@@ -1,4 +1,5 @@
-import { Users, BookOpen, Heart, CheckCircle2 } from "lucide-react";
+import { Users, BookOpen, Heart } from "lucide-react";
+import womenCoworking from "@/assets/women-coworking.jpg";
 
 const approaches = [
   {
@@ -31,6 +32,17 @@ export function FLIPGenderGapSection() {
             The Female Leadership Initiative Program addresses identified gaps for women in African tech 
             through a multi-pronged approach leveraging the WPTA and WFTA initiatives.
           </p>
+        </div>
+
+        {/* Featured Image */}
+        <div className="max-w-4xl mx-auto mb-10 md:mb-16 px-4 lg:px-0">
+          <div className="rounded-2xl overflow-hidden shadow-lg">
+            <img 
+              src={womenCoworking} 
+              alt="African women collaborating in a co-working space"
+              className="w-full h-48 md:h-72 object-cover"
+            />
+          </div>
         </div>
 
         <div className="grid md:grid-cols-3 gap-6 md:gap-8 px-4 lg:px-0">

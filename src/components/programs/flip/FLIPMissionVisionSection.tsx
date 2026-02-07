@@ -1,6 +1,13 @@
-import { Target, Eye, MapPin } from "lucide-react";
+import { Target, Eye } from "lucide-react";
 
-const countries = ["Nigeria", "Ghana", "Kenya", "South Africa", "Uganda", "Zambia"];
+const countries = [
+  { name: "Nigeria", flag: "🇳🇬" },
+  { name: "Ghana", flag: "🇬🇭" },
+  { name: "Kenya", flag: "🇰🇪" },
+  { name: "South Africa", flag: "🇿🇦" },
+  { name: "Uganda", flag: "🇺🇬" },
+  { name: "Zambia", flag: "🇿🇲" },
+];
 
 export function FLIPMissionVisionSection() {
   return (
@@ -9,9 +16,9 @@ export function FLIPMissionVisionSection() {
         {/* Countries */}
         <div className="flex flex-wrap justify-center gap-3 mb-10 md:mb-16 px-4">
           {countries.map((country) => (
-            <span key={country} className="inline-flex items-center gap-2 px-4 py-2 bg-card border border-border rounded-full text-sm text-foreground">
-              <MapPin className="w-4 h-4 text-accent" />
-              {country}
+            <span key={country.name} className="inline-flex items-center gap-2 px-4 py-2 bg-card border border-border rounded-full text-sm text-foreground">
+              <span className="text-lg">{country.flag}</span>
+              {country.name}
             </span>
           ))}
         </div>

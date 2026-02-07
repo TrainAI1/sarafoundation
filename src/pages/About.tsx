@@ -4,10 +4,13 @@ import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { 
   Target, Heart, Lightbulb, Globe, Users, Award, 
-  ArrowRight, Sparkles, Eye, Quote, Trophy, MapPin
+  ArrowRight, Sparkles, Eye, Quote, Trophy
 } from "lucide-react";
 import communityWorkshop from "@/assets/community-workshop.jpg";
 import techEntrepreneurs from "@/assets/tech-entrepreneurs.jpg";
+import techConference from "@/assets/tech-conference.jpg";
+import studentsLabImg from "@/assets/students-tech-lab.jpg";
+import womenCoworking from "@/assets/women-coworking.jpg";
 
 const milestones = [
   { year: "2020", title: "Foundation Established", description: "Sara Foundation Africa was founded with a vision to transform tech in Africa" },
@@ -52,11 +55,20 @@ const advisors = [
 ];
 
 const keyInitiatives = [
-  { title: "CAP Tech Hub", description: "Empowering tech leaders, innovators, and experts through comprehensive career advancement programs." },
-  { title: "FLIP Communities", description: "Women Professionals in Tech Africa and Women Founders in Tech Africa - building leadership pipelines." },
+  { title: "CAP Tech Hub", description: "Empowering tech leaders, innovators, and experts through comprehensive career advancement programs.", image: studentsLabImg },
+  { title: "FLIP Communities", description: "Women Professionals in Tech Africa and Women Founders in Tech Africa - building leadership pipelines.", image: womenCoworking },
 ];
 
-const countries = ["Nigeria", "Zambia", "Burundi", "Ghana", "Kenya", "South Africa", "Rwanda", "Uganda"];
+const countries = [
+  { name: "Nigeria", flag: "🇳🇬" },
+  { name: "Zambia", flag: "🇿🇲" },
+  { name: "Burundi", flag: "🇧🇮" },
+  { name: "Ghana", flag: "🇬🇭" },
+  { name: "Kenya", flag: "🇰🇪" },
+  { name: "South Africa", flag: "🇿🇦" },
+  { name: "Rwanda", flag: "🇷🇼" },
+  { name: "Uganda", flag: "🇺🇬" },
+];
 
 export default function About() {
   return (
@@ -107,12 +119,12 @@ export default function About() {
         <div className="section-container">
           <div className="flex flex-wrap items-center justify-center gap-3 md:gap-4">
             <span className="flex items-center gap-2 text-muted-foreground font-medium">
-              <MapPin className="w-4 h-4 text-primary" />
-              Trusted in 8 countries:
+              🌍 Trusted in 8 countries:
             </span>
             {countries.map((country) => (
-              <span key={country} className="px-3 py-1 bg-secondary rounded-full text-sm text-foreground">
-                {country}
+              <span key={country.name} className="inline-flex items-center gap-2 px-3 py-1.5 bg-secondary rounded-full text-sm text-foreground">
+                <span className="text-base">{country.flag}</span>
+                {country.name}
               </span>
             ))}
           </div>
@@ -205,9 +217,16 @@ export default function About() {
           </div>
           <div className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
             {keyInitiatives.map((initiative) => (
-              <div key={initiative.title} className="card-modern p-8 text-center">
-                <h3 className="font-display font-bold text-xl text-foreground mb-3">{initiative.title}</h3>
-                <p className="text-muted-foreground">{initiative.description}</p>
+              <div key={initiative.title} className="card-modern overflow-hidden">
+                <img 
+                  src={initiative.image} 
+                  alt={initiative.title}
+                  className="w-full h-40 md:h-48 object-cover"
+                />
+                <div className="p-6 md:p-8 text-center">
+                  <h3 className="font-display font-bold text-xl text-foreground mb-3">{initiative.title}</h3>
+                  <p className="text-muted-foreground">{initiative.description}</p>
+                </div>
               </div>
             ))}
           </div>
