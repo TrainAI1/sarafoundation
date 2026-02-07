@@ -1,4 +1,4 @@
-import { Users, Lightbulb, TrendingUp, Award, MapPin } from "lucide-react";
+import { Users, Lightbulb, TrendingUp, Award } from "lucide-react";
 import graduatesCelebration from "@/assets/graduates-celebration.jpg";
 import mentorshipSession from "@/assets/mentorship-session.jpg";
 
@@ -25,7 +25,14 @@ const benefits = [
   },
 ];
 
-const countries = ["Nigeria", "Ghana", "Kenya", "South Africa", "Uganda", "Zambia"];
+const countries = [
+  { name: "Nigeria", flag: "🇳🇬" },
+  { name: "Ghana", flag: "🇬🇭" },
+  { name: "Kenya", flag: "🇰🇪" },
+  { name: "South Africa", flag: "🇿🇦" },
+  { name: "Uganda", flag: "🇺🇬" },
+  { name: "Zambia", flag: "🇿🇲" },
+];
 
 export function CAPImpactSection() {
   return (
@@ -43,10 +50,10 @@ export function CAPImpactSection() {
             </p>
             {/* Countries */}
             <div className="flex flex-wrap gap-2">
-              {countries.map((country) => (
-                <span key={country} className="inline-flex items-center gap-2 px-3 py-1.5 bg-card border border-border rounded-full text-xs md:text-sm text-foreground">
-                  <MapPin className="w-3 h-3 text-primary" />
-                  {country}
+            {countries.map((country) => (
+                <span key={country.name} className="inline-flex items-center gap-2 px-3 py-1.5 bg-card border border-border rounded-full text-xs md:text-sm text-foreground">
+                  <span className="text-base">{country.flag}</span>
+                  {country.name}
                 </span>
               ))}
             </div>

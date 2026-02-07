@@ -1,14 +1,22 @@
 import { Handshake } from "lucide-react";
+import unilagLogo from "@/assets/logos/unilag.png";
+import uonLogo from "@/assets/logos/uon.png";
+import ashesiLogo from "@/assets/logos/ashesi.png";
+import uctLogo from "@/assets/logos/uct.png";
+import flutterwaveLogo from "@/assets/logos/flutterwave.png";
+import andelaLogo from "@/assets/logos/andela.png";
+import paystackLogo from "@/assets/logos/paystack.png";
+import googleLogo from "@/assets/logos/google.png";
 
 const partners = [
-  { name: "University of Lagos", type: "University" },
-  { name: "University of Nairobi", type: "University" },
-  { name: "Ashesi University", type: "University" },
-  { name: "University of Cape Town", type: "University" },
-  { name: "Flutterwave", type: "Corporate" },
-  { name: "Andela", type: "Corporate" },
-  { name: "Paystack", type: "Corporate" },
-  { name: "Google for Startups", type: "Corporate" },
+  { name: "University of Lagos", type: "University", logo: unilagLogo },
+  { name: "University of Nairobi", type: "University", logo: uonLogo },
+  { name: "Ashesi University", type: "University", logo: ashesiLogo },
+  { name: "University of Cape Town", type: "University", logo: uctLogo },
+  { name: "Flutterwave", type: "Corporate", logo: flutterwaveLogo },
+  { name: "Andela", type: "Corporate", logo: andelaLogo },
+  { name: "Paystack", type: "Corporate", logo: paystackLogo },
+  { name: "Google for Startups", type: "Corporate", logo: googleLogo },
 ];
 
 export function PartnersSection() {
@@ -36,10 +44,12 @@ export function PartnersSection() {
               key={partner.name}
               className="card-modern p-4 md:p-6 flex flex-col items-center justify-center text-center group hover:border-primary/30 transition-colors"
             >
-              <div className="w-12 h-12 md:w-16 md:h-16 rounded-xl md:rounded-2xl bg-gradient-to-br from-primary/10 to-accent/10 flex items-center justify-center mb-3 md:mb-4 group-hover:from-primary/20 group-hover:to-accent/20 transition-colors">
-                <span className="text-lg md:text-2xl font-bold text-primary">
-                  {partner.name.split(' ').map(w => w[0]).join('').slice(0, 2)}
-                </span>
+              <div className="w-16 h-16 md:w-20 md:h-20 rounded-xl md:rounded-2xl bg-white flex items-center justify-center mb-3 md:mb-4 overflow-hidden p-2">
+                <img 
+                  src={partner.logo} 
+                  alt={`${partner.name} logo`}
+                  className="w-full h-full object-contain"
+                />
               </div>
               <h3 className="font-semibold text-foreground text-xs md:text-sm mb-1">{partner.name}</h3>
               <span className="text-xs text-muted-foreground">{partner.type}</span>
