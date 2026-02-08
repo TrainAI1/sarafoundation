@@ -13,12 +13,12 @@ import studentsLabImg from "@/assets/students-tech-lab.jpg";
 import womenCoworking from "@/assets/women-coworking.jpg";
 
 const milestones = [
-  { year: "2020", title: "Foundation Established", description: "Sara Foundation Africa was founded with a vision to transform tech in Africa" },
-  { year: "2021", title: "First CAP Cohort", description: "Launched our Career Advancement Program in 5 Nigerian universities" },
-  { year: "2022", title: "FLIP Launch", description: "Introduced the Female Leadership Initiative Program" },
-  { year: "2023", title: "Pan-African Expansion", description: "Expanded across multiple African countries with partner institutions" },
-  { year: "2024", title: "Growing Community", description: "Celebrated our growing community of tech professionals and founders" },
-  { year: "2025", title: "Prestige Award", description: "Honored with the London & South East England Prestige Awards 2025/26" },
+  { year: "2023", title: "Foundation Established", description: "Sara Foundation Africa was founded in London with a vision to transform tech in Africa" },
+  { year: "2024", title: "CAP Cohort 1 Launch", description: "Launched CAP Tech Hub in 7 Nigerian universities, welcoming the first cohort of students" },
+  { year: "2024", title: "Pan-African Expansion", description: "Expanded to 35+ universities across 7 African countries — a 360% growth" },
+  { year: "2025", title: "FLIP Fellowship Launch", description: "Kicked off FLIP with 21 women fellows across mentorship, workshops, and capstone projects" },
+  { year: "2025", title: "Key Partnerships", description: "Secured partnerships with Scintilla, Farmily, Train AI, KàdàràBrite, Nanaade, and Platform Hub" },
+  { year: "2025", title: "Prestige Award", description: "Won the London & South East England Prestige Awards 2025/26 in Leadership Development" },
 ];
 
 const values = [
@@ -32,26 +32,27 @@ const coreTeam = [
   { 
     name: "Kalu Sarah", 
     role: "Founder", 
-    bio: "Leading professional with expertise in finance, technology, and strategy. Works in global fintech and has served as a global advisor to several foundations." 
+    bio: "Has worked with Goldman Sachs, Bloomberg, and Blackaion Capital. Also leads Train AI, an edtech platform for tech learners across Africa's $3.4B market." 
   },
   { 
     name: "Inem Emmanuel", 
     role: "Public Relations Specialist", 
-    bio: "Years of experience in social media management, designs, marketing, and communications. Skilled in creating and executing PR strategies." 
+    bio: "Grew social media reach to 5,365+ followers. Successfully hosted 15 live sessions including 8 LinkedIn Live and 7 Twitter Spaces." 
   },
   { 
     name: "Emediong Joel", 
     role: "Program Manager", 
-    bio: "Leads tech-driven initiatives such as CAP and FLIP. Champions inclusive programs that provide emerging talents with mentorship and opportunities." 
+    bio: "Expanded CAP to 35+ universities across 7 countries. Launched FLIP Fellowship and secured partnerships with Scintilla, Farmily, and more." 
   },
 ];
 
 const advisors = [
   { name: "Toby Nwanede", affiliation: "Scintilla Innovations", expertise: "Startup Founder" },
-  { name: "Ayoola Ademoye", affiliation: "Jisc (UK)", expertise: "Business Analyst" },
-  { name: "Dolapo Dahunsi", affiliation: "Career Pinnacle", expertise: "HR Professional" },
-  { name: "Fisayo Adeyemi", affiliation: "Rayne Consults", expertise: "Business Analyst" },
-  { name: "Ayodeji Babatunde", affiliation: "VC Dialogues", expertise: "VC Investor" },
+  { name: "Ayoola Ademoye", affiliation: "Jisc (UK)", expertise: "Business Strategy" },
+  { name: "Dolapo Dahunsi", affiliation: "General Electric", expertise: "HR Leader" },
+  { name: "Fisayo Adeyemi", affiliation: "Rayne Consults", expertise: "Business Analysis" },
+  { name: "Mercy Momah", affiliation: "Flour Mills of Nigeria", expertise: "PMO Consultant" },
+  { name: "Ayodeji Babatunde", affiliation: "VC Dialogues", expertise: "Venture Capital" },
 ];
 
 const keyInitiatives = [
@@ -61,13 +62,12 @@ const keyInitiatives = [
 
 const countries = [
   { name: "Nigeria", flag: "🇳🇬" },
-  { name: "Zambia", flag: "🇿🇲" },
-  { name: "Burundi", flag: "🇧🇮" },
   { name: "Ghana", flag: "🇬🇭" },
   { name: "Kenya", flag: "🇰🇪" },
   { name: "South Africa", flag: "🇿🇦" },
-  { name: "Rwanda", flag: "🇷🇼" },
   { name: "Uganda", flag: "🇺🇬" },
+  { name: "Zambia", flag: "🇿🇲" },
+  { name: "Togo", flag: "🇹🇬" },
 ];
 
 export default function About() {
@@ -107,7 +107,7 @@ export default function About() {
                 London & South East England Prestige Awards 2025/26
               </p>
               <p className="text-muted-foreground text-sm">
-                Honored for contributions to technology, education, and women's leadership
+                Winner in the Leadership Development Category
               </p>
             </div>
           </div>
@@ -119,7 +119,7 @@ export default function About() {
         <div className="section-container">
           <div className="flex flex-wrap items-center justify-center gap-3 md:gap-4">
             <span className="flex items-center gap-2 text-muted-foreground font-medium">
-              🌍 Trusted in 8 countries:
+              🌍 Present in 7 countries:
             </span>
             {countries.map((country) => (
               <span key={country.name} className="inline-flex items-center gap-2 px-3 py-1.5 bg-secondary rounded-full text-sm text-foreground">
@@ -152,8 +152,8 @@ export default function About() {
                   and SDG 8 (Decent Work and Economic Growth) through tech clubs and women's communities.
                 </p>
                 <p>
-                  Today, we operate across 8 African countries, partnering with universities, 
-                  organizations, and industry leaders to create pathways for young Africans to 
+                  Today, we operate across 7 African countries with 35+ university partners, 
+                  working alongside industry leaders to create pathways for young Africans to 
                   thrive in the global tech ecosystem.
                 </p>
               </div>
@@ -330,7 +330,7 @@ export default function About() {
             </p>
           </div>
 
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 md:gap-4">
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 md:gap-4">
             {advisors.map((advisor) => (
               <div key={advisor.name} className="card-modern p-4 md:p-5 text-center">
                 <div className="w-12 h-12 md:w-16 md:h-16 mx-auto rounded-full bg-gradient-to-br from-primary/10 to-accent/10 flex items-center justify-center mb-2 md:mb-3">

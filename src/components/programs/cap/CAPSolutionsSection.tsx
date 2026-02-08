@@ -7,14 +7,14 @@ const solutions = [
   {
     icon: Users,
     title: "Tech Talent Development",
-    description: "The continent needs 23 million additional tech workers by 2025 to meet its digital economy ambitions. With CAP Tech Hub set up in schools, students will be equipped to bridge the gap.",
+    description: "Africa needs millions of additional tech workers to meet its digital economy ambitions. With CAP Tech Hubs in 35+ universities across 7 countries, students are being equipped to bridge the gap.",
     highlights: ["Hands-on training", "Industry-ready skills", "Certified programs"],
     image: youngDeveloper,
   },
   {
     icon: Rocket,
     title: "Support for Early Founders",
-    description: "Total VC investment in African tech startups reached $24 billion in 2020. With the right tools and resources, schools can produce the next generation of tech founders and receive needed funding.",
+    description: "Through our Build and Launch phases, students develop real MVPs like ArtifyPro and CampusLink. Partnerships with Scintilla and Farmily open doors to internships and full-time roles.",
     highlights: ["Founder mentorship", "Pitch preparation", "Funding access"],
     image: techEntrepreneurs,
   },

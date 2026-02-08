@@ -61,9 +61,9 @@ export function HeroSection() {
             {/* Stats */}
             <div className="grid grid-cols-3 gap-4 md:gap-8 pt-8 md:pt-10 border-t border-white/10 animate-fade-up" style={{ animationDelay: '0.4s' }}>
               {[
-                { value: "500+", label: "Students Trained" },
-                { value: "50+", label: "Partner Schools" },
-                { value: "8", label: "African Countries" },
+                { value: "763+", label: "Students Trained" },
+                { value: "35+", label: "Partner Universities" },
+                { value: "7", label: "African Countries" },
               ].map((stat) => (
                 <div key={stat.label}>
                   <div className="text-2xl sm:text-3xl md:text-4xl font-bold font-display">{stat.value}</div>

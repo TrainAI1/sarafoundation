@@ -4,44 +4,49 @@ const coreTeam = [
   { 
     name: "Kalu Sarah", 
     role: "Founder", 
-    bio: "Leading professional with expertise in finance, technology, and strategy. Works in global fintech and has served as a global advisor to several foundations. On a mission to lead Africa-wide impact in SDG 5 and SDG 8." 
+    bio: "Leading professional with expertise in finance, technology, and strategy. Has worked with Goldman Sachs, Bloomberg, and Blackaion Capital. Also leads Train AI, an edtech platform for tech learners across Africa." 
   },
   { 
     name: "Inem Emmanuel", 
     role: "Public Relations Specialist", 
-    bio: "Helps brands connect with their audiences with years of experience in social media management, designs, marketing, and communications. Skilled in creating and executing PR strategies." 
+    bio: "Grew the foundation's LinkedIn to 1,700+ followers, Twitter to 1,250+, Instagram to 700+, and Facebook to 1,600+. Successfully hosted 15 live sessions across platforms." 
   },
   { 
     name: "Emediong Joel", 
     role: "Program Manager", 
-    bio: "Leads tech-driven initiatives such as CAP and FLIP to empower African youth and women. Champions inclusive programs that provide emerging talents with mentorship and opportunities in tech." 
+    bio: "Expanded CAP to 35+ universities across 7 African countries. Launched the FLIP Fellowship and secured key partnerships with Scintilla Africa, Farmily, and more." 
   },
 ];
 
 const advisors = [
   { 
     name: "Toby Nwanede", 
-    role: "Startup Founder", 
+    role: "3-time Startup Founder", 
     bio: "Partner at PIF; Founded Scintilla Innovations; Lead Marketing Consultant at Shoprite Nigeria." 
   },
   { 
     name: "Ayoola Ademoye", 
-    role: "Business Analyst", 
+    role: "Business Development & Strategy Leader", 
     bio: "Over 12 years of experience; contributed to ACCA's success in Nigeria; Business Analyst at Jisc (UK)." 
   },
   { 
     name: "Dolapo Dahunsi", 
-    role: "HR Professional", 
+    role: "African HR Leader", 
     bio: "People Operations & Immigration Specialist for West Africa at General Electric (GE); Co-founded Career Pinnacle." 
   },
   { 
     name: "Fisayo Adeyemi", 
-    role: "Business Analyst", 
-    bio: "Founder of Rayne Consults; 'The BA Influencer'; Director of Communications for IIBA Nigeria." 
+    role: "Business Analysis Leader", 
+    bio: "Founder of Rayne Consults; 'The BA Influencer'; Director of Communications for IIBA Nigeria. Mentor for FLIP No-Code Track." 
+  },
+  { 
+    name: "Mercy Momah", 
+    role: "Project Coach & PMO Consultant", 
+    bio: "Head, Project Management Office at Flour Mills of Nigeria Plc. Certified PMP, Business Analyst Professional. Workshop facilitator for FLIP Fellowship." 
   },
   { 
     name: "Ayodeji Babatunde", 
-    role: "VC Investor", 
+    role: "Venture Capital Leader", 
     bio: "Secured $2.3M for tech startups; founded VC Dialogues; Impact Officer for Global Shaper Community Atlanta." 
   },
 ];
@@ -122,7 +127,7 @@ export function TeamSection() {
           <h3 className="font-display font-bold text-xl md:text-2xl text-center mb-8 md:mb-10 text-foreground">
             Board of Advisors
           </h3>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4 md:gap-6">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-4 md:gap-6">
             {advisors.map((member) => (
               <TeamMember key={member.name} {...member} />
             ))}

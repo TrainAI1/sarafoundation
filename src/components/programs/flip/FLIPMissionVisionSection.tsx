@@ -7,6 +7,7 @@ const countries = [
   { name: "South Africa", flag: "🇿🇦" },
   { name: "Uganda", flag: "🇺🇬" },
   { name: "Zambia", flag: "🇿🇲" },
+  { name: "Togo", flag: "🇹🇬" },
 ];
 
 export function FLIPMissionVisionSection() {
