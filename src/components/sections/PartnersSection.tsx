@@ -1,57 +1,101 @@
 import { GraduationCap } from "lucide-react";
-import unilagLogo from "@/assets/logos/unilag.png";
-import uonLogo from "@/assets/logos/uon.png";
-import ashesiLogo from "@/assets/logos/ashesi.png";
-import uctLogo from "@/assets/logos/uct.png";
 
 const universities = [
-  { name: "University of Lagos", country: "🇳🇬 Nigeria", logo: unilagLogo },
-  { name: "University of Nairobi", country: "🇰🇪 Kenya", logo: uonLogo },
-  { name: "Ashesi University", country: "🇬🇭 Ghana", logo: ashesiLogo },
-  { name: "University of Cape Town", country: "🇿🇦 South Africa", logo: uctLogo },
+  // Cohort 1
+  { name: "University of Ilorin", country: "🇳🇬" },
+  { name: "University of Lagos", country: "🇳🇬" },
+  { name: "University of Abuja", country: "🇳🇬" },
+  { name: "University of Ibadan", country: "🇳🇬" },
+  { name: "Federal University of Technology, Akure", country: "🇳🇬" },
+  { name: "Ajayi Crowther University", country: "🇳🇬" },
+  { name: "Ahmadu Bello University, Zaria", country: "🇳🇬" },
+  // Cohort 2
+  { name: "Adeniran Ogunsanya College of Education", country: "🇳🇬" },
+  { name: "American Caregiving University", country: "🇿🇦" },
+  { name: "Babcock University", country: "🇳🇬" },
+  { name: "Benue State University", country: "🇳🇬" },
+  { name: "Cavendish University", country: "🇿🇲" },
+  { name: "Evans University", country: "🇺🇬" },
+  { name: "Federal Polytechnic Ilaro", country: "🇳🇬" },
+  { name: "Federal University Lokoja", country: "🇳🇬" },
+  { name: "Federal University of Oye Ekiti", country: "🇳🇬" },
+  { name: "Gateway Polytechnic Saapade", country: "🇳🇬" },
+  { name: "Kumasi Technical University", country: "🇬🇭" },
+  { name: "Ladoke Akintola University of Technology", country: "🇳🇬" },
+  { name: "Lagos State University", country: "🇳🇬" },
+  { name: "Makerere University", country: "🇺🇬" },
+  { name: "Micheal Okpara University of Agriculture", country: "🇳🇬" },
+  { name: "Modibbo Adama University, Yola", country: "🇳🇬" },
+  { name: "Mutesal Royal University", country: "🇺🇬" },
+  { name: "Narok University", country: "🇰🇪" },
+  { name: "National Open University of Nigeria", country: "🇳🇬" },
+  { name: "Obafemi Awolowo University", country: "🇳🇬" },
+  { name: "Polytechnic of Ibadan", country: "🇳🇬" },
+  { name: "Global Wealth University", country: "🇹🇬" },
+  { name: "University of Maiduguri", country: "🇳🇬" },
+  { name: "University of Nigeria, Nsukka", country: "🇳🇬" },
+  { name: "Asteven Energy Institute", country: "🇳🇬" },
 ];
 
 export function PartnersSection() {
+  // Double the list for seamless infinite scroll
+  const doubled = [...universities, ...universities];
+
   return (
-    <section className="py-16 md:py-24 bg-background">
+    <section className="py-16 md:py-24 bg-background overflow-hidden">
       <div className="section-container">
-        <div className="text-center max-w-3xl mx-auto mb-10 md:mb-16 px-4">
+        <div className="text-center max-w-3xl mx-auto mb-10 md:mb-14 px-4">
           <span className="section-badge mb-6">
             <GraduationCap className="w-4 h-4" />
             Our University Partners
           </span>
-          <h2 className="section-title text-foreground mb-6">
-            Present in Leading{" "}
-            <span className="gradient-text">African Universities</span>
+          <h2 className="section-title text-foreground mb-4">
+            Present in <span className="gradient-text">35+ African Universities</span>
           </h2>
           <p className="section-subtitle mx-auto">
-            We have established CAP Tech Hubs in top universities across Africa, 
-            empowering students on campus.
+            We have established CAP Tech Hubs across 7 countries, empowering students on campus.
           </p>
         </div>
+      </div>
 
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 max-w-4xl mx-auto">
-          {universities.map((uni) => (
+      {/* Scrolling ticker — row 1 (left) */}
+      <div className="relative mb-4">
+        <div className="flex animate-scroll-left gap-4 w-max">
+          {doubled.map((uni, i) => (
             <div
-              key={uni.name}
-              className="card-modern p-4 md:p-6 flex flex-col items-center justify-center text-center group hover:border-primary/30 transition-colors"
+              key={`a-${i}`}
+              className="flex-shrink-0 inline-flex items-center gap-2.5 px-5 py-3 bg-card border border-border rounded-full hover:border-primary/30 transition-colors"
             >
-              <div className="w-16 h-16 md:w-20 md:h-20 rounded-xl md:rounded-2xl bg-white flex items-center justify-center mb-3 md:mb-4 overflow-hidden p-2">
-                <img 
-                  src={uni.logo} 
-                  alt={`${uni.name} logo`}
-                  className="w-full h-full object-contain"
-                />
-              </div>
-              <h3 className="font-semibold text-foreground text-xs md:text-sm mb-1">{uni.name}</h3>
-              <span className="text-xs text-muted-foreground">{uni.country}</span>
+              <span className="text-lg">{uni.country}</span>
+              <span className="text-sm font-medium text-foreground whitespace-nowrap">
+                {uni.name}
+              </span>
             </div>
           ))}
         </div>
+      </div>
 
-        <div className="text-center mt-12">
-          <p className="text-muted-foreground">
-            And 31 more universities across 7 African countries
+      {/* Scrolling ticker — row 2 (right) */}
+      <div className="relative">
+        <div className="flex animate-scroll-right gap-4 w-max">
+          {[...doubled].reverse().map((uni, i) => (
+            <div
+              key={`b-${i}`}
+              className="flex-shrink-0 inline-flex items-center gap-2.5 px-5 py-3 bg-card border border-border rounded-full hover:border-primary/30 transition-colors"
+            >
+              <span className="text-lg">{uni.country}</span>
+              <span className="text-sm font-medium text-foreground whitespace-nowrap">
+                {uni.name}
+              </span>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <div className="section-container">
+        <div className="text-center mt-10">
+          <p className="text-muted-foreground text-sm">
+            Across Nigeria 🇳🇬 · Ghana 🇬🇭 · Kenya 🇰🇪 · South Africa 🇿🇦 · Uganda 🇺🇬 · Zambia 🇿🇲 · Togo 🇹🇬
           </p>
         </div>
       </div>
