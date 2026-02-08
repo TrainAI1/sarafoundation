@@ -32,6 +32,7 @@ const countries = [
   { name: "South Africa", flag: "🇿🇦" },
   { name: "Uganda", flag: "🇺🇬" },
   { name: "Zambia", flag: "🇿🇲" },
+  { name: "Togo", flag: "🇹🇬" },
 ];
 
 export function CAPImpactSection() {
@@ -45,8 +46,8 @@ export function CAPImpactSection() {
               What Students <span className="gradient-text-accent">Gain</span>
             </h2>
             <p className="section-subtitle mb-6">
-              We have a vibrant presence in over 35 universities with 763 students across 
-              the last 2 cohorts, continuously expanding into more institutions.
+              We have a vibrant presence in 35+ universities across 7 African countries with 763 students 
+              across 2 cohorts — a 360% growth in university partners since Cohort 1.
             </p>
             {/* Countries */}
             <div className="flex flex-wrap gap-2">

@@ -51,7 +51,7 @@ export function PartnersSection() {
 
         <div className="text-center mt-12">
           <p className="text-muted-foreground">
-            And many more across 12+ African countries
+            And 31 more universities across 7 African countries
           </p>
         </div>
       </div>
