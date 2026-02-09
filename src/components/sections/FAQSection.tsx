@@ -9,7 +9,7 @@ import { HelpCircle } from "lucide-react";
 const faqs = [
   {
     question: "Who can apply for the Career Advancement Program (CAP)?",
-    answer: "CAP is open to university students across Africa who are passionate about technology. You don't need prior coding experience – just enthusiasm and commitment to learn.",
+    answer: "CAP is open to university students across Africa who are passionate about technology. You don't need prior coding experience – just enthusiasm and commitment to learn. We currently have CAP Tech Hubs in 35+ universities across 7 countries.",
   },
   {
     question: "How much does it cost to join the programs?",
@@ -17,19 +17,23 @@ const faqs = [
   },
   {
     question: "What is the time commitment for CAP?",
-    answer: "CAP is a 9-month program divided into three phases. Participants typically dedicate 10-15 hours per week to workshops, mentorship sessions, and project work.",
+    answer: "CAP is a 9-month program divided into three phases: Learn (12 weekly expert sessions), Build (developing real MVPs), and Launch (showcasing projects to industry leaders). Participants typically dedicate 10-15 hours per week.",
+  },
+  {
+    question: "What is FLIP and who is it for?",
+    answer: "The Female Leadership Initiative Program (FLIP) is a membership-based program empowering women in tech through mentorship, networking, and opportunities. It includes the Women Professionals in Tech Africa (WPTA) and Women Founders in Tech Africa (WFTA) communities.",
   },
   {
     question: "How can organizations partner with Sara Foundation Africa?",
-    answer: "We offer various partnership models including sponsorships, university collaborations, and corporate partnerships. Contact our partnership team to explore opportunities.",
+    answer: "We offer various partnership models including sponsorships, university collaborations, and corporate partnerships. Current partners include Scintilla Innovations, Farmily, ALX, KàdàràBrite, Train AI, and more.",
   },
   {
-    question: "Do you offer certificates upon completion?",
-    answer: "Yes! All CAP graduates receive a certificate of completion. FLIP members also receive recognition for completing specific training modules and milestones.",
+    question: "Do students get real-world opportunities?",
+    answer: "Yes! Through our partnerships, CAP students have secured internships at Farmily, full-time job offers, and showcased projects like ArtifyPro and CampusLink at our Talent Showcase in partnership with Scintilla Africa.",
   },
   {
     question: "Which countries do you operate in?",
-    answer: "We currently operate in over 10 African countries including Nigeria, Ghana, Kenya, South Africa, and more. We're continuously expanding our reach.",
+    answer: "We currently operate across 7 African countries: Nigeria, Ghana, Kenya, South Africa, Uganda, Zambia, and Togo, with 35+ university partners.",
   },
 ];
 
