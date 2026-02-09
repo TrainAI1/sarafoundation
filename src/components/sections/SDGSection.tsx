@@ -1,4 +1,5 @@
 import { BookOpen, Users, Briefcase } from "lucide-react";
+import { ScrollAnimation } from "@/components/ui/scroll-animation";
 
 const sdgGoals = [
   {
@@ -27,23 +28,25 @@ const sdgGoals = [
 export function SDGSection() {
   return (
     <section className="py-0">
-      {sdgGoals.map((goal) => (
+      {sdgGoals.map((goal, index) => (
         <div
           key={goal.number}
           className={`py-12 md:py-16 bg-gradient-to-r ${goal.color}`}
         >
           <div className="section-container text-center">
-            <div className="max-w-3xl mx-auto px-4">
-              <div className="inline-flex items-center justify-center w-12 h-12 md:w-16 md:h-16 rounded-xl md:rounded-2xl bg-white/10 backdrop-blur-sm mb-4 md:mb-6">
-                <goal.icon className="w-6 h-6 md:w-8 md:h-8 text-white" />
+            <ScrollAnimation variant="fade-up" delay={index * 0.1}>
+              <div className="max-w-3xl mx-auto px-4">
+                <div className="inline-flex items-center justify-center w-12 h-12 md:w-16 md:h-16 rounded-xl md:rounded-2xl bg-white/10 backdrop-blur-sm mb-4 md:mb-6">
+                  <goal.icon className="w-6 h-6 md:w-8 md:h-8 text-white" />
+                </div>
+                <h3 className="font-display text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-3 md:mb-4">
+                  SDG {goal.number}
+                </h3>
+                <p className="text-base md:text-lg lg:text-xl text-white/80 leading-relaxed">
+                  {goal.description}
+                </p>
               </div>
-              <h3 className="font-display text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-3 md:mb-4">
-                SDG {goal.number}
-              </h3>
-              <p className="text-base md:text-lg lg:text-xl text-white/80 leading-relaxed">
-                {goal.description}
-              </p>
-            </div>
+            </ScrollAnimation>
           </div>
         </div>
       ))}

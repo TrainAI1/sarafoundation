@@ -5,6 +5,7 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { HelpCircle } from "lucide-react";
+import { ScrollAnimation, StaggerContainer, StaggerItem } from "@/components/ui/scroll-animation";
 
 const faqs = [
   {
@@ -41,7 +42,7 @@ export function FAQSection() {
   return (
     <section className="py-16 md:py-24 bg-background">
       <div className="section-container">
-        <div className="text-center max-w-3xl mx-auto mb-10 md:mb-16 px-4">
+        <ScrollAnimation variant="fade-up" className="text-center max-w-3xl mx-auto mb-10 md:mb-16 px-4">
           <span className="section-badge mb-6">
             <HelpCircle className="w-4 h-4" />
             FAQ
@@ -54,26 +55,27 @@ export function FAQSection() {
             Have questions? We've got answers. If you don't find what you're looking for, 
             feel free to contact us.
           </p>
-        </div>
+        </ScrollAnimation>
 
-        <div className="max-w-3xl mx-auto">
+        <StaggerContainer className="max-w-3xl mx-auto" staggerDelay={0.08}>
           <Accordion type="single" collapsible className="space-y-4">
             {faqs.map((faq, index) => (
-              <AccordionItem
-                key={index}
-                value={`item-${index}`}
-                className="card-modern px-6 border-none"
-              >
-                <AccordionTrigger className="text-left font-semibold text-foreground hover:text-primary py-6">
-                  {faq.question}
-                </AccordionTrigger>
-                <AccordionContent className="text-muted-foreground pb-6">
-                  {faq.answer}
-                </AccordionContent>
-              </AccordionItem>
+              <StaggerItem key={index}>
+                <AccordionItem
+                  value={`item-${index}`}
+                  className="card-modern px-6 border-none"
+                >
+                  <AccordionTrigger className="text-left font-semibold text-foreground hover:text-primary py-6">
+                    {faq.question}
+                  </AccordionTrigger>
+                  <AccordionContent className="text-muted-foreground pb-6">
+                    {faq.answer}
+                  </AccordionContent>
+                </AccordionItem>
+              </StaggerItem>
             ))}
           </Accordion>
-        </div>
+        </StaggerContainer>
       </div>
     </section>
   );

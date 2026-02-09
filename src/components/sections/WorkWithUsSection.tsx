@@ -1,6 +1,7 @@
 import { ArrowRight, Heart } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
+import { ScrollAnimation } from "@/components/ui/scroll-animation";
 
 export function WorkWithUsSection() {
   return (
@@ -13,32 +14,38 @@ export function WorkWithUsSection() {
 
       <div className="section-container relative z-10">
         <div className="max-w-3xl mx-auto text-center px-4">
-          <div className="inline-flex items-center gap-2 px-4 py-2 glass-card-dark rounded-full text-white/90 text-sm font-medium mb-4 md:mb-6">
-            <Heart className="w-4 h-4 text-accent" />
-            Work with Us
-          </div>
+          <ScrollAnimation variant="fade-up">
+            <div className="inline-flex items-center gap-2 px-4 py-2 glass-card-dark rounded-full text-white/90 text-sm font-medium mb-4 md:mb-6">
+              <Heart className="w-4 h-4 text-accent" />
+              Work with Us
+            </div>
+          </ScrollAnimation>
           
-          <h2 className="font-display text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4 md:mb-6 leading-tight">
-            We are on a mission to empower the next generation of tech founders and professionals.
-          </h2>
+          <ScrollAnimation variant="fade-up" delay={0.1}>
+            <h2 className="font-display text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4 md:mb-6 leading-tight">
+              We are on a mission to empower the next generation of tech founders and professionals.
+            </h2>
+          </ScrollAnimation>
           
-          <p className="text-lg md:text-xl text-white/70 mb-8 md:mb-10">
-            Join Us, Partner with Us, and Donate for Africa's Future.
-          </p>
+          <ScrollAnimation variant="fade-up" delay={0.2}>
+            <p className="text-lg md:text-xl text-white/70 mb-8 md:mb-10">
+              Join Us, Partner with Us, and Donate for Africa's Future.
+            </p>
 
-          <div className="flex flex-col sm:flex-row gap-3 md:gap-4 justify-center">
-            <Button variant="hero" size="lg" className="group w-full sm:w-auto" asChild>
-              <Link to="/donation">
-                Donate
-                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-              </Link>
-            </Button>
-            <Button variant="heroSecondary" size="lg" className="w-full sm:w-auto" asChild>
-              <Link to="/partnership">
-                Partner with Us
-              </Link>
-            </Button>
-          </div>
+            <div className="flex flex-col sm:flex-row gap-3 md:gap-4 justify-center">
+              <Button variant="hero" size="lg" className="group w-full sm:w-auto" asChild>
+                <Link to="/donation">
+                  Donate
+                  <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                </Link>
+              </Button>
+              <Button variant="heroSecondary" size="lg" className="w-full sm:w-auto" asChild>
+                <Link to="/partnership">
+                  Partner with Us
+                </Link>
+              </Button>
+            </div>
+          </ScrollAnimation>
         </div>
       </div>
     </section>

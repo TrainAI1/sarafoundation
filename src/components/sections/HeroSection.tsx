@@ -1,6 +1,7 @@
 import { ArrowRight, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
 
 export function HeroSection() {
   return (
@@ -27,26 +28,46 @@ export function HeroSection() {
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           {/* Content */}
           <div className="text-white space-y-6 md:space-y-8 text-center lg:text-left">
-            <div className="inline-flex items-center gap-2 px-4 md:px-5 py-2 md:py-2.5 glass-card-dark rounded-full animate-fade-up">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.1 }}
+              className="inline-flex items-center gap-2 px-4 md:px-5 py-2 md:py-2.5 glass-card-dark rounded-full"
+            >
               <Sparkles className="w-4 h-4 text-accent" />
               <span className="text-sm font-medium text-white/90">Empowering African Tech Talent</span>
-            </div>
+            </motion.div>
 
-            <h1 className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-[1.05] animate-fade-up" style={{ animationDelay: '0.1s' }}>
+            <motion.h1
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.2 }}
+              className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-[1.05]"
+            >
               Breaking Barriers,
               <br />
               <span className="text-white/90 italic">Igniting Innovation,</span>
               <br />
               Empowering Dreams.
-            </h1>
+            </motion.h1>
 
-            <p className="text-base md:text-lg lg:text-xl text-white/70 max-w-xl mx-auto lg:mx-0 animate-fade-up" style={{ animationDelay: '0.2s' }}>
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.35 }}
+              className="text-base md:text-lg lg:text-xl text-white/70 max-w-xl mx-auto lg:mx-0"
+            >
               We're on a mission to empower the next generation of tech founders and 
               professionals in Africa through inclusive programs that foster innovation 
               and leadership.
-            </p>
+            </motion.p>
 
-            <div className="flex flex-col sm:flex-row gap-3 md:gap-4 justify-center lg:justify-start animate-fade-up" style={{ animationDelay: '0.3s' }}>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.45 }}
+              className="flex flex-col sm:flex-row gap-3 md:gap-4 justify-center lg:justify-start"
+            >
               <Button variant="hero" size="lg" className="group w-full sm:w-auto" asChild>
                 <Link to="/programs/cap">
                   Join Our Mission
@@ -56,10 +77,15 @@ export function HeroSection() {
               <Button variant="heroSecondary" size="lg" className="w-full sm:w-auto" asChild>
                 <Link to="/partnership">Partner with Us</Link>
               </Button>
-            </div>
+            </motion.div>
 
             {/* Stats */}
-            <div className="grid grid-cols-3 gap-4 md:gap-8 pt-8 md:pt-10 border-t border-white/10 animate-fade-up" style={{ animationDelay: '0.4s' }}>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.55 }}
+              className="grid grid-cols-3 gap-4 md:gap-8 pt-8 md:pt-10 border-t border-white/10"
+            >
               {[
                 { value: "763+", label: "Students Trained" },
                 { value: "35+", label: "Partner Universities" },
@@ -70,13 +96,17 @@ export function HeroSection() {
                   <div className="text-white/60 text-xs sm:text-sm mt-1">{stat.label}</div>
                 </div>
               ))}
-            </div>
+            </motion.div>
           </div>
 
           {/* Hero Visual */}
-          <div className="relative hidden lg:block">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.8, delay: 0.3 }}
+            className="relative hidden lg:block"
+          >
             <div className="relative aspect-square">
-              {/* Main image with overlay */}
               <div className="absolute inset-0 rounded-3xl overflow-hidden">
                 <img 
                   src="/hero-students.jpg" 
@@ -86,7 +116,6 @@ export function HeroSection() {
                 <div className="absolute inset-0 bg-gradient-to-t from-primary/60 via-primary/20 to-transparent" />
               </div>
               
-              {/* Floating cards */}
               <div className="absolute top-8 -left-4 glass-card p-5 animate-float shadow-xl">
                 <div className="flex items-center gap-4">
                   <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-primary/20 to-primary/10 flex items-center justify-center">
@@ -111,7 +140,7 @@ export function HeroSection() {
                 </div>
               </div>
             </div>
-          </div>
+          </motion.div>
         </div>
       </div>
 
