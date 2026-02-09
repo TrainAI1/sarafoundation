@@ -30,10 +30,10 @@ const coreValues = [
 ];
 
 const stats = [
-  { value: "500+", label: "Students Empowered", icon: TrendingUp },
-  { value: "50+", label: "University Partners", icon: Users },
-  { value: "100+", label: "Mentors & Coaches", icon: Heart },
-  { value: "10+", label: "African Countries", icon: Target },
+  { value: "763+", label: "Students Trained", icon: TrendingUp },
+  { value: "35+", label: "University Partners", icon: Users },
+  { value: "5,250+", label: "Community Reach", icon: Heart },
+  { value: "7", label: "African Countries", icon: Target },
 ];
 
 export function MissionSection() {

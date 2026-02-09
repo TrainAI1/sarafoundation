@@ -34,9 +34,9 @@ const impactStats = [
   },
   {
     icon: TrendingUp,
-    value: "5,365+",
+    value: "5,250+",
     label: "Community Reach",
-    description: "Social media followers across Africa",
+    description: "People reached across Africa via social media",
   },
 ];
 

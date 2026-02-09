@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 export function HeroSection() {
   return (
-    <section className="relative min-h-screen flex items-center overflow-hidden">
+    <section className="relative min-h-[100svh] flex items-center overflow-hidden">
       {/* Gradient Background */}
       <div className="absolute inset-0 bg-gradient-to-br from-primary via-primary/90 to-[hsl(240,80%,50%)]" />
       
@@ -116,7 +116,7 @@ export function HeroSection() {
       </div>
 
       {/* Scroll indicator */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-white/40">
+      <div className="absolute bottom-4 md:bottom-8 left-1/2 -translate-x-1/2 flex-col items-center gap-2 text-white/40 hidden md:flex">
         <span className="text-xs uppercase tracking-widest">Scroll</span>
         <div className="w-5 h-9 rounded-full border-2 border-white/20 flex items-start justify-center p-1.5">
           <div className="w-1 h-2 rounded-full bg-white/60 animate-bounce" />
