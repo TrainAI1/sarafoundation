@@ -1,4 +1,5 @@
 import { Handshake } from "lucide-react";
+import { ScrollAnimation, StaggerContainer, StaggerItem } from "@/components/ui/scroll-animation";
 
 const partners = [
   {
@@ -39,7 +40,7 @@ export function StrategicPartnersSection() {
   return (
     <section className="py-12 md:py-20 bg-secondary/50">
       <div className="section-container">
-        <div className="text-center max-w-3xl mx-auto mb-8 md:mb-12 px-4">
+        <ScrollAnimation variant="fade-up" className="text-center max-w-3xl mx-auto mb-8 md:mb-12 px-4">
           <span className="section-badge mb-4 md:mb-6">
             <Handshake className="w-4 h-4" />
             Strategic Partners
@@ -50,26 +51,25 @@ export function StrategicPartnersSection() {
           <p className="section-subtitle mx-auto">
             Our collaborators help us open doors to mentorship, internships, and real-world exposure for African tech talent.
           </p>
-        </div>
+        </ScrollAnimation>
 
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 px-4 lg:px-0">
+        <StaggerContainer className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 px-4 lg:px-0" staggerDelay={0.08}>
           {partners.map((partner) => (
-            <div
-              key={partner.name}
-              className="card-modern p-4 md:p-6 text-center group"
-            >
-              <div className="w-10 h-10 md:w-12 md:h-12 mx-auto rounded-xl bg-gradient-to-br from-primary/10 to-accent/10 flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
-                <Handshake className="w-5 h-5 md:w-6 md:h-6 text-primary" />
+            <StaggerItem key={partner.name} variant="scale-in">
+              <div className="card-modern p-4 md:p-6 text-center group">
+                <div className="w-10 h-10 md:w-12 md:h-12 mx-auto rounded-xl bg-gradient-to-br from-primary/10 to-accent/10 flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
+                  <Handshake className="w-5 h-5 md:w-6 md:h-6 text-primary" />
+                </div>
+                <h3 className="font-display font-bold text-sm md:text-base text-foreground mb-1 md:mb-2">
+                  {partner.name}
+                </h3>
+                <p className="text-muted-foreground text-xs leading-relaxed hidden sm:block">
+                  {partner.description}
+                </p>
               </div>
-              <h3 className="font-display font-bold text-sm md:text-base text-foreground mb-1 md:mb-2">
-                {partner.name}
-              </h3>
-              <p className="text-muted-foreground text-xs leading-relaxed hidden sm:block">
-                {partner.description}
-              </p>
-            </div>
+            </StaggerItem>
           ))}
-        </div>
+        </StaggerContainer>
       </div>
     </section>
   );

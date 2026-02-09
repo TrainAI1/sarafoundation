@@ -1,4 +1,5 @@
 import { GraduationCap } from "lucide-react";
+import { ScrollAnimation } from "@/components/ui/scroll-animation";
 
 const universities = [
   // Cohort 1
@@ -38,13 +39,12 @@ const universities = [
 ];
 
 export function PartnersSection() {
-  // Double the list for seamless infinite scroll
   const doubled = [...universities, ...universities];
 
   return (
     <section className="py-16 md:py-24 bg-background overflow-hidden">
       <div className="section-container">
-        <div className="text-center max-w-3xl mx-auto mb-10 md:mb-14 px-4">
+        <ScrollAnimation variant="fade-up" className="text-center max-w-3xl mx-auto mb-10 md:mb-14 px-4">
           <span className="section-badge mb-6">
             <GraduationCap className="w-4 h-4" />
             Our University Partners
@@ -55,7 +55,7 @@ export function PartnersSection() {
           <p className="section-subtitle mx-auto">
             We have established CAP Tech Hubs across 7 countries, empowering students on campus.
           </p>
-        </div>
+        </ScrollAnimation>
       </div>
 
       {/* Scrolling ticker — row 1 (left) */}
@@ -93,11 +93,11 @@ export function PartnersSection() {
       </div>
 
       <div className="section-container">
-        <div className="text-center mt-10">
+        <ScrollAnimation variant="fade-in" className="text-center mt-10">
           <p className="text-muted-foreground text-sm">
             Across Nigeria 🇳🇬 · Ghana 🇬🇭 · Kenya 🇰🇪 · South Africa 🇿🇦 · Uganda 🇺🇬 · Zambia 🇿🇲 · Togo 🇹🇬
           </p>
-        </div>
+        </ScrollAnimation>
       </div>
     </section>
   );
