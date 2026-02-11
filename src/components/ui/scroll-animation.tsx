@@ -1,5 +1,5 @@
 import { motion, type Variants } from "framer-motion";
-import { type ReactNode } from "react";
+import { type ReactNode, forwardRef } from "react";
 
 const fadeUp: Variants = {
   hidden: { opacity: 0, y: 32 },
@@ -45,31 +45,30 @@ interface ScrollAnimationProps {
   once?: boolean;
 }
 
-export function ScrollAnimation({
-  children,
-  variant = "fade-up",
-  delay = 0,
-  duration = 0.6,
-  className = "",
-  once = true,
-}: ScrollAnimationProps) {
-  return (
-    <motion.div
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once, margin: "-60px" }}
-      variants={variantMap[variant]}
-      transition={{
-        duration,
-        delay,
-        ease: [0.25, 0.1, 0.25, 1],
-      }}
-      className={className}
-    >
-      {children}
-    </motion.div>
-  );
-}
+export const ScrollAnimation = forwardRef<HTMLDivElement, ScrollAnimationProps>(
+  function ScrollAnimation(
+    { children, variant = "fade-up", delay = 0, duration = 0.6, className = "", once = true },
+    ref
+  ) {
+    return (
+      <motion.div
+        ref={ref}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once, margin: "-60px" }}
+        variants={variantMap[variant]}
+        transition={{
+          duration,
+          delay,
+          ease: [0.25, 0.1, 0.25, 1],
+        }}
+        className={className}
+      >
+        {children}
+      </motion.div>
+    );
+  }
+);
 
 interface StaggerContainerProps {
   children: ReactNode;
