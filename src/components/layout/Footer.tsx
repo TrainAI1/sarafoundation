@@ -19,7 +19,7 @@ const quickLinks = [
 const programLinks = [
   { title: "Career Advancement Program", href: "/programs/cap" },
   { title: "Female Leadership Initiative", href: "/programs/flip" },
-  { title: "Donate", href: "/donate" },
+  { title: "Donate", href: "/donation" },
 ];
 
 const getSocialLinks = (s: Record<string, string>) => [
