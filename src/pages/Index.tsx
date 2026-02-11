@@ -12,10 +12,25 @@ import { TestimonialsSection } from "@/components/sections/TestimonialsSection";
 import { FAQSection } from "@/components/sections/FAQSection";
 import { NewsletterSection } from "@/components/sections/NewsletterSection";
 import { CTASection } from "@/components/sections/CTASection";
+import { Helmet } from "react-helmet-async";
 
 const Index = () => {
   return (
     <div className="min-h-screen">
+      <Helmet>
+        <title>Sara Foundation – Empowering African Tech Talent</title>
+        <meta name="description" content="Sara Foundation empowers African youth and women with tech skills, mentorship, and career development across 35+ universities in 7 countries." />
+        <link rel="canonical" href="https://sarafoundation.lovable.app/" />
+        <script type="application/ld+json">{JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "NonProfit",
+          "name": "Sara Foundation Africa",
+          "description": "Non-profit empowering African youth and women through tech education and career development.",
+          "url": "https://sarafoundation.lovable.app",
+          "foundingDate": "2023",
+          "areaServed": "Africa"
+        })}</script>
+      </Helmet>
       <Navbar />
       <main>
         <HeroSection />
