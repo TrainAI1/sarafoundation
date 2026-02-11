@@ -2,6 +2,7 @@ import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 import { 
   Building, Users, GraduationCap, ArrowRight, CheckCircle2,
   Handshake, Target, Sparkles, TrendingUp, Globe, Award
@@ -92,6 +93,11 @@ const process = [
 export default function Partnership() {
   return (
     <div className="min-h-screen bg-background">
+      <Helmet>
+        <title>Partner with Us – Sara Foundation Africa</title>
+        <meta name="description" content="Explore partnership opportunities with Sara Foundation Africa. Join corporates, governments, and foundations driving tech talent development across Africa." />
+        <link rel="canonical" href="https://sarafoundation.lovable.app/partnership" />
+      </Helmet>
       <Navbar />
       
       {/* Hero with Image */}

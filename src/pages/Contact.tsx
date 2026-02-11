@@ -4,6 +4,7 @@ import { Footer } from "@/components/layout/Footer";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
+import { Helmet } from "react-helmet-async";
 import { 
   Mail, MapPin, Phone, Send, MessageSquare, 
   Clock, Sparkles, CheckCircle2, Linkedin, Twitter, Instagram
@@ -52,6 +53,11 @@ export default function Contact() {
 
   return (
     <div className="min-h-screen bg-background">
+      <Helmet>
+        <title>Contact Us – Sara Foundation Africa</title>
+        <meta name="description" content="Get in touch with Sara Foundation Africa. Reach out for program inquiries, partnership opportunities, or general questions." />
+        <link rel="canonical" href="https://sarafoundation.lovable.app/contact" />
+      </Helmet>
       <Navbar />
       
       {/* Hero with Image */}
