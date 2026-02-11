@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Plus, Edit, Trash2, Eye, EyeOff, Search, Filter } from "lucide-react";
+import { Plus, Edit, Trash2, Eye, EyeOff, Search, CheckSquare, Square } from "lucide-react";
 import { toast } from "sonner";
 import type { Tables } from "@/integrations/supabase/types";
 
@@ -14,6 +14,7 @@ export default function AdminBlogList() {
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState("");
   const [filterStatus, setFilterStatus] = useState<"all" | "published" | "draft">("all");
+  const [selected, setSelected] = useState<Set<string>>(new Set());
 
   const fetchPosts = async () => {
     const { data } = await supabase.from("blog_posts").select("*").order("created_at", { ascending: false });
@@ -28,6 +29,7 @@ export default function AdminBlogList() {
     const { error } = await supabase.from("blog_posts").delete().eq("id", id);
     if (error) { toast.error(error.message); return; }
     toast.success("Post deleted");
+    setSelected(prev => { const n = new Set(prev); n.delete(id); return n; });
     fetchPosts();
   };
 
@@ -38,6 +40,46 @@ export default function AdminBlogList() {
     }).eq("id", post.id);
     if (error) { toast.error(error.message); return; }
     toast.success(post.published ? "Unpublished" : "Published");
+    fetchPosts();
+  };
+
+  const toggleSelect = (id: string) => {
+    setSelected(prev => {
+      const n = new Set(prev);
+      n.has(id) ? n.delete(id) : n.add(id);
+      return n;
+    });
+  };
+
+  const selectAll = () => {
+    if (selected.size === filtered.length) {
+      setSelected(new Set());
+    } else {
+      setSelected(new Set(filtered.map(p => p.id)));
+    }
+  };
+
+  const bulkPublish = async (publish: boolean) => {
+    const ids = Array.from(selected);
+    for (const id of ids) {
+      await supabase.from("blog_posts").update({
+        published: publish,
+        published_at: publish ? new Date().toISOString() : null,
+      }).eq("id", id);
+    }
+    toast.success(`${ids.length} post${ids.length > 1 ? 's' : ''} ${publish ? 'published' : 'unpublished'}`);
+    setSelected(new Set());
+    fetchPosts();
+  };
+
+  const bulkDelete = async () => {
+    const ids = Array.from(selected);
+    if (!confirm(`Delete ${ids.length} post${ids.length > 1 ? 's' : ''} permanently?`)) return;
+    for (const id of ids) {
+      await supabase.from("blog_posts").delete().eq("id", id);
+    }
+    toast.success(`${ids.length} post${ids.length > 1 ? 's' : ''} deleted`);
+    setSelected(new Set());
     fetchPosts();
   };
 
@@ -82,6 +124,24 @@ export default function AdminBlogList() {
         </div>
       </div>
 
+      {/* Bulk Actions Bar */}
+      {selected.size > 0 && (
+        <div className="flex items-center gap-3 mb-3 p-3 bg-primary/5 rounded-xl border border-primary/20">
+          <span className="text-sm font-medium text-foreground">{selected.size} selected</span>
+          <div className="flex gap-2 ml-auto">
+            <Button variant="outline" size="sm" onClick={() => bulkPublish(true)}>
+              <Eye className="w-3 h-3 mr-1" /> Publish
+            </Button>
+            <Button variant="outline" size="sm" onClick={() => bulkPublish(false)}>
+              <EyeOff className="w-3 h-3 mr-1" /> Unpublish
+            </Button>
+            <Button variant="outline" size="sm" className="text-destructive hover:text-destructive" onClick={bulkDelete}>
+              <Trash2 className="w-3 h-3 mr-1" /> Delete
+            </Button>
+          </div>
+        </div>
+      )}
+
       {filtered.length === 0 ? (
         <div className="card-modern p-12 text-center">
           <p className="text-muted-foreground mb-4">{posts.length === 0 ? "No blog posts yet." : "No matching posts."}</p>
@@ -89,8 +149,18 @@ export default function AdminBlogList() {
         </div>
       ) : (
         <div className="space-y-2">
+          {/* Select All */}
+          <div className="flex items-center gap-2 px-3 py-1">
+            <button onClick={selectAll} className="text-muted-foreground hover:text-foreground">
+              {selected.size === filtered.length ? <CheckSquare className="w-4 h-4" /> : <Square className="w-4 h-4" />}
+            </button>
+            <span className="text-xs text-muted-foreground">Select all</span>
+          </div>
           {filtered.map((post) => (
-            <div key={post.id} className="card-modern p-3 md:p-4 flex items-center justify-between gap-3">
+            <div key={post.id} className={`card-modern p-3 md:p-4 flex items-center gap-3 ${selected.has(post.id) ? 'ring-1 ring-primary bg-primary/5' : ''}`}>
+              <button onClick={() => toggleSelect(post.id)} className="text-muted-foreground hover:text-foreground flex-shrink-0">
+                {selected.has(post.id) ? <CheckSquare className="w-4 h-4 text-primary" /> : <Square className="w-4 h-4" />}
+              </button>
               <div className="flex-1 min-w-0">
                 <div className="flex items-center gap-2 mb-0.5 flex-wrap">
                   <Link to={`/admin/blog/${post.id}`} className="font-medium text-foreground text-sm hover:text-primary truncate">{post.title}</Link>
