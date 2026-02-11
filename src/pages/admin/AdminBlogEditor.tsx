@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
+import { ImageUpload } from "@/components/admin/ImageUpload";
 import { toast } from "sonner";
 import { ArrowLeft, Save, Eye, EyeOff, ExternalLink } from "lucide-react";
 import {
@@ -196,13 +197,14 @@ export default function AdminBlogEditor() {
               <Input value={authorName} onChange={(e) => setAuthorName(e.target.value)} className="text-sm" />
             </div>
             <div>
-              <Label className="text-xs">Cover Image URL</Label>
-              <Input value={coverImage} onChange={(e) => setCoverImage(e.target.value)} placeholder="https://..." className="text-sm" />
-              {coverImage && (
-                <div className="mt-2 rounded-lg overflow-hidden border border-border">
-                  <img src={coverImage} alt="Cover preview" className="w-full h-32 object-cover" onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }} />
-                </div>
-              )}
+              <Label className="text-xs">Cover Image</Label>
+              <ImageUpload
+                value={coverImage}
+                onChange={setCoverImage}
+                folder="blog-covers"
+                label="Upload Cover Image"
+                aspectRatio="landscape"
+              />
             </div>
           </div>
 

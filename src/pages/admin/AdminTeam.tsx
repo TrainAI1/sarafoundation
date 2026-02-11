@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
+import { ImageUpload } from "@/components/admin/ImageUpload";
 import { toast } from "sonner";
 import { Plus, Trash2, Save, Users, Edit } from "lucide-react";
 
@@ -126,8 +127,14 @@ export default function AdminTeam() {
                   <Textarea value={m.bio} onChange={(e) => updateField(m.id, "bio", e.target.value)} rows={3} className="text-sm" />
                 </div>
                 <div>
-                  <Label className="text-xs">Photo URL</Label>
-                  <Input value={m.photo} onChange={(e) => updateField(m.id, "photo", e.target.value)} placeholder="https://..." className="text-sm" />
+                  <Label className="text-xs">Photo</Label>
+                  <ImageUpload
+                    value={m.photo}
+                    onChange={(url) => updateField(m.id, "photo", url)}
+                    folder="team"
+                    label="Upload Photo"
+                    aspectRatio="square"
+                  />
                 </div>
               </div>
             )}
