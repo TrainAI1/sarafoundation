@@ -3,14 +3,13 @@ import { ScrollAnimation } from "@/components/ui/scroll-animation";
 import { useRef } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
-import scintillaImg from "@/assets/partners/scintilla.png";
+import scintillaImg from "@/assets/partners/scintilla.jpg";
 import familyImg from "@/assets/partners/farmily.jpg";
 import alxImg from "@/assets/partners/alx.png";
 import kadarabriteImg from "@/assets/partners/kadarabrite.png";
-import trainaiImg from "@/assets/partners/trainai.jpg";
+import trainaiImg from "@/assets/partners/trainai.png";
 import nanaadeImg from "@/assets/partners/nanaade.png";
 import platformhubImg from "@/assets/partners/platformhub.png";
-import analyticsImg from "@/assets/partners/10analytics.jpg";
 
 const partners = [
   { name: "Scintilla Innovations", image: scintillaImg },
@@ -20,7 +19,6 @@ const partners = [
   { name: "Train AI", image: trainaiImg },
   { name: "Nanaade", image: nanaadeImg },
   { name: "Platform Hub", image: platformhubImg },
-  { name: "10 Analytics", image: analyticsImg },
 ];
 
 export function StrategicPartnersSection() {

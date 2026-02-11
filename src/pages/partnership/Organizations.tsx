@@ -8,14 +8,13 @@ import {
   CheckCircle2, Handshake
 } from "lucide-react";
 
-import scintillaImg from "@/assets/partners/scintilla.png";
+import scintillaImg from "@/assets/partners/scintilla.jpg";
 import familyImg from "@/assets/partners/farmily.jpg";
 import alxImg from "@/assets/partners/alx.png";
 import kadarabriteImg from "@/assets/partners/kadarabrite.png";
-import trainaiImg from "@/assets/partners/trainai.jpg";
+import trainaiImg from "@/assets/partners/trainai.png";
 import nanaadeImg from "@/assets/partners/nanaade.png";
 import platformhubImg from "@/assets/partners/platformhub.png";
-import analyticsImg from "@/assets/partners/10analytics.jpg";
 
 const strategicPartners = [
   { name: "Scintilla Innovations", image: scintillaImg },
@@ -25,7 +24,6 @@ const strategicPartners = [
   { name: "Train AI", image: trainaiImg },
   { name: "Nanaade", image: nanaadeImg },
   { name: "Platform Hub", image: platformhubImg },
-  { name: "10 Analytics", image: analyticsImg },
 ];
 
 const partnerCategories = [
