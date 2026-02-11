@@ -11,6 +11,9 @@ import techEntrepreneurs from "@/assets/tech-entrepreneurs.jpg";
 import techConference from "@/assets/tech-conference.jpg";
 import studentsLabImg from "@/assets/students-tech-lab.jpg";
 import womenCoworking from "@/assets/women-coworking.jpg";
+import sarahPhoto from "@/assets/team/sarah-kalu.jpg";
+import emmanuelPhoto from "@/assets/team/inem-emmanuel.jpg";
+import emediongPhoto from "@/assets/team/emediong-joel.jpg";
 
 const milestones = [
   { year: "2023", title: "Foundation Established", description: "Sara Foundation Africa was founded in London with a vision to transform tech in Africa" },
@@ -32,17 +35,20 @@ const coreTeam = [
   { 
     name: "Kalu Sarah", 
     role: "Founder", 
-    bio: "Has worked with Goldman Sachs, Bloomberg, and Blackaion Capital. Also leads Train AI, an edtech platform for tech learners across Africa's $3.4B market." 
+    bio: "Has worked with Goldman Sachs, Bloomberg, and Blackaion Capital. Also leads Train AI, an edtech platform for tech learners across Africa's $3.4B market.",
+    photo: sarahPhoto,
   },
   { 
     name: "Inem Emmanuel", 
     role: "Public Relations Specialist", 
-    bio: "Grew social media reach to 5,365+ followers. Successfully hosted 15 live sessions including 8 LinkedIn Live and 7 Twitter Spaces." 
+    bio: "Grew social media reach to 5,365+ followers. Successfully hosted 15 live sessions including 8 LinkedIn Live and 7 Twitter Spaces.",
+    photo: emmanuelPhoto,
   },
   { 
     name: "Emediong Joel", 
     role: "Program Manager", 
-    bio: "Expanded CAP to 35+ universities across 7 countries. Launched FLIP Fellowship and secured partnerships with Scintilla, Farmily, and more." 
+    bio: "Expanded CAP to 35+ universities across 7 countries. Launched FLIP Fellowship and secured partnerships with Scintilla, Farmily, and more.",
+    photo: emediongPhoto,
   },
 ];
 
@@ -308,10 +314,8 @@ export default function About() {
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 mb-10 md:mb-16 max-w-4xl mx-auto">
             {coreTeam.map((member) => (
               <div key={member.name} className="card-modern p-4 md:p-6 text-center group">
-                <div className="w-16 h-16 md:w-24 md:h-24 mx-auto rounded-full bg-gradient-to-br from-primary to-accent flex items-center justify-center mb-3 md:mb-4 group-hover:scale-105 transition-transform">
-                  <span className="text-lg md:text-2xl font-bold text-white">
-                    {member.name.split(' ').map(n => n[0]).join('')}
-                  </span>
+                <div className="w-20 h-20 md:w-28 md:h-28 mx-auto rounded-full overflow-hidden mb-3 md:mb-4 group-hover:scale-105 transition-transform ring-4 ring-primary/20">
+                  <img src={member.photo} alt={member.name} className="w-full h-full object-cover" />
                 </div>
                 <h3 className="font-display font-bold text-sm md:text-lg text-foreground mb-0.5 md:mb-1">{member.name}</h3>
                 <p className="text-primary text-xs md:text-sm font-medium mb-1 md:mb-2">{member.role}</p>
