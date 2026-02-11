@@ -6,13 +6,13 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { ImageUpload } from "@/components/admin/ImageUpload";
 import { toast } from "sonner";
-import { Save, ChevronDown, ChevronUp, Globe, Layout, BarChart3, Info, Phone, Handshake, Image, Users, MessageSquare, GraduationCap, Heart } from "lucide-react";
+import { Save, ChevronDown, ChevronUp, Globe, Layout, BarChart3, Info, Phone, Handshake, Image, Users, MessageSquare, GraduationCap, Heart, Search, ExternalLink } from "lucide-react";
 import type { Tables } from "@/integrations/supabase/types";
 
 type Page = Tables<"pages">;
 
 const defaultPages = [
-  { slug: "home-hero", title: "Home – Hero Section", icon: Layout, fields: [
+  { slug: "home-hero", title: "Home – Hero Section", icon: Layout, previewPath: "/", fields: [
     { key: "headline", label: "Main Headline", type: "text", placeholder: "Breaking Barriers, Igniting Innovation..." },
     { key: "subheadline", label: "Subheadline", type: "textarea", placeholder: "We're on a mission to empower..." },
     { key: "cta_primary", label: "Primary CTA Text", type: "text", placeholder: "Join Our Mission" },
@@ -25,7 +25,7 @@ const defaultPages = [
     { key: "stat3_value", label: "Stat 3 Value", type: "text", placeholder: "7" },
     { key: "stat3_label", label: "Stat 3 Label", type: "text", placeholder: "African Countries" },
   ]},
-  { slug: "home-mission", title: "Home – Mission Section", icon: Globe, fields: [
+  { slug: "home-mission", title: "Home – Mission Section", icon: Globe, previewPath: "/#mission", fields: [
     { key: "badge", label: "Section Badge", type: "text", placeholder: "Our Mission" },
     { key: "headline", label: "Headline", type: "text", placeholder: "Fostering Diversity, Equity & Inclusion..." },
     { key: "description", label: "Description", type: "textarea", placeholder: "Sara Foundation Africa is dedicated to..." },
@@ -39,7 +39,7 @@ const defaultPages = [
     { key: "stat4_value", label: "Stat 4 Value", type: "text", placeholder: "7" },
     { key: "stat4_label", label: "Stat 4 Label", type: "text", placeholder: "African Countries" },
   ]},
-  { slug: "home-impact", title: "Home – Impact Stats", icon: BarChart3, fields: [
+  { slug: "home-impact", title: "Home – Impact Stats", icon: BarChart3, previewPath: "/#impact", fields: [
     { key: "students_value", label: "Students Trained", type: "text", placeholder: "763+" },
     { key: "students_desc", label: "Students Description", type: "text", placeholder: "Across 2 cohorts in CAP Tech Hub" },
     { key: "students_image", label: "Students Image", type: "image", placeholder: "" },
@@ -54,7 +54,7 @@ const defaultPages = [
     { key: "community_value", label: "Community Reach", type: "text", placeholder: "5,250+" },
     { key: "community_desc", label: "Community Description", type: "text", placeholder: "People reached across Africa" },
   ]},
-  { slug: "home-programs", title: "Home – Programs Section", icon: Layout, fields: [
+  { slug: "home-programs", title: "Home – Programs Section", icon: Layout, previewPath: "/#programs", fields: [
     { key: "badge", label: "Section Badge", type: "text", placeholder: "Our Programs" },
     { key: "headline", label: "Headline", type: "text", placeholder: "Programs That Transform..." },
     { key: "description", label: "Description", type: "textarea", placeholder: "From campus tech hubs to women's leadership..." },
@@ -65,32 +65,32 @@ const defaultPages = [
     { key: "flip_description", label: "FLIP Description", type: "textarea", placeholder: "Empowering women in tech through..." },
     { key: "flip_image", label: "FLIP Image", type: "image", placeholder: "" },
   ]},
-  { slug: "home-testimonials", title: "Home – Testimonials", icon: MessageSquare, fields: [
+  { slug: "home-testimonials", title: "Home – Testimonials", icon: MessageSquare, previewPath: "/#testimonials", fields: [
     { key: "badge", label: "Section Badge", type: "text", placeholder: "Success Stories" },
     { key: "headline", label: "Headline", type: "text", placeholder: "Hear from Our Community" },
     { key: "description", label: "Description", type: "textarea", placeholder: "Real stories from real people..." },
   ]},
-  { slug: "home-faq", title: "Home – FAQ Section", icon: Info, fields: [
+  { slug: "home-faq", title: "Home – FAQ Section", icon: Info, previewPath: "/#faq", fields: [
     { key: "headline", label: "Section Headline", type: "text", placeholder: "Frequently Asked Questions" },
     { key: "description", label: "Section Description", type: "textarea", placeholder: "Have questions? We've got answers..." },
   ]},
-  { slug: "home-cta", title: "Home – CTA Section", icon: Layout, fields: [
+  { slug: "home-cta", title: "Home – CTA Section", icon: Layout, previewPath: "/#cta", fields: [
     { key: "headline", label: "CTA Headline", type: "text", placeholder: "Ready to Make a Difference?" },
     { key: "description", label: "CTA Description", type: "textarea", placeholder: "Whether you're a student looking to start..." },
     { key: "cta_primary", label: "Primary Button Text", type: "text", placeholder: "Join as a Student" },
     { key: "cta_secondary", label: "Secondary Button Text", type: "text", placeholder: "Become a Partner" },
     { key: "bg_image", label: "Background Image", type: "image", placeholder: "" },
   ]},
-  { slug: "home-newsletter", title: "Home – Newsletter", icon: MessageSquare, fields: [
+  { slug: "home-newsletter", title: "Home – Newsletter", icon: MessageSquare, previewPath: "/#newsletter", fields: [
     { key: "headline", label: "Headline", type: "text", placeholder: "Stay Updated" },
     { key: "description", label: "Description", type: "textarea", placeholder: "Subscribe to get the latest news..." },
   ]},
-  { slug: "about-hero", title: "About – Hero Section", icon: Info, fields: [
+  { slug: "about-hero", title: "About – Hero Section", icon: Info, previewPath: "/about", fields: [
     { key: "headline", label: "Headline", type: "text", placeholder: "Transforming Africa's Tech Landscape" },
     { key: "description", label: "Description", type: "textarea", placeholder: "Sara Foundation is a Non-Profit Organization..." },
     { key: "hero_image", label: "Hero Image", type: "image", placeholder: "" },
   ]},
-  { slug: "about-story", title: "About – Our Story", icon: Info, fields: [
+  { slug: "about-story", title: "About – Our Story", icon: Info, previewPath: "/about", fields: [
     { key: "paragraph1", label: "Paragraph 1", type: "textarea", placeholder: "Sara Foundation Africa was born from..." },
     { key: "paragraph2", label: "Paragraph 2", type: "textarea", placeholder: "We promote Sustainable Development Goals..." },
     { key: "paragraph3", label: "Paragraph 3", type: "textarea", placeholder: "Today, we operate across 7 African countries..." },
@@ -99,39 +99,39 @@ const defaultPages = [
     { key: "story_image1", label: "Story Image 1", type: "image", placeholder: "" },
     { key: "story_image2", label: "Story Image 2", type: "image", placeholder: "" },
   ]},
-  { slug: "about-team", title: "About – Team Section", icon: Users, fields: [
+  { slug: "about-team", title: "About – Team Section", icon: Users, previewPath: "/about", fields: [
     { key: "badge", label: "Section Badge", type: "text", placeholder: "Our Team" },
     { key: "headline", label: "Headline", type: "text", placeholder: "Meet the People Behind..." },
     { key: "description", label: "Description", type: "textarea", placeholder: "Our passionate team is dedicated..." },
   ]},
-  { slug: "programs-cap", title: "Programs – CAP", icon: GraduationCap, fields: [
+  { slug: "programs-cap", title: "Programs – CAP", icon: GraduationCap, previewPath: "/programs/cap", fields: [
     { key: "hero_headline", label: "Hero Headline", type: "text", placeholder: "Career Advancement Program" },
     { key: "hero_description", label: "Hero Description", type: "textarea", placeholder: "A 9-month rotational tech program..." },
     { key: "hero_image", label: "Hero Image", type: "image", placeholder: "" },
     { key: "mission", label: "Mission", type: "textarea", placeholder: "To bridge the gap..." },
     { key: "vision", label: "Vision", type: "textarea", placeholder: "An Africa where every student..." },
   ]},
-  { slug: "programs-flip", title: "Programs – FLIP", icon: Heart, fields: [
+  { slug: "programs-flip", title: "Programs – FLIP", icon: Heart, previewPath: "/programs/flip", fields: [
     { key: "hero_headline", label: "Hero Headline", type: "text", placeholder: "Female Leadership Initiative" },
     { key: "hero_description", label: "Hero Description", type: "textarea", placeholder: "Empowering women in tech..." },
     { key: "hero_image", label: "Hero Image", type: "image", placeholder: "" },
     { key: "mission", label: "Mission", type: "textarea", placeholder: "To empower women..." },
     { key: "vision", label: "Vision", type: "textarea", placeholder: "A world where women lead..." },
   ]},
-  { slug: "contact-info", title: "Contact – Info", icon: Phone, fields: [
+  { slug: "contact-info", title: "Contact – Info", icon: Phone, previewPath: "/contact", fields: [
     { key: "headline", label: "Headline", type: "text", placeholder: "Get in Touch" },
     { key: "description", label: "Description", type: "textarea", placeholder: "Have a question or want to partner with us?" },
     { key: "email", label: "Contact Email", type: "text", placeholder: "hello@sarafoundation.org" },
     { key: "phone", label: "Phone Number", type: "text", placeholder: "+234 xxx xxx xxxx" },
     { key: "address", label: "Address", type: "text", placeholder: "London, UK" },
   ]},
-  { slug: "donation-page", title: "Donation Page", icon: Handshake, fields: [
+  { slug: "donation-page", title: "Donation Page", icon: Handshake, previewPath: "/donation", fields: [
     { key: "headline", label: "Headline", type: "text", placeholder: "Support Our Mission" },
     { key: "description", label: "Description", type: "textarea", placeholder: "Your contribution helps us..." },
     { key: "impact_text", label: "Impact Description", type: "textarea", placeholder: "Every donation creates real change..." },
     { key: "hero_image", label: "Hero Image", type: "image", placeholder: "" },
   ]},
-  { slug: "partnership-page", title: "Partnership Page", icon: Handshake, fields: [
+  { slug: "partnership-page", title: "Partnership Page", icon: Handshake, previewPath: "/partnership", fields: [
     { key: "hero_headline", label: "Hero Headline", type: "text", placeholder: "Partner with Sara Foundation" },
     { key: "hero_description", label: "Hero Description", type: "textarea", placeholder: "Join us in transforming..." },
     { key: "hero_image", label: "Hero Image", type: "image", placeholder: "" },
@@ -144,6 +144,7 @@ export default function AdminPages() {
   const [editValues, setEditValues] = useState<Record<string, Record<string, string>>>({});
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState<string | null>(null);
+  const [searchQuery, setSearchQuery] = useState("");
 
   const fetchPages = async () => {
     const { data } = await supabase.from("pages").select("*");
@@ -183,17 +184,28 @@ export default function AdminPages() {
     }));
   };
 
+  const filteredPages = defaultPages.filter(p =>
+    p.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    p.slug.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
   if (loading) return <div className="animate-pulse text-muted-foreground">Loading...</div>;
 
   return (
     <div>
-      <div className="mb-6">
-        <h1 className="font-display text-xl md:text-2xl font-bold text-foreground">Edit Pages</h1>
-        <p className="text-muted-foreground text-sm">Manage all content, images, and text on every page. Changes save to the database and reflect live.</p>
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 mb-6">
+        <div>
+          <h1 className="font-display text-xl md:text-2xl font-bold text-foreground">Edit Pages</h1>
+          <p className="text-muted-foreground text-sm">Manage all content, images, and text on every page. Changes reflect live on the website.</p>
+        </div>
+        <div className="relative w-full sm:w-64">
+          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
+          <Input value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} placeholder="Filter sections..." className="pl-9 text-sm" />
+        </div>
       </div>
 
       <div className="space-y-2">
-        {defaultPages.map((pageDef) => {
+        {filteredPages.map((pageDef) => {
           const exists = pages.find((p) => p.slug === pageDef.slug);
           const isExpanded = expandedSlug === pageDef.slug;
           const Icon = pageDef.icon;
@@ -217,7 +229,7 @@ export default function AdminPages() {
                   </div>
                   {exists && <span className="text-xs bg-success/10 text-success px-2 py-0.5 rounded-full hidden sm:block">Configured</span>}
                 </div>
-                {isExpanded ? <ChevronUp className="w-4 h-4 text-muted-foreground" /> : <ChevronDown className="w-4 h-4 text-muted-foreground" />}
+                <ChevronDown className={`w-4 h-4 text-muted-foreground transition-transform ${isExpanded ? 'rotate-180' : ''}`} />
               </button>
 
               {isExpanded && (
@@ -273,14 +285,21 @@ export default function AdminPages() {
                     </div>
                   </div>
 
-                  <Button
-                    onClick={() => savePage(pageDef.slug, pageDef.title)}
-                    size="sm"
-                    disabled={saving === pageDef.slug}
-                  >
-                    <Save className="w-3 h-3 mr-2" />
-                    {saving === pageDef.slug ? "Saving..." : "Save Changes"}
-                  </Button>
+                  <div className="flex items-center gap-2">
+                    <Button
+                      onClick={() => savePage(pageDef.slug, pageDef.title)}
+                      size="sm"
+                      disabled={saving === pageDef.slug}
+                    >
+                      <Save className="w-3 h-3 mr-2" />
+                      {saving === pageDef.slug ? "Saving..." : "Save Changes"}
+                    </Button>
+                    <Button variant="outline" size="sm" asChild>
+                      <a href={pageDef.previewPath} target="_blank" rel="noopener noreferrer">
+                        <ExternalLink className="w-3 h-3 mr-1" /> Preview on Site
+                      </a>
+                    </Button>
+                  </div>
                 </div>
               )}
             </div>
