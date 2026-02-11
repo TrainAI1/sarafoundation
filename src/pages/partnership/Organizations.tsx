@@ -51,7 +51,6 @@ const currentPartners = [
   "Flutterwave",
   "Andela",
   "Paystack",
-  "Google for Startups",
   "Microsoft",
   "AWS",
 ];
