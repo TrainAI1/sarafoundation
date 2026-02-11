@@ -14,12 +14,12 @@ const quickLinks = [
   { title: "Our Programs", href: "/programs/cap" },
   { title: "Blog", href: "/blog" },
   { title: "Contact", href: "/contact" },
+  { title: "Donate", href: "/donation" },
 ];
 
 const programLinks = [
   { title: "Career Advancement Program", href: "/programs/cap" },
   { title: "Female Leadership Initiative", href: "/programs/flip" },
-  { title: "Donate", href: "/donation" },
 ];
 
 const getSocialLinks = (s: Record<string, string>) => [
