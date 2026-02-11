@@ -6,39 +6,42 @@ import {
 } from "@/components/ui/accordion";
 import { HelpCircle } from "lucide-react";
 import { ScrollAnimation, StaggerContainer, StaggerItem } from "@/components/ui/scroll-animation";
+import { useQuery } from "@tanstack/react-query";
+import { supabase } from "@/integrations/supabase/client";
+import { usePageContent } from "@/hooks/usePageContent";
 
-const faqs = [
-  {
-    question: "Who can apply for the Career Advancement Program (CAP)?",
-    answer: "CAP is open to university students across Africa who are passionate about technology. You don't need prior coding experience – just enthusiasm and commitment to learn. We currently have CAP Tech Hubs in 35+ universities across 7 countries.",
-  },
-  {
-    question: "How much does it cost to join the programs?",
-    answer: "Both CAP and FLIP are completely free for participants. We believe in removing barriers to tech education and career advancement.",
-  },
-  {
-    question: "What is the time commitment for CAP?",
-    answer: "CAP is a 9-month program divided into three phases: Learn (12 weekly expert sessions), Build (developing real MVPs), and Launch (showcasing projects to industry leaders). Participants typically dedicate 10-15 hours per week.",
-  },
-  {
-    question: "What is FLIP and who is it for?",
-    answer: "The Female Leadership Initiative Program (FLIP) is a membership-based program empowering women in tech through mentorship, networking, and opportunities. It includes the Women Professionals in Tech Africa (WPTA) and Women Founders in Tech Africa (WFTA) communities.",
-  },
-  {
-    question: "How can organizations partner with Sara Foundation Africa?",
-    answer: "We offer various partnership models including sponsorships, university collaborations, and corporate partnerships. Current partners include Scintilla Innovations, Farmily, ALX, KàdàràBrite, Train AI, and more.",
-  },
-  {
-    question: "Do students get real-world opportunities?",
-    answer: "Yes! Through our partnerships, CAP students have secured internships at Farmily, full-time job offers, and showcased projects like ArtifyPro and CampusLink at our Talent Showcase in partnership with Scintilla Africa.",
-  },
-  {
-    question: "Which countries do you operate in?",
-    answer: "We currently operate across 7 African countries: Nigeria, Ghana, Kenya, South Africa, Uganda, Zambia, and Togo, with 35+ university partners.",
-  },
+const defaultFaqs = [
+  { question: "Who can apply for the Career Advancement Program (CAP)?", answer: "CAP is open to university students across Africa who are passionate about technology. You don't need prior coding experience – just enthusiasm and commitment to learn. We currently have CAP Tech Hubs in 35+ universities across 7 countries." },
+  { question: "How much does it cost to join the programs?", answer: "Both CAP and FLIP are completely free for participants. We believe in removing barriers to tech education and career advancement." },
+  { question: "What is the time commitment for CAP?", answer: "CAP is a 9-month program divided into three phases: Learn (12 weekly expert sessions), Build (developing real MVPs), and Launch (showcasing projects to industry leaders). Participants typically dedicate 10-15 hours per week." },
+  { question: "What is FLIP and who is it for?", answer: "The Female Leadership Initiative Program (FLIP) is a membership-based program empowering women in tech through mentorship, networking, and opportunities. It includes the Women Professionals in Tech Africa (WPTA) and Women Founders in Tech Africa (WFTA) communities." },
+  { question: "How can organizations partner with Sara Foundation Africa?", answer: "We offer various partnership models including sponsorships, university collaborations, and corporate partnerships. Current partners include Scintilla Innovations, Farmily, ALX, KàdàràBrite, Train AI, and more." },
+  { question: "Do students get real-world opportunities?", answer: "Yes! Through our partnerships, CAP students have secured internships at Farmily, full-time job offers, and showcased projects like ArtifyPro and CampusLink at our Talent Showcase in partnership with Scintilla Africa." },
+  { question: "Which countries do you operate in?", answer: "We currently operate across 7 African countries: Nigeria, Ghana, Kenya, South Africa, Uganda, Zambia, and Togo, with 35+ university partners." },
 ];
 
 export function FAQSection() {
+  const { data: content } = usePageContent("home-faq", {
+    headline: "Frequently Asked Questions",
+    description: "Have questions? We've got answers. If you don't find what you're looking for, feel free to contact us.",
+  });
+
+  const { data: dbFaqs } = useQuery({
+    queryKey: ["faq-items"],
+    queryFn: async () => {
+      const { data } = await supabase
+        .from("faq_items")
+        .select("*")
+        .eq("is_active", true)
+        .order("sort_order", { ascending: true });
+      return data;
+    },
+  });
+
+  const faqs = dbFaqs && dbFaqs.length > 0
+    ? dbFaqs.map(f => ({ question: f.question, answer: f.answer }))
+    : defaultFaqs;
+
   return (
     <section className="py-16 md:py-24 bg-background">
       <div className="section-container">
@@ -48,13 +51,13 @@ export function FAQSection() {
             FAQ
           </span>
           <h2 className="section-title text-foreground mb-6">
-            Frequently Asked{" "}
-            <span className="gradient-text">Questions</span>
+            {content.headline.includes("Asked") ? (
+              <>Frequently Asked{" "}<span className="gradient-text">Questions</span></>
+            ) : (
+              <span className="gradient-text">{content.headline}</span>
+            )}
           </h2>
-          <p className="section-subtitle mx-auto">
-            Have questions? We've got answers. If you don't find what you're looking for, 
-            feel free to contact us.
-          </p>
+          <p className="section-subtitle mx-auto">{content.description}</p>
         </ScrollAnimation>
 
         <StaggerContainer className="max-w-3xl mx-auto" staggerDelay={0.08}>

@@ -2,8 +2,18 @@ import { ArrowRight, Users, Building, Rocket } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { ScrollAnimation } from "@/components/ui/scroll-animation";
+import { usePageContent } from "@/hooks/usePageContent";
+
+const defaults = {
+  headline: "Ready to Make a Difference?",
+  description: "Whether you're a student looking to start your tech journey, an organization seeking to partner, or a sponsor wanting to create impact — there's a place for you at Sara Foundation Africa.",
+  cta_primary: "Join as a Student",
+  cta_secondary: "Become a Partner",
+};
 
 export function CTASection() {
+  const { data: c } = usePageContent("home-cta", defaults);
+
   return (
     <section className="py-16 md:py-24 lg:py-32 relative overflow-hidden">
       <div className="absolute inset-0 bg-gradient-to-br from-primary via-primary/90 to-[hsl(240,80%,50%)]" />
@@ -22,29 +32,27 @@ export function CTASection() {
           
           <ScrollAnimation variant="fade-up" delay={0.1}>
             <h2 className="font-display text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-white mb-4 md:mb-6 text-balance">
-              Ready to Make a Difference?
+              {c.headline}
             </h2>
           </ScrollAnimation>
           
           <ScrollAnimation variant="fade-up" delay={0.2}>
             <p className="text-base md:text-lg lg:text-xl text-white/70 mb-8 md:mb-12 max-w-2xl mx-auto">
-              Whether you're a student looking to start your tech journey, an organization 
-              seeking to partner, or a sponsor wanting to create impact — there's a place 
-              for you at Sara Foundation Africa.
+              {c.description}
             </p>
 
             <div className="flex flex-col sm:flex-row gap-3 md:gap-4 justify-center">
               <Button variant="hero" size="lg" className="group" asChild>
                 <Link to="/programs/cap">
                   <Users className="w-5 h-5" />
-                  Join as a Student
+                  {c.cta_primary}
                   <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                 </Link>
               </Button>
               <Button variant="heroSecondary" size="lg" className="group" asChild>
                 <Link to="/contact">
                   <Building className="w-5 h-5" />
-                  Become a Partner
+                  {c.cta_secondary}
                 </Link>
               </Button>
             </div>

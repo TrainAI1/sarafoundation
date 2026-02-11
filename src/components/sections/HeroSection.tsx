@@ -2,8 +2,34 @@ import { ArrowRight, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
+import { usePageContent } from "@/hooks/usePageContent";
+
+const defaults = {
+  headline_1: "Breaking Barriers,",
+  headline_2: "Igniting Innovation,",
+  headline_3: "Empowering Dreams.",
+  subheadline: "We're on a mission to empower the next generation of tech founders and professionals in Africa through inclusive programs that foster innovation and leadership.",
+  cta_primary: "Join Our Mission",
+  cta_secondary: "Partner with Us",
+  badge: "Empowering African Tech Talent",
+  hero_image: "/hero-students.jpg",
+  stat1_value: "763+",
+  stat1_label: "Students Trained",
+  stat2_value: "35+",
+  stat2_label: "Partner Universities",
+  stat3_value: "7",
+  stat3_label: "African Countries",
+};
 
 export function HeroSection() {
+  const { data: c } = usePageContent("home-hero", defaults);
+
+  const stats = [
+    { value: c.stat1_value, label: c.stat1_label },
+    { value: c.stat2_value, label: c.stat2_label },
+    { value: c.stat3_value, label: c.stat3_label },
+  ];
+
   return (
     <section className="relative min-h-[100svh] flex items-center overflow-hidden">
       {/* Gradient Background */}
@@ -35,7 +61,7 @@ export function HeroSection() {
               className="inline-flex items-center gap-2 px-4 md:px-5 py-2 md:py-2.5 glass-card-dark rounded-full"
             >
               <Sparkles className="w-4 h-4 text-accent" />
-              <span className="text-sm font-medium text-white/90">Empowering African Tech Talent</span>
+              <span className="text-sm font-medium text-white/90">{c.badge}</span>
             </motion.div>
 
             <motion.h1
@@ -44,11 +70,11 @@ export function HeroSection() {
               transition={{ duration: 0.7, delay: 0.2 }}
               className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-[1.05]"
             >
-              Breaking Barriers,
+              {c.headline_1 || "Breaking Barriers,"}
               <br />
-              <span className="text-white/90 italic">Igniting Innovation,</span>
+              <span className="text-white/90 italic">{c.headline_2 || "Igniting Innovation,"}</span>
               <br />
-              Empowering Dreams.
+              {c.headline_3 || "Empowering Dreams."}
             </motion.h1>
 
             <motion.p
@@ -57,9 +83,7 @@ export function HeroSection() {
               transition={{ duration: 0.6, delay: 0.35 }}
               className="text-base md:text-lg lg:text-xl text-white/70 max-w-xl mx-auto lg:mx-0"
             >
-              We're on a mission to empower the next generation of tech founders and 
-              professionals in Africa through inclusive programs that foster innovation 
-              and leadership.
+              {c.subheadline}
             </motion.p>
 
             <motion.div
@@ -70,12 +94,12 @@ export function HeroSection() {
             >
               <Button variant="hero" size="lg" className="group w-full sm:w-auto" asChild>
                 <Link to="/programs/cap">
-                  Join Our Mission
+                  {c.cta_primary}
                   <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                 </Link>
               </Button>
               <Button variant="heroSecondary" size="lg" className="w-full sm:w-auto" asChild>
-                <Link to="/partnership">Partner with Us</Link>
+                <Link to="/partnership">{c.cta_secondary}</Link>
               </Button>
             </motion.div>
 
@@ -86,11 +110,7 @@ export function HeroSection() {
               transition={{ duration: 0.6, delay: 0.55 }}
               className="grid grid-cols-3 gap-4 md:gap-8 pt-8 md:pt-10 border-t border-white/10"
             >
-              {[
-                { value: "763+", label: "Students Trained" },
-                { value: "35+", label: "Partner Universities" },
-                { value: "7", label: "African Countries" },
-              ].map((stat) => (
+              {stats.map((stat) => (
                 <div key={stat.label}>
                   <div className="text-2xl sm:text-3xl md:text-4xl font-bold font-display">{stat.value}</div>
                   <div className="text-white/60 text-xs sm:text-sm mt-1">{stat.label}</div>
@@ -109,7 +129,7 @@ export function HeroSection() {
             <div className="relative aspect-square">
               <div className="absolute inset-0 rounded-3xl overflow-hidden">
                 <img 
-                  src="/hero-students.jpg" 
+                  src={c.hero_image} 
                   alt="African students collaborating on technology projects"
                   className="w-full h-full object-cover"
                 />
