@@ -7,6 +7,26 @@ import {
   CheckCircle2, Handshake
 } from "lucide-react";
 
+import scintillaImg from "@/assets/partners/scintilla.png";
+import familyImg from "@/assets/partners/farmily.jpg";
+import alxImg from "@/assets/partners/alx.png";
+import kadarabriteImg from "@/assets/partners/kadarabrite.png";
+import trainaiImg from "@/assets/partners/trainai.jpg";
+import nanaadeImg from "@/assets/partners/nanaade.png";
+import platformhubImg from "@/assets/partners/platformhub.png";
+import analyticsImg from "@/assets/partners/10analytics.jpg";
+
+const strategicPartners = [
+  { name: "Scintilla Innovations", image: scintillaImg },
+  { name: "Farmily", image: familyImg },
+  { name: "ALX", image: alxImg },
+  { name: "KàdàràBrite", image: kadarabriteImg },
+  { name: "Train AI", image: trainaiImg },
+  { name: "Nanaade", image: nanaadeImg },
+  { name: "Platform Hub", image: platformhubImg },
+  { name: "10 Analytics", image: analyticsImg },
+];
+
 const partnerCategories = [
   {
     number: "01",
@@ -47,14 +67,6 @@ const partnerCategories = [
   },
 ];
 
-const currentPartners = [
-  "Flutterwave",
-  "Andela",
-  "Paystack",
-  "Microsoft",
-  "AWS",
-];
-
 export default function Organizations() {
   return (
     <div className="min-h-screen bg-background">
@@ -76,13 +88,7 @@ export default function Organizations() {
             </h1>
             <p className="text-base md:text-xl text-white/70 leading-relaxed mb-6 md:mb-8 max-w-3xl mx-auto">
               We are a non-profit organization established to promote SDG 4, SDG 5 and SDG 8 in Africa 
-              with a focus on technology and entrepreneurship. Our goal is to foster Diversity, Equity 
-              and Inclusion in technology and accelerate tech opportunities in Africa leveraging our 
-              initiatives: the Career Advancement Program (CAP) and Female Leadership Initiative Program (FLIP).
-            </p>
-            <p className="text-sm md:text-lg text-white/60 mb-6 md:mb-8 max-w-3xl mx-auto">
-              Through CAP, we establish tech hubs across African universities. Through FLIP, we empower 
-              women tech professionals and tech founders for continued success in Africa.
+              with a focus on technology and entrepreneurship.
             </p>
             <Button variant="hero" size="lg" className="w-full sm:w-auto" asChild>
               <Link to="/contact">
@@ -94,7 +100,7 @@ export default function Organizations() {
         </div>
       </section>
 
-      {/* Current Partners */}
+      {/* Strategic Partners */}
       <section className="py-16 md:py-24 bg-background">
         <div className="section-container">
           <div className="text-center max-w-3xl mx-auto mb-10 md:mb-16 px-4">
@@ -107,15 +113,19 @@ export default function Organizations() {
             </h2>
           </div>
 
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 md:gap-4">
-            {currentPartners.map((partner) => (
-              <div key={partner} className="card-modern p-3 md:p-4 text-center">
-                <div className="w-10 h-10 md:w-12 md:h-12 mx-auto rounded-lg md:rounded-xl bg-gradient-to-br from-primary/10 to-accent/10 flex items-center justify-center mb-2 md:mb-3">
-                  <span className="text-sm md:text-lg font-bold text-primary">
-                    {partner.split(' ').map(w => w[0]).join('').slice(0, 2)}
-                  </span>
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 md:gap-6 max-w-3xl mx-auto">
+            {strategicPartners.map((partner) => (
+              <div key={partner.name} className="group">
+                <div className="aspect-square bg-background rounded-xl border border-border flex items-center justify-center p-4 hover:border-primary/30 hover:shadow-lg transition-all duration-300">
+                  <img
+                    src={partner.image}
+                    alt={partner.name}
+                    className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-300"
+                  />
                 </div>
-                <p className="font-medium text-foreground text-xs md:text-sm">{partner}</p>
+                <p className="text-center mt-2 text-xs font-medium text-muted-foreground leading-tight">
+                  {partner.name}
+                </p>
               </div>
             ))}
           </div>

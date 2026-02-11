@@ -4,8 +4,9 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
+import { ImageUpload } from "@/components/admin/ImageUpload";
 import { toast } from "sonner";
-import { Save, FileText, ChevronDown, ChevronUp, Globe, Layout, BarChart3, Info, Phone, Handshake } from "lucide-react";
+import { Save, ChevronDown, ChevronUp, Globe, Layout, BarChart3, Info, Phone, Handshake, Image, Users, MessageSquare, GraduationCap, Heart } from "lucide-react";
 import type { Tables } from "@/integrations/supabase/types";
 
 type Page = Tables<"pages">;
@@ -16,6 +17,7 @@ const defaultPages = [
     { key: "subheadline", label: "Subheadline", type: "textarea", placeholder: "We're on a mission to empower..." },
     { key: "cta_primary", label: "Primary CTA Text", type: "text", placeholder: "Join Our Mission" },
     { key: "cta_secondary", label: "Secondary CTA Text", type: "text", placeholder: "Partner with Us" },
+    { key: "hero_image", label: "Hero Background Image", type: "image", placeholder: "" },
     { key: "stat1_value", label: "Stat 1 Value", type: "text", placeholder: "763+" },
     { key: "stat1_label", label: "Stat 1 Label", type: "text", placeholder: "Students Trained" },
     { key: "stat2_value", label: "Stat 2 Value", type: "text", placeholder: "35+" },
@@ -27,6 +29,7 @@ const defaultPages = [
     { key: "badge", label: "Section Badge", type: "text", placeholder: "Our Mission" },
     { key: "headline", label: "Headline", type: "text", placeholder: "Fostering Diversity, Equity & Inclusion..." },
     { key: "description", label: "Description", type: "textarea", placeholder: "Sara Foundation Africa is dedicated to..." },
+    { key: "mission_image", label: "Mission Image", type: "image", placeholder: "" },
     { key: "stat1_value", label: "Stat 1 Value", type: "text", placeholder: "763+" },
     { key: "stat1_label", label: "Stat 1 Label", type: "text", placeholder: "Students Trained" },
     { key: "stat2_value", label: "Stat 2 Value", type: "text", placeholder: "35+" },
@@ -39,6 +42,7 @@ const defaultPages = [
   { slug: "home-impact", title: "Home – Impact Stats", icon: BarChart3, fields: [
     { key: "students_value", label: "Students Trained", type: "text", placeholder: "763+" },
     { key: "students_desc", label: "Students Description", type: "text", placeholder: "Across 2 cohorts in CAP Tech Hub" },
+    { key: "students_image", label: "Students Image", type: "image", placeholder: "" },
     { key: "universities_value", label: "Universities", type: "text", placeholder: "35+" },
     { key: "universities_desc", label: "Universities Description", type: "text", placeholder: "Partner institutions across Africa" },
     { key: "countries_value", label: "Countries", type: "text", placeholder: "7" },
@@ -56,8 +60,15 @@ const defaultPages = [
     { key: "description", label: "Description", type: "textarea", placeholder: "From campus tech hubs to women's leadership..." },
     { key: "cap_title", label: "CAP Program Title", type: "text", placeholder: "Career Advancement Program" },
     { key: "cap_description", label: "CAP Description", type: "textarea", placeholder: "A 9-month rotational tech program..." },
+    { key: "cap_image", label: "CAP Image", type: "image", placeholder: "" },
     { key: "flip_title", label: "FLIP Program Title", type: "text", placeholder: "Female Leadership Initiative" },
     { key: "flip_description", label: "FLIP Description", type: "textarea", placeholder: "Empowering women in tech through..." },
+    { key: "flip_image", label: "FLIP Image", type: "image", placeholder: "" },
+  ]},
+  { slug: "home-testimonials", title: "Home – Testimonials", icon: MessageSquare, fields: [
+    { key: "badge", label: "Section Badge", type: "text", placeholder: "Success Stories" },
+    { key: "headline", label: "Headline", type: "text", placeholder: "Hear from Our Community" },
+    { key: "description", label: "Description", type: "textarea", placeholder: "Real stories from real people..." },
   ]},
   { slug: "home-faq", title: "Home – FAQ Section", icon: Info, fields: [
     { key: "headline", label: "Section Headline", type: "text", placeholder: "Frequently Asked Questions" },
@@ -68,10 +79,16 @@ const defaultPages = [
     { key: "description", label: "CTA Description", type: "textarea", placeholder: "Whether you're a student looking to start..." },
     { key: "cta_primary", label: "Primary Button Text", type: "text", placeholder: "Join as a Student" },
     { key: "cta_secondary", label: "Secondary Button Text", type: "text", placeholder: "Become a Partner" },
+    { key: "bg_image", label: "Background Image", type: "image", placeholder: "" },
+  ]},
+  { slug: "home-newsletter", title: "Home – Newsletter", icon: MessageSquare, fields: [
+    { key: "headline", label: "Headline", type: "text", placeholder: "Stay Updated" },
+    { key: "description", label: "Description", type: "textarea", placeholder: "Subscribe to get the latest news..." },
   ]},
   { slug: "about-hero", title: "About – Hero Section", icon: Info, fields: [
     { key: "headline", label: "Headline", type: "text", placeholder: "Transforming Africa's Tech Landscape" },
     { key: "description", label: "Description", type: "textarea", placeholder: "Sara Foundation is a Non-Profit Organization..." },
+    { key: "hero_image", label: "Hero Image", type: "image", placeholder: "" },
   ]},
   { slug: "about-story", title: "About – Our Story", icon: Info, fields: [
     { key: "paragraph1", label: "Paragraph 1", type: "textarea", placeholder: "Sara Foundation Africa was born from..." },
@@ -79,6 +96,27 @@ const defaultPages = [
     { key: "paragraph3", label: "Paragraph 3", type: "textarea", placeholder: "Today, we operate across 7 African countries..." },
     { key: "mission_text", label: "Mission Statement", type: "textarea", placeholder: "To foster Diversity, Equity, and Inclusion..." },
     { key: "vision_text", label: "Vision Statement", type: "textarea", placeholder: "An Africa where every young person..." },
+    { key: "story_image1", label: "Story Image 1", type: "image", placeholder: "" },
+    { key: "story_image2", label: "Story Image 2", type: "image", placeholder: "" },
+  ]},
+  { slug: "about-team", title: "About – Team Section", icon: Users, fields: [
+    { key: "badge", label: "Section Badge", type: "text", placeholder: "Our Team" },
+    { key: "headline", label: "Headline", type: "text", placeholder: "Meet the People Behind..." },
+    { key: "description", label: "Description", type: "textarea", placeholder: "Our passionate team is dedicated..." },
+  ]},
+  { slug: "programs-cap", title: "Programs – CAP", icon: GraduationCap, fields: [
+    { key: "hero_headline", label: "Hero Headline", type: "text", placeholder: "Career Advancement Program" },
+    { key: "hero_description", label: "Hero Description", type: "textarea", placeholder: "A 9-month rotational tech program..." },
+    { key: "hero_image", label: "Hero Image", type: "image", placeholder: "" },
+    { key: "mission", label: "Mission", type: "textarea", placeholder: "To bridge the gap..." },
+    { key: "vision", label: "Vision", type: "textarea", placeholder: "An Africa where every student..." },
+  ]},
+  { slug: "programs-flip", title: "Programs – FLIP", icon: Heart, fields: [
+    { key: "hero_headline", label: "Hero Headline", type: "text", placeholder: "Female Leadership Initiative" },
+    { key: "hero_description", label: "Hero Description", type: "textarea", placeholder: "Empowering women in tech..." },
+    { key: "hero_image", label: "Hero Image", type: "image", placeholder: "" },
+    { key: "mission", label: "Mission", type: "textarea", placeholder: "To empower women..." },
+    { key: "vision", label: "Vision", type: "textarea", placeholder: "A world where women lead..." },
   ]},
   { slug: "contact-info", title: "Contact – Info", icon: Phone, fields: [
     { key: "headline", label: "Headline", type: "text", placeholder: "Get in Touch" },
@@ -91,6 +129,12 @@ const defaultPages = [
     { key: "headline", label: "Headline", type: "text", placeholder: "Support Our Mission" },
     { key: "description", label: "Description", type: "textarea", placeholder: "Your contribution helps us..." },
     { key: "impact_text", label: "Impact Description", type: "textarea", placeholder: "Every donation creates real change..." },
+    { key: "hero_image", label: "Hero Image", type: "image", placeholder: "" },
+  ]},
+  { slug: "partnership-page", title: "Partnership Page", icon: Handshake, fields: [
+    { key: "hero_headline", label: "Hero Headline", type: "text", placeholder: "Partner with Sara Foundation" },
+    { key: "hero_description", label: "Hero Description", type: "textarea", placeholder: "Join us in transforming..." },
+    { key: "hero_image", label: "Hero Image", type: "image", placeholder: "" },
   ]},
 ];
 
@@ -145,7 +189,7 @@ export default function AdminPages() {
     <div>
       <div className="mb-6">
         <h1 className="font-display text-xl md:text-2xl font-bold text-foreground">Edit Pages</h1>
-        <p className="text-muted-foreground text-sm">Manage content for every section of the website. Changes save to the database.</p>
+        <p className="text-muted-foreground text-sm">Manage all content, images, and text on every page. Changes save to the database and reflect live.</p>
       </div>
 
       <div className="space-y-2">
@@ -153,6 +197,7 @@ export default function AdminPages() {
           const exists = pages.find((p) => p.slug === pageDef.slug);
           const isExpanded = expandedSlug === pageDef.slug;
           const Icon = pageDef.icon;
+          const imageFields = pageDef.fields.filter(f => f.type === "image").length;
 
           return (
             <div key={pageDef.slug} className="card-modern overflow-hidden">
@@ -166,7 +211,9 @@ export default function AdminPages() {
                   </div>
                   <div className="text-left">
                     <span className="font-medium text-foreground text-sm">{pageDef.title}</span>
-                    <span className="text-xs text-muted-foreground block">{pageDef.fields.length} fields</span>
+                    <span className="text-xs text-muted-foreground block">
+                      {pageDef.fields.length} fields{imageFields > 0 && ` · ${imageFields} image${imageFields > 1 ? 's' : ''}`}
+                    </span>
                   </div>
                   {exists && <span className="text-xs bg-success/10 text-success px-2 py-0.5 rounded-full hidden sm:block">Configured</span>}
                 </div>
@@ -174,30 +221,58 @@ export default function AdminPages() {
               </button>
 
               {isExpanded && (
-                <div className="p-3 md:p-4 pt-0 border-t border-border space-y-3">
-                  <div className="grid gap-3 sm:grid-cols-2">
-                    {pageDef.fields.map((field) => (
-                      <div key={field.key} className={field.type === "textarea" ? "sm:col-span-2" : ""}>
-                        <Label className="text-xs font-medium">{field.label}</Label>
-                        {field.type === "textarea" ? (
-                          <Textarea
-                            value={editValues[pageDef.slug]?.[field.key] || ""}
-                            onChange={(e) => updateField(pageDef.slug, field.key, e.target.value)}
-                            placeholder={field.placeholder}
-                            rows={3}
-                            className="text-sm"
-                          />
-                        ) : (
-                          <Input
-                            value={editValues[pageDef.slug]?.[field.key] || ""}
-                            onChange={(e) => updateField(pageDef.slug, field.key, e.target.value)}
-                            placeholder={field.placeholder}
-                            className="text-sm"
-                          />
-                        )}
+                <div className="p-3 md:p-4 pt-0 border-t border-border space-y-4">
+                  {/* Image fields */}
+                  {pageDef.fields.filter(f => f.type === "image").length > 0 && (
+                    <div>
+                      <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-3 flex items-center gap-1.5">
+                        <Image className="w-3 h-3" /> Images
+                      </p>
+                      <div className="grid gap-3 sm:grid-cols-2">
+                        {pageDef.fields.filter(f => f.type === "image").map((field) => (
+                          <div key={field.key}>
+                            <Label className="text-xs font-medium mb-1 block">{field.label}</Label>
+                            <ImageUpload
+                              value={editValues[pageDef.slug]?.[field.key] || ""}
+                              onChange={(url) => updateField(pageDef.slug, field.key, url)}
+                              folder={pageDef.slug}
+                              label={`Upload ${field.label}`}
+                              aspectRatio="landscape"
+                            />
+                          </div>
+                        ))}
                       </div>
-                    ))}
+                    </div>
+                  )}
+
+                  {/* Text fields */}
+                  <div>
+                    <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-3">Content</p>
+                    <div className="grid gap-3 sm:grid-cols-2">
+                      {pageDef.fields.filter(f => f.type !== "image").map((field) => (
+                        <div key={field.key} className={field.type === "textarea" ? "sm:col-span-2" : ""}>
+                          <Label className="text-xs font-medium">{field.label}</Label>
+                          {field.type === "textarea" ? (
+                            <Textarea
+                              value={editValues[pageDef.slug]?.[field.key] || ""}
+                              onChange={(e) => updateField(pageDef.slug, field.key, e.target.value)}
+                              placeholder={field.placeholder}
+                              rows={3}
+                              className="text-sm"
+                            />
+                          ) : (
+                            <Input
+                              value={editValues[pageDef.slug]?.[field.key] || ""}
+                              onChange={(e) => updateField(pageDef.slug, field.key, e.target.value)}
+                              placeholder={field.placeholder}
+                              className="text-sm"
+                            />
+                          )}
+                        </div>
+                      ))}
+                    </div>
                   </div>
+
                   <Button
                     onClick={() => savePage(pageDef.slug, pageDef.title)}
                     size="sm"
