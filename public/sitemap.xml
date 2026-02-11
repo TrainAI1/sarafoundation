@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>https://sarafoundation.lovable.app/</loc><priority>1.0</priority></url>
+  <url><loc>https://sarafoundation.lovable.app/about</loc><priority>0.8</priority></url>
+  <url><loc>https://sarafoundation.lovable.app/blog</loc><priority>0.8</priority></url>
+  <url><loc>https://sarafoundation.lovable.app/contact</loc><priority>0.7</priority></url>
+  <url><loc>https://sarafoundation.lovable.app/donation</loc><priority>0.7</priority></url>
+  <url><loc>https://sarafoundation.lovable.app/programs/cap</loc><priority>0.8</priority></url>
+  <url><loc>https://sarafoundation.lovable.app/programs/flip</loc><priority>0.8</priority></url>
+  <url><loc>https://sarafoundation.lovable.app/partnership</loc><priority>0.6</priority></url>
+</urlset>
