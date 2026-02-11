@@ -3,6 +3,7 @@ import { Footer } from "@/components/layout/Footer";
 import { DonationSection } from "@/components/sections/DonationSection";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 import { Heart, Sparkles, Users, GraduationCap, Lightbulb, ArrowRight } from "lucide-react";
 import graduatesCelebration from "@/assets/graduates-celebration.jpg";
 import mentorshipSession from "@/assets/mentorship-session.jpg";
@@ -29,6 +30,11 @@ const impactNumbers = [
 export default function Donation() {
   return (
     <div className="min-h-screen bg-background">
+      <Helmet>
+        <title>Donate – Support African Tech Talent | Sara Foundation</title>
+        <meta name="description" content="Your donation supports scholarships, mentorship programs, and resources for young African tech entrepreneurs. Invest in Africa's tech future." />
+        <link rel="canonical" href="https://sarafoundation.lovable.app/donation" />
+      </Helmet>
       <Navbar />
       
       {/* Hero */}

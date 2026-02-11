@@ -1,5 +1,6 @@
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
+import { Helmet } from "react-helmet-async";
 import { CAPHeroSection } from "@/components/programs/cap/CAPHeroSection";
 import { CAPProblemsSection } from "@/components/programs/cap/CAPProblemsSection";
 import { CAPSolutionsSection } from "@/components/programs/cap/CAPSolutionsSection";
@@ -12,6 +13,11 @@ import { CAPCTASection } from "@/components/programs/cap/CAPCTASection";
 export default function ProgramCAP() {
   return (
     <div className="min-h-screen bg-background">
+      <Helmet>
+        <title>CAP – Career Advancement Program | Sara Foundation Africa</title>
+        <meta name="description" content="Join the Career Advancement Program (CAP) – a 9-month rotational tech program establishing tech hubs across 35+ African universities in 7 countries." />
+        <link rel="canonical" href="https://sarafoundation.lovable.app/programs/cap" />
+      </Helmet>
       <Navbar />
       <CAPHeroSection />
       <CAPProblemsSection />

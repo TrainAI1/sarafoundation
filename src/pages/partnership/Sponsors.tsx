@@ -2,6 +2,7 @@ import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 import { 
   Heart, ArrowRight, Award, Users, TrendingUp,
   CheckCircle2, Sparkles
@@ -52,6 +53,11 @@ const sponsorBenefits = [
 export default function Sponsors() {
   return (
     <div className="min-h-screen bg-background">
+      <Helmet>
+        <title>Sponsor Us – Sara Foundation Africa</title>
+        <meta name="description" content="Support Sara Foundation through sponsorship opportunities. Drive tech talent development and promote diversity across Africa's tech ecosystem." />
+        <link rel="canonical" href="https://sarafoundation.lovable.app/partnership/sponsors" />
+      </Helmet>
       <Navbar />
       
       {/* Hero */}

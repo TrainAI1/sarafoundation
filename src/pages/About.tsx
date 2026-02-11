@@ -2,6 +2,7 @@ import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 import { 
   Target, Heart, Lightbulb, Globe, Users, Award, 
   ArrowRight, Sparkles, Eye, Quote, Trophy
@@ -79,8 +80,12 @@ const countries = [
 export default function About() {
   return (
     <div className="min-h-screen bg-background">
+      <Helmet>
+        <title>About Us – Sara Foundation Africa | Transforming Tech in Africa</title>
+        <meta name="description" content="Learn about Sara Foundation Africa's mission to foster Diversity, Equity & Inclusion in African tech. Operating across 7 countries with 35+ university partners." />
+        <link rel="canonical" href="https://sarafoundation.lovable.app/about" />
+      </Helmet>
       <Navbar />
-      
       {/* Hero */}
       <section className="pt-24 md:pt-32 pb-12 md:pb-20 bg-gradient-to-br from-primary via-primary/90 to-[hsl(240,80%,50%)] relative overflow-hidden">
         <div className="absolute inset-0 opacity-30">
