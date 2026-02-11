@@ -26,6 +26,10 @@ import AdminPartners from "./pages/admin/AdminPartners";
 import AdminTestimonials from "./pages/admin/AdminTestimonials";
 import AdminTeam from "./pages/admin/AdminTeam";
 import AdminSettings from "./pages/admin/AdminSettings";
+import AdminFAQ from "./pages/admin/AdminFAQ";
+import AdminContacts from "./pages/admin/AdminContacts";
+import AdminNewsletter from "./pages/admin/AdminNewsletter";
+import AdminMedia from "./pages/admin/AdminMedia";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -60,6 +64,10 @@ const App = () => (
               <Route path="testimonials" element={<AdminTestimonials />} />
               <Route path="team" element={<AdminTeam />} />
               <Route path="settings" element={<AdminSettings />} />
+              <Route path="faq" element={<AdminFAQ />} />
+              <Route path="contacts" element={<AdminContacts />} />
+              <Route path="newsletter" element={<AdminNewsletter />} />
+              <Route path="media" element={<AdminMedia />} />
             </Route>
             <Route path="*" element={<NotFound />} />
           </Routes>

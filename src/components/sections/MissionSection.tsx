@@ -2,6 +2,7 @@ import { Lightbulb, Users, Heart, Target, TrendingUp } from "lucide-react";
 import studentsLabImg from "@/assets/students-tech-lab.jpg";
 import communityWorkshopImg from "@/assets/community-workshop.jpg";
 import { ScrollAnimation, StaggerContainer, StaggerItem } from "@/components/ui/scroll-animation";
+import { usePageContent } from "@/hooks/usePageContent";
 
 const coreValues = [
   {
@@ -38,6 +39,23 @@ const stats = [
 ];
 
 export function MissionSection() {
+  const { data: c } = usePageContent("home-mission", {
+    badge: "Our Mission",
+    headline: "Fostering Diversity, Equity & Inclusion in African Tech",
+    description: "Sara Foundation Africa is dedicated to empowering young Africans to thrive in the global tech ecosystem. We believe that diversity drives innovation, and inclusion creates opportunities for all.",
+    stat1_value: "763+", stat1_label: "Students Trained",
+    stat2_value: "35+", stat2_label: "University Partners",
+    stat3_value: "5,250+", stat3_label: "Community Reach",
+    stat4_value: "7", stat4_label: "African Countries",
+  });
+
+  const stats = [
+    { value: c.stat1_value, label: c.stat1_label, icon: TrendingUp },
+    { value: c.stat2_value, label: c.stat2_label, icon: Users },
+    { value: c.stat3_value, label: c.stat3_label, icon: Heart },
+    { value: c.stat4_value, label: c.stat4_label, icon: Target },
+  ];
+
   return (
     <section className="py-16 md:py-24 lg:py-32 bg-background relative overflow-hidden">
       <div className="absolute inset-0 mesh-gradient opacity-50" />
@@ -47,16 +65,12 @@ export function MissionSection() {
         <div className="grid lg:grid-cols-2 gap-8 md:gap-12 items-center mb-12 md:mb-20 px-4 lg:px-0">
           <ScrollAnimation variant="slide-left">
             <div>
-              <span className="section-badge mb-6">Our Mission</span>
+              <span className="section-badge mb-6">{c.badge}</span>
               <h2 className="section-title text-foreground mb-6 text-balance">
                 Fostering Diversity, Equity & Inclusion in{" "}
                 <span className="gradient-text">African Tech</span>
               </h2>
-              <p className="section-subtitle">
-                Sara Foundation Africa is dedicated to empowering young Africans to thrive in 
-                the global tech ecosystem. We believe that diversity drives innovation, and 
-                inclusion creates opportunities for all.
-              </p>
+              <p className="section-subtitle">{c.description}</p>
             </div>
           </ScrollAnimation>
           <ScrollAnimation variant="slide-right">

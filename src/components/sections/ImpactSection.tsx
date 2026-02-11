@@ -1,47 +1,29 @@
 import { TrendingUp, Users, Globe, Award, Building, GraduationCap } from "lucide-react";
 import techConference from "@/assets/tech-conference.jpg";
 import { ScrollAnimation, StaggerContainer, StaggerItem } from "@/components/ui/scroll-animation";
+import { usePageContent } from "@/hooks/usePageContent";
 
-const impactStats = [
-  {
-    icon: Users,
-    value: "763+",
-    label: "Students Trained",
-    description: "Across 2 cohorts in CAP Tech Hub",
-  },
-  {
-    icon: GraduationCap,
-    value: "35+",
-    label: "Universities",
-    description: "Partner institutions across Africa",
-  },
-  {
-    icon: Globe,
-    value: "7",
-    label: "Countries",
-    description: "Nigeria, Ghana, Kenya, Uganda & more",
-  },
-  {
-    icon: Award,
-    value: "21",
-    label: "FLIP Fellows",
-    description: "Women empowered in Cohort 1",
-  },
-  {
-    icon: Building,
-    value: "10+",
-    label: "Key Partners",
-    description: "Scintilla, Farmily, Train AI & more",
-  },
-  {
-    icon: TrendingUp,
-    value: "5,250+",
-    label: "Community Reach",
-    description: "People reached across Africa via social media",
-  },
-];
+
 
 export function ImpactSection() {
+  const { data: c } = usePageContent("home-impact", {
+    students_value: "763+", students_desc: "Across 2 cohorts in CAP Tech Hub",
+    universities_value: "35+", universities_desc: "Partner institutions across Africa",
+    countries_value: "7", countries_desc: "Nigeria, Ghana, Kenya, Uganda & more",
+    fellows_value: "21", fellows_desc: "Women empowered in Cohort 1",
+    partners_value: "10+", partners_desc: "Scintilla, Farmily, Train AI & more",
+    community_value: "5,250+", community_desc: "People reached across Africa via social media",
+  });
+
+  const impactStats = [
+    { icon: Users, value: c.students_value, label: "Students Trained", description: c.students_desc },
+    { icon: GraduationCap, value: c.universities_value, label: "Universities", description: c.universities_desc },
+    { icon: Globe, value: c.countries_value, label: "Countries", description: c.countries_desc },
+    { icon: Award, value: c.fellows_value, label: "FLIP Fellows", description: c.fellows_desc },
+    { icon: Building, value: c.partners_value, label: "Key Partners", description: c.partners_desc },
+    { icon: TrendingUp, value: c.community_value, label: "Community Reach", description: c.community_desc },
+  ];
+
   return (
     <section className="py-16 md:py-24 bg-gradient-to-br from-foreground via-foreground/95 to-[hsl(240,20%,15%)] relative overflow-hidden">
       <div className="absolute inset-0 opacity-20">

@@ -11,6 +11,8 @@ import {
 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import communityWorkshop from "@/assets/community-workshop.jpg";
+import { supabase } from "@/integrations/supabase/client";
+import { usePageContent } from "@/hooks/usePageContent";
 
 const contactInfo = [
   { icon: Mail, title: "Email Us", value: "info@sarafoundationafrica.com", href: "mailto:info@sarafoundationafrica.com" },
@@ -37,18 +39,34 @@ const topics = [
 export default function Contact() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [formData, setFormData] = useState({ firstName: "", lastName: "", email: "", topic: "General Inquiry", message: "" });
   const { toast } = useToast();
+
+  const { data: contactContent } = usePageContent("contact-info", {
+    email: "info@sarafoundationafrica.com",
+    phone: "+44 7435 126104",
+    address: "E14 8AT, London, UK",
+  });
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-    await new Promise(resolve => setTimeout(resolve, 1500));
-    setIsSubmitting(false);
-    setIsSubmitted(true);
-    toast({
-      title: "Message sent successfully!",
-      description: "We'll get back to you within 24 hours.",
+    
+    const { error } = await supabase.from("contact_submissions").insert({
+      first_name: formData.firstName,
+      last_name: formData.lastName,
+      email: formData.email,
+      topic: formData.topic,
+      message: formData.message,
     });
+    
+    setIsSubmitting(false);
+    if (error) {
+      toast({ title: "Error", description: "Could not send message. Please try again.", variant: "destructive" });
+      return;
+    }
+    setIsSubmitted(true);
+    toast({ title: "Message sent successfully!", description: "We'll get back to you within 24 hours." });
   };
 
   return (
@@ -124,13 +142,13 @@ export default function Contact() {
                           <label className="block text-sm font-medium text-foreground mb-2">
                             First Name *
                           </label>
-                          <Input placeholder="John" className="rounded-xl" required />
+                          <Input placeholder="John" className="rounded-xl" required value={formData.firstName} onChange={(e) => setFormData(p => ({...p, firstName: e.target.value}))} />
                         </div>
                         <div>
                           <label className="block text-sm font-medium text-foreground mb-2">
                             Last Name *
                           </label>
-                          <Input placeholder="Doe" className="rounded-xl" required />
+                          <Input placeholder="Doe" className="rounded-xl" required value={formData.lastName} onChange={(e) => setFormData(p => ({...p, lastName: e.target.value}))} />
                         </div>
                       </div>
 
@@ -138,14 +156,14 @@ export default function Contact() {
                         <label className="block text-sm font-medium text-foreground mb-2">
                           Email Address *
                         </label>
-                        <Input type="email" placeholder="john@example.com" className="rounded-xl" required />
+                        <Input type="email" placeholder="john@example.com" className="rounded-xl" required value={formData.email} onChange={(e) => setFormData(p => ({...p, email: e.target.value}))} />
                       </div>
 
                       <div>
                         <label className="block text-sm font-medium text-foreground mb-2">
                           Topic
                         </label>
-                        <select className="flex h-10 w-full rounded-xl border border-input bg-background px-3 py-2 text-base ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm">
+                        <select className="flex h-10 w-full rounded-xl border border-input bg-background px-3 py-2 text-base ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm" value={formData.topic} onChange={(e) => setFormData(p => ({...p, topic: e.target.value}))}>
                           {topics.map((topic) => (
                             <option key={topic} value={topic}>{topic}</option>
                           ))}
@@ -160,6 +178,8 @@ export default function Contact() {
                           placeholder="Tell us more about your inquiry..." 
                           className="rounded-xl min-h-[120px] md:min-h-[150px]" 
                           required
+                          value={formData.message}
+                          onChange={(e) => setFormData(p => ({...p, message: e.target.value}))}
                         />
                       </div>
 

@@ -3,6 +3,10 @@ import { Mail, MapPin, Phone, Facebook, Twitter, Linkedin, Instagram, Youtube, S
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import logoWhite from "@/assets/logo-white.png";
+import { usePageContent } from "@/hooks/usePageContent";
+import { supabase } from "@/integrations/supabase/client";
+import { useState } from "react";
+import { useToast } from "@/hooks/use-toast";
 
 const quickLinks = [
   { title: "Home", href: "/" },
@@ -19,15 +23,34 @@ const programLinks = [
   { title: "Women Founders Africa", href: "/programs/flip" },
 ];
 
-const socialLinks = [
-  { icon: Facebook, href: "#", label: "Facebook" },
-  { icon: Twitter, href: "#", label: "Twitter" },
-  { icon: Linkedin, href: "#", label: "LinkedIn" },
-  { icon: Instagram, href: "#", label: "Instagram" },
-  { icon: Youtube, href: "#", label: "YouTube" },
+const getSocialLinks = (s: Record<string, string>) => [
+  { icon: Facebook, href: s.facebook || "#", label: "Facebook" },
+  { icon: Twitter, href: s.twitter || "#", label: "Twitter" },
+  { icon: Linkedin, href: s.linkedin || "#", label: "LinkedIn" },
+  { icon: Instagram, href: s.instagram || "#", label: "Instagram" },
+  { icon: Youtube, href: s.youtube || "#", label: "YouTube" },
 ];
 
 export function Footer() {
+  const [footerEmail, setFooterEmail] = useState("");
+  const { toast } = useToast();
+
+  const { data: settings } = usePageContent("site-settings", {
+    email: "info@sarafoundationafrica.com",
+    phone_uk: "+44 7435 126104",
+    phone_ng: "+234 9076 664049",
+    address_uk: "E14 8AT, London, UK",
+    address_ng: "Bafaj Crescent, Awoyaya-Eputu, Ibeju Lekki, Lagos, Nigeria",
+    facebook: "#", twitter: "#", linkedin: "#", instagram: "#", youtube: "#",
+  });
+
+  const handleFooterSubscribe = async () => {
+    if (!footerEmail) return;
+    await supabase.from("newsletter_subscribers").upsert({ email: footerEmail }, { onConflict: "email" });
+    toast({ title: "Subscribed!", description: "You'll receive our latest updates." });
+    setFooterEmail("");
+  };
+
   return (
     <footer className="bg-foreground text-white relative overflow-hidden">
       {/* Background decoration */}
@@ -57,10 +80,12 @@ export function Footer() {
               <div className="flex gap-2">
                 <Input 
                   type="email" 
-                  placeholder="Enter your email" 
+                  placeholder="Enter your email"
+                  value={footerEmail}
+                  onChange={(e) => setFooterEmail(e.target.value)}
                   className="bg-white/5 border-white/10 text-white placeholder:text-white/40 rounded-xl focus:border-primary"
                 />
-                <Button variant="accent" size="icon" className="rounded-xl flex-shrink-0">
+                <Button variant="accent" size="icon" className="rounded-xl flex-shrink-0" onClick={handleFooterSubscribe}>
                   <Send className="w-4 h-4" />
                 </Button>
               </div>
@@ -110,16 +135,16 @@ export function Footer() {
                   <MapPin className="w-5 h-5 text-primary" />
                 </div>
                 <div className="text-white/60 text-sm pt-2">
-                  <p>E14 8AT, London, UK</p>
-                  <p>Bafaj Crescent, Awoyaya-Eputu, Ibeju Lekki, Lagos, Nigeria</p>
+                  <p>{settings.address_uk}</p>
+                  <p>{settings.address_ng}</p>
                 </div>
               </li>
               <li className="flex items-center gap-4">
                 <div className="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center flex-shrink-0">
                   <Mail className="w-5 h-5 text-primary" />
                 </div>
-                <a href="mailto:info@sarafoundationafrica.com" className="text-white/60 hover:text-primary text-sm transition-colors">
-                  info@sarafoundationafrica.com
+                <a href={`mailto:${settings.email}`} className="text-white/60 hover:text-primary text-sm transition-colors">
+                  {settings.email}
                 </a>
               </li>
               <li className="flex items-center gap-4">
@@ -127,8 +152,8 @@ export function Footer() {
                   <Phone className="w-5 h-5 text-primary" />
                 </div>
                 <div className="text-white/60 text-sm">
-                  <p>+44 7435 126104 (UK)</p>
-                  <p>+234 9076 664049 (NG)</p>
+                  <p>{settings.phone_uk} (UK)</p>
+                  <p>{settings.phone_ng} (NG)</p>
                 </div>
               </li>
             </ul>
@@ -137,7 +162,7 @@ export function Footer() {
             <div className="mt-8">
               <p className="font-semibold mb-4">Follow Us</p>
               <div className="flex gap-2">
-                {socialLinks.map((social) => (
+                {getSocialLinks(settings).map((social) => (
                   <a
                     key={social.label}
                     href={social.href}

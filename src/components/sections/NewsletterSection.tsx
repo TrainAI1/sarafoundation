@@ -4,23 +4,34 @@ import { Input } from "@/components/ui/input";
 import { Mail, Send, Sparkles } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { ScrollAnimation } from "@/components/ui/scroll-animation";
+import { usePageContent } from "@/hooks/usePageContent";
+import { supabase } from "@/integrations/supabase/client";
 
 export function NewsletterSection() {
   const [email, setEmail] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const { toast } = useToast();
 
+  const { data: c } = usePageContent("home-newsletter", {
+    headline: "Subscribe to Our Newsletter",
+    description: "Get the latest news, success stories, and opportunities delivered straight to your inbox. No spam, just valuable content.",
+  });
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!email) return;
 
     setIsLoading(true);
-    await new Promise(resolve => setTimeout(resolve, 1000));
-    
-    toast({
-      title: "Successfully subscribed!",
-      description: "You'll receive our latest updates and news.",
-    });
+    const { error } = await supabase.from("newsletter_subscribers").upsert(
+      { email },
+      { onConflict: "email" }
+    );
+
+    if (error) {
+      toast({ title: "Error", description: "Could not subscribe. Please try again.", variant: "destructive" });
+    } else {
+      toast({ title: "Successfully subscribed!", description: "You'll receive our latest updates and news." });
+    }
     
     setEmail("");
     setIsLoading(false);
@@ -41,13 +52,13 @@ export function NewsletterSection() {
               </div>
 
               <h2 className="section-title text-foreground mb-4">
-                Subscribe to Our{" "}
-                <span className="gradient-text">Newsletter</span>
+                {c.headline.includes("Newsletter") ? (
+                  <>Subscribe to Our{" "}<span className="gradient-text">Newsletter</span></>
+                ) : (
+                  <span className="gradient-text">{c.headline}</span>
+                )}
               </h2>
-              <p className="text-muted-foreground text-lg mb-8 max-w-xl mx-auto">
-                Get the latest news, success stories, and opportunities delivered straight 
-                to your inbox. No spam, just valuable content.
-              </p>
+              <p className="text-muted-foreground text-lg mb-8 max-w-xl mx-auto">{c.description}</p>
 
               <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
                 <Input
@@ -58,17 +69,8 @@ export function NewsletterSection() {
                   className="rounded-xl h-12 flex-1"
                   required
                 />
-                <Button 
-                  type="submit" 
-                  size="lg" 
-                  className="glow-effect"
-                  disabled={isLoading}
-                >
-                  {isLoading ? (
-                    <Sparkles className="w-5 h-5 animate-pulse" />
-                  ) : (
-                    <Send className="w-5 h-5" />
-                  )}
+                <Button type="submit" size="lg" className="glow-effect" disabled={isLoading}>
+                  {isLoading ? <Sparkles className="w-5 h-5 animate-pulse" /> : <Send className="w-5 h-5" />}
                   Subscribe
                 </Button>
               </form>

@@ -4,7 +4,8 @@ import { useAdmin } from "@/hooks/useAdmin";
 import { supabase } from "@/integrations/supabase/client";
 import {
   LayoutDashboard, FileText, PenTool, LogOut, Home,
-  Users, MessageSquare, Image, Settings, Menu, X, ChevronRight, Handshake
+  Users, MessageSquare, Image, Settings, Menu, X, ChevronRight, Handshake,
+  HelpCircle, Mail, Newspaper
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
@@ -15,9 +16,23 @@ const navGroups = [
       { label: "Dashboard", path: "/admin", icon: LayoutDashboard },
       { label: "Blog Posts", path: "/admin/blog", icon: PenTool },
       { label: "Pages", path: "/admin/pages", icon: FileText },
+      { label: "FAQ", path: "/admin/faq", icon: HelpCircle },
       { label: "Partners", path: "/admin/partners", icon: Handshake },
       { label: "Testimonials", path: "/admin/testimonials", icon: MessageSquare },
       { label: "Team", path: "/admin/team", icon: Users },
+    ],
+  },
+  {
+    label: "Assets",
+    items: [
+      { label: "Media Library", path: "/admin/media", icon: Image },
+    ],
+  },
+  {
+    label: "Inbox",
+    items: [
+      { label: "Contact Messages", path: "/admin/contacts", icon: Mail },
+      { label: "Newsletter", path: "/admin/newsletter", icon: Newspaper },
     ],
   },
   {
