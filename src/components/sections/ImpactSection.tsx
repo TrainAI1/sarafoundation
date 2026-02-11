@@ -1,5 +1,5 @@
 import { TrendingUp, Users, Globe, Award, Building, GraduationCap } from "lucide-react";
-import techConference from "@/assets/tech-conference.jpg";
+import impactLecture from "@/assets/impact-lecture.jpg";
 import { ScrollAnimation, StaggerContainer, StaggerItem } from "@/components/ui/scroll-animation";
 import { usePageContent } from "@/hooks/usePageContent";
 
@@ -54,7 +54,7 @@ export function ImpactSection() {
           <ScrollAnimation variant="slide-right">
             <div className="rounded-2xl overflow-hidden shadow-2xl">
               <img 
-                src={techConference} 
+                src={impactLecture} 
                 alt="African tech conference with diverse attendees"
                 className="w-full h-56 md:h-72 object-cover"
               />
