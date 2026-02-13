@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import { Heart, Sparkles, Users, GraduationCap, Lightbulb, ArrowRight, HelpCircle, CheckCircle2 } from "lucide-react";
-import graduatesCelebration from "@/assets/graduates-celebration.jpg";
+import graduatesCelebration from "@/assets/cap-graduates-2025.jpg";
 import mentorshipSession from "@/assets/mentorship-session.jpg";
 import {
   Accordion,
@@ -155,7 +155,7 @@ export default function Donation() {
                 className="w-full h-48 md:h-64 object-cover"
               />
               <div className="p-4 bg-card">
-                <p className="font-semibold text-foreground">CAP Graduates 2023</p>
+                <p className="font-semibold text-foreground">CAP Graduates 2025</p>
                 <p className="text-sm text-muted-foreground">Students celebrating their program completion</p>
               </div>
             </div>

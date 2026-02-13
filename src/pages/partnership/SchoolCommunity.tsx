@@ -159,27 +159,25 @@ export default function SchoolCommunity() {
             </p>
           </div>
 
-          <div className="max-w-3xl mx-auto">
-            <ScrollArea className="h-[400px] md:h-[480px] rounded-2xl border border-border bg-card p-4 md:p-6">
-              <div className="space-y-3">
+          <div className="max-w-5xl mx-auto">
+            <div className="overflow-x-auto pb-4 -mx-4 px-4">
+              <div className="flex gap-4" style={{ minWidth: 'max-content' }}>
                 {partnerUniversities.map((uni) => (
-                  <div key={uni.name} className="flex items-center gap-4 p-3 md:p-4 rounded-xl bg-background border border-border/50 hover:border-primary/30 hover:shadow-md transition-all">
-                    <div className="w-12 h-12 md:w-14 md:h-14 rounded-xl bg-gradient-to-br from-primary/10 to-accent/10 flex items-center justify-center flex-shrink-0 overflow-hidden">
+                  <div key={uni.name} className="flex-shrink-0 w-[200px] md:w-[240px] p-4 md:p-5 rounded-xl bg-card border border-border/50 hover:border-primary/30 hover:shadow-md transition-all text-center">
+                    <div className="w-14 h-14 md:w-16 md:h-16 mx-auto rounded-xl bg-gradient-to-br from-primary/10 to-accent/10 flex items-center justify-center mb-3 overflow-hidden">
                       {uni.logo ? (
-                        <img src={uni.logo} alt={uni.name} className="w-10 h-10 md:w-11 md:h-11 object-contain" />
+                        <img src={uni.logo} alt={uni.name} className="w-11 h-11 md:w-12 md:h-12 object-contain" />
                       ) : (
-                        <GraduationCap className="w-6 h-6 text-primary" />
+                        <GraduationCap className="w-7 h-7 text-primary" />
                       )}
                     </div>
-                    <div className="min-w-0">
-                      <p className="font-semibold text-foreground text-sm md:text-base truncate">{uni.name}</p>
-                      <p className="text-muted-foreground text-xs md:text-sm">{uni.country}</p>
-                    </div>
+                    <p className="font-semibold text-foreground text-sm md:text-base truncate">{uni.name}</p>
+                    <p className="text-muted-foreground text-xs md:text-sm">{uni.country}</p>
                   </div>
                 ))}
               </div>
-            </ScrollArea>
-            <p className="text-center text-muted-foreground text-xs mt-3">Scroll to see all {partnerUniversities.length} partner universities</p>
+            </div>
+            <p className="text-center text-muted-foreground text-xs mt-3">Scroll horizontally to see all {partnerUniversities.length} partner universities →</p>
           </div>
         </div>
       </section>

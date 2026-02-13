@@ -7,7 +7,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Helmet } from "react-helmet-async";
 import { 
   Mail, MapPin, Phone, Send, MessageSquare, 
-  Clock, Sparkles, CheckCircle2, Linkedin, Twitter, Instagram, HelpCircle
+  Clock, Sparkles, CheckCircle2, Linkedin, Twitter, Instagram, HelpCircle, ArrowRight
 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import communityWorkshop from "@/assets/community-workshop.jpg";
@@ -271,8 +271,22 @@ export default function Contact() {
                   className="w-full h-40 md:h-56 object-cover"
                 />
                 <div className="p-4 bg-card">
-                  <p className="font-semibold text-foreground text-sm">Our Community</p>
-                  <p className="text-xs text-muted-foreground">Connecting with students and professionals across Africa</p>
+                  <p className="font-semibold text-foreground text-sm">Join Our Community</p>
+                  <p className="text-xs text-muted-foreground mb-3">Connecting with students and professionals across Africa</p>
+                  <div className="flex flex-col gap-2">
+                    <a href="https://forms.gle/XxtkUK5WzNKnstAn7" target="_blank" rel="noopener noreferrer">
+                      <Button size="sm" className="w-full text-xs">
+                        Join CAP Tech Hub
+                        <ArrowRight className="w-3 h-3 ml-1" />
+                      </Button>
+                    </a>
+                    <a href="https://forms.gle/8X1LSmQc5kKbhsrBA" target="_blank" rel="noopener noreferrer">
+                      <Button size="sm" variant="outline" className="w-full text-xs">
+                        Join FLIP Fellowship
+                        <ArrowRight className="w-3 h-3 ml-1" />
+                      </Button>
+                    </a>
+                  </div>
                 </div>
               </div>
             </div>
