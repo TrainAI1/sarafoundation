@@ -22,7 +22,6 @@ import kadarabriteImg from "@/assets/partners/kadarabrite.png";
 import trainaiImg from "@/assets/partners/trainai.png";
 import nanaadeImg from "@/assets/partners/nanaade.png";
 import platformhubImg from "@/assets/partners/platformhub.png";
-import analyticsImg from "@/assets/partners/10analytics.jpg";
 
 const strategicPartners = [
   { name: "Scintilla Innovations", image: scintillaImg, type: "Innovation Partner" },
@@ -32,7 +31,6 @@ const strategicPartners = [
   { name: "Train AI", image: trainaiImg, type: "EdTech Partner" },
   { name: "Nanaade", image: nanaadeImg, type: "Creative Partner" },
   { name: "Platform Hub", image: platformhubImg, type: "Community Partner" },
-  { name: "10Analytics", image: analyticsImg, type: "Data Partner" },
 ];
 
 const partnerCategories = [
@@ -149,23 +147,21 @@ export default function Organizations() {
             </h2>
           </div>
 
-          <div className="max-w-3xl mx-auto">
-            <ScrollArea className="h-[400px] md:h-[480px] rounded-2xl border border-border bg-card p-4 md:p-6">
-              <div className="space-y-3">
+          <div className="max-w-5xl mx-auto">
+            <div className="overflow-x-auto pb-4 -mx-4 px-4">
+              <div className="flex gap-4" style={{ minWidth: 'max-content' }}>
                 {strategicPartners.map((partner) => (
-                  <div key={partner.name} className="flex items-center gap-4 p-3 md:p-4 rounded-xl bg-background border border-border/50 hover:border-primary/30 hover:shadow-md transition-all">
-                    <div className="w-14 h-14 md:w-16 md:h-16 rounded-xl bg-background border border-border flex items-center justify-center flex-shrink-0 overflow-hidden p-2">
+                  <div key={partner.name} className="flex-shrink-0 w-[200px] md:w-[240px] p-4 md:p-5 rounded-xl bg-card border border-border/50 hover:border-primary/30 hover:shadow-md transition-all text-center">
+                    <div className="w-16 h-16 md:w-20 md:h-20 mx-auto rounded-xl bg-background border border-border flex items-center justify-center mb-3 overflow-hidden p-2">
                       <img src={partner.image} alt={partner.name} className="w-full h-full object-contain" />
                     </div>
-                    <div className="min-w-0">
-                      <p className="font-semibold text-foreground text-sm md:text-base truncate">{partner.name}</p>
-                      <p className="text-muted-foreground text-xs md:text-sm">{partner.type}</p>
-                    </div>
+                    <p className="font-semibold text-foreground text-sm md:text-base truncate">{partner.name}</p>
+                    <p className="text-muted-foreground text-xs md:text-sm">{partner.type}</p>
                   </div>
                 ))}
               </div>
-            </ScrollArea>
-            <p className="text-center text-muted-foreground text-xs mt-3">Showing all {strategicPartners.length} strategic partners</p>
+            </div>
+            <p className="text-center text-muted-foreground text-xs mt-3">Scroll horizontally to see all {strategicPartners.length} strategic partners →</p>
           </div>
         </div>
       </section>
