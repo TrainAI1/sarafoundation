@@ -3,10 +3,17 @@ import { Footer } from "@/components/layout/Footer";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
+import { ScrollArea } from "@/components/ui/scroll-area";
 import { 
   Building, ArrowRight, Briefcase, Landmark, Heart,
-  CheckCircle2, Handshake
+  CheckCircle2, Handshake, ClipboardList, HelpCircle, FileText
 } from "lucide-react";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
 
 import scintillaImg from "@/assets/partners/scintilla.jpg";
 import familyImg from "@/assets/partners/farmily.jpg";
@@ -15,15 +22,17 @@ import kadarabriteImg from "@/assets/partners/kadarabrite.png";
 import trainaiImg from "@/assets/partners/trainai.png";
 import nanaadeImg from "@/assets/partners/nanaade.png";
 import platformhubImg from "@/assets/partners/platformhub.png";
+import analyticsImg from "@/assets/partners/10analytics.jpg";
 
 const strategicPartners = [
-  { name: "Scintilla Innovations", image: scintillaImg },
-  { name: "Farmily", image: familyImg },
-  { name: "ALX", image: alxImg },
-  { name: "KàdàràBrite", image: kadarabriteImg },
-  { name: "Train AI", image: trainaiImg },
-  { name: "Nanaade", image: nanaadeImg },
-  { name: "Platform Hub", image: platformhubImg },
+  { name: "Scintilla Innovations", image: scintillaImg, type: "Innovation Partner" },
+  { name: "Farmily", image: familyImg, type: "AgriTech Partner" },
+  { name: "ALX", image: alxImg, type: "Education Partner" },
+  { name: "KàdàràBrite", image: kadarabriteImg, type: "Tech Partner" },
+  { name: "Train AI", image: trainaiImg, type: "EdTech Partner" },
+  { name: "Nanaade", image: nanaadeImg, type: "Creative Partner" },
+  { name: "Platform Hub", image: platformhubImg, type: "Community Partner" },
+  { name: "10Analytics", image: analyticsImg, type: "Data Partner" },
 ];
 
 const partnerCategories = [
@@ -66,6 +75,29 @@ const partnerCategories = [
   },
 ];
 
+const partnershipProcess = [
+  { step: "01", title: "Reach Out", description: "Contact us to express your interest in partnering." },
+  { step: "02", title: "Discovery Call", description: "We discuss your organization's goals and how we can align." },
+  { step: "03", title: "Partnership Proposal", description: "We create a tailored proposal with clear objectives and KPIs." },
+  { step: "04", title: "Launch & Report", description: "We execute and provide regular impact reports." },
+];
+
+const whatWeOffer = [
+  { title: "Co-branded Programs", description: "Joint initiatives that carry your brand alongside ours for maximum visibility." },
+  { title: "Talent Pipeline", description: "Direct access to trained, vetted tech professionals from our programs." },
+  { title: "Impact Reporting", description: "Quarterly reports detailing the impact of your partnership contribution." },
+  { title: "Event Partnerships", description: "Speaking slots, sponsorship recognition, and networking at our events." },
+  { title: "CSR Integration", description: "Structured programs that align with your corporate social responsibility goals." },
+  { title: "Thought Leadership", description: "Joint publications, webinars, and speaking engagements on key topics." },
+];
+
+const faqs = [
+  { q: "What types of organizations can partner with you?", a: "We welcome partnerships from corporates, government agencies, foundations, NGOs, and international development organizations committed to tech talent development in Africa." },
+  { q: "Is there a minimum commitment period?", a: "We recommend a 12-month partnership to achieve meaningful impact, but we can customize the duration based on your objectives." },
+  { q: "How is impact measured?", a: "We track key metrics including students trained, women empowered, startups supported, and employment outcomes. Partners receive quarterly impact dashboards." },
+  { q: "Can we customize the partnership?", a: "Absolutely. Every partnership is tailored to align with your organization's strategic goals and CSR objectives." },
+];
+
 export default function Organizations() {
   return (
     <div className="min-h-screen bg-background">
@@ -104,7 +136,7 @@ export default function Organizations() {
         </div>
       </section>
 
-      {/* Strategic Partners */}
+      {/* Strategic Partners - Scrollable */}
       <section className="py-16 md:py-24 bg-background">
         <div className="section-container">
           <div className="text-center max-w-3xl mx-auto mb-10 md:mb-16 px-4">
@@ -117,19 +149,48 @@ export default function Organizations() {
             </h2>
           </div>
 
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 md:gap-6 max-w-3xl mx-auto">
-            {strategicPartners.map((partner) => (
-              <div key={partner.name} className="group">
-                <div className="aspect-square bg-background rounded-xl border border-border flex items-center justify-center p-4 hover:border-primary/30 hover:shadow-lg transition-all duration-300">
-                  <img
-                    src={partner.image}
-                    alt={partner.name}
-                    className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-300"
-                  />
+          <div className="max-w-3xl mx-auto">
+            <ScrollArea className="h-[400px] md:h-[480px] rounded-2xl border border-border bg-card p-4 md:p-6">
+              <div className="space-y-3">
+                {strategicPartners.map((partner) => (
+                  <div key={partner.name} className="flex items-center gap-4 p-3 md:p-4 rounded-xl bg-background border border-border/50 hover:border-primary/30 hover:shadow-md transition-all">
+                    <div className="w-14 h-14 md:w-16 md:h-16 rounded-xl bg-background border border-border flex items-center justify-center flex-shrink-0 overflow-hidden p-2">
+                      <img src={partner.image} alt={partner.name} className="w-full h-full object-contain" />
+                    </div>
+                    <div className="min-w-0">
+                      <p className="font-semibold text-foreground text-sm md:text-base truncate">{partner.name}</p>
+                      <p className="text-muted-foreground text-xs md:text-sm">{partner.type}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </ScrollArea>
+            <p className="text-center text-muted-foreground text-xs mt-3">Showing all {strategicPartners.length} strategic partners</p>
+          </div>
+        </div>
+      </section>
+
+      {/* What We Offer */}
+      <section className="py-16 md:py-24 bg-secondary/50">
+        <div className="section-container">
+          <div className="text-center max-w-3xl mx-auto mb-10 md:mb-16 px-4">
+            <span className="section-badge mb-4 md:mb-6">
+              <FileText className="w-4 h-4" />
+              What We Offer
+            </span>
+            <h2 className="section-title text-foreground mb-4 md:mb-6">
+              Partnership <span className="gradient-text">Deliverables</span>
+            </h2>
+          </div>
+
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
+            {whatWeOffer.map((item) => (
+              <div key={item.title} className="card-modern p-5 md:p-6">
+                <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary/10 to-accent/10 flex items-center justify-center mb-3">
+                  <CheckCircle2 className="w-5 h-5 text-primary" />
                 </div>
-                <p className="text-center mt-2 text-xs font-medium text-muted-foreground leading-tight">
-                  {partner.name}
-                </p>
+                <h3 className="font-display font-bold text-base md:text-lg text-foreground mb-2">{item.title}</h3>
+                <p className="text-muted-foreground text-sm leading-relaxed">{item.description}</p>
               </div>
             ))}
           </div>
@@ -137,12 +198,12 @@ export default function Organizations() {
       </section>
 
       {/* Partner Categories */}
-      <section className="py-16 md:py-24 bg-secondary/50">
+      <section className="py-16 md:py-24 bg-background">
         <div className="section-container">
           <div className="text-center max-w-3xl mx-auto mb-10 md:mb-16 px-4">
             <span className="section-badge mb-4 md:mb-6">
               <CheckCircle2 className="w-4 h-4" />
-              Benefits
+              Partnership Tracks
             </span>
             <h2 className="section-title text-foreground mb-4 md:mb-6">
               Why You Should <span className="gradient-text">Partner with Us</span>
@@ -185,6 +246,68 @@ export default function Organizations() {
                 </div>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* How It Works */}
+      <section className="py-16 md:py-24 bg-secondary/50">
+        <div className="section-container">
+          <div className="text-center max-w-3xl mx-auto mb-10 md:mb-16 px-4">
+            <span className="section-badge mb-4 md:mb-6">
+              <ClipboardList className="w-4 h-4" />
+              How It Works
+            </span>
+            <h2 className="section-title text-foreground mb-4 md:mb-6">
+              Partnership <span className="gradient-text">Process</span>
+            </h2>
+          </div>
+
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 max-w-4xl mx-auto">
+            {partnershipProcess.map((item, index) => (
+              <div key={item.step} className="relative">
+                <div className="card-modern p-5 md:p-6 text-center h-full">
+                  <div className="w-10 h-10 md:w-12 md:h-12 mx-auto rounded-xl bg-gradient-to-br from-primary to-accent flex items-center justify-center text-white font-bold text-sm md:text-lg mb-3 md:mb-4">
+                    {item.step}
+                  </div>
+                  <h3 className="font-display font-bold text-sm md:text-lg text-foreground mb-1 md:mb-2">{item.title}</h3>
+                  <p className="text-muted-foreground text-xs md:text-sm">{item.description}</p>
+                </div>
+                {index < partnershipProcess.length - 1 && (
+                  <div className="hidden lg:block absolute top-1/2 -right-3 w-6 h-0.5 bg-border" />
+                )}
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* FAQ */}
+      <section className="py-16 md:py-24 bg-background">
+        <div className="section-container">
+          <div className="text-center max-w-3xl mx-auto mb-10 md:mb-16 px-4">
+            <span className="section-badge mb-4 md:mb-6">
+              <HelpCircle className="w-4 h-4" />
+              FAQ
+            </span>
+            <h2 className="section-title text-foreground mb-4 md:mb-6">
+              Frequently Asked <span className="gradient-text">Questions</span>
+            </h2>
+          </div>
+
+          <div className="max-w-3xl mx-auto px-4">
+            <Accordion type="single" collapsible className="space-y-3">
+              {faqs.map((faq, idx) => (
+                <AccordionItem key={idx} value={`faq-${idx}`} className="card-modern border-none px-5 md:px-6">
+                  <AccordionTrigger className="text-left text-sm md:text-base font-semibold text-foreground hover:no-underline">
+                    {faq.q}
+                  </AccordionTrigger>
+                  <AccordionContent className="text-muted-foreground text-sm md:text-base leading-relaxed">
+                    {faq.a}
+                  </AccordionContent>
+                </AccordionItem>
+              ))}
+            </Accordion>
           </div>
         </div>
       </section>

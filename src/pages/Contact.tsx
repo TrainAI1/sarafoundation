@@ -7,12 +7,18 @@ import { Textarea } from "@/components/ui/textarea";
 import { Helmet } from "react-helmet-async";
 import { 
   Mail, MapPin, Phone, Send, MessageSquare, 
-  Clock, Sparkles, CheckCircle2, Linkedin, Twitter, Instagram
+  Clock, Sparkles, CheckCircle2, Linkedin, Twitter, Instagram, HelpCircle
 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import communityWorkshop from "@/assets/community-workshop.jpg";
 import { supabase } from "@/integrations/supabase/client";
 import { usePageContent } from "@/hooks/usePageContent";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
 
 const contactInfo = [
   { icon: Mail, title: "Email Us", value: "info@sarafoundationafrica.com", href: "mailto:info@sarafoundationafrica.com" },
@@ -34,6 +40,13 @@ const topics = [
   "Donation/Sponsorship",
   "Media/Press",
   "Other",
+];
+
+const faqs = [
+  { q: "How quickly will I get a response?", a: "We aim to respond to all inquiries within 24–48 business hours. Urgent matters are prioritized." },
+  { q: "Which office should I contact?", a: "You can reach either our London (UK) or Lagos (Nigeria) office. Both teams coordinate closely, so either office can assist you." },
+  { q: "Can I schedule a meeting?", a: "Yes! Use the contact form and select your topic. Our team will reach out to schedule a meeting at a convenient time." },
+  { q: "I'm interested in volunteering. How do I apply?", a: "Select 'General Inquiry' in the form and mention your interest in volunteering. We'll connect you with our volunteer coordination team." },
 ];
 
 export default function Contact() {
@@ -267,8 +280,38 @@ export default function Contact() {
         </div>
       </section>
 
-      {/* Office Locations */}
+      {/* FAQ */}
       <section className="py-16 md:py-24 bg-secondary/50">
+        <div className="section-container">
+          <div className="text-center max-w-3xl mx-auto mb-10 md:mb-16 px-4">
+            <span className="section-badge mb-4 md:mb-6">
+              <HelpCircle className="w-4 h-4" />
+              FAQ
+            </span>
+            <h2 className="section-title text-foreground mb-4 md:mb-6">
+              Common <span className="gradient-text">Questions</span>
+            </h2>
+          </div>
+
+          <div className="max-w-3xl mx-auto px-4">
+            <Accordion type="single" collapsible className="space-y-3">
+              {faqs.map((faq, idx) => (
+                <AccordionItem key={idx} value={`faq-${idx}`} className="card-modern border-none px-5 md:px-6">
+                  <AccordionTrigger className="text-left text-sm md:text-base font-semibold text-foreground hover:no-underline">
+                    {faq.q}
+                  </AccordionTrigger>
+                  <AccordionContent className="text-muted-foreground text-sm md:text-base leading-relaxed">
+                    {faq.a}
+                  </AccordionContent>
+                </AccordionItem>
+              ))}
+            </Accordion>
+          </div>
+        </div>
+      </section>
+
+      {/* Office Locations */}
+      <section className="py-16 md:py-24 bg-background">
         <div className="section-container px-4 lg:px-0">
           <div className="text-center max-w-3xl mx-auto mb-10 md:mb-16">
             <span className="section-badge mb-4 md:mb-6">
