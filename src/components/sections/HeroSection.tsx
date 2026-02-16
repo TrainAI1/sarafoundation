@@ -17,7 +17,7 @@ const defaults = {
   stat1_label: "Students Trained",
   stat2_value: "35+",
   stat2_label: "Partner Universities",
-  stat3_value: "7",
+  stat3_value: "8",
   stat3_label: "African Countries",
 };
 

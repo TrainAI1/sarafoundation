@@ -9,7 +9,7 @@ export function ImpactSection() {
   const { data: c } = usePageContent("home-impact", {
     students_value: "763+", students_desc: "Across 2 cohorts in CAP Tech Hub",
     universities_value: "35+", universities_desc: "Partner institutions across Africa",
-    countries_value: "7", countries_desc: "Nigeria, Ghana, Kenya, Uganda & more",
+    countries_value: "8", countries_desc: "Nigeria, Ghana, Kenya, Uganda & more",
     fellows_value: "21", fellows_desc: "Women empowered in Cohort 1",
     partners_value: "10+", partners_desc: "Scintilla, Farmily, Train AI & more",
     community_value: "5,250+", community_desc: "People reached across Africa via social media",
