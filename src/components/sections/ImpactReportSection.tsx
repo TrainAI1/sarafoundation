@@ -47,7 +47,7 @@ export function ImpactReportSection() {
 
               <div className="flex flex-col sm:flex-row gap-3">
                 <Button variant="default" size="lg" className="group" asChild>
-                  <a href="/about">
+                  <a href="https://drive.google.com/file/d/1Ex55tpVH_RPB0VJygsUyw9Hp74RyPKR_/view?usp=drivesdk" target="_blank" rel="noopener noreferrer">
                     Read Full Report
                     <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                   </a>
