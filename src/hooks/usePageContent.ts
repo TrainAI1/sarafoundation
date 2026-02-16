@@ -11,8 +11,9 @@ export function usePageContent(slug: string, defaults: Record<string, string> = 
         .eq("slug", slug)
         .maybeSingle();
       if (error) throw error;
-      return data?.content as Record<string, string> | null;
+      return (data?.content as Record<string, string>) ?? null;
     },
+    placeholderData: null,
     staleTime: 1000 * 60 * 5, // 5 min cache
   });
 

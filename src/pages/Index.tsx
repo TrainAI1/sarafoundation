@@ -6,6 +6,7 @@ import { WorkWithUsSection } from "@/components/sections/WorkWithUsSection";
 import { MissionSection } from "@/components/sections/MissionSection";
 import { ProgramsSection } from "@/components/sections/ProgramsSection";
 import { ImpactSection } from "@/components/sections/ImpactSection";
+import { ImpactReportSection } from "@/components/sections/ImpactReportSection";
 import { PartnersSection } from "@/components/sections/PartnersSection";
 import { StrategicPartnersSection } from "@/components/sections/StrategicPartnersSection";
 import { TestimonialsSection } from "@/components/sections/TestimonialsSection";
@@ -19,7 +20,7 @@ const Index = () => {
     <div className="min-h-screen">
       <Helmet>
         <title>Sara Foundation – Empowering African Tech Talent</title>
-        <meta name="description" content="Sara Foundation empowers African youth and women with tech skills, mentorship, and career development across 35+ universities in 7 countries." />
+        <meta name="description" content="Sara Foundation empowers African youth and women with tech skills, mentorship, and career development across 35+ universities in 8 countries." />
         <link rel="canonical" href="https://sarafoundation.lovable.app/" />
         <script type="application/ld+json">{JSON.stringify({
           "@context": "https://schema.org",
@@ -39,6 +40,7 @@ const Index = () => {
         <MissionSection />
         <ProgramsSection />
         <ImpactSection />
+        <ImpactReportSection />
         <PartnersSection />
         <StrategicPartnersSection />
         <TestimonialsSection />
