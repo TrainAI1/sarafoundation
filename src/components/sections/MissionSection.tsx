@@ -1,4 +1,4 @@
-import { Lightbulb, Users, Heart, Target, TrendingUp } from "lucide-react";
+import { Lightbulb, Users, Heart, Target } from "lucide-react";
 import studentsLabImg from "@/assets/students-tech-lab.jpg";
 import communityWorkshopImg from "@/assets/community-workshop.jpg";
 import { ScrollAnimation, StaggerContainer, StaggerItem } from "@/components/ui/scroll-animation";
@@ -31,31 +31,12 @@ const coreValues = [
   },
 ];
 
-const stats = [
-  { value: "763+", label: "Students Trained", icon: TrendingUp },
-  { value: "35+", label: "University Partners", icon: Users },
-  { value: "5,250+", label: "Community Reach", icon: Heart },
-  { value: "7", label: "African Countries", icon: Target },
-];
-
 export function MissionSection() {
   const { data: c } = usePageContent("home-mission", {
     badge: "Our Mission",
     headline: "Fostering Diversity, Equity & Inclusion in African Tech",
     description: "Sara Foundation Africa is dedicated to empowering young Africans to thrive in the global tech ecosystem. We believe that diversity drives innovation, and inclusion creates opportunities for all.",
-    stat1_value: "763+", stat1_label: "Students Trained",
-    stat2_value: "35+", stat2_label: "University Partners",
-    stat3_value: "5,250+", stat3_label: "Community Reach",
-    stat4_value: "7", stat4_label: "African Countries",
   });
-
-  const stats = [
-    { value: c.stat1_value, label: c.stat1_label, icon: TrendingUp },
-    { value: c.stat2_value, label: c.stat2_label, icon: Users },
-    { value: c.stat3_value, label: c.stat3_label, icon: Heart },
-    { value: c.stat4_value, label: c.stat4_label, icon: Target },
-  ];
-
   return (
     <section className="py-16 md:py-24 lg:py-32 bg-background relative overflow-hidden">
       <div className="absolute inset-0 mesh-gradient opacity-50" />
@@ -108,25 +89,6 @@ export function MissionSection() {
           ))}
         </StaggerContainer>
 
-        {/* Impact Stats */}
-        <ScrollAnimation variant="scale-in" className="mt-12 md:mt-20 relative">
-          <div className="absolute inset-0 bg-gradient-to-r from-primary via-primary/90 to-[hsl(240,80%,50%)] rounded-2xl md:rounded-[2rem]" />
-          <div className="absolute inset-0 opacity-20">
-            <div className="absolute top-0 right-0 w-64 h-64 rounded-full bg-white blur-3xl" />
-            <div className="absolute bottom-0 left-0 w-48 h-48 rounded-full bg-accent blur-3xl" />
-          </div>
-          <div className="relative grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8 p-6 md:p-10 lg:p-14 text-center text-white">
-            {stats.map((stat) => (
-              <div key={stat.label} className="group">
-                <div className="inline-flex items-center justify-center w-10 h-10 md:w-12 md:h-12 rounded-lg md:rounded-xl bg-white/10 mb-2 md:mb-4 group-hover:scale-110 transition-transform">
-                  <stat.icon className="w-5 h-5 md:w-6 md:h-6" />
-                </div>
-                <div className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold font-display mb-1 md:mb-2">{stat.value}</div>
-                <div className="text-white/70 text-xs md:text-sm">{stat.label}</div>
-              </div>
-            ))}
-          </div>
-        </ScrollAnimation>
       </div>
     </section>
   );
