@@ -15,6 +15,10 @@ import womenCoworking from "@/assets/women-coworking.jpg";
 import sarahPhoto from "@/assets/team/sarah-kalu.jpg";
 import emmanuelPhoto from "@/assets/team/inem-emmanuel.jpg";
 import emediongPhoto from "@/assets/team/emediong-joel.jpg";
+import tobyPhoto from "@/assets/team/toby-nwanede.jpg";
+import dolapoPhoto from "@/assets/team/dolapo-dahunsi.jpg";
+import fisayoPhoto from "@/assets/team/fisayo-adeyemi.jpg";
+import mercyPhoto from "@/assets/team/mercy-momah.jpg";
 
 const milestones = [
   { year: "2023", title: "Foundation Established", description: "Sara Foundation Africa was founded in London with a vision to transform tech in Africa" },
@@ -54,12 +58,12 @@ const coreTeam = [
 ];
 
 const advisors = [
-  { name: "Toby Nwanede", affiliation: "Scintilla Innovations", expertise: "Startup Founder" },
-  { name: "Ayoola Ademoye", affiliation: "Jisc (UK)", expertise: "Business Strategy" },
-  { name: "Dolapo Dahunsi", affiliation: "General Electric", expertise: "HR Leader" },
-  { name: "Fisayo Adeyemi", affiliation: "Rayne Consults", expertise: "Business Analysis" },
-  { name: "Mercy Momah", affiliation: "Flour Mills of Nigeria", expertise: "PMO Consultant" },
-  { name: "Ayodeji Babatunde", affiliation: "VC Dialogues", expertise: "Venture Capital" },
+  { name: "Toby Nwanede", affiliation: "Scintilla Innovations", expertise: "Startup Founder", photo: tobyPhoto },
+  { name: "Ayoola Ademoye", affiliation: "Jisc (UK)", expertise: "Business Strategy", photo: null },
+  { name: "Dolapo Dahunsi", affiliation: "General Electric", expertise: "HR Leader", photo: dolapoPhoto },
+  { name: "Fisayo Adeyemi", affiliation: "Rayne Consults", expertise: "Business Analysis", photo: fisayoPhoto },
+  { name: "Mercy Momah", affiliation: "Flour Mills of Nigeria", expertise: "PMO Consultant", photo: mercyPhoto },
+  { name: "Ayodeji Babatunde", affiliation: "VC Dialogues", expertise: "Venture Capital", photo: null },
 ];
 
 const keyInitiatives = [
@@ -342,11 +346,17 @@ export default function About() {
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 md:gap-4">
             {advisors.map((advisor) => (
               <div key={advisor.name} className="card-modern p-4 md:p-5 text-center">
-                <div className="w-12 h-12 md:w-16 md:h-16 mx-auto rounded-full bg-gradient-to-br from-primary/10 to-accent/10 flex items-center justify-center mb-2 md:mb-3">
-                  <span className="text-sm md:text-lg font-bold text-primary">
-                    {advisor.name.split(' ').map(n => n[0]).join('').slice(0, 2)}
-                  </span>
-                </div>
+                {advisor.photo ? (
+                  <div className="w-12 h-12 md:w-16 md:h-16 mx-auto rounded-full overflow-hidden mb-2 md:mb-3 ring-2 ring-primary/20">
+                    <img src={advisor.photo} alt={advisor.name} className="w-full h-full object-cover" />
+                  </div>
+                ) : (
+                  <div className="w-12 h-12 md:w-16 md:h-16 mx-auto rounded-full bg-gradient-to-br from-primary/10 to-accent/10 flex items-center justify-center mb-2 md:mb-3">
+                    <span className="text-sm md:text-lg font-bold text-primary">
+                      {advisor.name.split(' ').map(n => n[0]).join('').slice(0, 2)}
+                    </span>
+                  </div>
+                )}
                 <h4 className="font-semibold text-foreground text-xs md:text-sm mb-0.5">{advisor.name}</h4>
                 <p className="text-muted-foreground text-xs mb-1">{advisor.affiliation}</p>
                 <span className="inline-block px-2 py-0.5 bg-primary/10 text-primary rounded-full text-xs">
