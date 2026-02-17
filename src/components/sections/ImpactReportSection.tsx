@@ -1,14 +1,7 @@
-import { FileText, Download, ArrowRight, Users, GraduationCap, Globe, Award } from "lucide-react";
+import { FileText, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { ScrollAnimation, StaggerContainer, StaggerItem } from "@/components/ui/scroll-animation";
+import { ScrollAnimation } from "@/components/ui/scroll-animation";
 import capGraduates from "@/assets/cap-graduates-2025.jpg";
-
-const highlights = [
-  { icon: Users, value: "763+", label: "Students Trained", description: "Across 2 cohorts" },
-  { icon: GraduationCap, value: "35+", label: "Universities", description: "In 8 countries" },
-  { icon: Globe, value: "8", label: "Countries", description: "Pan-African reach" },
-  { icon: Award, value: "21", label: "FLIP Fellows", description: "Women leaders" },
-];
 
 export function ImpactReportSection() {
   return (
@@ -33,17 +26,6 @@ export function ImpactReportSection() {
                 of African tech leaders.
               </p>
 
-              <StaggerContainer className="grid grid-cols-2 gap-3 md:gap-4 mb-6 md:mb-8" staggerDelay={0.1}>
-                {highlights.map((item) => (
-                  <StaggerItem key={item.label} variant="scale-in">
-                    <div className="card-modern p-3 md:p-4 text-center">
-                      <item.icon className="w-5 h-5 md:w-6 md:h-6 text-primary mx-auto mb-1.5" />
-                      <div className="font-display font-bold text-lg md:text-xl text-foreground">{item.value}</div>
-                      <div className="text-xs text-muted-foreground">{item.label}</div>
-                    </div>
-                  </StaggerItem>
-                ))}
-              </StaggerContainer>
 
               <div className="flex flex-col sm:flex-row gap-3">
                 <Button variant="default" size="lg" className="group" asChild>
