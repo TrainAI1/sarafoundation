@@ -60,8 +60,8 @@ const coreTeam = [
 const advisors = [
   { name: "Toby Nwanede", affiliation: "Scintilla Innovations", expertise: "Startup Founder", photo: tobyPhoto },
   { name: "Ayoola Ademoye", affiliation: "Jisc (UK)", expertise: "Business Strategy", photo: null },
-  { name: "Dolapo Dahunsi", affiliation: "General Electric", expertise: "HR Leader", photo: dolapoPhoto },
-  { name: "Fisayo Adeyemi", affiliation: "Rayne Consults", expertise: "Business Analysis", photo: fisayoPhoto },
+  { name: "Dolapo Dahunsi", affiliation: "General Electric", expertise: "HR Leader", photo: fisayoPhoto },
+  { name: "Fisayo Adeyemi", affiliation: "Rayne Consults", expertise: "Business Analysis", photo: dolapoPhoto },
   { name: "Mercy Momah", affiliation: "Flour Mills of Nigeria", expertise: "PMO Consultant", photo: mercyPhoto },
   { name: "Ayodeji Babatunde", affiliation: "VC Dialogues", expertise: "Venture Capital", photo: null },
 ];
