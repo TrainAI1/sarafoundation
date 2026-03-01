@@ -4,6 +4,7 @@ import { Footer } from "@/components/layout/Footer";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
+import { toast } from "sonner";
 import { 
   ArrowRight, Calendar, Clock, User, Tag,
   Newspaper, Search, ChevronRight
@@ -32,6 +33,23 @@ export default function Blog() {
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [searchQuery, setSearchQuery] = useState("");
   const [dbPosts, setDbPosts] = useState<any[]>([]);
+  const [newsletterEmail, setNewsletterEmail] = useState("");
+  const [subscribing, setSubscribing] = useState(false);
+
+  const handleNewsletterSubscribe = async () => {
+    if (!newsletterEmail) return;
+    setSubscribing(true);
+    try {
+      const { error } = await supabase.from("newsletter_subscribers").upsert({ email: newsletterEmail }, { onConflict: "email" });
+      if (error) throw error;
+      toast.success("Subscribed! You'll receive our latest updates.");
+      setNewsletterEmail("");
+    } catch (err: any) {
+      toast.error(err.message);
+    } finally {
+      setSubscribing(false);
+    }
+  };
 
   useEffect(() => {
     supabase.from("blog_posts").select("*").eq("published", true).order("published_at", { ascending: false }).then(({ data }) => {
@@ -61,6 +79,10 @@ export default function Blog() {
       <Helmet>
         <title>Blog – Sara Foundation Africa</title>
         <meta name="description" content="Stories, insights and updates from Sara Foundation's work empowering African tech talent." />
+        <meta property="og:title" content="Blog – Sara Foundation Africa" />
+        <meta property="og:description" content="Stories, insights and updates from Sara Foundation's work empowering African tech talent." />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://sarafoundation.lovable.app/blog" />
       </Helmet>
       <Navbar />
       
@@ -159,8 +181,8 @@ export default function Blog() {
           <h2 className="font-display text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-4 md:mb-6">Never Miss an Update</h2>
           <p className="text-white/70 text-base md:text-lg mb-6 md:mb-8 max-w-2xl mx-auto">Subscribe to our newsletter and get the latest articles delivered to your inbox.</p>
           <div className="flex flex-col sm:flex-row gap-3 md:gap-4 justify-center max-w-md mx-auto">
-            <Input type="email" placeholder="Enter your email" className="rounded-xl h-12 bg-white/10 border-white/20 text-white placeholder:text-white/50" />
-            <Button variant="hero" size="lg">Subscribe</Button>
+            <Input type="email" placeholder="Enter your email" value={newsletterEmail} onChange={(e) => setNewsletterEmail(e.target.value)} className="rounded-xl h-12 bg-white/10 border-white/20 text-white placeholder:text-white/50" />
+            <Button variant="hero" size="lg" onClick={handleNewsletterSubscribe} disabled={subscribing}>{subscribing ? "Subscribing..." : "Subscribe"}</Button>
           </div>
         </div>
       </section>

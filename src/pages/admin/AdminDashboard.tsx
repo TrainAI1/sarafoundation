@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
-import { FileText, PenTool, Eye, MessageSquare, Users, TrendingUp, ChevronRight, Handshake, Settings, Image } from "lucide-react";
+import { FileText, PenTool, Eye, MessageSquare, Users, TrendingUp, ChevronRight, Handshake, Settings, Image, Mail, Inbox } from "lucide-react";
 import { Link } from "react-router-dom";
 import type { Tables } from "@/integrations/supabase/types";
 
@@ -13,6 +13,8 @@ export default function AdminDashboard() {
   const [recentPosts, setRecentPosts] = useState<BlogPost[]>([]);
   const [pagesCount, setPagesCount] = useState(0);
   const [configuredPages, setConfiguredPages] = useState<string[]>([]);
+  const [contactCount, setContactCount] = useState(0);
+  const [subscriberCount, setSubscriberCount] = useState(0);
 
   useEffect(() => {
     const fetchStats = async () => {
@@ -21,17 +23,23 @@ export default function AdminDashboard() {
         { count: pub },
         { data: recent },
         { data: pages },
+        { count: contacts },
+        { count: subscribers },
       ] = await Promise.all([
         supabase.from("blog_posts").select("*", { count: "exact", head: true }),
         supabase.from("blog_posts").select("*", { count: "exact", head: true }).eq("published", true),
         supabase.from("blog_posts").select("*").order("created_at", { ascending: false }).limit(5),
         supabase.from("pages").select("slug"),
+        supabase.from("contact_submissions").select("*", { count: "exact", head: true }),
+        supabase.from("newsletter_subscribers").select("*", { count: "exact", head: true }),
       ]);
       setBlogCount(total || 0);
       setPublishedCount(pub || 0);
       setRecentPosts(recent || []);
       setPagesCount((pages || []).length);
       setConfiguredPages((pages || []).map(p => p.slug));
+      setContactCount(contacts || 0);
+      setSubscriberCount(subscribers || 0);
     };
     fetchStats();
   }, []);
@@ -49,7 +57,7 @@ export default function AdminDashboard() {
       </div>
 
       {/* Stats Grid */}
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4 mb-6 md:mb-8">
+      <div className="grid grid-cols-2 lg:grid-cols-3 gap-3 md:gap-4 mb-6 md:mb-8">
         <div className="card-modern p-4 md:p-5">
           <div className="flex items-center gap-2 mb-2">
             <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center">
@@ -85,6 +93,24 @@ export default function AdminDashboard() {
           </div>
           <p className="text-2xl md:text-3xl font-bold text-foreground">{blogCount - publishedCount}</p>
           <p className="text-xs text-muted-foreground">Drafts</p>
+        </div>
+        <div className="card-modern p-4 md:p-5">
+          <div className="flex items-center gap-2 mb-2">
+            <div className="w-8 h-8 rounded-lg bg-accent/10 flex items-center justify-center">
+              <Inbox className="w-4 h-4 text-accent" />
+            </div>
+          </div>
+          <p className="text-2xl md:text-3xl font-bold text-foreground">{contactCount}</p>
+          <p className="text-xs text-muted-foreground">Contact Messages</p>
+        </div>
+        <div className="card-modern p-4 md:p-5">
+          <div className="flex items-center gap-2 mb-2">
+            <div className="w-8 h-8 rounded-lg bg-success/10 flex items-center justify-center">
+              <Mail className="w-4 h-4 text-success" />
+            </div>
+          </div>
+          <p className="text-2xl md:text-3xl font-bold text-foreground">{subscriberCount}</p>
+          <p className="text-xs text-muted-foreground">Subscribers</p>
         </div>
       </div>
 

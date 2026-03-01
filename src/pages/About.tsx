@@ -88,6 +88,10 @@ export default function About() {
         <title>About Us – Sara Foundation Africa | Transforming Tech in Africa</title>
         <meta name="description" content="Learn about Sara Foundation Africa's mission to foster Diversity, Equity & Inclusion in African tech. Operating across 7 countries with 35+ university partners." />
         <link rel="canonical" href="https://sarafoundation.lovable.app/about" />
+        <meta property="og:title" content="About Us – Sara Foundation Africa" />
+        <meta property="og:description" content="Learn about Sara Foundation Africa's mission to foster Diversity, Equity & Inclusion in African tech." />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://sarafoundation.lovable.app/about" />
       </Helmet>
       <Navbar />
       {/* Hero */}
