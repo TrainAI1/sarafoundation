@@ -22,6 +22,10 @@ const Index = () => {
         <title>Sara Foundation – Empowering African Tech Talent</title>
         <meta name="description" content="Sara Foundation empowers African youth and women with tech skills, mentorship, and career development across 35+ universities in 8 countries." />
         <link rel="canonical" href="https://sarafoundation.lovable.app/" />
+        <meta property="og:title" content="Sara Foundation – Empowering African Tech Talent" />
+        <meta property="og:description" content="Sara Foundation empowers African youth and women with tech skills, mentorship, and career development across 35+ universities in 8 countries." />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://sarafoundation.lovable.app/" />
         <script type="application/ld+json">{JSON.stringify({
           "@context": "https://schema.org",
           "@type": "NonProfit",

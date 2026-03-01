@@ -11,34 +11,43 @@ export default function AdminLogin() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
-  const [isSignUp, setIsSignUp] = useState(false);
+  const [showForgot, setShowForgot] = useState(false);
   const navigate = useNavigate();
 
-  const handleAuth = async (e: React.FormEvent) => {
+  const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
-
     try {
-      if (isSignUp) {
-        const { error } = await supabase.auth.signUp({ email, password });
-        if (error) throw error;
-        toast.success("Account created! You can now log in.");
-        setIsSignUp(false);
-      } else {
-        const { error } = await supabase.auth.signInWithPassword({ email, password });
-        if (error) throw error;
+      const { error } = await supabase.auth.signInWithPassword({ email, password });
+      if (error) throw error;
 
-        // Check if admin
-        const { data } = await supabase.rpc("is_admin");
-        if (!data) {
-          await supabase.auth.signOut();
-          toast.error("Access denied. Admin only.");
-          return;
-        }
-
-        toast.success("Welcome back!");
-        navigate("/admin");
+      const { data } = await supabase.rpc("is_admin");
+      if (!data) {
+        await supabase.auth.signOut();
+        toast.error("Access denied. Admin only.");
+        return;
       }
+
+      toast.success("Welcome back!");
+      navigate("/admin");
+    } catch (err: any) {
+      toast.error(err.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleForgotPassword = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!email) { toast.error("Enter your email first."); return; }
+    setLoading(true);
+    try {
+      const { error } = await supabase.auth.resetPasswordForEmail(email, {
+        redirectTo: `${window.location.origin}/admin/reset-password`,
+      });
+      if (error) throw error;
+      toast.success("Password reset link sent! Check your email.");
+      setShowForgot(false);
     } catch (err: any) {
       toast.error(err.message);
     } finally {
@@ -57,22 +66,37 @@ export default function AdminLogin() {
           <p className="text-muted-foreground text-sm mt-1">Sara Foundation</p>
         </div>
 
-        <form onSubmit={handleAuth} className="card-modern p-6 space-y-4">
-          <div>
-            <Label htmlFor="email">Email</Label>
-            <Input id="email" type="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
-          </div>
-          <div>
-            <Label htmlFor="password">Password</Label>
-            <Input id="password" type="password" value={password} onChange={(e) => setPassword(e.target.value)} required minLength={6} />
-          </div>
-          <Button type="submit" className="w-full" disabled={loading}>
-            {loading ? "Please wait..." : isSignUp ? "Create Account" : "Sign In"}
-          </Button>
-          <button type="button" onClick={() => setIsSignUp(!isSignUp)} className="text-xs text-muted-foreground hover:text-primary w-full text-center">
-            {isSignUp ? "Already have an account? Sign in" : "First time? Create account"}
-          </button>
-        </form>
+        {showForgot ? (
+          <form onSubmit={handleForgotPassword} className="card-modern p-6 space-y-4">
+            <div>
+              <Label htmlFor="email">Email</Label>
+              <Input id="email" type="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
+            </div>
+            <Button type="submit" className="w-full" disabled={loading}>
+              {loading ? "Sending..." : "Send Reset Link"}
+            </Button>
+            <button type="button" onClick={() => setShowForgot(false)} className="text-xs text-muted-foreground hover:text-primary w-full text-center">
+              ← Back to sign in
+            </button>
+          </form>
+        ) : (
+          <form onSubmit={handleLogin} className="card-modern p-6 space-y-4">
+            <div>
+              <Label htmlFor="email">Email</Label>
+              <Input id="email" type="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
+            </div>
+            <div>
+              <Label htmlFor="password">Password</Label>
+              <Input id="password" type="password" value={password} onChange={(e) => setPassword(e.target.value)} required minLength={6} />
+            </div>
+            <Button type="submit" className="w-full" disabled={loading}>
+              {loading ? "Please wait..." : "Sign In"}
+            </Button>
+            <button type="button" onClick={() => setShowForgot(true)} className="text-xs text-muted-foreground hover:text-primary w-full text-center">
+              Forgot your password?
+            </button>
+          </form>
+        )}
       </div>
     </div>
   );

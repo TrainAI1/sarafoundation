@@ -31,6 +31,9 @@ import AdminFAQ from "./pages/admin/AdminFAQ";
 import AdminContacts from "./pages/admin/AdminContacts";
 import AdminNewsletter from "./pages/admin/AdminNewsletter";
 import AdminMedia from "./pages/admin/AdminMedia";
+import AdminResetPassword from "./pages/admin/AdminResetPassword";
+import Privacy from "./pages/Privacy";
+import Terms from "./pages/Terms";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -56,7 +59,10 @@ const App = () => (
             <Route path="/partnership/school-community" element={<SchoolCommunity />} />
             <Route path="/partnership/organizations" element={<Organizations />} />
             <Route path="/partnership/sponsors" element={<Sponsors />} />
+            <Route path="/privacy" element={<Privacy />} />
+            <Route path="/terms" element={<Terms />} />
             <Route path="/admin/login" element={<AdminLogin />} />
+            <Route path="/admin/reset-password" element={<AdminResetPassword />} />
             <Route path="/admin" element={<AdminLayout />}>
               <Route index element={<AdminDashboard />} />
               <Route path="blog" element={<AdminBlogList />} />
