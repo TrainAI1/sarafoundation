@@ -17,6 +17,10 @@ export default function ProgramCAP() {
         <title>CAP – Career Advancement Program | Sara Foundation Africa</title>
         <meta name="description" content="Join the Career Advancement Program (CAP) – a 9-month rotational tech program establishing tech hubs across 35+ African universities in 7 countries." />
         <link rel="canonical" href="https://sarafoundation.lovable.app/programs/cap" />
+        <meta property="og:title" content="CAP – Career Advancement Program | Sara Foundation Africa" />
+        <meta property="og:description" content="Join the Career Advancement Program (CAP) – a 9-month rotational tech program across 35+ African universities." />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://sarafoundation.lovable.app/programs/cap" />
       </Helmet>
       <Navbar />
       <CAPHeroSection />

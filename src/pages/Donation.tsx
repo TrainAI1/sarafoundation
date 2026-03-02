@@ -55,6 +55,10 @@ export default function Donation() {
         <title>Donate – Support African Tech Talent | Sara Foundation</title>
         <meta name="description" content="Your donation supports scholarships, mentorship programs, and resources for young African tech entrepreneurs. Invest in Africa's tech future." />
         <link rel="canonical" href="https://sarafoundation.lovable.app/donation" />
+        <meta property="og:title" content="Donate – Support African Tech Talent | Sara Foundation" />
+        <meta property="og:description" content="Your donation supports scholarships, mentorship programs, and resources for young African tech entrepreneurs." />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://sarafoundation.lovable.app/donation" />
       </Helmet>
       <Navbar />
       
