@@ -88,6 +88,10 @@ export default function Contact() {
         <title>Contact Us – Sara Foundation Africa</title>
         <meta name="description" content="Get in touch with Sara Foundation Africa. Reach out for program inquiries, partnership opportunities, or general questions." />
         <link rel="canonical" href="https://sarafoundation.lovable.app/contact" />
+        <meta property="og:title" content="Contact Us – Sara Foundation Africa" />
+        <meta property="og:description" content="Get in touch with Sara Foundation Africa for program inquiries, partnership opportunities, or general questions." />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://sarafoundation.lovable.app/contact" />
       </Helmet>
       <Navbar />
       
