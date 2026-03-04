@@ -1,117 +1,50 @@
 
 
-# Implementation Plan: Fix All Missing Features and Issues
+# Plan: Fix Favicon, Routing, SEO Links, and Add Google Analytics
 
-## 1. Fix RLS Policies (RESTRICTIVE to PERMISSIVE)
+## Issue Analysis
 
-All RLS policies across all tables are currently RESTRICTIVE, which blocks anonymous INSERT operations for contact forms and newsletter signups. A new database migration will recreate all policies as PERMISSIVE (the PostgreSQL default).
+1. **Favicon**: The `index.html` correctly references `/favicon.png` and the file exists in `public/`. This should work, but the **published site** may not have the latest changes deployed. You need to click **Publish > Update** to push frontend changes live.
 
-**Tables affected:** `blog_posts`, `contact_submissions`, `faq_items`, `newsletter_subscribers`, `pages`, `user_roles`
+2. **404 Routing Errors on Published Site**: The `_redirects` file exists and is correct (`/*  /index.html  200`). However, these frontend changes only take effect after you click **Update** in the publish dialog. The error format `cpt1::dpdfp-...` confirms this is a server-side 404 from the hosting platform, meaning the `_redirects` file hasn't been deployed yet.
 
-**Migration approach:** Drop and recreate each policy without the RESTRICTIVE keyword (PostgreSQL defaults to PERMISSIVE).
+3. **SEO Links Not Working**: Same root cause as #2 -- the pages exist in the code (`/about`, `/blog`, `/contact`, etc.) but the published site hasn't been updated with the latest build including the `_redirects` routing fallback.
 
----
+4. **Google Analytics**: Needs a GA Measurement ID to inject the `gtag.js` script.
 
-## 2. Add Markdown Rendering to Blog Posts
+## Implementation
 
-The public blog post page (`src/pages/BlogPost.tsx`) currently splits content by newlines and renders plain text. The admin editor already has a `markdownToHtml` function.
+### 1. Add `public/404.html` as a Fallback
+Create a `404.html` that redirects to the SPA. This provides a secondary fallback in case `_redirects` isn't picked up by the hosting:
 
-**Changes:**
-- Extract the `markdownToHtml` function into a shared utility (`src/lib/markdown.ts`)
-- Use it in `BlogPost.tsx` with `dangerouslySetInnerHTML` (content is admin-authored, not user-generated)
-- Update the admin blog editor to import from the shared utility
+```html
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="refresh" content="0;url=/">
+  <script>
+    // Preserve the path for client-side routing
+    sessionStorage.setItem('redirect', window.location.pathname);
+    window.location.replace('/');
+  </script>
+</head>
+</html>
+```
 
----
+Then in `App.tsx`, read the stored path on mount and navigate to it.
 
-## 3. Wire Up Blog Page Newsletter Subscribe Button
+### 2. Google Analytics
+Add the `gtag.js` script to `index.html`. Since no Measurement ID has been provided yet, I will ask the user for it.
 
-The newsletter form in `Blog.tsx` (lines 157-163) has no `onClick` handler. 
-
-**Changes:**
-- Add state for the email input and a submit handler that inserts into `newsletter_subscribers` (same pattern as `NewsletterSection.tsx` and `Footer.tsx`)
-
----
-
-## 4. Add Missing Privacy Policy and Terms of Service Pages
-
-The footer links to `/privacy` and `/terms` but no routes or pages exist.
-
-**Changes:**
-- Create `src/pages/Privacy.tsx` with standard privacy policy content for a non-profit
-- Create `src/pages/Terms.tsx` with standard terms of service content
-- Add routes in `App.tsx`
+### 3. Publish Reminder
+The user must click **Publish > Update** after these changes to push the frontend to the live site.
 
 ---
 
-## 5. Remove Hardcoded Email Fallback from is_admin()
+## Files to Change
 
-The `is_admin()` function has a hardcoded email fallback (`inememmanuel@gmail.com`). This will be removed so admin access relies solely on the `user_roles` table.
-
-**Changes:**
-- Database migration to update `is_admin()` to only use `has_role(auth.uid(), 'admin')`
-
----
-
-## 6. Fix Admin Login - Remove Public Signup Toggle
-
-The admin login page has a toggle to create accounts, which is a security risk. Only existing admins should be able to create admin accounts.
-
-**Changes:**
-- Remove the signup toggle and signup flow from `AdminLogin.tsx`
-- Add a "Forgot Password" link with `resetPasswordForEmail`
-- Create a `/admin/reset-password` page for password reset completion
-
----
-
-## 7. Enhance Admin Dashboard with Contact and Newsletter Stats
-
-The admin dashboard is missing counts for contact submissions and newsletter subscribers.
-
-**Changes:**
-- Add queries for `contact_submissions` count and `newsletter_subscribers` count in `AdminDashboard.tsx`
-- Add two new stat cards (Contact Messages, Subscribers)
-
----
-
-## 8. Clean Up AdminPages Stat Fields
-
-The admin pages editor (`AdminPages.tsx`) still has stat fields for the Hero and Mission sections that were removed from the frontend.
-
-**Changes:**
-- Remove `stat1_value`, `stat1_label`, `stat2_value`, `stat2_label`, `stat3_value`, `stat3_label` fields from the `home-hero` page definition
-- Remove similar stat fields from the `home-mission` page definition
-
----
-
-## 9. Add Open Graph Meta Tags for Social Sharing
-
-Add OG meta tags to key pages for better social media sharing.
-
-**Changes:**
-- Add `og:title`, `og:description`, `og:image`, `og:url`, `og:type` meta tags to `Index.tsx`, `About.tsx`, `Blog.tsx`, `BlogPost.tsx`, and program pages
-
----
-
-## Technical Details
-
-### File Changes Summary
-
-| File | Action |
+| File | Change |
 |------|--------|
-| `supabase/migrations/new.sql` | Fix RESTRICTIVE policies, remove hardcoded email from is_admin() |
-| `src/lib/markdown.ts` | New shared markdown utility |
-| `src/pages/BlogPost.tsx` | Add markdown rendering |
-| `src/pages/admin/AdminBlogEditor.tsx` | Import shared markdown utility |
-| `src/pages/Blog.tsx` | Wire newsletter subscribe button |
-| `src/pages/Privacy.tsx` | New page |
-| `src/pages/Terms.tsx` | New page |
-| `src/App.tsx` | Add /privacy, /terms, /admin/reset-password routes |
-| `src/pages/admin/AdminLogin.tsx` | Remove signup, add forgot password |
-| `src/pages/admin/AdminResetPassword.tsx` | New page for password reset |
-| `src/pages/admin/AdminDashboard.tsx` | Add contact/newsletter stats |
-| `src/pages/admin/AdminPages.tsx` | Remove orphaned stat fields |
-| `src/pages/Index.tsx` | Add OG meta tags |
-| `src/pages/About.tsx` | Add OG meta tags |
-| `src/pages/Blog.tsx` | Add OG meta tags |
-| `src/pages/BlogPost.tsx` | Add OG meta tags |
+| `public/404.html` | New fallback redirect page |
+| `index.html` | Add Google Analytics `gtag.js` script (once ID provided) |
 
