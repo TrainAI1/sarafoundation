@@ -96,11 +96,11 @@ export default function Partnership() {
       <Helmet>
         <title>Partner with Us – Sara Foundation Africa</title>
         <meta name="description" content="Explore partnership opportunities with Sara Foundation Africa. Join corporates, governments, and foundations driving tech talent development across Africa." />
-        <link rel="canonical" href="https://sarafoundation.lovable.app/partnership" />
+        <link rel="canonical" href="https://sarafoundationafrica.com/partnership" />
         <meta property="og:title" content="Partner with Us – Sara Foundation Africa" />
         <meta property="og:description" content="Explore partnership opportunities with Sara Foundation Africa driving tech talent development across Africa." />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://sarafoundation.lovable.app/partnership" />
+        <meta property="og:url" content="https://sarafoundationafrica.com/partnership" />
       </Helmet>
       <Navbar />
       

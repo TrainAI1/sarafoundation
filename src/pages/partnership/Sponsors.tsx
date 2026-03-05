@@ -135,7 +135,7 @@ export default function Sponsors() {
       <Helmet>
         <title>Sponsor Us – Sara Foundation Africa</title>
         <meta name="description" content="Support Sara Foundation through sponsorship opportunities. Drive tech talent development and promote diversity across Africa's tech ecosystem." />
-        <link rel="canonical" href="https://sarafoundation.lovable.app/partnership/sponsors" />
+        <link rel="canonical" href="https://sarafoundationafrica.com/partnership/sponsors" />
       </Helmet>
       <Navbar />
       

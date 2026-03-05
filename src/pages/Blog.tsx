@@ -82,7 +82,7 @@ export default function Blog() {
         <meta property="og:title" content="Blog – Sara Foundation Africa" />
         <meta property="og:description" content="Stories, insights and updates from Sara Foundation's work empowering African tech talent." />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://sarafoundation.lovable.app/blog" />
+        <meta property="og:url" content="https://sarafoundationafrica.com/blog" />
       </Helmet>
       <Navbar />
       

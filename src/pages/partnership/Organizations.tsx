@@ -102,7 +102,7 @@ export default function Organizations() {
       <Helmet>
         <title>Organization Partnerships – Sara Foundation Africa</title>
         <meta name="description" content="Partner with Sara Foundation Africa as a corporate, government, or foundation to drive tech talent development and promote diversity across Africa." />
-        <link rel="canonical" href="https://sarafoundation.lovable.app/partnership/organizations" />
+        <link rel="canonical" href="https://sarafoundationafrica.com/partnership/organizations" />
       </Helmet>
       <Navbar />
       

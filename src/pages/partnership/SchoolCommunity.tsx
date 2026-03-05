@@ -122,7 +122,7 @@ export default function SchoolCommunity() {
       <Helmet>
         <title>School & Community Partnerships – Sara Foundation Africa</title>
         <meta name="description" content="Partner with Sara Foundation to bring CAP Tech Hubs to your university. Access resources, student training, and faculty development." />
-        <link rel="canonical" href="https://sarafoundation.lovable.app/partnership/school-community" />
+        <link rel="canonical" href="https://sarafoundationafrica.com/partnership/school-community" />
       </Helmet>
       <Navbar />
       

@@ -319,7 +319,7 @@ export default function AdminBlogEditor() {
             <h3 className="font-semibold text-foreground text-sm">SEO Preview</h3>
             <div className="bg-secondary rounded-lg p-3">
               <p className="text-primary text-sm font-medium truncate">{title || "Post title"}</p>
-              <p className="text-xs text-success truncate">sarafoundation.lovable.app/blog/{slug || "post-slug"}</p>
+              <p className="text-xs text-success truncate">sarafoundationafrica.com/blog/{slug || "post-slug"}</p>
               <p className="text-xs text-muted-foreground line-clamp-2 mt-1">{excerpt || "Post description will appear here..."}</p>
             </div>
           </div>
