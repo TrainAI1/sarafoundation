@@ -16,11 +16,11 @@ export default function ProgramFLIP() {
       <Helmet>
         <title>FLIP – Female Leadership Initiative Program | Sara Foundation Africa</title>
         <meta name="description" content="The Female Leadership Initiative Program (FLIP) empowers women in tech through mentorship, workshops, and leadership development across Africa." />
-        <link rel="canonical" href="https://sarafoundation.lovable.app/programs/flip" />
+        <link rel="canonical" href="https://sarafoundationafrica.com/programs/flip" />
         <meta property="og:title" content="FLIP – Female Leadership Initiative Program | Sara Foundation Africa" />
         <meta property="og:description" content="FLIP empowers women in tech through mentorship, workshops, and leadership development across Africa." />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://sarafoundation.lovable.app/programs/flip" />
+        <meta property="og:url" content="https://sarafoundationafrica.com/programs/flip" />
       </Helmet>
       <Navbar />
       <FLIPHeroSection />

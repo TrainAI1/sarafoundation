@@ -62,7 +62,7 @@ export default function BlogPostPage() {
         <meta property="og:title" content={post.title} />
         <meta property="og:description" content={post.excerpt || post.title} />
         <meta property="og:type" content="article" />
-        <meta property="og:url" content={`https://sarafoundation.lovable.app/blog/${post.slug}`} />
+        <meta property="og:url" content={`https://sarafoundationafrica.com/blog/${post.slug}`} />
         {post.cover_image && <meta property="og:image" content={post.cover_image} />}
       </Helmet>
       <Navbar />
