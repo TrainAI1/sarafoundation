@@ -6,7 +6,7 @@ const corsHeaders = {
     "authorization, x-client-info, apikey, content-type",
 };
 
-const SITE_URL = "https://sarafoundation.lovable.app";
+const SITE_URL = "https://sarafoundationafrica.com";
 
 const staticPages = [
   { loc: "/", priority: "1.0", changefreq: "weekly" },
