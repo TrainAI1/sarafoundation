@@ -123,6 +123,11 @@ export default function SchoolCommunity() {
         <title>School & Community Partnerships – Sara Foundation Africa</title>
         <meta name="description" content="Partner with Sara Foundation to bring CAP Tech Hubs to your university. Access resources, student training, and faculty development." />
         <link rel="canonical" href="https://sarafoundationafrica.com/partnership/school-community" />
+        <meta property="og:title" content="School & Community Partnerships – Sara Foundation Africa" />
+        <meta property="og:description" content="Partner with Sara Foundation to bring CAP Tech Hubs to your university." />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://sarafoundationafrica.com/partnership/school-community" />
+        <meta property="og:image" content="https://sarafoundationafrica.com/hero-students.jpg" />
       </Helmet>
       <Navbar />
       

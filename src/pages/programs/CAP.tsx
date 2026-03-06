@@ -21,6 +21,7 @@ export default function ProgramCAP() {
         <meta property="og:description" content="Join the Career Advancement Program (CAP) – a 9-month rotational tech program across 35+ African universities." />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://sarafoundationafrica.com/programs/cap" />
+        <meta property="og:image" content="https://sarafoundationafrica.com/hero-students.jpg" />
       </Helmet>
       <Navbar />
       <CAPHeroSection />

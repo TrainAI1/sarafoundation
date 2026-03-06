@@ -83,6 +83,8 @@ export default function Blog() {
         <meta property="og:description" content="Stories, insights and updates from Sara Foundation's work empowering African tech talent." />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://sarafoundationafrica.com/blog" />
+        <meta property="og:image" content="https://sarafoundationafrica.com/hero-students.jpg" />
+        <link rel="canonical" href="https://sarafoundationafrica.com/blog" />
       </Helmet>
       <Navbar />
       

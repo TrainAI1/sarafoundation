@@ -59,6 +59,7 @@ export default function Donation() {
         <meta property="og:description" content="Your donation supports scholarships, mentorship programs, and resources for young African tech entrepreneurs." />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://sarafoundationafrica.com/donation" />
+        <meta property="og:image" content="https://sarafoundationafrica.com/hero-students.jpg" />
       </Helmet>
       <Navbar />
       

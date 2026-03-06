@@ -8,6 +8,11 @@ export default function Terms() {
       <Helmet>
         <title>Terms of Service – Sara Foundation Africa</title>
         <meta name="description" content="Terms of service for Sara Foundation Africa's website and programs." />
+        <link rel="canonical" href="https://sarafoundationafrica.com/terms" />
+        <meta property="og:title" content="Terms of Service – Sara Foundation Africa" />
+        <meta property="og:description" content="Terms of service for Sara Foundation Africa's website and programs." />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://sarafoundationafrica.com/terms" />
       </Helmet>
       <Navbar />
       <main className="pt-28 pb-16">

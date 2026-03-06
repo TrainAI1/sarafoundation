@@ -136,6 +136,11 @@ export default function Sponsors() {
         <title>Sponsor Us – Sara Foundation Africa</title>
         <meta name="description" content="Support Sara Foundation through sponsorship opportunities. Drive tech talent development and promote diversity across Africa's tech ecosystem." />
         <link rel="canonical" href="https://sarafoundationafrica.com/partnership/sponsors" />
+        <meta property="og:title" content="Sponsor Us – Sara Foundation Africa" />
+        <meta property="og:description" content="Support Sara Foundation through sponsorship opportunities. Drive tech talent development across Africa." />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://sarafoundationafrica.com/partnership/sponsors" />
+        <meta property="og:image" content="https://sarafoundationafrica.com/hero-students.jpg" />
       </Helmet>
       <Navbar />
       
