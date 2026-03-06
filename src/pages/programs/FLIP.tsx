@@ -21,6 +21,7 @@ export default function ProgramFLIP() {
         <meta property="og:description" content="FLIP empowers women in tech through mentorship, workshops, and leadership development across Africa." />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://sarafoundationafrica.com/programs/flip" />
+        <meta property="og:image" content="https://sarafoundationafrica.com/hero-students.jpg" />
       </Helmet>
       <Navbar />
       <FLIPHeroSection />

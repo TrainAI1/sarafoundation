@@ -92,6 +92,7 @@ export default function Contact() {
         <meta property="og:description" content="Get in touch with Sara Foundation Africa for program inquiries, partnership opportunities, or general questions." />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://sarafoundationafrica.com/contact" />
+        <meta property="og:image" content="https://sarafoundationafrica.com/hero-students.jpg" />
       </Helmet>
       <Navbar />
       

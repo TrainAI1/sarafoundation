@@ -8,6 +8,11 @@ export default function Privacy() {
       <Helmet>
         <title>Privacy Policy – Sara Foundation Africa</title>
         <meta name="description" content="Sara Foundation Africa's privacy policy. Learn how we collect, use, and protect your personal information." />
+        <link rel="canonical" href="https://sarafoundationafrica.com/privacy" />
+        <meta property="og:title" content="Privacy Policy – Sara Foundation Africa" />
+        <meta property="og:description" content="Sara Foundation Africa's privacy policy. Learn how we collect, use, and protect your personal information." />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://sarafoundationafrica.com/privacy" />
       </Helmet>
       <Navbar />
       <main className="pt-28 pb-16">

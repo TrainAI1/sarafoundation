@@ -101,6 +101,7 @@ export default function Partnership() {
         <meta property="og:description" content="Explore partnership opportunities with Sara Foundation Africa driving tech talent development across Africa." />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://sarafoundationafrica.com/partnership" />
+        <meta property="og:image" content="https://sarafoundationafrica.com/hero-students.jpg" />
       </Helmet>
       <Navbar />
       

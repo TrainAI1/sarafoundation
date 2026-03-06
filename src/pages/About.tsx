@@ -92,6 +92,7 @@ export default function About() {
         <meta property="og:description" content="Learn about Sara Foundation Africa's mission to foster Diversity, Equity & Inclusion in African tech." />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://sarafoundationafrica.com/about" />
+        <meta property="og:image" content="https://sarafoundationafrica.com/hero-students.jpg" />
       </Helmet>
       <Navbar />
       {/* Hero */}

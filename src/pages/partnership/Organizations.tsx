@@ -103,6 +103,11 @@ export default function Organizations() {
         <title>Organization Partnerships – Sara Foundation Africa</title>
         <meta name="description" content="Partner with Sara Foundation Africa as a corporate, government, or foundation to drive tech talent development and promote diversity across Africa." />
         <link rel="canonical" href="https://sarafoundationafrica.com/partnership/organizations" />
+        <meta property="og:title" content="Organization Partnerships – Sara Foundation Africa" />
+        <meta property="og:description" content="Partner with Sara Foundation Africa as a corporate, government, or foundation to drive tech talent development." />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://sarafoundationafrica.com/partnership/organizations" />
+        <meta property="og:image" content="https://sarafoundationafrica.com/hero-students.jpg" />
       </Helmet>
       <Navbar />
       
