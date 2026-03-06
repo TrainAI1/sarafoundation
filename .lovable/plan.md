@@ -1,52 +1,47 @@
 
 
-# Plan: Fix Google Search 404 Errors and Website Issues
+# Plan: Fix SEO 404 Errors and Remaining Issues
 
-## Root Cause Analysis
+## Problem Analysis
 
-The 404 errors when accessing pages from Google search are caused by **two issues**:
+The custom domain `sarafoundationafrica.com` **is connected** in Lovable settings. All code references already use the correct domain. The remaining 404 errors when visiting deep links (e.g., `/programs/cap`, `/partnership`) have two potential causes:
 
-1. **No custom domain connected in Lovable**: The project has no custom domain configured in Lovable's domain settings. Even if DNS records point to Lovable's IP, the domain must also be registered within Lovable's project settings for routing to work. Without this, Lovable's servers don't know which project to serve for `sarafoundationafrica.com`, resulting in a 404.
+1. **SPA routing on the hosting layer**: This is a Single Page Application. When a user (or Google's crawler) directly navigates to `sarafoundationafrica.com/programs/cap`, the server must return `index.html` for all routes. The project has `_redirects` and `404.html` fallback mechanisms, but the `404.html` uses a JavaScript-based redirect which **search engine crawlers cannot execute**. Googlebot sees the 404 page, not the actual content.
 
-2. **Sitemap references wrong domain**: The sitemap edge function hardcodes `https://sarafoundation.lovable.app` as the site URL, and `robots.txt` points to the edge function URL. Google is indexing URLs under the `.lovable.app` domain rather than the custom domain.
+2. **`vercel.json` conflict**: The project contains a `vercel.json` with rewrite rules. This file is irrelevant on Lovable hosting and could cause confusion. It should be removed.
 
-## Additional Issues Found
-
-| Issue | Details |
-|-------|---------|
-| OG/Twitter images point to `lovable.dev` placeholder | Social sharing shows Lovable's default image, not Sara Foundation branding |
-| Twitter site meta tag says `@Lovable` | Should reference Sara Foundation's Twitter handle |
-| No Google Analytics | Tracking not yet implemented (needs Measurement ID) |
-| Sitemap domain mismatch | Edge function uses `sarafoundation.lovable.app` instead of custom domain |
+3. **Stale Google index**: Google previously indexed pages that returned 404s. Even after fixes, it takes time for Google to re-crawl and update its index. A re-submission of the sitemap via Google Search Console will accelerate this.
 
 ## Implementation Plan
 
-### Step 1: Connect Custom Domain (User Action Required)
-You need to go to **Project Settings → Domains** and add `sarafoundationafrica.com` and `www.sarafoundationafrica.com`. This is the critical missing step -- without it, no code changes will fix the 404 errors.
+### Step 1: Improve 404.html for crawler compatibility
+Replace the JavaScript-only redirect in `public/404.html` with a proper meta refresh that also includes a `<noscript>` fallback, and add a visible link. However, the real fix is ensuring the `_redirects` file works -- on Lovable hosting, `_redirects` with `/* /index.html 200` should handle all routes before `404.html` is ever reached.
 
-### Step 2: Fix Sitemap Domain
-Update the sitemap edge function to use the custom domain URL instead of the Lovable staging URL.
+### Step 2: Remove vercel.json
+This file is a Vercel-specific config and has no effect on Lovable hosting. It should be deleted to avoid confusion.
 
-### Step 3: Update robots.txt
-Update the sitemap URL in `robots.txt` to use the custom domain path (`/sitemap.xml` served by the edge function or a redirect).
+### Step 3: Add prerendering meta tags for better SEO
+Add `<meta name="fragment" content="!">` to `index.html` to signal to crawlers that the page uses JavaScript rendering. While modern Googlebot renders JavaScript, this helps with other crawlers.
 
-### Step 4: Fix Meta Tags in index.html
-- Replace OG/Twitter image URLs with Sara Foundation's own image (use an existing asset or the favicon)
-- Update `twitter:site` from `@Lovable` to Sara Foundation's handle
-- Add `og:url` meta tag with the correct domain
+### Step 4: Ensure publish/update is done
+After changes, you must click **Publish → Update** for frontend changes to go live on the custom domain.
 
-### Step 5: Add Google Analytics
-Add the `gtag.js` script to `index.html` once a Measurement ID is provided.
+### Step 5: Resubmit sitemap in Google Search Console
+After deploying, go to [Google Search Console](https://search.google.com/search-console) and:
+- Submit `https://sarafoundationafrica.com/sitemap.xml`
+- Request re-indexing of affected pages
+- Remove any old `sarafoundation.lovable.app` entries if present
 
 ## Files to Change
 
 | File | Change |
 |------|--------|
-| `supabase/functions/sitemap/index.ts` | Update `SITE_URL` to custom domain |
-| `public/robots.txt` | Update sitemap URL to custom domain |
-| `index.html` | Fix OG images, twitter handle, add og:url |
-| `public/sitemap.xml` | Update URLs to custom domain (static fallback) |
+| `public/404.html` | Improve with better meta refresh and noscript fallback |
+| `vercel.json` | Delete (Vercel-specific, not needed on Lovable) |
+| `index.html` | Add fragment meta tag for crawler compatibility |
 
-## Critical User Action
-Before any code changes take effect on the live custom domain, you **must connect the domain in Project Settings → Domains**. Go to your project settings, click Domains, and add both `sarafoundationafrica.com` and `www.sarafoundationafrica.com`.
+## User Actions Required
+- **Publish → Update** after changes are deployed
+- **Resubmit sitemap** in Google Search Console
+- **Request re-indexing** of key pages showing 404 in Google results
 
