@@ -1,0 +1,30 @@
+{
+  "redirects": [
+    {
+      "source": "/schoolcommunity",
+      "destination": "/partnership/school-community",
+      "permanent": true
+    },
+    {
+      "source": "/support-us",
+      "destination": "/donation",
+      "permanent": true
+    },
+    {
+      "source": "/sponsors",
+      "destination": "/partnership/sponsors",
+      "permanent": true
+    },
+    {
+      "source": "/program",
+      "destination": "/programs/cap",
+      "permanent": true
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
+  ]
+}
