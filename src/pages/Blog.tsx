@@ -147,7 +147,7 @@ export default function Blog() {
                   </Link>
                 ) : (
                   <div className="aspect-video overflow-hidden relative">
-                    <img src={post.image} alt={post.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                    <img src={post.image} alt={post.title} loading="lazy" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
                   </div>
                 )}
                 <div className="p-4 md:p-6">
