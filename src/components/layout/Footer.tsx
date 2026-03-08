@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Mail, MapPin, Phone, Facebook, Twitter, Linkedin, Instagram, Youtube, Send } from "lucide-react";
+import { Mail, MapPin, Phone, Facebook, Twitter, Linkedin, Instagram, Youtube, Send, Music2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import logoWhite from "@/assets/logo-white.png";
@@ -28,6 +28,7 @@ const getSocialLinks = (s: Record<string, string>) => [
   { icon: Linkedin, href: s.linkedin || "#", label: "LinkedIn" },
   { icon: Instagram, href: s.instagram || "#", label: "Instagram" },
   { icon: Youtube, href: s.youtube || "#", label: "YouTube" },
+  { icon: Music2, href: s.tiktok || "#", label: "TikTok" },
 ];
 
 export function Footer() {
@@ -40,7 +41,7 @@ export function Footer() {
     phone_ng: "+234 9076 664049",
     address_uk: "E14 8AT, London, UK",
     address_ng: "Bafaj Crescent, Awoyaya-Eputu, Ibeju Lekki, Lagos, Nigeria",
-    facebook: "#", twitter: "#", linkedin: "#", instagram: "#", youtube: "#",
+    facebook: "https://www.facebook.com/share/17jsnQdbnd/", twitter: "https://x.com/Sarafoundations", linkedin: "https://www.linkedin.com/company/sara-foundation/", instagram: "https://www.instagram.com/sarafoundation.africa", youtube: "https://youtube.com/@sara.foundation", tiktok: "https://www.tiktok.com/@sara.foundation",
   });
 
   const handleFooterSubscribe = async () => {
@@ -165,6 +166,8 @@ export function Footer() {
                   <a
                     key={social.label}
                     href={social.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center hover:bg-primary transition-all duration-300"
                     aria-label={social.label}
                   >
