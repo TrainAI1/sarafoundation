@@ -176,6 +176,7 @@ export default function Donation() {
               <img 
                 src={mentorshipSession} 
                 alt="Mentorship session between advisor and student"
+                loading="lazy"
                 className="w-full h-48 md:h-64 object-cover"
               />
               <div className="p-4 bg-card">
