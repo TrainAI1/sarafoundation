@@ -104,6 +104,10 @@ export default function Contact() {
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://sarafoundationafrica.com/contact" />
         <meta property="og:image" content="https://sarafoundationafrica.com/hero-students.jpg" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Contact Us – Sara Foundation Africa" />
+        <meta name="twitter:description" content="Get in touch with Sara Foundation Africa for program inquiries, partnership opportunities, or general questions." />
+        <meta name="twitter:image" content="https://sarafoundationafrica.com/hero-students.jpg" />
       </Helmet>
       <Navbar />
       <main>

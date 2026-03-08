@@ -27,6 +27,10 @@ const Index = () => {
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://sarafoundationafrica.com/" />
         <meta property="og:image" content="https://sarafoundationafrica.com/hero-students.jpg" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Sara Foundation – Empowering African Tech Talent" />
+        <meta name="twitter:description" content="Sara Foundation empowers African youth and women with tech skills, mentorship, and career development across 35+ universities in 8 countries." />
+        <meta name="twitter:image" content="https://sarafoundationafrica.com/hero-students.jpg" />
         <script type="application/ld+json">{JSON.stringify({
           "@context": "https://schema.org",
           "@type": "NGO",

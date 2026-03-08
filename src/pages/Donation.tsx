@@ -67,6 +67,10 @@ export default function Donation() {
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://sarafoundationafrica.com/donation" />
         <meta property="og:image" content="https://sarafoundationafrica.com/hero-students.jpg" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Donate – Support African Tech Talent | Sara Foundation" />
+        <meta name="twitter:description" content="Your donation supports scholarships, mentorship programs, and resources for young African tech entrepreneurs." />
+        <meta name="twitter:image" content="https://sarafoundationafrica.com/hero-students.jpg" />
       </Helmet>
       <Navbar />
       <main>
