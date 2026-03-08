@@ -43,11 +43,11 @@ const topics = [
   "Other",
 ];
 
-const faqs = [
-  { q: "How quickly will I get a response?", a: "We aim to respond to all inquiries within 24–48 business hours. Urgent matters are prioritized." },
-  { q: "Which office should I contact?", a: "You can reach either our London (UK) or Lagos (Nigeria) office. Both teams coordinate closely, so either office can assist you." },
-  { q: "Can I schedule a meeting?", a: "Yes! Use the contact form and select your topic. Our team will reach out to schedule a meeting at a convenient time." },
-  { q: "I'm interested in volunteering. How do I apply?", a: "Select 'General Inquiry' in the form and mention your interest in volunteering. We'll connect you with our volunteer coordination team." },
+const contactFaqDefaults = [
+  { question: "How quickly will I get a response?", answer: "We aim to respond to all inquiries within 24–48 business hours. Urgent matters are prioritized." },
+  { question: "Which office should I contact?", answer: "You can reach either our London (UK) or Lagos (Nigeria) office. Both teams coordinate closely, so either office can assist you." },
+  { question: "Can I schedule a meeting?", answer: "Yes! Use the contact form and select your topic. Our team will reach out to schedule a meeting at a convenient time." },
+  { question: "I'm interested in volunteering. How do I apply?", answer: "Select 'General Inquiry' in the form and mention your interest in volunteering. We'll connect you with our volunteer coordination team." },
 ];
 
 export default function Contact() {
