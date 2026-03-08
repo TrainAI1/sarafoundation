@@ -55,6 +55,10 @@ export default function Contact() {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [formData, setFormData] = useState({ firstName: "", lastName: "", email: "", topic: "General Inquiry", message: "" });
   const { toast } = useToast();
+  const { data: dbFaqs } = useFAQItems();
+  const faqs = dbFaqs && dbFaqs.length > 0
+    ? dbFaqs.map(f => ({ question: f.question, answer: f.answer }))
+    : contactFaqDefaults;
 
   const { data: contactContent } = usePageContent("contact-info", {
     email: "info@sarafoundationafrica.com",
