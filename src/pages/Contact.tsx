@@ -13,6 +13,7 @@ import { useToast } from "@/hooks/use-toast";
 import communityWorkshop from "@/assets/community-workshop.jpg";
 import { supabase } from "@/integrations/supabase/client";
 import { usePageContent } from "@/hooks/usePageContent";
+import { useFAQItems } from "@/hooks/useFAQItems";
 import {
   Accordion,
   AccordionContent,
