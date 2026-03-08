@@ -29,12 +29,27 @@ const Index = () => {
         <meta property="og:image" content="https://sarafoundationafrica.com/hero-students.jpg" />
         <script type="application/ld+json">{JSON.stringify({
           "@context": "https://schema.org",
-          "@type": "NonProfit",
+          "@type": "NGO",
           "name": "Sara Foundation Africa",
-          "description": "Non-profit empowering African youth and women through tech education and career development.",
+          "alternateName": "Sara Foundation",
+          "description": "Non-profit empowering African youth and women through tech education, mentorship, and career development across 35+ universities in 8 countries.",
           "url": "https://sarafoundationafrica.com",
+          "logo": "https://sarafoundationafrica.com/favicon.png",
           "foundingDate": "2023",
-          "areaServed": "Africa"
+          "areaServed": "Africa",
+          "sameAs": [
+            "https://www.linkedin.com/company/sara-foundation/",
+            "https://x.com/Sarafoundations",
+            "https://www.instagram.com/sarafoundation.africa",
+            "https://www.facebook.com/share/17jsnQdbnd/",
+            "https://youtube.com/@sara.foundation",
+            "https://www.tiktok.com/@sara.foundation"
+          ],
+          "contactPoint": {
+            "@type": "ContactPoint",
+            "email": "info@sarafoundationafrica.com",
+            "contactType": "General Inquiry"
+          }
         })}</script>
       </Helmet>
       <Navbar />

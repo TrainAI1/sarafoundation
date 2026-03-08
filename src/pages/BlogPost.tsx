@@ -3,9 +3,10 @@ import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
-import { ArrowLeft, Calendar, User, Clock } from "lucide-react";
+import { ArrowLeft, Calendar, User } from "lucide-react";
 import { Helmet } from "react-helmet-async";
 import { markdownToHtml } from "@/lib/markdown";
+import { BlogShareButtons } from "@/components/BlogShareButtons";
 import type { Tables } from "@/integrations/supabase/types";
 
 type BlogPost = Tables<"blog_posts">;
@@ -69,6 +70,18 @@ export default function BlogPostPage() {
         <meta name="twitter:title" content={post.title} />
         <meta name="twitter:description" content={post.excerpt || post.title} />
         <meta name="twitter:image" content={post.cover_image || "https://sarafoundationafrica.com/hero-students.jpg"} />
+        <script type="application/ld+json">{JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "Article",
+          "headline": post.title,
+          "description": post.excerpt || post.title,
+          "image": post.cover_image || "https://sarafoundationafrica.com/hero-students.jpg",
+          "author": { "@type": "Person", "name": post.author_name },
+          "publisher": { "@type": "Organization", "name": "Sara Foundation Africa", "logo": { "@type": "ImageObject", "url": "https://sarafoundationafrica.com/favicon.png" } },
+          "datePublished": post.published_at || post.created_at,
+          "dateModified": post.updated_at,
+          "mainEntityOfPage": `https://sarafoundationafrica.com/blog/${post.slug}`
+        })}</script>
       </Helmet>
       <Navbar />
       <article className="pt-28 pb-16">
@@ -98,6 +111,13 @@ export default function BlogPostPage() {
             className="prose prose-lg max-w-none text-muted-foreground leading-relaxed [&_h1]:text-2xl [&_h1]:font-bold [&_h1]:text-foreground [&_h1]:mt-6 [&_h1]:mb-3 [&_h2]:text-xl [&_h2]:font-bold [&_h2]:text-foreground [&_h2]:mt-5 [&_h2]:mb-2 [&_h3]:text-lg [&_h3]:font-bold [&_h3]:text-foreground [&_h3]:mt-4 [&_h3]:mb-2 [&_strong]:font-bold [&_strong]:text-foreground [&_em]:italic [&_a]:text-primary [&_a]:underline [&_code]:bg-secondary [&_code]:px-1 [&_code]:rounded [&_blockquote]:border-l-4 [&_blockquote]:border-primary [&_blockquote]:pl-4 [&_blockquote]:italic [&_li]:ml-4 [&_hr]:my-4 [&_hr]:border-border [&_img]:rounded-lg [&_img]:max-w-full"
             dangerouslySetInnerHTML={{ __html: markdownToHtml(post.content) }}
           />
+
+          <div className="mt-10 pt-6 border-t border-border">
+            <BlogShareButtons
+              title={post.title}
+              url={`https://sarafoundationafrica.com/blog/${post.slug}`}
+            />
+          </div>
         </div>
       </article>
       <Footer />
