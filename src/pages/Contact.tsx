@@ -322,10 +322,10 @@ export default function Contact() {
               {faqs.map((faq, idx) => (
                 <AccordionItem key={idx} value={`faq-${idx}`} className="card-modern border-none px-5 md:px-6">
                   <AccordionTrigger className="text-left text-sm md:text-base font-semibold text-foreground hover:no-underline">
-                    {faq.q}
+                    {faq.question}
                   </AccordionTrigger>
                   <AccordionContent className="text-muted-foreground text-sm md:text-base leading-relaxed">
-                    {faq.a}
+                    {faq.answer}
                   </AccordionContent>
                 </AccordionItem>
               ))}
