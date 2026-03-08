@@ -28,6 +28,7 @@ const getSocialLinks = (s: Record<string, string>) => [
   { icon: Linkedin, href: s.linkedin || "#", label: "LinkedIn" },
   { icon: Instagram, href: s.instagram || "#", label: "Instagram" },
   { icon: Youtube, href: s.youtube || "#", label: "YouTube" },
+  { icon: Music2, href: s.tiktok || "#", label: "TikTok" },
 ];
 
 export function Footer() {
