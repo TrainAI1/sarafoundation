@@ -7,6 +7,7 @@ import { Helmet } from "react-helmet-async";
 import { Heart, Sparkles, Users, GraduationCap, Lightbulb, ArrowRight, HelpCircle, CheckCircle2 } from "lucide-react";
 import graduatesCelebration from "@/assets/cap-graduates-2025.jpg";
 import mentorshipSession from "@/assets/mentorship-session.jpg";
+import { useFAQItems } from "@/hooks/useFAQItems";
 import {
   Accordion,
   AccordionContent,
