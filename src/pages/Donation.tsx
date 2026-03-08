@@ -164,6 +164,7 @@ export default function Donation() {
               <img 
                 src={graduatesCelebration} 
                 alt="CAP program graduates celebrating their achievements"
+                loading="lazy"
                 className="w-full h-48 md:h-64 object-cover"
               />
               <div className="p-4 bg-card">
