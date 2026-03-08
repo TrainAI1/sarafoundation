@@ -70,6 +70,18 @@ export default function BlogPostPage() {
         <meta name="twitter:title" content={post.title} />
         <meta name="twitter:description" content={post.excerpt || post.title} />
         <meta name="twitter:image" content={post.cover_image || "https://sarafoundationafrica.com/hero-students.jpg"} />
+        <script type="application/ld+json">{JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "Article",
+          "headline": post.title,
+          "description": post.excerpt || post.title,
+          "image": post.cover_image || "https://sarafoundationafrica.com/hero-students.jpg",
+          "author": { "@type": "Person", "name": post.author_name },
+          "publisher": { "@type": "Organization", "name": "Sara Foundation Africa", "logo": { "@type": "ImageObject", "url": "https://sarafoundationafrica.com/favicon.png" } },
+          "datePublished": post.published_at || post.created_at,
+          "dateModified": post.updated_at,
+          "mainEntityOfPage": `https://sarafoundationafrica.com/blog/${post.slug}`
+        })}</script>
       </Helmet>
       <Navbar />
       <article className="pt-28 pb-16">
