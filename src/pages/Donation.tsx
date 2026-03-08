@@ -41,12 +41,12 @@ const whereItGoes = [
   { title: "Outreach & Growth", percentage: "10%", description: "Expanding to new countries, universities, and communities across the continent." },
 ];
 
-const faqs = [
-  { q: "Is my donation tax-deductible?", a: "Sara Foundation Africa is a registered non-profit organization. We provide official donation receipts. Please consult your local tax advisor for deductibility in your jurisdiction." },
-  { q: "Can I donate in currencies other than USD?", a: "Yes! We accept donations in multiple currencies. Our payment partners handle currency conversion automatically." },
-  { q: "Can I set up a recurring donation?", a: "Currently we accept one-time donations. Recurring donation options are coming soon. Contact us for monthly giving arrangements." },
-  { q: "How will I know my donation made an impact?", a: "All donors receive an annual impact report showing exactly how funds were used. Major donors ($500+) receive quarterly updates." },
-  { q: "Can I donate to a specific program?", a: "Yes, you can specify whether your donation goes to CAP (university programs) or FLIP (women's leadership). Contact us to earmark your donation." },
+const donationFaqDefaults = [
+  { question: "Is my donation tax-deductible?", answer: "Sara Foundation Africa is a registered non-profit organization. We provide official donation receipts. Please consult your local tax advisor for deductibility in your jurisdiction." },
+  { question: "Can I donate in currencies other than USD?", answer: "Yes! We accept donations in multiple currencies. Our payment partners handle currency conversion automatically." },
+  { question: "Can I set up a recurring donation?", answer: "Currently we accept one-time donations. Recurring donation options are coming soon. Contact us for monthly giving arrangements." },
+  { question: "How will I know my donation made an impact?", answer: "All donors receive an annual impact report showing exactly how funds were used. Major donors ($500+) receive quarterly updates." },
+  { question: "Can I donate to a specific program?", answer: "Yes, you can specify whether your donation goes to CAP (university programs) or FLIP (women's leadership). Contact us to earmark your donation." },
 ];
 
 export default function Donation() {
