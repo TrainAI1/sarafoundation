@@ -20,11 +20,11 @@ import graduatesCelebration from "@/assets/graduates-celebration.jpg";
 
 // Fallback hardcoded posts
 const fallbackPosts = [
-  { id: "1", title: "How CAP is Transforming Tech Education in African Universities", excerpt: "Discover how our Career Advancement Program is creating new pathways for students across the continent.", image: communityWorkshop, author_name: "Sarah Adekunle", date: "Dec 15, 2024", category: "Programs", slug: "", isDb: false },
-  { id: "2", title: "Women in Tech: Breaking Barriers in Nigeria's Startup Ecosystem", excerpt: "A deep dive into the challenges and triumphs of women entrepreneurs building tech companies in Nigeria.", image: womenTechLeaders, author_name: "Fatima Hassan", date: "Dec 10, 2024", category: "Women in Tech", slug: "", isDb: false },
-  { id: "3", title: "5 Essential Skills Every Tech Professional Needs in 2025", excerpt: "From AI literacy to soft skills, here's what you need to stay competitive in the evolving tech landscape.", image: techEntrepreneurs, author_name: "Michael Obi", date: "Dec 5, 2024", category: "Career", slug: "", isDb: false },
-  { id: "4", title: "Partnership Spotlight: How Universities are Embracing Tech Innovation", excerpt: "Highlighting our partnership with leading African universities to create tech-focused curricula.", image: techConferenceSpeaker, author_name: "Sarah Adekunle", date: "Nov 28, 2024", category: "Partnership", slug: "", isDb: false },
-  { id: "5", title: "From Student to Founder: Success Stories from Our Alumni", excerpt: "Inspiring journeys of CAP graduates who have launched successful tech startups.", image: graduatesCelebration, author_name: "Michael Obi", date: "Nov 20, 2024", category: "Success Stories", slug: "", isDb: false },
+  { id: "1", title: "How CAP is Transforming Tech Education in African Universities", excerpt: "Discover how our Career Advancement Program is creating new pathways for students across the continent.", image: communityWorkshop, author_name: "Sarah Adekunle", date: "Dec 15, 2024", category: "Programs", slug: "cap-transforming-tech-education", isDb: false },
+  { id: "2", title: "Women in Tech: Breaking Barriers in Nigeria's Startup Ecosystem", excerpt: "A deep dive into the challenges and triumphs of women entrepreneurs building tech companies in Nigeria.", image: womenTechLeaders, author_name: "Fatima Hassan", date: "Dec 10, 2024", category: "Women in Tech", slug: "women-in-tech-breaking-barriers", isDb: false },
+  { id: "3", title: "5 Essential Skills Every Tech Professional Needs in 2025", excerpt: "From AI literacy to soft skills, here's what you need to stay competitive in the evolving tech landscape.", image: techEntrepreneurs, author_name: "Michael Obi", date: "Dec 5, 2024", category: "Career", slug: "essential-skills-tech-2025", isDb: false },
+  { id: "4", title: "Partnership Spotlight: How Universities are Embracing Tech Innovation", excerpt: "Highlighting our partnership with leading African universities to create tech-focused curricula.", image: techConferenceSpeaker, author_name: "Sarah Adekunle", date: "Nov 28, 2024", category: "Partnership", slug: "universities-embracing-tech-innovation", isDb: false },
+  { id: "5", title: "From Student to Founder: Success Stories from Our Alumni", excerpt: "Inspiring journeys of CAP graduates who have launched successful tech startups.", image: graduatesCelebration, author_name: "Michael Obi", date: "Nov 20, 2024", category: "Success Stories", slug: "student-to-founder-success-stories", isDb: false },
 ];
 
 const categories = ["All", "Programs", "Women in Tech", "Career", "Partnership", "Success Stories", "Industry"];
@@ -87,7 +87,7 @@ export default function Blog() {
         <link rel="canonical" href="https://sarafoundationafrica.com/blog" />
       </Helmet>
       <Navbar />
-      
+      <main>
       {/* Hero */}
       <section className="pt-24 md:pt-32 pb-12 md:pb-20 bg-gradient-to-br from-primary via-primary/90 to-[hsl(240,80%,50%)] relative overflow-hidden">
         <div className="absolute inset-0">
@@ -147,7 +147,7 @@ export default function Blog() {
                   </Link>
                 ) : (
                   <div className="aspect-video overflow-hidden relative">
-                    <img src={post.image} alt={post.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                    <img src={post.image} alt={post.title} loading="lazy" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
                   </div>
                 )}
                 <div className="p-4 md:p-6">
@@ -189,6 +189,7 @@ export default function Blog() {
         </div>
       </section>
 
+      </main>
       <Footer />
     </div>
   );

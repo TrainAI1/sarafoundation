@@ -59,11 +59,16 @@ export default function BlogPostPage() {
       <Helmet>
         <title>{post.title} – Sara Foundation Africa</title>
         <meta name="description" content={post.excerpt || post.title} />
+        <link rel="canonical" href={`https://sarafoundationafrica.com/blog/${post.slug}`} />
         <meta property="og:title" content={post.title} />
         <meta property="og:description" content={post.excerpt || post.title} />
         <meta property="og:type" content="article" />
         <meta property="og:url" content={`https://sarafoundationafrica.com/blog/${post.slug}`} />
-        {post.cover_image && <meta property="og:image" content={post.cover_image} />}
+        <meta property="og:image" content={post.cover_image || "https://sarafoundationafrica.com/hero-students.jpg"} />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={post.title} />
+        <meta name="twitter:description" content={post.excerpt || post.title} />
+        <meta name="twitter:image" content={post.cover_image || "https://sarafoundationafrica.com/hero-students.jpg"} />
       </Helmet>
       <Navbar />
       <article className="pt-28 pb-16">
