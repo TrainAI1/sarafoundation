@@ -270,6 +270,8 @@ export default function Contact() {
                     <a
                       key={social.name}
                       href={social.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
                       className="w-10 h-10 md:w-12 md:h-12 rounded-xl bg-secondary flex items-center justify-center hover:bg-primary hover:text-white transition-colors"
                       aria-label={social.name}
                     >
