@@ -284,10 +284,11 @@ export default function Contact() {
               {/* Image instead of map */}
               <div className="rounded-2xl overflow-hidden shadow-lg">
                 <img 
-                  src={communityWorkshop} 
-                  alt="Sara Foundation community event"
-                  className="w-full h-40 md:h-56 object-cover"
-                />
+                   src={communityWorkshop} 
+                   alt="Sara Foundation community event"
+                   loading="lazy"
+                   className="w-full h-40 md:h-56 object-cover"
+                 />
                 <div className="p-4 bg-card">
                   <p className="font-semibold text-foreground text-sm">Join Our Community</p>
                   <p className="text-xs text-muted-foreground mb-3">Connecting with students and professionals across Africa</p>

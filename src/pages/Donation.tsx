@@ -50,6 +50,12 @@ const donationFaqDefaults = [
 ];
 
 export default function Donation() {
+  const { data: dbFaqs } = useFAQItems();
+  const faqs = dbFaqs && dbFaqs.length > 0
+    ? dbFaqs.filter(f => f.question.toLowerCase().includes("donat") || f.answer.toLowerCase().includes("donat"))
+    : donationFaqDefaults;
+  // If no donation-specific FAQs in DB, use defaults
+  const displayFaqs = faqs.length > 0 ? faqs : donationFaqDefaults;
   return (
     <div className="min-h-screen bg-background">
       <Helmet>
