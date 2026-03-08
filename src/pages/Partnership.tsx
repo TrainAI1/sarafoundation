@@ -328,6 +328,7 @@ export default function Partnership() {
         </div>
       </section>
 
+      </main>
       <Footer />
     </div>
   );
