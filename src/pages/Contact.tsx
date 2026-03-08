@@ -83,6 +83,12 @@ export default function Contact() {
       toast({ title: "Error", description: "Could not send message. Please try again.", variant: "destructive" });
       return;
     }
+
+    // Send notification (fire and forget)
+    supabase.functions.invoke("notify", {
+      body: { type: "contact", data: { first_name: formData.firstName, last_name: formData.lastName, email: formData.email, topic: formData.topic, message: formData.message } },
+    }).catch(() => {});
+
     setIsSubmitted(true);
     toast({ title: "Message sent successfully!", description: "We'll get back to you within 24 hours." });
   };
