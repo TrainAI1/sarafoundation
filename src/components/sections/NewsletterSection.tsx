@@ -30,6 +30,7 @@ export function NewsletterSection() {
     if (error) {
       toast({ title: "Error", description: "Could not subscribe. Please try again.", variant: "destructive" });
     } else {
+      supabase.functions.invoke("notify", { body: { type: "newsletter", data: { email } } }).catch(() => {});
       toast({ title: "Successfully subscribed!", description: "You'll receive our latest updates and news." });
     }
     

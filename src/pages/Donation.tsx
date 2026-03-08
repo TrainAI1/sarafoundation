@@ -7,6 +7,7 @@ import { Helmet } from "react-helmet-async";
 import { Heart, Sparkles, Users, GraduationCap, Lightbulb, ArrowRight, HelpCircle, CheckCircle2 } from "lucide-react";
 import graduatesCelebration from "@/assets/cap-graduates-2025.jpg";
 import mentorshipSession from "@/assets/mentorship-session.jpg";
+import { useFAQItems } from "@/hooks/useFAQItems";
 import {
   Accordion,
   AccordionContent,
@@ -40,15 +41,21 @@ const whereItGoes = [
   { title: "Outreach & Growth", percentage: "10%", description: "Expanding to new countries, universities, and communities across the continent." },
 ];
 
-const faqs = [
-  { q: "Is my donation tax-deductible?", a: "Sara Foundation Africa is a registered non-profit organization. We provide official donation receipts. Please consult your local tax advisor for deductibility in your jurisdiction." },
-  { q: "Can I donate in currencies other than USD?", a: "Yes! We accept donations in multiple currencies. Our payment partners handle currency conversion automatically." },
-  { q: "Can I set up a recurring donation?", a: "Currently we accept one-time donations. Recurring donation options are coming soon. Contact us for monthly giving arrangements." },
-  { q: "How will I know my donation made an impact?", a: "All donors receive an annual impact report showing exactly how funds were used. Major donors ($500+) receive quarterly updates." },
-  { q: "Can I donate to a specific program?", a: "Yes, you can specify whether your donation goes to CAP (university programs) or FLIP (women's leadership). Contact us to earmark your donation." },
+const donationFaqDefaults = [
+  { question: "Is my donation tax-deductible?", answer: "Sara Foundation Africa is a registered non-profit organization. We provide official donation receipts. Please consult your local tax advisor for deductibility in your jurisdiction." },
+  { question: "Can I donate in currencies other than USD?", answer: "Yes! We accept donations in multiple currencies. Our payment partners handle currency conversion automatically." },
+  { question: "Can I set up a recurring donation?", answer: "Currently we accept one-time donations. Recurring donation options are coming soon. Contact us for monthly giving arrangements." },
+  { question: "How will I know my donation made an impact?", answer: "All donors receive an annual impact report showing exactly how funds were used. Major donors ($500+) receive quarterly updates." },
+  { question: "Can I donate to a specific program?", answer: "Yes, you can specify whether your donation goes to CAP (university programs) or FLIP (women's leadership). Contact us to earmark your donation." },
 ];
 
 export default function Donation() {
+  const { data: dbFaqs } = useFAQItems();
+  const faqs = dbFaqs && dbFaqs.length > 0
+    ? dbFaqs.filter(f => f.question.toLowerCase().includes("donat") || f.answer.toLowerCase().includes("donat"))
+    : donationFaqDefaults;
+  // If no donation-specific FAQs in DB, use defaults
+  const displayFaqs = faqs.length > 0 ? faqs : donationFaqDefaults;
   return (
     <div className="min-h-screen bg-background">
       <Helmet>
@@ -157,6 +164,7 @@ export default function Donation() {
               <img 
                 src={graduatesCelebration} 
                 alt="CAP program graduates celebrating their achievements"
+                loading="lazy"
                 className="w-full h-48 md:h-64 object-cover"
               />
               <div className="p-4 bg-card">
@@ -168,6 +176,7 @@ export default function Donation() {
               <img 
                 src={mentorshipSession} 
                 alt="Mentorship session between advisor and student"
+                loading="lazy"
                 className="w-full h-48 md:h-64 object-cover"
               />
               <div className="p-4 bg-card">
@@ -216,13 +225,13 @@ export default function Donation() {
 
           <div className="max-w-3xl mx-auto px-4">
             <Accordion type="single" collapsible className="space-y-3">
-              {faqs.map((faq, idx) => (
+              {displayFaqs.map((faq, idx) => (
                 <AccordionItem key={idx} value={`faq-${idx}`} className="card-modern border-none px-5 md:px-6">
                   <AccordionTrigger className="text-left text-sm md:text-base font-semibold text-foreground hover:no-underline">
-                    {faq.q}
+                    {faq.question}
                   </AccordionTrigger>
                   <AccordionContent className="text-muted-foreground text-sm md:text-base leading-relaxed">
-                    {faq.a}
+                    {faq.answer}
                   </AccordionContent>
                 </AccordionItem>
               ))}

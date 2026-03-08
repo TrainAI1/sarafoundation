@@ -42,6 +42,7 @@ export default function Blog() {
     try {
       const { error } = await supabase.from("newsletter_subscribers").upsert({ email: newsletterEmail }, { onConflict: "email" });
       if (error) throw error;
+      supabase.functions.invoke("notify", { body: { type: "newsletter", data: { email: newsletterEmail } } }).catch(() => {});
       toast.success("Subscribed! You'll receive our latest updates.");
       setNewsletterEmail("");
     } catch (err: any) {

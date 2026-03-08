@@ -47,6 +47,7 @@ export function Footer() {
   const handleFooterSubscribe = async () => {
     if (!footerEmail) return;
     await supabase.from("newsletter_subscribers").upsert({ email: footerEmail }, { onConflict: "email" });
+    supabase.functions.invoke("notify", { body: { type: "newsletter", data: { email: footerEmail } } }).catch(() => {});
     toast({ title: "Subscribed!", description: "You'll receive our latest updates." });
     setFooterEmail("");
   };

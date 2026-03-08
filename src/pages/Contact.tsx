@@ -13,6 +13,7 @@ import { useToast } from "@/hooks/use-toast";
 import communityWorkshop from "@/assets/community-workshop.jpg";
 import { supabase } from "@/integrations/supabase/client";
 import { usePageContent } from "@/hooks/usePageContent";
+import { useFAQItems } from "@/hooks/useFAQItems";
 import {
   Accordion,
   AccordionContent,
@@ -42,11 +43,11 @@ const topics = [
   "Other",
 ];
 
-const faqs = [
-  { q: "How quickly will I get a response?", a: "We aim to respond to all inquiries within 24–48 business hours. Urgent matters are prioritized." },
-  { q: "Which office should I contact?", a: "You can reach either our London (UK) or Lagos (Nigeria) office. Both teams coordinate closely, so either office can assist you." },
-  { q: "Can I schedule a meeting?", a: "Yes! Use the contact form and select your topic. Our team will reach out to schedule a meeting at a convenient time." },
-  { q: "I'm interested in volunteering. How do I apply?", a: "Select 'General Inquiry' in the form and mention your interest in volunteering. We'll connect you with our volunteer coordination team." },
+const contactFaqDefaults = [
+  { question: "How quickly will I get a response?", answer: "We aim to respond to all inquiries within 24–48 business hours. Urgent matters are prioritized." },
+  { question: "Which office should I contact?", answer: "You can reach either our London (UK) or Lagos (Nigeria) office. Both teams coordinate closely, so either office can assist you." },
+  { question: "Can I schedule a meeting?", answer: "Yes! Use the contact form and select your topic. Our team will reach out to schedule a meeting at a convenient time." },
+  { question: "I'm interested in volunteering. How do I apply?", answer: "Select 'General Inquiry' in the form and mention your interest in volunteering. We'll connect you with our volunteer coordination team." },
 ];
 
 export default function Contact() {
@@ -54,6 +55,10 @@ export default function Contact() {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [formData, setFormData] = useState({ firstName: "", lastName: "", email: "", topic: "General Inquiry", message: "" });
   const { toast } = useToast();
+  const { data: dbFaqs } = useFAQItems();
+  const faqs = dbFaqs && dbFaqs.length > 0
+    ? dbFaqs.map(f => ({ question: f.question, answer: f.answer }))
+    : contactFaqDefaults;
 
   const { data: contactContent } = usePageContent("contact-info", {
     email: "info@sarafoundationafrica.com",
@@ -78,6 +83,12 @@ export default function Contact() {
       toast({ title: "Error", description: "Could not send message. Please try again.", variant: "destructive" });
       return;
     }
+
+    // Send notification (fire and forget)
+    supabase.functions.invoke("notify", {
+      body: { type: "contact", data: { first_name: formData.firstName, last_name: formData.lastName, email: formData.email, topic: formData.topic, message: formData.message } },
+    }).catch(() => {});
+
     setIsSubmitted(true);
     toast({ title: "Message sent successfully!", description: "We'll get back to you within 24 hours." });
   };
@@ -259,6 +270,8 @@ export default function Contact() {
                     <a
                       key={social.name}
                       href={social.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
                       className="w-10 h-10 md:w-12 md:h-12 rounded-xl bg-secondary flex items-center justify-center hover:bg-primary hover:text-white transition-colors"
                       aria-label={social.name}
                     >
@@ -271,10 +284,11 @@ export default function Contact() {
               {/* Image instead of map */}
               <div className="rounded-2xl overflow-hidden shadow-lg">
                 <img 
-                  src={communityWorkshop} 
-                  alt="Sara Foundation community event"
-                  className="w-full h-40 md:h-56 object-cover"
-                />
+                   src={communityWorkshop} 
+                   alt="Sara Foundation community event"
+                   loading="lazy"
+                   className="w-full h-40 md:h-56 object-cover"
+                 />
                 <div className="p-4 bg-card">
                   <p className="font-semibold text-foreground text-sm">Join Our Community</p>
                   <p className="text-xs text-muted-foreground mb-3">Connecting with students and professionals across Africa</p>
@@ -317,10 +331,10 @@ export default function Contact() {
               {faqs.map((faq, idx) => (
                 <AccordionItem key={idx} value={`faq-${idx}`} className="card-modern border-none px-5 md:px-6">
                   <AccordionTrigger className="text-left text-sm md:text-base font-semibold text-foreground hover:no-underline">
-                    {faq.q}
+                    {faq.question}
                   </AccordionTrigger>
                   <AccordionContent className="text-muted-foreground text-sm md:text-base leading-relaxed">
-                    {faq.a}
+                    {faq.answer}
                   </AccordionContent>
                 </AccordionItem>
               ))}
