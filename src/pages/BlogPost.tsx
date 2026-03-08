@@ -118,6 +118,8 @@ export default function BlogPostPage() {
               url={`https://sarafoundationafrica.com/blog/${post.slug}`}
             />
           </div>
+        </div>
+      </article>
       <Footer />
     </div>
   );
