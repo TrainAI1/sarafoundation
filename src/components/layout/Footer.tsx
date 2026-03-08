@@ -40,7 +40,7 @@ export function Footer() {
     phone_ng: "+234 9076 664049",
     address_uk: "E14 8AT, London, UK",
     address_ng: "Bafaj Crescent, Awoyaya-Eputu, Ibeju Lekki, Lagos, Nigeria",
-    facebook: "#", twitter: "#", linkedin: "#", instagram: "#", youtube: "#",
+    facebook: "https://www.facebook.com/share/17jsnQdbnd/", twitter: "https://x.com/Sarafoundations", linkedin: "https://www.linkedin.com/company/sara-foundation/", instagram: "https://www.instagram.com/sarafoundation.africa", youtube: "https://youtube.com/@sara.foundation", tiktok: "https://www.tiktok.com/@sara.foundation",
   });
 
   const handleFooterSubscribe = async () => {

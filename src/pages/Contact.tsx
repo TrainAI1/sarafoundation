@@ -28,9 +28,9 @@ const contactInfo = [
 ];
 
 const socialLinks = [
-  { icon: Linkedin, name: "LinkedIn", href: "#" },
-  { icon: Twitter, name: "Twitter", href: "#" },
-  { icon: Instagram, name: "Instagram", href: "#" },
+  { icon: Linkedin, name: "LinkedIn", href: "https://www.linkedin.com/company/sara-foundation/" },
+  { icon: Twitter, name: "Twitter/X", href: "https://x.com/Sarafoundations" },
+  { icon: Instagram, name: "Instagram", href: "https://www.instagram.com/sarafoundation.africa" },
 ];
 
 const topics = [
