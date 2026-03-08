@@ -322,7 +322,7 @@ export default function Partnership() {
               </Link>
             </Button>
             <Button variant="heroSecondary" size="lg" asChild>
-              <a href="#" download>Download Partnership Deck</a>
+              <Link to="/contact">Request Partnership Deck</Link>
             </Button>
           </div>
         </div>
