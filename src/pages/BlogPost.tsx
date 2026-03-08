@@ -3,9 +3,10 @@ import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
-import { ArrowLeft, Calendar, User, Clock } from "lucide-react";
+import { ArrowLeft, Calendar, User } from "lucide-react";
 import { Helmet } from "react-helmet-async";
 import { markdownToHtml } from "@/lib/markdown";
+import { BlogShareButtons } from "@/components/BlogShareButtons";
 import type { Tables } from "@/integrations/supabase/types";
 
 type BlogPost = Tables<"blog_posts">;
