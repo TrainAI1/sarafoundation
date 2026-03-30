@@ -4,17 +4,17 @@ const problems = [
   {
     stat: "47%",
     title: "Limited ICT Programs",
-    description: "of African Universities do not offer ICT-related programs.",
-  },
-  {
-    stat: "4%",
-    title: "Low Tech Skills",
-    description: "In Sub-Saharan Africa, only 4% of university graduates have tech-related skills.",
+    description: "African universities do not offer ICT-related programmes.",
   },
   {
     stat: "70%",
     title: "Outdated Curriculums",
-    description: "of African universities offer IT programs based on outdated curriculums.",
+    description: "African universities offer IT programmes based on outdated curriculums.",
+  },
+  {
+    stat: "4%",
+    title: "Low Tech Skills",
+    description: "In Sub-Saharan Africa, only 4% of university graduates possess tech-related skills.",
   },
 ];
 
@@ -28,11 +28,11 @@ export function CAPProblemsSection() {
             The Challenge
           </span>
           <h2 className="section-title text-foreground mb-4 md:mb-6">
-            We See a <span className="gradient-text">Gap</span> in African Education
+            Africa Tech Learning is <span className="gradient-text">Broken</span>
           </h2>
           <p className="section-subtitle mx-auto">
-            Career Advancement Program was created to address critical gaps in the African 
-            Education Sector and Tech Ecosystem.
+            We see a critical gap in the African Education Sector and Tech Ecosystem.
+            The current pipeline is broken.
           </p>
         </div>
 
@@ -50,6 +50,12 @@ export function CAPProblemsSection() {
               </p>
             </div>
           ))}
+        </div>
+
+        <div className="text-center mt-8 px-4">
+          <div className="inline-block bg-primary text-primary-foreground px-6 py-3 rounded-xl font-semibold text-sm md:text-base">
+            23 Million — the number of additional tech workers the continent needs by 2025
+          </div>
         </div>
       </div>
     </section>
