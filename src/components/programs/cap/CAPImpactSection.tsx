@@ -1,93 +1,56 @@
-import { Users, Lightbulb, TrendingUp, Award } from "lucide-react";
-import graduatesCelebration from "@/assets/graduates-celebration.jpg";
-import mentorshipSession from "@/assets/mentorship-session.jpg";
+import capManStudying from "@/assets/cap-man-studying.jpg";
+import capWomanYellow from "@/assets/cap-woman-yellow.jpg";
 
-const benefits = [
-  {
-    icon: Users,
-    title: "Build Connections",
-    description: "Students across tracks are poised to build connections and collaborations.",
-  },
-  {
-    icon: Lightbulb,
-    title: "Hands-on Experience",
-    description: "Gain exposure to the tech industry boosting preparedness for future STEM careers.",
-  },
-  {
-    icon: TrendingUp,
-    title: "Emerging Technologies",
-    description: "CAP exposes students to cutting-edge trends, offering insights into emerging fields.",
-  },
-  {
-    icon: Award,
-    title: "Technical Skills",
-    description: "Cultivate valuable skills including coding, product management essential for tech industry success.",
-  },
-];
-
-const countries = [
-  { name: "Nigeria", flag: "🇳🇬" },
-  { name: "Ghana", flag: "🇬🇭" },
-  { name: "Kenya", flag: "🇰🇪" },
-  { name: "South Africa", flag: "🇿🇦" },
-  { name: "Uganda", flag: "🇺🇬" },
-  { name: "Zambia", flag: "🇿🇲" },
-  { name: "Togo", flag: "🇹🇬" },
+const stats = [
+  { value: "35+", label: "Universities", sub: "across Africa" },
+  { value: "8", label: "Countries", sub: "Nigeria, Ghana, Uganda, Kenya, Zambia, Togo & more" },
+  { value: "800+", label: "Students", sub: "in CAP Tech Hubs Database" },
+  { value: "5,500+", label: "People Reached", sub: "via social media & sessions" },
+  { value: "8", label: "Full-Time & Intern Job Offers", sub: "secured by CAP alumni in 2025" },
+  { value: "6", label: "Expert Sessions", sub: "per Learn phase cohort" },
+  { value: "92%", label: "Scholarship from Sara Foundation", sub: "" },
+  { value: "2025", label: "Prestige Award Winner", sub: "London & South East England" },
 ];
 
 export function CAPImpactSection() {
   return (
     <section className="py-16 md:py-24 bg-gradient-to-br from-primary/5 to-accent/5">
       <div className="section-container">
-        <div className="grid lg:grid-cols-2 gap-8 md:gap-12 items-center mb-12 md:mb-16 px-4 lg:px-0">
-          <div>
-            <span className="section-badge mb-4 md:mb-6">Our Impact</span>
-            <h2 className="section-title text-foreground mb-4 md:mb-6">
-              What Students <span className="gradient-text-accent">Gain</span>
-            </h2>
-            <p className="section-subtitle mb-6">
-              We have a vibrant presence in 35+ universities across 7 African countries with 763 students 
-              across 2 cohorts — a 360% growth in university partners since Cohort 1.
-            </p>
-            {/* Countries */}
-            <div className="flex flex-wrap gap-2">
-            {countries.map((country) => (
-                <span key={country.name} className="inline-flex items-center gap-2 px-3 py-1.5 bg-card border border-border rounded-full text-xs md:text-sm text-foreground">
-                  <span className="text-base">{country.flag}</span>
-                  {country.name}
-                </span>
-              ))}
-            </div>
-          </div>
-          <div className="grid grid-cols-2 gap-4">
-            <img 
-              src={graduatesCelebration} 
-              alt="CAP graduates celebrating"
-              className="w-full h-40 md:h-56 object-cover rounded-2xl shadow-lg"
-            />
-            <img 
-              src={mentorshipSession} 
-              alt="Mentorship session"
-              className="w-full h-40 md:h-56 object-cover rounded-2xl shadow-lg mt-6"
-            />
-          </div>
+        <div className="text-center max-w-3xl mx-auto mb-10 md:mb-16 px-4">
+          <span className="section-badge mb-4 md:mb-6">Our Impact</span>
+          <h2 className="section-title text-foreground mb-4 md:mb-6">
+            Proven Results. <span className="gradient-text">Growing Fast.</span>
+          </h2>
         </div>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 px-4 lg:px-0">
-          {benefits.map((benefit, index) => (
-            <div key={benefit.title} className="card-modern p-5 md:p-6 text-center group">
-              <div className="w-12 h-12 md:w-14 md:h-14 mx-auto rounded-xl bg-gradient-to-br from-primary to-primary/60 flex items-center justify-center mb-4 shadow-lg group-hover:scale-110 transition-transform">
-                <benefit.icon className="w-6 h-6 md:w-7 md:h-7 text-white" />
+        <div className="grid lg:grid-cols-4 gap-4 md:gap-6 px-4 lg:px-0 mb-8">
+          {stats.slice(0, 4).map((stat) => (
+            <div key={stat.label} className="card-modern p-5 md:p-6 text-center">
+              <div className="text-3xl md:text-4xl font-bold font-display text-primary mb-2">
+                {stat.value}
               </div>
-              <div className="text-2xl md:text-3xl font-bold font-display text-primary mb-2">
-                0{index + 1}
-              </div>
-              <h3 className="font-display font-bold text-base md:text-lg text-foreground mb-2">
-                {benefit.title}
+              <h3 className="font-display font-bold text-sm text-foreground mb-1">
+                {stat.label}
               </h3>
-              <p className="text-muted-foreground text-xs md:text-sm">
-                {benefit.description}
-              </p>
+              {stat.sub && (
+                <p className="text-muted-foreground text-xs">{stat.sub}</p>
+              )}
+            </div>
+          ))}
+        </div>
+
+        <div className="grid lg:grid-cols-4 gap-4 md:gap-6 px-4 lg:px-0">
+          {stats.slice(4).map((stat) => (
+            <div key={stat.label} className="card-modern p-5 md:p-6 text-center">
+              <div className="text-3xl md:text-4xl font-bold font-display text-primary mb-2">
+                {stat.value}
+              </div>
+              <h3 className="font-display font-bold text-sm text-foreground mb-1">
+                {stat.label}
+              </h3>
+              {stat.sub && (
+                <p className="text-muted-foreground text-xs">{stat.sub}</p>
+              )}
             </div>
           ))}
         </div>
