@@ -32,6 +32,7 @@ import AdminFAQ from "./pages/admin/AdminFAQ";
 import AdminContacts from "./pages/admin/AdminContacts";
 import AdminNewsletter from "./pages/admin/AdminNewsletter";
 import AdminMedia from "./pages/admin/AdminMedia";
+import AdminAnalytics from "./pages/admin/AdminAnalytics";
 import AdminResetPassword from "./pages/admin/AdminResetPassword";
 import Privacy from "./pages/Privacy";
 import Terms from "./pages/Terms";
