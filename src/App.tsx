@@ -32,6 +32,7 @@ import AdminFAQ from "./pages/admin/AdminFAQ";
 import AdminContacts from "./pages/admin/AdminContacts";
 import AdminNewsletter from "./pages/admin/AdminNewsletter";
 import AdminMedia from "./pages/admin/AdminMedia";
+import AdminAnalytics from "./pages/admin/AdminAnalytics";
 import AdminResetPassword from "./pages/admin/AdminResetPassword";
 import Privacy from "./pages/Privacy";
 import Terms from "./pages/Terms";
@@ -69,6 +70,7 @@ const App = () => {
             <Route path="/admin/reset-password" element={<AdminResetPassword />} />
             <Route path="/admin" element={<AdminLayout />}>
               <Route index element={<AdminDashboard />} />
+              <Route path="analytics" element={<AdminAnalytics />} />
               <Route path="blog" element={<AdminBlogList />} />
               <Route path="blog/:id" element={<AdminBlogEditor />} />
               <Route path="pages" element={<AdminPages />} />
