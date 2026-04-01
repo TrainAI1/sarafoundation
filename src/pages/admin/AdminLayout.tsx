@@ -5,7 +5,7 @@ import { supabase } from "@/integrations/supabase/client";
 import {
   LayoutDashboard, FileText, PenTool, LogOut, Home,
   Users, MessageSquare, Image, Settings, Menu, X, ChevronRight, Handshake,
-  HelpCircle, Mail, Newspaper
+  HelpCircle, Mail, Newspaper, BarChart3
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
