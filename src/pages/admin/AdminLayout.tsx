@@ -14,6 +14,7 @@ const navGroups = [
     label: "Content",
     items: [
       { label: "Dashboard", path: "/admin", icon: LayoutDashboard },
+      { label: "Analytics", path: "/admin/analytics", icon: BarChart3 },
       { label: "Blog Posts", path: "/admin/blog", icon: PenTool },
       { label: "Pages", path: "/admin/pages", icon: FileText },
       { label: "FAQ", path: "/admin/faq", icon: HelpCircle },
