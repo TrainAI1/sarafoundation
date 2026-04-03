@@ -272,3 +272,22 @@
     text-wrap: balance;
   }
 }
+
+@keyframes float-bounce {
+  0%, 85%, 100% {
+    transform: translateY(0);
+  }
+  90% {
+    transform: translateY(-8px);
+  }
+  95% {
+    transform: translateY(0);
+  }
+  97% {
+    transform: translateY(-4px);
+  }
+}
+
+.animate-float-bounce {
+  animation: float-bounce 4s ease-in-out infinite;
+}
