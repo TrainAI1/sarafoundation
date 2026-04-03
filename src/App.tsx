@@ -38,6 +38,7 @@ import Privacy from "./pages/Privacy";
 import Terms from "./pages/Terms";
 import NotFound from "./pages/NotFound";
 import { CookieConsent } from "./components/CookieConsent";
+import { FloatingDonateButton } from "./components/FloatingDonateButton";
 
 const queryClient = new QueryClient();
 
