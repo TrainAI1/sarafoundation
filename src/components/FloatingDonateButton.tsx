@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useLocation } from "react-router-dom";
 import { Heart, X, CreditCard, Wallet, ExternalLink, Copy } from "lucide-react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
@@ -43,6 +44,9 @@ const handleCopy = (value: string, label: string) => {
 
 export function FloatingDonateButton() {
   const [open, setOpen] = useState(false);
+  const location = useLocation();
+
+  if (location.pathname === "/donation") return null;
 
   return (
     <>
