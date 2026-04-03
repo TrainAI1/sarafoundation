@@ -44,6 +44,9 @@ const handleCopy = (value: string, label: string) => {
 
 export function FloatingDonateButton() {
   const [open, setOpen] = useState(false);
+  const location = useLocation();
+
+  if (location.pathname === "/donation") return null;
 
   return (
     <>
