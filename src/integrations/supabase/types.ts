@@ -122,6 +122,75 @@ export type Database = {
         }
         Relationships: []
       }
+      flip_applications: {
+        Row: {
+          age_range: string
+          commitment: boolean
+          country: string
+          created_at: string
+          education: string
+          email: string
+          experience: string
+          first_name: string
+          id: string
+          interview_availability: string | null
+          job_role: string | null
+          last_name: string
+          paid_at: string | null
+          payment_amount: number | null
+          payment_currency: string | null
+          payment_status: string
+          paystack_reference: string | null
+          phone: string
+          preferred_track: string
+          state: string | null
+        }
+        Insert: {
+          age_range: string
+          commitment?: boolean
+          country: string
+          created_at?: string
+          education: string
+          email: string
+          experience: string
+          first_name: string
+          id?: string
+          interview_availability?: string | null
+          job_role?: string | null
+          last_name: string
+          paid_at?: string | null
+          payment_amount?: number | null
+          payment_currency?: string | null
+          payment_status?: string
+          paystack_reference?: string | null
+          phone: string
+          preferred_track: string
+          state?: string | null
+        }
+        Update: {
+          age_range?: string
+          commitment?: boolean
+          country?: string
+          created_at?: string
+          education?: string
+          email?: string
+          experience?: string
+          first_name?: string
+          id?: string
+          interview_availability?: string | null
+          job_role?: string | null
+          last_name?: string
+          paid_at?: string | null
+          payment_amount?: number | null
+          payment_currency?: string | null
+          payment_status?: string
+          paystack_reference?: string | null
+          phone?: string
+          preferred_track?: string
+          state?: string | null
+        }
+        Relationships: []
+      }
       newsletter_subscribers: {
         Row: {
           email: string
