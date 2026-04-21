@@ -1,52 +1,114 @@
 
 
-# Plan: Fix Google Search 404 Errors and Website Issues
+# FLIP Fellowship Application + Payment Flow
 
-## Root Cause Analysis
+Build a beautiful, on-site enrollment experience that replaces the Google Form link. Applicants fill a multi-step native form, then pay ₦1,000 (NGN) or $1 (USD) via Paystack. Only after payment confirmation are they marked as enrolled and emailed a confirmation.
 
-The 404 errors when accessing pages from Google search are caused by **two issues**:
+## User Flow
 
-1. **No custom domain connected in Lovable**: The project has no custom domain configured in Lovable's domain settings. Even if DNS records point to Lovable's IP, the domain must also be registered within Lovable's project settings for routing to work. Without this, Lovable's servers don't know which project to serve for `sarafoundationafrica.com`, resulting in a 404.
+```text
+[Join FLIP button]
+      ↓
+[/programs/flip/apply]
+  Step 1: Personal Info     (email, names, country, state, phone)
+  Step 2: Background        (age range, education, job role, experience)
+  Step 3: Commitment        (5hrs/week, interview availability, track)
+      ↓
+[Review & Submit]  → application saved (status: pending_payment)
+      ↓
+[/programs/flip/payment?app=:id]
+  Choose currency: NGN ₦1,000  |  USD $1
+  → Paystack inline checkout opens
+      ↓
+[Paystack callback → verify-flip-payment edge function]
+  Verify with Paystack API → mark application paid → send confirmation email
+      ↓
+[/programs/flip/success]  "You're officially enrolled!"
+```
 
-2. **Sitemap references wrong domain**: The sitemap edge function hardcodes `https://sarafoundation.lovable.app` as the site URL, and `robots.txt` points to the edge function URL. Google is indexing URLs under the `.lovable.app` domain rather than the custom domain.
+## What Gets Built
 
-## Additional Issues Found
+### 1. New Page: `src/pages/programs/FLIPApply.tsx`
+Multi-step wizard matching site UI (uses existing `Card`, `Button`, `Input`, `Select`, `RadioGroup`, `Progress` components and the accent gradient). Features:
+- Progress bar (Step X of 3)
+- Per-step validation with `react-hook-form` + `zod`
+- Back/Next navigation, data preserved between steps
+- Mobile-first (single column, large touch targets)
+- Final review screen before submission
 
-| Issue | Details |
-|-------|---------|
-| OG/Twitter images point to `lovable.dev` placeholder | Social sharing shows Lovable's default image, not Sara Foundation branding |
-| Twitter site meta tag says `@Lovable` | Should reference Sara Foundation's Twitter handle |
-| No Google Analytics | Tracking not yet implemented (needs Measurement ID) |
-| Sitemap domain mismatch | Edge function uses `sarafoundation.lovable.app` instead of custom domain |
+Form fields (mirrors the Google Form):
+- Email, First Name, Last Name, Country, State, Phone (WhatsApp)
+- Age range (dropdown), Highest education (radio), Current job role
+- Years of experience (radio), Can commit 5hrs/week (yes/no)
+- Interview availability (text), Preferred track (No-Code / Code / Tech-preneur)
 
-## Implementation Plan
+### 2. New Page: `src/pages/programs/FLIPPayment.tsx`
+- Shows submitted summary
+- Currency selector card: **₦1,000 (Nigeria)** or **$1 (Global)**
+- "Pay Now" button → opens Paystack inline popup (`@paystack/inline-js`)
+- On success → calls `verify-flip-payment` edge function → redirects to success page
+- On failure → friendly retry message
 
-### Step 1: Connect Custom Domain (User Action Required)
-You need to go to **Project Settings → Domains** and add `sarafoundationafrica.com` and `www.sarafoundationafrica.com`. This is the critical missing step -- without it, no code changes will fix the 404 errors.
+### 3. New Page: `src/pages/programs/FLIPSuccess.tsx`
+Celebration screen with confirmation, next steps, WhatsApp community link, and "Back to FLIP" CTA.
 
-### Step 2: Fix Sitemap Domain
-Update the sitemap edge function to use the custom domain URL instead of the Lovable staging URL.
+### 4. Database (1 new table)
+```sql
+flip_applications (
+  id uuid PK,
+  email, first_name, last_name, country, state, phone,
+  age_range, education, job_role, experience,
+  commitment boolean, interview_availability, preferred_track,
+  payment_status text default 'pending',  -- pending | paid | failed
+  payment_currency text,                   -- NGN | USD
+  payment_amount integer,                  -- in kobo/cents
+  paystack_reference text,
+  created_at, paid_at
+)
+```
+RLS: public INSERT (with field validation), admin SELECT/UPDATE/DELETE — same pattern as `contact_submissions`.
 
-### Step 3: Update robots.txt
-Update the sitemap URL in `robots.txt` to use the custom domain path (`/sitemap.xml` served by the edge function or a redirect).
+### 5. Edge Functions
+- **`initialize-flip-payment`** — Creates a Paystack transaction, returns `access_code` + `reference` for inline checkout. Validates application exists and is unpaid.
+- **`verify-flip-payment`** — Called after checkout. Verifies reference with Paystack API, updates `payment_status = 'paid'`, sets `paid_at`, sends confirmation email via existing `notify` function pattern.
 
-### Step 4: Fix Meta Tags in index.html
-- Replace OG/Twitter image URLs with Sara Foundation's own image (use an existing asset or the favicon)
-- Update `twitter:site` from `@Lovable` to Sara Foundation's handle
-- Add `og:url` meta tag with the correct domain
+### 6. Admin Dashboard
+New section in `AdminLayout` sidebar: **"FLIP Applications"** (`/admin/flip-applications`)
+- Table listing all applications with payment status badges (Pending / Paid / Failed)
+- Filter by status, search by email/name
+- Click row → detail drawer with full submission + payment reference
+- Export CSV button
 
-### Step 5: Add Google Analytics
-Add the `gtag.js` script to `index.html` once a Measurement ID is provided.
+### 7. Wire Up Existing Buttons
+Replace external Google Form links in:
+- `FLIPHeroSection.tsx` "Join FLIP" → `/programs/flip/apply`
+- `FLIPCTASection.tsx` "Become a Member" → `/programs/flip/apply`
+- `Contact.tsx` "Join FLIP Fellowship" → `/programs/flip/apply`
 
-## Files to Change
+### 8. Routes added in `App.tsx`
+- `/programs/flip/apply`
+- `/programs/flip/payment`
+- `/programs/flip/success`
+- `/admin/flip-applications`
 
-| File | Change |
-|------|--------|
-| `supabase/functions/sitemap/index.ts` | Update `SITE_URL` to custom domain |
-| `public/robots.txt` | Update sitemap URL to custom domain |
-| `index.html` | Fix OG images, twitter handle, add og:url |
-| `public/sitemap.xml` | Update URLs to custom domain (static fallback) |
+## Required Secret
 
-## Critical User Action
-Before any code changes take effect on the live custom domain, you **must connect the domain in Project Settings → Domains**. Go to your project settings, click Domains, and add both `sarafoundationafrica.com` and `www.sarafoundationafrica.com`.
+To process real payments I need your **Paystack Secret Key** (starts with `sk_live_…` or `sk_test_…`).
+
+How to get it:
+1. Sign in to dashboard.paystack.com
+2. Settings → API Keys & Webhooks
+3. Copy the **Secret Key**
+
+Paystack accepts both NGN (₦1,000) and USD ($1) — single integration covers both. I'll request it after you approve this plan.
+
+## Email Notifications
+
+For the "you're enrolled" confirmation email, the project currently uses the `notify` edge function for server-side logging only. I'll extend it (or add a lightweight send) using the existing pattern. If you want a real branded email delivered to the applicant, I'll set up Lovable's built-in email system as part of this work — no external account needed.
+
+## Out of Scope (won't change)
+
+- Existing CAP enrollment Google Form stays as-is unless you ask
+- Floating Donate button, design system, color palette unchanged
+- No changes to other forms or pages
 
