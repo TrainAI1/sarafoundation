@@ -5,7 +5,7 @@ import { supabase } from "@/integrations/supabase/client";
 import {
   LayoutDashboard, FileText, PenTool, LogOut, Home,
   Users, MessageSquare, Image, Settings, Menu, X, ChevronRight, Handshake,
-  HelpCircle, Mail, Newspaper, BarChart3
+  HelpCircle, Mail, Newspaper, BarChart3, GraduationCap
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
@@ -34,6 +34,7 @@ const navGroups = [
     items: [
       { label: "Contact Messages", path: "/admin/contacts", icon: Mail },
       { label: "Newsletter", path: "/admin/newsletter", icon: Newspaper },
+      { label: "FLIP Applications", path: "/admin/flip-applications", icon: GraduationCap },
     ],
   },
   {

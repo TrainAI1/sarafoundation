@@ -303,12 +303,12 @@ export default function Contact() {
                         <ArrowRight className="w-3 h-3 ml-1" />
                       </Button>
                     </a>
-                    <a href="https://forms.gle/8X1LSmQc5kKbhsrBA" target="_blank" rel="noopener noreferrer">
+                    <Link to="/programs/flip/apply">
                       <Button size="sm" variant="outline" className="w-full text-xs">
                         Join FLIP Fellowship
                         <ArrowRight className="w-3 h-3 ml-1" />
                       </Button>
-                    </a>
+                    </Link>
                   </div>
                 </div>
               </div>

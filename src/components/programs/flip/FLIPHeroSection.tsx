@@ -41,7 +41,7 @@ export function FLIPHeroSection() {
             </p>
             <div className="flex flex-col sm:flex-row gap-3 md:gap-4">
               <Button variant="hero" size="lg" className="group" asChild>
-                <Link to="/contact">
+                <Link to="/programs/flip/apply">
                   Join FLIP
                   <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                 </Link>
