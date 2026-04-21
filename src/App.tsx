@@ -14,6 +14,9 @@ import BlogPost from "./pages/BlogPost";
 import Donation from "./pages/Donation";
 import ProgramCAP from "./pages/programs/CAP";
 import ProgramFLIP from "./pages/programs/FLIP";
+import FLIPApply from "./pages/programs/FLIPApply";
+import FLIPPayment from "./pages/programs/FLIPPayment";
+import FLIPSuccess from "./pages/programs/FLIPSuccess";
 import Partnership from "./pages/Partnership";
 import SchoolCommunity from "./pages/partnership/SchoolCommunity";
 import Organizations from "./pages/partnership/Organizations";
@@ -34,6 +37,7 @@ import AdminNewsletter from "./pages/admin/AdminNewsletter";
 import AdminMedia from "./pages/admin/AdminMedia";
 import AdminAnalytics from "./pages/admin/AdminAnalytics";
 import AdminResetPassword from "./pages/admin/AdminResetPassword";
+import AdminFlipApplications from "./pages/admin/AdminFlipApplications";
 import Privacy from "./pages/Privacy";
 import Terms from "./pages/Terms";
 import NotFound from "./pages/NotFound";
@@ -61,6 +65,9 @@ const App = () => {
             <Route path="/donation" element={<Donation />} />
             <Route path="/programs/cap" element={<ProgramCAP />} />
             <Route path="/programs/flip" element={<ProgramFLIP />} />
+            <Route path="/programs/flip/apply" element={<FLIPApply />} />
+            <Route path="/programs/flip/payment" element={<FLIPPayment />} />
+            <Route path="/programs/flip/success" element={<FLIPSuccess />} />
             <Route path="/partnership" element={<Partnership />} />
             <Route path="/partnership/school-community" element={<SchoolCommunity />} />
             <Route path="/partnership/organizations" element={<Organizations />} />
@@ -83,6 +90,7 @@ const App = () => {
               <Route path="contacts" element={<AdminContacts />} />
               <Route path="newsletter" element={<AdminNewsletter />} />
               <Route path="media" element={<AdminMedia />} />
+              <Route path="flip-applications" element={<AdminFlipApplications />} />
             </Route>
             <Route path="*" element={<NotFound />} />
           </Routes>

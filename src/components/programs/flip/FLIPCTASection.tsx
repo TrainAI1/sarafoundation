@@ -15,7 +15,7 @@ export function FLIPCTASection() {
         </p>
         <div className="flex flex-col sm:flex-row gap-3 md:gap-4 justify-center">
           <Button variant="hero" size="lg" className="group" asChild>
-            <Link to="/contact">
+            <Link to="/programs/flip/apply">
               Become a Member
               <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
             </Link>
