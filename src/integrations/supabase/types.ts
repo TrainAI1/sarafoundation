@@ -59,6 +59,75 @@ export type Database = {
         }
         Relationships: []
       }
+      cap_applications: {
+        Row: {
+          country: string
+          created_at: string
+          email: string
+          full_name: string
+          id: string
+          installments_completed: number
+          motivation: string | null
+          paid_amount: number
+          paid_at: string | null
+          payment_currency: string | null
+          payment_plan: string
+          payment_status: string
+          paystack_reference: string | null
+          phone: string
+          preferred_track: string
+          referral_source: string | null
+          specialization: string | null
+          total_amount: number | null
+          university: string
+          year_of_study: string
+        }
+        Insert: {
+          country: string
+          created_at?: string
+          email: string
+          full_name: string
+          id?: string
+          installments_completed?: number
+          motivation?: string | null
+          paid_amount?: number
+          paid_at?: string | null
+          payment_currency?: string | null
+          payment_plan?: string
+          payment_status?: string
+          paystack_reference?: string | null
+          phone: string
+          preferred_track: string
+          referral_source?: string | null
+          specialization?: string | null
+          total_amount?: number | null
+          university: string
+          year_of_study: string
+        }
+        Update: {
+          country?: string
+          created_at?: string
+          email?: string
+          full_name?: string
+          id?: string
+          installments_completed?: number
+          motivation?: string | null
+          paid_amount?: number
+          paid_at?: string | null
+          payment_currency?: string | null
+          payment_plan?: string
+          payment_status?: string
+          paystack_reference?: string | null
+          phone?: string
+          preferred_track?: string
+          referral_source?: string | null
+          specialization?: string | null
+          total_amount?: number | null
+          university?: string
+          year_of_study?: string
+        }
+        Relationships: []
+      }
       contact_submissions: {
         Row: {
           created_at: string
