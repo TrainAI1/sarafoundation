@@ -13,7 +13,7 @@ const actions = [
     icon: Users,
     label: "Become a CAP Member",
     sublabel: "University Students",
-    to: "/contact",
+    to: "/programs/cap/apply",
   },
   {
     icon: Mail,

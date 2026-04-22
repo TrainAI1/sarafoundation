@@ -17,6 +17,9 @@ import ProgramFLIP from "./pages/programs/FLIP";
 import FLIPApply from "./pages/programs/FLIPApply";
 import FLIPPayment from "./pages/programs/FLIPPayment";
 import FLIPSuccess from "./pages/programs/FLIPSuccess";
+import CAPApply from "./pages/programs/CAPApply";
+import CAPPayment from "./pages/programs/CAPPayment";
+import CAPSuccess from "./pages/programs/CAPSuccess";
 import Partnership from "./pages/Partnership";
 import SchoolCommunity from "./pages/partnership/SchoolCommunity";
 import Organizations from "./pages/partnership/Organizations";
@@ -38,6 +41,7 @@ import AdminMedia from "./pages/admin/AdminMedia";
 import AdminAnalytics from "./pages/admin/AdminAnalytics";
 import AdminResetPassword from "./pages/admin/AdminResetPassword";
 import AdminFlipApplications from "./pages/admin/AdminFlipApplications";
+import AdminCapApplications from "./pages/admin/AdminCapApplications";
 import Privacy from "./pages/Privacy";
 import Terms from "./pages/Terms";
 import NotFound from "./pages/NotFound";
@@ -64,6 +68,9 @@ const App = () => {
             <Route path="/blog/:slug" element={<BlogPost />} />
             <Route path="/donation" element={<Donation />} />
             <Route path="/programs/cap" element={<ProgramCAP />} />
+            <Route path="/programs/cap/apply" element={<CAPApply />} />
+            <Route path="/programs/cap/payment" element={<CAPPayment />} />
+            <Route path="/programs/cap/success" element={<CAPSuccess />} />
             <Route path="/programs/flip" element={<ProgramFLIP />} />
             <Route path="/programs/flip/apply" element={<FLIPApply />} />
             <Route path="/programs/flip/payment" element={<FLIPPayment />} />
@@ -91,6 +98,7 @@ const App = () => {
               <Route path="newsletter" element={<AdminNewsletter />} />
               <Route path="media" element={<AdminMedia />} />
               <Route path="flip-applications" element={<AdminFlipApplications />} />
+              <Route path="cap-applications" element={<AdminCapApplications />} />
             </Route>
             <Route path="*" element={<NotFound />} />
           </Routes>

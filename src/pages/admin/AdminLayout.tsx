@@ -35,6 +35,7 @@ const navGroups = [
       { label: "Contact Messages", path: "/admin/contacts", icon: Mail },
       { label: "Newsletter", path: "/admin/newsletter", icon: Newspaper },
       { label: "FLIP Applications", path: "/admin/flip-applications", icon: GraduationCap },
+      { label: "CAP Applications", path: "/admin/cap-applications", icon: GraduationCap },
     ],
   },
   {
