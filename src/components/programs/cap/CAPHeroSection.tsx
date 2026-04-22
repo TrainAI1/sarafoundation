@@ -39,8 +39,8 @@ export function CAPHeroSection() {
             </p>
             <div className="flex flex-col sm:flex-row gap-3 md:gap-4">
               <Button variant="hero" size="lg" className="group" asChild>
-                <Link to="/contact">
-                  Become a CAP Member
+                <Link to="/programs/cap/apply">
+                  Join Cohort 3
                   <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                 </Link>
               </Button>

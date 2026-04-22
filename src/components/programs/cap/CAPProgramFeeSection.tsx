@@ -1,4 +1,6 @@
-import { CheckCircle2 } from "lucide-react";
+import { CheckCircle2, ArrowRight } from "lucide-react";
+import { Link } from "react-router-dom";
+import { Button } from "@/components/ui/button";
 
 const included = [
   "3 Months Program + Alumni access",
@@ -62,6 +64,16 @@ export function CAPProgramFeeSection() {
               </li>
             ))}
           </ul>
+          <div className="mt-8 text-center">
+            <Button asChild size="lg" className="rounded-xl glow-effect">
+              <Link to="/programs/cap/apply">
+                Apply for Cohort 3 <ArrowRight className="w-4 h-4" />
+              </Link>
+            </Button>
+            <p className="text-xs text-muted-foreground mt-3">
+              Global students: pay $60 once or $20/month for 3 months
+            </p>
+          </div>
         </div>
       </div>
     </section>
