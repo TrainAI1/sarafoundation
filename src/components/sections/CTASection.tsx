@@ -7,7 +7,7 @@ import { usePageContent } from "@/hooks/usePageContent";
 const defaults = {
   headline: "Ready to Make a Difference?",
   description: "Whether you're a student looking to start your tech journey, an organization seeking to partner, or a sponsor wanting to create impact — there's a place for you at Sara Foundation Africa.",
-  cta_primary: "Join as a Student",
+  cta_primary: "Sign Up",
   cta_secondary: "Become a Partner",
 };
 
@@ -43,7 +43,7 @@ export function CTASection() {
 
             <div className="flex flex-col sm:flex-row gap-3 md:gap-4 justify-center">
               <Button variant="hero" size="lg" className="group" asChild>
-                <Link to="/programs/cap">
+                <Link to="/auth?mode=signup">
                   <Users className="w-5 h-5" />
                   {c.cta_primary}
                   <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
