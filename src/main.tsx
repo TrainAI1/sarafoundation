@@ -1,8 +1,29 @@
 import { createRoot } from "react-dom/client";
 import App from "./App.tsx";
 import "./index.css";
+import { APP_UPDATE_EVENT, APP_VERSION, APP_VERSION_RELOAD_KEY, APP_VERSION_STORAGE_KEY } from "./config/app-version";
 
-const APP_VERSION = "2026-04-22T00:00:00.000Z";
+const markCurrentVersion = () => {
+  localStorage.setItem(APP_VERSION_STORAGE_KEY, APP_VERSION);
+  localStorage.removeItem(APP_VERSION_RELOAD_KEY);
+};
+
+try {
+  const storedVersion = localStorage.getItem(APP_VERSION_STORAGE_KEY);
+  const reloadVersion = localStorage.getItem(APP_VERSION_RELOAD_KEY);
+
+  if (!storedVersion) {
+    markCurrentVersion();
+  } else if (storedVersion !== APP_VERSION && reloadVersion !== APP_VERSION) {
+    localStorage.setItem(APP_VERSION_RELOAD_KEY, APP_VERSION);
+    localStorage.setItem(APP_VERSION_STORAGE_KEY, APP_VERSION);
+    (window.location.reload as (forceReload?: boolean) => void)(true);
+  } else if (storedVersion !== APP_VERSION) {
+    markCurrentVersion();
+  }
+} catch {
+  // localStorage can be unavailable in restricted browsers; continue without blocking render.
+}
 
 const isInIframe = (() => {
   try {
@@ -40,6 +61,7 @@ if ("serviceWorker" in navigator) {
 
             nextWorker.addEventListener("statechange", () => {
               if (nextWorker.state === "installed" && navigator.serviceWorker.controller) {
+                window.dispatchEvent(new CustomEvent(APP_UPDATE_EVENT));
                 nextWorker.postMessage({ type: "SKIP_WAITING" });
               }
             });

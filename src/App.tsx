@@ -4,7 +4,9 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
+import { toast } from "sonner";
 import { HelmetProvider } from "react-helmet-async";
+import { APP_UPDATE_EVENT } from "./config/app-version";
 import { ScrollToTop } from "./components/ScrollToTop";
 import Index from "./pages/Index";
 import About from "./pages/About";
@@ -51,6 +53,22 @@ import { FloatingDonateButton } from "./components/FloatingDonateButton";
 const queryClient = new QueryClient();
 
 const App = () => {
+  useEffect(() => {
+    const showUpdatePrompt = () => {
+      toast("New version available", {
+        description: "Refresh to load the latest site updates.",
+        action: {
+          label: "Refresh",
+          onClick: () => (window.location.reload as (forceReload?: boolean) => void)(true),
+        },
+        duration: Infinity,
+      });
+    };
+
+    window.addEventListener(APP_UPDATE_EVENT, showUpdatePrompt);
+    return () => window.removeEventListener(APP_UPDATE_EVENT, showUpdatePrompt);
+  }, []);
+
   return (
   <QueryClientProvider client={queryClient}>
     <HelmetProvider>
