@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Helmet } from "react-helmet-async";
+import { useParams } from "react-router-dom";
 import { BookOpenCheck, CheckCircle2, Loader2, LockKeyhole } from "lucide-react";
 import { toast } from "sonner";
 import { Navbar } from "@/components/layout/Navbar";
@@ -10,7 +11,17 @@ import { Slider } from "@/components/ui/slider";
 import { Progress } from "@/components/ui/progress";
 import { supabase } from "@/integrations/supabase/client";
 
-const COURSE_ID = "external-course";
+const DEFAULT_COURSE_ID = "external-course";
+
+const resolveCourseId = (paramId?: string): string => {
+  if (paramId && paramId.trim().length > 0) return paramId.trim();
+  if (typeof window !== "undefined") {
+    const segments = window.location.pathname.split("/").filter(Boolean);
+    const idx = segments.indexOf("external-course");
+    if (idx !== -1 && segments[idx + 1]) return segments[idx + 1];
+  }
+  return DEFAULT_COURSE_ID;
+};
 
 type CourseProgress = {
   progress_percentage: number | null;
@@ -18,6 +29,8 @@ type CourseProgress = {
 };
 
 export default function ExternalCourse() {
+  const { courseId: courseIdParam } = useParams<{ courseId?: string }>();
+  const courseId = resolveCourseId(courseIdParam);
   const [userId, setUserId] = useState<string | null>(null);
   const [progress, setProgress] = useState(0);
   const [persistedProgress, setPersistedProgress] = useState(0);
@@ -30,6 +43,9 @@ export default function ExternalCourse() {
 
     const loadProgress = async () => {
       setLoading(true);
+      setProgress(0);
+      setPersistedProgress(0);
+      setIsCompleted(false);
       const { data: userResult, error: userError } = await supabase.auth.getUser();
 
       if (!active) return;
@@ -45,7 +61,7 @@ export default function ExternalCourse() {
         .from("course_progress")
         .select("progress_percentage, is_completed")
         .eq("user_id", userResult.user.id)
-        .eq("course_id", COURSE_ID)
+        .eq("course_id", courseId)
         .maybeSingle();
 
       if (!active) return;
@@ -65,12 +81,16 @@ export default function ExternalCourse() {
     return () => {
       active = false;
     };
-  }, []);
+  }, [courseId]);
 
   const saveProgress = async (nextProgress: number, successMessage: string) => {
     if (!userId) {
       toast.error("Please sign in before saving course progress.");
       setProgress(persistedProgress);
+      return;
+    }
+    if (!courseId) {
+      toast.error("Missing course identifier.");
       return;
     }
 
@@ -83,7 +103,7 @@ export default function ExternalCourse() {
       .upsert(
         {
           user_id: userId,
-          course_id: COURSE_ID,
+          course_id: courseId,
           progress_percentage: normalizedProgress,
           is_completed: nextCompleted,
           updated_at: new Date().toISOString(),
