@@ -88,6 +88,7 @@ const App = () => {
             <Route path="/blog/:slug" element={<BlogPost />} />
             <Route path="/donation" element={<Donation />} />
             <Route path="/external-course" element={<ExternalCourse />} />
+            <Route path="/external-course/:courseId" element={<ExternalCourse />} />
             <Route path="/auth" element={<Auth />} />
             <Route path="/programs/cap" element={<ProgramCAP />} />
             <Route path="/programs/cap/apply" element={<CAPApply />} />
