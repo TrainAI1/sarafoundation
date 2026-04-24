@@ -4,9 +4,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
-import { toast } from "sonner";
 import { HelmetProvider } from "react-helmet-async";
-import { APP_UPDATE_EVENT } from "./config/app-version";
 import { ScrollToTop } from "./components/ScrollToTop";
 import Index from "./pages/Index";
 import About from "./pages/About";
@@ -14,8 +12,6 @@ import Contact from "./pages/Contact";
 import Blog from "./pages/Blog";
 import BlogPost from "./pages/BlogPost";
 import Donation from "./pages/Donation";
-import ExternalCourse from "./pages/ExternalCourse";
-import Auth from "./pages/Auth";
 import ProgramCAP from "./pages/programs/CAP";
 import ProgramFLIP from "./pages/programs/FLIP";
 import FLIPApply from "./pages/programs/FLIPApply";
@@ -55,22 +51,6 @@ import { FloatingDonateButton } from "./components/FloatingDonateButton";
 const queryClient = new QueryClient();
 
 const App = () => {
-  useEffect(() => {
-    const showUpdatePrompt = () => {
-      toast("New version available", {
-        description: "Refresh to load the latest site updates.",
-        action: {
-          label: "Refresh",
-          onClick: () => (window.location.reload as (forceReload?: boolean) => void)(true),
-        },
-        duration: Infinity,
-      });
-    };
-
-    window.addEventListener(APP_UPDATE_EVENT, showUpdatePrompt);
-    return () => window.removeEventListener(APP_UPDATE_EVENT, showUpdatePrompt);
-  }, []);
-
   return (
   <QueryClientProvider client={queryClient}>
     <HelmetProvider>
@@ -87,9 +67,6 @@ const App = () => {
             <Route path="/blog" element={<Blog />} />
             <Route path="/blog/:slug" element={<BlogPost />} />
             <Route path="/donation" element={<Donation />} />
-            <Route path="/external-course" element={<ExternalCourse />} />
-            <Route path="/external-course/:courseId" element={<ExternalCourse />} />
-            <Route path="/auth" element={<Auth />} />
             <Route path="/programs/cap" element={<ProgramCAP />} />
             <Route path="/programs/cap/apply" element={<CAPApply />} />
             <Route path="/programs/cap/payment" element={<CAPPayment />} />

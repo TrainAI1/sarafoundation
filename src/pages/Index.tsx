@@ -4,7 +4,6 @@ import { HeroSection } from "@/components/sections/HeroSection";
 import { SDGSection } from "@/components/sections/SDGSection";
 import { WorkWithUsSection } from "@/components/sections/WorkWithUsSection";
 import { MissionSection } from "@/components/sections/MissionSection";
-import { OutcomeFocusedSection } from "@/components/sections/OutcomeFocusedSection";
 import { ProgramsSection } from "@/components/sections/ProgramsSection";
 import { ImpactSection } from "@/components/sections/ImpactSection";
 import { ImpactReportSection } from "@/components/sections/ImpactReportSection";
@@ -63,7 +62,6 @@ const Index = () => {
         <SDGSection />
         <WorkWithUsSection />
         <MissionSection />
-        <OutcomeFocusedSection />
         <ProgramsSection />
         <ImpactSection />
         <ImpactReportSection />

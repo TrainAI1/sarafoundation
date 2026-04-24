@@ -161,33 +161,6 @@ export type Database = {
         }
         Relationships: []
       }
-      course_progress: {
-        Row: {
-          course_id: string
-          id: string
-          is_completed: boolean | null
-          progress_percentage: number | null
-          updated_at: string
-          user_id: string
-        }
-        Insert: {
-          course_id: string
-          id?: string
-          is_completed?: boolean | null
-          progress_percentage?: number | null
-          updated_at?: string
-          user_id: string
-        }
-        Update: {
-          course_id?: string
-          id?: string
-          is_completed?: boolean | null
-          progress_percentage?: number | null
-          updated_at?: string
-          user_id?: string
-        }
-        Relationships: []
-      }
       faq_items: {
         Row: {
           answer: string

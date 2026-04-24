@@ -9,7 +9,7 @@ const defaults = {
   headline_2: "Igniting Innovation,",
   headline_3: "Empowering Dreams.",
   subheadline: "We're on a mission to empower the next generation of tech founders and professionals in Africa through inclusive programs that foster innovation and leadership.",
-  cta_primary: "Register",
+  cta_primary: "Join Our Mission",
   cta_secondary: "Partner with Us",
   badge: "Empowering African Tech Talent",
   hero_image: "/hero-students.jpg",
@@ -81,7 +81,7 @@ export function HeroSection() {
               className="flex flex-col sm:flex-row gap-3 md:gap-4 justify-center lg:justify-start"
             >
               <Button variant="hero" size="lg" className="group w-full sm:w-auto" asChild>
-                <Link to="/auth?mode=signup">
+                <Link to="/programs/cap">
                   {c.cta_primary}
                   <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                 </Link>
