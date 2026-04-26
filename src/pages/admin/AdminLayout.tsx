@@ -5,7 +5,7 @@ import { supabase } from "@/integrations/supabase/client";
 import {
   LayoutDashboard, FileText, PenTool, LogOut, Home,
   Users, MessageSquare, Image, Settings, Menu, X, ChevronRight, Handshake,
-  HelpCircle, Mail, Newspaper, BarChart3, GraduationCap
+  HelpCircle, Mail, Newspaper, BarChart3, GraduationCap, Shield
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
@@ -42,6 +42,7 @@ const navGroups = [
     label: "Settings",
     items: [
       { label: "Site Settings", path: "/admin/settings", icon: Settings },
+      { label: "Site Health & Backup", path: "/admin/site-health", icon: Shield },
     ],
   },
 ];
