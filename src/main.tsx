@@ -1,6 +1,7 @@
 import { createRoot } from "react-dom/client";
 import App from "./App.tsx";
 import "./index.css";
+import { toast } from "sonner";
 
 const APP_VERSION = "2026-04-22T00:00:00.000Z";
 
@@ -40,6 +41,9 @@ if ("serviceWorker" in navigator) {
 
             nextWorker.addEventListener("statechange", () => {
               if (nextWorker.state === "installed" && navigator.serviceWorker.controller) {
+                toast.info("New version available — refreshing…", {
+                  duration: 4000,
+                });
                 nextWorker.postMessage({ type: "SKIP_WAITING" });
               }
             });
