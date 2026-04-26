@@ -40,6 +40,7 @@ export default function AdminFlipApplications() {
   const [loading, setLoading] = useState(true);
   const [filter, setFilter] = useState<"all" | "paid" | "pending" | "failed">("all");
   const [search, setSearch] = useState("");
+  const [trackFilter, setTrackFilter] = useState<string>("all");
   const [selected, setSelected] = useState<FlipApp | null>(null);
 
   const load = async () => {
@@ -56,6 +57,7 @@ export default function AdminFlipApplications() {
   const filtered = useMemo(() => {
     return rows.filter((r) => {
       if (filter !== "all" && r.payment_status !== filter) return false;
+      if (trackFilter !== "all" && r.preferred_track !== trackFilter) return false;
       if (search) {
         const q = search.toLowerCase();
         return (
@@ -66,7 +68,18 @@ export default function AdminFlipApplications() {
       }
       return true;
     });
-  }, [rows, filter, search]);
+  }, [rows, filter, search, trackFilter]);
+
+  const trackCounts = useMemo(() => {
+    const counts: Record<string, number> = {};
+    rows.forEach((r) => {
+      const t = r.preferred_track || "Unspecified";
+      counts[t] = (counts[t] || 0) + 1;
+    });
+    return counts;
+  }, [rows]);
+
+  const trackOptions = useMemo(() => Object.keys(trackCounts).sort(), [trackCounts]);
 
   const stats = useMemo(() => ({
     total: rows.length,
@@ -142,6 +155,22 @@ export default function AdminFlipApplications() {
         </div>
       </div>
 
+      {trackOptions.length > 0 && (
+        <div className="flex gap-2 flex-wrap mb-4 items-center">
+          <span className="text-xs uppercase tracking-wider text-muted-foreground">Track:</span>
+          <Button size="sm" variant={trackFilter === "all" ? "default" : "outline"}
+            onClick={() => setTrackFilter("all")} className="rounded-xl">
+            All ({rows.length})
+          </Button>
+          {trackOptions.map((t) => (
+            <Button key={t} size="sm" variant={trackFilter === t ? "default" : "outline"}
+              onClick={() => setTrackFilter(t)} className="rounded-xl">
+              {t} ({trackCounts[t]})
+            </Button>
+          ))}
+        </div>
+      )}
+
       {filtered.length === 0 ? (
         <div className="card-modern p-8 text-center text-muted-foreground">
           <Users className="w-8 h-8 mx-auto mb-3 opacity-50" />
@@ -154,7 +183,7 @@ export default function AdminFlipApplications() {
               <thead className="bg-secondary/50 text-xs uppercase text-muted-foreground">
                 <tr>
                   <th className="text-left px-4 py-3">Applicant</th>
-                  <th className="text-left px-4 py-3 hidden md:table-cell">Track</th>
+                  <th className="text-left px-4 py-3">Track</th>
                   <th className="text-left px-4 py-3 hidden sm:table-cell">Country</th>
                   <th className="text-left px-4 py-3">Status</th>
                   <th className="text-left px-4 py-3 hidden md:table-cell">Date</th>
@@ -168,7 +197,11 @@ export default function AdminFlipApplications() {
                       <p className="font-medium text-foreground">{r.first_name} {r.last_name}</p>
                       <p className="text-xs text-muted-foreground">{r.email}</p>
                     </td>
-                    <td className="px-4 py-3 hidden md:table-cell text-foreground">{r.preferred_track}</td>
+                    <td className="px-4 py-3">
+                      <span className="px-2 py-1 rounded-full text-xs font-medium bg-primary/10 text-primary">
+                        {r.preferred_track}
+                      </span>
+                    </td>
                     <td className="px-4 py-3 hidden sm:table-cell text-foreground">{r.country}</td>
                     <td className="px-4 py-3">
                       <span className={`px-2 py-1 rounded-full text-xs font-medium capitalize ${statusColors[r.payment_status] || "bg-secondary text-muted-foreground"}`}>
