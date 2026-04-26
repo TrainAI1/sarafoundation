@@ -12,20 +12,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { supabase } from "@/integrations/supabase/client";
 import studentsLabImg from "@/assets/students-tech-lab.jpg";
-import womenTechLeaders from "@/assets/women-tech-leaders.jpg";
-import communityWorkshop from "@/assets/community-workshop.jpg";
-import techEntrepreneurs from "@/assets/tech-entrepreneurs.jpg";
 import techConferenceSpeaker from "@/assets/tech-conference-speaker.jpg";
-import graduatesCelebration from "@/assets/graduates-celebration.jpg";
-
-// Fallback hardcoded posts
-const fallbackPosts = [
-  { id: "1", title: "How CAP is Transforming Tech Education in African Universities", excerpt: "Discover how our Career Advancement Program is creating new pathways for students across the continent.", image: communityWorkshop, author_name: "Sarah Adekunle", date: "Dec 15, 2024", category: "Programs", slug: "cap-transforming-tech-education", isDb: false },
-  { id: "2", title: "Women in Tech: Breaking Barriers in Nigeria's Startup Ecosystem", excerpt: "A deep dive into the challenges and triumphs of women entrepreneurs building tech companies in Nigeria.", image: womenTechLeaders, author_name: "Fatima Hassan", date: "Dec 10, 2024", category: "Women in Tech", slug: "women-in-tech-breaking-barriers", isDb: false },
-  { id: "3", title: "5 Essential Skills Every Tech Professional Needs in 2025", excerpt: "From AI literacy to soft skills, here's what you need to stay competitive in the evolving tech landscape.", image: techEntrepreneurs, author_name: "Michael Obi", date: "Dec 5, 2024", category: "Career", slug: "essential-skills-tech-2025", isDb: false },
-  { id: "4", title: "Partnership Spotlight: How Universities are Embracing Tech Innovation", excerpt: "Highlighting our partnership with leading African universities to create tech-focused curricula.", image: techConferenceSpeaker, author_name: "Sarah Adekunle", date: "Nov 28, 2024", category: "Partnership", slug: "universities-embracing-tech-innovation", isDb: false },
-  { id: "5", title: "From Student to Founder: Success Stories from Our Alumni", excerpt: "Inspiring journeys of CAP graduates who have launched successful tech startups.", image: graduatesCelebration, author_name: "Michael Obi", date: "Nov 20, 2024", category: "Success Stories", slug: "student-to-founder-success-stories", isDb: false },
-];
 
 const categories = ["All", "Programs", "Women in Tech", "Career", "Partnership", "Success Stories", "Industry"];
 
@@ -58,15 +45,18 @@ export default function Blog() {
     });
   }, []);
 
-  // Merge DB posts with fallback
-  const allPosts = [
-    ...dbPosts.map((p) => ({
-      id: p.id, title: p.title, excerpt: p.excerpt || "", image: p.cover_image || studentsLabImg,
-      author_name: p.author_name, date: new Date(p.published_at || p.created_at).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" }),
-      category: p.category || "General", slug: p.slug, isDb: true,
-    })),
-    ...(dbPosts.length === 0 ? fallbackPosts : []),
-  ];
+  // Always link to real DB posts
+  const allPosts = dbPosts.map((p) => ({
+    id: p.id,
+    title: p.title,
+    excerpt: p.excerpt || "",
+    image: p.cover_image || studentsLabImg,
+    author_name: p.author_name,
+    date: new Date(p.published_at || p.created_at).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" }),
+    category: p.category || "General",
+    slug: p.slug,
+    isDb: true,
+  }));
 
   const filteredPosts = allPosts.filter((post) => {
     const matchesCategory = selectedCategory === "All" || post.category === selectedCategory;
@@ -91,6 +81,24 @@ export default function Blog() {
         <meta name="twitter:description" content="Stories, insights and updates from Sara Foundation's work empowering African tech talent." />
         <meta name="twitter:image" content="https://sarafoundationafrica.com/hero-students.jpg" />
       </Helmet>
+      {dbPosts.length > 0 && (
+        <Helmet>
+          <script type="application/ld+json">{JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Blog",
+            "name": "Sara Foundation Africa Blog",
+            "url": "https://sarafoundationafrica.com/blog",
+            "blogPost": dbPosts.slice(0, 10).map((p) => ({
+              "@type": "BlogPosting",
+              "headline": p.title,
+              "url": `https://sarafoundationafrica.com/blog/${p.slug}`,
+              "datePublished": p.published_at || p.created_at,
+              "author": { "@type": "Person", "name": p.author_name },
+              "image": p.cover_image || "https://sarafoundationafrica.com/hero-students.jpg",
+            })),
+          })}</script>
+        </Helmet>
+      )}
       <Navbar />
       <main>
       {/* Hero */}
