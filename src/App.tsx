@@ -42,6 +42,7 @@ import AdminAnalytics from "./pages/admin/AdminAnalytics";
 import AdminResetPassword from "./pages/admin/AdminResetPassword";
 import AdminFlipApplications from "./pages/admin/AdminFlipApplications";
 import AdminCapApplications from "./pages/admin/AdminCapApplications";
+import AdminSiteHealth from "./pages/admin/AdminSiteHealth";
 import Privacy from "./pages/Privacy";
 import Terms from "./pages/Terms";
 import NotFound from "./pages/NotFound";
@@ -99,6 +100,7 @@ const App = () => {
               <Route path="media" element={<AdminMedia />} />
               <Route path="flip-applications" element={<AdminFlipApplications />} />
               <Route path="cap-applications" element={<AdminCapApplications />} />
+              <Route path="site-health" element={<AdminSiteHealth />} />
             </Route>
             <Route path="*" element={<NotFound />} />
           </Routes>
