@@ -23,7 +23,7 @@ export default function BlogPostPage() {
         .select("*")
         .eq("slug", slug)
         .eq("published", true)
-        .single();
+        .maybeSingle();
       setPost(data);
       setLoading(false);
     };
