@@ -1,4 +1,4 @@
-import { ArrowRight, Sparkles } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
@@ -54,7 +54,7 @@ export function HeroSection() {
   const loop = [...marqueeCards, ...marqueeCards];
 
   return (
-    <section className="relative min-h-[100svh] flex items-center overflow-hidden">
+    <section className="relative min-h-[100svh] flex flex-col overflow-hidden">
       {/* Gradient Background */}
       <div className="absolute inset-0 bg-gradient-to-br from-primary via-primary/90 to-[hsl(240,80%,50%)]" />
       
@@ -73,36 +73,24 @@ export function HeroSection() {
         }}
       />
 
-      <div className="section-container relative z-10 pt-24 md:pt-28 pb-12 md:pb-16 w-full">
-        <div className="flex flex-col items-center text-center text-white space-y-6 md:space-y-8 max-w-4xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.1 }}
-            className="inline-flex items-center gap-2 px-4 md:px-5 py-2 md:py-2.5 glass-card-dark rounded-full"
-          >
-            <Sparkles className="w-4 h-4 text-accent" />
-            <span className="text-sm font-medium text-white/90">{c.badge}</span>
-          </motion.div>
-
+      <div className="section-container relative z-10 pt-20 md:pt-24 pb-6 md:pb-8 w-full flex-1 flex flex-col">
+        <div className="flex flex-col items-center text-center text-white space-y-4 md:space-y-5 max-w-3xl mx-auto">
           <motion.h1
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.2 }}
-            className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-[1.05]"
+            transition={{ duration: 0.7, delay: 0.1 }}
+            className="font-display text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold leading-[1.1]"
           >
-            {c.headline_1 || "Breaking Barriers,"}
-            <br />
-            <span className="text-white/90 italic">{c.headline_2 || "Igniting Innovation,"}</span>
-            <br />
+            {c.headline_1 || "Breaking Barriers,"}{" "}
+            <span className="text-white/90 italic">{c.headline_2 || "Igniting Innovation,"}</span>{" "}
             {c.headline_3 || "Empowering Dreams."}
           </motion.h1>
 
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.35 }}
-            className="text-base md:text-lg lg:text-xl text-white/70 max-w-2xl"
+            transition={{ duration: 0.6, delay: 0.25 }}
+            className="text-sm md:text-base text-white/70 max-w-xl"
           >
             {c.subheadline}
           </motion.p>
@@ -110,8 +98,8 @@ export function HeroSection() {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.45 }}
-            className="flex flex-col sm:flex-row gap-3 md:gap-4 justify-center"
+            transition={{ duration: 0.6, delay: 0.35 }}
+            className="flex flex-col sm:flex-row gap-3 justify-center"
           >
             <Button variant="hero" size="lg" className="group w-full sm:w-auto" asChild>
               <Link to="/programs/cap">
@@ -125,67 +113,86 @@ export function HeroSection() {
           </motion.div>
         </div>
 
-        {/* Marquee */}
+        {/* Marquee — Outlier-style staggered cards */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.6 }}
-          className="relative mt-12 md:mt-16 -mx-4 md:-mx-8"
+          transition={{ duration: 0.8, delay: 0.5 }}
+          className="relative mt-6 md:mt-10 -mx-4 md:-mx-8 flex-1 flex items-end"
         >
           {/* Edge fades */}
-          <div className="pointer-events-none absolute inset-y-0 left-0 w-16 md:w-32 z-10 bg-gradient-to-r from-primary to-transparent" />
-          <div className="pointer-events-none absolute inset-y-0 right-0 w-16 md:w-32 z-10 bg-gradient-to-l from-primary to-transparent" />
+          <div className="pointer-events-none absolute inset-y-0 left-0 w-16 md:w-24 z-10 bg-gradient-to-r from-primary to-transparent" />
+          <div className="pointer-events-none absolute inset-y-0 right-0 w-16 md:w-24 z-10 bg-gradient-to-l from-primary to-transparent" />
 
-          <div className="overflow-hidden">
+          <div className="overflow-hidden w-full py-6">
             <div
-              className="flex gap-4 md:gap-6 w-max animate-scroll-left will-change-transform"
-              style={{ animationDuration: "80s" }}
+              className="flex items-center gap-3 md:gap-4 w-max animate-scroll-left will-change-transform"
+              style={{ animationDuration: "70s" }}
             >
-              {loop.map((card, i) => (
-                <div
-                  key={`${card.name}-${i}`}
-                  className={`relative shrink-0 w-[180px] sm:w-[200px] md:w-[220px] aspect-[3/4] rounded-2xl md:rounded-3xl overflow-hidden shadow-2xl ring-1 ring-white/10 ${
-                    card.tone === "accent"
-                      ? "bg-gradient-to-br from-accent to-[hsl(350,80%,55%)]"
-                      : card.tone === "dark"
-                      ? "bg-gradient-to-br from-[hsl(240,40%,15%)] to-[hsl(240,60%,25%)]"
-                      : "bg-white"
-                  }`}
-                >
-                  {card.tone !== "accent" && (
-                    <img
-                      src={card.src}
-                      alt={card.name}
-                      loading="lazy"
-                      className="absolute inset-0 w-full h-full object-cover"
-                    />
-                  )}
-                  {card.tone === "accent" ? (
-                    <div className="relative h-full flex flex-col justify-between p-5 text-white">
-                      <div className="text-xs uppercase tracking-widest opacity-80">{card.role}</div>
-                      <div className="font-display text-4xl md:text-5xl font-bold leading-none">
-                        {card.name}
+              {loop.map((card, i) => {
+                // Stagger: alternating heights and slight tilt
+                const variant = i % 4;
+                const heightClass =
+                  variant === 0
+                    ? "h-[180px] md:h-[220px]"
+                    : variant === 1
+                    ? "h-[140px] md:h-[170px]"
+                    : variant === 2
+                    ? "h-[200px] md:h-[240px]"
+                    : "h-[160px] md:h-[190px]";
+                const widthClass =
+                  card.tone === "accent"
+                    ? "w-[110px] md:w-[130px]"
+                    : "w-[130px] md:w-[160px]";
+                const tilt =
+                  variant === 0
+                    ? "rotate-[-3deg]"
+                    : variant === 1
+                    ? "rotate-[2deg]"
+                    : variant === 2
+                    ? "rotate-[-1.5deg]"
+                    : "rotate-[3deg]";
+                const offset = variant % 2 === 0 ? "-translate-y-2" : "translate-y-3";
+                return (
+                  <div
+                    key={`${card.name}-${i}`}
+                    className={`relative shrink-0 ${widthClass} ${heightClass} ${tilt} ${offset} rounded-2xl overflow-hidden shadow-2xl ring-1 ring-white/10 ${
+                      card.tone === "accent"
+                        ? "bg-gradient-to-br from-accent to-[hsl(350,80%,55%)]"
+                        : card.tone === "dark"
+                        ? "bg-gradient-to-br from-[hsl(240,40%,15%)] to-[hsl(240,60%,25%)]"
+                        : "bg-white"
+                    }`}
+                  >
+                    {card.tone !== "accent" && (
+                      <img
+                        src={card.src}
+                        alt={card.name}
+                        loading="lazy"
+                        className="absolute inset-0 w-full h-full object-cover"
+                      />
+                    )}
+                    {card.tone === "accent" ? (
+                      <div className="relative h-full flex flex-col justify-between p-3 text-white">
+                        <div className="font-display text-2xl md:text-3xl font-bold leading-none">
+                          {card.name}
+                        </div>
+                        <div className="text-[10px] uppercase tracking-wider opacity-90 leading-tight">
+                          {card.role}
+                        </div>
                       </div>
-                    </div>
-                  ) : (
-                    <div className="absolute inset-x-0 bottom-0 p-3 md:p-4 bg-gradient-to-t from-black/80 via-black/40 to-transparent text-white">
-                      <div className="font-semibold text-sm md:text-base leading-tight">{card.name}</div>
-                      <div className="text-[11px] md:text-xs text-white/80">{card.role}</div>
-                    </div>
-                  )}
-                </div>
-              ))}
+                    ) : (
+                      <div className="absolute inset-x-0 bottom-0 p-2 md:p-3 bg-gradient-to-t from-black/85 via-black/40 to-transparent text-white">
+                        <div className="font-semibold text-xs md:text-sm leading-tight">{card.name}</div>
+                        <div className="text-[10px] text-white/80 leading-tight">{card.role}</div>
+                      </div>
+                    )}
+                  </div>
+                );
+              })}
             </div>
           </div>
         </motion.div>
-      </div>
-
-      {/* Scroll indicator */}
-      <div className="absolute bottom-4 md:bottom-8 left-1/2 -translate-x-1/2 flex-col items-center gap-2 text-white/40 hidden md:flex">
-        <span className="text-xs uppercase tracking-widest">Scroll</span>
-        <div className="w-5 h-9 rounded-full border-2 border-white/20 flex items-start justify-center p-1.5">
-          <div className="w-1 h-2 rounded-full bg-white/60 animate-bounce" />
-        </div>
       </div>
     </section>
   );
