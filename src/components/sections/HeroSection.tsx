@@ -137,7 +137,10 @@ export function HeroSection() {
           <div className="pointer-events-none absolute inset-y-0 right-0 w-16 md:w-32 z-10 bg-gradient-to-l from-primary to-transparent" />
 
           <div className="overflow-hidden">
-            <div className="flex gap-4 md:gap-6 w-max animate-marquee-slow will-change-transform">
+            <div
+              className="flex gap-4 md:gap-6 w-max animate-scroll-left will-change-transform"
+              style={{ animationDuration: "80s" }}
+            >
               {loop.map((card, i) => (
                 <div
                   key={`${card.name}-${i}`}
