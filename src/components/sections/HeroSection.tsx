@@ -55,26 +55,29 @@ export function HeroSection() {
 
   return (
     <section className="relative min-h-[100svh] flex flex-col overflow-hidden">
-      {/* Gradient Background */}
-      <div className="absolute inset-0 bg-gradient-to-br from-primary via-primary/90 to-[hsl(240,80%,50%)]" />
-      
-      {/* Mesh gradient overlay */}
-      <div className="absolute inset-0 opacity-40">
-        <div className="absolute top-0 left-1/4 w-[300px] h-[300px] md:w-[600px] md:h-[600px] rounded-full bg-accent/40 blur-[80px] md:blur-[120px] animate-float" />
-        <div className="absolute bottom-0 right-1/4 w-[260px] h-[260px] md:w-[500px] md:h-[500px] rounded-full bg-white/20 blur-[70px] md:blur-[100px] animate-float-delayed" />
+      {/* Light background that blends into page */}
+      <div className="absolute inset-0 bg-background" />
+
+      {/* Subtle tinted mesh */}
+      <div className="absolute inset-0 opacity-60">
+        <div className="absolute -top-20 left-1/4 w-[300px] h-[300px] md:w-[600px] md:h-[600px] rounded-full bg-primary/10 blur-[80px] md:blur-[120px] animate-float" />
+        <div className="absolute bottom-0 right-1/4 w-[260px] h-[260px] md:w-[500px] md:h-[500px] rounded-full bg-accent/10 blur-[70px] md:blur-[100px] animate-float-delayed" />
       </div>
 
-      {/* Grid pattern */}
-      <div 
-        className="absolute inset-0 opacity-[0.03]"
+      {/* Grid pattern (dark on white) */}
+      <div
+        className="absolute inset-0 opacity-[0.04]"
         style={{
-          backgroundImage: `linear-gradient(rgba(255,255,255,.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.1) 1px, transparent 1px)`,
+          backgroundImage: `linear-gradient(hsl(var(--foreground)) 1px, transparent 1px), linear-gradient(90deg, hsl(var(--foreground)) 1px, transparent 1px)`,
           backgroundSize: '64px 64px',
         }}
       />
 
+      {/* Bottom fade into page background for seamless scroll */}
+      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-32 z-[5] bg-gradient-to-b from-transparent to-background" />
+
       <div className="section-container relative z-10 pt-24 md:pt-28 pb-8 md:pb-10 w-full flex-1 flex flex-col">
-        <div className="flex flex-col items-center text-center text-white space-y-4 md:space-y-5 max-w-3xl mx-auto px-2">
+        <div className="flex flex-col items-center text-center text-foreground space-y-4 md:space-y-5 max-w-3xl mx-auto px-2">
           <motion.h1
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
@@ -82,7 +85,7 @@ export function HeroSection() {
             className="font-display text-[26px] leading-[1.15] sm:text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight"
           >
             {c.headline_1 || "Breaking Barriers,"}{" "}
-            <span className="text-white/90 italic">{c.headline_2 || "Igniting Innovation,"}</span>{" "}
+            <span className="italic gradient-text">{c.headline_2 || "Igniting Innovation,"}</span>{" "}
             {c.headline_3 || "Empowering Dreams."}
           </motion.h1>
 
@@ -90,7 +93,7 @@ export function HeroSection() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.25 }}
-            className="text-[13px] leading-relaxed md:text-base text-white/75 max-w-xl px-2"
+            className="text-[13px] leading-relaxed md:text-base text-muted-foreground max-w-xl px-2"
           >
             {c.subheadline}
           </motion.p>
@@ -101,13 +104,13 @@ export function HeroSection() {
             transition={{ duration: 0.6, delay: 0.35 }}
             className="flex flex-col sm:flex-row gap-3 justify-center w-full sm:w-auto pt-1"
           >
-            <Button variant="hero" size="lg" className="group w-full sm:w-auto" asChild>
+            <Button size="lg" className="group w-full sm:w-auto" asChild>
               <Link to="/programs/cap">
                 {c.cta_primary}
                 <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </Link>
             </Button>
-            <Button variant="heroSecondary" size="lg" className="w-full sm:w-auto" asChild>
+            <Button variant="outline" size="lg" className="w-full sm:w-auto" asChild>
               <Link to="/partnership">{c.cta_secondary}</Link>
             </Button>
           </motion.div>
@@ -120,9 +123,9 @@ export function HeroSection() {
           transition={{ duration: 0.8, delay: 0.5 }}
           className="relative mt-8 md:mt-10 -mx-4 sm:-mx-6 md:-mx-8 flex-1 flex items-end"
         >
-          {/* Edge fades */}
-          <div className="pointer-events-none absolute inset-y-0 left-0 w-10 md:w-24 z-10 bg-gradient-to-r from-primary to-transparent" />
-          <div className="pointer-events-none absolute inset-y-0 right-0 w-10 md:w-24 z-10 bg-gradient-to-l from-primary to-transparent" />
+          {/* Edge fades — match white background */}
+          <div className="pointer-events-none absolute inset-y-0 left-0 w-10 md:w-24 z-10 bg-gradient-to-r from-background to-transparent" />
+          <div className="pointer-events-none absolute inset-y-0 right-0 w-10 md:w-24 z-10 bg-gradient-to-l from-background to-transparent" />
 
           <div className="overflow-hidden w-full py-4 md:py-6">
             <div
