@@ -49,10 +49,10 @@ export function Navbar() {
     <header 
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
         scrolled 
-          ? "bg-white/80 backdrop-blur-xl border-b border-border/50 shadow-sm" 
+          ? "bg-background/80 backdrop-blur-xl border-b border-border/50 shadow-sm" 
           : isHome 
             ? "bg-transparent" 
-            : "bg-white/80 backdrop-blur-xl"
+            : "bg-background/80 backdrop-blur-xl"
       }`}
     >
       <nav className="section-container">
@@ -176,7 +176,7 @@ export function Navbar() {
 
         {/* Mobile Menu */}
         {mobileMenuOpen && (
-          <div className="lg:hidden py-6 bg-white/95 backdrop-blur-xl rounded-2xl mt-2 border border-border/50 shadow-lg animate-fade-in">
+          <div className="lg:hidden py-6 bg-background/95 backdrop-blur-xl rounded-2xl mt-2 border border-border/50 shadow-lg animate-fade-in">
             <div className="flex flex-col gap-2 px-4">
               <Link to="/" className="nav-link-modern py-3 px-4 rounded-xl hover:bg-secondary" onClick={() => setMobileMenuOpen(false)}>
                 Home
