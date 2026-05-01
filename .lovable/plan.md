@@ -1,114 +1,111 @@
+# Plan: Hero header border + Govt Job Placement Program (GJP)
 
+## 1. Hero header readability fix
 
-# FLIP Fellowship Application + Payment Flow
+In `src/components/sections/HeroSection.tsx`, the headline and subheadline sit directly under the transparent navbar on the homepage, making them hard to read.
 
-Build a beautiful, on-site enrollment experience that replaces the Google Form link. Applicants fill a multi-step native form, then pay ₦1,000 (NGN) or $1 (USD) via Paystack. Only after payment confirmation are they marked as enrolled and emailed a confirmation.
+Fix:
+- Add a soft bottom border / divider on the navbar so the hero text edge is clearly separated from the header area.
+- In `src/components/layout/Navbar.tsx`, when on the home page and not yet scrolled, switch from `bg-transparent` to a very light `bg-background/40 backdrop-blur-sm border-b border-border/30` so the logo + nav items are visible against the white hero, and there's a visible boundary between header and hero text.
+- Keep scrolled state behavior unchanged.
 
-## User Flow
+No changes to hero typography or layout in this step.
 
-```text
-[Join FLIP button]
-      ↓
-[/programs/flip/apply]
-  Step 1: Personal Info     (email, names, country, state, phone)
-  Step 2: Background        (age range, education, job role, experience)
-  Step 3: Commitment        (5hrs/week, interview availability, track)
-      ↓
-[Review & Submit]  → application saved (status: pending_payment)
-      ↓
-[/programs/flip/payment?app=:id]
-  Choose currency: NGN ₦1,000  |  USD $1
-  → Paystack inline checkout opens
-      ↓
-[Paystack callback → verify-flip-payment edge function]
-  Verify with Paystack API → mark application paid → send confirmation email
-      ↓
-[/programs/flip/success]  "You're officially enrolled!"
+## 2. New third program: "Govt Job Placement (GJP)"
+
+A new flagship card on the homepage Programs section, a dedicated landing/info page, an application form page, a Paystack-backed ₦2,000 admin fee payment page, and a success page. Admin can view submissions in a new admin route.
+
+### 2a. Database (migration)
+
+New table `gjp_applications`:
+- `id uuid pk default gen_random_uuid()`
+- `full_name text not null` (≤200)
+- `email text not null` (≤255)
+- `whatsapp text not null` (≤30)
+- `graduated boolean not null`
+- `institution text` (≤200)
+- `graduation_year text` (≤10)
+- `nysc_completed boolean not null`
+- `nysc_year text` (≤10)
+- `career_path text not null` (≤150)
+- `current_status text` (≤50) — e.g. unemployed / freelancing / part-time
+- `state_of_residence text` (≤100)
+- `is_cap_flip_alumnus boolean default false`
+- `cap_flip_cohort text` (≤50)
+- `referral_source text` (≤150)
+- `additional_info text` (≤2000)
+- `payment_status text not null default 'pending'`
+- `payment_amount integer` (kobo, default 200000 = ₦2,000)
+- `paystack_reference text`
+- `paid_at timestamptz`
+- `created_at timestamptz not null default now()`
+
+RLS:
+- Public INSERT with `payment_status='pending'` and length checks (mirroring `cap_applications`).
+- Admin SELECT/UPDATE/DELETE via `is_admin()`.
+
+### 2b. Edge functions
+
+Two new functions modeled on the CAP versions:
+
+- `supabase/functions/initialize-gjp-payment/index.ts` — fixed amount `200000` kobo (₦2,000), currency NGN, initializes Paystack, stores `paystack_reference`.
+- `supabase/functions/verify-gjp-payment/index.ts` — verifies via Paystack, marks `payment_status='paid'`, sets `paid_at`, and triggers the existing `notify` function for admin email.
+
+Both use `PAYSTACK_SECRET_KEY` (already configured) and `verify_jwt = false` (default).
+
+### 2c. Frontend pages
+
+New routes in `src/App.tsx`:
+- `/programs/gjp` → `pages/programs/GJP.tsx`
+- `/programs/gjp/apply` → `pages/programs/GJPApply.tsx`
+- `/programs/gjp/payment` → `pages/programs/GJPPayment.tsx`
+- `/programs/gjp/success` → `pages/programs/GJPSuccess.tsx`
+- `/admin/gjp-applications` → `pages/admin/AdminGjpApplications.tsx`
+
+`pages/programs/GJP.tsx` — landing page styled like `CAP.tsx`. Sections:
+- Hero: "Exclusive Govt Job Placement Opportunity for NYSC Graduates — 500 Slots Only"
+- Who can apply (graduate + NYSC completed)
+- Why apply through Sara Foundation (500 of 30,000 priority slots)
+- How it works (Apply → Shortlist → 1-week refresher training → Placement)
+- Earnings note: up to ₦150,000/month, 12 months, Q3 2026 start
+- Fee note: **₦2,000 admin/processing fee. Training and job referral are completely FREE.**
+- Disclaimer: not 100% guaranteed
+- CTA: "Apply Now" → `/programs/gjp/apply`
+
+`pages/programs/GJPApply.tsx` — form using `react-hook-form` + `zod` (mirroring `FLIPApply.tsx`/`CAPApply.tsx`) capturing all fields above. On submit: insert into `gjp_applications` then navigate to `/programs/gjp/payment?id=<uuid>`.
+
+`pages/programs/GJPPayment.tsx` — calls `initialize-gjp-payment`, opens Paystack inline (`@paystack/inline-js` pattern already in CAPPayment), shows ₦2,000 admin fee summary with copy: "This covers form processing/onboarding only. Training & referral are free."
+
+`pages/programs/GJPSuccess.tsx` — verifies via `verify-gjp-payment` using `?reference=`, shows confirmation + next steps.
+
+### 2d. Programs section on homepage
+
+Update `src/components/sections/ProgramsSection.tsx`:
+- Add third program object `gjp` with icon (e.g. `Briefcase`), title "Govt Job Placement (GJP)", subtitle "12-Month Paid Placement — 500 Slots", concise description, image (reuse `graduates-celebration.jpg`), `href: "/programs/gjp"`.
+- Adjust grid from `lg:grid-cols-2` to `lg:grid-cols-3` with smaller padding so 3 cards fit; phases array: `Apply` / `Train` / `Placement`.
+
+### 2e. Navbar Programs dropdown
+
+In `src/components/layout/Navbar.tsx`, append to `programItems`:
+```
+{ title: "Govt Job Placement (GJP)", href: "/programs/gjp", description: "12-month paid placement for NYSC graduates" }
 ```
 
-## What Gets Built
+### 2f. Admin
 
-### 1. New Page: `src/pages/programs/FLIPApply.tsx`
-Multi-step wizard matching site UI (uses existing `Card`, `Button`, `Input`, `Select`, `RadioGroup`, `Progress` components and the accent gradient). Features:
-- Progress bar (Step X of 3)
-- Per-step validation with `react-hook-form` + `zod`
-- Back/Next navigation, data preserved between steps
-- Mobile-first (single column, large touch targets)
-- Final review screen before submission
+- Add `pages/admin/AdminGjpApplications.tsx` modeled on `AdminCapApplications.tsx` — table view, search, payment status filter, CSV export.
+- Add nav link in `pages/admin/AdminLayout.tsx`.
 
-Form fields (mirrors the Google Form):
-- Email, First Name, Last Name, Country, State, Phone (WhatsApp)
-- Age range (dropdown), Highest education (radio), Current job role
-- Years of experience (radio), Can commit 5hrs/week (yes/no)
-- Interview availability (text), Preferred track (No-Code / Code / Tech-preneur)
+## Technical notes
 
-### 2. New Page: `src/pages/programs/FLIPPayment.tsx`
-- Shows submitted summary
-- Currency selector card: **₦1,000 (Nigeria)** or **$1 (Global)**
-- "Pay Now" button → opens Paystack inline popup (`@paystack/inline-js`)
-- On success → calls `verify-flip-payment` edge function → redirects to success page
-- On failure → friendly retry message
+- Paystack amount is in kobo: `200000` = ₦2,000.
+- Currency is fixed NGN (no USD option for this program).
+- Form validation with Zod, both client and DB-level (RLS length checks).
+- `notify` edge function is already wired for similar submissions and can be reused with `type: "gjp_application"`.
+- No changes to `client.ts` or `types.ts` (auto-regenerated after migration).
 
-### 3. New Page: `src/pages/programs/FLIPSuccess.tsx`
-Celebration screen with confirmation, next steps, WhatsApp community link, and "Back to FLIP" CTA.
+## Out of scope
 
-### 4. Database (1 new table)
-```sql
-flip_applications (
-  id uuid PK,
-  email, first_name, last_name, country, state, phone,
-  age_range, education, job_role, experience,
-  commitment boolean, interview_availability, preferred_track,
-  payment_status text default 'pending',  -- pending | paid | failed
-  payment_currency text,                   -- NGN | USD
-  payment_amount integer,                  -- in kobo/cents
-  paystack_reference text,
-  created_at, paid_at
-)
-```
-RLS: public INSERT (with field validation), admin SELECT/UPDATE/DELETE — same pattern as `contact_submissions`.
-
-### 5. Edge Functions
-- **`initialize-flip-payment`** — Creates a Paystack transaction, returns `access_code` + `reference` for inline checkout. Validates application exists and is unpaid.
-- **`verify-flip-payment`** — Called after checkout. Verifies reference with Paystack API, updates `payment_status = 'paid'`, sets `paid_at`, sends confirmation email via existing `notify` function pattern.
-
-### 6. Admin Dashboard
-New section in `AdminLayout` sidebar: **"FLIP Applications"** (`/admin/flip-applications`)
-- Table listing all applications with payment status badges (Pending / Paid / Failed)
-- Filter by status, search by email/name
-- Click row → detail drawer with full submission + payment reference
-- Export CSV button
-
-### 7. Wire Up Existing Buttons
-Replace external Google Form links in:
-- `FLIPHeroSection.tsx` "Join FLIP" → `/programs/flip/apply`
-- `FLIPCTASection.tsx` "Become a Member" → `/programs/flip/apply`
-- `Contact.tsx` "Join FLIP Fellowship" → `/programs/flip/apply`
-
-### 8. Routes added in `App.tsx`
-- `/programs/flip/apply`
-- `/programs/flip/payment`
-- `/programs/flip/success`
-- `/admin/flip-applications`
-
-## Required Secret
-
-To process real payments I need your **Paystack Secret Key** (starts with `sk_live_…` or `sk_test_…`).
-
-How to get it:
-1. Sign in to dashboard.paystack.com
-2. Settings → API Keys & Webhooks
-3. Copy the **Secret Key**
-
-Paystack accepts both NGN (₦1,000) and USD ($1) — single integration covers both. I'll request it after you approve this plan.
-
-## Email Notifications
-
-For the "you're enrolled" confirmation email, the project currently uses the `notify` edge function for server-side logging only. I'll extend it (or add a lightweight send) using the existing pattern. If you want a real branded email delivered to the applicant, I'll set up Lovable's built-in email system as part of this work — no external account needed.
-
-## Out of Scope (won't change)
-
-- Existing CAP enrollment Google Form stays as-is unless you ask
-- Floating Donate button, design system, color palette unchanged
-- No changes to other forms or pages
-
+- Any changes to existing CAP/FLIP payment flows.
+- Email templating beyond reusing the existing `notify` function.
+- Refund logic.
