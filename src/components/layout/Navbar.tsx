@@ -61,7 +61,7 @@ export function Navbar() {
           {/* Logo */}
           <Link to="/" className="flex items-center">
             <img 
-              src={showDarkLogo ? logoDark : logoWhite} 
+              src={logoDark} 
               alt="Sara Foundation Africa" 
               className="h-10 md:h-12 w-auto"
             />
