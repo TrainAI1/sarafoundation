@@ -22,6 +22,7 @@ const partnershipItems = [
 const programItems = [
   { title: "Career Advancement Program", href: "/programs/cap", description: "9-month rotational tech program" },
   { title: "Female Leadership Initiative", href: "/programs/flip", description: "Empowering women in tech" },
+  { title: "Govt Job Placement (GJP)", href: "/programs/gjp", description: "12-month paid placement for NYSC graduates" },
 ];
 
 export function Navbar() {
@@ -51,7 +52,7 @@ export function Navbar() {
         scrolled 
           ? "bg-background/80 backdrop-blur-xl border-b border-border/50 shadow-sm" 
           : isHome 
-            ? "bg-transparent" 
+            ? "bg-background/40 backdrop-blur-md border-b border-border/30" 
             : "bg-background/80 backdrop-blur-xl"
       }`}
     >
