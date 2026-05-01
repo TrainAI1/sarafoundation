@@ -74,9 +74,7 @@ export function Navbar() {
                 <NavigationMenuItem>
                   <Link 
                     to="/" 
-                    className={`px-4 py-2 font-medium transition-colors ${
-                      scrolled || !isHome ? 'text-foreground/70 hover:text-foreground' : 'text-white/80 hover:text-white'
-                    }`}
+                    className="px-4 py-2 font-medium transition-colors text-foreground/70 hover:text-foreground"
                   >
                     Home
                   </Link>
@@ -84,9 +82,7 @@ export function Navbar() {
 
                 <NavigationMenuItem>
                   <NavigationMenuTrigger 
-                    className={`bg-transparent font-medium ${
-                      scrolled || !isHome ? 'text-foreground/70 hover:text-foreground' : 'text-white/80 hover:text-white'
-                    }`}
+                    className="bg-transparent font-medium text-foreground/70 hover:text-foreground"
                   >
                     Partnership
                   </NavigationMenuTrigger>
@@ -113,9 +109,7 @@ export function Navbar() {
 
                 <NavigationMenuItem>
                   <NavigationMenuTrigger 
-                    className={`bg-transparent font-medium ${
-                      scrolled || !isHome ? 'text-foreground/70 hover:text-foreground' : 'text-white/80 hover:text-white'
-                    }`}
+                    className="bg-transparent font-medium text-foreground/70 hover:text-foreground"
                   >
                     Programs
                   </NavigationMenuTrigger>
@@ -144,9 +138,7 @@ export function Navbar() {
                   <NavigationMenuItem key={item}>
                     <Link 
                       to={`/${item.toLowerCase()}`} 
-                      className={`px-4 py-2 font-medium transition-colors ${
-                        scrolled || !isHome ? 'text-foreground/70 hover:text-foreground' : 'text-white/80 hover:text-white'
-                      }`}
+                      className="px-4 py-2 font-medium transition-colors text-foreground/70 hover:text-foreground"
                     >
                       {item}
                     </Link>
@@ -158,7 +150,7 @@ export function Navbar() {
 
           {/* CTA Button */}
           <div className="hidden lg:flex items-center gap-3">
-            <Button variant={scrolled || !isHome ? "outline" : "outlineWhite"} size="sm" asChild>
+            <Button variant="outline" size="sm" asChild>
               <Link to="/partnership">Partner with Us</Link>
             </Button>
             <Button size="sm" className="glow-effect" asChild>
@@ -168,7 +160,7 @@ export function Navbar() {
 
           {/* Mobile Menu Button */}
           <button
-            className={`lg:hidden p-2 ${scrolled || !isHome ? 'text-foreground' : 'text-white'}`}
+            className="lg:hidden p-2 text-foreground"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
           >
             {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
