@@ -287,6 +287,78 @@ export type Database = {
         }
         Relationships: []
       }
+      gjp_applications: {
+        Row: {
+          additional_info: string | null
+          cap_flip_cohort: string | null
+          career_path: string
+          created_at: string
+          current_status: string | null
+          email: string
+          full_name: string
+          graduated: boolean
+          graduation_year: string | null
+          id: string
+          institution: string | null
+          is_cap_flip_alumnus: boolean
+          nysc_completed: boolean
+          nysc_year: string | null
+          paid_at: string | null
+          payment_amount: number | null
+          payment_status: string
+          paystack_reference: string | null
+          referral_source: string | null
+          state_of_residence: string | null
+          whatsapp: string
+        }
+        Insert: {
+          additional_info?: string | null
+          cap_flip_cohort?: string | null
+          career_path: string
+          created_at?: string
+          current_status?: string | null
+          email: string
+          full_name: string
+          graduated: boolean
+          graduation_year?: string | null
+          id?: string
+          institution?: string | null
+          is_cap_flip_alumnus?: boolean
+          nysc_completed: boolean
+          nysc_year?: string | null
+          paid_at?: string | null
+          payment_amount?: number | null
+          payment_status?: string
+          paystack_reference?: string | null
+          referral_source?: string | null
+          state_of_residence?: string | null
+          whatsapp: string
+        }
+        Update: {
+          additional_info?: string | null
+          cap_flip_cohort?: string | null
+          career_path?: string
+          created_at?: string
+          current_status?: string | null
+          email?: string
+          full_name?: string
+          graduated?: boolean
+          graduation_year?: string | null
+          id?: string
+          institution?: string | null
+          is_cap_flip_alumnus?: boolean
+          nysc_completed?: boolean
+          nysc_year?: string | null
+          paid_at?: string | null
+          payment_amount?: number | null
+          payment_status?: string
+          paystack_reference?: string | null
+          referral_source?: string | null
+          state_of_residence?: string | null
+          whatsapp?: string
+        }
+        Relationships: []
+      }
       newsletter_subscribers: {
         Row: {
           email: string

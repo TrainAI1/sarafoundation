@@ -1,8 +1,9 @@
-import { GraduationCap, Users, ArrowRight, Rocket, BookOpen, Zap, Star } from "lucide-react";
+import { GraduationCap, Users, ArrowRight, Rocket, BookOpen, Zap, Star, Briefcase, BadgeCheck, ClipboardCheck } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import studentsLabImg from "@/assets/students-tech-lab.jpg";
 import womenTechLeaders from "@/assets/women-tech-leaders.jpg";
+import graduatesCelebration from "@/assets/graduates-celebration.jpg";
 import { ScrollAnimation, StaggerContainer, StaggerItem } from "@/components/ui/scroll-animation";
 
 const programs = [
@@ -35,6 +36,21 @@ const programs = [
     gradient: "from-accent to-[hsl(350,80%,55%)]",
     href: "/programs/flip",
   },
+  {
+    id: "gjp",
+    icon: Briefcase,
+    title: "Govt Job Placement (GJP)",
+    subtitle: "12-Month Paid Placement · 500 Slots",
+    description: "Exclusive partnership connecting NYSC graduates to 12-month government-backed placements with earnings up to ₦150,000/month. Training & referral are FREE.",
+    image: graduatesCelebration,
+    phases: [
+      { name: "Apply", icon: ClipboardCheck, description: "Submit form + ₦2k admin fee" },
+      { name: "Train", icon: BookOpen, description: "Free 1-week refresher" },
+      { name: "Placement", icon: BadgeCheck, description: "12-month paid role" },
+    ],
+    gradient: "from-primary to-accent",
+    href: "/programs/gjp",
+  },
 ];
 
 export function ProgramsSection() {
@@ -61,7 +77,7 @@ export function ProgramsSection() {
         </ScrollAnimation>
 
         {/* Programs Grid */}
-        <StaggerContainer className="grid lg:grid-cols-2 gap-6 md:gap-8" staggerDelay={0.15}>
+        <StaggerContainer className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8" staggerDelay={0.15}>
           {programs.map((program) => (
             <StaggerItem key={program.id} variant="scale-in">
               <div className="card-modern overflow-hidden group">
