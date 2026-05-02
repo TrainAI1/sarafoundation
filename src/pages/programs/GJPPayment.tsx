@@ -94,6 +94,7 @@ export default function GJPPayment() {
             return;
           }
           navigate(`/programs/gjp/success?app=${app.id}`);
+          // pass reference through so success page can display it
         },
         onCancel: () => {
           setProcessing(false);
