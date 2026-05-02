@@ -206,6 +206,17 @@ export default function AdminGjpApplications() {
             </Button>
           ))}
         </div>
+        <Select value={stageFilter} onValueChange={setStageFilter}>
+          <SelectTrigger className="rounded-xl w-[180px]">
+            <SelectValue placeholder="All stages" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="all">All stages</SelectItem>
+            {applicantStatusOptions.map((o) => (
+              <SelectItem key={o.value} value={o.value}>{o.label}</SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
       </div>
 
       {filtered.length === 0 ? (
@@ -223,7 +234,8 @@ export default function AdminGjpApplications() {
                   <th className="text-left px-4 py-3 hidden md:table-cell">Institution</th>
                   <th className="text-left px-4 py-3">Career Path</th>
                   <th className="text-left px-4 py-3 hidden sm:table-cell">NYSC</th>
-                  <th className="text-left px-4 py-3">Status</th>
+                  <th className="text-left px-4 py-3">Stage</th>
+                  <th className="text-left px-4 py-3 hidden lg:table-cell">Payment</th>
                   <th className="px-4 py-3"></th>
                 </tr>
               </thead>
@@ -248,6 +260,11 @@ export default function AdminGjpApplications() {
                       {r.nysc_completed ? "✓ Completed" : "—"}
                     </td>
                     <td className="px-4 py-3">
+                      <span className={`px-2 py-1 rounded-full text-xs font-medium capitalize ${applicantStatusColors[r.applicant_status] || "bg-secondary text-muted-foreground"}`}>
+                        {r.applicant_status.replace("_", " ")}
+                      </span>
+                    </td>
+                    <td className="px-4 py-3 hidden lg:table-cell">
                       <span className={`px-2 py-1 rounded-full text-xs font-medium capitalize ${statusColors[r.payment_status] || "bg-secondary text-muted-foreground"}`}>
                         {r.payment_status}
                       </span>
