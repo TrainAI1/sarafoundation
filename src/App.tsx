@@ -24,6 +24,7 @@ import ProgramGJP from "./pages/programs/GJP";
 import GJPApply from "./pages/programs/GJPApply";
 import GJPPayment from "./pages/programs/GJPPayment";
 import GJPSuccess from "./pages/programs/GJPSuccess";
+import GJPStatus from "./pages/programs/GJPStatus";
 import Partnership from "./pages/Partnership";
 import SchoolCommunity from "./pages/partnership/SchoolCommunity";
 import Organizations from "./pages/partnership/Organizations";
@@ -85,6 +86,7 @@ const App = () => {
             <Route path="/programs/gjp/apply" element={<GJPApply />} />
             <Route path="/programs/gjp/payment" element={<GJPPayment />} />
             <Route path="/programs/gjp/success" element={<GJPSuccess />} />
+            <Route path="/programs/gjp/status" element={<GJPStatus />} />
             <Route path="/partnership" element={<Partnership />} />
             <Route path="/partnership/school-community" element={<SchoolCommunity />} />
             <Route path="/partnership/organizations" element={<Organizations />} />
