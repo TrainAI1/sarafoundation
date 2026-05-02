@@ -93,8 +93,7 @@ export default function GJPPayment() {
             setProcessing(false);
             return;
           }
-          navigate(`/programs/gjp/success?app=${app.id}`);
-          // pass reference through so success page can display it
+          navigate(`/programs/gjp/success?app=${app.id}&reference=${encodeURIComponent(ref)}`);
         },
         onCancel: () => {
           setProcessing(false);
