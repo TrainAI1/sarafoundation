@@ -2,8 +2,11 @@ import { useEffect, useMemo, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { Label } from "@/components/ui/label";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { toast } from "sonner";
-import { Download, Eye, Trash2, Briefcase, X } from "lucide-react";
+import { Download, Eye, Trash2, Briefcase, X, Save } from "lucide-react";
 import { format } from "date-fns";
 
 interface GjpApp {
@@ -28,6 +31,9 @@ interface GjpApp {
   paystack_reference: string | null;
   created_at: string;
   paid_at: string | null;
+  applicant_status: string;
+  status_notes: string | null;
+  status_updated_at: string;
 }
 
 const statusColors: Record<string, string> = {
@@ -36,12 +42,36 @@ const statusColors: Record<string, string> = {
   failed: "bg-destructive/15 text-destructive",
 };
 
+const applicantStatusOptions = [
+  { value: "submitted", label: "Submitted" },
+  { value: "under_review", label: "Under Review" },
+  { value: "shortlisted", label: "Shortlisted" },
+  { value: "training", label: "Training" },
+  { value: "placed", label: "Placed" },
+  { value: "rejected", label: "Rejected" },
+  { value: "withdrawn", label: "Withdrawn" },
+];
+
+const applicantStatusColors: Record<string, string> = {
+  submitted: "bg-secondary text-foreground",
+  under_review: "bg-blue-500/15 text-blue-700 dark:text-blue-400",
+  shortlisted: "bg-primary/15 text-primary",
+  training: "bg-purple-500/15 text-purple-700 dark:text-purple-400",
+  placed: "bg-emerald-500/15 text-emerald-700 dark:text-emerald-400",
+  rejected: "bg-destructive/15 text-destructive",
+  withdrawn: "bg-muted text-muted-foreground",
+};
+
 export default function AdminGjpApplications() {
   const [rows, setRows] = useState<GjpApp[]>([]);
   const [loading, setLoading] = useState(true);
   const [filter, setFilter] = useState<"all" | "paid" | "pending">("all");
+  const [stageFilter, setStageFilter] = useState<string>("all");
   const [search, setSearch] = useState("");
   const [selected, setSelected] = useState<GjpApp | null>(null);
+  const [editStatus, setEditStatus] = useState<string>("submitted");
+  const [editNotes, setEditNotes] = useState<string>("");
+  const [saving, setSaving] = useState(false);
 
   const load = async () => {
     const { data } = await supabase
@@ -54,9 +84,17 @@ export default function AdminGjpApplications() {
 
   useEffect(() => { load(); }, []);
 
+  useEffect(() => {
+    if (selected) {
+      setEditStatus(selected.applicant_status);
+      setEditNotes(selected.status_notes || "");
+    }
+  }, [selected]);
+
   const filtered = useMemo(() => {
     return rows.filter((r) => {
       if (filter !== "all" && r.payment_status !== filter) return false;
+      if (stageFilter !== "all" && r.applicant_status !== stageFilter) return false;
       if (search) {
         const q = search.toLowerCase();
         return (
@@ -68,7 +106,7 @@ export default function AdminGjpApplications() {
       }
       return true;
     });
-  }, [rows, filter, search]);
+  }, [rows, filter, stageFilter, search]);
 
   const stats = useMemo(() => ({
     total: rows.length,
@@ -84,12 +122,29 @@ export default function AdminGjpApplications() {
     load();
   };
 
+  const saveStatus = async () => {
+    if (!selected) return;
+    setSaving(true);
+    const { error } = await supabase
+      .from("gjp_applications")
+      .update({ applicant_status: editStatus, status_notes: editNotes || null })
+      .eq("id", selected.id);
+    setSaving(false);
+    if (error) {
+      toast.error("Could not save status.");
+      return;
+    }
+    toast.success("Status updated");
+    setSelected({ ...selected, applicant_status: editStatus, status_notes: editNotes || null, status_updated_at: new Date().toISOString() });
+    load();
+  };
+
   const exportCsv = () => {
     const headers = [
       "Created", "Status", "Paid Amount", "Full Name", "Email", "WhatsApp",
       "State", "Graduated", "Institution", "Grad Year", "NYSC Completed", "NYSC Year",
       "Career Path", "Current Status", "CAP/FLIP Alumnus", "Cohort", "Referral",
-      "Reference", "Paid At", "Additional Info",
+      "Reference", "Paid At", "Applicant Status", "Status Notes", "Status Updated", "Additional Info",
     ];
     const escape = (v: any) => {
       const s = v === null || v === undefined ? "" : String(v);
@@ -104,7 +159,8 @@ export default function AdminGjpApplications() {
         r.nysc_completed, r.nysc_year,
         r.career_path, r.current_status,
         r.is_cap_flip_alumnus, r.cap_flip_cohort,
-        r.referral_source, r.paystack_reference, r.paid_at, r.additional_info,
+        r.referral_source, r.paystack_reference, r.paid_at,
+        r.applicant_status, r.status_notes, r.status_updated_at, r.additional_info,
       ].map(escape).join(","));
     });
     const blob = new Blob([lines.join("\n")], { type: "text/csv" });
