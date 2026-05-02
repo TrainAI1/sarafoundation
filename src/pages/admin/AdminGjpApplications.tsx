@@ -316,6 +316,34 @@ export default function AdminGjpApplications() {
               <Detail label="Reference" value={selected.paystack_reference || "—"} />
               <Detail label="Submitted" value={format(new Date(selected.created_at), "PPpp")} />
               {selected.paid_at && <Detail label="Paid At" value={format(new Date(selected.paid_at), "PPpp")} />}
+              <hr className="border-border" />
+              <div className="space-y-3 rounded-xl bg-secondary/30 p-3">
+                <p className="text-xs uppercase tracking-wider text-muted-foreground font-semibold">Applicant Tracking</p>
+                <div>
+                  <Label htmlFor="stage" className="text-xs">Stage</Label>
+                  <Select value={editStatus} onValueChange={setEditStatus}>
+                    <SelectTrigger id="stage" className="mt-1 rounded-xl">
+                      <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {applicantStatusOptions.map((o) => (
+                        <SelectItem key={o.value} value={o.value}>{o.label}</SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                </div>
+                <div>
+                  <Label htmlFor="notes" className="text-xs">Notes (visible to applicant on status page)</Label>
+                  <Textarea id="notes" value={editNotes} onChange={(e) => setEditNotes(e.target.value)}
+                    className="mt-1 rounded-xl min-h-[80px]" placeholder="e.g. Shortlisted — interview details coming soon." />
+                </div>
+                <Button onClick={saveStatus} disabled={saving} size="sm" className="rounded-xl w-full">
+                  <Save className="w-4 h-4" /> {saving ? "Saving..." : "Save Status"}
+                </Button>
+                <p className="text-[10px] text-muted-foreground">
+                  Last updated {format(new Date(selected.status_updated_at), "PPpp")}
+                </p>
+              </div>
             </div>
           </div>
         </div>
