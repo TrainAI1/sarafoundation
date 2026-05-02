@@ -2,8 +2,11 @@ import { useEffect, useMemo, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { Label } from "@/components/ui/label";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { toast } from "sonner";
-import { Download, Eye, Trash2, Briefcase, X } from "lucide-react";
+import { Download, Eye, Trash2, Briefcase, X, Save } from "lucide-react";
 import { format } from "date-fns";
 
 interface GjpApp {
@@ -28,6 +31,9 @@ interface GjpApp {
   paystack_reference: string | null;
   created_at: string;
   paid_at: string | null;
+  applicant_status: string;
+  status_notes: string | null;
+  status_updated_at: string;
 }
 
 const statusColors: Record<string, string> = {
@@ -36,12 +42,36 @@ const statusColors: Record<string, string> = {
   failed: "bg-destructive/15 text-destructive",
 };
 
+const applicantStatusOptions = [
+  { value: "submitted", label: "Submitted" },
+  { value: "under_review", label: "Under Review" },
+  { value: "shortlisted", label: "Shortlisted" },
+  { value: "training", label: "Training" },
+  { value: "placed", label: "Placed" },
+  { value: "rejected", label: "Rejected" },
+  { value: "withdrawn", label: "Withdrawn" },
+];
+
+const applicantStatusColors: Record<string, string> = {
+  submitted: "bg-secondary text-foreground",
+  under_review: "bg-blue-500/15 text-blue-700 dark:text-blue-400",
+  shortlisted: "bg-primary/15 text-primary",
+  training: "bg-purple-500/15 text-purple-700 dark:text-purple-400",
+  placed: "bg-emerald-500/15 text-emerald-700 dark:text-emerald-400",
+  rejected: "bg-destructive/15 text-destructive",
+  withdrawn: "bg-muted text-muted-foreground",
+};
+
 export default function AdminGjpApplications() {
   const [rows, setRows] = useState<GjpApp[]>([]);
   const [loading, setLoading] = useState(true);
   const [filter, setFilter] = useState<"all" | "paid" | "pending">("all");
+  const [stageFilter, setStageFilter] = useState<string>("all");
   const [search, setSearch] = useState("");
   const [selected, setSelected] = useState<GjpApp | null>(null);
+  const [editStatus, setEditStatus] = useState<string>("submitted");
+  const [editNotes, setEditNotes] = useState<string>("");
+  const [saving, setSaving] = useState(false);
 
   const load = async () => {
     const { data } = await supabase
@@ -54,9 +84,17 @@ export default function AdminGjpApplications() {
 
   useEffect(() => { load(); }, []);
 
+  useEffect(() => {
+    if (selected) {
+      setEditStatus(selected.applicant_status);
+      setEditNotes(selected.status_notes || "");
+    }
+  }, [selected]);
+
   const filtered = useMemo(() => {
     return rows.filter((r) => {
       if (filter !== "all" && r.payment_status !== filter) return false;
+      if (stageFilter !== "all" && r.applicant_status !== stageFilter) return false;
       if (search) {
         const q = search.toLowerCase();
         return (
@@ -68,7 +106,7 @@ export default function AdminGjpApplications() {
       }
       return true;
     });
-  }, [rows, filter, search]);
+  }, [rows, filter, stageFilter, search]);
 
   const stats = useMemo(() => ({
     total: rows.length,
@@ -84,12 +122,29 @@ export default function AdminGjpApplications() {
     load();
   };
 
+  const saveStatus = async () => {
+    if (!selected) return;
+    setSaving(true);
+    const { error } = await supabase
+      .from("gjp_applications")
+      .update({ applicant_status: editStatus, status_notes: editNotes || null })
+      .eq("id", selected.id);
+    setSaving(false);
+    if (error) {
+      toast.error("Could not save status.");
+      return;
+    }
+    toast.success("Status updated");
+    setSelected({ ...selected, applicant_status: editStatus, status_notes: editNotes || null, status_updated_at: new Date().toISOString() });
+    load();
+  };
+
   const exportCsv = () => {
     const headers = [
       "Created", "Status", "Paid Amount", "Full Name", "Email", "WhatsApp",
       "State", "Graduated", "Institution", "Grad Year", "NYSC Completed", "NYSC Year",
       "Career Path", "Current Status", "CAP/FLIP Alumnus", "Cohort", "Referral",
-      "Reference", "Paid At", "Additional Info",
+      "Reference", "Paid At", "Applicant Status", "Status Notes", "Status Updated", "Additional Info",
     ];
     const escape = (v: any) => {
       const s = v === null || v === undefined ? "" : String(v);
@@ -104,7 +159,8 @@ export default function AdminGjpApplications() {
         r.nysc_completed, r.nysc_year,
         r.career_path, r.current_status,
         r.is_cap_flip_alumnus, r.cap_flip_cohort,
-        r.referral_source, r.paystack_reference, r.paid_at, r.additional_info,
+        r.referral_source, r.paystack_reference, r.paid_at,
+        r.applicant_status, r.status_notes, r.status_updated_at, r.additional_info,
       ].map(escape).join(","));
     });
     const blob = new Blob([lines.join("\n")], { type: "text/csv" });
@@ -150,6 +206,17 @@ export default function AdminGjpApplications() {
             </Button>
           ))}
         </div>
+        <Select value={stageFilter} onValueChange={setStageFilter}>
+          <SelectTrigger className="rounded-xl w-[180px]">
+            <SelectValue placeholder="All stages" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="all">All stages</SelectItem>
+            {applicantStatusOptions.map((o) => (
+              <SelectItem key={o.value} value={o.value}>{o.label}</SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
       </div>
 
       {filtered.length === 0 ? (
@@ -167,7 +234,8 @@ export default function AdminGjpApplications() {
                   <th className="text-left px-4 py-3 hidden md:table-cell">Institution</th>
                   <th className="text-left px-4 py-3">Career Path</th>
                   <th className="text-left px-4 py-3 hidden sm:table-cell">NYSC</th>
-                  <th className="text-left px-4 py-3">Status</th>
+                  <th className="text-left px-4 py-3">Stage</th>
+                  <th className="text-left px-4 py-3 hidden lg:table-cell">Payment</th>
                   <th className="px-4 py-3"></th>
                 </tr>
               </thead>
@@ -192,6 +260,11 @@ export default function AdminGjpApplications() {
                       {r.nysc_completed ? "✓ Completed" : "—"}
                     </td>
                     <td className="px-4 py-3">
+                      <span className={`px-2 py-1 rounded-full text-xs font-medium capitalize ${applicantStatusColors[r.applicant_status] || "bg-secondary text-muted-foreground"}`}>
+                        {r.applicant_status.replace("_", " ")}
+                      </span>
+                    </td>
+                    <td className="px-4 py-3 hidden lg:table-cell">
                       <span className={`px-2 py-1 rounded-full text-xs font-medium capitalize ${statusColors[r.payment_status] || "bg-secondary text-muted-foreground"}`}>
                         {r.payment_status}
                       </span>
@@ -243,6 +316,34 @@ export default function AdminGjpApplications() {
               <Detail label="Reference" value={selected.paystack_reference || "—"} />
               <Detail label="Submitted" value={format(new Date(selected.created_at), "PPpp")} />
               {selected.paid_at && <Detail label="Paid At" value={format(new Date(selected.paid_at), "PPpp")} />}
+              <hr className="border-border" />
+              <div className="space-y-3 rounded-xl bg-secondary/30 p-3">
+                <p className="text-xs uppercase tracking-wider text-muted-foreground font-semibold">Applicant Tracking</p>
+                <div>
+                  <Label htmlFor="stage" className="text-xs">Stage</Label>
+                  <Select value={editStatus} onValueChange={setEditStatus}>
+                    <SelectTrigger id="stage" className="mt-1 rounded-xl">
+                      <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {applicantStatusOptions.map((o) => (
+                        <SelectItem key={o.value} value={o.value}>{o.label}</SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                </div>
+                <div>
+                  <Label htmlFor="notes" className="text-xs">Notes (visible to applicant on status page)</Label>
+                  <Textarea id="notes" value={editNotes} onChange={(e) => setEditNotes(e.target.value)}
+                    className="mt-1 rounded-xl min-h-[80px]" placeholder="e.g. Shortlisted — interview details coming soon." />
+                </div>
+                <Button onClick={saveStatus} disabled={saving} size="sm" className="rounded-xl w-full">
+                  <Save className="w-4 h-4" /> {saving ? "Saving..." : "Save Status"}
+                </Button>
+                <p className="text-[10px] text-muted-foreground">
+                  Last updated {format(new Date(selected.status_updated_at), "PPpp")}
+                </p>
+              </div>
             </div>
           </div>
         </div>

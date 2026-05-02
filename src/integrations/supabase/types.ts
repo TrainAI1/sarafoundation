@@ -290,6 +290,7 @@ export type Database = {
       gjp_applications: {
         Row: {
           additional_info: string | null
+          applicant_status: string
           cap_flip_cohort: string | null
           career_path: string
           created_at: string
@@ -309,10 +310,13 @@ export type Database = {
           paystack_reference: string | null
           referral_source: string | null
           state_of_residence: string | null
+          status_notes: string | null
+          status_updated_at: string
           whatsapp: string
         }
         Insert: {
           additional_info?: string | null
+          applicant_status?: string
           cap_flip_cohort?: string | null
           career_path: string
           created_at?: string
@@ -332,10 +336,13 @@ export type Database = {
           paystack_reference?: string | null
           referral_source?: string | null
           state_of_residence?: string | null
+          status_notes?: string | null
+          status_updated_at?: string
           whatsapp: string
         }
         Update: {
           additional_info?: string | null
+          applicant_status?: string
           cap_flip_cohort?: string | null
           career_path?: string
           created_at?: string
@@ -355,6 +362,8 @@ export type Database = {
           paystack_reference?: string | null
           referral_source?: string | null
           state_of_residence?: string | null
+          status_notes?: string | null
+          status_updated_at?: string
           whatsapp?: string
         }
         Relationships: []
@@ -463,6 +472,18 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      get_gjp_status_by_email_ref: {
+        Args: { _email: string; _reference: string }
+        Returns: {
+          applicant_status: string
+          career_path: string
+          created_at: string
+          full_name: string
+          payment_status: string
+          status_notes: string
+          status_updated_at: string
+        }[]
+      }
       has_role: {
         Args: {
           _role: Database["public"]["Enums"]["app_role"]

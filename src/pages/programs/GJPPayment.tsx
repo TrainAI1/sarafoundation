@@ -93,7 +93,7 @@ export default function GJPPayment() {
             setProcessing(false);
             return;
           }
-          navigate(`/programs/gjp/success?app=${app.id}`);
+          navigate(`/programs/gjp/success?app=${app.id}&reference=${encodeURIComponent(ref)}`);
         },
         onCancel: () => {
           setProcessing(false);
