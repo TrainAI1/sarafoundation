@@ -59,6 +59,9 @@ export default function ProgramGJP() {
           <p className="text-xs text-muted-foreground mt-6">
             ⏳ First come, first serve. Slots are limited and filling fast.
           </p>
+          <p className="text-xs text-muted-foreground mt-2">
+            Already applied? <Link to="/programs/gjp/status" className="text-primary hover:underline font-medium">Check your status →</Link>
+          </p>
         </div>
       </section>
 
