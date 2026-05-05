@@ -4,7 +4,6 @@ import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { Button } from "@/components/ui/button";
 import { CheckCircle2, ArrowRight, Sparkles, Search, Copy } from "lucide-react";
-import { Button as _B } from "@/components/ui/button";
 import { toast } from "sonner";
 
 export default function GJPSuccess() {
