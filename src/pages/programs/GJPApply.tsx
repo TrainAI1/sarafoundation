@@ -364,7 +364,7 @@ export default function GJPApply() {
                 </Button>
               ) : (
                 <Button onClick={submit} disabled={submitting} className="rounded-xl glow-effect">
-                  {submitting ? <><Loader2 className="w-4 h-4 animate-spin" /> Saving...</> : <>Continue to Payment <ArrowRight className="w-4 h-4" /></>}
+        {submitting ? <><Loader2 className="w-4 h-4 animate-spin" /> Saving...</> : <>Submit Application <ArrowRight className="w-4 h-4" /></>}
                 </Button>
               )}
             </div>
