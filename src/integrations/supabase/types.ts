@@ -472,6 +472,18 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      get_gjp_status_by_email_appid: {
+        Args: { _app_id_prefix: string; _email: string }
+        Returns: {
+          applicant_status: string
+          career_path: string
+          created_at: string
+          full_name: string
+          payment_status: string
+          status_notes: string
+          status_updated_at: string
+        }[]
+      }
       get_gjp_status_by_email_ref: {
         Args: { _email: string; _reference: string }
         Returns: {
