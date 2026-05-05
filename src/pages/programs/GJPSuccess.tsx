@@ -3,11 +3,19 @@ import { Helmet } from "react-helmet-async";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { Button } from "@/components/ui/button";
-import { CheckCircle2, ArrowRight, Sparkles, Search } from "lucide-react";
+import { CheckCircle2, ArrowRight, Sparkles, Search, Copy } from "lucide-react";
+import { Button as _B } from "@/components/ui/button";
+import { toast } from "sonner";
 
 export default function GJPSuccess() {
   const [params] = useSearchParams();
   const appId = params.get("app");
+  const shortId = appId ? appId.slice(0, 8) : null;
+  const copyId = async () => {
+    if (!shortId) return;
+    await navigator.clipboard.writeText(shortId);
+    toast.success("Application ID copied");
+  };
 
   return (
     <div className="min-h-screen bg-background">
@@ -41,7 +49,17 @@ export default function GJPSuccess() {
                 <li className="flex gap-3"><span className="font-bold text-primary">3.</span> Free 1-week refresher training for shortlisted candidates.</li>
                 <li className="flex gap-3"><span className="font-bold text-primary">4.</span> Referral for placement consideration (Q3 2026 start).</li>
               </ol>
-              {appId && <p className="text-xs text-muted-foreground mt-3 font-mono">App ID: {appId.slice(0, 8)}</p>}
+              {shortId && (
+                <div className="mt-4 rounded-lg bg-background border border-border p-3 flex items-center justify-between gap-2">
+                  <div className="min-w-0">
+                    <p className="text-[10px] uppercase tracking-wider text-muted-foreground">Your Application ID — save this to track status</p>
+                    <p className="font-mono text-sm font-semibold text-foreground">{shortId}</p>
+                  </div>
+                  <Button size="sm" variant="outline" onClick={copyId} className="rounded-lg flex-shrink-0">
+                    <Copy className="w-3 h-3" /> Copy
+                  </Button>
+                </div>
+              )}
             </div>
 
             <div className="flex flex-col sm:flex-row gap-3">
