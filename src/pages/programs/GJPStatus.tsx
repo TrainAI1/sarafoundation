@@ -32,23 +32,23 @@ const stepIndex = (s: string) => stepsList.findIndex((x) => x.key === s);
 
 export default function GJPStatus() {
   const [email, setEmail] = useState("");
-  const [reference, setReference] = useState("");
+  const [appId, setAppId] = useState("");
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState<Status | null>(null);
   const [notFound, setNotFound] = useState(false);
 
   const lookup = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!email.trim() || !reference.trim()) {
-      toast.error("Enter both email and payment reference.");
+    if (!email.trim() || !appId.trim()) {
+      toast.error("Enter both your email and application ID.");
       return;
     }
     setLoading(true);
     setNotFound(false);
     setResult(null);
-    const { data, error } = await supabase.rpc("get_gjp_status_by_email_ref", {
+    const { data, error } = await supabase.rpc("get_gjp_status_by_email_appid", {
       _email: email.trim(),
-      _reference: reference.trim(),
+      _app_id_prefix: appId.trim().toLowerCase().slice(0, 8),
     });
     setLoading(false);
     if (error) {
@@ -86,7 +86,7 @@ export default function GJPStatus() {
               Check Your Application Status
             </h1>
             <p className="text-muted-foreground text-sm md:text-base">
-              Enter the email you applied with and your Paystack payment reference.
+              Enter the email you applied with and your application ID (shown after submission).
             </p>
           </div>
 
@@ -98,13 +98,13 @@ export default function GJPStatus() {
                 className="mt-1.5 rounded-xl" placeholder="you@example.com" />
             </div>
             <div>
-              <Label htmlFor="reference">Payment Reference</Label>
-              <Input id="reference" value={reference}
-                onChange={(e) => setReference(e.target.value)}
+              <Label htmlFor="appid">Application ID</Label>
+              <Input id="appid" value={appId}
+                onChange={(e) => setAppId(e.target.value)}
                 className="mt-1.5 rounded-xl font-mono"
-                placeholder="e.g. T123456abcdef" />
+                placeholder="e.g. a1b2c3d4" maxLength={8} />
               <p className="text-xs text-muted-foreground mt-1">
-                Found on your Paystack receipt email.
+                The 8-character ID shown on your application confirmation page.
               </p>
             </div>
             <Button type="submit" disabled={loading} size="lg" className="w-full rounded-xl glow-effect">
@@ -117,7 +117,7 @@ export default function GJPStatus() {
               <XCircle className="w-8 h-8 text-destructive mx-auto mb-2" />
               <p className="font-semibold text-foreground">No matching application found</p>
               <p className="text-sm text-muted-foreground mt-1">
-                Double-check your email and reference. If you just paid, allow a minute and retry.
+                Double-check your email and application ID and try again.
               </p>
             </div>
           )}
@@ -129,16 +129,6 @@ export default function GJPStatus() {
                   <p className="text-xs uppercase tracking-wider text-muted-foreground">Applicant</p>
                   <p className="font-semibold text-foreground">{result.full_name}</p>
                   <p className="text-xs text-muted-foreground">{result.career_path}</p>
-                </div>
-                <div className="text-right">
-                  <p className="text-xs uppercase tracking-wider text-muted-foreground">Payment</p>
-                  <span className={`inline-block mt-1 px-2 py-1 rounded-full text-xs font-medium capitalize ${
-                    result.payment_status === "paid"
-                      ? "bg-emerald-500/15 text-emerald-700 dark:text-emerald-400"
-                      : "bg-amber-500/15 text-amber-700 dark:text-amber-400"
-                  }`}>
-                    {result.payment_status}
-                  </span>
                 </div>
               </div>
 
