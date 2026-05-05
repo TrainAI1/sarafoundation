@@ -146,7 +146,7 @@ export default function GJPApply() {
       toast.error("Could not save your application. Please try again.");
       return;
     }
-    navigate(`/programs/gjp/payment?app=${row.id}`);
+    navigate(`/programs/gjp/success?app=${row.id}`);
   };
 
   return (
