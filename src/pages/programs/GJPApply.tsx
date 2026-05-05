@@ -339,9 +339,9 @@ export default function GJPApply() {
                 <div className="rounded-xl bg-primary/10 border border-primary/30 p-4 flex items-start gap-3">
                   <CheckCircle2 className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
                   <div className="text-sm text-foreground">
-                    <p className="font-semibold mb-1">Next: Pay the ₦2,000 admin/processing fee</p>
+                    <p className="font-semibold mb-1">Application is 100% free</p>
                     <p className="text-muted-foreground text-xs">
-                      Training and job referral are <strong>completely free</strong>. The ₦2,000 covers form processing and onboarding only.
+                      No payment required. Training and job referral are <strong>completely free</strong>.
                     </p>
                   </div>
                 </div>
