@@ -22,7 +22,6 @@ import CAPPayment from "./pages/programs/CAPPayment";
 import CAPSuccess from "./pages/programs/CAPSuccess";
 import ProgramGJP from "./pages/programs/GJP";
 import GJPApply from "./pages/programs/GJPApply";
-import GJPPayment from "./pages/programs/GJPPayment";
 import GJPSuccess from "./pages/programs/GJPSuccess";
 import GJPStatus from "./pages/programs/GJPStatus";
 import Partnership from "./pages/Partnership";
@@ -84,7 +83,6 @@ const App = () => {
             <Route path="/programs/flip/success" element={<FLIPSuccess />} />
             <Route path="/programs/gjp" element={<ProgramGJP />} />
             <Route path="/programs/gjp/apply" element={<GJPApply />} />
-            <Route path="/programs/gjp/payment" element={<GJPPayment />} />
             <Route path="/programs/gjp/success" element={<GJPSuccess />} />
             <Route path="/programs/gjp/status" element={<GJPStatus />} />
             <Route path="/partnership" element={<Partnership />} />
