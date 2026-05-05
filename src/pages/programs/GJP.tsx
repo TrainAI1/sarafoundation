@@ -5,11 +5,11 @@ import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import {
   Briefcase, CheckCircle2, ArrowRight, Sparkles, AlertTriangle,
-  Clock, Users, GraduationCap, BadgeCheck, Wallet,
+  Clock, Users, GraduationCap, BadgeCheck,
 } from "lucide-react";
 
 const steps = [
-  { icon: GraduationCap, title: "Submit your application", desc: "Fill the short form and complete the ₦2,000 admin/processing fee." },
+  { icon: GraduationCap, title: "Submit your application", desc: "Fill the short form — no payment required, it's completely free." },
   { icon: BadgeCheck, title: "Get shortlisted", desc: "Our team reviews and shortlists qualified graduates from our network." },
   { icon: Users, title: "1-week refresher training", desc: "Shortlisted applicants attend a free refresher to meet placement standards." },
   { icon: Briefcase, title: "Proceed to placement consideration", desc: "Strong candidates are referred for the 12-month paid placement (Q3 2026 start)." },
@@ -142,22 +142,16 @@ export default function ProgramGJP() {
           <div className="text-center mb-10">
             <span className="section-badge mb-4">Cost</span>
             <h2 className="section-title text-foreground">
-              Training & referral are <span className="gradient-text">100% FREE</span>
+              Application, training & referral are <span className="gradient-text">100% FREE</span>
             </h2>
           </div>
-          <div className="grid sm:grid-cols-2 gap-4">
-            <div className="card-modern p-6 text-center border-t-4 border-t-primary bg-primary/5">
-              <Wallet className="w-8 h-8 text-primary mx-auto mb-3" />
-              <p className="text-xs uppercase tracking-wider text-primary font-semibold mb-2">Admin / Processing Fee</p>
-              <div className="text-3xl md:text-4xl font-bold font-display text-primary mb-1">₦2,000</div>
-              <p className="text-xs text-muted-foreground">One-time, covers form processing & onboarding</p>
-            </div>
-            <div className="card-modern p-6 text-center border-t-4 border-t-accent bg-accent/5">
-              <CheckCircle2 className="w-8 h-8 text-accent mx-auto mb-3" />
-              <p className="text-xs uppercase tracking-wider text-accent font-semibold mb-2">Training & Referral</p>
-              <div className="text-3xl md:text-4xl font-bold font-display text-accent mb-1">FREE</div>
-              <p className="text-xs text-muted-foreground">No cost for the 1-week refresher or job referral</p>
-            </div>
+          <div className="card-modern p-8 text-center border-t-4 border-t-accent bg-accent/5 max-w-md mx-auto">
+            <CheckCircle2 className="w-10 h-10 text-accent mx-auto mb-3" />
+            <p className="text-xs uppercase tracking-wider text-accent font-semibold mb-2">No Fees. No Charges.</p>
+            <div className="text-4xl md:text-5xl font-bold font-display text-accent mb-2">FREE</div>
+            <p className="text-sm text-muted-foreground">
+              No application fee, no training fee, no referral fee. Just submit your form.
+            </p>
           </div>
 
           <div className="mt-8 rounded-xl bg-amber-500/10 border border-amber-500/30 p-5 flex items-start gap-3">

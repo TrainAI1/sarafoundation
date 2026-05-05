@@ -9,12 +9,11 @@ import { toast } from "sonner";
 export default function GJPSuccess() {
   const [params] = useSearchParams();
   const appId = params.get("app");
-  const reference = params.get("reference");
-
-  const copyRef = async () => {
-    if (!reference) return;
-    await navigator.clipboard.writeText(reference);
-    toast.success("Reference copied");
+  const shortId = appId ? appId.slice(0, 8) : null;
+  const copyId = async () => {
+    if (!shortId) return;
+    await navigator.clipboard.writeText(shortId);
+    toast.success("Application ID copied");
   };
 
   return (
@@ -37,30 +36,29 @@ export default function GJPSuccess() {
               You're on the GJP shortlist queue!
             </h1>
             <p className="text-muted-foreground text-base md:text-lg mb-8">
-              Your application and admin fee have been received. Our team will review and contact
+              Your application has been received. Our team will review and contact
               shortlisted applicants via email and WhatsApp with next steps.
             </p>
 
             <div className="rounded-xl bg-secondary/40 p-5 text-left mb-8">
               <p className="font-semibold text-foreground mb-3">What happens next?</p>
               <ol className="space-y-2 text-sm text-muted-foreground">
-                <li className="flex gap-3"><span className="font-bold text-primary">1.</span> Confirmation email with your reference (check spam too).</li>
+                <li className="flex gap-3"><span className="font-bold text-primary">1.</span> Confirmation email (check spam too).</li>
                 <li className="flex gap-3"><span className="font-bold text-primary">2.</span> Shortlisting from the 500 priority slot pool.</li>
                 <li className="flex gap-3"><span className="font-bold text-primary">3.</span> Free 1-week refresher training for shortlisted candidates.</li>
                 <li className="flex gap-3"><span className="font-bold text-primary">4.</span> Referral for placement consideration (Q3 2026 start).</li>
               </ol>
-              {reference && (
+              {shortId && (
                 <div className="mt-4 rounded-lg bg-background border border-border p-3 flex items-center justify-between gap-2">
                   <div className="min-w-0">
-                    <p className="text-[10px] uppercase tracking-wider text-muted-foreground">Payment Reference</p>
-                    <p className="font-mono text-xs text-foreground truncate">{reference}</p>
+                    <p className="text-[10px] uppercase tracking-wider text-muted-foreground">Your Application ID — save this to track status</p>
+                    <p className="font-mono text-sm font-semibold text-foreground">{shortId}</p>
                   </div>
-                  <Button size="sm" variant="outline" onClick={copyRef} className="rounded-lg flex-shrink-0">
+                  <Button size="sm" variant="outline" onClick={copyId} className="rounded-lg flex-shrink-0">
                     <Copy className="w-3 h-3" /> Copy
                   </Button>
                 </div>
               )}
-              {appId && <p className="text-xs text-muted-foreground mt-3 font-mono">App ID: {appId.slice(0, 8)}</p>}
             </div>
 
             <div className="flex flex-col sm:flex-row gap-3">
