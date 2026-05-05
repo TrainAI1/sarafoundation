@@ -6,8 +6,9 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { toast } from "sonner";
-import { Download, Eye, Trash2, Briefcase, X, Save } from "lucide-react";
+import { Download, FileSpreadsheet, Eye, Trash2, Briefcase, X, Save } from "lucide-react";
 import { format } from "date-fns";
+import * as XLSX from "xlsx";
 
 interface GjpApp {
   id: string;
@@ -172,6 +173,41 @@ export default function AdminGjpApplications() {
     URL.revokeObjectURL(url);
   };
 
+  const exportExcel = () => {
+    const data = filtered.map((r) => ({
+      "Submitted": format(new Date(r.created_at), "yyyy-MM-dd HH:mm"),
+      "Full Name": r.full_name,
+      "Email": r.email,
+      "WhatsApp": r.whatsapp,
+      "State": r.state_of_residence || "",
+      "Graduated": r.graduated ? "Yes" : "No",
+      "Institution": r.institution || "",
+      "Graduation Year": r.graduation_year || "",
+      "NYSC Completed": r.nysc_completed ? "Yes" : "No",
+      "NYSC Year": r.nysc_year || "",
+      "Career Path": r.career_path,
+      "Current Status": r.current_status || "",
+      "CAP/FLIP Alumnus": r.is_cap_flip_alumnus ? "Yes" : "No",
+      "Cohort": r.cap_flip_cohort || "",
+      "Referral Source": r.referral_source || "",
+      "Additional Info": r.additional_info || "",
+      "Applicant Stage": r.applicant_status,
+      "Status Notes": r.status_notes || "",
+      "Status Updated": r.status_updated_at ? format(new Date(r.status_updated_at), "yyyy-MM-dd HH:mm") : "",
+      "Application ID": r.id.slice(0, 8),
+    }));
+    const ws = XLSX.utils.json_to_sheet(data);
+    // Auto-size columns
+    const colWidths = Object.keys(data[0] || {}).map((key) => ({
+      wch: Math.max(key.length, ...data.map((row: any) => String(row[key] ?? "").length)) + 2,
+    }));
+    ws["!cols"] = colWidths;
+    const wb = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, "GJP Applications");
+    XLSX.writeFile(wb, `gjp-applications-${new Date().toISOString().slice(0, 10)}.xlsx`);
+    toast.success(`Exported ${data.length} applications to Excel`);
+  };
+
   const formatAmount = (amount: number | null) => {
     if (!amount) return "—";
     return `₦${(amount / 100).toLocaleString()}`;
@@ -190,9 +226,14 @@ export default function AdminGjpApplications() {
             {stats.total} total · {stats.paid} paid · {stats.pending} pending
           </p>
         </div>
-        <Button onClick={exportCsv} variant="outline" size="sm" disabled={filtered.length === 0}>
-          <Download className="w-4 h-4" /> Export CSV
-        </Button>
+        <div className="flex gap-2">
+          <Button onClick={exportExcel} size="sm" disabled={filtered.length === 0}>
+            <FileSpreadsheet className="w-4 h-4" /> Export Excel
+          </Button>
+          <Button onClick={exportCsv} variant="outline" size="sm" disabled={filtered.length === 0}>
+            <Download className="w-4 h-4" /> CSV
+          </Button>
+        </div>
       </div>
 
       <div className="flex flex-col sm:flex-row gap-2 mb-4">
