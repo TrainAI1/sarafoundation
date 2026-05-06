@@ -6,7 +6,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { toast } from "sonner";
-import { Download, FileSpreadsheet, Eye, Trash2, Briefcase, X, Save } from "lucide-react";
+import { Download, FileSpreadsheet, Eye, Trash2, Briefcase, X, Save, Mail, Code2 } from "lucide-react";
 import { format } from "date-fns";
 import * as XLSX from "xlsx";
 
@@ -20,6 +20,7 @@ interface GjpApp {
   graduation_year: string | null;
   nysc_completed: boolean;
   nysc_year: string | null;
+  interested_in_tech: boolean;
   career_path: string;
   current_status: string | null;
   state_of_residence: string | null;
@@ -68,11 +69,16 @@ export default function AdminGjpApplications() {
   const [loading, setLoading] = useState(true);
   const [filter, setFilter] = useState<"all" | "paid" | "pending">("all");
   const [stageFilter, setStageFilter] = useState<string>("all");
+  const [techFilter, setTechFilter] = useState<"all" | "tech" | "non_tech">("all");
   const [search, setSearch] = useState("");
   const [selected, setSelected] = useState<GjpApp | null>(null);
   const [editStatus, setEditStatus] = useState<string>("submitted");
   const [editNotes, setEditNotes] = useState<string>("");
   const [saving, setSaving] = useState(false);
+  const [selectedIds, setSelectedIds] = useState<Set<string>>(new Set());
+  const [emailDialog, setEmailDialog] = useState<{ recipients: string[]; mode: "selected" | "filtered" | "single" } | null>(null);
+  const [emailSubject, setEmailSubject] = useState("");
+  const [emailBody, setEmailBody] = useState("");
 
   const load = async () => {
     const { data } = await supabase
@@ -96,6 +102,8 @@ export default function AdminGjpApplications() {
     return rows.filter((r) => {
       if (filter !== "all" && r.payment_status !== filter) return false;
       if (stageFilter !== "all" && r.applicant_status !== stageFilter) return false;
+      if (techFilter === "tech" && !r.interested_in_tech) return false;
+      if (techFilter === "non_tech" && r.interested_in_tech) return false;
       if (search) {
         const q = search.toLowerCase();
         return (
@@ -107,13 +115,74 @@ export default function AdminGjpApplications() {
       }
       return true;
     });
-  }, [rows, filter, stageFilter, search]);
+  }, [rows, filter, stageFilter, techFilter, search]);
 
   const stats = useMemo(() => ({
     total: rows.length,
     paid: rows.filter((r) => r.payment_status === "paid").length,
     pending: rows.filter((r) => r.payment_status === "pending").length,
+    tech: rows.filter((r) => r.interested_in_tech).length,
   }), [rows]);
+
+  const toggleSelect = (id: string) => {
+    setSelectedIds((s) => {
+      const next = new Set(s);
+      if (next.has(id)) next.delete(id);
+      else next.add(id);
+      return next;
+    });
+  };
+
+  const toggleSelectAllFiltered = () => {
+    const allSelected = filtered.every((r) => selectedIds.has(r.id));
+    setSelectedIds((s) => {
+      const next = new Set(s);
+      if (allSelected) filtered.forEach((r) => next.delete(r.id));
+      else filtered.forEach((r) => next.add(r.id));
+      return next;
+    });
+  };
+
+  const openEmail = (mode: "selected" | "filtered" | "single", single?: GjpApp) => {
+    let recipients: string[] = [];
+    if (mode === "single" && single) recipients = [single.email];
+    else if (mode === "selected") {
+      recipients = rows.filter((r) => selectedIds.has(r.id)).map((r) => r.email);
+    } else {
+      recipients = filtered.map((r) => r.email);
+    }
+    recipients = Array.from(new Set(recipients.filter(Boolean)));
+    if (recipients.length === 0) {
+      toast.error("No recipients to email.");
+      return;
+    }
+    setEmailSubject("");
+    setEmailBody("");
+    setEmailDialog({ recipients, mode });
+  };
+
+  const sendEmail = () => {
+    if (!emailDialog) return;
+    const { recipients, mode } = emailDialog;
+    const subject = encodeURIComponent(emailSubject);
+    const body = encodeURIComponent(emailBody);
+    // For single: To. For bulk: BCC to protect recipients' privacy.
+    let mailto: string;
+    if (mode === "single") {
+      mailto = `mailto:${recipients[0]}?subject=${subject}&body=${body}`;
+    } else {
+      mailto = `mailto:?bcc=${recipients.join(",")}&subject=${subject}&body=${body}`;
+    }
+    window.location.href = mailto;
+    toast.success(`Opening your email client with ${recipients.length} recipient${recipients.length > 1 ? "s" : ""}.`);
+    setEmailDialog(null);
+  };
+
+  const copyEmails = () => {
+    if (!emailDialog) return;
+    navigator.clipboard.writeText(emailDialog.recipients.join(", "));
+    toast.success(`Copied ${emailDialog.recipients.length} email${emailDialog.recipients.length > 1 ? "s" : ""} to clipboard.`);
+  };
 
   const remove = async (id: string) => {
     if (!confirm("Delete this application? This cannot be undone.")) return;
@@ -185,6 +254,7 @@ export default function AdminGjpApplications() {
       "Graduation Year": r.graduation_year || "",
       "NYSC Completed": r.nysc_completed ? "Yes" : "No",
       "NYSC Year": r.nysc_year || "",
+      "Interested in Tech": r.interested_in_tech ? "Yes" : "No",
       "Career Path": r.career_path,
       "Current Status": r.current_status || "",
       "CAP/FLIP Alumnus": r.is_cap_flip_alumnus ? "Yes" : "No",
