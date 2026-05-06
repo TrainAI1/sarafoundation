@@ -293,10 +293,26 @@ export default function AdminGjpApplications() {
             <Briefcase className="w-5 h-5" /> GJP Applications
           </h1>
           <p className="text-muted-foreground text-sm">
-            {stats.total} total · {stats.paid} paid · {stats.pending} pending
+            {stats.total} total · {stats.tech} tech · {stats.total - stats.tech} non-tech
           </p>
         </div>
-        <div className="flex gap-2">
+        <div className="flex flex-wrap gap-2">
+          <Button
+            onClick={() => openEmail("selected")}
+            size="sm"
+            variant="outline"
+            disabled={selectedIds.size === 0}
+          >
+            <Mail className="w-4 h-4" /> Email selected ({selectedIds.size})
+          </Button>
+          <Button
+            onClick={() => openEmail("filtered")}
+            size="sm"
+            variant="outline"
+            disabled={filtered.length === 0}
+          >
+            <Mail className="w-4 h-4" /> Email all filtered
+          </Button>
           <Button onClick={exportExcel} size="sm" disabled={filtered.length === 0}>
             <FileSpreadsheet className="w-4 h-4" /> Export Excel
           </Button>
@@ -317,6 +333,16 @@ export default function AdminGjpApplications() {
             </Button>
           ))}
         </div>
+        <Select value={techFilter} onValueChange={(v) => setTechFilter(v as typeof techFilter)}>
+          <SelectTrigger className="rounded-xl w-[160px]">
+            <SelectValue />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="all">All interests</SelectItem>
+            <SelectItem value="tech">Tech only</SelectItem>
+            <SelectItem value="non_tech">Non-tech only</SelectItem>
+          </SelectContent>
+        </Select>
         <Select value={stageFilter} onValueChange={setStageFilter}>
           <SelectTrigger className="rounded-xl w-[180px]">
             <SelectValue placeholder="All stages" />
@@ -341,6 +367,15 @@ export default function AdminGjpApplications() {
             <table className="w-full text-sm">
               <thead className="bg-secondary/50 text-xs uppercase text-muted-foreground">
                 <tr>
+                  <th className="px-3 py-3 w-8">
+                    <input
+                      type="checkbox"
+                      aria-label="Select all"
+                      checked={filtered.length > 0 && filtered.every((r) => selectedIds.has(r.id))}
+                      onChange={toggleSelectAllFiltered}
+                      className="h-4 w-4 rounded border-border accent-primary cursor-pointer"
+                    />
+                  </th>
                   <th className="text-left px-4 py-3">Applicant</th>
                   <th className="text-left px-4 py-3 hidden md:table-cell">Institution</th>
                   <th className="text-left px-4 py-3">Career Path</th>
@@ -353,6 +388,15 @@ export default function AdminGjpApplications() {
               <tbody>
                 {filtered.map((r) => (
                   <tr key={r.id} className="border-t border-border hover:bg-secondary/30">
+                    <td className="px-3 py-3">
+                      <input
+                        type="checkbox"
+                        aria-label={`Select ${r.full_name}`}
+                        checked={selectedIds.has(r.id)}
+                        onChange={() => toggleSelect(r.id)}
+                        className="h-4 w-4 rounded border-border accent-primary cursor-pointer"
+                      />
+                    </td>
                     <td className="px-4 py-3">
                       <p className="font-medium text-foreground">{r.full_name}</p>
                       <p className="text-xs text-muted-foreground">{r.email}</p>
@@ -363,9 +407,18 @@ export default function AdminGjpApplications() {
                       <p className="text-xs text-muted-foreground">{r.graduation_year}</p>
                     </td>
                     <td className="px-4 py-3">
-                      <span className="px-2 py-1 rounded-full text-xs font-medium bg-primary/10 text-primary">
-                        {r.career_path}
-                      </span>
+                      <div className="flex flex-col gap-1">
+                        <span className="px-2 py-1 rounded-full text-xs font-medium bg-primary/10 text-primary w-fit">
+                          {r.career_path}
+                        </span>
+                        {r.interested_in_tech ? (
+                          <span className="inline-flex items-center gap-1 text-[10px] text-emerald-600 dark:text-emerald-400 font-semibold">
+                            <Code2 className="w-3 h-3" /> Tech
+                          </span>
+                        ) : (
+                          <span className="text-[10px] text-muted-foreground font-medium">Non-tech</span>
+                        )}
+                      </div>
                     </td>
                     <td className="px-4 py-3 hidden sm:table-cell text-xs text-foreground">
                       {r.nysc_completed ? "✓ Completed" : "—"}
@@ -381,6 +434,9 @@ export default function AdminGjpApplications() {
                       </span>
                     </td>
                     <td className="px-4 py-3 text-right whitespace-nowrap">
+                      <Button variant="ghost" size="icon" onClick={() => openEmail("single", r)} title="Email applicant">
+                        <Mail className="w-4 h-4" />
+                      </Button>
                       <Button variant="ghost" size="icon" onClick={() => setSelected(r)}>
                         <Eye className="w-4 h-4" />
                       </Button>
@@ -416,6 +472,7 @@ export default function AdminGjpApplications() {
               <Detail label="NYSC Year" value={selected.nysc_year || "—"} />
               <hr className="border-border" />
               <Detail label="Career Path" value={selected.career_path} />
+              <Detail label="Interested in Tech" value={selected.interested_in_tech ? "Yes" : "No"} />
               <Detail label="Current Status" value={selected.current_status || "—"} />
               <Detail label="CAP/FLIP Alumnus" value={selected.is_cap_flip_alumnus ? "Yes" : "No"} />
               <Detail label="Cohort" value={selected.cap_flip_cohort || "—"} />
@@ -454,6 +511,84 @@ export default function AdminGjpApplications() {
                 <p className="text-[10px] text-muted-foreground">
                   Last updated {format(new Date(selected.status_updated_at), "PPpp")}
                 </p>
+              </div>
+              <Button
+                onClick={() => { openEmail("single", selected); setSelected(null); }}
+                variant="outline"
+                size="sm"
+                className="w-full rounded-xl"
+              >
+                <Mail className="w-4 h-4" /> Email this applicant
+              </Button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {emailDialog && (
+        <div
+          className="fixed inset-0 z-50 flex items-end sm:items-center justify-center p-0 sm:p-4 bg-foreground/40"
+          onClick={() => setEmailDialog(null)}
+        >
+          <div
+            className="bg-card w-full sm:max-w-lg rounded-t-2xl sm:rounded-2xl shadow-2xl max-h-[90vh] overflow-y-auto"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="sticky top-0 bg-card border-b border-border px-5 py-3 flex items-center justify-between">
+              <h3 className="font-display font-bold text-foreground flex items-center gap-2">
+                <Mail className="w-4 h-4" />
+                {emailDialog.mode === "single" ? "Email applicant" : `Email ${emailDialog.recipients.length} applicants`}
+              </h3>
+              <Button variant="ghost" size="icon" onClick={() => setEmailDialog(null)}>
+                <X className="w-4 h-4" />
+              </Button>
+            </div>
+            <div className="p-5 space-y-4 text-sm">
+              <div className="rounded-xl bg-secondary/40 p-3 text-xs text-muted-foreground">
+                {emailDialog.mode === "single" ? (
+                  <p><strong>To:</strong> {emailDialog.recipients[0]}</p>
+                ) : (
+                  <>
+                    <p className="font-semibold text-foreground mb-1">
+                      {emailDialog.recipients.length} recipients (sent as BCC for privacy)
+                    </p>
+                    <p className="line-clamp-3 break-words">
+                      {emailDialog.recipients.slice(0, 8).join(", ")}
+                      {emailDialog.recipients.length > 8 && ` …and ${emailDialog.recipients.length - 8} more`}
+                    </p>
+                  </>
+                )}
+              </div>
+              <div>
+                <Label htmlFor="email-subject" className="text-xs">Subject</Label>
+                <Input
+                  id="email-subject"
+                  value={emailSubject}
+                  onChange={(e) => setEmailSubject(e.target.value)}
+                  placeholder="GJP — update from Sara Foundation"
+                  className="mt-1 rounded-xl"
+                />
+              </div>
+              <div>
+                <Label htmlFor="email-body" className="text-xs">Message</Label>
+                <Textarea
+                  id="email-body"
+                  value={emailBody}
+                  onChange={(e) => setEmailBody(e.target.value)}
+                  placeholder="Hi, we have an update on your GJP application..."
+                  className="mt-1 rounded-xl min-h-[160px]"
+                />
+              </div>
+              <p className="text-[11px] text-muted-foreground">
+                This will open your default email client (Gmail, Outlook, Apple Mail) with the message pre-filled. You can review before sending.
+              </p>
+              <div className="flex flex-col-reverse sm:flex-row gap-2 sm:justify-between">
+                <Button variant="outline" size="sm" onClick={copyEmails} className="rounded-xl">
+                  Copy emails
+                </Button>
+                <Button onClick={sendEmail} size="sm" className="rounded-xl">
+                  <Mail className="w-4 h-4" /> Open in email client
+                </Button>
               </div>
             </div>
           </div>
