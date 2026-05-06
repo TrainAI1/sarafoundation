@@ -301,6 +301,7 @@ export type Database = {
           graduation_year: string | null
           id: string
           institution: string | null
+          interested_in_tech: boolean
           is_cap_flip_alumnus: boolean
           nysc_completed: boolean
           nysc_year: string | null
@@ -327,6 +328,7 @@ export type Database = {
           graduation_year?: string | null
           id?: string
           institution?: string | null
+          interested_in_tech?: boolean
           is_cap_flip_alumnus?: boolean
           nysc_completed: boolean
           nysc_year?: string | null
@@ -353,6 +355,7 @@ export type Database = {
           graduation_year?: string | null
           id?: string
           institution?: string | null
+          interested_in_tech?: boolean
           is_cap_flip_alumnus?: boolean
           nysc_completed?: boolean
           nysc_year?: string | null
