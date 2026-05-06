@@ -17,11 +17,21 @@ import { ArrowLeft, ArrowRight, CheckCircle2, Loader2, Briefcase } from "lucide-
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
 
-const careerPaths = [
-  "Tech / Software", "Data / Analytics", "Product / Design",
-  "Finance / Accounting", "Marketing / Communications", "Operations / Admin",
-  "Education / Training", "Engineering", "Health Sciences",
-  "Law / Public Policy", "Other",
+const techCareerPaths = [
+  "Software / Coding",
+  "Product Management",
+  "Product Marketing",
+  "Product / Design",
+  "Data / Analytics",
+  "Cybersecurity",
+  "Engineering (Tech)",
+];
+
+const nonTechCareerPaths = [
+  "Education / Training",
+  "Marketing / Communications",
+  "Operations / Admin",
+  "Other",
 ];
 
 const referralSources = [
@@ -40,6 +50,7 @@ const schema = z.object({
   graduation_year: z.string().trim().max(10).optional().or(z.literal("")),
   nysc_completed: z.enum(["yes", "no"]),
   nysc_year: z.string().trim().max(10).optional().or(z.literal("")),
+  interested_in_tech: z.enum(["yes", "no"]),
   career_path: z.string().min(1, "Select your career path").max(150),
   current_status: z.string().max(50).optional().or(z.literal("")),
   state_of_residence: z.string().trim().max(100).optional().or(z.literal("")),
@@ -55,6 +66,7 @@ const initial: FormState = {
   full_name: "", email: "", whatsapp: "",
   graduated: "yes", institution: "", graduation_year: "",
   nysc_completed: "yes", nysc_year: "",
+  interested_in_tech: "yes",
   career_path: "", current_status: "", state_of_residence: "",
   is_cap_flip_alumnus: "no", cap_flip_cohort: "",
   referral_source: "", additional_info: "",
@@ -63,7 +75,7 @@ const initial: FormState = {
 const stepFields: Record<number, (keyof FormState)[]> = {
   1: ["full_name", "email", "whatsapp", "state_of_residence"],
   2: ["graduated", "institution", "graduation_year", "nysc_completed", "nysc_year"],
-  3: ["career_path", "current_status", "is_cap_flip_alumnus", "cap_flip_cohort", "referral_source", "additional_info"],
+  3: ["interested_in_tech", "career_path", "current_status", "is_cap_flip_alumnus", "cap_flip_cohort", "referral_source", "additional_info"],
 };
 
 export default function GJPApply() {
@@ -76,7 +88,15 @@ export default function GJPApply() {
   const total = 3;
   const progress = (step / total) * 100;
   const set = <K extends keyof FormState>(k: K, v: FormState[K]) =>
-    setData((p) => ({ ...p, [k]: v }));
+    setData((p) => {
+      const next = { ...p, [k]: v } as FormState;
+      // Reset career path when tech interest toggles, since options differ
+      if (k === "interested_in_tech") next.career_path = "";
+      return next;
+    });
+
+  const careerOptions =
+    data.interested_in_tech === "yes" ? techCareerPaths : nonTechCareerPaths;
 
   const validateStep = (s: number) => {
     const newErrors: Partial<Record<keyof FormState, string>> = {};
@@ -129,6 +149,7 @@ export default function GJPApply() {
         graduation_year: data.graduation_year?.trim() || null,
         nysc_completed: data.nysc_completed === "yes",
         nysc_year: data.nysc_year?.trim() || null,
+        interested_in_tech: data.interested_in_tech === "yes",
         career_path: data.career_path,
         current_status: data.current_status || null,
         state_of_residence: data.state_of_residence?.trim() || null,
@@ -275,11 +296,43 @@ export default function GJPApply() {
               <div className="space-y-5">
                 <h2 className="font-display font-bold text-xl text-foreground">Career & Background</h2>
                 <div>
+                  <Label>Are you interested in a career in tech? *</Label>
+                  <RadioGroup
+                    value={data.interested_in_tech}
+                    onValueChange={(v) => set("interested_in_tech", v as "yes" | "no")}
+                    className="mt-2 grid grid-cols-2 gap-2"
+                  >
+                    {[["yes", "Yes"], ["no", "No"]].map(([v, l]) => (
+                      <Label key={v} htmlFor={`tech-${v}`}
+                        className="flex items-center gap-2 p-3 rounded-xl border border-border hover:border-primary cursor-pointer">
+                        <RadioGroupItem value={v} id={`tech-${v}`} />
+                        <span className="text-sm font-normal">{l}</span>
+                      </Label>
+                    ))}
+                  </RadioGroup>
+                  {data.interested_in_tech === "yes" && (
+                    <p className="text-xs text-muted-foreground mt-2">
+                      Great — these are the tech areas Sara Foundation focuses on. Pick the one closest to your interest.
+                    </p>
+                  )}
+                  {data.interested_in_tech === "no" && (
+                    <div className="mt-3 rounded-xl bg-amber-500/10 border border-amber-500/30 p-3 text-xs text-foreground">
+                      <p className="font-semibold mb-1">Heads up</p>
+                      <p className="text-muted-foreground">
+                        Tech applications are <strong>prioritized</strong> over non-tech ones, since most of our placement partners hire for tech and tech-adjacent roles. We currently <strong>don't cover finance, law, or health services</strong>. You can still apply in one of the areas below.
+                      </p>
+                    </div>
+                  )}
+                </div>
+
+                <div>
                   <Label>Career Path *</Label>
                   <Select value={data.career_path} onValueChange={(v) => set("career_path", v)}>
-                    <SelectTrigger className="mt-1.5 rounded-xl"><SelectValue placeholder="Choose your career path" /></SelectTrigger>
+                    <SelectTrigger className="mt-1.5 rounded-xl">
+                      <SelectValue placeholder={data.interested_in_tech === "yes" ? "Choose a tech area" : "Choose a non-tech area"} />
+                    </SelectTrigger>
                     <SelectContent>
-                      {careerPaths.map((s) => <SelectItem key={s} value={s}>{s}</SelectItem>)}
+                      {careerOptions.map((s) => <SelectItem key={s} value={s}>{s}</SelectItem>)}
                     </SelectContent>
                   </Select>
                   {errors.career_path && <p className="text-destructive text-xs mt-1">{errors.career_path}</p>}
