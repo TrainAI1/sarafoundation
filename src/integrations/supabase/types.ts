@@ -313,6 +313,7 @@ export type Database = {
           state_of_residence: string | null
           status_notes: string | null
           status_updated_at: string
+          tech_skills_rating: string | null
           whatsapp: string
         }
         Insert: {
@@ -340,6 +341,7 @@ export type Database = {
           state_of_residence?: string | null
           status_notes?: string | null
           status_updated_at?: string
+          tech_skills_rating?: string | null
           whatsapp: string
         }
         Update: {
@@ -367,6 +369,7 @@ export type Database = {
           state_of_residence?: string | null
           status_notes?: string | null
           status_updated_at?: string
+          tech_skills_rating?: string | null
           whatsapp?: string
         }
         Relationships: []
