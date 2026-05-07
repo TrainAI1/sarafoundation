@@ -492,7 +492,7 @@ export default function AdminGjpApplications() {
               <Detail label="NYSC Year" value={selected.nysc_year || "—"} />
               <hr className="border-border" />
               <Detail label="Career Path" value={selected.career_path} />
-              <Detail label="Interested in Tech" value={selected.interested_in_tech ? "Yes" : "No"} />
+              <Detail label="Interested in Tech" value={isTechPath(selected.career_path) ? "Yes" : "No"} />
               <Detail label="Tech Skills & Rating" value={selected.tech_skills_rating || "—"} />
               <Detail label="Current Status" value={selected.current_status || "—"} />
               <Detail label="CAP/FLIP Alumnus" value={selected.is_cap_flip_alumnus ? "Yes" : "No"} />
