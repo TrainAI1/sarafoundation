@@ -25,6 +25,8 @@ const techCareerPaths = [
   "Data / Analytics",
   "Cybersecurity",
   "Engineering (Tech)",
+  "Tech Entrepreneurship",
+  "Business Analysis",
 ];
 
 const nonTechCareerPaths = [
@@ -52,6 +54,7 @@ const schema = z.object({
   nysc_year: z.string().trim().max(10).optional().or(z.literal("")),
   interested_in_tech: z.enum(["yes", "no"]),
   career_path: z.string().min(1, "Select your career path").max(150),
+  tech_skills_rating: z.string().trim().max(1000).optional().or(z.literal("")),
   current_status: z.string().max(50).optional().or(z.literal("")),
   state_of_residence: z.string().trim().max(100).optional().or(z.literal("")),
   is_cap_flip_alumnus: z.enum(["yes", "no"]),
@@ -67,7 +70,7 @@ const initial: FormState = {
   graduated: "yes", institution: "", graduation_year: "",
   nysc_completed: "yes", nysc_year: "",
   interested_in_tech: "yes",
-  career_path: "", current_status: "", state_of_residence: "",
+  career_path: "", tech_skills_rating: "", current_status: "", state_of_residence: "",
   is_cap_flip_alumnus: "no", cap_flip_cohort: "",
   referral_source: "", additional_info: "",
 };
@@ -111,6 +114,9 @@ export default function GJPApply() {
     }
     if (s === 3) {
       if (!data.career_path) newErrors.career_path = "Select a career path";
+      if (data.interested_in_tech === "yes" && !data.tech_skills_rating?.trim()) {
+        newErrors.tech_skills_rating = "List at least one tech skill and rate yourself 1-10";
+      }
       if (data.is_cap_flip_alumnus === "yes" && !data.cap_flip_cohort?.trim()) {
         newErrors.cap_flip_cohort = "Tell us your cohort";
       }
@@ -151,6 +157,9 @@ export default function GJPApply() {
         nysc_year: data.nysc_year?.trim() || null,
         interested_in_tech: data.interested_in_tech === "yes",
         career_path: data.career_path,
+        tech_skills_rating: data.interested_in_tech === "yes"
+          ? (data.tech_skills_rating?.trim() || null)
+          : null,
         current_status: data.current_status || null,
         state_of_residence: data.state_of_residence?.trim() || null,
         is_cap_flip_alumnus: data.is_cap_flip_alumnus === "yes",
@@ -337,6 +346,25 @@ export default function GJPApply() {
                   </Select>
                   {errors.career_path && <p className="text-destructive text-xs mt-1">{errors.career_path}</p>}
                 </div>
+
+                {data.interested_in_tech === "yes" && (
+                  <div>
+                    <Label htmlFor="tech_skills_rating">Tech skills & self-rating *</Label>
+                    <Textarea
+                      id="tech_skills_rating"
+                      value={data.tech_skills_rating}
+                      onChange={(e) => set("tech_skills_rating", e.target.value)}
+                      className="mt-1.5 rounded-xl min-h-[100px]"
+                      placeholder={"List the tech skills you have and rate yourself 1–10.\n\nExample:\nProduct Management 7\nFigma / UI Design 6\nSQL 4"}
+                    />
+                    <p className="text-xs text-muted-foreground mt-1">
+                      Be honest — this helps us shortlist applicants who already have some technical skills.
+                    </p>
+                    {errors.tech_skills_rating && (
+                      <p className="text-destructive text-xs mt-1">{errors.tech_skills_rating}</p>
+                    )}
+                  </div>
+                )}
 
                 <div>
                   <Label>Current Employment Status</Label>
