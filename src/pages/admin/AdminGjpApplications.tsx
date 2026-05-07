@@ -431,7 +431,7 @@ export default function AdminGjpApplications() {
                         <span className="px-2 py-1 rounded-full text-xs font-medium bg-primary/10 text-primary w-fit">
                           {r.career_path}
                         </span>
-                        {r.interested_in_tech ? (
+                        {isTechPath(r.career_path) ? (
                           <span className="inline-flex items-center gap-1 text-[10px] text-emerald-600 dark:text-emerald-400 font-semibold">
                             <Code2 className="w-3 h-3" /> Tech
                           </span>
