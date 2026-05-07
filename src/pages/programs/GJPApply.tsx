@@ -347,6 +347,25 @@ export default function GJPApply() {
                   {errors.career_path && <p className="text-destructive text-xs mt-1">{errors.career_path}</p>}
                 </div>
 
+                {data.interested_in_tech === "yes" && (
+                  <div>
+                    <Label htmlFor="tech_skills_rating">Tech skills & self-rating *</Label>
+                    <Textarea
+                      id="tech_skills_rating"
+                      value={data.tech_skills_rating}
+                      onChange={(e) => set("tech_skills_rating", e.target.value)}
+                      className="mt-1.5 rounded-xl min-h-[100px]"
+                      placeholder={"List the tech skills you have and rate yourself 1–10.\n\nExample:\nProduct Management 7\nFigma / UI Design 6\nSQL 4"}
+                    />
+                    <p className="text-xs text-muted-foreground mt-1">
+                      Be honest — this helps us shortlist applicants who already have some technical skills.
+                    </p>
+                    {errors.tech_skills_rating && (
+                      <p className="text-destructive text-xs mt-1">{errors.tech_skills_rating}</p>
+                    )}
+                  </div>
+                )}
+
                 <div>
                   <Label>Current Employment Status</Label>
                   <Select value={data.current_status} onValueChange={(v) => set("current_status", v)}>
