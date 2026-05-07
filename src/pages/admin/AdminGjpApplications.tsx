@@ -10,6 +10,23 @@ import { Download, FileSpreadsheet, Eye, Trash2, Briefcase, X, Save, Mail, Code2
 import { format } from "date-fns";
 import * as XLSX from "xlsx";
 
+// Authoritative list of tech career paths. Used to derive the tech/non-tech
+// flag from career_path so legacy/incorrect interested_in_tech values can't
+// miscategorize an applicant in the dashboard.
+const TECH_CAREER_PATHS = new Set<string>([
+  "Software / Coding",
+  "Product Management",
+  "Product Marketing",
+  "Product / Design",
+  "Data / Analytics",
+  "Cybersecurity",
+  "Engineering (Tech)",
+  "Tech Entrepreneurship",
+  "Business Analysis",
+]);
+const isTechPath = (career_path: string | null | undefined) =>
+  !!career_path && TECH_CAREER_PATHS.has(career_path);
+
 interface GjpApp {
   id: string;
   full_name: string;
@@ -103,8 +120,9 @@ export default function AdminGjpApplications() {
     return rows.filter((r) => {
       if (filter !== "all" && r.payment_status !== filter) return false;
       if (stageFilter !== "all" && r.applicant_status !== stageFilter) return false;
-      if (techFilter === "tech" && !r.interested_in_tech) return false;
-      if (techFilter === "non_tech" && r.interested_in_tech) return false;
+      const tech = isTechPath(r.career_path);
+      if (techFilter === "tech" && !tech) return false;
+      if (techFilter === "non_tech" && tech) return false;
       if (search) {
         const q = search.toLowerCase();
         return (
@@ -122,7 +140,7 @@ export default function AdminGjpApplications() {
     total: rows.length,
     paid: rows.filter((r) => r.payment_status === "paid").length,
     pending: rows.filter((r) => r.payment_status === "pending").length,
-    tech: rows.filter((r) => r.interested_in_tech).length,
+    tech: rows.filter((r) => isTechPath(r.career_path)).length,
   }), [rows]);
 
   const toggleSelect = (id: string) => {
@@ -255,7 +273,7 @@ export default function AdminGjpApplications() {
       "Graduation Year": r.graduation_year || "",
       "NYSC Completed": r.nysc_completed ? "Yes" : "No",
       "NYSC Year": r.nysc_year || "",
-      "Interested in Tech": r.interested_in_tech ? "Yes" : "No",
+      "Interested in Tech": isTechPath(r.career_path) ? "Yes" : "No",
       "Career Path": r.career_path,
       "Tech Skills & Rating": r.tech_skills_rating || "",
       "Current Status": r.current_status || "",
@@ -413,7 +431,7 @@ export default function AdminGjpApplications() {
                         <span className="px-2 py-1 rounded-full text-xs font-medium bg-primary/10 text-primary w-fit">
                           {r.career_path}
                         </span>
-                        {r.interested_in_tech ? (
+                        {isTechPath(r.career_path) ? (
                           <span className="inline-flex items-center gap-1 text-[10px] text-emerald-600 dark:text-emerald-400 font-semibold">
                             <Code2 className="w-3 h-3" /> Tech
                           </span>
@@ -474,7 +492,7 @@ export default function AdminGjpApplications() {
               <Detail label="NYSC Year" value={selected.nysc_year || "—"} />
               <hr className="border-border" />
               <Detail label="Career Path" value={selected.career_path} />
-              <Detail label="Interested in Tech" value={selected.interested_in_tech ? "Yes" : "No"} />
+              <Detail label="Interested in Tech" value={isTechPath(selected.career_path) ? "Yes" : "No"} />
               <Detail label="Tech Skills & Rating" value={selected.tech_skills_rating || "—"} />
               <Detail label="Current Status" value={selected.current_status || "—"} />
               <Detail label="CAP/FLIP Alumnus" value={selected.is_cap_flip_alumnus ? "Yes" : "No"} />
