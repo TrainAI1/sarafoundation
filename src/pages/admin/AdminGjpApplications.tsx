@@ -22,6 +22,7 @@ interface GjpApp {
   nysc_year: string | null;
   interested_in_tech: boolean;
   career_path: string;
+  tech_skills_rating: string | null;
   current_status: string | null;
   state_of_residence: string | null;
   is_cap_flip_alumnus: boolean;
@@ -256,6 +257,7 @@ export default function AdminGjpApplications() {
       "NYSC Year": r.nysc_year || "",
       "Interested in Tech": r.interested_in_tech ? "Yes" : "No",
       "Career Path": r.career_path,
+      "Tech Skills & Rating": r.tech_skills_rating || "",
       "Current Status": r.current_status || "",
       "CAP/FLIP Alumnus": r.is_cap_flip_alumnus ? "Yes" : "No",
       "Cohort": r.cap_flip_cohort || "",
@@ -473,6 +475,7 @@ export default function AdminGjpApplications() {
               <hr className="border-border" />
               <Detail label="Career Path" value={selected.career_path} />
               <Detail label="Interested in Tech" value={selected.interested_in_tech ? "Yes" : "No"} />
+              <Detail label="Tech Skills & Rating" value={selected.tech_skills_rating || "—"} />
               <Detail label="Current Status" value={selected.current_status || "—"} />
               <Detail label="CAP/FLIP Alumnus" value={selected.is_cap_flip_alumnus ? "Yes" : "No"} />
               <Detail label="Cohort" value={selected.cap_flip_cohort || "—"} />
