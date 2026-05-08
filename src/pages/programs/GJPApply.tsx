@@ -276,9 +276,18 @@ export default function GJPApply() {
                     </div>
                     <div>
                       <Label htmlFor="graduation_year">Graduation Year</Label>
-                      <Input id="graduation_year" value={data.graduation_year}
-                        onChange={(e) => set("graduation_year", e.target.value)}
-                        className="mt-1.5 rounded-xl" placeholder="2023" />
+                      <Select value={data.graduation_year} onValueChange={(v) => set("graduation_year", v)}>
+                        <SelectTrigger className="mt-1.5 rounded-xl">
+                          <SelectValue placeholder="Select year" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          {graduationYears.map((y) => <SelectItem key={y} value={y}>{y}</SelectItem>)}
+                        </SelectContent>
+                      </Select>
+                      <p className="text-xs text-muted-foreground mt-1">
+                        Only graduates from 2022–2026 can apply.
+                      </p>
+                      {errors.graduation_year && <p className="text-destructive text-xs mt-1">{errors.graduation_year}</p>}
                     </div>
                   </div>
                 )}
@@ -296,11 +305,19 @@ export default function GJPApply() {
                   </RadioGroup>
                 </div>
                 {data.nysc_completed === "yes" && (
-                  <div>
-                    <Label htmlFor="nysc_year">NYSC Pass-Out Year</Label>
-                    <Input id="nysc_year" value={data.nysc_year}
-                      onChange={(e) => set("nysc_year", e.target.value)}
-                      className="mt-1.5 rounded-xl max-w-xs" placeholder="2024" />
+                  <div className="grid sm:grid-cols-2 gap-4">
+                    <div>
+                      <Label htmlFor="nysc_year">NYSC Pass-Out Year</Label>
+                      <Input id="nysc_year" value={data.nysc_year}
+                        onChange={(e) => set("nysc_year", e.target.value)}
+                        className="mt-1.5 rounded-xl" placeholder="2024" />
+                    </div>
+                    <div>
+                      <Label htmlFor="nysc_number">NYSC Call-Up Number (optional)</Label>
+                      <Input id="nysc_number" value={data.nysc_number}
+                        onChange={(e) => set("nysc_number", e.target.value)}
+                        className="mt-1.5 rounded-xl" placeholder="e.g. NYSC/ABC/2024/12345" />
+                    </div>
                   </div>
                 )}
                 {data.nysc_completed === "no" && (
