@@ -51,7 +51,7 @@ const schema = z.object({
   whatsapp: z.string().trim().min(7, "Enter a valid WhatsApp number").max(30),
   graduated: z.enum(["yes", "no"]),
   institution: z.string().trim().max(200).optional().or(z.literal("")),
-  graduation_year: z.string().trim().max(10),
+  graduation_year: z.string().trim().max(10).optional().or(z.literal("")),
   nysc_completed: z.enum(["yes", "no"]),
   nysc_year: z.string().trim().max(10).optional().or(z.literal("")),
   nysc_number: z.string().trim().max(50).optional().or(z.literal("")),
