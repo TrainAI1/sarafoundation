@@ -13,7 +13,6 @@ import { toast } from "sonner";
 type Status = {
   full_name: string;
   career_path: string;
-  payment_status: string;
   applicant_status: string;
   status_notes: string | null;
   status_updated_at: string;

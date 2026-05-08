@@ -29,6 +29,8 @@ const techCareerPaths = [
   "Business Analysis",
 ];
 
+const graduationYears = ["2022", "2023", "2024", "2025", "2026"];
+
 const nonTechCareerPaths = [
   "Education / Training",
   "Marketing / Communications",
@@ -52,6 +54,7 @@ const schema = z.object({
   graduation_year: z.string().trim().max(10).optional().or(z.literal("")),
   nysc_completed: z.enum(["yes", "no"]),
   nysc_year: z.string().trim().max(10).optional().or(z.literal("")),
+  nysc_number: z.string().trim().max(50).optional().or(z.literal("")),
   interested_in_tech: z.enum(["yes", "no"]),
   career_path: z.string().min(1, "Select your career path").max(150),
   tech_skills_rating: z.string().trim().max(1000).optional().or(z.literal("")),
@@ -68,7 +71,7 @@ type FormState = z.infer<typeof schema>;
 const initial: FormState = {
   full_name: "", email: "", whatsapp: "",
   graduated: "yes", institution: "", graduation_year: "",
-  nysc_completed: "yes", nysc_year: "",
+  nysc_completed: "yes", nysc_year: "", nysc_number: "",
   interested_in_tech: "yes",
   career_path: "", tech_skills_rating: "", current_status: "", state_of_residence: "",
   is_cap_flip_alumnus: "no", cap_flip_cohort: "",
@@ -77,7 +80,7 @@ const initial: FormState = {
 
 const stepFields: Record<number, (keyof FormState)[]> = {
   1: ["full_name", "email", "whatsapp", "state_of_residence"],
-  2: ["graduated", "institution", "graduation_year", "nysc_completed", "nysc_year"],
+  2: ["graduated", "institution", "graduation_year", "nysc_completed", "nysc_year", "nysc_number"],
   3: ["interested_in_tech", "career_path", "current_status", "is_cap_flip_alumnus", "cap_flip_cohort", "referral_source", "additional_info"],
 };
 
@@ -111,6 +114,13 @@ export default function GJPApply() {
     }
     if (s === 2) {
       if (data.graduated === "yes" && !data.institution?.trim()) newErrors.institution = "Required";
+      if (data.graduated === "yes") {
+        if (!data.graduation_year) {
+          newErrors.graduation_year = "Required";
+        } else if (!graduationYears.includes(data.graduation_year)) {
+          newErrors.graduation_year = "Only graduates from 2022–2026 can apply";
+        }
+      }
     }
     if (s === 3) {
       if (!data.career_path) newErrors.career_path = "Select a career path";
@@ -155,6 +165,7 @@ export default function GJPApply() {
         graduation_year: data.graduation_year?.trim() || null,
         nysc_completed: data.nysc_completed === "yes",
         nysc_year: data.nysc_year?.trim() || null,
+        nysc_number: data.nysc_number?.trim() || null,
         interested_in_tech: data.interested_in_tech === "yes",
         career_path: data.career_path,
         tech_skills_rating: data.interested_in_tech === "yes"
@@ -166,7 +177,6 @@ export default function GJPApply() {
         cap_flip_cohort: data.cap_flip_cohort?.trim() || null,
         referral_source: data.referral_source || null,
         additional_info: data.additional_info?.trim() || null,
-        payment_status: "pending",
       })
       .select("id")
       .single();
@@ -266,9 +276,18 @@ export default function GJPApply() {
                     </div>
                     <div>
                       <Label htmlFor="graduation_year">Graduation Year</Label>
-                      <Input id="graduation_year" value={data.graduation_year}
-                        onChange={(e) => set("graduation_year", e.target.value)}
-                        className="mt-1.5 rounded-xl" placeholder="2023" />
+                      <Select value={data.graduation_year} onValueChange={(v) => set("graduation_year", v)}>
+                        <SelectTrigger className="mt-1.5 rounded-xl">
+                          <SelectValue placeholder="Select year" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          {graduationYears.map((y) => <SelectItem key={y} value={y}>{y}</SelectItem>)}
+                        </SelectContent>
+                      </Select>
+                      <p className="text-xs text-muted-foreground mt-1">
+                        Only graduates from 2022–2026 can apply.
+                      </p>
+                      {errors.graduation_year && <p className="text-destructive text-xs mt-1">{errors.graduation_year}</p>}
                     </div>
                   </div>
                 )}
@@ -286,11 +305,19 @@ export default function GJPApply() {
                   </RadioGroup>
                 </div>
                 {data.nysc_completed === "yes" && (
-                  <div>
-                    <Label htmlFor="nysc_year">NYSC Pass-Out Year</Label>
-                    <Input id="nysc_year" value={data.nysc_year}
-                      onChange={(e) => set("nysc_year", e.target.value)}
-                      className="mt-1.5 rounded-xl max-w-xs" placeholder="2024" />
+                  <div className="grid sm:grid-cols-2 gap-4">
+                    <div>
+                      <Label htmlFor="nysc_year">NYSC Pass-Out Year</Label>
+                      <Input id="nysc_year" value={data.nysc_year}
+                        onChange={(e) => set("nysc_year", e.target.value)}
+                        className="mt-1.5 rounded-xl" placeholder="2024" />
+                    </div>
+                    <div>
+                      <Label htmlFor="nysc_number">NYSC Call-Up Number (optional)</Label>
+                      <Input id="nysc_number" value={data.nysc_number}
+                        onChange={(e) => set("nysc_number", e.target.value)}
+                        className="mt-1.5 rounded-xl" placeholder="e.g. NYSC/ABC/2024/12345" />
+                    </div>
                   </div>
                 )}
                 {data.nysc_completed === "no" && (

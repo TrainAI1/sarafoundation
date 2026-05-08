@@ -6,13 +6,10 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { toast } from "sonner";
-import { Download, FileSpreadsheet, Eye, Trash2, Briefcase, X, Save, Mail, Code2 } from "lucide-react";
+import { Download, FileSpreadsheet, Eye, Trash2, Briefcase, X, Save, Mail, Code2, Filter } from "lucide-react";
 import { format } from "date-fns";
 import * as XLSX from "xlsx";
 
-// Authoritative list of tech career paths. Used to derive the tech/non-tech
-// flag from career_path so legacy/incorrect interested_in_tech values can't
-// miscategorize an applicant in the dashboard.
 const TECH_CAREER_PATHS = new Set<string>([
   "Software / Coding",
   "Product Management",
@@ -37,6 +34,7 @@ interface GjpApp {
   graduation_year: string | null;
   nysc_completed: boolean;
   nysc_year: string | null;
+  nysc_number: string | null;
   interested_in_tech: boolean;
   career_path: string;
   tech_skills_rating: string | null;
@@ -46,21 +44,11 @@ interface GjpApp {
   cap_flip_cohort: string | null;
   referral_source: string | null;
   additional_info: string | null;
-  payment_status: string;
-  payment_amount: number | null;
-  paystack_reference: string | null;
   created_at: string;
-  paid_at: string | null;
   applicant_status: string;
   status_notes: string | null;
   status_updated_at: string;
 }
-
-const statusColors: Record<string, string> = {
-  paid: "bg-emerald-500/15 text-emerald-700 dark:text-emerald-400",
-  pending: "bg-amber-500/15 text-amber-700 dark:text-amber-400",
-  failed: "bg-destructive/15 text-destructive",
-};
 
 const applicantStatusOptions = [
   { value: "submitted", label: "Submitted" },
@@ -85,10 +73,16 @@ const applicantStatusColors: Record<string, string> = {
 export default function AdminGjpApplications() {
   const [rows, setRows] = useState<GjpApp[]>([]);
   const [loading, setLoading] = useState(true);
-  const [filter, setFilter] = useState<"all" | "paid" | "pending">("all");
   const [stageFilter, setStageFilter] = useState<string>("all");
   const [techFilter, setTechFilter] = useState<"all" | "tech" | "non_tech">("all");
+  const [careerFilter, setCareerFilter] = useState<string>("all");
+  const [nyscFilter, setNyscFilter] = useState<"all" | "yes" | "no">("all");
+  const [nyscYearFilter, setNyscYearFilter] = useState<string>("all");
+  const [gradYearFilter, setGradYearFilter] = useState<string>("all");
+  const [alumniFilter, setAlumniFilter] = useState<"all" | "yes" | "no">("all");
+  const [stateFilter, setStateFilter] = useState<string>("all");
   const [search, setSearch] = useState("");
+  const [showFilters, setShowFilters] = useState(false);
   const [selected, setSelected] = useState<GjpApp | null>(null);
   const [editStatus, setEditStatus] = useState<string>("submitted");
   const [editNotes, setEditNotes] = useState<string>("");
@@ -103,7 +97,7 @@ export default function AdminGjpApplications() {
       .from("gjp_applications")
       .select("*")
       .order("created_at", { ascending: false });
-    setRows((data as GjpApp[]) || []);
+    setRows((data as unknown as GjpApp[]) || []);
     setLoading(false);
   };
 
@@ -116,32 +110,79 @@ export default function AdminGjpApplications() {
     }
   }, [selected]);
 
+  const careerPathOptions = useMemo(() => {
+    const set = new Set<string>();
+    rows.forEach((r) => r.career_path && set.add(r.career_path));
+    return Array.from(set).sort();
+  }, [rows]);
+
+  const nyscYears = useMemo(() => {
+    const set = new Set<string>();
+    rows.forEach((r) => r.nysc_year && set.add(r.nysc_year));
+    return Array.from(set).sort().reverse();
+  }, [rows]);
+
+  const gradYears = useMemo(() => {
+    const set = new Set<string>();
+    rows.forEach((r) => r.graduation_year && set.add(r.graduation_year));
+    return Array.from(set).sort().reverse();
+  }, [rows]);
+
+  const states = useMemo(() => {
+    const set = new Set<string>();
+    rows.forEach((r) => r.state_of_residence && set.add(r.state_of_residence));
+    return Array.from(set).sort();
+  }, [rows]);
+
   const filtered = useMemo(() => {
     return rows.filter((r) => {
-      if (filter !== "all" && r.payment_status !== filter) return false;
       if (stageFilter !== "all" && r.applicant_status !== stageFilter) return false;
       const tech = isTechPath(r.career_path);
       if (techFilter === "tech" && !tech) return false;
       if (techFilter === "non_tech" && tech) return false;
+      if (careerFilter !== "all" && r.career_path !== careerFilter) return false;
+      if (nyscFilter === "yes" && !r.nysc_completed) return false;
+      if (nyscFilter === "no" && r.nysc_completed) return false;
+      if (nyscYearFilter !== "all" && r.nysc_year !== nyscYearFilter) return false;
+      if (gradYearFilter !== "all" && r.graduation_year !== gradYearFilter) return false;
+      if (alumniFilter === "yes" && !r.is_cap_flip_alumnus) return false;
+      if (alumniFilter === "no" && r.is_cap_flip_alumnus) return false;
+      if (stateFilter !== "all" && r.state_of_residence !== stateFilter) return false;
       if (search) {
         const q = search.toLowerCase();
         return (
           r.email.toLowerCase().includes(q) ||
           r.full_name.toLowerCase().includes(q) ||
           (r.institution || "").toLowerCase().includes(q) ||
-          r.career_path.toLowerCase().includes(q)
+          r.career_path.toLowerCase().includes(q) ||
+          (r.nysc_number || "").toLowerCase().includes(q)
         );
       }
       return true;
     });
-  }, [rows, filter, stageFilter, techFilter, search]);
+  }, [rows, stageFilter, techFilter, careerFilter, nyscFilter, nyscYearFilter, gradYearFilter, alumniFilter, stateFilter, search]);
 
   const stats = useMemo(() => ({
     total: rows.length,
-    paid: rows.filter((r) => r.payment_status === "paid").length,
-    pending: rows.filter((r) => r.payment_status === "pending").length,
     tech: rows.filter((r) => isTechPath(r.career_path)).length,
+    nyscDone: rows.filter((r) => r.nysc_completed).length,
   }), [rows]);
+
+  const activeFilterCount =
+    (stageFilter !== "all" ? 1 : 0) +
+    (techFilter !== "all" ? 1 : 0) +
+    (careerFilter !== "all" ? 1 : 0) +
+    (nyscFilter !== "all" ? 1 : 0) +
+    (nyscYearFilter !== "all" ? 1 : 0) +
+    (gradYearFilter !== "all" ? 1 : 0) +
+    (alumniFilter !== "all" ? 1 : 0) +
+    (stateFilter !== "all" ? 1 : 0);
+
+  const resetFilters = () => {
+    setStageFilter("all"); setTechFilter("all"); setCareerFilter("all");
+    setNyscFilter("all"); setNyscYearFilter("all"); setGradYearFilter("all");
+    setAlumniFilter("all"); setStateFilter("all");
+  };
 
   const toggleSelect = (id: string) => {
     setSelectedIds((s) => {
@@ -185,7 +226,6 @@ export default function AdminGjpApplications() {
     const { recipients, mode } = emailDialog;
     const subject = encodeURIComponent(emailSubject);
     const body = encodeURIComponent(emailBody);
-    // For single: To. For bulk: BCC to protect recipients' privacy.
     let mailto: string;
     if (mode === "single") {
       mailto = `mailto:${recipients[0]}?subject=${subject}&body=${body}`;
@@ -230,10 +270,10 @@ export default function AdminGjpApplications() {
 
   const exportCsv = () => {
     const headers = [
-      "Created", "Status", "Paid Amount", "Full Name", "Email", "WhatsApp",
-      "State", "Graduated", "Institution", "Grad Year", "NYSC Completed", "NYSC Year",
-      "Career Path", "Current Status", "CAP/FLIP Alumnus", "Cohort", "Referral",
-      "Reference", "Paid At", "Applicant Status", "Status Notes", "Status Updated", "Additional Info",
+      "Created", "Full Name", "Email", "WhatsApp",
+      "State", "Graduated", "Institution", "Grad Year", "NYSC Completed", "NYSC Year", "NYSC Number",
+      "Tech Interest", "Career Path", "Tech Skills & Rating", "Current Status", "CAP/FLIP Alumnus", "Cohort", "Referral",
+      "Applicant Status", "Status Notes", "Status Updated", "Additional Info",
     ];
     const escape = (v: any) => {
       const s = v === null || v === undefined ? "" : String(v);
@@ -242,13 +282,14 @@ export default function AdminGjpApplications() {
     const lines = [headers.join(",")];
     filtered.forEach((r) => {
       lines.push([
-        r.created_at, r.payment_status, r.payment_amount,
+        r.created_at,
         r.full_name, r.email, r.whatsapp, r.state_of_residence,
         r.graduated, r.institution, r.graduation_year,
-        r.nysc_completed, r.nysc_year,
-        r.career_path, r.current_status,
+        r.nysc_completed, r.nysc_year, r.nysc_number,
+        isTechPath(r.career_path) ? "Yes" : "No",
+        r.career_path, r.tech_skills_rating, r.current_status,
         r.is_cap_flip_alumnus, r.cap_flip_cohort,
-        r.referral_source, r.paystack_reference, r.paid_at,
+        r.referral_source,
         r.applicant_status, r.status_notes, r.status_updated_at, r.additional_info,
       ].map(escape).join(","));
     });
@@ -273,6 +314,7 @@ export default function AdminGjpApplications() {
       "Graduation Year": r.graduation_year || "",
       "NYSC Completed": r.nysc_completed ? "Yes" : "No",
       "NYSC Year": r.nysc_year || "",
+      "NYSC Call-Up Number": r.nysc_number || "",
       "Interested in Tech": isTechPath(r.career_path) ? "Yes" : "No",
       "Career Path": r.career_path,
       "Tech Skills & Rating": r.tech_skills_rating || "",
@@ -287,7 +329,6 @@ export default function AdminGjpApplications() {
       "Application ID": r.id.slice(0, 8),
     }));
     const ws = XLSX.utils.json_to_sheet(data);
-    // Auto-size columns
     const colWidths = Object.keys(data[0] || {}).map((key) => ({
       wch: Math.max(key.length, ...data.map((row: any) => String(row[key] ?? "").length)) + 2,
     }));
@@ -296,11 +337,6 @@ export default function AdminGjpApplications() {
     XLSX.utils.book_append_sheet(wb, ws, "GJP Applications");
     XLSX.writeFile(wb, `gjp-applications-${new Date().toISOString().slice(0, 10)}.xlsx`);
     toast.success(`Exported ${data.length} applications to Excel`);
-  };
-
-  const formatAmount = (amount: number | null) => {
-    if (!amount) return "—";
-    return `₦${(amount / 100).toLocaleString()}`;
   };
 
   if (loading) return <div className="animate-pulse text-muted-foreground">Loading...</div>;
@@ -313,24 +349,14 @@ export default function AdminGjpApplications() {
             <Briefcase className="w-5 h-5" /> GJP Applications
           </h1>
           <p className="text-muted-foreground text-sm">
-            {stats.total} total · {stats.tech} tech · {stats.total - stats.tech} non-tech
+            {stats.total} total · {stats.tech} tech · {stats.total - stats.tech} non-tech · {stats.nyscDone} NYSC completed
           </p>
         </div>
         <div className="flex flex-wrap gap-2">
-          <Button
-            onClick={() => openEmail("selected")}
-            size="sm"
-            variant="outline"
-            disabled={selectedIds.size === 0}
-          >
+          <Button onClick={() => openEmail("selected")} size="sm" variant="outline" disabled={selectedIds.size === 0}>
             <Mail className="w-4 h-4" /> Email selected ({selectedIds.size})
           </Button>
-          <Button
-            onClick={() => openEmail("filtered")}
-            size="sm"
-            variant="outline"
-            disabled={filtered.length === 0}
-          >
+          <Button onClick={() => openEmail("filtered")} size="sm" variant="outline" disabled={filtered.length === 0}>
             <Mail className="w-4 h-4" /> Email all filtered
           </Button>
           <Button onClick={exportExcel} size="sm" disabled={filtered.length === 0}>
@@ -342,38 +368,131 @@ export default function AdminGjpApplications() {
         </div>
       </div>
 
-      <div className="flex flex-col sm:flex-row gap-2 mb-4">
-        <Input placeholder="Search name, email, institution, career..." value={search}
-          onChange={(e) => setSearch(e.target.value)} className="rounded-xl max-w-xs" />
-        <div className="flex gap-2 flex-wrap">
-          {(["all", "paid", "pending"] as const).map((f) => (
-            <Button key={f} size="sm" variant={filter === f ? "default" : "outline"}
-              onClick={() => setFilter(f)} className="capitalize rounded-xl">
-              {f}
+      <div className="space-y-3 mb-4">
+        <div className="flex flex-col sm:flex-row gap-2">
+          <Input
+            placeholder="Search name, email, institution, career, NYSC number..."
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            className="rounded-xl flex-1"
+          />
+          <Button
+            variant={showFilters ? "default" : "outline"}
+            size="sm"
+            onClick={() => setShowFilters((v) => !v)}
+            className="rounded-xl"
+          >
+            <Filter className="w-4 h-4" />
+            Filters{activeFilterCount > 0 ? ` (${activeFilterCount})` : ""}
+          </Button>
+          {activeFilterCount > 0 && (
+            <Button variant="ghost" size="sm" onClick={resetFilters} className="rounded-xl">
+              Reset
             </Button>
-          ))}
+          )}
         </div>
-        <Select value={techFilter} onValueChange={(v) => setTechFilter(v as typeof techFilter)}>
-          <SelectTrigger className="rounded-xl w-[160px]">
-            <SelectValue />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="all">All interests</SelectItem>
-            <SelectItem value="tech">Tech only</SelectItem>
-            <SelectItem value="non_tech">Non-tech only</SelectItem>
-          </SelectContent>
-        </Select>
-        <Select value={stageFilter} onValueChange={setStageFilter}>
-          <SelectTrigger className="rounded-xl w-[180px]">
-            <SelectValue placeholder="All stages" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="all">All stages</SelectItem>
-            {applicantStatusOptions.map((o) => (
-              <SelectItem key={o.value} value={o.value}>{o.label}</SelectItem>
-            ))}
-          </SelectContent>
-        </Select>
+
+        {showFilters && (
+          <div className="card-modern p-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+            <div>
+              <Label className="text-xs">Stage</Label>
+              <Select value={stageFilter} onValueChange={setStageFilter}>
+                <SelectTrigger className="rounded-xl mt-1"><SelectValue /></SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="all">All stages</SelectItem>
+                  {applicantStatusOptions.map((o) => (
+                    <SelectItem key={o.value} value={o.value}>{o.label}</SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
+            <div>
+              <Label className="text-xs">Tech interest</Label>
+              <Select value={techFilter} onValueChange={(v) => setTechFilter(v as typeof techFilter)}>
+                <SelectTrigger className="rounded-xl mt-1"><SelectValue /></SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="all">All interests</SelectItem>
+                  <SelectItem value="tech">Tech only</SelectItem>
+                  <SelectItem value="non_tech">Non-tech only</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+            <div>
+              <Label className="text-xs">Career path</Label>
+              <Select value={careerFilter} onValueChange={setCareerFilter}>
+                <SelectTrigger className="rounded-xl mt-1"><SelectValue /></SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="all">All career paths</SelectItem>
+                  {careerPathOptions.map((c) => (
+                    <SelectItem key={c} value={c}>{c}</SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
+            <div>
+              <Label className="text-xs">NYSC completed</Label>
+              <Select value={nyscFilter} onValueChange={(v) => setNyscFilter(v as typeof nyscFilter)}>
+                <SelectTrigger className="rounded-xl mt-1"><SelectValue /></SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="all">All</SelectItem>
+                  <SelectItem value="yes">Completed</SelectItem>
+                  <SelectItem value="no">Not completed</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+            <div>
+              <Label className="text-xs">NYSC year</Label>
+              <Select value={nyscYearFilter} onValueChange={setNyscYearFilter}>
+                <SelectTrigger className="rounded-xl mt-1"><SelectValue /></SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="all">All NYSC years</SelectItem>
+                  {nyscYears.map((y) => (
+                    <SelectItem key={y} value={y}>{y}</SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
+            <div>
+              <Label className="text-xs">Graduation year</Label>
+              <Select value={gradYearFilter} onValueChange={setGradYearFilter}>
+                <SelectTrigger className="rounded-xl mt-1"><SelectValue /></SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="all">All grad years</SelectItem>
+                  {gradYears.map((y) => (
+                    <SelectItem key={y} value={y}>{y}</SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
+            <div>
+              <Label className="text-xs">CAP/FLIP alumni</Label>
+              <Select value={alumniFilter} onValueChange={(v) => setAlumniFilter(v as typeof alumniFilter)}>
+                <SelectTrigger className="rounded-xl mt-1"><SelectValue /></SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="all">All</SelectItem>
+                  <SelectItem value="yes">Alumni only</SelectItem>
+                  <SelectItem value="no">Non-alumni</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+            <div>
+              <Label className="text-xs">State</Label>
+              <Select value={stateFilter} onValueChange={setStateFilter}>
+                <SelectTrigger className="rounded-xl mt-1"><SelectValue /></SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="all">All states</SelectItem>
+                  {states.map((s) => (
+                    <SelectItem key={s} value={s}>{s}</SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
+          </div>
+        )}
+
+        <p className="text-xs text-muted-foreground">
+          Showing {filtered.length} of {rows.length}
+        </p>
       </div>
 
       {filtered.length === 0 ? (
@@ -401,7 +520,6 @@ export default function AdminGjpApplications() {
                   <th className="text-left px-4 py-3">Career Path</th>
                   <th className="text-left px-4 py-3 hidden sm:table-cell">NYSC</th>
                   <th className="text-left px-4 py-3">Stage</th>
-                  <th className="text-left px-4 py-3 hidden lg:table-cell">Payment</th>
                   <th className="px-4 py-3"></th>
                 </tr>
               </thead>
@@ -441,16 +559,16 @@ export default function AdminGjpApplications() {
                       </div>
                     </td>
                     <td className="px-4 py-3 hidden sm:table-cell text-xs text-foreground">
-                      {r.nysc_completed ? "✓ Completed" : "—"}
+                      {r.nysc_completed ? (
+                        <>
+                          <p>✓ {r.nysc_year || "Completed"}</p>
+                          {r.nysc_number && <p className="text-[10px] text-muted-foreground font-mono">{r.nysc_number}</p>}
+                        </>
+                      ) : "—"}
                     </td>
                     <td className="px-4 py-3">
                       <span className={`px-2 py-1 rounded-full text-xs font-medium capitalize ${applicantStatusColors[r.applicant_status] || "bg-secondary text-muted-foreground"}`}>
                         {r.applicant_status.replace("_", " ")}
-                      </span>
-                    </td>
-                    <td className="px-4 py-3 hidden lg:table-cell">
-                      <span className={`px-2 py-1 rounded-full text-xs font-medium capitalize ${statusColors[r.payment_status] || "bg-secondary text-muted-foreground"}`}>
-                        {r.payment_status}
                       </span>
                     </td>
                     <td className="px-4 py-3 text-right whitespace-nowrap">
@@ -490,6 +608,7 @@ export default function AdminGjpApplications() {
               <Detail label="Grad Year" value={selected.graduation_year || "—"} />
               <Detail label="NYSC Completed" value={selected.nysc_completed ? "Yes" : "No"} />
               <Detail label="NYSC Year" value={selected.nysc_year || "—"} />
+              <Detail label="NYSC Call-Up #" value={selected.nysc_number || "—"} />
               <hr className="border-border" />
               <Detail label="Career Path" value={selected.career_path} />
               <Detail label="Interested in Tech" value={isTechPath(selected.career_path) ? "Yes" : "No"} />
@@ -500,11 +619,7 @@ export default function AdminGjpApplications() {
               <Detail label="Referral" value={selected.referral_source || "—"} />
               <Detail label="Additional" value={selected.additional_info || "—"} />
               <hr className="border-border" />
-              <Detail label="Payment Status" value={selected.payment_status} />
-              <Detail label="Paid Amount" value={formatAmount(selected.payment_amount)} />
-              <Detail label="Reference" value={selected.paystack_reference || "—"} />
               <Detail label="Submitted" value={format(new Date(selected.created_at), "PPpp")} />
-              {selected.paid_at && <Detail label="Paid At" value={format(new Date(selected.paid_at), "PPpp")} />}
               <hr className="border-border" />
               <div className="space-y-3 rounded-xl bg-secondary/30 p-3">
                 <p className="text-xs uppercase tracking-wider text-muted-foreground font-semibold">Applicant Tracking</p>

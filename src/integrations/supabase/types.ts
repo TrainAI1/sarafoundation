@@ -304,11 +304,8 @@ export type Database = {
           interested_in_tech: boolean
           is_cap_flip_alumnus: boolean
           nysc_completed: boolean
+          nysc_number: string | null
           nysc_year: string | null
-          paid_at: string | null
-          payment_amount: number | null
-          payment_status: string
-          paystack_reference: string | null
           referral_source: string | null
           state_of_residence: string | null
           status_notes: string | null
@@ -332,11 +329,8 @@ export type Database = {
           interested_in_tech?: boolean
           is_cap_flip_alumnus?: boolean
           nysc_completed: boolean
+          nysc_number?: string | null
           nysc_year?: string | null
-          paid_at?: string | null
-          payment_amount?: number | null
-          payment_status?: string
-          paystack_reference?: string | null
           referral_source?: string | null
           state_of_residence?: string | null
           status_notes?: string | null
@@ -360,11 +354,8 @@ export type Database = {
           interested_in_tech?: boolean
           is_cap_flip_alumnus?: boolean
           nysc_completed?: boolean
+          nysc_number?: string | null
           nysc_year?: string | null
-          paid_at?: string | null
-          payment_amount?: number | null
-          payment_status?: string
-          paystack_reference?: string | null
           referral_source?: string | null
           state_of_residence?: string | null
           status_notes?: string | null
@@ -485,19 +476,6 @@ export type Database = {
           career_path: string
           created_at: string
           full_name: string
-          payment_status: string
-          status_notes: string
-          status_updated_at: string
-        }[]
-      }
-      get_gjp_status_by_email_ref: {
-        Args: { _email: string; _reference: string }
-        Returns: {
-          applicant_status: string
-          career_path: string
-          created_at: string
-          full_name: string
-          payment_status: string
           status_notes: string
           status_updated_at: string
         }[]
