@@ -6,7 +6,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { toast } from "sonner";
-import { Download, FileSpreadsheet, Eye, Trash2, Briefcase, X, Save, Mail, Code2 } from "lucide-react";
+import { Download, FileSpreadsheet, Eye, Trash2, Briefcase, X, Save, Mail, Code2, Filter } from "lucide-react";
 import { format } from "date-fns";
 import * as XLSX from "xlsx";
 
@@ -37,6 +37,7 @@ interface GjpApp {
   graduation_year: string | null;
   nysc_completed: boolean;
   nysc_year: string | null;
+  nysc_number: string | null;
   interested_in_tech: boolean;
   career_path: string;
   tech_skills_rating: string | null;
@@ -46,21 +47,11 @@ interface GjpApp {
   cap_flip_cohort: string | null;
   referral_source: string | null;
   additional_info: string | null;
-  payment_status: string;
-  payment_amount: number | null;
-  paystack_reference: string | null;
   created_at: string;
-  paid_at: string | null;
   applicant_status: string;
   status_notes: string | null;
   status_updated_at: string;
 }
-
-const statusColors: Record<string, string> = {
-  paid: "bg-emerald-500/15 text-emerald-700 dark:text-emerald-400",
-  pending: "bg-amber-500/15 text-amber-700 dark:text-amber-400",
-  failed: "bg-destructive/15 text-destructive",
-};
 
 const applicantStatusOptions = [
   { value: "submitted", label: "Submitted" },
