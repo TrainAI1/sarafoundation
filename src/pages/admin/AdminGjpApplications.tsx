@@ -8,7 +8,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { Checkbox } from "@/components/ui/checkbox";
 import { toast } from "sonner";
-import { Download, FileSpreadsheet, Eye, Trash2, Briefcase, X, Save, Mail, Code2, Filter, ChevronDown, ListChecks } from "lucide-react";
+import { Download, FileSpreadsheet, Eye, Trash2, Briefcase, X, Save, Mail, Code2, Filter, ChevronDown, ListChecks, Clock, AlertCircle } from "lucide-react";
 import { format } from "date-fns";
 import * as XLSX from "xlsx";
 
@@ -50,6 +50,20 @@ interface GjpApp {
   applicant_status: string;
   status_notes: string | null;
   status_updated_at: string;
+}
+
+interface Followup {
+  id: string;
+  recipients: string[];
+  subject: string;
+  body: string;
+  due_at: string;
+  auto_send: boolean;
+  sent: boolean;
+  sent_at: string | null;
+  send_error: string | null;
+  set_status_after: string | null;
+  created_at: string;
 }
 
 const applicantStatusOptions = [
@@ -97,6 +111,11 @@ export default function AdminGjpApplications() {
   const [bulkStatus, setBulkStatus] = useState<string>("under_review");
   const [bulkNotes, setBulkNotes] = useState<string>("");
   const [bulkSaving, setBulkSaving] = useState(false);
+  const [emailStatusAfter, setEmailStatusAfter] = useState<string>("under_review");
+  const [followupDays, setFollowupDays] = useState<string>("0");
+  const [followupAutoSend, setFollowupAutoSend] = useState(false);
+  const [followups, setFollowups] = useState<Followup[]>([]);
+  const [followupsOpen, setFollowupsOpen] = useState(false);
 
   const load = async () => {
     const { data } = await supabase
@@ -105,6 +124,15 @@ export default function AdminGjpApplications() {
       .order("created_at", { ascending: false });
     setRows((data as unknown as GjpApp[]) || []);
     setLoading(false);
+    loadFollowups();
+  };
+
+  const loadFollowups = async () => {
+    const { data } = await supabase
+      .from("gjp_email_followups" as any)
+      .select("*")
+      .order("due_at", { ascending: true });
+    setFollowups((data as unknown as Followup[]) || []);
   };
 
   useEffect(() => { load(); }, []);
@@ -230,6 +258,8 @@ export default function AdminGjpApplications() {
   const sendEmail = async () => {
     if (!emailDialog) return;
     const { recipients, mode } = emailDialog;
+    const days = parseInt(followupDays || "0", 10);
+
     const subject = encodeURIComponent(emailSubject);
     const body = encodeURIComponent(emailBody);
     let mailto: string;
@@ -241,36 +271,60 @@ export default function AdminGjpApplications() {
     window.location.href = mailto;
     toast.success(`Opening your email client with ${recipients.length} recipient${recipients.length > 1 ? "s" : ""}.`);
 
-    // Smart auto-promote: any recipient still in "submitted" moves to "under_review".
-    const recipientSet = new Set(recipients.map((e) => e.toLowerCase()));
-    const toPromote = rows.filter(
-      (r) => r.email && recipientSet.has(r.email.toLowerCase()) && r.applicant_status === "submitted"
-    );
-    if (toPromote.length > 0) {
-      const ids = toPromote.map((r) => r.id);
-      const nowIso = new Date().toISOString();
-      // Optimistic UI
-      setRows((prev) =>
-        prev.map((r) =>
-          ids.includes(r.id)
-            ? { ...r, applicant_status: "under_review", status_updated_at: nowIso }
-            : r
-        )
+    // Smart status update for recipients matching the chosen "set status after" value.
+    if (emailStatusAfter && emailStatusAfter !== "keep") {
+      const recipientSet = new Set(recipients.map((e) => e.toLowerCase()));
+      const toUpdate = rows.filter(
+        (r) => r.email && recipientSet.has(r.email.toLowerCase()) && r.applicant_status !== emailStatusAfter
       );
-      const { error } = await supabase
-        .from("gjp_applications")
-        .update({ applicant_status: "under_review", status_updated_at: nowIso })
-        .in("id", ids);
+      if (toUpdate.length > 0) {
+        const ids = toUpdate.map((r) => r.id);
+        const nowIso = new Date().toISOString();
+        setRows((prev) =>
+          prev.map((r) =>
+            ids.includes(r.id)
+              ? { ...r, applicant_status: emailStatusAfter, status_updated_at: nowIso }
+              : r
+          )
+        );
+        const { error } = await supabase
+          .from("gjp_applications")
+          .update({ applicant_status: emailStatusAfter, status_updated_at: nowIso })
+          .in("id", ids);
+        if (error) {
+          console.error(error);
+          toast.error("Emails opened, but couldn't auto-update statuses.");
+          load();
+        } else {
+          toast.success(`Moved ${ids.length} applicant${ids.length > 1 ? "s" : ""} to ${emailStatusAfter.replace("_", " ")}.`);
+        }
+      }
+    }
+
+    // Schedule a follow-up reminder if requested
+    if (days > 0) {
+      const due = new Date();
+      due.setDate(due.getDate() + days);
+      const { error } = await supabase.from("gjp_email_followups" as any).insert({
+        recipients,
+        subject: emailSubject ? `Follow-up: ${emailSubject}` : "Follow-up",
+        body: emailBody,
+        due_at: due.toISOString(),
+        auto_send: followupAutoSend,
+        set_status_after: emailStatusAfter !== "keep" ? emailStatusAfter : null,
+      });
       if (error) {
         console.error(error);
-        toast.error("Emails opened, but couldn't auto-update statuses.");
-        load();
+        toast.error("Couldn't schedule follow-up.");
       } else {
-        toast.success(`Moved ${ids.length} applicant${ids.length > 1 ? "s" : ""} to Under Review.`);
+        toast.success(`Follow-up scheduled for ${format(due, "PP")}.`);
+        loadFollowups();
       }
     }
 
     setEmailDialog(null);
+    setFollowupDays("0");
+    setFollowupAutoSend(false);
   };
 
   const copyEmails = () => {
@@ -409,6 +463,34 @@ export default function AdminGjpApplications() {
     XLSX.utils.book_append_sheet(wb, ws, "GJP Applications");
     XLSX.writeFile(wb, `gjp-applications-${new Date().toISOString().slice(0, 10)}.xlsx`);
     toast.success(`Exported ${data.length} applications to Excel`);
+  };
+
+  const dueFollowups = useMemo(
+    () => followups.filter((f) => !f.sent && new Date(f.due_at) <= new Date()),
+    [followups]
+  );
+
+  const sendFollowupNow = (f: Followup) => {
+    const subject = encodeURIComponent(f.subject);
+    const body = encodeURIComponent(f.body);
+    const mailto = f.recipients.length === 1
+      ? `mailto:${f.recipients[0]}?subject=${subject}&body=${body}`
+      : `mailto:?bcc=${f.recipients.join(",")}&subject=${subject}&body=${body}`;
+    window.location.href = mailto;
+    markFollowupSent(f.id);
+  };
+
+  const markFollowupSent = async (id: string) => {
+    await supabase.from("gjp_email_followups" as any)
+      .update({ sent: true, sent_at: new Date().toISOString() })
+      .eq("id", id);
+    loadFollowups();
+    toast.success("Follow-up marked as sent.");
+  };
+
+  const deleteFollowup = async (id: string) => {
+    await supabase.from("gjp_email_followups" as any).delete().eq("id", id);
+    loadFollowups();
   };
 
   if (loading) return <div className="animate-pulse text-muted-foreground">Loading...</div>;
