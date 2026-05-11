@@ -899,6 +899,45 @@ export default function AdminGjpApplications() {
               <p className="text-[11px] text-muted-foreground">
                 This will open your default email client (Gmail, Outlook, Apple Mail) with the message pre-filled. You can review before sending.
               </p>
+              <div className="rounded-xl border border-border p-3 space-y-3">
+                <div>
+                  <Label className="text-xs">After sending, set status to</Label>
+                  <Select value={emailStatusAfter} onValueChange={setEmailStatusAfter}>
+                    <SelectTrigger className="mt-1 rounded-xl"><SelectValue /></SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="keep">Keep current status</SelectItem>
+                      {applicantStatusOptions.map((o) => (
+                        <SelectItem key={o.value} value={o.value}>{o.label}</SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                </div>
+                <div className="grid grid-cols-2 gap-2">
+                  <div>
+                    <Label className="text-xs">Schedule follow-up in (days)</Label>
+                    <Input
+                      type="number"
+                      min="0"
+                      value={followupDays}
+                      onChange={(e) => setFollowupDays(e.target.value)}
+                      className="mt-1 rounded-xl"
+                      placeholder="0 = no follow-up"
+                    />
+                  </div>
+                  <div className="flex items-end">
+                    <label className="flex items-center gap-2 text-xs cursor-pointer">
+                      <Checkbox
+                        checked={followupAutoSend}
+                        onCheckedChange={(v) => setFollowupAutoSend(!!v)}
+                      />
+                      <span>Auto-send when due</span>
+                    </label>
+                  </div>
+                </div>
+                <p className="text-[11px] text-muted-foreground">
+                  Follow-ups appear in the "Follow-ups" list when due. Auto-send requires email sending to be configured.
+                </p>
+              </div>
               <div className="flex flex-col-reverse sm:flex-row gap-2 sm:justify-between">
                 <Button variant="outline" size="sm" onClick={copyEmails} className="rounded-xl">
                   Copy emails
