@@ -469,27 +469,21 @@ export default function AdminGjpApplications() {
             </div>
             <div>
               <Label className="text-xs">NYSC year</Label>
-              <Select value={nyscYearFilter} onValueChange={setNyscYearFilter}>
-                <SelectTrigger className="rounded-xl mt-1"><SelectValue /></SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="all">All NYSC years</SelectItem>
-                  {nyscYears.map((y) => (
-                    <SelectItem key={y} value={y}>{y}</SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
+              <MultiYearPicker
+                label="NYSC years"
+                options={nyscYears}
+                value={nyscYearFilter}
+                onChange={setNyscYearFilter}
+              />
             </div>
             <div>
               <Label className="text-xs">Graduation year</Label>
-              <Select value={gradYearFilter} onValueChange={setGradYearFilter}>
-                <SelectTrigger className="rounded-xl mt-1"><SelectValue /></SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="all">All grad years</SelectItem>
-                  {gradYears.map((y) => (
-                    <SelectItem key={y} value={y}>{y}</SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
+              <MultiYearPicker
+                label="grad years"
+                options={gradYears}
+                value={gradYearFilter}
+                onChange={setGradYearFilter}
+              />
             </div>
             <div>
               <Label className="text-xs">CAP/FLIP alumni</Label>
