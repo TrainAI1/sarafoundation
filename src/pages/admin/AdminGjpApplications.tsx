@@ -274,6 +274,21 @@ export default function AdminGjpApplications() {
     load();
   };
 
+  const quickUpdateStatus = async (id: string, status: string) => {
+    // Optimistic UI update
+    setRows((rs) => rs.map((r) => (r.id === id ? { ...r, applicant_status: status, status_updated_at: new Date().toISOString() } : r)));
+    const { error } = await supabase
+      .from("gjp_applications")
+      .update({ applicant_status: status })
+      .eq("id", id);
+    if (error) {
+      toast.error("Could not update status — refreshing.");
+      load();
+      return;
+    }
+    toast.success(`Status → ${status.replace("_", " ")}`);
+  };
+
   const applyBulkStatus = async () => {
     if (selectedIds.size === 0) return;
     setBulkSaving(true);
@@ -596,9 +611,22 @@ export default function AdminGjpApplications() {
                       ) : "—"}
                     </td>
                     <td className="px-4 py-3">
-                      <span className={`px-2 py-1 rounded-full text-xs font-medium capitalize ${applicantStatusColors[r.applicant_status] || "bg-secondary text-muted-foreground"}`}>
-                        {r.applicant_status.replace("_", " ")}
-                      </span>
+                      <Select
+                        value={r.applicant_status}
+                        onValueChange={(v) => quickUpdateStatus(r.id, v)}
+                      >
+                        <SelectTrigger
+                          className={`h-7 px-2 py-1 rounded-full text-xs font-medium capitalize border-0 w-fit min-w-[110px] gap-1 focus:ring-1 focus:ring-ring focus:ring-offset-0 ${applicantStatusColors[r.applicant_status] || "bg-secondary text-muted-foreground"}`}
+                          aria-label="Change status"
+                        >
+                          <SelectValue />
+                        </SelectTrigger>
+                        <SelectContent>
+                          {applicantStatusOptions.map((o) => (
+                            <SelectItem key={o.value} value={o.value}>{o.label}</SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
                     </td>
                     <td className="px-4 py-3 text-right whitespace-nowrap">
                       <Button variant="ghost" size="icon" onClick={() => openEmail("single", r)} title="Email applicant">
