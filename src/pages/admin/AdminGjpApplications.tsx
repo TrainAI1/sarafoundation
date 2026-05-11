@@ -227,7 +227,7 @@ export default function AdminGjpApplications() {
     setEmailDialog({ recipients, mode });
   };
 
-  const sendEmail = () => {
+  const sendEmail = async () => {
     if (!emailDialog) return;
     const { recipients, mode } = emailDialog;
     const subject = encodeURIComponent(emailSubject);
@@ -240,6 +240,36 @@ export default function AdminGjpApplications() {
     }
     window.location.href = mailto;
     toast.success(`Opening your email client with ${recipients.length} recipient${recipients.length > 1 ? "s" : ""}.`);
+
+    // Smart auto-promote: any recipient still in "submitted" moves to "under_review".
+    const recipientSet = new Set(recipients.map((e) => e.toLowerCase()));
+    const toPromote = rows.filter(
+      (r) => r.email && recipientSet.has(r.email.toLowerCase()) && r.applicant_status === "submitted"
+    );
+    if (toPromote.length > 0) {
+      const ids = toPromote.map((r) => r.id);
+      const nowIso = new Date().toISOString();
+      // Optimistic UI
+      setRows((prev) =>
+        prev.map((r) =>
+          ids.includes(r.id)
+            ? { ...r, applicant_status: "under_review", status_updated_at: nowIso }
+            : r
+        )
+      );
+      const { error } = await supabase
+        .from("gjp_applications")
+        .update({ applicant_status: "under_review", status_updated_at: nowIso })
+        .in("id", ids);
+      if (error) {
+        console.error(error);
+        toast.error("Emails opened, but couldn't auto-update statuses.");
+        load();
+      } else {
+        toast.success(`Moved ${ids.length} applicant${ids.length > 1 ? "s" : ""} to Under Review.`);
+      }
+    }
+
     setEmailDialog(null);
   };
 
