@@ -1001,6 +1001,84 @@ export default function AdminGjpApplications() {
           </div>
         </div>
       )}
+
+      {followupsOpen && (
+        <div
+          className="fixed inset-0 z-50 flex items-end sm:items-center justify-center p-0 sm:p-4 bg-foreground/40"
+          onClick={() => setFollowupsOpen(false)}
+        >
+          <div
+            className="bg-card w-full sm:max-w-2xl rounded-t-2xl sm:rounded-2xl shadow-2xl max-h-[90vh] overflow-y-auto"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="sticky top-0 bg-card border-b border-border px-5 py-3 flex items-center justify-between">
+              <h3 className="font-display font-bold text-foreground flex items-center gap-2">
+                <Clock className="w-4 h-4" /> Scheduled follow-ups
+              </h3>
+              <Button variant="ghost" size="icon" onClick={() => setFollowupsOpen(false)}>
+                <X className="w-4 h-4" />
+              </Button>
+            </div>
+            <div className="p-5 space-y-3">
+              {followups.length === 0 ? (
+                <p className="text-sm text-muted-foreground text-center py-8">
+                  No follow-ups scheduled. Schedule one when you send an email.
+                </p>
+              ) : (
+                followups.map((f) => {
+                  const due = new Date(f.due_at);
+                  const isDue = !f.sent && due <= new Date();
+                  return (
+                    <div
+                      key={f.id}
+                      className={`rounded-xl border p-3 space-y-2 ${
+                        isDue ? "border-destructive/50 bg-destructive/5" : "border-border"
+                      } ${f.sent ? "opacity-60" : ""}`}
+                    >
+                      <div className="flex items-start justify-between gap-2">
+                        <div className="flex-1 min-w-0">
+                          <p className="font-medium text-foreground text-sm truncate">{f.subject}</p>
+                          <p className="text-xs text-muted-foreground">
+                            {f.recipients.length} recipient{f.recipients.length > 1 ? "s" : ""} · Due {format(due, "PPp")}
+                            {f.auto_send && !f.sent && " · Auto-send"}
+                            {f.sent && f.sent_at && ` · Sent ${format(new Date(f.sent_at), "PP")}`}
+                          </p>
+                          {isDue && (
+                            <p className="text-xs text-destructive font-semibold flex items-center gap-1 mt-1">
+                              <AlertCircle className="w-3 h-3" /> Due now
+                            </p>
+                          )}
+                          {f.send_error && (
+                            <p className="text-xs text-destructive mt-1">Error: {f.send_error}</p>
+                          )}
+                        </div>
+                        <div className="flex gap-1 shrink-0">
+                          {!f.sent && (
+                            <Button size="sm" variant="outline" onClick={() => sendFollowupNow(f)} className="rounded-lg">
+                              <Mail className="w-3 h-3" /> Send
+                            </Button>
+                          )}
+                          <Button
+                            size="icon"
+                            variant="ghost"
+                            className="text-destructive h-8 w-8"
+                            onClick={() => deleteFollowup(f.id)}
+                          >
+                            <Trash2 className="w-3 h-3" />
+                          </Button>
+                        </div>
+                      </div>
+                      <p className="text-xs text-muted-foreground line-clamp-2 break-words">
+                        {f.body}
+                      </p>
+                    </div>
+                  );
+                })
+              )}
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
