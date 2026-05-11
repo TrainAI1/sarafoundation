@@ -383,6 +383,14 @@ export default function AdminGjpApplications() {
           <Button onClick={() => openEmail("selected")} size="sm" variant="outline" disabled={selectedIds.size === 0}>
             <Mail className="w-4 h-4" /> Email selected ({selectedIds.size})
           </Button>
+          <Button
+            onClick={() => { setBulkStatus("under_review"); setBulkNotes(""); setBulkStatusOpen(true); }}
+            size="sm"
+            variant="outline"
+            disabled={selectedIds.size === 0}
+          >
+            <ListChecks className="w-4 h-4" /> Change status ({selectedIds.size})
+          </Button>
           <Button onClick={() => openEmail("filtered")} size="sm" variant="outline" disabled={filtered.length === 0}>
             <Mail className="w-4 h-4" /> Email all filtered
           </Button>
