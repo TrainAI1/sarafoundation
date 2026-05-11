@@ -53,6 +53,7 @@ import Terms from "./pages/Terms";
 import NotFound from "./pages/NotFound";
 import { CookieConsent } from "./components/CookieConsent";
 import { FloatingDonateButton } from "./components/FloatingDonateButton";
+import { SessionDonationPopup } from "./components/SessionDonationPopup";
 
 const queryClient = new QueryClient();
 
@@ -116,6 +117,7 @@ const App = () => {
           </Routes>
           <CookieConsent />
           <FloatingDonateButton />
+          <SessionDonationPopup />
         </BrowserRouter>
       </TooltipProvider>
     </HelmetProvider>

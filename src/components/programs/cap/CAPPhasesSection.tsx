@@ -1,66 +1,119 @@
-import { BookOpen, Rocket, Zap, Clock, CheckCircle2, ArrowRight } from "lucide-react";
+import { BookOpen, Rocket, Zap, Clock, CheckCircle2, ArrowRight, Users, Sparkles, Trophy } from "lucide-react";
 
-const phases = [
-  {
-    name: "Learn",
-    number: "01",
-    icon: BookOpen,
-    duration: "6 Weeks",
-    description: "Weekly expert-led sessions covering coding, no-code, product management, cybersecurity, data analysis, UI/UX and entrepreneurship.",
-    outcomes: [
-      "12 industry-expert sessions",
-      "AI Powered curriculum",
-      "Practical framework",
-      "Community & peer learning",
-    ],
-    color: "from-primary to-primary/80",
-  },
-  {
-    name: "Build",
-    number: "02",
-    icon: Rocket,
-    duration: "6 Weeks",
-    description: "All tracks collaborate like a startup — solving real African problems through project-based learning and mentored sprints.",
-    outcomes: [
-      "Cross-track startup simulation",
-      "Real life project exposure",
-      "Industry mentor oversight",
-      "Portfolio-ready projects",
-    ],
-    color: "from-[hsl(240,80%,50%)] to-[hsl(240,80%,40%)]",
-  },
-  {
-    name: "Launch",
-    number: "03",
-    icon: Zap,
-    duration: "1 Week",
-    description: "Internship placements for Code & No-Code students. Pre-seed funding pursuit for Tech-preneurs.",
-    outcomes: [
-      "Internship placement support",
-      "Certificate of Completion and Alumni Access",
-      "CAP Talent Showcase",
-      "Full-time job opportunities",
-    ],
-    color: "from-accent to-accent/80",
-  },
-];
+const pathA = {
+  label: "Path A",
+  title: "13-Week Program for CAP",
+  subtitle: "Career Advancement Program — learn, build, and launch.",
+  totalDuration: "13 Weeks",
+  phases: [
+    {
+      name: "Exclusive Learning",
+      number: "01",
+      icon: BookOpen,
+      duration: "2 Weeks",
+      description: "Immersive expert-led sessions across coding, no-code, product, cybersecurity, data, UI/UX and entrepreneurship.",
+      outcomes: [
+        "Industry-expert sessions",
+        "AI-powered curriculum",
+        "Practical frameworks",
+        "Community & peer learning",
+      ],
+      color: "from-primary to-primary/80",
+    },
+    {
+      name: "Build While Learning",
+      number: "02",
+      icon: Rocket,
+      duration: "10 Weeks",
+      description: "Apply skills in real time — students collaborate like a startup, solving real African problems through mentored sprints.",
+      outcomes: [
+        "Cross-track startup simulation",
+        "Real-life project exposure",
+        "Industry mentor oversight",
+        "Portfolio-ready projects",
+      ],
+      color: "from-[hsl(240,80%,50%)] to-[hsl(240,80%,40%)]",
+    },
+    {
+      name: "Launch",
+      number: "03",
+      icon: Zap,
+      duration: "1 Week",
+      description: "Internship placements for Code & No-Code students. Pre-seed funding pursuit for Tech-preneurs.",
+      outcomes: [
+        "Internship placement support",
+        "Certificate of Completion & Alumni Access",
+        "CAP Talent Showcase",
+        "Full-time job opportunities",
+      ],
+      color: "from-accent to-accent/80",
+    },
+  ],
+};
 
-export function CAPPhasesSection() {
+const pathB = {
+  label: "Path B",
+  title: "6-Week Fellowship",
+  subtitle: "An accelerated track focused on intensive workshops, mentorship, and a capstone project.",
+  totalDuration: "6 Weeks",
+  phases: [
+    {
+      name: "Intensive Workshops",
+      number: "01",
+      icon: Sparkles,
+      duration: "Weeks 1–2",
+      description: "Hands-on, fast-paced workshops covering core skills and in-demand tools led by industry practitioners.",
+      outcomes: [
+        "Live expert workshops",
+        "Skill-focused curriculum",
+        "Practical assignments",
+        "Cohort-based learning",
+      ],
+      color: "from-primary to-primary/80",
+    },
+    {
+      name: "Mentorship",
+      number: "02",
+      icon: Users,
+      duration: "Weeks 3–4",
+      description: "1:1 and group mentorship from seasoned tech leaders to sharpen direction, technical depth, and confidence.",
+      outcomes: [
+        "Dedicated mentor pairing",
+        "Career & growth guidance",
+        "Live feedback sessions",
+        "Network expansion",
+      ],
+      color: "from-[hsl(240,80%,50%)] to-[hsl(240,80%,40%)]",
+    },
+    {
+      name: "Capstone Project",
+      number: "03",
+      icon: Trophy,
+      duration: "Weeks 5–6",
+      description: "Fellows ship a real, portfolio-grade capstone project and present it at a closing showcase.",
+      outcomes: [
+        "Portfolio-ready capstone",
+        "Closing showcase & demo",
+        "Certificate of Completion",
+        "Alumni community access",
+      ],
+      color: "from-accent to-accent/80",
+    },
+  ],
+};
+
+function PathBlock({ data }: { data: typeof pathA }) {
   return (
-    <section className="py-16 md:py-24 bg-background">
-      <div className="section-container">
-        <div className="text-center max-w-3xl mx-auto mb-10 md:mb-16 px-4">
-          <span className="section-badge mb-4 md:mb-6">Program Structure</span>
-          <h2 className="section-title text-foreground mb-4 md:mb-6">
-            3 Months. Real Skills. <span className="gradient-text">Real Outcomes.</span>
-          </h2>
-          <p className="section-subtitle mx-auto">
-            CAP is structured into three powerful phases — each building on the last.
-          </p>
-        </div>
-
-        <div className="grid md:grid-cols-3 gap-6 md:gap-8 px-4 lg:px-0">
-          {phases.map((phase, index) => (
+    <div className="mb-12 md:mb-16 last:mb-0">
+      <div className="text-center max-w-3xl mx-auto mb-6 md:mb-10 px-4">
+        <span className="section-badge mb-3 md:mb-4">{data.label} · {data.totalDuration}</span>
+        <h3 className="font-display text-2xl md:text-3xl font-bold text-foreground mb-2">
+          {data.title}
+        </h3>
+        <p className="text-sm md:text-base text-muted-foreground">{data.subtitle}</p>
+      </div>
+      <div className="grid md:grid-cols-3 gap-6 md:gap-8 px-4 lg:px-0">
+        {data.phases.map((phase, index) => (
             <div key={phase.name} className="card-modern overflow-hidden group relative">
               <div className={`p-5 md:p-6 bg-gradient-to-r ${phase.color} text-white`}>
                 <div className="flex items-center gap-3">
@@ -92,14 +145,34 @@ export function CAPPhasesSection() {
                 </ul>
               </div>
 
-              {index < phases.length - 1 && (
+              {index < data.phases.length - 1 && (
                 <div className="hidden md:flex absolute -right-4 top-1/2 -translate-y-1/2 z-10 w-8 h-8 rounded-full bg-primary text-white items-center justify-center">
                   <ArrowRight className="w-4 h-4" />
                 </div>
               )}
             </div>
           ))}
+      </div>
+    </div>
+  );
+}
+
+export function CAPPhasesSection() {
+  return (
+    <section className="py-16 md:py-24 bg-background">
+      <div className="section-container">
+        <div className="text-center max-w-3xl mx-auto mb-10 md:mb-16 px-4">
+          <span className="section-badge mb-4 md:mb-6">Program Structure</span>
+          <h2 className="section-title text-foreground mb-4 md:mb-6">
+            Two Paths. <span className="gradient-text">Real Outcomes.</span>
+          </h2>
+          <p className="section-subtitle mx-auto">
+            Choose the journey that fits you — a full 13-week CAP experience or an accelerated 6-week Fellowship.
+          </p>
         </div>
+
+        <PathBlock data={pathA} />
+        <PathBlock data={pathB} />
       </div>
     </section>
   );
