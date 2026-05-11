@@ -8,7 +8,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { Checkbox } from "@/components/ui/checkbox";
 import { toast } from "sonner";
-import { Download, FileSpreadsheet, Eye, Trash2, Briefcase, X, Save, Mail, Code2, Filter, ChevronDown, ListChecks } from "lucide-react";
+import { Download, FileSpreadsheet, Eye, Trash2, Briefcase, X, Save, Mail, Code2, Filter, ChevronDown, ListChecks, Clock, AlertCircle } from "lucide-react";
 import { format } from "date-fns";
 import * as XLSX from "xlsx";
 
@@ -50,6 +50,20 @@ interface GjpApp {
   applicant_status: string;
   status_notes: string | null;
   status_updated_at: string;
+}
+
+interface Followup {
+  id: string;
+  recipients: string[];
+  subject: string;
+  body: string;
+  due_at: string;
+  auto_send: boolean;
+  sent: boolean;
+  sent_at: string | null;
+  send_error: string | null;
+  set_status_after: string | null;
+  created_at: string;
 }
 
 const applicantStatusOptions = [
@@ -97,6 +111,11 @@ export default function AdminGjpApplications() {
   const [bulkStatus, setBulkStatus] = useState<string>("under_review");
   const [bulkNotes, setBulkNotes] = useState<string>("");
   const [bulkSaving, setBulkSaving] = useState(false);
+  const [emailStatusAfter, setEmailStatusAfter] = useState<string>("under_review");
+  const [followupDays, setFollowupDays] = useState<string>("0");
+  const [followupAutoSend, setFollowupAutoSend] = useState(false);
+  const [followups, setFollowups] = useState<Followup[]>([]);
+  const [followupsOpen, setFollowupsOpen] = useState(false);
 
   const load = async () => {
     const { data } = await supabase
@@ -105,6 +124,15 @@ export default function AdminGjpApplications() {
       .order("created_at", { ascending: false });
     setRows((data as unknown as GjpApp[]) || []);
     setLoading(false);
+    loadFollowups();
+  };
+
+  const loadFollowups = async () => {
+    const { data } = await supabase
+      .from("gjp_email_followups" as any)
+      .select("*")
+      .order("due_at", { ascending: true });
+    setFollowups((data as unknown as Followup[]) || []);
   };
 
   useEffect(() => { load(); }, []);
@@ -230,6 +258,8 @@ export default function AdminGjpApplications() {
   const sendEmail = async () => {
     if (!emailDialog) return;
     const { recipients, mode } = emailDialog;
+    const days = parseInt(followupDays || "0", 10);
+
     const subject = encodeURIComponent(emailSubject);
     const body = encodeURIComponent(emailBody);
     let mailto: string;
@@ -241,36 +271,60 @@ export default function AdminGjpApplications() {
     window.location.href = mailto;
     toast.success(`Opening your email client with ${recipients.length} recipient${recipients.length > 1 ? "s" : ""}.`);
 
-    // Smart auto-promote: any recipient still in "submitted" moves to "under_review".
-    const recipientSet = new Set(recipients.map((e) => e.toLowerCase()));
-    const toPromote = rows.filter(
-      (r) => r.email && recipientSet.has(r.email.toLowerCase()) && r.applicant_status === "submitted"
-    );
-    if (toPromote.length > 0) {
-      const ids = toPromote.map((r) => r.id);
-      const nowIso = new Date().toISOString();
-      // Optimistic UI
-      setRows((prev) =>
-        prev.map((r) =>
-          ids.includes(r.id)
-            ? { ...r, applicant_status: "under_review", status_updated_at: nowIso }
-            : r
-        )
+    // Smart status update for recipients matching the chosen "set status after" value.
+    if (emailStatusAfter && emailStatusAfter !== "keep") {
+      const recipientSet = new Set(recipients.map((e) => e.toLowerCase()));
+      const toUpdate = rows.filter(
+        (r) => r.email && recipientSet.has(r.email.toLowerCase()) && r.applicant_status !== emailStatusAfter
       );
-      const { error } = await supabase
-        .from("gjp_applications")
-        .update({ applicant_status: "under_review", status_updated_at: nowIso })
-        .in("id", ids);
+      if (toUpdate.length > 0) {
+        const ids = toUpdate.map((r) => r.id);
+        const nowIso = new Date().toISOString();
+        setRows((prev) =>
+          prev.map((r) =>
+            ids.includes(r.id)
+              ? { ...r, applicant_status: emailStatusAfter, status_updated_at: nowIso }
+              : r
+          )
+        );
+        const { error } = await supabase
+          .from("gjp_applications")
+          .update({ applicant_status: emailStatusAfter, status_updated_at: nowIso })
+          .in("id", ids);
+        if (error) {
+          console.error(error);
+          toast.error("Emails opened, but couldn't auto-update statuses.");
+          load();
+        } else {
+          toast.success(`Moved ${ids.length} applicant${ids.length > 1 ? "s" : ""} to ${emailStatusAfter.replace("_", " ")}.`);
+        }
+      }
+    }
+
+    // Schedule a follow-up reminder if requested
+    if (days > 0) {
+      const due = new Date();
+      due.setDate(due.getDate() + days);
+      const { error } = await supabase.from("gjp_email_followups" as any).insert({
+        recipients,
+        subject: emailSubject ? `Follow-up: ${emailSubject}` : "Follow-up",
+        body: emailBody,
+        due_at: due.toISOString(),
+        auto_send: followupAutoSend,
+        set_status_after: emailStatusAfter !== "keep" ? emailStatusAfter : null,
+      });
       if (error) {
         console.error(error);
-        toast.error("Emails opened, but couldn't auto-update statuses.");
-        load();
+        toast.error("Couldn't schedule follow-up.");
       } else {
-        toast.success(`Moved ${ids.length} applicant${ids.length > 1 ? "s" : ""} to Under Review.`);
+        toast.success(`Follow-up scheduled for ${format(due, "PP")}.`);
+        loadFollowups();
       }
     }
 
     setEmailDialog(null);
+    setFollowupDays("0");
+    setFollowupAutoSend(false);
   };
 
   const copyEmails = () => {
@@ -411,6 +465,34 @@ export default function AdminGjpApplications() {
     toast.success(`Exported ${data.length} applications to Excel`);
   };
 
+  const dueFollowups = useMemo(
+    () => followups.filter((f) => !f.sent && new Date(f.due_at) <= new Date()),
+    [followups]
+  );
+
+  const sendFollowupNow = (f: Followup) => {
+    const subject = encodeURIComponent(f.subject);
+    const body = encodeURIComponent(f.body);
+    const mailto = f.recipients.length === 1
+      ? `mailto:${f.recipients[0]}?subject=${subject}&body=${body}`
+      : `mailto:?bcc=${f.recipients.join(",")}&subject=${subject}&body=${body}`;
+    window.location.href = mailto;
+    markFollowupSent(f.id);
+  };
+
+  const markFollowupSent = async (id: string) => {
+    await supabase.from("gjp_email_followups" as any)
+      .update({ sent: true, sent_at: new Date().toISOString() })
+      .eq("id", id);
+    loadFollowups();
+    toast.success("Follow-up marked as sent.");
+  };
+
+  const deleteFollowup = async (id: string) => {
+    await supabase.from("gjp_email_followups" as any).delete().eq("id", id);
+    loadFollowups();
+  };
+
   if (loading) return <div className="animate-pulse text-muted-foreground">Loading...</div>;
 
   return (
@@ -427,6 +509,18 @@ export default function AdminGjpApplications() {
         <div className="flex flex-wrap gap-2">
           <Button onClick={() => openEmail("selected")} size="sm" variant="outline" disabled={selectedIds.size === 0}>
             <Mail className="w-4 h-4" /> Email selected ({selectedIds.size})
+          </Button>
+          <Button
+            onClick={() => setFollowupsOpen(true)}
+            size="sm"
+            variant={dueFollowups.length > 0 ? "default" : "outline"}
+          >
+            <Clock className="w-4 h-4" /> Follow-ups
+            {dueFollowups.length > 0 && (
+              <span className="ml-1 inline-flex items-center justify-center rounded-full bg-destructive text-destructive-foreground text-[10px] px-1.5 min-w-[18px] h-[18px] font-semibold">
+                {dueFollowups.length}
+              </span>
+            )}
           </Button>
           <Button
             onClick={() => { setBulkStatus("under_review"); setBulkNotes(""); setBulkStatusOpen(true); }}
@@ -805,6 +899,45 @@ export default function AdminGjpApplications() {
               <p className="text-[11px] text-muted-foreground">
                 This will open your default email client (Gmail, Outlook, Apple Mail) with the message pre-filled. You can review before sending.
               </p>
+              <div className="rounded-xl border border-border p-3 space-y-3">
+                <div>
+                  <Label className="text-xs">After sending, set status to</Label>
+                  <Select value={emailStatusAfter} onValueChange={setEmailStatusAfter}>
+                    <SelectTrigger className="mt-1 rounded-xl"><SelectValue /></SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="keep">Keep current status</SelectItem>
+                      {applicantStatusOptions.map((o) => (
+                        <SelectItem key={o.value} value={o.value}>{o.label}</SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                </div>
+                <div className="grid grid-cols-2 gap-2">
+                  <div>
+                    <Label className="text-xs">Schedule follow-up in (days)</Label>
+                    <Input
+                      type="number"
+                      min="0"
+                      value={followupDays}
+                      onChange={(e) => setFollowupDays(e.target.value)}
+                      className="mt-1 rounded-xl"
+                      placeholder="0 = no follow-up"
+                    />
+                  </div>
+                  <div className="flex items-end">
+                    <label className="flex items-center gap-2 text-xs cursor-pointer">
+                      <Checkbox
+                        checked={followupAutoSend}
+                        onCheckedChange={(v) => setFollowupAutoSend(!!v)}
+                      />
+                      <span>Auto-send when due</span>
+                    </label>
+                  </div>
+                </div>
+                <p className="text-[11px] text-muted-foreground">
+                  Follow-ups appear in the "Follow-ups" list when due. Auto-send requires email sending to be configured.
+                </p>
+              </div>
               <div className="flex flex-col-reverse sm:flex-row gap-2 sm:justify-between">
                 <Button variant="outline" size="sm" onClick={copyEmails} className="rounded-xl">
                   Copy emails
@@ -864,6 +997,84 @@ export default function AdminGjpApplications() {
                   <Save className="w-4 h-4" /> {bulkSaving ? "Updating..." : "Apply to all"}
                 </Button>
               </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {followupsOpen && (
+        <div
+          className="fixed inset-0 z-50 flex items-end sm:items-center justify-center p-0 sm:p-4 bg-foreground/40"
+          onClick={() => setFollowupsOpen(false)}
+        >
+          <div
+            className="bg-card w-full sm:max-w-2xl rounded-t-2xl sm:rounded-2xl shadow-2xl max-h-[90vh] overflow-y-auto"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="sticky top-0 bg-card border-b border-border px-5 py-3 flex items-center justify-between">
+              <h3 className="font-display font-bold text-foreground flex items-center gap-2">
+                <Clock className="w-4 h-4" /> Scheduled follow-ups
+              </h3>
+              <Button variant="ghost" size="icon" onClick={() => setFollowupsOpen(false)}>
+                <X className="w-4 h-4" />
+              </Button>
+            </div>
+            <div className="p-5 space-y-3">
+              {followups.length === 0 ? (
+                <p className="text-sm text-muted-foreground text-center py-8">
+                  No follow-ups scheduled. Schedule one when you send an email.
+                </p>
+              ) : (
+                followups.map((f) => {
+                  const due = new Date(f.due_at);
+                  const isDue = !f.sent && due <= new Date();
+                  return (
+                    <div
+                      key={f.id}
+                      className={`rounded-xl border p-3 space-y-2 ${
+                        isDue ? "border-destructive/50 bg-destructive/5" : "border-border"
+                      } ${f.sent ? "opacity-60" : ""}`}
+                    >
+                      <div className="flex items-start justify-between gap-2">
+                        <div className="flex-1 min-w-0">
+                          <p className="font-medium text-foreground text-sm truncate">{f.subject}</p>
+                          <p className="text-xs text-muted-foreground">
+                            {f.recipients.length} recipient{f.recipients.length > 1 ? "s" : ""} · Due {format(due, "PPp")}
+                            {f.auto_send && !f.sent && " · Auto-send"}
+                            {f.sent && f.sent_at && ` · Sent ${format(new Date(f.sent_at), "PP")}`}
+                          </p>
+                          {isDue && (
+                            <p className="text-xs text-destructive font-semibold flex items-center gap-1 mt-1">
+                              <AlertCircle className="w-3 h-3" /> Due now
+                            </p>
+                          )}
+                          {f.send_error && (
+                            <p className="text-xs text-destructive mt-1">Error: {f.send_error}</p>
+                          )}
+                        </div>
+                        <div className="flex gap-1 shrink-0">
+                          {!f.sent && (
+                            <Button size="sm" variant="outline" onClick={() => sendFollowupNow(f)} className="rounded-lg">
+                              <Mail className="w-3 h-3" /> Send
+                            </Button>
+                          )}
+                          <Button
+                            size="icon"
+                            variant="ghost"
+                            className="text-destructive h-8 w-8"
+                            onClick={() => deleteFollowup(f.id)}
+                          >
+                            <Trash2 className="w-3 h-3" />
+                          </Button>
+                        </div>
+                      </div>
+                      <p className="text-xs text-muted-foreground line-clamp-2 break-words">
+                        {f.body}
+                      </p>
+                    </div>
+                  );
+                })
+              )}
             </div>
           </div>
         </div>
