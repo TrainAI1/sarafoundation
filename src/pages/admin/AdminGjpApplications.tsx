@@ -5,8 +5,10 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
+import { Checkbox } from "@/components/ui/checkbox";
 import { toast } from "sonner";
-import { Download, FileSpreadsheet, Eye, Trash2, Briefcase, X, Save, Mail, Code2, Filter } from "lucide-react";
+import { Download, FileSpreadsheet, Eye, Trash2, Briefcase, X, Save, Mail, Code2, Filter, ChevronDown, ListChecks } from "lucide-react";
 import { format } from "date-fns";
 import * as XLSX from "xlsx";
 
@@ -77,8 +79,8 @@ export default function AdminGjpApplications() {
   const [techFilter, setTechFilter] = useState<"all" | "tech" | "non_tech">("all");
   const [careerFilter, setCareerFilter] = useState<string>("all");
   const [nyscFilter, setNyscFilter] = useState<"all" | "yes" | "no">("all");
-  const [nyscYearFilter, setNyscYearFilter] = useState<string>("all");
-  const [gradYearFilter, setGradYearFilter] = useState<string>("all");
+  const [nyscYearFilter, setNyscYearFilter] = useState<Set<string>>(new Set());
+  const [gradYearFilter, setGradYearFilter] = useState<Set<string>>(new Set());
   const [alumniFilter, setAlumniFilter] = useState<"all" | "yes" | "no">("all");
   const [stateFilter, setStateFilter] = useState<string>("all");
   const [search, setSearch] = useState("");
@@ -91,6 +93,10 @@ export default function AdminGjpApplications() {
   const [emailDialog, setEmailDialog] = useState<{ recipients: string[]; mode: "selected" | "filtered" | "single" } | null>(null);
   const [emailSubject, setEmailSubject] = useState("");
   const [emailBody, setEmailBody] = useState("");
+  const [bulkStatusOpen, setBulkStatusOpen] = useState(false);
+  const [bulkStatus, setBulkStatus] = useState<string>("under_review");
+  const [bulkNotes, setBulkNotes] = useState<string>("");
+  const [bulkSaving, setBulkSaving] = useState(false);
 
   const load = async () => {
     const { data } = await supabase
@@ -143,8 +149,8 @@ export default function AdminGjpApplications() {
       if (careerFilter !== "all" && r.career_path !== careerFilter) return false;
       if (nyscFilter === "yes" && !r.nysc_completed) return false;
       if (nyscFilter === "no" && r.nysc_completed) return false;
-      if (nyscYearFilter !== "all" && r.nysc_year !== nyscYearFilter) return false;
-      if (gradYearFilter !== "all" && r.graduation_year !== gradYearFilter) return false;
+      if (nyscYearFilter.size > 0 && (!r.nysc_year || !nyscYearFilter.has(r.nysc_year))) return false;
+      if (gradYearFilter.size > 0 && (!r.graduation_year || !gradYearFilter.has(r.graduation_year))) return false;
       if (alumniFilter === "yes" && !r.is_cap_flip_alumnus) return false;
       if (alumniFilter === "no" && r.is_cap_flip_alumnus) return false;
       if (stateFilter !== "all" && r.state_of_residence !== stateFilter) return false;
@@ -173,14 +179,14 @@ export default function AdminGjpApplications() {
     (techFilter !== "all" ? 1 : 0) +
     (careerFilter !== "all" ? 1 : 0) +
     (nyscFilter !== "all" ? 1 : 0) +
-    (nyscYearFilter !== "all" ? 1 : 0) +
-    (gradYearFilter !== "all" ? 1 : 0) +
+    (nyscYearFilter.size > 0 ? 1 : 0) +
+    (gradYearFilter.size > 0 ? 1 : 0) +
     (alumniFilter !== "all" ? 1 : 0) +
     (stateFilter !== "all" ? 1 : 0);
 
   const resetFilters = () => {
     setStageFilter("all"); setTechFilter("all"); setCareerFilter("all");
-    setNyscFilter("all"); setNyscYearFilter("all"); setGradYearFilter("all");
+    setNyscFilter("all"); setNyscYearFilter(new Set()); setGradYearFilter(new Set());
     setAlumniFilter("all"); setStateFilter("all");
   };
 
@@ -265,6 +271,27 @@ export default function AdminGjpApplications() {
     }
     toast.success("Status updated");
     setSelected({ ...selected, applicant_status: editStatus, status_notes: editNotes || null, status_updated_at: new Date().toISOString() });
+    load();
+  };
+
+  const applyBulkStatus = async () => {
+    if (selectedIds.size === 0) return;
+    setBulkSaving(true);
+    const update: { applicant_status: string; status_notes?: string | null } = { applicant_status: bulkStatus };
+    if (bulkNotes.trim()) update.status_notes = bulkNotes.trim();
+    const { error } = await supabase
+      .from("gjp_applications")
+      .update(update)
+      .in("id", Array.from(selectedIds));
+    setBulkSaving(false);
+    if (error) {
+      toast.error("Could not update status.");
+      return;
+    }
+    toast.success(`Updated ${selectedIds.size} applicant${selectedIds.size > 1 ? "s" : ""} to ${bulkStatus.replace("_", " ")}`);
+    setBulkStatusOpen(false);
+    setBulkNotes("");
+    setSelectedIds(new Set());
     load();
   };
 
