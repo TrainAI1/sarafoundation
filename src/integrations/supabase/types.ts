@@ -365,6 +365,51 @@ export type Database = {
         }
         Relationships: []
       }
+      gjp_email_followups: {
+        Row: {
+          auto_send: boolean
+          body: string
+          created_at: string
+          created_by: string | null
+          due_at: string
+          id: string
+          recipients: string[]
+          send_error: string | null
+          sent: boolean
+          sent_at: string | null
+          set_status_after: string | null
+          subject: string
+        }
+        Insert: {
+          auto_send?: boolean
+          body: string
+          created_at?: string
+          created_by?: string | null
+          due_at: string
+          id?: string
+          recipients: string[]
+          send_error?: string | null
+          sent?: boolean
+          sent_at?: string | null
+          set_status_after?: string | null
+          subject: string
+        }
+        Update: {
+          auto_send?: boolean
+          body?: string
+          created_at?: string
+          created_by?: string | null
+          due_at?: string
+          id?: string
+          recipients?: string[]
+          send_error?: string | null
+          sent?: boolean
+          sent_at?: string | null
+          set_status_after?: string | null
+          subject?: string
+        }
+        Relationships: []
+      }
       newsletter_subscribers: {
         Row: {
           email: string
