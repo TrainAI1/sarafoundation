@@ -5,8 +5,10 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
+import { Checkbox } from "@/components/ui/checkbox";
 import { toast } from "sonner";
-import { Download, FileSpreadsheet, Eye, Trash2, Briefcase, X, Save, Mail, Code2, Filter } from "lucide-react";
+import { Download, FileSpreadsheet, Eye, Trash2, Briefcase, X, Save, Mail, Code2, Filter, ChevronDown, ListChecks } from "lucide-react";
 import { format } from "date-fns";
 import * as XLSX from "xlsx";
 
@@ -77,8 +79,8 @@ export default function AdminGjpApplications() {
   const [techFilter, setTechFilter] = useState<"all" | "tech" | "non_tech">("all");
   const [careerFilter, setCareerFilter] = useState<string>("all");
   const [nyscFilter, setNyscFilter] = useState<"all" | "yes" | "no">("all");
-  const [nyscYearFilter, setNyscYearFilter] = useState<string>("all");
-  const [gradYearFilter, setGradYearFilter] = useState<string>("all");
+  const [nyscYearFilter, setNyscYearFilter] = useState<Set<string>>(new Set());
+  const [gradYearFilter, setGradYearFilter] = useState<Set<string>>(new Set());
   const [alumniFilter, setAlumniFilter] = useState<"all" | "yes" | "no">("all");
   const [stateFilter, setStateFilter] = useState<string>("all");
   const [search, setSearch] = useState("");
@@ -91,6 +93,10 @@ export default function AdminGjpApplications() {
   const [emailDialog, setEmailDialog] = useState<{ recipients: string[]; mode: "selected" | "filtered" | "single" } | null>(null);
   const [emailSubject, setEmailSubject] = useState("");
   const [emailBody, setEmailBody] = useState("");
+  const [bulkStatusOpen, setBulkStatusOpen] = useState(false);
+  const [bulkStatus, setBulkStatus] = useState<string>("under_review");
+  const [bulkNotes, setBulkNotes] = useState<string>("");
+  const [bulkSaving, setBulkSaving] = useState(false);
 
   const load = async () => {
     const { data } = await supabase
@@ -143,8 +149,8 @@ export default function AdminGjpApplications() {
       if (careerFilter !== "all" && r.career_path !== careerFilter) return false;
       if (nyscFilter === "yes" && !r.nysc_completed) return false;
       if (nyscFilter === "no" && r.nysc_completed) return false;
-      if (nyscYearFilter !== "all" && r.nysc_year !== nyscYearFilter) return false;
-      if (gradYearFilter !== "all" && r.graduation_year !== gradYearFilter) return false;
+      if (nyscYearFilter.size > 0 && (!r.nysc_year || !nyscYearFilter.has(r.nysc_year))) return false;
+      if (gradYearFilter.size > 0 && (!r.graduation_year || !gradYearFilter.has(r.graduation_year))) return false;
       if (alumniFilter === "yes" && !r.is_cap_flip_alumnus) return false;
       if (alumniFilter === "no" && r.is_cap_flip_alumnus) return false;
       if (stateFilter !== "all" && r.state_of_residence !== stateFilter) return false;
@@ -173,14 +179,14 @@ export default function AdminGjpApplications() {
     (techFilter !== "all" ? 1 : 0) +
     (careerFilter !== "all" ? 1 : 0) +
     (nyscFilter !== "all" ? 1 : 0) +
-    (nyscYearFilter !== "all" ? 1 : 0) +
-    (gradYearFilter !== "all" ? 1 : 0) +
+    (nyscYearFilter.size > 0 ? 1 : 0) +
+    (gradYearFilter.size > 0 ? 1 : 0) +
     (alumniFilter !== "all" ? 1 : 0) +
     (stateFilter !== "all" ? 1 : 0);
 
   const resetFilters = () => {
     setStageFilter("all"); setTechFilter("all"); setCareerFilter("all");
-    setNyscFilter("all"); setNyscYearFilter("all"); setGradYearFilter("all");
+    setNyscFilter("all"); setNyscYearFilter(new Set()); setGradYearFilter(new Set());
     setAlumniFilter("all"); setStateFilter("all");
   };
 
@@ -265,6 +271,27 @@ export default function AdminGjpApplications() {
     }
     toast.success("Status updated");
     setSelected({ ...selected, applicant_status: editStatus, status_notes: editNotes || null, status_updated_at: new Date().toISOString() });
+    load();
+  };
+
+  const applyBulkStatus = async () => {
+    if (selectedIds.size === 0) return;
+    setBulkSaving(true);
+    const update: { applicant_status: string; status_notes?: string | null } = { applicant_status: bulkStatus };
+    if (bulkNotes.trim()) update.status_notes = bulkNotes.trim();
+    const { error } = await supabase
+      .from("gjp_applications")
+      .update(update)
+      .in("id", Array.from(selectedIds));
+    setBulkSaving(false);
+    if (error) {
+      toast.error("Could not update status.");
+      return;
+    }
+    toast.success(`Updated ${selectedIds.size} applicant${selectedIds.size > 1 ? "s" : ""} to ${bulkStatus.replace("_", " ")}`);
+    setBulkStatusOpen(false);
+    setBulkNotes("");
+    setSelectedIds(new Set());
     load();
   };
 
@@ -356,6 +383,14 @@ export default function AdminGjpApplications() {
           <Button onClick={() => openEmail("selected")} size="sm" variant="outline" disabled={selectedIds.size === 0}>
             <Mail className="w-4 h-4" /> Email selected ({selectedIds.size})
           </Button>
+          <Button
+            onClick={() => { setBulkStatus("under_review"); setBulkNotes(""); setBulkStatusOpen(true); }}
+            size="sm"
+            variant="outline"
+            disabled={selectedIds.size === 0}
+          >
+            <ListChecks className="w-4 h-4" /> Change status ({selectedIds.size})
+          </Button>
           <Button onClick={() => openEmail("filtered")} size="sm" variant="outline" disabled={filtered.length === 0}>
             <Mail className="w-4 h-4" /> Email all filtered
           </Button>
@@ -442,27 +477,21 @@ export default function AdminGjpApplications() {
             </div>
             <div>
               <Label className="text-xs">NYSC year</Label>
-              <Select value={nyscYearFilter} onValueChange={setNyscYearFilter}>
-                <SelectTrigger className="rounded-xl mt-1"><SelectValue /></SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="all">All NYSC years</SelectItem>
-                  {nyscYears.map((y) => (
-                    <SelectItem key={y} value={y}>{y}</SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
+              <MultiYearPicker
+                label="NYSC years"
+                options={nyscYears}
+                value={nyscYearFilter}
+                onChange={setNyscYearFilter}
+              />
             </div>
             <div>
               <Label className="text-xs">Graduation year</Label>
-              <Select value={gradYearFilter} onValueChange={setGradYearFilter}>
-                <SelectTrigger className="rounded-xl mt-1"><SelectValue /></SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="all">All grad years</SelectItem>
-                  {gradYears.map((y) => (
-                    <SelectItem key={y} value={y}>{y}</SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
+              <MultiYearPicker
+                label="grad years"
+                options={gradYears}
+                value={gradYearFilter}
+                onChange={setGradYearFilter}
+              />
             </div>
             <div>
               <Label className="text-xs">CAP/FLIP alumni</Label>
@@ -730,6 +759,57 @@ export default function AdminGjpApplications() {
           </div>
         </div>
       )}
+
+      {bulkStatusOpen && (
+        <div
+          className="fixed inset-0 z-50 flex items-end sm:items-center justify-center p-0 sm:p-4 bg-foreground/40"
+          onClick={() => setBulkStatusOpen(false)}
+        >
+          <div
+            className="bg-card w-full sm:max-w-md rounded-t-2xl sm:rounded-2xl shadow-2xl"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="border-b border-border px-5 py-3 flex items-center justify-between">
+              <h3 className="font-display font-bold text-foreground flex items-center gap-2">
+                <ListChecks className="w-4 h-4" /> Change status for {selectedIds.size} applicant{selectedIds.size > 1 ? "s" : ""}
+              </h3>
+              <Button variant="ghost" size="icon" onClick={() => setBulkStatusOpen(false)}>
+                <X className="w-4 h-4" />
+              </Button>
+            </div>
+            <div className="p-5 space-y-4 text-sm">
+              <div>
+                <Label className="text-xs">New stage</Label>
+                <Select value={bulkStatus} onValueChange={setBulkStatus}>
+                  <SelectTrigger className="mt-1 rounded-xl"><SelectValue /></SelectTrigger>
+                  <SelectContent>
+                    {applicantStatusOptions.map((o) => (
+                      <SelectItem key={o.value} value={o.value}>{o.label}</SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
+              <div>
+                <Label className="text-xs">Notes (optional — overwrites existing notes for all selected)</Label>
+                <Textarea
+                  value={bulkNotes}
+                  onChange={(e) => setBulkNotes(e.target.value)}
+                  placeholder="Leave blank to keep each applicant's current note."
+                  className="mt-1 rounded-xl min-h-[80px]"
+                />
+              </div>
+              <div className="flex flex-col-reverse sm:flex-row sm:justify-end gap-2">
+                <Button variant="outline" size="sm" onClick={() => setBulkStatusOpen(false)} className="rounded-xl">
+                  Cancel
+                </Button>
+                <Button onClick={applyBulkStatus} disabled={bulkSaving} size="sm" className="rounded-xl">
+                  <Save className="w-4 h-4" /> {bulkSaving ? "Updating..." : "Apply to all"}
+                </Button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
@@ -740,5 +820,69 @@ function Detail({ label, value }: { label: string; value: string }) {
       <span className="text-muted-foreground text-xs uppercase tracking-wider col-span-1">{label}</span>
       <span className="text-foreground col-span-2 break-words">{value}</span>
     </div>
+  );
+}
+
+function MultiYearPicker({
+  label,
+  options,
+  value,
+  onChange,
+}: {
+  label: string;
+  options: string[];
+  value: Set<string>;
+  onChange: (next: Set<string>) => void;
+}) {
+  const toggle = (y: string) => {
+    const next = new Set(value);
+    if (next.has(y)) next.delete(y);
+    else next.add(y);
+    onChange(next);
+  };
+  const summary =
+    value.size === 0
+      ? `All ${label}`
+      : value.size <= 2
+        ? Array.from(value).sort().reverse().join(", ")
+        : `${value.size} ${label} selected`;
+  return (
+    <Popover>
+      <PopoverTrigger asChild>
+        <Button variant="outline" size="sm" className="mt-1 w-full justify-between rounded-xl font-normal">
+          <span className="truncate">{summary}</span>
+          <ChevronDown className="w-4 h-4 opacity-50 shrink-0" />
+        </Button>
+      </PopoverTrigger>
+      <PopoverContent align="start" className="w-56 p-2">
+        <div className="flex items-center justify-between px-2 py-1">
+          <span className="text-xs text-muted-foreground">Select {label}</span>
+          {value.size > 0 && (
+            <button
+              type="button"
+              onClick={() => onChange(new Set())}
+              className="text-xs text-primary hover:underline"
+            >
+              Clear
+            </button>
+          )}
+        </div>
+        <div className="max-h-60 overflow-y-auto">
+          {options.length === 0 ? (
+            <p className="text-xs text-muted-foreground px-2 py-3">No options yet</p>
+          ) : (
+            options.map((y) => (
+              <label
+                key={y}
+                className="flex items-center gap-2 px-2 py-1.5 rounded-md hover:bg-secondary cursor-pointer text-sm"
+              >
+                <Checkbox checked={value.has(y)} onCheckedChange={() => toggle(y)} />
+                <span>{y}</span>
+              </label>
+            ))
+          )}
+        </div>
+      </PopoverContent>
+    </Popover>
   );
 }
