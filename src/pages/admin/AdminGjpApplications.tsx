@@ -511,6 +511,18 @@ export default function AdminGjpApplications() {
             <Mail className="w-4 h-4" /> Email selected ({selectedIds.size})
           </Button>
           <Button
+            onClick={() => setFollowupsOpen(true)}
+            size="sm"
+            variant={dueFollowups.length > 0 ? "default" : "outline"}
+          >
+            <Clock className="w-4 h-4" /> Follow-ups
+            {dueFollowups.length > 0 && (
+              <span className="ml-1 inline-flex items-center justify-center rounded-full bg-destructive text-destructive-foreground text-[10px] px-1.5 min-w-[18px] h-[18px] font-semibold">
+                {dueFollowups.length}
+              </span>
+            )}
+          </Button>
+          <Button
             onClick={() => { setBulkStatus("under_review"); setBulkNotes(""); setBulkStatusOpen(true); }}
             size="sm"
             variant="outline"
