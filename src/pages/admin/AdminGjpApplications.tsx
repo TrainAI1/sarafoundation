@@ -287,16 +287,28 @@ export default function AdminGjpApplications() {
               : r
           )
         );
-        const { error } = await supabase
-          .from("gjp_applications")
-          .update({ applicant_status: emailStatusAfter, status_updated_at: nowIso })
-          .in("id", ids);
-        if (error) {
-          console.error(error);
+        const BATCH = 100;
+        let updated = 0;
+        let firstErr: string | null = null;
+        for (let i = 0; i < ids.length; i += BATCH) {
+          const chunk = ids.slice(i, i + BATCH);
+          const { error } = await supabase
+            .from("gjp_applications")
+            .update({ applicant_status: emailStatusAfter, status_updated_at: nowIso })
+            .in("id", chunk);
+          if (error) {
+            firstErr = firstErr || error.message;
+          } else {
+            updated += chunk.length;
+          }
+        }
+        if (updated === 0) {
+          console.error(firstErr);
           toast.error("Emails opened, but couldn't auto-update statuses.");
           load();
         } else {
-          toast.success(`Moved ${ids.length} applicant${ids.length > 1 ? "s" : ""} to ${emailStatusAfter.replace("_", " ")}.`);
+          toast.success(`Moved ${updated} applicant${updated > 1 ? "s" : ""} to ${emailStatusAfter.replace("_", " ")}.`);
+          if (firstErr) toast.warning(`Some updates failed: ${firstErr}`);
         }
       }
     }
@@ -378,16 +390,32 @@ export default function AdminGjpApplications() {
     setBulkSaving(true);
     const update: { applicant_status: string; status_notes?: string | null } = { applicant_status: bulkStatus };
     if (bulkNotes.trim()) update.status_notes = bulkNotes.trim();
-    const { error } = await supabase
-      .from("gjp_applications")
-      .update(update)
-      .in("id", Array.from(selectedIds));
+    const ids = Array.from(selectedIds);
+    const BATCH = 100;
+    let done = 0;
+    const errors: string[] = [];
+    for (let i = 0; i < ids.length; i += BATCH) {
+      const chunk = ids.slice(i, i + BATCH);
+      const { error } = await supabase
+        .from("gjp_applications")
+        .update(update)
+        .in("id", chunk);
+      if (error) {
+        errors.push(error.message);
+      } else {
+        done += chunk.length;
+      }
+    }
     setBulkSaving(false);
-    if (error) {
-      toast.error("Could not update status.");
+    if (done === 0) {
+      toast.error(`Could not update status: ${errors[0] || "unknown error"}`);
       return;
     }
-    toast.success(`Updated ${selectedIds.size} applicant${selectedIds.size > 1 ? "s" : ""} to ${bulkStatus.replace("_", " ")}`);
+    if (errors.length) {
+      toast.warning(`Updated ${done}/${ids.length}. Some batches failed: ${errors[0]}`);
+    } else {
+      toast.success(`Updated ${done} applicant${done > 1 ? "s" : ""} to ${bulkStatus.replace("_", " ")}`);
+    }
     setBulkStatusOpen(false);
     setBulkNotes("");
     setSelectedIds(new Set());
