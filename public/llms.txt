@@ -1,0 +1,34 @@
+# Sara Foundation Africa
+
+> Non-profit empowering African youth and women with tech skills, mentorship, and career development across 35+ universities in 8 countries.
+
+Sara Foundation runs flagship programs (CAP, FLIP, GJP) that combine intensive learning, mentorship, and real-world projects to prepare African students for tech careers.
+
+## Pages
+
+- [Home](/): Mission overview, programs, impact, and partners.
+- [About](/about): Our story, leadership team, and SDG alignment.
+- [Contact](/contact): Email, phone, and office locations.
+- [Donate](/donation): Support our mission via Naira transfer, crypto, or GoFundMe.
+- [Blog](/blog): Articles on African tech education, women in tech, and graduate outcomes.
+
+## Programs
+
+- [CAP Tech Hub](/programs/cap): Career Advancement Program — 13-week intensive (2 weeks learning, 10 weeks build, 1 week launch) and 6-week Fellowship paths.
+- [CAP Apply](/programs/cap/apply): Application form for CAP cohort.
+- [FLIP](/programs/flip): Female Leadership Initiative Program — mentorship and workshops for women in tech.
+- [FLIP Apply](/programs/flip/apply): Application form for FLIP fellowship.
+- [GJP](/programs/gjp): Graduate Jobs Program connecting graduates to tech roles.
+- [GJP Apply](/programs/gjp/apply): Application form for GJP.
+
+## Partnership
+
+- [Partnership Overview](/partnership): Ways to partner with Sara Foundation.
+- [Schools & Communities](/partnership/school-community): University and community partnerships.
+- [Organizations](/partnership/organizations): Corporate and NGO partnerships.
+- [Sponsors](/partnership/sponsors): Sponsorship opportunities.
+
+## Optional
+
+- [Privacy Policy](/privacy)
+- [Terms of Service](/terms)
