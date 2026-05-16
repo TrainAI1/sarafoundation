@@ -13,4 +13,4 @@ Allow: /
 User-agent: *
 Allow: /
 
-Sitemap: https://sarafoundationafrica.com/sitemap.xml
+Sitemap: https://sarafoundation.lovable.app/sitemap.xml
