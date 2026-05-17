@@ -174,7 +174,9 @@ export function HeroSection() {
                       <img
                         src={card.src}
                         alt={card.name}
-                        loading="lazy"
+                        loading={i < 4 ? "eager" : "lazy"}
+                        fetchPriority={i === 0 ? "high" : "auto"}
+                        decoding="async"
                         className="absolute inset-0 w-full h-full object-cover"
                       />
                     )}

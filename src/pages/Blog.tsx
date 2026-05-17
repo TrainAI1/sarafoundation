@@ -182,7 +182,7 @@ export default function Blog() {
 
           {filteredPosts.length === 0 && (
             <div className="text-center py-16">
-              <Newspaper className="w-16 h-16 text-muted-foreground/30 mx-auto mb-4" />
+              <Newspaper className="w-16 h-16 text-muted-foreground mx-auto mb-4" />
               <h3 className="font-display font-bold text-xl text-foreground mb-2">No articles found</h3>
               <p className="text-muted-foreground">Try adjusting your search or filter criteria.</p>
             </div>
