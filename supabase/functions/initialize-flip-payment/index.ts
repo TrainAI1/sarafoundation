@@ -61,8 +61,8 @@ serve(async (req) => {
       });
     }
 
-    // NGN ₦1,000 = 100000 kobo. USD $1 = 100 cents.
-    const amount = currency === "NGN" ? 100000 : 100;
+    // NGN ₦2,000 = 200000 kobo. USD $1.30 = 130 cents.
+    const amount = currency === "NGN" ? 200000 : 130;
 
     const initRes = await fetch(`${PAYSTACK_BASE}/transaction/initialize`, {
       method: "POST",

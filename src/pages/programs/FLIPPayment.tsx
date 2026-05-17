@@ -154,7 +154,7 @@ export default function FLIPPayment() {
                     <CreditCard className="w-5 h-5 text-accent" />
                     <span className="font-semibold text-foreground">Nigeria (NGN)</span>
                   </div>
-                  <p className="font-display text-2xl font-bold text-foreground">₦1,000</p>
+                  <p className="font-display text-2xl font-bold text-foreground">₦2,000</p>
                   <p className="text-xs text-muted-foreground mt-1">Card, transfer, USSD</p>
                 </button>
                 <button
@@ -165,7 +165,7 @@ export default function FLIPPayment() {
                     <Globe className="w-5 h-5 text-accent" />
                     <span className="font-semibold text-foreground">Global (USD)</span>
                   </div>
-                  <p className="font-display text-2xl font-bold text-foreground">$1.00</p>
+                  <p className="font-display text-2xl font-bold text-foreground">$1.30</p>
                   <p className="text-xs text-muted-foreground mt-1">International cards</p>
                 </button>
               </div>
@@ -180,7 +180,7 @@ export default function FLIPPayment() {
               {processing ? (
                 <><Loader2 className="w-5 h-5 animate-spin" /> Processing...</>
               ) : (
-                <>Pay {currency === "NGN" ? "₦1,000" : "$1.00"} & Enroll</>
+                <>Pay {currency === "NGN" ? "₦2,000" : "$1.30"} & Enroll</>
               )}
             </Button>
 
