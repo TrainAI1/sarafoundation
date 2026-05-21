@@ -181,7 +181,11 @@ export function Footer() {
         </div>
 
         {/* Bottom Bar */}
-        <div className="mt-16 pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-4">
+        <div className="mt-16 pt-8 border-t border-white/10 flex flex-col gap-4">
+          <p className="text-white/50 text-xs md:text-sm leading-relaxed text-center md:text-left">
+            Sara Foundation Africa is registered as <span className="text-white/80 font-medium">Princess Sara Foundation</span> in Nigeria with CAC charity number: <span className="text-white/80 font-medium">7980056</span>.
+          </p>
+          <div className="flex flex-col md:flex-row justify-between items-center gap-4">
           <p className="text-white/40 text-sm">
             © {new Date().getFullYear()} Sara Foundation Africa. All rights reserved.
           </p>
@@ -192,6 +196,7 @@ export function Footer() {
             <Link to="/terms" className="text-white/40 hover:text-white transition-colors">
               Terms of Service
             </Link>
+          </div>
           </div>
         </div>
       </div>
