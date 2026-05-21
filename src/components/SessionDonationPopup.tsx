@@ -4,6 +4,7 @@ import { Dialog, DialogContent, DialogPortal, DialogOverlay } from "@/components
 import * as DialogPrimitive from "@radix-ui/react-dialog";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
+import { PaystackDonate } from "@/components/PaystackDonate";
 
 const SESSION_KEY = "sara_session_donation_shown";
 
@@ -74,6 +75,13 @@ export function SessionDonationPopup() {
           </div>
 
           <div className="space-y-2.5 max-h-[55vh] overflow-y-auto">
+            <div className="rounded-xl border border-primary/30 bg-primary/5 p-3">
+              <p className="text-xs font-semibold text-foreground mb-2 flex items-center gap-1.5">
+                <CreditCard className="w-3.5 h-3.5 text-primary" /> Donate instantly with card
+              </p>
+              <PaystackDonate compact />
+            </div>
+
             {methods.map((m) => (
               <div
                 key={m.title}
