@@ -6,6 +6,7 @@ import { Drawer, DrawerContent, DrawerHeader, DrawerTitle, DrawerDescription } f
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 import { useIsMobile } from "@/hooks/use-mobile";
+import { PaystackDonate } from "@/components/PaystackDonate";
 
 const donationMethods = [
   {
@@ -47,6 +48,13 @@ const handleCopy = (value: string, label: string) => {
 function DonateContent() {
   return (
     <>
+      <div className="rounded-xl border border-primary/30 bg-primary/5 p-3 mb-3">
+        <p className="text-xs font-semibold text-foreground mb-2 flex items-center gap-1.5">
+          <CreditCard className="w-3.5 h-3.5 text-primary" /> Donate instantly with card
+        </p>
+        <PaystackDonate compact />
+      </div>
+
       <div className="space-y-2.5">
         {donationMethods.map((method) => (
           <div

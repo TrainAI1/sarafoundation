@@ -2,6 +2,7 @@ import { Heart, CreditCard, Wallet, ExternalLink, Gift, Copy } from "lucide-reac
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { toast } from "sonner";
+import { PaystackDonate } from "@/components/PaystackDonate";
 
 const donationMethods = [
   {
@@ -98,6 +99,20 @@ export function DonationSection() {
 
           {/* Donation Methods */}
           <div className="space-y-3 md:space-y-4 px-4 lg:px-0">
+            {/* Featured: Card payment via Paystack */}
+            <div className="card-modern p-5 md:p-6 border-primary/30">
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-primary to-accent flex items-center justify-center shadow-lg">
+                  <CreditCard className="w-6 h-6 text-white" />
+                </div>
+                <div>
+                  <h4 className="font-semibold text-foreground text-base">Donate with Card</h4>
+                  <p className="text-xs text-muted-foreground">Instant · Visa, Mastercard, Verve, Transfer</p>
+                </div>
+              </div>
+              <PaystackDonate compact />
+            </div>
+
             {donationMethods.map((method, index) => (
               <div 
                 key={method.title}
