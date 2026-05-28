@@ -6,7 +6,7 @@ const corsHeaders = {
     "authorization, x-client-info, apikey, content-type, x-supabase-client-platform, x-supabase-client-platform-version, x-supabase-client-runtime, x-supabase-client-runtime-version",
 };
 
-const STRIPE_BASE = "https://api.stripe.com/v1";
+const STRIPE_BASE = "https://connector-gateway.lovable.dev/stripe";
 const ALLOWED = ["USD", "NGN", "EUR", "GBP", "GHS", "KES", "ZAR", "CAD", "AUD"] as const;
 
 type Body = {
@@ -39,7 +39,8 @@ serve(async (req) => {
 
   try {
     const KEY = Deno.env.get("STRIPE_SANDBOX_API_KEY") || Deno.env.get("STRIPE_API_KEY");
-    if (!KEY) {
+    const LOVABLE_KEY = Deno.env.get("LOVABLE_API_KEY");
+    if (!KEY || !LOVABLE_KEY) {
       return new Response(JSON.stringify({ error: "Stripe not configured" }), {
         status: 500, headers: { ...corsHeaders, "Content-Type": "application/json" },
       });
@@ -108,7 +109,8 @@ serve(async (req) => {
     const res = await fetch(`${STRIPE_BASE}/checkout/sessions`, {
       method: "POST",
       headers: {
-        Authorization: `Bearer ${KEY}`,
+        Authorization: `Bearer ${LOVABLE_KEY}`,
+        "X-Connection-Api-Key": KEY,
         "Content-Type": "application/x-www-form-urlencoded",
       },
       body: form(payload),
