@@ -11,3 +11,6 @@ verify_jwt = false
 
 [functions.verify-stripe-session]
 verify_jwt = false
+
+[functions._debug_env]
+verify_jwt = false
