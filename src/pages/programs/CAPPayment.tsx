@@ -20,24 +20,6 @@ type App = {
   preferred_track: string;
 };
 
-function loadPaystackScript(): Promise<void> {
-  return new Promise((resolve, reject) => {
-    if ((window as any).PaystackPop) return resolve();
-    const existing = document.querySelector('script[src="https://js.paystack.co/v2/inline.js"]');
-    if (existing) {
-      existing.addEventListener("load", () => resolve());
-      existing.addEventListener("error", () => reject(new Error("Failed to load Paystack")));
-      return;
-    }
-    const s = document.createElement("script");
-    s.src = "https://js.paystack.co/v2/inline.js";
-    s.async = true;
-    s.onload = () => resolve();
-    s.onerror = () => reject(new Error("Failed to load Paystack"));
-    document.body.appendChild(s);
-  });
-}
-
 const PRICES = {
   full: { NGN: 90000, USD: 60, displayNGN: "₦90,000", displayUSD: "$60" },
   installments: { NGN: 30000, USD: 20, displayNGN: "₦30,000", displayUSD: "$20" },
@@ -83,7 +65,6 @@ export default function CAPPayment() {
       }
       setLoading(false);
     })();
-    loadPaystackScript().catch(() => toast.error("Could not load payment script."));
   }, [appId, navigate]);
 
   const lockedPlan = (app?.installments_completed ?? 0) > 0;
@@ -94,46 +75,28 @@ export default function CAPPayment() {
     if (!app) return;
     setProcessing(true);
     try {
-      const { data, error } = await supabase.functions.invoke("initialize-cap-payment", {
-        body: { application_id: app.id, currency, plan },
+      const origin = window.location.origin;
+      const amount = plan === "full"
+        ? (currency === "NGN" ? PRICES.full.NGN : PRICES.full.USD)
+        : (currency === "NGN" ? PRICES.installments.NGN : PRICES.installments.USD);
+      const { data, error } = await supabase.functions.invoke("create-stripe-checkout", {
+        body: {
+          purpose: "cap",
+          email: app.email,
+          name: app.full_name,
+          currency,
+          amount,
+          application_id: app.id,
+          preferred_track: app.preferred_track,
+          plan,
+          success_url: `${origin}/programs/cap/success?app=${app.id}`,
+          cancel_url: `${origin}/programs/cap/payment?app=${app.id}`,
+        },
       });
-      if (error || !data?.access_code) {
+      if (error || !data?.url) {
         throw new Error(error?.message || data?.error || "Payment init failed");
       }
-      await loadPaystackScript();
-      const PaystackPop = (window as any).PaystackPop;
-      const popup = new PaystackPop();
-      popup.resumeTransaction(data.access_code, {
-        onSuccess: async (tx: { reference: string }) => {
-          const ref = tx?.reference || data.reference;
-          toast.message("Verifying payment...");
-          const { data: vData, error: vErr } = await supabase.functions.invoke("verify-cap-payment", {
-            body: { reference: ref },
-          });
-          if (vErr || !vData?.success) {
-            toast.error("Payment could not be verified. Please contact support.");
-            setProcessing(false);
-            return;
-          }
-          if (vData.fully_paid) {
-            navigate(`/programs/cap/success?app=${app.id}`);
-          } else {
-            toast.success(`Installment ${vData.installments_completed} of 3 received!`);
-            // Re-fetch to update the UI
-            const { data: refreshed } = await supabase
-              .from("cap_applications")
-              .select("id, email, full_name, payment_status, payment_plan, payment_currency, paid_amount, installments_completed, preferred_track")
-              .eq("id", app.id)
-              .maybeSingle();
-            if (refreshed) setApp(refreshed as App);
-            setProcessing(false);
-          }
-        },
-        onCancel: () => {
-          setProcessing(false);
-          toast.message("Payment cancelled.");
-        },
-      });
+      window.location.href = data.url;
     } catch (e: any) {
       console.error(e);
       toast.error(e.message || "Could not start payment.");
@@ -251,12 +214,12 @@ export default function CAPPayment() {
 
             <div className="flex items-start gap-2 text-xs text-muted-foreground">
               <ShieldCheck className="w-4 h-4 text-primary flex-shrink-0 mt-0.5" />
-              <p>Payments are securely processed by Paystack. Your card details never touch our servers.</p>
+              <p>Payments are securely processed by Stripe. Your card details never touch our servers.</p>
             </div>
 
             <Button onClick={pay} disabled={processing} size="lg" className="w-full glow-effect rounded-xl">
               {processing ? (
-                <><Loader2 className="w-5 h-5 animate-spin" /> Processing...</>
+                <><Loader2 className="w-5 h-5 animate-spin" /> Redirecting to Stripe...</>
               ) : (
                 <>
                   Pay {currentPrice}
