@@ -5,3 +5,12 @@ verify_jwt = false
 
 [functions.notify]
 verify_jwt = false
+
+[functions.create-stripe-checkout]
+verify_jwt = false
+
+[functions.verify-stripe-session]
+verify_jwt = false
+
+[functions.debug-env]
+verify_jwt = false

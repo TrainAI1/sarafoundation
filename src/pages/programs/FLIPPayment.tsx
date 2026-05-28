@@ -17,24 +17,6 @@ type App = {
   preferred_track: string;
 };
 
-function loadPaystackScript(): Promise<void> {
-  return new Promise((resolve, reject) => {
-    if ((window as any).PaystackPop) return resolve();
-    const existing = document.querySelector('script[src="https://js.paystack.co/v2/inline.js"]');
-    if (existing) {
-      existing.addEventListener("load", () => resolve());
-      existing.addEventListener("error", () => reject(new Error("Failed to load Paystack")));
-      return;
-    }
-    const s = document.createElement("script");
-    s.src = "https://js.paystack.co/v2/inline.js";
-    s.async = true;
-    s.onload = () => resolve();
-    s.onerror = () => reject(new Error("Failed to load Paystack"));
-    document.body.appendChild(s);
-  });
-}
-
 export default function FLIPPayment() {
   const [params] = useSearchParams();
   const appId = params.get("app");
@@ -67,41 +49,31 @@ export default function FLIPPayment() {
       setApp(data as App);
       setLoading(false);
     })();
-    loadPaystackScript().catch(() => toast.error("Could not load payment script."));
   }, [appId, navigate]);
 
   const pay = async () => {
     if (!app) return;
     setProcessing(true);
     try {
-      const { data, error } = await supabase.functions.invoke("initialize-flip-payment", {
-        body: { application_id: app.id, currency },
+      const origin = window.location.origin;
+      const amount = currency === "NGN" ? 2000 : 1.30;
+      const { data, error } = await supabase.functions.invoke("create-stripe-checkout", {
+        body: {
+          purpose: "flip",
+          email: app.email,
+          name: `${app.first_name} ${app.last_name}`,
+          currency,
+          amount,
+          application_id: app.id,
+          preferred_track: app.preferred_track,
+          success_url: `${origin}/programs/flip/success?app=${app.id}`,
+          cancel_url: `${origin}/programs/flip/payment?app=${app.id}`,
+        },
       });
-      if (error || !data?.access_code) {
+      if (error || !data?.url) {
         throw new Error(error?.message || data?.error || "Payment init failed");
       }
-      await loadPaystackScript();
-      const PaystackPop = (window as any).PaystackPop;
-      const popup = new PaystackPop();
-      popup.resumeTransaction(data.access_code, {
-        onSuccess: async (tx: { reference: string }) => {
-          const ref = tx?.reference || data.reference;
-          toast.message("Verifying payment...");
-          const { data: vData, error: vErr } = await supabase.functions.invoke("verify-flip-payment", {
-            body: { reference: ref },
-          });
-          if (vErr || !vData?.paid) {
-            toast.error("Payment could not be verified. Please contact support.");
-            setProcessing(false);
-            return;
-          }
-          navigate(`/programs/flip/success?app=${app.id}`);
-        },
-        onCancel: () => {
-          setProcessing(false);
-          toast.message("Payment cancelled.");
-        },
-      });
+      window.location.href = data.url;
     } catch (e: any) {
       console.error(e);
       toast.error(e.message || "Could not start payment.");
@@ -173,12 +145,12 @@ export default function FLIPPayment() {
 
             <div className="flex items-start gap-2 text-xs text-muted-foreground">
               <ShieldCheck className="w-4 h-4 text-accent flex-shrink-0 mt-0.5" />
-              <p>Payments are securely processed by Paystack. Your card details never touch our servers.</p>
+              <p>Payments are securely processed by Stripe. Your card details never touch our servers.</p>
             </div>
 
             <Button onClick={pay} disabled={processing} size="lg" className="w-full glow-effect rounded-xl">
               {processing ? (
-                <><Loader2 className="w-5 h-5 animate-spin" /> Processing...</>
+                <><Loader2 className="w-5 h-5 animate-spin" /> Redirecting to Stripe...</>
               ) : (
                 <>Pay {currency === "NGN" ? "₦2,000" : "$1.30"} & Enroll</>
               )}

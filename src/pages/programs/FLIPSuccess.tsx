@@ -1,13 +1,24 @@
+import { useEffect, useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { Button } from "@/components/ui/button";
 import { CheckCircle2, ArrowRight, Sparkles } from "lucide-react";
+import { supabase } from "@/integrations/supabase/client";
 
 export default function FLIPSuccess() {
   const [params] = useSearchParams();
   const appId = params.get("app");
+  const sessionId = params.get("session_id");
+  const [verified, setVerified] = useState<boolean | null>(null);
+
+  useEffect(() => {
+    if (!sessionId) { setVerified(true); return; }
+    supabase.functions.invoke("verify-stripe-session", { body: { session_id: sessionId } })
+      .then(({ data }) => setVerified(Boolean(data?.paid)))
+      .catch(() => setVerified(false));
+  }, [sessionId]);
 
   return (
     <div className="min-h-screen bg-background">
