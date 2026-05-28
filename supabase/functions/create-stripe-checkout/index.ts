@@ -6,7 +6,7 @@ const corsHeaders = {
     "authorization, x-client-info, apikey, content-type, x-supabase-client-platform, x-supabase-client-platform-version, x-supabase-client-runtime, x-supabase-client-runtime-version",
 };
 
-const STRIPE_BASE = "https://connector-gateway.lovable.dev/stripe";
+const STRIPE_BASE = "https://connector-gateway.lovable.dev/stripe/v1";
 const ALLOWED = ["USD", "NGN", "EUR", "GBP", "GHS", "KES", "ZAR", "CAD", "AUD"] as const;
 
 type Body = {
