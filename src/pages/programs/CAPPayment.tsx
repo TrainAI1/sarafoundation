@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { ArrowLeft, CreditCard, Globe, Loader2, ShieldCheck, Calendar, Wallet } from "lucide-react";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
+import { resumePaystack } from "@/lib/paystack";
 
 type App = {
   id: string;
@@ -33,7 +34,7 @@ export default function CAPPayment() {
   const [loading, setLoading] = useState(true);
   const [currency, setCurrency] = useState<"NGN" | "USD">("NGN");
   const [plan, setPlan] = useState<"full" | "installments">("full");
-  const [processing, setProcessing] = useState(false);
+  const [processing, setProcessing] = useState<null | "stripe" | "paystack">(null);
 
   useEffect(() => {
     if (!appId) {
@@ -71,14 +72,13 @@ export default function CAPPayment() {
   const installmentsPaid = app?.installments_completed ?? 0;
   const installmentNumber = installmentsPaid + 1;
 
-  const pay = async () => {
+  const payStripe = async () => {
     if (!app) return;
-    setProcessing(true);
+    if (currency === "NGN") { toast.error("Use Paystack for Naira payments."); return; }
+    setProcessing("stripe");
     try {
       const origin = window.location.origin;
-      const amount = plan === "full"
-        ? (currency === "NGN" ? PRICES.full.NGN : PRICES.full.USD)
-        : (currency === "NGN" ? PRICES.installments.NGN : PRICES.installments.USD);
+      const amount = plan === "full" ? PRICES.full.USD : PRICES.installments.USD;
       const { data, error } = await supabase.functions.invoke("create-stripe-checkout", {
         body: {
           purpose: "cap",
@@ -100,7 +100,34 @@ export default function CAPPayment() {
     } catch (e: any) {
       console.error(e);
       toast.error(e.message || "Could not start payment.");
-      setProcessing(false);
+      setProcessing(null);
+    }
+  };
+
+  const payPaystack = async () => {
+    if (!app) return;
+    setProcessing("paystack");
+    try {
+      const { data, error } = await supabase.functions.invoke("initialize-cap-payment", {
+        body: { application_id: app.id, currency, plan },
+      });
+      if (error || !data?.access_code) {
+        throw new Error(error?.message || data?.error || "Could not start Paystack");
+      }
+      resumePaystack(data.access_code, {
+        onSuccess: async () => {
+          try {
+            await supabase.functions.invoke("verify-cap-payment", { body: { reference: data.reference } });
+          } catch (e) { console.error("verify failed:", e); }
+          window.location.href = `/programs/cap/success?app=${app.id}&reference=${encodeURIComponent(data.reference)}`;
+        },
+        onCancel: () => { setProcessing(null); toast.message("Payment cancelled."); },
+        onError: (e) => { console.error(e); setProcessing(null); toast.error("Payment failed."); },
+      });
+    } catch (e: any) {
+      console.error(e);
+      toast.error(e.message || "Could not start Paystack.");
+      setProcessing(null);
     }
   };
 
@@ -217,17 +244,27 @@ export default function CAPPayment() {
               <p>Payments are securely processed by Stripe. Your card details never touch our servers.</p>
             </div>
 
-            <Button onClick={pay} disabled={processing} size="lg" className="w-full glow-effect rounded-xl">
-              {processing ? (
-                <><Loader2 className="w-5 h-5 animate-spin" /> Redirecting to Stripe...</>
-              ) : (
-                <>
-                  Pay {currentPrice}
-                  {plan === "installments" && !lockedPlan && " (1st installment)"}
-                  {lockedPlan && ` · Installment ${installmentNumber} of 3`}
-                </>
+            <div className="grid gap-2">
+              <Button onClick={payPaystack} disabled={!!processing} size="lg" className="w-full glow-effect rounded-xl">
+                {processing === "paystack" ? (
+                  <><Loader2 className="w-5 h-5 animate-spin" /> Opening Paystack...</>
+                ) : (
+                  <>Pay {currentPrice} with Paystack
+                    {plan === "installments" && !lockedPlan && " (1st installment)"}
+                    {lockedPlan && ` · Installment ${installmentNumber} of 3`}
+                  </>
+                )}
+              </Button>
+              {currency === "USD" && (
+                <Button onClick={payStripe} disabled={!!processing} size="lg" variant="outline" className="w-full rounded-xl">
+                  {processing === "stripe" ? (
+                    <><Loader2 className="w-5 h-5 animate-spin" /> Redirecting to Stripe...</>
+                  ) : (
+                    <>Pay {currentPrice} with Stripe</>
+                  )}
+                </Button>
               )}
-            </Button>
+            </div>
 
             {!lockedPlan && (
               <Button variant="ghost" asChild className="w-full">
