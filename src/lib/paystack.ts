@@ -7,6 +7,10 @@ declare global {
     PaystackPop?: {
       new (): {
         newTransaction: (opts: PaystackTxnOptions) => void;
+        resumeTransaction: (
+          accessCode: string,
+          handlers?: { onSuccess?: (txn: { reference: string; status: string }) => void; onCancel?: () => void; onError?: (e: unknown) => void; },
+        ) => void;
       };
     };
   }
@@ -35,4 +39,15 @@ export function payWithPaystack(opts: Omit<PaystackTxnOptions, "key">) {
 
 export function genRef(prefix: string) {
   return `${prefix}_${Date.now()}_${Math.random().toString(36).slice(2, 10)}`;
+}
+
+export function resumePaystack(
+  accessCode: string,
+  handlers: { onSuccess?: (txn: { reference: string; status: string }) => void; onCancel?: () => void; onError?: (e: unknown) => void },
+) {
+  if (typeof window === "undefined" || !window.PaystackPop) {
+    throw new Error("Paystack failed to load. Please refresh the page.");
+  }
+  const pop = new window.PaystackPop();
+  pop.resumeTransaction(accessCode, handlers);
 }
