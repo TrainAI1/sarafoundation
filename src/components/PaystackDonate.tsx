@@ -5,6 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
+import { payWithPaystack, genRef } from "@/lib/paystack";
 
 type Currency = "USD" | "NGN" | "EUR" | "GBP";
 
@@ -22,19 +23,25 @@ export function PaystackDonate({ compact = false }: { compact?: boolean }) {
   const [amount, setAmount] = useState<string>("25");
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
-  const [processing, setProcessing] = useState(false);
+  const [processing, setProcessing] = useState<null | "stripe" | "paystack">(null);
 
-  const pay = async () => {
+  const validate = () => {
     const amt = Number(amount);
     if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-      toast.error("Please enter a valid email.");
-      return;
+      toast.error("Please enter a valid email."); return null;
     }
     if (!Number.isFinite(amt) || amt <= 0) {
-      toast.error("Please enter a donation amount.");
-      return;
+      toast.error("Please enter a donation amount."); return null;
     }
-    setProcessing(true);
+    return amt;
+  };
+
+  const payStripe = async () => {
+    const amt = validate(); if (amt === null) return;
+    if (currency === "NGN") {
+      toast.error("Stripe does not support NGN. Please use Paystack for Naira."); return;
+    }
+    setProcessing("stripe");
     try {
       const origin = window.location.origin;
       const { data, error } = await supabase.functions.invoke("create-stripe-checkout", {
@@ -55,7 +62,31 @@ export function PaystackDonate({ compact = false }: { compact?: boolean }) {
     } catch (e: any) {
       console.error(e);
       toast.error(e.message || "Could not start payment.");
-      setProcessing(false);
+      setProcessing(null);
+    }
+  };
+
+  const payPaystack = async () => {
+    const amt = validate(); if (amt === null) return;
+    setProcessing("paystack");
+    try {
+      const minor = Math.round(amt * 100);
+      payWithPaystack({
+        email,
+        amount: minor,
+        currency,
+        reference: genRef("don"),
+        metadata: { purpose: "Sara Foundation Donation", donor_name: name || undefined },
+        onSuccess: (txn) => {
+          window.location.href = `/donation-success?reference=${encodeURIComponent(txn.reference)}`;
+        },
+        onCancel: () => { setProcessing(null); toast.message("Payment cancelled."); },
+        onError: (e) => { console.error(e); setProcessing(null); toast.error("Payment failed."); },
+      });
+    } catch (e: any) {
+      console.error(e);
+      toast.error(e.message || "Paystack failed to open.");
+      setProcessing(null);
     }
   };
 
@@ -111,17 +142,28 @@ export function PaystackDonate({ compact = false }: { compact?: boolean }) {
         </div>
       </div>
 
-      <Button onClick={pay} disabled={processing} size="lg" className="w-full glow-effect">
-        {processing ? (
-          <><Loader2 className="w-4 h-4 animate-spin" /> Redirecting to Stripe...</>
-        ) : (
-          <><CreditCard className="w-4 h-4" /> Donate {SYMBOL[currency]}{Number(amount || 0).toLocaleString()} with Card</>
+      <div className="grid gap-2">
+        <Button onClick={payPaystack} disabled={!!processing} size="lg" className="w-full glow-effect">
+          {processing === "paystack" ? (
+            <><Loader2 className="w-4 h-4 animate-spin" /> Opening Paystack...</>
+          ) : (
+            <><CreditCard className="w-4 h-4" /> Pay {SYMBOL[currency]}{Number(amount || 0).toLocaleString()} with Paystack</>
+          )}
+        </Button>
+        {currency !== "NGN" && (
+          <Button onClick={payStripe} disabled={!!processing} size="lg" variant="outline" className="w-full">
+            {processing === "stripe" ? (
+              <><Loader2 className="w-4 h-4 animate-spin" /> Redirecting to Stripe...</>
+            ) : (
+              <><CreditCard className="w-4 h-4" /> Pay {SYMBOL[currency]}{Number(amount || 0).toLocaleString()} with Stripe</>
+            )}
+          </Button>
         )}
-      </Button>
+      </div>
 
       <div className="flex items-start gap-2 text-[11px] text-muted-foreground">
         <ShieldCheck className="w-3.5 h-3.5 text-primary flex-shrink-0 mt-0.5" />
-        <p>Secured by Stripe. We never see or store your card details. You'll receive an emailed receipt.</p>
+        <p>Secured by Paystack & Stripe. We never see or store your card details. You'll receive an emailed receipt.</p>
       </div>
     </div>
   );
