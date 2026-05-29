@@ -6,8 +6,9 @@ const corsHeaders = {
     "authorization, x-client-info, apikey, content-type, x-supabase-client-platform, x-supabase-client-platform-version, x-supabase-client-runtime, x-supabase-client-runtime-version",
 };
 
-const STRIPE_BASE = "https://connector-gateway.lovable.dev/stripe/v1";
-const ALLOWED = ["USD", "NGN", "EUR", "GBP", "GHS", "KES", "ZAR", "CAD", "AUD"] as const;
+const STRIPE_BASE = "https://api.stripe.com/v1";
+// Stripe processes all majors. NGN is intentionally excluded (use Paystack for NGN).
+const ALLOWED = ["USD", "EUR", "GBP", "GHS", "KES", "ZAR", "CAD", "AUD"] as const;
 
 type Body = {
   purpose: "donation" | "flip" | "cap";
@@ -38,9 +39,11 @@ serve(async (req) => {
   if (req.method === "OPTIONS") return new Response(null, { headers: corsHeaders });
 
   try {
-    const KEY = Deno.env.get("STRIPE_SANDBOX_API_KEY") || Deno.env.get("STRIPE_API_KEY");
-    const LOVABLE_KEY = Deno.env.get("LOVABLE_API_KEY");
-    if (!KEY || !LOVABLE_KEY) {
+    const KEY =
+      Deno.env.get("Stripe_secret_key") ||
+      Deno.env.get("STRIPE_SECRET_KEY") ||
+      Deno.env.get("STRIPE_API_KEY");
+    if (!KEY) {
       return new Response(JSON.stringify({ error: "Stripe not configured" }), {
         status: 500, headers: { ...corsHeaders, "Content-Type": "application/json" },
       });
@@ -109,8 +112,7 @@ serve(async (req) => {
     const res = await fetch(`${STRIPE_BASE}/checkout/sessions`, {
       method: "POST",
       headers: {
-        Authorization: `Bearer ${LOVABLE_KEY}`,
-        "X-Connection-Api-Key": KEY,
+        Authorization: `Bearer ${KEY}`,
         "Content-Type": "application/x-www-form-urlencoded",
       },
       body: form(payload),

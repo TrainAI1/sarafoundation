@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { ArrowLeft, CreditCard, Globe, Loader2, ShieldCheck } from "lucide-react";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
+import { resumePaystack } from "@/lib/paystack";
 
 type App = {
   id: string;
@@ -24,7 +25,7 @@ export default function FLIPPayment() {
   const [app, setApp] = useState<App | null>(null);
   const [loading, setLoading] = useState(true);
   const [currency, setCurrency] = useState<"NGN" | "USD">("NGN");
-  const [processing, setProcessing] = useState(false);
+  const [processing, setProcessing] = useState<null | "stripe" | "paystack">(null);
 
   useEffect(() => {
     if (!appId) {
@@ -51,12 +52,16 @@ export default function FLIPPayment() {
     })();
   }, [appId, navigate]);
 
-  const pay = async () => {
+  const payStripe = async () => {
     if (!app) return;
-    setProcessing(true);
+    if (currency === "NGN") {
+      toast.error("Use Paystack for Naira payments.");
+      return;
+    }
+    setProcessing("stripe");
     try {
       const origin = window.location.origin;
-      const amount = currency === "NGN" ? 2000 : 1.30;
+      const amount = 1.30;
       const { data, error } = await supabase.functions.invoke("create-stripe-checkout", {
         body: {
           purpose: "flip",
@@ -77,7 +82,34 @@ export default function FLIPPayment() {
     } catch (e: any) {
       console.error(e);
       toast.error(e.message || "Could not start payment.");
-      setProcessing(false);
+      setProcessing(null);
+    }
+  };
+
+  const payPaystack = async () => {
+    if (!app) return;
+    setProcessing("paystack");
+    try {
+      const { data, error } = await supabase.functions.invoke("initialize-flip-payment", {
+        body: { application_id: app.id, currency },
+      });
+      if (error || !data?.access_code) {
+        throw new Error(error?.message || data?.error || "Could not start Paystack");
+      }
+      resumePaystack(data.access_code, {
+        onSuccess: async () => {
+          try {
+            await supabase.functions.invoke("verify-flip-payment", { body: { reference: data.reference } });
+          } catch (e) { console.error("verify failed:", e); }
+          window.location.href = `/programs/flip/success?app=${app.id}&reference=${encodeURIComponent(data.reference)}`;
+        },
+        onCancel: () => { setProcessing(null); toast.message("Payment cancelled."); },
+        onError: (e) => { console.error(e); setProcessing(null); toast.error("Payment failed."); },
+      });
+    } catch (e: any) {
+      console.error(e);
+      toast.error(e.message || "Could not start Paystack.");
+      setProcessing(null);
     }
   };
 
@@ -145,16 +177,27 @@ export default function FLIPPayment() {
 
             <div className="flex items-start gap-2 text-xs text-muted-foreground">
               <ShieldCheck className="w-4 h-4 text-accent flex-shrink-0 mt-0.5" />
-              <p>Payments are securely processed by Stripe. Your card details never touch our servers.</p>
+              <p>Payments are securely processed by Paystack and Stripe. Your card details never touch our servers.</p>
             </div>
 
-            <Button onClick={pay} disabled={processing} size="lg" className="w-full glow-effect rounded-xl">
-              {processing ? (
-                <><Loader2 className="w-5 h-5 animate-spin" /> Redirecting to Stripe...</>
-              ) : (
-                <>Pay {currency === "NGN" ? "₦2,000" : "$1.30"} & Enroll</>
+            <div className="grid gap-2">
+              <Button onClick={payPaystack} disabled={!!processing} size="lg" className="w-full glow-effect rounded-xl">
+                {processing === "paystack" ? (
+                  <><Loader2 className="w-5 h-5 animate-spin" /> Opening Paystack...</>
+                ) : (
+                  <>Pay {currency === "NGN" ? "₦2,000" : "$1.30"} with Paystack</>
+                )}
+              </Button>
+              {currency === "USD" && (
+                <Button onClick={payStripe} disabled={!!processing} size="lg" variant="outline" className="w-full rounded-xl">
+                  {processing === "stripe" ? (
+                    <><Loader2 className="w-5 h-5 animate-spin" /> Redirecting to Stripe...</>
+                  ) : (
+                    <>Pay $1.30 with Stripe</>
+                  )}
+                </Button>
               )}
-            </Button>
+            </div>
 
             <Button variant="ghost" asChild className="w-full">
               <Link to="/programs/flip/apply"><ArrowLeft className="w-4 h-4" /> Edit Application</Link>
