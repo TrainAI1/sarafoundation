@@ -121,13 +121,17 @@ export default function FLIPApply() {
   };
 
   const submit = async () => {
-    if (!validateStep(3)) return;
+    if (!validateStep(3)) {
+      toast.error("Please fill in all required fields.");
+      return;
+    }
     if (!data.commitment) {
       toast.error("You must commit to 5 hours/week to enroll.");
       return;
     }
     setSubmitting(true);
-    const { data: row, error } = await supabase
+    try {
+      const { data: row, error } = await supabase
       .from("flip_applications")
       .insert({
         email: data.email.trim(),
@@ -147,12 +151,18 @@ export default function FLIPApply() {
       })
       .select("id")
       .single();
-    setSubmitting(false);
-    if (error || !row) {
-      toast.error("Could not save your application. Please try again.");
-      return;
+      if (error || !row) {
+        console.error("FLIP submit error:", error);
+        toast.error(error?.message || "Could not save your application. Please try again.");
+        setSubmitting(false);
+        return;
+      }
+      navigate(`/programs/flip/payment?app=${row.id}`);
+    } catch (e: any) {
+      console.error("FLIP submit exception:", e);
+      toast.error(e?.message || "Network error. Please try again.");
+      setSubmitting(false);
     }
-    navigate(`/programs/flip/payment?app=${row.id}`);
   };
 
   return (
@@ -283,14 +293,18 @@ export default function FLIPApply() {
               <div className="space-y-5">
                 <h2 className="font-display font-bold text-xl text-foreground">Commitment & Track</h2>
                 <div className="p-4 rounded-xl border border-border bg-secondary/30">
-                  <Label className="flex items-start gap-3 cursor-pointer">
-                    <input type="checkbox" className="mt-1 w-4 h-4 accent-accent"
+                  <div className="flex items-start gap-3">
+                    <input
+                      id="flip-commitment"
+                      type="checkbox"
+                      className="mt-1 w-5 h-5 accent-accent flex-shrink-0"
                       checked={data.commitment}
-                      onChange={(e) => set("commitment", e.target.checked)} />
-                    <span className="text-sm font-normal">
+                      onChange={(e) => set("commitment", e.target.checked)}
+                    />
+                    <Label htmlFor="flip-commitment" className="text-sm font-normal cursor-pointer leading-relaxed">
                       I commit to dedicating <strong>at least 5 hours per week</strong> to the FLIP Fellowship activities.
-                    </span>
-                  </Label>
+                    </Label>
+                  </div>
                 </div>
                 <div>
                   <Label htmlFor="interview">Interview Availability</Label>
