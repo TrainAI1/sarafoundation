@@ -328,6 +328,7 @@ export default function FLIPApply() {
                     ))}
                   </RadioGroup>
                   {errors.preferred_track && <p className="text-destructive text-xs mt-1">{errors.preferred_track}</p>}
+                </div>
               </div>
             )}
 
