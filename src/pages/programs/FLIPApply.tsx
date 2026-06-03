@@ -328,14 +328,6 @@ export default function FLIPApply() {
                     ))}
                   </RadioGroup>
                   {errors.preferred_track && <p className="text-destructive text-xs mt-1">{errors.preferred_track}</p>}
-                </div>
-
-                <div className="rounded-xl bg-accent/10 border border-accent/30 p-4 flex items-start gap-3">
-                  <CheckCircle2 className="w-5 h-5 text-accent flex-shrink-0 mt-0.5" />
-                  <p className="text-sm text-foreground">
-                    Next: a one-time enrollment fee of <strong>₦1,000</strong> (Nigeria) or <strong>$1</strong> (Global) confirms your spot.
-                  </p>
-                </div>
               </div>
             )}
 
