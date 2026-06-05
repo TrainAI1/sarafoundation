@@ -85,7 +85,7 @@ export default function About() {
   return (
     <div className="min-h-screen bg-background">
       <Helmet>
-        <title>About Us – Sara Foundation Africa | Transforming Tech in Africa</title>
+        <title>About Sara Foundation Africa – Transforming African Tech</title>
         <meta name="description" content="Learn about Sara Foundation Africa's mission to foster Diversity, Equity & Inclusion in African tech. Operating across 7 countries with 35+ university partners." />
         <link rel="canonical" href="https://sarafoundationafrica.com/about" />
         <meta property="og:title" content="About Us – Sara Foundation Africa" />
