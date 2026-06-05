@@ -1,6 +1,18 @@
-// Shared markdown to HTML converter (content is admin-authored, safe for dangerouslySetInnerHTML)
+// Shared markdown to HTML converter. Output is sanitized with DOMPurify before rendering.
+import DOMPurify from "dompurify";
+
+function escapeHtml(s: string): string {
+  return s
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;");
+}
+
 export function markdownToHtml(md: string): string {
-  let html = md
+  // Escape any raw HTML first so authored markdown cannot inject tags.
+  let html = escapeHtml(md)
     .replace(/^### (.+)$/gm, '<h3 class="text-lg font-bold mt-4 mb-2">$1</h3>')
     .replace(/^## (.+)$/gm, '<h2 class="text-xl font-bold mt-5 mb-2">$1</h2>')
     .replace(/^# (.+)$/gm, '<h1 class="text-2xl font-bold mt-6 mb-3">$1</h1>')
@@ -15,5 +27,9 @@ export function markdownToHtml(md: string): string {
     .replace(/!\[(.+?)\]\((.+?)\)/g, '<img src="$2" alt="$1" class="rounded-lg my-2 max-w-full" />')
     .replace(/\n\n/g, '</p><p class="mb-3">')
     .replace(/\n/g, '<br />');
-  return `<p class="mb-3">${html}</p>`;
+  const wrapped = `<p class="mb-3">${html}</p>`;
+  return DOMPurify.sanitize(wrapped, {
+    USE_PROFILES: { html: true },
+    ALLOWED_URI_REGEXP: /^(?:(?:https?|mailto|tel):|[^a-z]|[a-z+.\-]+(?:[^a-z+.\-:]|$))/i,
+  });
 }
