@@ -86,7 +86,7 @@ export function Footer() {
                   onChange={(e) => setFooterEmail(e.target.value)}
                   className="bg-white/5 border-white/10 text-white placeholder:text-white/40 rounded-xl focus:border-primary"
                 />
-                <Button variant="accent" size="icon" className="rounded-xl flex-shrink-0" onClick={handleFooterSubscribe}>
+                <Button variant="accent" size="icon" className="rounded-xl flex-shrink-0" onClick={handleFooterSubscribe} aria-label="Subscribe to newsletter">
                   <Send className="w-4 h-4" />
                 </Button>
               </div>

@@ -109,6 +109,46 @@ export default function Contact() {
         <meta name="twitter:title" content="Contact Us – Sara Foundation Africa" />
         <meta name="twitter:description" content="Get in touch with Sara Foundation Africa for program inquiries, partnership opportunities, or general questions." />
         <meta name="twitter:image" content="https://sarafoundationafrica.com/hero-students.jpg" />
+        <script type="application/ld+json">{JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          "mainEntity": (faqs ?? []).map((f) => ({
+            "@type": "Question",
+            "name": f.question,
+            "acceptedAnswer": { "@type": "Answer", "text": f.answer },
+          })),
+        })}</script>
+        <script type="application/ld+json">{JSON.stringify([
+          {
+            "@context": "https://schema.org",
+            "@type": "LocalBusiness",
+            "name": "Sara Foundation Africa – London Office",
+            "image": "https://sarafoundationafrica.com/favicon.png",
+            "url": "https://sarafoundationafrica.com/contact",
+            "telephone": "+44 7435 126104",
+            "email": "info@sarafoundationafrica.com",
+            "address": {
+              "@type": "PostalAddress",
+              "streetAddress": "E14 8AT",
+              "addressLocality": "London",
+              "addressCountry": "GB",
+            },
+          },
+          {
+            "@context": "https://schema.org",
+            "@type": "LocalBusiness",
+            "name": "Sara Foundation Africa – Lagos Office",
+            "image": "https://sarafoundationafrica.com/favicon.png",
+            "url": "https://sarafoundationafrica.com/contact",
+            "email": "info@sarafoundationafrica.com",
+            "address": {
+              "@type": "PostalAddress",
+              "streetAddress": "Bafaj Crescent, Awoyaya-Eputu, Ibeju Lekki",
+              "addressLocality": "Lagos",
+              "addressCountry": "NG",
+            },
+          },
+        ])}</script>
       </Helmet>
       <Navbar />
       <main>
