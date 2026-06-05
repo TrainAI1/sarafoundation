@@ -79,9 +79,8 @@ export function HeroSection() {
       <div className="section-container relative z-10 pt-24 md:pt-28 pb-8 md:pb-10 w-full flex-1 flex flex-col">
         <div className="flex flex-col items-center text-center text-foreground space-y-4 md:space-y-5 max-w-3xl mx-auto px-2">
           <motion.h1
-            initial={{ opacity: 0, y: 30 }}
+            initial={false}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.1 }}
             className="font-display text-[26px] leading-[1.15] sm:text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight"
           >
             {c.headline_1 || "Breaking Barriers,"}{" "}
