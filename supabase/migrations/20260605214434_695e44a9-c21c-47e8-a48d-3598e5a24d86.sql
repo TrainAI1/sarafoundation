@@ -1,0 +1,1 @@
+ALTER TABLE public.gjp_applications ENABLE ROW LEVEL SECURITY;
