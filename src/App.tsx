@@ -26,6 +26,9 @@ import GJPApply from "./pages/programs/GJPApply";
 import GJPSuccess from "./pages/programs/GJPSuccess";
 import GJPStatus from "./pages/programs/GJPStatus";
 import Partnership from "./pages/Partnership";
+import Projects from "./pages/Projects";
+import Volunteer from "./pages/Volunteer";
+import AnnualReports from "./pages/AnnualReports";
 import SchoolCommunity from "./pages/partnership/SchoolCommunity";
 import Organizations from "./pages/partnership/Organizations";
 import Sponsors from "./pages/partnership/Sponsors";
@@ -92,6 +95,9 @@ const App = () => {
             <Route path="/partnership/school-community" element={<SchoolCommunity />} />
             <Route path="/partnership/organizations" element={<Organizations />} />
             <Route path="/partnership/sponsors" element={<Sponsors />} />
+            <Route path="/projects" element={<Projects />} />
+            <Route path="/volunteer" element={<Volunteer />} />
+            <Route path="/annual-reports" element={<AnnualReports />} />
             <Route path="/privacy" element={<Privacy />} />
             <Route path="/terms" element={<Terms />} />
             <Route path="/admin/login" element={<AdminLogin />} />

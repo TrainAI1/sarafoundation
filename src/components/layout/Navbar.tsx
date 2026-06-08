@@ -134,13 +134,19 @@ export function Navbar() {
                   </NavigationMenuContent>
                 </NavigationMenuItem>
 
-                {['About', 'Contact', 'Blog'].map((item) => (
+                {[
+                  { label: 'Projects', href: '/projects' },
+                  { label: 'Volunteer', href: '/volunteer' },
+                  { label: 'About', href: '/about' },
+                  { label: 'Blog', href: '/blog' },
+                  { label: 'Contact', href: '/contact' },
+                ].map((item) => (
                   <NavigationMenuItem key={item}>
                     <Link 
-                      to={`/${item.toLowerCase()}`} 
+                      to={item.href} 
                       className="px-4 py-2 font-medium transition-colors text-foreground/70 hover:text-foreground"
                     >
-                      {item}
+                      {item.label}
                     </Link>
                   </NavigationMenuItem>
                 ))}
@@ -209,14 +215,20 @@ export function Navbar() {
                 </div>
               </div>
 
-              {['About', 'Contact', 'Blog'].map((item) => (
+              {[
+                { label: 'Projects', href: '/projects' },
+                { label: 'Volunteer', href: '/volunteer' },
+                { label: 'About', href: '/about' },
+                { label: 'Blog', href: '/blog' },
+                { label: 'Contact', href: '/contact' },
+              ].map((item) => (
                 <Link 
                   key={item}
-                  to={`/${item.toLowerCase()}`} 
+                  to={item.href} 
                   className="nav-link-modern py-3 px-4 rounded-xl hover:bg-secondary" 
                   onClick={() => setMobileMenuOpen(false)}
                 >
-                  {item}
+                  {item.label}
                 </Link>
               ))}
 

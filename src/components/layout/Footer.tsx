@@ -11,7 +11,9 @@ import { useToast } from "@/hooks/use-toast";
 const quickLinks = [
   { title: "Home", href: "/" },
   { title: "About Us", href: "/about" },
-  { title: "Our Programs", href: "/programs/cap" },
+  { title: "Projects", href: "/projects" },
+  { title: "Volunteer", href: "/volunteer" },
+  { title: "Annual Reports", href: "/annual-reports" },
   { title: "Blog", href: "/blog" },
   { title: "Contact", href: "/contact" },
   { title: "Donate", href: "/donation" },
