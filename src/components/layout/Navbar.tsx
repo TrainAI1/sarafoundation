@@ -141,7 +141,7 @@ export function Navbar() {
                   { label: 'Blog', href: '/blog' },
                   { label: 'Contact', href: '/contact' },
                 ].map((item) => (
-                  <NavigationMenuItem key={item}>
+                  <NavigationMenuItem key={item.label}>
                     <Link 
                       to={item.href} 
                       className="px-4 py-2 font-medium transition-colors text-foreground/70 hover:text-foreground"
@@ -223,7 +223,7 @@ export function Navbar() {
                 { label: 'Contact', href: '/contact' },
               ].map((item) => (
                 <Link 
-                  key={item}
+                  key={item.label}
                   to={item.href} 
                   className="nav-link-modern py-3 px-4 rounded-xl hover:bg-secondary" 
                   onClick={() => setMobileMenuOpen(false)}
