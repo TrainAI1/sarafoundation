@@ -167,11 +167,11 @@ export function CAPPhasesSection() {
             Two Paths. <span className="gradient-text">Real Outcomes.</span>
           </h2>
           <p className="section-subtitle mx-auto">
-            Choose the journey that fits you — a full 13-week CAP experience or an accelerated 6-week Fellowship.
-          </p>
-        </div>
+          Choose the journey that fits you — a full 6-week CAP experience or an accelerated 6-week Fellowship.
+        </p>
+      </div>
 
-        <PathBlock data={pathA} />
+      <PathBlock data={pathA} />
         <PathBlock data={pathB} />
       </div>
     </section>
