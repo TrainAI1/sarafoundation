@@ -2,9 +2,9 @@ import { BookOpen, Rocket, Zap, Clock, CheckCircle2, ArrowRight, Users, Sparkles
 
 const pathA = {
   label: "Path A",
-  title: "13-Week Program for CAP",
+  title: "6-Week Program for CAP",
   subtitle: "Career Advancement Program — learn, build, and launch.",
-  totalDuration: "13 Weeks",
+  totalDuration: "6 Weeks",
   phases: [
     {
       name: "Exclusive Learning",
@@ -167,11 +167,11 @@ export function CAPPhasesSection() {
             Two Paths. <span className="gradient-text">Real Outcomes.</span>
           </h2>
           <p className="section-subtitle mx-auto">
-            Choose the journey that fits you — a full 13-week CAP experience or an accelerated 6-week Fellowship.
-          </p>
-        </div>
+          Choose the journey that fits you — a full 6-week CAP experience or an accelerated 6-week Fellowship.
+        </p>
+      </div>
 
-        <PathBlock data={pathA} />
+      <PathBlock data={pathA} />
         <PathBlock data={pathB} />
       </div>
     </section>
