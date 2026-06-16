@@ -2,9 +2,9 @@ import { BookOpen, Rocket, Zap, Clock, CheckCircle2, ArrowRight, Users, Sparkles
 
 const pathA = {
   label: "Path A",
-  title: "13-Week Program for CAP",
+  title: "6-Week Program for CAP",
   subtitle: "Career Advancement Program — learn, build, and launch.",
-  totalDuration: "13 Weeks",
+  totalDuration: "6 Weeks",
   phases: [
     {
       name: "Exclusive Learning",
