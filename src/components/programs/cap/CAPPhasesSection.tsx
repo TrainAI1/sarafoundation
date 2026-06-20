@@ -113,15 +113,14 @@ export function CAPPhasesSection() {
         <div className="text-center max-w-3xl mx-auto mb-10 md:mb-16 px-4">
           <span className="section-badge mb-4 md:mb-6">Program Structure</span>
           <h2 className="section-title text-foreground mb-4 md:mb-6">
-            Two Paths. <span className="gradient-text">Real Outcomes.</span>
+            One Path. <span className="gradient-text">Real Outcomes.</span>
           </h2>
           <p className="section-subtitle mx-auto">
-          Choose the journey that fits you — a full 6-week CAP experience or an accelerated 6-week Fellowship.
-        </p>
-      </div>
+            A full 6-week CAP experience — learn, build, and launch your tech career.
+          </p>
+        </div>
 
-      <PathBlock data={pathA} />
-        <PathBlock data={pathB} />
+        <PhaseBlock data={program} />
       </div>
     </section>
   );
