@@ -18,16 +18,16 @@ export default function ProgramCAP() {
     <div className="min-h-screen bg-background">
       <Helmet>
         <title>CAP Tech Hub – Career Advancement Program | Sara Foundation Africa</title>
-        <meta name="description" content="Join CAP Tech Hub – a 3-month intensive program equipping African university students with skills, projects, and confidence to launch real tech careers across 35+ universities in 8 countries." />
+        <meta name="description" content="Join CAP Tech Hub – a 6-week intensive program equipping African university students with skills, projects, and confidence to launch real tech careers across 35+ universities in 8 countries." />
         <link rel="canonical" href="https://sarafoundationafrica.com/programs/cap" />
         <meta property="og:title" content="CAP Tech Hub – Career Advancement Program | Sara Foundation Africa" />
-        <meta property="og:description" content="A 3-month intensive program equipping African university students to launch real tech careers across 35+ universities in 8 countries." />
+        <meta property="og:description" content="A 6-week intensive program equipping African university students to launch real tech careers across 35+ universities in 8 countries." />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://sarafoundationafrica.com/programs/cap" />
         <meta property="og:image" content="https://sarafoundationafrica.com/hero-students.jpg" />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="CAP Tech Hub – Career Advancement Program | Sara Foundation Africa" />
-        <meta name="twitter:description" content="A 3-month intensive program equipping African university students to launch real tech careers across 35+ universities in 8 countries." />
+        <meta name="twitter:description" content="A 6-week intensive program equipping African university students to launch real tech careers across 35+ universities in 8 countries." />
         <meta name="twitter:image" content="https://sarafoundationafrica.com/hero-students.jpg" />
       </Helmet>
       <Navbar />

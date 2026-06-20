@@ -34,7 +34,7 @@ export function CAPHeroSection() {
               Empowering Africa's Next Generation of Tech Leaders.
             </h1>
             <p className="text-base md:text-xl text-white/70 leading-relaxed mb-6 md:mb-8">
-              A 3-month intensive program equipping African university students
+              A 6-week intensive program equipping African university students
               with the skills, projects, and confidence to launch real tech careers.
             </p>
             <div className="flex flex-col sm:flex-row gap-3 md:gap-4">
@@ -43,9 +43,6 @@ export function CAPHeroSection() {
                   Join Cohort 3
                   <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                 </Link>
-              </Button>
-              <Button variant="heroSecondary" size="lg" asChild>
-                <Link to="/partnership/school-community">Enrol Your Hub</Link>
               </Button>
             </div>
           </div>

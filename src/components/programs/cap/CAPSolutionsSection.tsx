@@ -20,7 +20,7 @@ export function CAPSolutionsSection() {
             What is the <span className="gradient-text">Career Advancement Program?</span>
           </h2>
           <p className="section-subtitle mx-auto">
-            CAP is a 3-month intensive, student-led tech hub program embedded inside African universities
+            CAP is a 6-week intensive, student-led tech hub program embedded inside African universities
             built on practical learning.
           </p>
         </div>
