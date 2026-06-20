@@ -1,7 +1,7 @@
-import { BookOpen, Rocket, Zap, Clock, CheckCircle2, ArrowRight, Users, Sparkles, Trophy } from "lucide-react";
+import { BookOpen, Rocket, Zap, Clock, CheckCircle2, ArrowRight } from "lucide-react";
 
-const pathA = {
-  label: "Path A",
+const program = {
+  label: "CAP Program",
   title: "6-Week Program for CAP",
   subtitle: "Career Advancement Program — learn, build, and launch.",
   totalDuration: "6 Weeks",
@@ -24,7 +24,7 @@ const pathA = {
       name: "Build While Learning",
       number: "02",
       icon: Rocket,
-      duration: "10 Weeks",
+      duration: "4 Weeks",
       description: "Apply skills in real time — students collaborate like a startup, solving real African problems through mentored sprints.",
       outcomes: [
         "Cross-track startup simulation",
@@ -45,57 +45,6 @@ const pathA = {
         "Certificate of Completion & Alumni Access",
         "CAP Talent Showcase",
         "Full-time job opportunities",
-      ],
-      color: "from-accent to-accent/80",
-    },
-  ],
-};
-
-const pathB = {
-  label: "Path B",
-  title: "6-Week Fellowship",
-  subtitle: "An accelerated track focused on intensive workshops, mentorship, and a capstone project.",
-  totalDuration: "6 Weeks",
-  phases: [
-    {
-      name: "Intensive Workshops",
-      number: "01",
-      icon: Sparkles,
-      duration: "Weeks 1–2",
-      description: "Hands-on, fast-paced workshops covering core skills and in-demand tools led by industry practitioners.",
-      outcomes: [
-        "Live expert workshops",
-        "Skill-focused curriculum",
-        "Practical assignments",
-        "Cohort-based learning",
-      ],
-      color: "from-primary to-primary/80",
-    },
-    {
-      name: "Mentorship",
-      number: "02",
-      icon: Users,
-      duration: "Weeks 3–4",
-      description: "1:1 and group mentorship from seasoned tech leaders to sharpen direction, technical depth, and confidence.",
-      outcomes: [
-        "Dedicated mentor pairing",
-        "Career & growth guidance",
-        "Live feedback sessions",
-        "Network expansion",
-      ],
-      color: "from-[hsl(240,80%,50%)] to-[hsl(240,80%,40%)]",
-    },
-    {
-      name: "Capstone Project",
-      number: "03",
-      icon: Trophy,
-      duration: "Weeks 5–6",
-      description: "Fellows ship a real, portfolio-grade capstone project and present it at a closing showcase.",
-      outcomes: [
-        "Portfolio-ready capstone",
-        "Closing showcase & demo",
-        "Certificate of Completion",
-        "Alumni community access",
       ],
       color: "from-accent to-accent/80",
     },
