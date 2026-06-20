@@ -51,7 +51,7 @@ const program = {
   ],
 };
 
-function PathBlock({ data }: { data: typeof pathA }) {
+function PhaseBlock({ data }: { data: typeof program }) {
   return (
     <div className="mb-12 md:mb-16 last:mb-0">
       <div className="text-center max-w-3xl mx-auto mb-6 md:mb-10 px-4">
