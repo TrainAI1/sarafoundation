@@ -7,11 +7,11 @@ import { usePageContent } from "@/hooks/usePageContent";
 
 export function ImpactSection() {
   const { data: c } = usePageContent("home-impact", {
-    students_value: "763", students_desc: "Across 2 cohorts in CAP Tech Hub",
+    students_value: "763", students_desc: "CAP participants across cohorts",
     universities_value: "35", universities_desc: "Partner institutions across Africa",
-    countries_value: "8", countries_desc: "Nigeria, Ghana, Kenya, Uganda & more",
-    fellows_value: "21", fellows_desc: "Women empowered in Cohort 1",
-    partners_value: "10+", partners_desc: "Scintilla, Farmily, Train AI & more",
+    countries_value: "11", countries_desc: "African countries reached",
+    fellows_value: "52", fellows_desc: "Women trained through FLIP & cohorts",
+    partners_value: "705", partners_desc: "People referred for placement (incl. 696 via EJP)",
     community_value: "5,250+", community_desc: "People reached across Africa via social media",
   });
 
@@ -20,7 +20,7 @@ export function ImpactSection() {
     { icon: GraduationCap, value: c.universities_value, label: "Universities", description: c.universities_desc },
     { icon: Globe, value: c.countries_value, label: "Countries", description: c.countries_desc },
     { icon: Award, value: c.fellows_value, label: "FLIP Fellows", description: c.fellows_desc },
-    { icon: Building, value: c.partners_value, label: "Key Partners", description: c.partners_desc },
+    { icon: Building, value: c.partners_value, label: "Placement Referrals", description: c.partners_desc },
     { icon: TrendingUp, value: c.community_value, label: "Community Reach", description: c.community_desc },
   ];
 
