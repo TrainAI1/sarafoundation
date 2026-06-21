@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import capClassroom from "@/assets/cap-classroom.jpg";
 
 const stats = [
-  { value: "35+", label: "Universities" },
+  { value: "35", label: "Universities" },
   { value: "8", label: "Countries" },
   { value: "800+", label: "Students" },
 ];

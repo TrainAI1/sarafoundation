@@ -25,7 +25,7 @@ const benefits = [
   {
     icon: Globe,
     title: "Pan-African Network",
-    description: "Join a community spanning 35+ universities and 8 countries across the African continent.",
+    description: "Join a community spanning 35 universities and 11 African countries across the African continent.",
   },
   {
     icon: BookOpen,

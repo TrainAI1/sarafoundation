@@ -23,7 +23,7 @@ import mercyPhoto from "@/assets/team/mercy-momah.jpg";
 const milestones = [
   { year: "2023", title: "Foundation Established", description: "Sara Foundation Africa was founded in London with a vision to transform tech in Africa" },
   { year: "2024", title: "CAP Cohort 1 Launch", description: "Launched CAP Tech Hub in 7 Nigerian universities, welcoming the first cohort of students" },
-  { year: "2024", title: "Pan-African Expansion", description: "Expanded to 35+ universities across 7 African countries — a 360% growth" },
+  { year: "2024", title: "Pan-African Expansion", description: "Expanded to 35 universities across 11 African countries — a 360% growth" },
   { year: "2025", title: "FLIP Fellowship Launch", description: "Kicked off FLIP with 21 women fellows across mentorship, workshops, and capstone projects" },
   { year: "2025", title: "Key Partnerships", description: "Secured partnerships with Scintilla, Farmily, Train AI, KàdàràBrite, Nanaade, and Platform Hub" },
   { year: "2025", title: "Prestige Award", description: "Won the London & South East England Prestige Awards 2025/26 in Leadership Development" },
@@ -52,7 +52,7 @@ const coreTeam = [
   { 
     name: "Emediong Joel", 
     role: "Program Manager", 
-    bio: "Expanded CAP to 35+ universities across 7 countries. Launched FLIP Fellowship and secured partnerships with Scintilla, Farmily, and more.",
+    bio: "Expanded CAP to 35 universities across 11 African countries. Launched FLIP Fellowship and secured partnerships with Scintilla, Farmily, and more.",
     photo: emediongPhoto,
   },
 ];
@@ -86,7 +86,7 @@ export default function About() {
     <div className="min-h-screen bg-background">
       <Helmet>
         <title>About Sara Foundation Africa – Transforming African Tech</title>
-        <meta name="description" content="Learn about Sara Foundation Africa's mission to foster Diversity, Equity & Inclusion in African tech. Operating across 7 countries with 35+ university partners." />
+        <meta name="description" content="Learn about Sara Foundation Africa's mission to foster Diversity, Equity & Inclusion in African tech. Operating across 11 African countries with 35 university partners." />
         <link rel="canonical" href="https://sarafoundationafrica.com/about" />
         <meta property="og:title" content="About Us – Sara Foundation Africa" />
         <meta property="og:description" content="Learn about Sara Foundation Africa's mission to foster Diversity, Equity & Inclusion in African tech." />
@@ -144,7 +144,7 @@ export default function About() {
         <div className="section-container">
           <div className="flex flex-wrap items-center justify-center gap-3 md:gap-4">
             <span className="flex items-center gap-2 text-muted-foreground font-medium">
-              🌍 Present in 7 countries:
+              🌍 Present in 11 African countries:
             </span>
             {countries.map((country) => (
               <span key={country.name} className="inline-flex items-center gap-2 px-3 py-1.5 bg-secondary rounded-full text-sm text-foreground">
@@ -177,7 +177,7 @@ export default function About() {
                   and SDG 8 (Decent Work and Economic Growth) through tech clubs and women's communities.
                 </p>
                 <p>
-                  Today, we operate across 7 African countries with 35+ university partners, 
+                  Today, we operate across 11 African countries with 35 university partners, 
                   working alongside industry leaders to create pathways for young Africans to 
                   thrive in the global tech ecosystem.
                 </p>

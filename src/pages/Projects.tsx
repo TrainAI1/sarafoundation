@@ -4,50 +4,58 @@ import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { GraduationCap, Users, Briefcase, Sparkles, Trophy, Building2, ArrowRight } from "lucide-react";
+import { Smartphone, Users, Briefcase, Sparkles, Building2, ArrowRight, GraduationCap, Globe } from "lucide-react";
 
-const projects = [
+const headlineStats = [
+  { value: "35", label: "Universities", icon: Building2 },
+  { value: "763", label: "CAP Participants", icon: GraduationCap },
+  { value: "52", label: "Women Trained", icon: Sparkles },
+  { value: "11", label: "African Countries", icon: Globe },
+  { value: "705", label: "People Referred for Placement", icon: Briefcase },
+];
+
+const pastProjects = [
+  {
+    icon: Smartphone,
+    title: "Sara Foundation Mobile App — v1 Launch",
+    period: "2024",
+    summary: "Shipped the first version of the Sara Foundation mobile app — cohort onboarding, learning tracker, mentor matching and event check-in — used by CAP and FLIP participants across our partner campuses.",
+    impact: "App live · Used across CAP and FLIP cohorts",
+  },
   {
     icon: GraduationCap,
-    title: "CAP Tech Hubs",
-    summary: "Operational tech hubs inside 35+ partner universities across 8 African countries, delivering structured training in software, design, data and product.",
-    impact: "763+ students trained · 35+ universities · 8 countries",
-    href: "/programs/cap",
+    title: "CAP Cohorts 1 & 2 — Tech Hub Rollout",
+    period: "2023 – 2024",
+    summary: "Stood up Career Advancement Program tech hubs across 35 partner universities, training 763 students in software, design, data and product over two cohorts.",
+    impact: "763 students trained · 35 universities · 11 African countries",
   },
   {
     icon: Sparkles,
-    title: "FLIP Fellowship",
-    summary: "The Female Leadership Initiative Program supports African women in tech with mentorship, leadership coaching, peer community and funded opportunities.",
-    impact: "Cohort-based · Mentor-matched · Pan-African",
-    href: "/programs/flip",
-  },
-  {
-    icon: Users,
-    title: "WPTA — Women Professionals in Tech Africa",
-    summary: "A continent-wide community supporting women already working in tech with peer circles, technical talks, salary benchmarking and senior-track mentorship.",
-    impact: "Quarterly cohorts · Sponsored events",
-    href: "/programs/flip",
-  },
-  {
-    icon: Trophy,
-    title: "WFTA — Women Founders in Tech Africa",
-    summary: "Accelerator-style support for women building tech companies — investor introductions, founder masterminds, pitch prep and ecosystem partnerships.",
-    impact: "Founder cohorts · Demo-day pipeline",
-    href: "/programs/flip",
+    title: "FLIP Fellowship — Cohort 1",
+    period: "2024",
+    summary: "Launched the Female Leadership Initiative Program with our first fellowship cohort — leadership coaching, technical mentorship and a Pan-African peer community for women in tech.",
+    impact: "52 women supported · Pan-African cohort · Mentor-matched",
   },
   {
     icon: Briefcase,
-    title: "Government Job Placement (GJP)",
-    summary: "A 12-month paid placement program connecting NYSC graduates with public-sector tech roles across Nigerian ministries and agencies.",
-    impact: "12-month placements · Paid roles · NYSC pipeline",
-    href: "/programs/gjp",
+    title: "EJP — Employment & Job Placement Pipeline",
+    period: "2023 – 2024",
+    summary: "Connected qualified African tech talent with hiring partners across the continent. Together with placements from earlier cohorts, the program contributes to a cumulative total of 705 people referred for placement.",
+    impact: "696 referred through EJP · 705 cumulative placements",
+  },
+  {
+    icon: Users,
+    title: "WPTA & WFTA Community Build-out",
+    period: "2024",
+    summary: "Activated the Women Professionals in Tech Africa (WPTA) and Women Founders in Tech Africa (WFTA) communities with quarterly peer circles, technical talks and founder masterminds.",
+    impact: "Quarterly cohorts · Senior-track mentorship",
   },
   {
     icon: Building2,
-    title: "University Partnership Network",
-    summary: "Memoranda of Understanding with universities across Nigeria, Ghana, Kenya, South Africa, Uganda, Zambia, Togo and Cameroon to embed industry-relevant tech tracks.",
-    impact: "35+ MoUs signed · Faculty co-design",
-    href: "/partnership/school-community",
+    title: "University Partnership Network — 35 MoUs",
+    period: "2022 – 2024",
+    summary: "Signed Memoranda of Understanding with 35 universities across Nigeria, Ghana, Kenya, South Africa, Uganda, Zambia, Togo, Cameroon and other African nations to embed industry-relevant tech tracks.",
+    impact: "35 MoUs signed · 11 countries · Faculty co-design",
   },
 ];
 
@@ -55,48 +63,59 @@ export default function Projects() {
   return (
     <div className="min-h-screen bg-background">
       <Helmet>
-        <title>Our Projects | Sara Foundation Africa</title>
-        <meta name="description" content="Explore Sara Foundation Africa's projects: CAP Tech Hubs, FLIP Fellowship, WPTA, WFTA, Government Job Placement, and our university partnership network across 8 countries." />
+        <title>Past Projects & Impact Reports | Sara Foundation Africa</title>
+        <meta name="description" content="Past projects and impact reports from Sara Foundation Africa: 35 universities, 763 CAP participants, 52 women trained, 11 African countries, 705 people referred for placement." />
         <link rel="canonical" href="https://sarafoundationafrica.com/projects" />
-        <meta property="og:title" content="Our Projects | Sara Foundation Africa" />
-        <meta property="og:description" content="Programs and initiatives building Africa's next generation of tech talent and women leaders." />
+        <meta property="og:title" content="Past Projects & Impact Reports | Sara Foundation Africa" />
+        <meta property="og:description" content="Milestones from the Sara Foundation Africa mobile app launch, CAP cohorts, FLIP Fellowship and EJP placement pipeline." />
         <meta property="og:url" content="https://sarafoundationafrica.com/projects" />
         <meta property="og:type" content="website" />
         <script type="application/ld+json">{JSON.stringify({
           "@context": "https://schema.org",
           "@type": "CollectionPage",
-          name: "Sara Foundation Africa Projects",
+          name: "Sara Foundation Africa — Past Projects & Impact Reports",
           url: "https://sarafoundationafrica.com/projects",
-          about: projects.map(p => ({ "@type": "Thing", name: p.title, description: p.summary })),
+          about: pastProjects.map(p => ({ "@type": "Thing", name: p.title, description: p.summary })),
         })}</script>
       </Helmet>
       <Navbar />
       <main className="pt-24 md:pt-32">
         <section className="section-container pb-12">
-          <span className="section-badge mb-4">Our Projects</span>
+          <span className="section-badge mb-4">Past Projects & Impact</span>
           <h1 className="section-title text-foreground mb-4 max-w-3xl">
-            Concrete <span className="gradient-text">projects</span> changing African tech.
+            What we've <span className="gradient-text">shipped</span> and who we've reached.
           </h1>
           <p className="section-subtitle max-w-3xl">
-            Sara Foundation Africa runs a portfolio of education, fellowship, and placement projects across eight
-            African countries. Each project below is live, measurable, and built in partnership with universities,
-            industry, and government to move African talent into globally competitive tech careers.
+            A snapshot of completed milestones — from our mobile app launch and CAP cohort rollouts to the FLIP
+            Fellowship and our EJP placement pipeline. Numbers below are verified across our 2023–2024 reporting.
           </p>
+        </section>
+
+        <section className="section-container pb-12">
+          <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
+            {headlineStats.map(({ icon: Icon, value, label }) => (
+              <Card key={label} className="p-5 text-center">
+                <div className="w-10 h-10 mx-auto rounded-xl bg-primary/10 flex items-center justify-center mb-3">
+                  <Icon className="w-5 h-5 text-primary" />
+                </div>
+                <div className="text-2xl md:text-3xl font-display font-bold text-foreground">{value}</div>
+                <div className="text-xs md:text-sm text-muted-foreground mt-1">{label}</div>
+              </Card>
+            ))}
+          </div>
         </section>
 
         <section className="section-container pb-20">
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {projects.map(({ icon: Icon, ...p }) => (
+            {pastProjects.map(({ icon: Icon, ...p }) => (
               <Card key={p.title} className="p-6 hover:shadow-lg transition-shadow flex flex-col">
                 <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-4">
                   <Icon className="w-6 h-6 text-primary" />
                 </div>
+                <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wide mb-1">{p.period}</p>
                 <h2 className="font-display font-bold text-xl mb-2 text-foreground">{p.title}</h2>
                 <p className="text-muted-foreground text-sm leading-relaxed mb-4 flex-1">{p.summary}</p>
                 <p className="text-xs font-semibold text-primary mb-4">{p.impact}</p>
-                <Button asChild variant="outline" size="sm" className="w-fit">
-                  <Link to={p.href}>Learn more <ArrowRight className="w-4 h-4 ml-1" /></Link>
-                </Button>
               </Card>
             ))}
           </div>
@@ -104,14 +123,15 @@ export default function Projects() {
 
         <section className="section-container pb-20">
           <Card className="p-8 md:p-12 text-center bg-gradient-to-br from-primary/10 to-accent/10 border-primary/20">
-            <h2 className="font-display font-bold text-2xl md:text-3xl mb-4">Support a project</h2>
+            <h2 className="font-display font-bold text-2xl md:text-3xl mb-4">Read the full impact reports</h2>
             <p className="text-muted-foreground max-w-2xl mx-auto mb-6">
-              Every project is funded by donations, sponsorships, and partnerships. Help us scale what's working.
+              Detailed cohort data, financials and outcomes are published in our annual reports. Support what's working
+              with a donation or partnership.
             </p>
             <div className="flex flex-wrap gap-3 justify-center">
-              <Button asChild size="lg"><Link to="/donation">Donate</Link></Button>
+              <Button asChild size="lg"><Link to="/annual-reports">View Annual Reports <ArrowRight className="w-4 h-4 ml-1" /></Link></Button>
+              <Button asChild size="lg" variant="outline"><Link to="/donation">Donate</Link></Button>
               <Button asChild size="lg" variant="outline"><Link to="/partnership">Partner with us</Link></Button>
-              <Button asChild size="lg" variant="outline"><Link to="/volunteer">Volunteer</Link></Button>
             </div>
           </Card>
         </section>

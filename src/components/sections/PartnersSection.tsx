@@ -50,10 +50,10 @@ export function PartnersSection() {
             Our University Partners
           </span>
           <h2 className="section-title text-foreground mb-4">
-            Present in <span className="gradient-text">35+ African Universities</span>
+            Present in <span className="gradient-text">35 African Universities</span>
           </h2>
           <p className="section-subtitle mx-auto">
-            We have established CAP Tech Hubs across 7 countries, empowering students on campus.
+            We have established CAP Tech Hubs across 11 African countries, empowering students on campus.
           </p>
         </ScrollAnimation>
       </div>
