@@ -81,30 +81,12 @@ export function Navbar() {
                 </NavigationMenuItem>
 
                 <NavigationMenuItem>
-                  <NavigationMenuTrigger 
-                    className="bg-transparent font-medium text-foreground/70 hover:text-foreground"
+                  <Link 
+                    to="/about" 
+                    className="px-4 py-2 font-medium transition-colors text-foreground/70 hover:text-foreground"
                   >
-                    Partnership
-                  </NavigationMenuTrigger>
-                  <NavigationMenuContent>
-                    <ul className="grid w-[400px] gap-2 p-4 bg-popover/95 backdrop-blur-xl rounded-2xl border border-border/50 shadow-lg">
-                      {partnershipItems.map((item) => (
-                        <li key={item.title}>
-                          <NavigationMenuLink asChild>
-                            <Link
-                              to={item.href}
-                              className="block select-none space-y-1 rounded-xl p-4 leading-none no-underline outline-none transition-all hover:bg-secondary"
-                            >
-                              <div className="text-sm font-semibold leading-none text-foreground">{item.title}</div>
-                              <p className="line-clamp-2 text-sm leading-snug text-muted-foreground mt-1">
-                                {item.description}
-                              </p>
-                            </Link>
-                          </NavigationMenuLink>
-                        </li>
-                      ))}
-                    </ul>
-                  </NavigationMenuContent>
+                    About Us
+                  </Link>
                 </NavigationMenuItem>
 
                 <NavigationMenuItem>
@@ -134,10 +116,36 @@ export function Navbar() {
                   </NavigationMenuContent>
                 </NavigationMenuItem>
 
+                <NavigationMenuItem>
+                  <NavigationMenuTrigger 
+                    className="bg-transparent font-medium text-foreground/70 hover:text-foreground"
+                  >
+                    Partnership
+                  </NavigationMenuTrigger>
+                  <NavigationMenuContent>
+                    <ul className="grid w-[400px] gap-2 p-4 bg-popover/95 backdrop-blur-xl rounded-2xl border border-border/50 shadow-lg">
+                      {partnershipItems.map((item) => (
+                        <li key={item.title}>
+                          <NavigationMenuLink asChild>
+                            <Link
+                              to={item.href}
+                              className="block select-none space-y-1 rounded-xl p-4 leading-none no-underline outline-none transition-all hover:bg-secondary"
+                            >
+                              <div className="text-sm font-semibold leading-none text-foreground">{item.title}</div>
+                              <p className="line-clamp-2 text-sm leading-snug text-muted-foreground mt-1">
+                                {item.description}
+                              </p>
+                            </Link>
+                          </NavigationMenuLink>
+                        </li>
+                      ))}
+                    </ul>
+                  </NavigationMenuContent>
+                </NavigationMenuItem>
+
                 {[
-                  { label: 'Projects', href: '/projects' },
+                  { label: 'Project', href: '/projects' },
                   { label: 'Volunteer', href: '/volunteer' },
-                  { label: 'About', href: '/about' },
                   { label: 'Blog', href: '/blog' },
                   { label: 'Contact', href: '/contact' },
                 ].map((item) => (
@@ -182,22 +190,10 @@ export function Navbar() {
               <Link to="/" className="nav-link-modern py-3 px-4 rounded-xl hover:bg-secondary" onClick={() => setMobileMenuOpen(false)}>
                 Home
               </Link>
-              
-              <div className="py-2">
-                <span className="px-4 font-semibold text-foreground text-sm">Partnership</span>
-                <div className="mt-2 space-y-1">
-                  {partnershipItems.map((item) => (
-                    <Link
-                      key={item.title}
-                      to={item.href}
-                      className="block py-2 px-4 ml-2 text-muted-foreground hover:text-primary rounded-lg hover:bg-secondary transition-colors"
-                      onClick={() => setMobileMenuOpen(false)}
-                    >
-                      {item.title}
-                    </Link>
-                  ))}
-                </div>
-              </div>
+
+              <Link to="/about" className="nav-link-modern py-3 px-4 rounded-xl hover:bg-secondary" onClick={() => setMobileMenuOpen(false)}>
+                About Us
+              </Link>
 
               <div className="py-2">
                 <span className="px-4 font-semibold text-foreground text-sm">Programs</span>
@@ -215,10 +211,25 @@ export function Navbar() {
                 </div>
               </div>
 
+              <div className="py-2">
+                <span className="px-4 font-semibold text-foreground text-sm">Partnership</span>
+                <div className="mt-2 space-y-1">
+                  {partnershipItems.map((item) => (
+                    <Link
+                      key={item.title}
+                      to={item.href}
+                      className="block py-2 px-4 ml-2 text-muted-foreground hover:text-primary rounded-lg hover:bg-secondary transition-colors"
+                      onClick={() => setMobileMenuOpen(false)}
+                    >
+                      {item.title}
+                    </Link>
+                  ))}
+                </div>
+              </div>
+
               {[
-                { label: 'Projects', href: '/projects' },
+                { label: 'Project', href: '/projects' },
                 { label: 'Volunteer', href: '/volunteer' },
-                { label: 'About', href: '/about' },
                 { label: 'Blog', href: '/blog' },
                 { label: 'Contact', href: '/contact' },
               ].map((item) => (
