@@ -10,18 +10,18 @@ import { Card } from "@/components/ui/card";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
-import { Users, BookOpen, Camera, Calendar, Heart, Globe } from "lucide-react";
+import { Users, BookOpen, Mic, GraduationCap, Heart, Globe } from "lucide-react";
 
 const roles = [
-  { icon: BookOpen, title: "Program Mentor", description: "Mentor CAP or FLIP cohort members in software, design, data, product, or career skills. Time: 2–4 hrs/month, virtual." },
-  { icon: Users, title: "University Ambassador", description: "Represent Sara Foundation on your campus, support tech-hub events, and recruit cohort members. Open to students at partner universities." },
-  { icon: Camera, title: "Content Contributor", description: "Write blog posts, design social graphics, edit short videos, or produce alumni stories for our communications channels." },
-  { icon: Calendar, title: "Events Volunteer", description: "Support in-person and virtual events — Talent Showcase, demo days, workshops, fundraisers. Flexible commitment per event." },
+  { icon: BookOpen, title: "Mentor", description: "Guide CAP and FLIP cohort members 1:1 in software, design, data, product, or career growth. Time commitment: 2–4 hours per month, fully virtual." },
+  { icon: Users, title: "Student Ambassador", description: "Represent Sara Foundation on your campus, run tech-hub activities, and recruit cohort members. Open to students at our partner universities." },
+  { icon: Mic, title: "Speaker", description: "Deliver keynote talks, fireside chats, or panel sessions at our showcases, demo days, and cohort events — share your career story and expertise." },
+  { icon: GraduationCap, title: "Trainer", description: "Lead structured technical or soft-skill training for a CAP or FLIP cohort — workshops, bootcamps, or full curriculum tracks in your area of expertise." },
 ];
 
 const benefits = [
   { icon: Heart, title: "Make real impact", text: "Directly support young Africans entering tech careers." },
-  { icon: Globe, title: "Pan-African network", text: "Join a community of volunteers across 8 countries." },
+  { icon: Globe, title: "Pan-African network", text: "Join a community of volunteers across 11 African countries." },
   { icon: Users, title: "Recognition", text: "Volunteer certificates, references, and recognition at our annual showcase." },
 ];
 
@@ -58,10 +58,10 @@ export default function Volunteer() {
     <div className="min-h-screen bg-background">
       <Helmet>
         <title>Volunteer with Sara Foundation Africa</title>
-        <meta name="description" content="Volunteer as a mentor, university ambassador, content contributor or events volunteer with Sara Foundation Africa. Help us empower African tech talent." />
+        <meta name="description" content="Volunteer as a mentor, student ambassador, speaker or trainer with Sara Foundation Africa. Help us empower African tech talent across 11 countries." />
         <link rel="canonical" href="https://sarafoundationafrica.com/volunteer" />
         <meta property="og:title" content="Volunteer with Sara Foundation Africa" />
-        <meta property="og:description" content="Join our volunteer network across 8 African countries." />
+        <meta property="og:description" content="Join our volunteer network across 11 African countries as a mentor, student ambassador, speaker or trainer." />
         <meta property="og:url" content="https://sarafoundationafrica.com/volunteer" />
         <meta property="og:type" content="website" />
         <script type="application/ld+json">{JSON.stringify({
