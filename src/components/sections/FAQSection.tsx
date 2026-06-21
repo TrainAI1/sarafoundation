@@ -17,7 +17,7 @@ const defaultFaqs = [
   { question: "What is FLIP and who is it for?", answer: "The Female Leadership Initiative Program (FLIP) is a membership-based program empowering women in tech through mentorship, networking, and opportunities. It includes the Women Professionals in Tech Africa (WPTA) and Women Founders in Tech Africa (WFTA) communities." },
   { question: "How can organizations partner with Sara Foundation Africa?", answer: "We offer various partnership models including sponsorships, university collaborations, and corporate partnerships. Current partners include Scintilla Innovations, Farmily, ALX, KàdàràBrite, Train AI, and more." },
   { question: "Do students get real-world opportunities?", answer: "Yes! Through our partnerships, CAP students have secured internships at Farmily, full-time job offers, and showcased projects like ArtifyPro and CampusLink at our Talent Showcase in partnership with Scintilla Africa." },
-  { question: "Which countries do you operate in?", answer: "We currently operate across 11 African countries: Nigeria, Ghana, Kenya, South Africa, Uganda, Zambia, and Togo, with 35+ university partners." },
+  { question: "Which countries do you operate in?", answer: "We currently operate across 11 African countries: Nigeria, Ghana, Kenya, South Africa, Uganda, Zambia, and Togo, with 35 university partners." },
 ];
 
 export function FAQSection() {

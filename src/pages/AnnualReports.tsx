@@ -10,7 +10,7 @@ const reports = [
   {
     year: "2025",
     title: "Sara Foundation Africa — 2025 Impact Report",
-    summary: "763+ students trained across 35 universities in 11 African countries, the launch of the FLIP Fellowship, expanded WPTA and WFTA communities, and our first Government Job Placement cohort.",
+    summary: "763 students trained across 35 universities in 11 African countries, the launch of the FLIP Fellowship, expanded WPTA and WFTA communities, and our first Government Job Placement cohort.",
     href: "https://drive.google.com/file/d/1Ex55tpVH_RPB0VJygsUyw9Hp74RyPKR_/view?usp=drivesdk",
     status: "available" as const,
   },

@@ -2,7 +2,7 @@ import capManStudying from "@/assets/cap-man-studying.jpg";
 import capWomanYellow from "@/assets/cap-woman-yellow.jpg";
 
 const stats = [
-  { value: "35+", label: "Universities", sub: "across Africa" },
+  { value: "35", label: "Universities", sub: "across Africa" },
   { value: "8", label: "Countries", sub: "Nigeria, Ghana, Uganda, Kenya, Zambia, Togo & more" },
   { value: "800+", label: "Students", sub: "in CAP Tech Hubs Database" },
   { value: "5,500+", label: "People Reached", sub: "via social media & sessions" },

@@ -86,7 +86,7 @@ export default function About() {
     <div className="min-h-screen bg-background">
       <Helmet>
         <title>About Sara Foundation Africa – Transforming African Tech</title>
-        <meta name="description" content="Learn about Sara Foundation Africa's mission to foster Diversity, Equity & Inclusion in African tech. Operating across 7 countries with 35+ university partners." />
+        <meta name="description" content="Learn about Sara Foundation Africa's mission to foster Diversity, Equity & Inclusion in African tech. Operating across 11 African countries with 35 university partners." />
         <link rel="canonical" href="https://sarafoundationafrica.com/about" />
         <meta property="og:title" content="About Us – Sara Foundation Africa" />
         <meta property="og:description" content="Learn about Sara Foundation Africa's mission to foster Diversity, Equity & Inclusion in African tech." />
@@ -144,7 +144,7 @@ export default function About() {
         <div className="section-container">
           <div className="flex flex-wrap items-center justify-center gap-3 md:gap-4">
             <span className="flex items-center gap-2 text-muted-foreground font-medium">
-              🌍 Present in 7 countries:
+              🌍 Present in 11 African countries:
             </span>
             {countries.map((country) => (
               <span key={country.name} className="inline-flex items-center gap-2 px-3 py-1.5 bg-secondary rounded-full text-sm text-foreground">
@@ -177,7 +177,7 @@ export default function About() {
                   and SDG 8 (Decent Work and Economic Growth) through tech clubs and women's communities.
                 </p>
                 <p>
-                  Today, we operate across 7 African countries with 35+ university partners, 
+                  Today, we operate across 11 African countries with 35 university partners, 
                   working alongside industry leaders to create pathways for young Africans to 
                   thrive in the global tech ecosystem.
                 </p>
