@@ -81,7 +81,7 @@ export default function Projects() {
           </h1>
           <p className="section-subtitle max-w-3xl">
             A snapshot of completed milestones — from our mobile app launch and CAP cohort rollouts to the FLIP
-            Fellowship and our EJP placement pipeline. Numbers below are verified across our 2023–2024 reporting.
+            Fellowship and our EJP placement pipeline. Numbers below are verified across our 2024–2025 reporting.
           </p>
         </section>
 
