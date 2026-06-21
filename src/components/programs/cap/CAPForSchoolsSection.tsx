@@ -10,7 +10,7 @@ const benefits = [
   {
     icon: Users,
     title: "Student Engagement & Retention",
-    description: "CAP-run hubs create vibrant student multi-university communities, allowing students to connect with other students across 8 African countries and 35 different universities.",
+    description: "CAP-run hubs create vibrant student multi-university communities, allowing students to connect with other students across 11 African countries and 35 different universities.",
   },
   {
     icon: Gift,
@@ -25,7 +25,7 @@ const benefits = [
   {
     icon: Globe,
     title: "Pan-African Visibility",
-    description: "Join a network of 35+ universities across 8 African countries with growing global recognition.",
+    description: "Join a network of 35 universities across 11 African countries with growing global recognition.",
   },
   {
     icon: Award,

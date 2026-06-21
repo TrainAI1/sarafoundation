@@ -21,7 +21,7 @@ interface TeamMember {
 const defaultTeam: TeamMember[] = [
   { id: 1, name: "Kalu Sarah", role: "Founder", bio: "Has worked with Goldman Sachs, Bloomberg, and Blackaion Capital.", photo: "", type: "core" },
   { id: 2, name: "Inem Emmanuel", role: "Public Relations Specialist", bio: "Grew social media reach to 5,365+ followers.", photo: "", type: "core" },
-  { id: 3, name: "Emediong Joel", role: "Program Manager", bio: "Expanded CAP to 35+ universities across 7 countries.", photo: "", type: "core" },
+  { id: 3, name: "Emediong Joel", role: "Program Manager", bio: "Expanded CAP to 35 universities across 11 African countries.", photo: "", type: "core" },
   { id: 4, name: "Toby Nwanede", role: "3-time Startup Founder", bio: "Partner at PIF; Founded Scintilla Innovations.", photo: "", type: "advisor", affiliation: "Scintilla Innovations" },
   { id: 5, name: "Ayoola Ademoye", role: "Business Strategy", bio: "Over 12 years of experience.", photo: "", type: "advisor", affiliation: "Jisc (UK)" },
   { id: 6, name: "Dolapo Dahunsi", role: "HR Leader", bio: "People Operations Specialist at GE.", photo: "", type: "advisor", affiliation: "General Electric" },

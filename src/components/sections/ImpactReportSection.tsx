@@ -21,7 +21,7 @@ export function ImpactReportSection() {
               </h2>
               <p className="text-muted-foreground leading-relaxed mb-6 md:mb-8">
                 Our 2025 Impact Report showcases the incredible journey of Sara Foundation Africa — 
-                from training 763+ students across 35+ universities in 8 African countries to launching 
+                from training 763+ students across 35 universities in 11 African countries to launching 
                 the FLIP Fellowship for women in tech. Discover how we're building the next generation 
                 of African tech leaders.
               </p>

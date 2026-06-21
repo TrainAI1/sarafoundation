@@ -7,7 +7,7 @@ const features = [
   "Industry-expert-led weekly sessions",
   "Real startup projects solving African problems",
   "Internship pathways on completion",
-  "Part of a network across 35+ universities, 8 countries",
+  "Part of a network across 35 universities, 11 African countries",
 ];
 
 export function CAPSolutionsSection() {
