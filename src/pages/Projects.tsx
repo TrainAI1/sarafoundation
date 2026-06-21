@@ -16,44 +16,38 @@ const headlineStats = [
 
 const pastProjects = [
   {
-    icon: Smartphone,
-    title: "Sara Foundation Mobile App — v1 Launch",
-    period: "2024",
-    summary: "Shipped the first version of the Sara Foundation mobile app — cohort onboarding, learning tracker, mentor matching and event check-in — used by CAP and FLIP participants across our partner campuses.",
-    impact: "App live · Used across CAP and FLIP cohorts",
+    icon: Briefcase,
+    title: "GJP — Government Job Placement (NJFP)",
+    summary: "Our partnership with the Nigerian government on the Nigerian Jubilee Fellowship Placement (NJFP) Program — referring NYSC graduates in tech-related fields for placement into government and partner roles.",
+    impact: "Federal Government partnership · NYSC tech graduates referred for placement",
   },
   {
     icon: GraduationCap,
     title: "CAP Cohorts 1 & 2 — Tech Hub Rollout",
-    period: "2023 – 2024",
     summary: "Stood up Career Advancement Program tech hubs across 35 partner universities, training 763 students in software, design, data and product over two cohorts.",
     impact: "763 students trained · 35 universities · 11 African countries",
   },
   {
     icon: Sparkles,
     title: "FLIP Fellowship — Cohort 1",
-    period: "2024",
     summary: "Launched the Female Leadership Initiative Program with our first fellowship cohort — leadership coaching, technical mentorship and a Pan-African peer community for women in tech.",
     impact: "52 women supported · Pan-African cohort · Mentor-matched",
   },
   {
     icon: Briefcase,
     title: "EJP — Employment & Job Placement Pipeline",
-    period: "2023 – 2024",
     summary: "Connected qualified African tech talent with hiring partners across the continent. Together with placements from earlier cohorts, the program contributes to a cumulative total of 705 people referred for placement.",
     impact: "696 referred through EJP · 705 cumulative placements",
   },
   {
     icon: Users,
-    title: "WPTA & WFTA Community Build-out",
-    period: "2024",
-    summary: "Activated the Women Professionals in Tech Africa (WPTA) and Women Founders in Tech Africa (WFTA) communities with quarterly peer circles, technical talks and founder masterminds.",
-    impact: "Quarterly cohorts · Senior-track mentorship",
+    title: "Alumni Build-up",
+    summary: "Built and activated the Sara Foundation alumni network — graduates from CAP, FLIP and placement programs supporting one another through peer circles, mentorship, referrals and ongoing professional development.",
+    impact: "Pan-African alumni network · Peer mentorship · Career referrals",
   },
   {
     icon: Building2,
     title: "University Partnership Network — 35 MoUs",
-    period: "2022 – 2024",
     summary: "Signed Memoranda of Understanding with 35 universities across Nigeria, Ghana, Kenya, South Africa, Uganda, Zambia, Togo, Cameroon and other African nations to embed industry-relevant tech tracks.",
     impact: "35 MoUs signed · 11 countries · Faculty co-design",
   },
@@ -112,7 +106,6 @@ export default function Projects() {
                 <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-4">
                   <Icon className="w-6 h-6 text-primary" />
                 </div>
-                <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wide mb-1">{p.period}</p>
                 <h2 className="font-display font-bold text-xl mb-2 text-foreground">{p.title}</h2>
                 <p className="text-muted-foreground text-sm leading-relaxed mb-4 flex-1">{p.summary}</p>
                 <p className="text-xs font-semibold text-primary mb-4">{p.impact}</p>
