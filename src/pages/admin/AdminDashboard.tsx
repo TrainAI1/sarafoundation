@@ -70,7 +70,7 @@ export default function AdminDashboard() {
         supabase.from("flip_applications").select("*", { count: "exact", head: true }),
         supabase.from("flip_applications").select("*", { count: "exact", head: true }).gte("created_at", d7),
         supabase.from("flip_applications").select("*", { count: "exact", head: true }).gte("created_at", d14).lt("created_at", d7),
-        supabase.from("flip_applications").select("id, full_name, email, created_at").gte("created_at", d30).order("created_at", { ascending: true }),
+        supabase.from("flip_applications").select("id, first_name, last_name, email, created_at").gte("created_at", d30).order("created_at", { ascending: true }),
         supabase.from("flip_applications").select("applicant_status"),
         supabase.from("gjp_applications").select("*", { count: "exact", head: true }),
         supabase.from("gjp_applications").select("*", { count: "exact", head: true }).gte("created_at", d7),
@@ -109,7 +109,7 @@ export default function AdminDashboard() {
         });
       };
       addToDay(capRecentRes.data as { created_at: string }[] | null, "cap");
-      addToDay(flipRecentRes.data as { created_at: string }[] | null, "flip");
+      addToDay((flipRecentRes.data ?? []) as { created_at: string }[], "flip");
       addToDay(gjpRecentRes.data as { created_at: string }[] | null, "gjp");
       setDaily(Array.from(dayMap.values()));
 
@@ -154,14 +154,33 @@ export default function AdminDashboard() {
         }))
       );
       const appRows: RecentRow[] = [];
-      const pushApps = (rows: { id: string; full_name: string; email: string; created_at: string }[] | null, type: string, href: string) => {
-        (rows ?? []).slice(-3).reverse().forEach((r) => appRows.push({
-          id: `${type}-${r.id}`, label: r.full_name, sub: `${type} · ${r.email}`, created_at: r.created_at, href,
+      const pushApps = (
+        rows: { id: string; name: string; email: string; created_at: string }[],
+        type: string,
+        href: string,
+      ) => {
+        rows.slice(-3).reverse().forEach((r) => appRows.push({
+          id: `${type}-${r.id}`, label: r.name, sub: `${type} · ${r.email}`, created_at: r.created_at, href,
         }));
       };
-      pushApps(capRecentRes.data as { id: string; full_name: string; email: string; created_at: string }[] | null, "CAP", "/admin/cap-applications");
-      pushApps(flipRecentRes.data as { id: string; full_name: string; email: string; created_at: string }[] | null, "FLIP", "/admin/flip-applications");
-      pushApps(gjpRecentRes.data as { id: string; full_name: string; email: string; created_at: string }[] | null, "GJP", "/admin/gjp-applications");
+      pushApps(
+        ((capRecentRes.data ?? []) as { id: string; full_name: string; email: string; created_at: string }[]).map((r) => ({
+          id: r.id, name: r.full_name, email: r.email, created_at: r.created_at,
+        })),
+        "CAP", "/admin/cap-applications"
+      );
+      pushApps(
+        ((flipRecentRes.data ?? []) as { id: string; first_name: string; last_name: string; email: string; created_at: string }[]).map((r) => ({
+          id: r.id, name: `${r.first_name} ${r.last_name}`, email: r.email, created_at: r.created_at,
+        })),
+        "FLIP", "/admin/flip-applications"
+      );
+      pushApps(
+        ((gjpRecentRes.data ?? []) as { id: string; full_name: string; email: string; created_at: string }[]).map((r) => ({
+          id: r.id, name: r.full_name, email: r.email, created_at: r.created_at,
+        })),
+        "GJP", "/admin/gjp-applications"
+      );
       appRows.sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime());
       setRecentApps(appRows.slice(0, 6));
 
