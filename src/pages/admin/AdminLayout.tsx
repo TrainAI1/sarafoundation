@@ -5,51 +5,58 @@ import { supabase } from "@/integrations/supabase/client";
 import {
   LayoutDashboard, FileText, PenTool, LogOut, Home,
   Users, MessageSquare, Image, Settings, Menu, X, ChevronRight, Handshake,
-  HelpCircle, Mail, Newspaper, BarChart3, GraduationCap, Shield, Briefcase
+  HelpCircle, Mail, Newspaper, BarChart3, GraduationCap, Shield, Briefcase,
+  UserCog, ScrollText
 } from "lucide-react";
-import { Button } from "@/components/ui/button";
 
-const navGroups = [
+type Capability = "content" | "submissions" | "admin" | "any";
+
+interface NavItem { label: string; path: string; icon: typeof Mail; cap: Capability }
+interface NavGroup { label: string; cap: Capability; items: NavItem[] }
+
+const navGroups: NavGroup[] = [
   {
-    label: "Content",
+    label: "Overview", cap: "any",
     items: [
-      { label: "Dashboard", path: "/admin", icon: LayoutDashboard },
-      { label: "Analytics", path: "/admin/analytics", icon: BarChart3 },
-      { label: "Blog Posts", path: "/admin/blog", icon: PenTool },
-      { label: "Pages", path: "/admin/pages", icon: FileText },
-      { label: "FAQ", path: "/admin/faq", icon: HelpCircle },
-      { label: "Partners", path: "/admin/partners", icon: Handshake },
-      { label: "Testimonials", path: "/admin/testimonials", icon: MessageSquare },
-      { label: "Team", path: "/admin/team", icon: Users },
+      { label: "Dashboard", path: "/admin", icon: LayoutDashboard, cap: "any" },
+      { label: "Analytics", path: "/admin/analytics", icon: BarChart3, cap: "any" },
     ],
   },
   {
-    label: "Assets",
+    label: "Content", cap: "content",
     items: [
-      { label: "Media Library", path: "/admin/media", icon: Image },
+      { label: "Blog Posts", path: "/admin/blog", icon: PenTool, cap: "content" },
+      { label: "Pages", path: "/admin/pages", icon: FileText, cap: "content" },
+      { label: "FAQ", path: "/admin/faq", icon: HelpCircle, cap: "content" },
+      { label: "Partners", path: "/admin/partners", icon: Handshake, cap: "content" },
+      { label: "Testimonials", path: "/admin/testimonials", icon: MessageSquare, cap: "content" },
+      { label: "Team", path: "/admin/team", icon: Users, cap: "content" },
+      { label: "Media Library", path: "/admin/media", icon: Image, cap: "content" },
     ],
   },
   {
-    label: "Inbox",
+    label: "Inbox & Pipeline", cap: "submissions",
     items: [
-      { label: "Contact Messages", path: "/admin/contacts", icon: Mail },
-      { label: "Newsletter", path: "/admin/newsletter", icon: Newspaper },
-      { label: "FLIP Applications", path: "/admin/flip-applications", icon: GraduationCap },
-      { label: "CAP Applications", path: "/admin/cap-applications", icon: GraduationCap },
-      { label: "GJP Applications", path: "/admin/gjp-applications", icon: Briefcase },
+      { label: "Contact Messages", path: "/admin/contacts", icon: Mail, cap: "submissions" },
+      { label: "Newsletter", path: "/admin/newsletter", icon: Newspaper, cap: "submissions" },
+      { label: "CAP Applications", path: "/admin/cap-applications", icon: GraduationCap, cap: "submissions" },
+      { label: "FLIP Applications", path: "/admin/flip-applications", icon: GraduationCap, cap: "submissions" },
+      { label: "GJP Applications", path: "/admin/gjp-applications", icon: Briefcase, cap: "submissions" },
     ],
   },
   {
-    label: "Settings",
+    label: "Admin", cap: "admin",
     items: [
-      { label: "Site Settings", path: "/admin/settings", icon: Settings },
-      { label: "Site Health & Backup", path: "/admin/site-health", icon: Shield },
+      { label: "Users & Roles", path: "/admin/users", icon: UserCog, cap: "admin" },
+      { label: "Audit Log", path: "/admin/audit-log", icon: ScrollText, cap: "admin" },
+      { label: "Site Settings", path: "/admin/settings", icon: Settings, cap: "admin" },
+      { label: "Site Health & Backup", path: "/admin/site-health", icon: Shield, cap: "admin" },
     ],
   },
 ];
 
 export default function AdminLayout() {
-  const { isAdmin, loading } = useAdmin();
+  const { isAdmin, canEditContent, canModerate, loading, roles, email } = useAdmin();
   const location = useLocation();
   const navigate = useNavigate();
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -62,7 +69,26 @@ export default function AdminLayout() {
     );
   }
 
-  if (!isAdmin) return null;
+  if (!isAdmin && !canEditContent && !canModerate) return null;
+
+  const allow = (cap: Capability) =>
+    cap === "any" ||
+    (cap === "admin" && isAdmin) ||
+    (cap === "content" && canEditContent) ||
+    (cap === "submissions" && canModerate);
+
+  const visibleGroups = navGroups
+    .filter((g) => allow(g.cap))
+    .map((g) => ({ ...g, items: g.items.filter((i) => allow(i.cap)) }))
+    .filter((g) => g.items.length > 0);
+
+  const primaryRole = isAdmin ? "admin" : roles[0] ?? "viewer";
+  const roleBadge = {
+    admin: "bg-primary/15 text-primary",
+    editor: "bg-accent/15 text-accent",
+    moderator: "bg-success/15 text-success",
+    viewer: "bg-muted text-muted-foreground",
+  }[primaryRole] || "bg-muted text-muted-foreground";
 
   const handleSignOut = async () => {
     await supabase.auth.signOut();
@@ -72,16 +98,21 @@ export default function AdminLayout() {
   const SidebarContent = () => (
     <>
       <div className="p-4 border-b border-border flex items-center justify-between">
-        <div>
+        <div className="min-w-0">
           <h2 className="font-display font-bold text-foreground text-lg">Sara Admin</h2>
-          <p className="text-xs text-muted-foreground">Content Management</p>
+          <div className="flex items-center gap-1.5 mt-0.5">
+            <span className={`text-[10px] font-semibold uppercase tracking-wider px-1.5 py-0.5 rounded ${roleBadge}`}>
+              {primaryRole}
+            </span>
+            <p className="text-xs text-muted-foreground truncate">{email}</p>
+          </div>
         </div>
         <button onClick={() => setSidebarOpen(false)} className="lg:hidden p-1 text-muted-foreground hover:text-foreground">
           <X className="w-5 h-5" />
         </button>
       </div>
       <nav className="flex-1 p-3 space-y-4 overflow-y-auto">
-        {navGroups.map((group) => (
+        {visibleGroups.map((group) => (
           <div key={group.label}>
             <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider px-3 mb-2">{group.label}</p>
             <div className="space-y-0.5">
