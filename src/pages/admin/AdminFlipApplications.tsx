@@ -242,6 +242,9 @@ export default function AdminFlipApplications() {
                       {format(new Date(r.created_at), "MMM d, yyyy")}
                     </td>
                     <td className="px-4 py-3 text-right whitespace-nowrap">
+                      <Button variant="ghost" size="icon" onClick={() => openEmail("single", r)} title="Email applicant">
+                        <Mail className="w-4 h-4" />
+                      </Button>
                       <Button variant="ghost" size="icon" onClick={() => setSelected(r)}>
                         <Eye className="w-4 h-4" />
                       </Button>
