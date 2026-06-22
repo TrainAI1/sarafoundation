@@ -102,8 +102,48 @@ export default function AdminCapApplications() {
     await supabase.from("cap_applications").delete().eq("id", id);
     setSelected((s) => (s?.id === id ? null : s));
     toast.success("Application deleted");
+    log({ action: "cap.delete", entity: "cap", entity_id: id });
     load();
   };
+
+  const updateStatus = async (id: string, status: ApplicationStatus) => {
+    const { error } = await supabase.from("cap_applications").update({ applicant_status: status }).eq("id", id);
+    if (error) { toast.error(error.message); return; }
+    log({ action: "cap.status", entity: "cap", entity_id: id, summary: `Status → ${status}`, metadata: { status } });
+    toast.success(`Status updated to ${status}`);
+    setSelected((s) => (s && s.id === id ? { ...s, applicant_status: status } : s));
+    load();
+  };
+
+  const bulkStatus = async (status: string) => {
+    const ids = Array.from(picked);
+    if (!ids.length) return;
+    const { error } = await supabase.from("cap_applications").update({ applicant_status: status }).in("id", ids);
+    if (error) { toast.error(error.message); return; }
+    log({ action: "cap.bulk.status", entity: "cap", summary: `${ids.length} → ${status}`, metadata: { count: ids.length, status } });
+    toast.success(`Updated ${ids.length} application(s)`);
+    setPicked(new Set());
+    load();
+  };
+
+  const bulkDelete = async () => {
+    const ids = Array.from(picked);
+    if (!ids.length) return;
+    if (!confirm(`Delete ${ids.length} application(s)?`)) return;
+    const { error } = await supabase.from("cap_applications").delete().in("id", ids);
+    if (error) { toast.error(error.message); return; }
+    log({ action: "cap.bulk.delete", entity: "cap", summary: `Deleted ${ids.length}`, metadata: { count: ids.length } });
+    toast.success(`Deleted ${ids.length} application(s)`);
+    setPicked(new Set());
+    load();
+  };
+
+  const togglePick = (id: string) =>
+    setPicked((p) => {
+      const n = new Set(p);
+      if (n.has(id)) n.delete(id); else n.add(id);
+      return n;
+    });
 
   const exportCsv = () => {
     const headers = [
