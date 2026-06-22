@@ -18,8 +18,8 @@ const reports = [
     year: "2024",
     title: "Sara Foundation Africa — 2024 Impact Report",
     summary: "Inaugural CAP cohort across founding partner universities, formation of the WPTA community, and the establishment of our governance, leadership team and operating model.",
-    href: "#",
-    status: "coming" as const,
+    href: "https://drive.google.com/file/d/1DjVw-vTf6ugcp75rFVCUCKM4zictzDKN/view?usp=drivesdk",
+    status: "available" as const,
   },
 ];
 
@@ -54,7 +54,7 @@ export default function AnnualReports() {
               <Card key={r.year} className="p-8">
                 <div className="flex items-baseline gap-3 mb-3">
                   <span className="font-display font-bold text-3xl gradient-text">{r.year}</span>
-                  {r.status === "coming" && (
+                  {(r.status as string) === "coming" && (
                     <span className="text-xs px-2 py-1 rounded-full bg-muted text-muted-foreground flex items-center gap-1">
                       <Clock className="w-3 h-3" /> Coming soon
                     </span>
