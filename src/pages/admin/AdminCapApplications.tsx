@@ -5,6 +5,10 @@ import { Input } from "@/components/ui/input";
 import { toast } from "sonner";
 import { Download, Eye, Trash2, GraduationCap, X } from "lucide-react";
 import { format } from "date-fns";
+import StatusPipeline, { statusBadge, type ApplicationStatus } from "@/components/admin/StatusPipeline";
+import NotesPanel from "@/components/admin/NotesPanel";
+import BulkActionsBar from "@/components/admin/BulkActionsBar";
+import { useAuditLog } from "@/hooks/useAuditLog";
 
 interface CapApp {
   id: string;
@@ -43,6 +47,8 @@ export default function AdminCapApplications() {
   const [search, setSearch] = useState("");
   const [trackFilter, setTrackFilter] = useState<string>("all");
   const [selected, setSelected] = useState<CapApp | null>(null);
+  const [picked, setPicked] = useState<Set<string>>(new Set());
+  const { log } = useAuditLog();
 
   const load = async () => {
     const { data } = await supabase
