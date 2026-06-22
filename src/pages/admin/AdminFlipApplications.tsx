@@ -243,12 +243,17 @@ export default function AdminFlipApplications() {
 
       {selected && (
         <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center p-0 sm:p-4 bg-foreground/40" onClick={() => setSelected(null)}>
-          <div className="bg-card w-full sm:max-w-lg rounded-t-2xl sm:rounded-2xl shadow-2xl max-h-[90vh] overflow-y-auto" onClick={(e) => e.stopPropagation()}>
+          <div className="bg-card w-full sm:max-w-2xl rounded-t-2xl sm:rounded-2xl shadow-2xl max-h-[90vh] overflow-y-auto" onClick={(e) => e.stopPropagation()}>
             <div className="sticky top-0 bg-card border-b border-border px-5 py-3 flex items-center justify-between">
               <h3 className="font-display font-bold text-foreground">Application Details</h3>
               <Button variant="ghost" size="icon" onClick={() => setSelected(null)}><X className="w-4 h-4" /></Button>
             </div>
-            <div className="p-5 space-y-3 text-sm">
+            <div className="p-5 space-y-4 text-sm">
+              <div>
+                <p className="text-xs uppercase tracking-wider text-muted-foreground mb-2">Pipeline status {statusBadge(selected.applicant_status)}</p>
+                <StatusPipeline current={selected.applicant_status} onChange={(s) => updateStatus(selected.id, s)} />
+              </div>
+              <hr className="border-border" />
               <Detail label="Name" value={`${selected.first_name} ${selected.last_name}`} />
               <Detail label="Email" value={selected.email} />
               <Detail label="Phone" value={selected.phone} />
@@ -266,6 +271,8 @@ export default function AdminFlipApplications() {
               <Detail label="Reference" value={selected.paystack_reference || "—"} />
               <Detail label="Submitted" value={format(new Date(selected.created_at), "PPpp")} />
               {selected.paid_at && <Detail label="Paid At" value={format(new Date(selected.paid_at), "PPpp")} />}
+              <hr className="border-border" />
+              <NotesPanel type="flip" id={selected.id} />
             </div>
           </div>
         </div>
