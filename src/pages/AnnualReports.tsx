@@ -54,7 +54,7 @@ export default function AnnualReports() {
               <Card key={r.year} className="p-8">
                 <div className="flex items-baseline gap-3 mb-3">
                   <span className="font-display font-bold text-3xl gradient-text">{r.year}</span>
-                  {r.status === "coming" && (
+                  {(r.status as string) === "coming" && (
                     <span className="text-xs px-2 py-1 rounded-full bg-muted text-muted-foreground flex items-center gap-1">
                       <Clock className="w-3 h-3" /> Coming soon
                     </span>
