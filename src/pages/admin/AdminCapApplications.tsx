@@ -221,6 +221,14 @@ export default function AdminCapApplications() {
             </Button>
           ))}
         </div>
+        <div className="flex gap-2 flex-wrap sm:ml-auto">
+          <Button onClick={() => openEmail("selected")} size="sm" variant="outline" disabled={picked.size === 0} className="rounded-xl">
+            <Mail className="w-4 h-4" /> Email selected ({picked.size})
+          </Button>
+          <Button onClick={() => openEmail("filtered")} size="sm" variant="outline" disabled={filtered.length === 0} className="rounded-xl">
+            <Mail className="w-4 h-4" /> Email all filtered
+          </Button>
+        </div>
       </div>
 
       {trackOptions.length > 0 && (
