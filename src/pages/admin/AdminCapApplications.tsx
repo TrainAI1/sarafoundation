@@ -27,6 +27,7 @@ interface CapApp {
   paystack_reference: string | null;
   created_at: string;
   paid_at: string | null;
+  applicant_status: string | null;
 }
 
 const statusColors: Record<string, string> = {
