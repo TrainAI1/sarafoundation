@@ -233,22 +233,40 @@ export default function AdminCapApplications() {
           <p>No applications match your filters.</p>
         </div>
       ) : (
+        <>
+        <BulkActionsBar
+          count={picked.size}
+          onClear={() => setPicked(new Set())}
+          onStatusChange={bulkStatus}
+          onDelete={bulkDelete}
+        />
         <div className="card-modern overflow-hidden">
           <div className="overflow-x-auto">
             <table className="w-full text-sm">
               <thead className="bg-secondary/50 text-xs uppercase text-muted-foreground">
                 <tr>
+                  <th className="px-3 py-3">
+                    <input
+                      type="checkbox"
+                      checked={filtered.length > 0 && filtered.every((r) => picked.has(r.id))}
+                      onChange={(e) => setPicked(e.target.checked ? new Set(filtered.map((r) => r.id)) : new Set())}
+                    />
+                  </th>
                   <th className="text-left px-4 py-3">Applicant</th>
                   <th className="text-left px-4 py-3 hidden md:table-cell">University</th>
                   <th className="text-left px-4 py-3">Track</th>
                   <th className="text-left px-4 py-3">Plan / Paid</th>
-                  <th className="text-left px-4 py-3">Status</th>
+                  <th className="text-left px-4 py-3">Payment</th>
+                  <th className="text-left px-4 py-3">Pipeline</th>
                   <th className="px-4 py-3"></th>
                 </tr>
               </thead>
               <tbody>
                 {filtered.map((r) => (
                   <tr key={r.id} className="border-t border-border hover:bg-secondary/30">
+                    <td className="px-3 py-3" onClick={(e) => e.stopPropagation()}>
+                      <input type="checkbox" checked={picked.has(r.id)} onChange={() => togglePick(r.id)} />
+                    </td>
                     <td className="px-4 py-3">
                       <p className="font-medium text-foreground">{r.full_name}</p>
                       <p className="text-xs text-muted-foreground">{r.email}</p>
@@ -274,6 +292,7 @@ export default function AdminCapApplications() {
                         {r.payment_status}
                       </span>
                     </td>
+                    <td className="px-4 py-3">{statusBadge(r.applicant_status)}</td>
                     <td className="px-4 py-3 text-right whitespace-nowrap">
                       <Button variant="ghost" size="icon" onClick={() => setSelected(r)}>
                         <Eye className="w-4 h-4" />
@@ -288,16 +307,25 @@ export default function AdminCapApplications() {
             </table>
           </div>
         </div>
+        </>
       )}
 
       {selected && (
         <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center p-0 sm:p-4 bg-foreground/40" onClick={() => setSelected(null)}>
-          <div className="bg-card w-full sm:max-w-lg rounded-t-2xl sm:rounded-2xl shadow-2xl max-h-[90vh] overflow-y-auto" onClick={(e) => e.stopPropagation()}>
+          <div className="bg-card w-full sm:max-w-2xl rounded-t-2xl sm:rounded-2xl shadow-2xl max-h-[90vh] overflow-y-auto" onClick={(e) => e.stopPropagation()}>
             <div className="sticky top-0 bg-card border-b border-border px-5 py-3 flex items-center justify-between">
               <h3 className="font-display font-bold text-foreground">Application Details</h3>
               <Button variant="ghost" size="icon" onClick={() => setSelected(null)}><X className="w-4 h-4" /></Button>
             </div>
-            <div className="p-5 space-y-3 text-sm">
+            <div className="p-5 space-y-4 text-sm">
+              <div>
+                <p className="text-xs uppercase tracking-wider text-muted-foreground mb-2">Pipeline status</p>
+                <StatusPipeline
+                  current={selected.applicant_status}
+                  onChange={(s) => updateStatus(selected.id, s)}
+                />
+              </div>
+              <hr className="border-border" />
               <Detail label="Name" value={selected.full_name} />
               <Detail label="Email" value={selected.email} />
               <Detail label="Phone" value={selected.phone} />
@@ -317,6 +345,8 @@ export default function AdminCapApplications() {
               <Detail label="Reference" value={selected.paystack_reference || "—"} />
               <Detail label="Submitted" value={format(new Date(selected.created_at), "PPpp")} />
               {selected.paid_at && <Detail label="Fully Paid At" value={format(new Date(selected.paid_at), "PPpp")} />}
+              <hr className="border-border" />
+              <NotesPanel type="cap" id={selected.id} />
             </div>
           </div>
         </div>
