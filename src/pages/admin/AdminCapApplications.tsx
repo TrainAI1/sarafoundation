@@ -5,6 +5,10 @@ import { Input } from "@/components/ui/input";
 import { toast } from "sonner";
 import { Download, Eye, Trash2, GraduationCap, X } from "lucide-react";
 import { format } from "date-fns";
+import StatusPipeline, { statusBadge, type ApplicationStatus } from "@/components/admin/StatusPipeline";
+import NotesPanel from "@/components/admin/NotesPanel";
+import BulkActionsBar from "@/components/admin/BulkActionsBar";
+import { useAuditLog } from "@/hooks/useAuditLog";
 
 interface CapApp {
   id: string;
@@ -27,6 +31,7 @@ interface CapApp {
   paystack_reference: string | null;
   created_at: string;
   paid_at: string | null;
+  applicant_status: string | null;
 }
 
 const statusColors: Record<string, string> = {
@@ -42,6 +47,8 @@ export default function AdminCapApplications() {
   const [search, setSearch] = useState("");
   const [trackFilter, setTrackFilter] = useState<string>("all");
   const [selected, setSelected] = useState<CapApp | null>(null);
+  const [picked, setPicked] = useState<Set<string>>(new Set());
+  const { log } = useAuditLog();
 
   const load = async () => {
     const { data } = await supabase
@@ -95,8 +102,48 @@ export default function AdminCapApplications() {
     await supabase.from("cap_applications").delete().eq("id", id);
     setSelected((s) => (s?.id === id ? null : s));
     toast.success("Application deleted");
+    log({ action: "cap.delete", entity: "cap", entity_id: id });
     load();
   };
+
+  const updateStatus = async (id: string, status: ApplicationStatus) => {
+    const { error } = await supabase.from("cap_applications").update({ applicant_status: status }).eq("id", id);
+    if (error) { toast.error(error.message); return; }
+    log({ action: "cap.status", entity: "cap", entity_id: id, summary: `Status → ${status}`, metadata: { status } });
+    toast.success(`Status updated to ${status}`);
+    setSelected((s) => (s && s.id === id ? { ...s, applicant_status: status } : s));
+    load();
+  };
+
+  const bulkStatus = async (status: string) => {
+    const ids = Array.from(picked);
+    if (!ids.length) return;
+    const { error } = await supabase.from("cap_applications").update({ applicant_status: status }).in("id", ids);
+    if (error) { toast.error(error.message); return; }
+    log({ action: "cap.bulk.status", entity: "cap", summary: `${ids.length} → ${status}`, metadata: { count: ids.length, status } });
+    toast.success(`Updated ${ids.length} application(s)`);
+    setPicked(new Set());
+    load();
+  };
+
+  const bulkDelete = async () => {
+    const ids = Array.from(picked);
+    if (!ids.length) return;
+    if (!confirm(`Delete ${ids.length} application(s)?`)) return;
+    const { error } = await supabase.from("cap_applications").delete().in("id", ids);
+    if (error) { toast.error(error.message); return; }
+    log({ action: "cap.bulk.delete", entity: "cap", summary: `Deleted ${ids.length}`, metadata: { count: ids.length } });
+    toast.success(`Deleted ${ids.length} application(s)`);
+    setPicked(new Set());
+    load();
+  };
+
+  const togglePick = (id: string) =>
+    setPicked((p) => {
+      const n = new Set(p);
+      if (n.has(id)) n.delete(id); else n.add(id);
+      return n;
+    });
 
   const exportCsv = () => {
     const headers = [
@@ -186,22 +233,40 @@ export default function AdminCapApplications() {
           <p>No applications match your filters.</p>
         </div>
       ) : (
+        <>
+        <BulkActionsBar
+          count={picked.size}
+          onClear={() => setPicked(new Set())}
+          onStatusChange={bulkStatus}
+          onDelete={bulkDelete}
+        />
         <div className="card-modern overflow-hidden">
           <div className="overflow-x-auto">
             <table className="w-full text-sm">
               <thead className="bg-secondary/50 text-xs uppercase text-muted-foreground">
                 <tr>
+                  <th className="px-3 py-3">
+                    <input
+                      type="checkbox"
+                      checked={filtered.length > 0 && filtered.every((r) => picked.has(r.id))}
+                      onChange={(e) => setPicked(e.target.checked ? new Set(filtered.map((r) => r.id)) : new Set())}
+                    />
+                  </th>
                   <th className="text-left px-4 py-3">Applicant</th>
                   <th className="text-left px-4 py-3 hidden md:table-cell">University</th>
                   <th className="text-left px-4 py-3">Track</th>
                   <th className="text-left px-4 py-3">Plan / Paid</th>
-                  <th className="text-left px-4 py-3">Status</th>
+                  <th className="text-left px-4 py-3">Payment</th>
+                  <th className="text-left px-4 py-3">Pipeline</th>
                   <th className="px-4 py-3"></th>
                 </tr>
               </thead>
               <tbody>
                 {filtered.map((r) => (
                   <tr key={r.id} className="border-t border-border hover:bg-secondary/30">
+                    <td className="px-3 py-3" onClick={(e) => e.stopPropagation()}>
+                      <input type="checkbox" checked={picked.has(r.id)} onChange={() => togglePick(r.id)} />
+                    </td>
                     <td className="px-4 py-3">
                       <p className="font-medium text-foreground">{r.full_name}</p>
                       <p className="text-xs text-muted-foreground">{r.email}</p>
@@ -227,6 +292,7 @@ export default function AdminCapApplications() {
                         {r.payment_status}
                       </span>
                     </td>
+                    <td className="px-4 py-3">{statusBadge(r.applicant_status)}</td>
                     <td className="px-4 py-3 text-right whitespace-nowrap">
                       <Button variant="ghost" size="icon" onClick={() => setSelected(r)}>
                         <Eye className="w-4 h-4" />
@@ -241,16 +307,25 @@ export default function AdminCapApplications() {
             </table>
           </div>
         </div>
+        </>
       )}
 
       {selected && (
         <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center p-0 sm:p-4 bg-foreground/40" onClick={() => setSelected(null)}>
-          <div className="bg-card w-full sm:max-w-lg rounded-t-2xl sm:rounded-2xl shadow-2xl max-h-[90vh] overflow-y-auto" onClick={(e) => e.stopPropagation()}>
+          <div className="bg-card w-full sm:max-w-2xl rounded-t-2xl sm:rounded-2xl shadow-2xl max-h-[90vh] overflow-y-auto" onClick={(e) => e.stopPropagation()}>
             <div className="sticky top-0 bg-card border-b border-border px-5 py-3 flex items-center justify-between">
               <h3 className="font-display font-bold text-foreground">Application Details</h3>
               <Button variant="ghost" size="icon" onClick={() => setSelected(null)}><X className="w-4 h-4" /></Button>
             </div>
-            <div className="p-5 space-y-3 text-sm">
+            <div className="p-5 space-y-4 text-sm">
+              <div>
+                <p className="text-xs uppercase tracking-wider text-muted-foreground mb-2">Pipeline status</p>
+                <StatusPipeline
+                  current={selected.applicant_status}
+                  onChange={(s) => updateStatus(selected.id, s)}
+                />
+              </div>
+              <hr className="border-border" />
               <Detail label="Name" value={selected.full_name} />
               <Detail label="Email" value={selected.email} />
               <Detail label="Phone" value={selected.phone} />
@@ -270,6 +345,8 @@ export default function AdminCapApplications() {
               <Detail label="Reference" value={selected.paystack_reference || "—"} />
               <Detail label="Submitted" value={format(new Date(selected.created_at), "PPpp")} />
               {selected.paid_at && <Detail label="Fully Paid At" value={format(new Date(selected.paid_at), "PPpp")} />}
+              <hr className="border-border" />
+              <NotesPanel type="cap" id={selected.id} />
             </div>
           </div>
         </div>

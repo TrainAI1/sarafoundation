@@ -52,6 +52,8 @@ import AdminFlipApplications from "./pages/admin/AdminFlipApplications";
 import AdminCapApplications from "./pages/admin/AdminCapApplications";
 import AdminGjpApplications from "./pages/admin/AdminGjpApplications";
 import AdminSiteHealth from "./pages/admin/AdminSiteHealth";
+import AdminUsers from "./pages/admin/AdminUsers";
+import AdminAuditLog from "./pages/admin/AdminAuditLog";
 import Privacy from "./pages/Privacy";
 import Terms from "./pages/Terms";
 import NotFound from "./pages/NotFound";
@@ -120,6 +122,8 @@ const App = () => {
               <Route path="cap-applications" element={<AdminCapApplications />} />
               <Route path="gjp-applications" element={<AdminGjpApplications />} />
               <Route path="site-health" element={<AdminSiteHealth />} />
+              <Route path="users" element={<AdminUsers />} />
+              <Route path="audit-log" element={<AdminAuditLog />} />
             </Route>
             <Route path="*" element={<NotFound />} />
           </Routes>

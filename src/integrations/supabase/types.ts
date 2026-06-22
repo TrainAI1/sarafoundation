@@ -14,6 +14,72 @@ export type Database = {
   }
   public: {
     Tables: {
+      admin_audit_log: {
+        Row: {
+          action: string
+          actor_email: string | null
+          actor_id: string | null
+          created_at: string
+          entity: string | null
+          entity_id: string | null
+          id: string
+          metadata: Json | null
+          summary: string | null
+        }
+        Insert: {
+          action: string
+          actor_email?: string | null
+          actor_id?: string | null
+          created_at?: string
+          entity?: string | null
+          entity_id?: string | null
+          id?: string
+          metadata?: Json | null
+          summary?: string | null
+        }
+        Update: {
+          action?: string
+          actor_email?: string | null
+          actor_id?: string | null
+          created_at?: string
+          entity?: string | null
+          entity_id?: string | null
+          id?: string
+          metadata?: Json | null
+          summary?: string | null
+        }
+        Relationships: []
+      }
+      application_notes: {
+        Row: {
+          application_id: string
+          application_type: string
+          author_email: string | null
+          author_id: string | null
+          body: string
+          created_at: string
+          id: string
+        }
+        Insert: {
+          application_id: string
+          application_type: string
+          author_email?: string | null
+          author_id?: string | null
+          body: string
+          created_at?: string
+          id?: string
+        }
+        Update: {
+          application_id?: string
+          application_type?: string
+          author_email?: string | null
+          author_id?: string | null
+          body?: string
+          created_at?: string
+          id?: string
+        }
+        Relationships: []
+      }
       blog_posts: {
         Row: {
           author_name: string
@@ -61,6 +127,8 @@ export type Database = {
       }
       cap_applications: {
         Row: {
+          applicant_status: string
+          assigned_to: string | null
           country: string
           created_at: string
           email: string
@@ -78,11 +146,15 @@ export type Database = {
           preferred_track: string
           referral_source: string | null
           specialization: string | null
+          status_notes: string | null
+          status_updated_at: string
           total_amount: number | null
           university: string
           year_of_study: string
         }
         Insert: {
+          applicant_status?: string
+          assigned_to?: string | null
           country: string
           created_at?: string
           email: string
@@ -100,11 +172,15 @@ export type Database = {
           preferred_track: string
           referral_source?: string | null
           specialization?: string | null
+          status_notes?: string | null
+          status_updated_at?: string
           total_amount?: number | null
           university: string
           year_of_study: string
         }
         Update: {
+          applicant_status?: string
+          assigned_to?: string | null
           country?: string
           created_at?: string
           email?: string
@@ -122,6 +198,8 @@ export type Database = {
           preferred_track?: string
           referral_source?: string | null
           specialization?: string | null
+          status_notes?: string | null
+          status_updated_at?: string
           total_amount?: number | null
           university?: string
           year_of_study?: string
@@ -221,6 +299,8 @@ export type Database = {
       flip_applications: {
         Row: {
           age_range: string
+          applicant_status: string
+          assigned_to: string | null
           commitment: boolean
           country: string
           created_at: string
@@ -240,9 +320,13 @@ export type Database = {
           phone: string
           preferred_track: string
           state: string | null
+          status_notes: string | null
+          status_updated_at: string
         }
         Insert: {
           age_range: string
+          applicant_status?: string
+          assigned_to?: string | null
           commitment?: boolean
           country: string
           created_at?: string
@@ -262,9 +346,13 @@ export type Database = {
           phone: string
           preferred_track: string
           state?: string | null
+          status_notes?: string | null
+          status_updated_at?: string
         }
         Update: {
           age_range?: string
+          applicant_status?: string
+          assigned_to?: string | null
           commitment?: boolean
           country?: string
           created_at?: string
@@ -284,6 +372,8 @@ export type Database = {
           phone?: string
           preferred_track?: string
           state?: string | null
+          status_notes?: string | null
+          status_updated_at?: string
         }
         Relationships: []
       }
@@ -291,6 +381,7 @@ export type Database = {
         Row: {
           additional_info: string | null
           applicant_status: string
+          assigned_to: string | null
           cap_flip_cohort: string | null
           career_path: string
           created_at: string
@@ -316,6 +407,7 @@ export type Database = {
         Insert: {
           additional_info?: string | null
           applicant_status?: string
+          assigned_to?: string | null
           cap_flip_cohort?: string | null
           career_path: string
           created_at?: string
@@ -341,6 +433,7 @@ export type Database = {
         Update: {
           additional_info?: string | null
           applicant_status?: string
+          assigned_to?: string | null
           cap_flip_cohort?: string | null
           career_path?: string
           created_at?: string
@@ -514,6 +607,15 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      assign_user_role: {
+        Args: {
+          _role: Database["public"]["Enums"]["app_role"]
+          _target_user: string
+        }
+        Returns: undefined
+      }
+      can_edit_content: { Args: never; Returns: boolean }
+      can_moderate_submissions: { Args: never; Returns: boolean }
       get_gjp_status_by_email_appid: {
         Args: { _app_id_prefix: string; _email: string }
         Returns: {
@@ -533,9 +635,26 @@ export type Database = {
         Returns: boolean
       }
       is_admin: { Args: never; Returns: boolean }
+      list_admin_users: {
+        Args: never
+        Returns: {
+          created_at: string
+          email: string
+          last_sign_in_at: string
+          roles: string[]
+          user_id: string
+        }[]
+      }
+      revoke_user_role: {
+        Args: {
+          _role: Database["public"]["Enums"]["app_role"]
+          _target_user: string
+        }
+        Returns: undefined
+      }
     }
     Enums: {
-      app_role: "admin" | "moderator" | "user"
+      app_role: "admin" | "moderator" | "user" | "editor"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -663,7 +782,7 @@ export type CompositeTypes<
 export const Constants = {
   public: {
     Enums: {
-      app_role: ["admin", "moderator", "user"],
+      app_role: ["admin", "moderator", "user", "editor"],
     },
   },
 } as const

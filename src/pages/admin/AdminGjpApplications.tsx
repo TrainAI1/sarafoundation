@@ -10,6 +10,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { toast } from "sonner";
 import { Download, FileSpreadsheet, Eye, Trash2, Briefcase, X, Save, Mail, Code2, Filter, ChevronDown, ListChecks, Clock, AlertCircle } from "lucide-react";
 import { format } from "date-fns";
+import NotesPanel from "@/components/admin/NotesPanel";
 import * as XLSX from "xlsx";
 
 const TECH_CAREER_PATHS = new Set<string>([
@@ -865,6 +866,8 @@ export default function AdminGjpApplications() {
               >
                 <Mail className="w-4 h-4" /> Email this applicant
               </Button>
+              <hr className="border-border" />
+              <NotesPanel type="gjp" id={selected.id} />
             </div>
           </div>
         </div>

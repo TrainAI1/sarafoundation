@@ -1,50 +1,58 @@
-## Google Ad Grants Audit — Status of each item
+## Goal
+Turn the admin from a single-role CMS into a multi-role operations console: granular roles, real analytics, audit trail, application workflows, and bulk operations.
 
-| # | Item | Status |
-|---|---|---|
-| 1 | Domain ownership (sarafoundationafrica.com, A → 185.158.133.1) | ✅ Pass |
-| 2 | Mission statement on homepage + About page | ✅ Pass (Hero + MissionSection + About.tsx ~1.9k words) |
-| 3 | Original content — About, Programs, Donate, Contact, Blog | ✅ Pass |
-| 3 | Original content — **Projects, Volunteer, Annual Reports pages** | ❌ Missing |
-| 4 | Navigation — Home / About / Programs / Blog / Contact / Donate | ✅ Pass; **Volunteer & Projects not in menu** |
-| 5 | Functional Donate page (Paystack + crypto + GoFundMe) | ✅ Pass |
-| 6 | HTTPS sitewide (Lovable hosting) | ✅ Pass |
-| 7 | Mobile responsive | ✅ Pass |
-| 8 | Speed (LCP fix already applied, lazy images) | ✅ Pass |
-| 9 | Trust info (CAC #7980056, leadership, addresses, phone, email, Privacy, Terms) | ✅ Pass |
-| 10 | No AdSense / affiliate ads | ✅ Pass |
-| 11 | Recent activity (Blog + Impact Report) | ✅ Pass |
-| 12 | Footer items (About, Contact, Privacy, Terms, Donate, Socials, Copyright) | ✅ Pass |
+## 1. Roles & permissions
 
-## Gaps to fix
+Add two new app_role values: `editor`, `moderator` (existing: `admin`, `moderator`, `user`). Permissions:
 
-Three dedicated pages are missing that Google Ad Grants reviewers look for:
+| Area | admin | editor | moderator | viewer-only |
+|---|---|---|---|---|
+| Dashboard / Analytics | ✅ | ✅ | ✅ | read |
+| Blog, Pages, FAQ, Partners, Testimonials, Team, Media | ✅ | ✅ | ❌ | ❌ |
+| Site Settings, Site Health | ✅ | ❌ | ❌ | ❌ |
+| Contacts, Newsletter, CAP/FLIP/GJP applications | ✅ | ❌ | ✅ | ❌ |
+| User & role management, Audit log | ✅ | ❌ | ❌ | ❌ |
 
-1. **/projects** — overview of concrete projects (CAP Tech Hubs in 35+ universities, FLIP Fellowship, GJP placements, Talent Showcase, university partnerships). Aggregates existing program work into a "Projects" view distinct from program landing pages.
-2. **/volunteer** — explains volunteer/mentor roles (program mentors, university ambassadors, content contributors, event volunteers) with a signup form that writes to a new `volunteer_applications` table (or reuses contact submissions table).
-3. **/annual-reports** — index page listing 2024 and 2025 impact reports with download links (Drive URL already exists for 2025).
+New DB helpers (SECURITY DEFINER): `can_edit_content()`, `can_moderate_submissions()`. RLS policies extended on content tables (allow editor) and submission tables (allow moderator) — admin keeps everything.
 
-## Implementation
+## 2. New tables
 
-### New pages (each 400–600 words, full SEO Helmet, semantic H1, internal links, CTAs)
+- `admin_audit_log` — actor_id, actor_email, action, entity, entity_id, summary, metadata jsonb, ip, created_at. Admin read-only.
+- `application_notes` — application_type (cap/flip/gjp/contact), application_id, author_id, body, created_at. Admin + moderator manage; logged in audit log.
+- Status/assignee columns added to `cap_applications` and `flip_applications` (mirrors `gjp_applications`): `applicant_status text default 'new'`, `status_notes text`, `status_updated_at timestamptz`, `assigned_to uuid references auth.users`. Trigger updates `status_updated_at` when status changes.
 
-- `src/pages/Projects.tsx` — hero + grid of 6 project cards (CAP Tech Hubs, FLIP Fellowship, WPTA, WFTA, GJP, Talent Showcase) + impact metrics + CTA.
-- `src/pages/Volunteer.tsx` — hero + 4 volunteer roles + benefits + form (name, email, role, skills, message) posting via existing `notify` edge function and inserting to `contact_submissions`.
-- `src/pages/AnnualReports.tsx` — hero + report cards (2025 live, 2024 placeholder/coming soon) + download buttons.
+## 3. Dashboard rewrite (real data)
 
-### Routing & navigation
+Replace AdminDashboard with a KPI console pulling from DB:
+- KPI cards: contacts (24h / 7d / total), newsletter subs, applications by program with week-over-week deltas, donations stub.
+- Charts (recharts): applications-over-time stacked area (CAP / FLIP / GJP, last 30 days), funnel by status (new → review → shortlist → accepted), contact submissions bar, top universities.
+- Inbox preview: latest 5 contacts and 5 applications, with role-aware links.
+- Quick actions filtered by current role.
 
-- `src/App.tsx` — add `/projects`, `/volunteer`, `/annual-reports` routes.
-- `src/components/layout/Navbar.tsx` — add **Projects** and **Volunteer** to desktop + mobile menus.
-- `src/components/layout/Footer.tsx` — add **Projects**, **Volunteer**, **Annual Reports** under Quick Links.
+## 4. New admin pages
 
-### SEO
+- `/admin/users` — list auth users with role badges, assign/revoke roles (admin/editor/moderator), invite-by-email (creates pending invite row + magic link), uses `prevent_last_admin_*` triggers.
+- `/admin/audit-log` — searchable, filter by actor/action/date; CSV export.
 
-- `public/sitemap.xml` — add the 3 new URLs.
-- Per-page `<Helmet>` with unique title (<60 chars), description (<160 chars), canonical, og tags, JSON-LD (`WebPage` / `VolunteerRole` schema where applicable).
+## 5. Workflow upgrades on application pages
 
-### Out of scope
+For Contacts, CAP, FLIP, GJP, Newsletter:
+- Multi-select rows + sticky bulk-action bar: change status, assign to user, export CSV, mark spam, delete.
+- Advanced filter chips: status, date range, university/country, search.
+- Per-row detail drawer: full record, internal notes thread (`application_notes`), status pipeline buttons (new / review / shortlisted / accepted / rejected), assignee dropdown.
+- All mutations write to `admin_audit_log`.
 
-- Performance/Lighthouse audits already addressed in prior SEO passes.
-- No design system or branding changes — reuses existing tokens, glassmorphism, blue/cyan palette, ScrollAnimation.
-- No backend schema changes unless needed for the Volunteer form (will reuse `contact_submissions` to keep this scoped).
+## 6. Layout & auth
+
+- `useAdmin()` returns `{ roles, isAdmin, canEditContent, canModerate, loading }`.
+- `AdminLayout` filters sidebar groups by capability; non-permitted routes redirect to dashboard with toast.
+- Header gains role badge + active-user count.
+
+## 7. Technical details
+
+- Migration in one batch: new enum value, helper functions, audit/notes tables (with grants + RLS), columns + triggers, complementary RLS policies for editor/moderator on existing tables.
+- Audit log written via small helper hook `useAuditLog().log(action, entity, ...)` (client-side, but enforced by RLS that only admins read).
+- Bulk operations done with `.in('id', ids)` updates wrapped in Promise.all where atomic isn't required.
+- Stick to existing design tokens (`card-modern`, `bg-primary/10`, etc.) — no visual redesign.
+
+I'll start with the migration, then ship all code in one pass once the schema is in.
