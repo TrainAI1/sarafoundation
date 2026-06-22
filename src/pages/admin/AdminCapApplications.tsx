@@ -3,11 +3,12 @@ import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { toast } from "sonner";
-import { Download, Eye, Trash2, GraduationCap, X } from "lucide-react";
+import { Download, Eye, Trash2, GraduationCap, X, Mail } from "lucide-react";
 import { format } from "date-fns";
 import StatusPipeline, { statusBadge, type ApplicationStatus } from "@/components/admin/StatusPipeline";
 import NotesPanel from "@/components/admin/NotesPanel";
 import BulkActionsBar from "@/components/admin/BulkActionsBar";
+import EmailDialog from "@/components/admin/EmailDialog";
 import { useAuditLog } from "@/hooks/useAuditLog";
 
 interface CapApp {
@@ -48,6 +49,7 @@ export default function AdminCapApplications() {
   const [trackFilter, setTrackFilter] = useState<string>("all");
   const [selected, setSelected] = useState<CapApp | null>(null);
   const [picked, setPicked] = useState<Set<string>>(new Set());
+  const [emailDialog, setEmailDialog] = useState<{ recipients: string[]; mode: "single" | "bulk" } | null>(null);
   const { log } = useAuditLog();
 
   const load = async () => {
@@ -138,6 +140,16 @@ export default function AdminCapApplications() {
     load();
   };
 
+  const openEmail = (scope: "selected" | "filtered" | "single", single?: CapApp) => {
+    let recipients: string[] = [];
+    if (scope === "single" && single) recipients = [single.email];
+    else if (scope === "selected") recipients = rows.filter((r) => picked.has(r.id)).map((r) => r.email);
+    else recipients = filtered.map((r) => r.email);
+    recipients = Array.from(new Set(recipients.filter(Boolean)));
+    if (!recipients.length) { toast.error("No recipients to email."); return; }
+    setEmailDialog({ recipients, mode: scope === "single" ? "single" : "bulk" });
+  };
+
   const togglePick = (id: string) =>
     setPicked((p) => {
       const n = new Set(p);
@@ -208,6 +220,14 @@ export default function AdminCapApplications() {
               {f}
             </Button>
           ))}
+        </div>
+        <div className="flex gap-2 flex-wrap sm:ml-auto">
+          <Button onClick={() => openEmail("selected")} size="sm" variant="outline" disabled={picked.size === 0} className="rounded-xl">
+            <Mail className="w-4 h-4" /> Email selected ({picked.size})
+          </Button>
+          <Button onClick={() => openEmail("filtered")} size="sm" variant="outline" disabled={filtered.length === 0} className="rounded-xl">
+            <Mail className="w-4 h-4" /> Email all filtered
+          </Button>
         </div>
       </div>
 
@@ -294,6 +314,9 @@ export default function AdminCapApplications() {
                     </td>
                     <td className="px-4 py-3">{statusBadge(r.applicant_status)}</td>
                     <td className="px-4 py-3 text-right whitespace-nowrap">
+                      <Button variant="ghost" size="icon" onClick={() => openEmail("single", r)} title="Email applicant">
+                        <Mail className="w-4 h-4" />
+                      </Button>
                       <Button variant="ghost" size="icon" onClick={() => setSelected(r)}>
                         <Eye className="w-4 h-4" />
                       </Button>
@@ -348,8 +371,23 @@ export default function AdminCapApplications() {
               <hr className="border-border" />
               <NotesPanel type="cap" id={selected.id} />
             </div>
+            <div className="sticky bottom-0 bg-card border-t border-border px-5 py-3 flex justify-end">
+              <Button size="sm" onClick={() => { openEmail("single", selected); setSelected(null); }} className="rounded-xl">
+                <Mail className="w-4 h-4" /> Email this applicant
+              </Button>
+            </div>
           </div>
         </div>
+      )}
+
+      {emailDialog && (
+        <EmailDialog
+          recipients={emailDialog.recipients}
+          mode={emailDialog.mode}
+          defaultSubject="CAP — update from Sara Foundation"
+          onClose={() => setEmailDialog(null)}
+          onSent={({ recipients }) => log({ action: "cap.email", entity: "cap", summary: `Emailed ${recipients.length}`, metadata: { count: recipients.length } })}
+        />
       )}
     </div>
   );
