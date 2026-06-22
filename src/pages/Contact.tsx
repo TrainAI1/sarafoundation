@@ -213,31 +213,31 @@ export default function Contact() {
                     <form onSubmit={handleSubmit} className="space-y-4 md:space-y-6">
                       <div className="grid sm:grid-cols-2 gap-4">
                         <div>
-                          <label className="block text-sm font-medium text-foreground mb-2">
+                          <label htmlFor="contact-first-name" className="block text-sm font-medium text-foreground mb-2">
                             First Name *
                           </label>
-                          <Input placeholder="John" className="rounded-xl" required value={formData.firstName} onChange={(e) => setFormData(p => ({...p, firstName: e.target.value}))} />
+                          <Input id="contact-first-name" name="firstName" autoComplete="given-name" placeholder="John" className="rounded-xl" required value={formData.firstName} onChange={(e) => setFormData(p => ({...p, firstName: e.target.value}))} />
                         </div>
                         <div>
-                          <label className="block text-sm font-medium text-foreground mb-2">
+                          <label htmlFor="contact-last-name" className="block text-sm font-medium text-foreground mb-2">
                             Last Name *
                           </label>
-                          <Input placeholder="Doe" className="rounded-xl" required value={formData.lastName} onChange={(e) => setFormData(p => ({...p, lastName: e.target.value}))} />
+                          <Input id="contact-last-name" name="lastName" autoComplete="family-name" placeholder="Doe" className="rounded-xl" required value={formData.lastName} onChange={(e) => setFormData(p => ({...p, lastName: e.target.value}))} />
                         </div>
                       </div>
 
                       <div>
-                        <label className="block text-sm font-medium text-foreground mb-2">
+                        <label htmlFor="contact-email" className="block text-sm font-medium text-foreground mb-2">
                           Email Address *
                         </label>
-                        <Input type="email" placeholder="john@example.com" className="rounded-xl" required value={formData.email} onChange={(e) => setFormData(p => ({...p, email: e.target.value}))} />
+                        <Input id="contact-email" name="email" autoComplete="email" type="email" placeholder="john@example.com" className="rounded-xl" required value={formData.email} onChange={(e) => setFormData(p => ({...p, email: e.target.value}))} />
                       </div>
 
                       <div>
-                        <label className="block text-sm font-medium text-foreground mb-2">
+                        <label htmlFor="contact-topic" className="block text-sm font-medium text-foreground mb-2">
                           Topic
                         </label>
-                        <select className="flex h-10 w-full rounded-xl border border-input bg-background px-3 py-2 text-base ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm" value={formData.topic} onChange={(e) => setFormData(p => ({...p, topic: e.target.value}))}>
+                        <select id="contact-topic" name="topic" className="flex h-10 w-full rounded-xl border border-input bg-background px-3 py-2 text-base ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm" value={formData.topic} onChange={(e) => setFormData(p => ({...p, topic: e.target.value}))}>
                           {topics.map((topic) => (
                             <option key={topic} value={topic}>{topic}</option>
                           ))}
@@ -245,10 +245,12 @@ export default function Contact() {
                       </div>
 
                       <div>
-                        <label className="block text-sm font-medium text-foreground mb-2">
+                        <label htmlFor="contact-message" className="block text-sm font-medium text-foreground mb-2">
                           Message *
                         </label>
                         <Textarea 
+                          id="contact-message"
+                          name="message"
                           placeholder="Tell us more about your inquiry..." 
                           className="rounded-xl min-h-[120px] md:min-h-[150px]" 
                           required

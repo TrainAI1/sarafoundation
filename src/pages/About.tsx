@@ -97,6 +97,20 @@ export default function About() {
         <meta name="twitter:title" content="About Us – Sara Foundation Africa" />
         <meta name="twitter:description" content="Learn about Sara Foundation Africa's mission to foster Diversity, Equity & Inclusion in African tech." />
         <meta name="twitter:image" content="https://sarafoundationafrica.com/hero-students.jpg" />
+        <script type="application/ld+json">{JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "name": "Sara Foundation Africa",
+          "url": "https://sarafoundationafrica.com",
+          "logo": "https://sarafoundationafrica.com/favicon.png",
+          "foundingDate": "2023",
+          "description": "Sara Foundation Africa fosters Diversity, Equity & Inclusion in African tech, operating across 11 African countries with 35 university partners.",
+          "sameAs": [
+            "https://www.linkedin.com/company/sara-foundation/",
+            "https://x.com/Sarafoundations",
+            "https://www.instagram.com/sarafoundation.africa"
+          ]
+        })}</script>
       </Helmet>
       <Navbar />
       <main>

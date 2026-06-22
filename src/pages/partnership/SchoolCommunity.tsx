@@ -128,6 +128,15 @@ export default function SchoolCommunity() {
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://sarafoundationafrica.com/partnership/school-community" />
         <meta property="og:image" content="https://sarafoundationafrica.com/hero-students.jpg" />
+        <script type="application/ld+json">{JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          "mainEntity": faqs.map((f) => ({
+            "@type": "Question",
+            "name": f.q,
+            "acceptedAnswer": { "@type": "Answer", "text": f.a },
+          })),
+        })}</script>
       </Helmet>
       <Navbar />
       

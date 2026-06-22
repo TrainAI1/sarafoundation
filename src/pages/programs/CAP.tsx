@@ -18,7 +18,7 @@ export default function ProgramCAP() {
     <div className="min-h-screen bg-background">
       <Helmet>
         <title>CAP Tech Hub – Career Advancement Program | Sara Foundation Africa</title>
-        <meta name="description" content="Join CAP Tech Hub – a 6-week intensive program equipping African university students with skills, projects, and confidence to launch real tech careers across 35 universities in 11 African countries." />
+        <meta name="description" content="CAP Tech Hub — a 6-week intensive program equipping African university students to launch real tech careers. 35 universities, 11 countries." />
         <link rel="canonical" href="https://sarafoundationafrica.com/programs/cap" />
         <meta property="og:title" content="CAP Tech Hub – Career Advancement Program | Sara Foundation Africa" />
         <meta property="og:description" content="A 6-week intensive program equipping African university students to launch real tech careers across 35 universities in 11 African countries." />

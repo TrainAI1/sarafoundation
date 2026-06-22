@@ -71,6 +71,15 @@ export default function Donation() {
         <meta name="twitter:title" content="Donate – Support African Tech Talent | Sara Foundation" />
         <meta name="twitter:description" content="Your donation supports scholarships, mentorship programs, and resources for young African tech entrepreneurs." />
         <meta name="twitter:image" content="https://sarafoundationafrica.com/hero-students.jpg" />
+        <script type="application/ld+json">{JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          "mainEntity": displayFaqs.map((f: any) => ({
+            "@type": "Question",
+            "name": f.question,
+            "acceptedAnswer": { "@type": "Answer", "text": f.answer },
+          })),
+        })}</script>
       </Helmet>
       <Navbar />
       <main>
