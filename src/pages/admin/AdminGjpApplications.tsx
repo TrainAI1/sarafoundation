@@ -865,6 +865,8 @@ export default function AdminGjpApplications() {
               >
                 <Mail className="w-4 h-4" /> Email this applicant
               </Button>
+              <hr className="border-border" />
+              <NotesPanel type="gjp" id={selected.id} />
             </div>
           </div>
         </div>
