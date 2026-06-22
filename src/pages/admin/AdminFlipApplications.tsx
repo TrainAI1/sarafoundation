@@ -293,8 +293,23 @@ export default function AdminFlipApplications() {
               <hr className="border-border" />
               <NotesPanel type="flip" id={selected.id} />
             </div>
+            <div className="sticky bottom-0 bg-card border-t border-border px-5 py-3 flex justify-end">
+              <Button size="sm" onClick={() => { openEmail("single", selected); setSelected(null); }} className="rounded-xl">
+                <Mail className="w-4 h-4" /> Email this applicant
+              </Button>
+            </div>
           </div>
         </div>
+      )}
+
+      {emailDialog && (
+        <EmailDialog
+          recipients={emailDialog.recipients}
+          mode={emailDialog.mode}
+          defaultSubject="FLIP — update from Sara Foundation"
+          onClose={() => setEmailDialog(null)}
+          onSent={({ recipients }) => log({ action: "flip.email", entity: "flip", summary: `Emailed ${recipients.length}`, metadata: { count: recipients.length } })}
+        />
       )}
     </div>
   );
