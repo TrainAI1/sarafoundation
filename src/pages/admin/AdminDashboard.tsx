@@ -108,9 +108,9 @@ export default function AdminDashboard() {
           if (p) (p[key] as number) += 1;
         });
       };
-      addToDay(capRecentRes.data as { created_at: string }[] | null, "cap");
+      addToDay((capRecentRes.data ?? []) as { created_at: string }[], "cap");
       addToDay((flipRecentRes.data ?? []) as { created_at: string }[], "flip");
-      addToDay(gjpRecentRes.data as { created_at: string }[] | null, "gjp");
+      addToDay((gjpRecentRes.data ?? []) as { created_at: string }[], "gjp");
       setDaily(Array.from(dayMap.values()));
 
       // Funnel by status
