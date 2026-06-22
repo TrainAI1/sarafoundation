@@ -5,6 +5,9 @@ import { Input } from "@/components/ui/input";
 import { toast } from "sonner";
 import { Download, Eye, Trash2, Users, X } from "lucide-react";
 import { format } from "date-fns";
+import StatusPipeline, { statusBadge, type ApplicationStatus } from "@/components/admin/StatusPipeline";
+import NotesPanel from "@/components/admin/NotesPanel";
+import { useAuditLog } from "@/hooks/useAuditLog";
 
 interface FlipApp {
   id: string;
@@ -27,6 +30,7 @@ interface FlipApp {
   paystack_reference: string | null;
   created_at: string;
   paid_at: string | null;
+  applicant_status: string | null;
 }
 
 const statusColors: Record<string, string> = {
@@ -42,6 +46,16 @@ export default function AdminFlipApplications() {
   const [search, setSearch] = useState("");
   const [trackFilter, setTrackFilter] = useState<string>("all");
   const [selected, setSelected] = useState<FlipApp | null>(null);
+  const { log } = useAuditLog();
+
+  const updateStatus = async (id: string, status: ApplicationStatus) => {
+    const { error } = await supabase.from("flip_applications").update({ applicant_status: status }).eq("id", id);
+    if (error) { toast.error(error.message); return; }
+    log({ action: "flip.status", entity: "flip", entity_id: id, summary: `Status → ${status}`, metadata: { status } });
+    toast.success(`Status updated to ${status}`);
+    setSelected((s) => (s && s.id === id ? { ...s, applicant_status: status } : s));
+    load();
+  };
 
   const load = async () => {
     const { data } = await supabase
