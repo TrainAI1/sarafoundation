@@ -172,7 +172,7 @@ export function HeroSection() {
                     {card.tone !== "accent" && (
                       <img
                         src={card.src}
-                        alt={card.name}
+                        alt={`Sara Foundation participant ${card.name} — ${card.role}`}
                         loading={i < 4 ? "eager" : "lazy"}
                         fetchPriority={i === 0 ? "high" : "auto"}
                         decoding="async"

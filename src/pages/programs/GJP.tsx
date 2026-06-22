@@ -20,7 +20,7 @@ export default function ProgramGJP() {
     <div className="min-h-screen bg-background">
       <Helmet>
         <title>Govt Job Placement (GJP) – Sara Foundation Africa</title>
-        <meta name="description" content="Exclusive 12-month government-backed job placement opportunity for NYSC graduates. Up to ₦150,000/month. Only 500 priority slots — apply through Sara Foundation." />
+        <meta name="description" content="12-month government-backed job placement for Nigerian NYSC graduates. Up to ₦150,000/month. Only 500 priority slots — apply via Sara Foundation." />
         <link rel="canonical" href="https://sarafoundationafrica.com/programs/gjp" />
         <meta property="og:title" content="GJP – Govt Job Placement for NYSC Graduates" />
         <meta property="og:description" content="500 priority slots for Nigerian NYSC graduates. Earn up to ₦150,000/month for 12 months. Training and referral are free." />
