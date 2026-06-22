@@ -18,8 +18,8 @@ const reports = [
     year: "2024",
     title: "Sara Foundation Africa — 2024 Impact Report",
     summary: "Inaugural CAP cohort across founding partner universities, formation of the WPTA community, and the establishment of our governance, leadership team and operating model.",
-    href: "#",
-    status: "coming" as const,
+    href: "https://drive.google.com/file/d/1DjVw-vTf6ugcp75rFVCUCKM4zictzDKN/view?usp=drivesdk",
+    status: "available" as const,
   },
 ];
 
