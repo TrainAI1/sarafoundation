@@ -3,10 +3,11 @@ import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { toast } from "sonner";
-import { Download, Eye, Trash2, Users, X } from "lucide-react";
+import { Download, Eye, Trash2, Users, X, Mail } from "lucide-react";
 import { format } from "date-fns";
 import StatusPipeline, { statusBadge, type ApplicationStatus } from "@/components/admin/StatusPipeline";
 import NotesPanel from "@/components/admin/NotesPanel";
+import EmailDialog from "@/components/admin/EmailDialog";
 import { useAuditLog } from "@/hooks/useAuditLog";
 
 interface FlipApp {
@@ -46,6 +47,7 @@ export default function AdminFlipApplications() {
   const [search, setSearch] = useState("");
   const [trackFilter, setTrackFilter] = useState<string>("all");
   const [selected, setSelected] = useState<FlipApp | null>(null);
+  const [emailDialog, setEmailDialog] = useState<{ recipients: string[]; mode: "single" | "bulk" } | null>(null);
   const { log } = useAuditLog();
 
   const updateStatus = async (id: string, status: ApplicationStatus) => {
@@ -107,6 +109,15 @@ export default function AdminFlipApplications() {
     setSelected((s) => (s?.id === id ? null : s));
     toast.success("Application deleted");
     load();
+  };
+
+  const openEmail = (scope: "filtered" | "single", single?: FlipApp) => {
+    let recipients: string[] = [];
+    if (scope === "single" && single) recipients = [single.email];
+    else recipients = filtered.map((r) => r.email);
+    recipients = Array.from(new Set(recipients.filter(Boolean)));
+    if (!recipients.length) { toast.error("No recipients to email."); return; }
+    setEmailDialog({ recipients, mode: scope === "single" ? "single" : "bulk" });
   };
 
   const exportCsv = () => {
