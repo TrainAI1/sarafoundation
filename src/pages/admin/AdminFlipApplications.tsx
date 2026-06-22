@@ -178,6 +178,11 @@ export default function AdminFlipApplications() {
             </Button>
           ))}
         </div>
+        <div className="sm:ml-auto">
+          <Button onClick={() => openEmail("filtered")} size="sm" variant="outline" disabled={filtered.length === 0} className="rounded-xl">
+            <Mail className="w-4 h-4" /> Email all filtered ({filtered.length})
+          </Button>
+        </div>
       </div>
 
       {trackOptions.length > 0 && (
