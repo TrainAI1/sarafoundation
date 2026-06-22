@@ -371,8 +371,23 @@ export default function AdminCapApplications() {
               <hr className="border-border" />
               <NotesPanel type="cap" id={selected.id} />
             </div>
+            <div className="sticky bottom-0 bg-card border-t border-border px-5 py-3 flex justify-end">
+              <Button size="sm" onClick={() => { openEmail("single", selected); setSelected(null); }} className="rounded-xl">
+                <Mail className="w-4 h-4" /> Email this applicant
+              </Button>
+            </div>
           </div>
         </div>
+      )}
+
+      {emailDialog && (
+        <EmailDialog
+          recipients={emailDialog.recipients}
+          mode={emailDialog.mode}
+          defaultSubject="CAP — update from Sara Foundation"
+          onClose={() => setEmailDialog(null)}
+          onSent={({ recipients }) => log({ action: "cap.email", entity: "cap", summary: `Emailed ${recipients.length}`, metadata: { count: recipients.length } })}
+        />
       )}
     </div>
   );
