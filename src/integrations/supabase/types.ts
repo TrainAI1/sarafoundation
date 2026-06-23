@@ -136,8 +136,11 @@ export type Database = {
           id: string
           installments_completed: number
           motivation: string | null
+          outstanding_commitment: number
           paid_amount: number
           paid_at: string | null
+          partner_code: string | null
+          partner_code_id: string | null
           payment_currency: string | null
           payment_plan: string
           payment_status: string
@@ -162,8 +165,11 @@ export type Database = {
           id?: string
           installments_completed?: number
           motivation?: string | null
+          outstanding_commitment?: number
           paid_amount?: number
           paid_at?: string | null
+          partner_code?: string | null
+          partner_code_id?: string | null
           payment_currency?: string | null
           payment_plan?: string
           payment_status?: string
@@ -188,8 +194,11 @@ export type Database = {
           id?: string
           installments_completed?: number
           motivation?: string | null
+          outstanding_commitment?: number
           paid_amount?: number
           paid_at?: string | null
+          partner_code?: string | null
+          partner_code_id?: string | null
           payment_currency?: string | null
           payment_plan?: string
           payment_status?: string
@@ -204,7 +213,15 @@ export type Database = {
           university?: string
           year_of_study?: string
         }
-        Relationships: []
+        Relationships: [
+          {
+            foreignKeyName: "cap_applications_partner_code_id_fkey"
+            columns: ["partner_code_id"]
+            isOneToOne: false
+            referencedRelation: "partner_codes"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       contact_submissions: {
         Row: {
@@ -312,7 +329,10 @@ export type Database = {
           interview_availability: string | null
           job_role: string | null
           last_name: string
+          outstanding_commitment: number
           paid_at: string | null
+          partner_code: string | null
+          partner_code_id: string | null
           payment_amount: number | null
           payment_currency: string | null
           payment_status: string
@@ -338,7 +358,10 @@ export type Database = {
           interview_availability?: string | null
           job_role?: string | null
           last_name: string
+          outstanding_commitment?: number
           paid_at?: string | null
+          partner_code?: string | null
+          partner_code_id?: string | null
           payment_amount?: number | null
           payment_currency?: string | null
           payment_status?: string
@@ -364,7 +387,10 @@ export type Database = {
           interview_availability?: string | null
           job_role?: string | null
           last_name?: string
+          outstanding_commitment?: number
           paid_at?: string | null
+          partner_code?: string | null
+          partner_code_id?: string | null
           payment_amount?: number | null
           payment_currency?: string | null
           payment_status?: string
@@ -375,7 +401,15 @@ export type Database = {
           status_notes?: string | null
           status_updated_at?: string
         }
-        Relationships: []
+        Relationships: [
+          {
+            foreignKeyName: "flip_applications_partner_code_id_fkey"
+            columns: ["partner_code_id"]
+            isOneToOne: false
+            referencedRelation: "partner_codes"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       gjp_applications: {
         Row: {
@@ -548,6 +582,48 @@ export type Database = {
         }
         Relationships: []
       }
+      partner_codes: {
+        Row: {
+          active: boolean
+          code: string
+          created_at: string
+          expires_at: string | null
+          id: string
+          max_uses: number | null
+          notes: string | null
+          partner_name: string
+          programs: string[]
+          updated_at: string
+          uses: number
+        }
+        Insert: {
+          active?: boolean
+          code: string
+          created_at?: string
+          expires_at?: string | null
+          id?: string
+          max_uses?: number | null
+          notes?: string | null
+          partner_name: string
+          programs?: string[]
+          updated_at?: string
+          uses?: number
+        }
+        Update: {
+          active?: boolean
+          code?: string
+          created_at?: string
+          expires_at?: string | null
+          id?: string
+          max_uses?: number | null
+          notes?: string | null
+          partner_name?: string
+          programs?: string[]
+          updated_at?: string
+          uses?: number
+        }
+        Relationships: []
+      }
       partners: {
         Row: {
           category: string
@@ -651,6 +727,14 @@ export type Database = {
           _target_user: string
         }
         Returns: undefined
+      }
+      validate_partner_code: {
+        Args: { _code: string; _program: string }
+        Returns: {
+          code: string
+          id: string
+          partner_name: string
+        }[]
       }
     }
     Enums: {
