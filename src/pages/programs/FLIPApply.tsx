@@ -54,6 +54,7 @@ const schema = z.object({
   commitment: z.boolean(),
   interview_availability: z.string().trim().max(500).optional().or(z.literal("")),
   preferred_track: z.string().min(1, "Select a track"),
+  partner_code: z.string().trim().max(50).optional().or(z.literal("")),
 });
 
 type FormState = z.infer<typeof schema>;
@@ -62,6 +63,7 @@ const initial: FormState = {
   email: "", first_name: "", last_name: "", country: "", state: "", phone: "",
   age_range: "", education: "", job_role: "", experience: "",
   commitment: false, interview_availability: "", preferred_track: "",
+  partner_code: "",
 };
 
 const stepFields: Record<number, (keyof FormState)[]> = {
@@ -131,6 +133,23 @@ export default function FLIPApply() {
     }
     setSubmitting(true);
     try {
+      let partnerCodeId: string | null = null;
+      let partnerCodeNormalized: string | null = null;
+      if (data.partner_code && data.partner_code.trim()) {
+        const { data: codeRows, error: codeErr } = await supabase
+          .rpc("validate_partner_code", {
+            _code: data.partner_code.trim(),
+            _program: "flip",
+          });
+        if (codeErr || !codeRows || (Array.isArray(codeRows) && codeRows.length === 0)) {
+          toast.error("That reference code is invalid or expired.");
+          setSubmitting(false);
+          return;
+        }
+        const row = Array.isArray(codeRows) ? codeRows[0] : codeRows;
+        partnerCodeId = row.id;
+        partnerCodeNormalized = row.code;
+      }
       const { data: row, error } = await supabase
       .from("flip_applications")
       .insert({
@@ -148,7 +167,9 @@ export default function FLIPApply() {
         interview_availability: data.interview_availability?.trim() || null,
         preferred_track: data.preferred_track,
         payment_status: "pending",
-      })
+        partner_code: partnerCodeNormalized,
+        partner_code_id: partnerCodeId,
+      } as any)
       .select("id")
       .single();
       if (error || !row) {
@@ -328,6 +349,24 @@ export default function FLIPApply() {
                     ))}
                   </RadioGroup>
                   {errors.preferred_track && <p className="text-destructive text-xs mt-1">{errors.preferred_track}</p>}
+                </div>
+
+                <div className="rounded-xl border border-dashed border-accent/40 p-4 bg-accent/5">
+                  <Label htmlFor="flip_partner_code" className="text-foreground">
+                    Partner Reference Code <span className="text-muted-foreground font-normal">(optional)</span>
+                  </Label>
+                  <Input
+                    id="flip_partner_code"
+                    value={data.partner_code}
+                    onChange={(e) => set("partner_code", e.target.value.toUpperCase())}
+                    className="mt-1.5 rounded-xl uppercase"
+                    placeholder="e.g. PARTNER2025"
+                    maxLength={50}
+                  />
+                  <p className="text-xs text-muted-foreground mt-2">
+                    Have a code from one of our partners? Enter it to unlock subsidised partner pricing
+                    (₦90,000 full, or ₦30,000 upfront with a ₦60,000 commitment).
+                  </p>
                 </div>
               </div>
             )}

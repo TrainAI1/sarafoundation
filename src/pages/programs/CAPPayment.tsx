@@ -19,11 +19,14 @@ type App = {
   paid_amount: number;
   installments_completed: number;
   preferred_track: string;
+  partner_code: string | null;
+  partner_code_id: string | null;
 };
 
 const PRICES = {
   full: { NGN: 90000, USD: 60, displayNGN: "₦90,000", displayUSD: "$60" },
   installments: { NGN: 30000, USD: 20, displayNGN: "₦30,000", displayUSD: "$20" },
+  partner_split: { NGN: 30000, USD: 0, displayNGN: "₦30,000", displayUSD: "—" },
 };
 
 export default function CAPPayment() {
@@ -33,7 +36,7 @@ export default function CAPPayment() {
   const [app, setApp] = useState<App | null>(null);
   const [loading, setLoading] = useState(true);
   const [currency, setCurrency] = useState<"NGN" | "USD">("NGN");
-  const [plan, setPlan] = useState<"full" | "installments">("full");
+  const [plan, setPlan] = useState<"full" | "installments" | "partner_split">("full");
   const [processing, setProcessing] = useState<null | "stripe" | "paystack">(null);
 
   useEffect(() => {
@@ -44,7 +47,7 @@ export default function CAPPayment() {
     (async () => {
       const { data, error } = await supabase
         .from("cap_applications")
-        .select("id, email, full_name, payment_status, payment_plan, payment_currency, paid_amount, installments_completed, preferred_track")
+        .select("id, email, full_name, payment_status, payment_plan, payment_currency, paid_amount, installments_completed, preferred_track, partner_code, partner_code_id")
         .eq("id", appId)
         .maybeSingle();
       if (error || !data) {
@@ -69,12 +72,14 @@ export default function CAPPayment() {
   }, [appId, navigate]);
 
   const lockedPlan = (app?.installments_completed ?? 0) > 0;
+  const isPartner = !!app?.partner_code_id;
   const installmentsPaid = app?.installments_completed ?? 0;
   const installmentNumber = installmentsPaid + 1;
 
   const payStripe = async () => {
     if (!app) return;
     if (currency === "NGN") { toast.error("Use Paystack for Naira payments."); return; }
+    if (plan === "partner_split") { toast.error("The split-payment option is only available in Naira via Paystack."); return; }
     setProcessing("stripe");
     try {
       const origin = window.location.origin;
@@ -108,8 +113,9 @@ export default function CAPPayment() {
     if (!app) return;
     setProcessing("paystack");
     try {
+      const effectiveCurrency = plan === "partner_split" ? "NGN" : currency;
       const { data, error } = await supabase.functions.invoke("initialize-cap-payment", {
-        body: { application_id: app.id, currency, plan },
+        body: { application_id: app.id, currency: effectiveCurrency, plan },
       });
       if (error || !data?.access_code) {
         throw new Error(error?.message || data?.error || "Could not start Paystack");
@@ -141,7 +147,9 @@ export default function CAPPayment() {
 
   const currentPrice = plan === "full"
     ? (currency === "NGN" ? PRICES.full.displayNGN : PRICES.full.displayUSD)
-    : (currency === "NGN" ? PRICES.installments.displayNGN : PRICES.installments.displayUSD);
+    : plan === "partner_split"
+      ? "₦30,000 today + ₦60,000 commitment"
+      : (currency === "NGN" ? PRICES.installments.displayNGN : PRICES.installments.displayUSD);
 
   return (
     <div className="min-h-screen bg-background">
@@ -178,7 +186,14 @@ export default function CAPPayment() {
 
             {!lockedPlan && (
               <div>
-                <p className="font-semibold text-foreground mb-3">Select payment plan</p>
+                <p className="font-semibold text-foreground mb-3">
+                  Select payment plan
+                  {isPartner && (
+                    <span className="ml-2 inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-primary/15 text-primary text-xs font-medium">
+                      Partner code applied
+                    </span>
+                  )}
+                </p>
                 <div className="grid sm:grid-cols-2 gap-3">
                   <button
                     onClick={() => setPlan("full")}
@@ -193,20 +208,34 @@ export default function CAPPayment() {
                     </p>
                     <p className="text-xs text-muted-foreground mt-1">One-time payment</p>
                   </button>
-                  <button
-                    onClick={() => setPlan("installments")}
-                    className={`text-left p-4 rounded-xl border-2 transition-all ${plan === "installments" ? "border-primary bg-primary/5" : "border-border hover:border-primary/50"}`}
-                  >
-                    <div className="flex items-center gap-2 mb-2">
-                      <Calendar className="w-5 h-5 text-primary" />
-                      <span className="font-semibold text-foreground">3 Installments</span>
-                    </div>
-                    <p className="font-display text-lg font-bold text-foreground">
-                      {currency === "NGN" ? PRICES.installments.displayNGN : PRICES.installments.displayUSD}
-                      <span className="text-xs font-normal text-muted-foreground"> /month</span>
-                    </p>
-                    <p className="text-xs text-muted-foreground mt-1">Pay monthly for 3 months</p>
-                  </button>
+                  {isPartner ? (
+                    <button
+                      onClick={() => setPlan("partner_split")}
+                      className={`text-left p-4 rounded-xl border-2 transition-all ${plan === "partner_split" ? "border-primary bg-primary/5" : "border-border hover:border-primary/50"}`}
+                    >
+                      <div className="flex items-center gap-2 mb-2">
+                        <Calendar className="w-5 h-5 text-primary" />
+                        <span className="font-semibold text-foreground">₦30k + ₦60k Commitment</span>
+                      </div>
+                      <p className="font-display text-lg font-bold text-foreground">₦30,000 today</p>
+                      <p className="text-xs text-muted-foreground mt-1">₦60,000 due as a tracked commitment</p>
+                    </button>
+                  ) : (
+                    <button
+                      onClick={() => setPlan("installments")}
+                      className={`text-left p-4 rounded-xl border-2 transition-all ${plan === "installments" ? "border-primary bg-primary/5" : "border-border hover:border-primary/50"}`}
+                    >
+                      <div className="flex items-center gap-2 mb-2">
+                        <Calendar className="w-5 h-5 text-primary" />
+                        <span className="font-semibold text-foreground">3 Installments</span>
+                      </div>
+                      <p className="font-display text-lg font-bold text-foreground">
+                        {currency === "NGN" ? PRICES.installments.displayNGN : PRICES.installments.displayUSD}
+                        <span className="text-xs font-normal text-muted-foreground"> /month</span>
+                      </p>
+                      <p className="text-xs text-muted-foreground mt-1">Pay monthly for 3 months</p>
+                    </button>
+                  )}
                 </div>
               </div>
             )}
@@ -276,6 +305,11 @@ export default function CAPPayment() {
           {plan === "installments" && !lockedPlan && (
             <p className="text-xs text-center text-muted-foreground mt-4">
               You'll receive a payment link by email each month. Total: {currency === "NGN" ? "₦90,000" : "$60"} over 3 months.
+            </p>
+          )}
+          {plan === "partner_split" && !lockedPlan && (
+            <p className="text-xs text-center text-muted-foreground mt-4">
+              You pay ₦30,000 now to confirm your spot. The remaining ₦60,000 is logged as a commitment and our team will follow up on the timeline.
             </p>
           )}
         </div>
