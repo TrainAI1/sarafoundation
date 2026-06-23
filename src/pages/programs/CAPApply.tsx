@@ -131,9 +131,13 @@ export default function CAPApply() {
       partnerCodeId = row.id;
       partnerCodeNormalized = row.code;
     }
-    const { data: row, error } = await supabase
+    const newId = (typeof crypto !== "undefined" && "randomUUID" in crypto)
+      ? crypto.randomUUID()
+      : `${Date.now()}-${Math.random().toString(36).slice(2)}`;
+    const { error } = await supabase
       .from("cap_applications")
       .insert({
+        id: newId,
         full_name: data.full_name.trim(),
         email: data.email.trim(),
         phone: data.phone.trim(),
@@ -148,15 +152,14 @@ export default function CAPApply() {
         payment_status: "pending",
         partner_code: partnerCodeNormalized,
         partner_code_id: partnerCodeId,
-      } as any)
-      .select("id")
-      .single();
+      } as any);
     setSubmitting(false);
-    if (error || !row) {
-      toast.error("Could not save your application. Please try again.");
+    if (error) {
+      console.error("CAP submit error:", error);
+      toast.error(error.message || "Could not save your application. Please try again.");
       return;
     }
-    navigate(`/programs/cap/payment?app=${row.id}`);
+    navigate(`/programs/cap/payment?app=${newId}`);
   };
 
   return (
