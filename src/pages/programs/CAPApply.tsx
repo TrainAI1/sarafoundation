@@ -44,6 +44,7 @@ const schema = z.object({
   specialization: z.string().trim().max(100).optional().or(z.literal("")),
   motivation: z.string().trim().max(2000).optional().or(z.literal("")),
   referral_source: z.string().trim().max(100).optional().or(z.literal("")),
+  partner_code: z.string().trim().max(50).optional().or(z.literal("")),
 });
 
 type FormState = z.infer<typeof schema>;
@@ -52,6 +53,7 @@ const initial: FormState = {
   full_name: "", email: "", phone: "", country: "",
   university: "", year_of_study: "",
   preferred_track: "", specialization: "", motivation: "", referral_source: "",
+  partner_code: "",
 };
 
 const stepFields: Record<number, (keyof FormState)[]> = {
@@ -111,6 +113,24 @@ export default function CAPApply() {
       toast.error("Please review your answers.");
       return;
     }
+    // Validate partner reference code if supplied
+    let partnerCodeId: string | null = null;
+    let partnerCodeNormalized: string | null = null;
+    if (data.partner_code && data.partner_code.trim()) {
+      const { data: codeRows, error: codeErr } = await supabase
+        .rpc("validate_partner_code", {
+          _code: data.partner_code.trim(),
+          _program: "cap",
+        });
+      if (codeErr || !codeRows || (Array.isArray(codeRows) && codeRows.length === 0)) {
+        setSubmitting(false);
+        toast.error("That reference code is invalid or expired.");
+        return;
+      }
+      const row = Array.isArray(codeRows) ? codeRows[0] : codeRows;
+      partnerCodeId = row.id;
+      partnerCodeNormalized = row.code;
+    }
     const { data: row, error } = await supabase
       .from("cap_applications")
       .insert({
@@ -126,7 +146,9 @@ export default function CAPApply() {
         referral_source: data.referral_source?.trim() || null,
         payment_plan: "full",
         payment_status: "pending",
-      })
+        partner_code: partnerCodeNormalized,
+        partner_code_id: partnerCodeId,
+      } as any)
       .select("id")
       .single();
     setSubmitting(false);
@@ -277,12 +299,31 @@ export default function CAPApply() {
                   </Select>
                 </div>
 
+                <div className="rounded-xl border border-dashed border-primary/40 p-4 bg-primary/5">
+                  <Label htmlFor="partner_code" className="text-foreground">
+                    Partner Reference Code <span className="text-muted-foreground font-normal">(optional)</span>
+                  </Label>
+                  <Input
+                    id="partner_code"
+                    value={data.partner_code}
+                    onChange={(e) => set("partner_code", e.target.value.toUpperCase())}
+                    className="mt-1.5 rounded-xl uppercase"
+                    placeholder="e.g. PARTNER2025"
+                    maxLength={50}
+                  />
+                  <p className="text-xs text-muted-foreground mt-2">
+                    Have a code from one of our partners? Enter it to unlock subsidised partner pricing
+                    (₦90,000 full, or ₦30,000 upfront with a ₦60,000 commitment).
+                  </p>
+                </div>
+
                 <div className="rounded-xl bg-primary/10 border border-primary/30 p-4 flex items-start gap-3">
                   <CheckCircle2 className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
                   <div className="text-sm text-foreground">
                     <p className="font-semibold mb-1">Next: Choose your payment plan</p>
                     <p className="text-muted-foreground text-xs">
-                      Pay in full <strong>₦90,000 / $60</strong>, or in 3 monthly installments of <strong>₦30,000 / $20</strong>.
+                      Standard program fee is <strong>₦1,000,000 / £500</strong>. Subsidised partner pricing
+                      (₦90,000 full or ₦30,000 + ₦60,000 commitment) is unlocked with a valid partner code.
                     </p>
                   </div>
                 </div>
