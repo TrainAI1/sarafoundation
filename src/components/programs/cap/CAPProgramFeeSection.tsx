@@ -23,9 +23,9 @@ export function CAPProgramFeeSection() {
 
         <div className="grid md:grid-cols-2 gap-6 md:gap-8 px-4 lg:px-0 max-w-4xl mx-auto mb-10">
           {/* Program Cost */}
-          <div className="card-modern p-6 md:p-8 text-center border-t-4 border-t-muted">
+          <div className="card-modern p-6 md:p-8 text-center border-t-4 border-t-primary">
             <p className="text-sm text-muted-foreground mb-2 uppercase tracking-wider font-medium">Program Cost</p>
-            <div className="text-3xl md:text-4xl font-bold font-display text-muted-foreground line-through mb-1">
+            <div className="text-3xl md:text-4xl font-bold font-display text-primary mb-1">
               £500
             </div>
             <p className="text-muted-foreground text-sm">(₦1,000,000)</p>
