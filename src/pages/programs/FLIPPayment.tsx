@@ -16,6 +16,8 @@ type App = {
   last_name: string;
   payment_status: string;
   preferred_track: string;
+  partner_code: string | null;
+  partner_code_id: string | null;
 };
 
 export default function FLIPPayment() {
@@ -25,6 +27,7 @@ export default function FLIPPayment() {
   const [app, setApp] = useState<App | null>(null);
   const [loading, setLoading] = useState(true);
   const [currency, setCurrency] = useState<"NGN" | "USD">("NGN");
+  const [plan, setPlan] = useState<"full" | "partner_split">("full");
   const [processing, setProcessing] = useState<null | "stripe" | "paystack">(null);
 
   useEffect(() => {
@@ -35,7 +38,7 @@ export default function FLIPPayment() {
     (async () => {
       const { data, error } = await supabase
         .from("flip_applications")
-        .select("id, email, first_name, last_name, payment_status, preferred_track")
+        .select("id, email, first_name, last_name, payment_status, preferred_track, partner_code, partner_code_id")
         .eq("id", appId)
         .maybeSingle();
       if (error || !data) {
@@ -52,16 +55,31 @@ export default function FLIPPayment() {
     })();
   }, [appId, navigate]);
 
+  const isPartner = !!app?.partner_code_id;
+
+  const ngnAmount = isPartner
+    ? (plan === "partner_split" ? 30000 : 90000)
+    : 2000;
+  const usdAmount = isPartner ? 60 : 1.30;
+  const ngnDisplay = isPartner
+    ? (plan === "partner_split" ? "₦30,000" : "₦90,000")
+    : "₦2,000";
+  const usdDisplay = isPartner ? "$60" : "$1.30";
+
   const payStripe = async () => {
     if (!app) return;
     if (currency === "NGN") {
       toast.error("Use Paystack for Naira payments.");
       return;
     }
+    if (plan === "partner_split") {
+      toast.error("The split-payment option is only available in Naira via Paystack.");
+      return;
+    }
     setProcessing("stripe");
     try {
       const origin = window.location.origin;
-      const amount = 1.30;
+      const amount = usdAmount;
       const { data, error } = await supabase.functions.invoke("create-stripe-checkout", {
         body: {
           purpose: "flip",
@@ -90,8 +108,9 @@ export default function FLIPPayment() {
     if (!app) return;
     setProcessing("paystack");
     try {
+      const effectiveCurrency = plan === "partner_split" ? "NGN" : currency;
       const { data, error } = await supabase.functions.invoke("initialize-flip-payment", {
-        body: { application_id: app.id, currency },
+        body: { application_id: app.id, currency: effectiveCurrency, plan },
       });
       if (error || !data?.access_code) {
         throw new Error(error?.message || data?.error || "Could not start Paystack");
@@ -145,7 +164,36 @@ export default function FLIPPayment() {
               <p className="font-semibold text-foreground">{app?.first_name} {app?.last_name}</p>
               <p className="text-sm text-muted-foreground">{app?.email}</p>
               <p className="text-sm text-muted-foreground">Track: <span className="text-foreground font-medium">{app?.preferred_track}</span></p>
+              {isPartner && (
+                <p className="text-sm text-accent font-medium mt-2">
+                  Partner code applied: <span className="font-mono">{app?.partner_code}</span>
+                </p>
+              )}
             </div>
+
+            {isPartner && (
+              <div>
+                <p className="font-semibold text-foreground mb-3">Select payment plan</p>
+                <div className="grid sm:grid-cols-2 gap-3">
+                  <button
+                    onClick={() => setPlan("full")}
+                    className={`text-left p-4 rounded-xl border-2 transition-all ${plan === "full" ? "border-accent bg-accent/5" : "border-border hover:border-accent/50"}`}
+                  >
+                    <div className="font-semibold text-foreground mb-1">Pay in Full</div>
+                    <p className="font-display text-lg font-bold text-foreground">₦90,000</p>
+                    <p className="text-xs text-muted-foreground mt-1">One-time payment</p>
+                  </button>
+                  <button
+                    onClick={() => setPlan("partner_split")}
+                    className={`text-left p-4 rounded-xl border-2 transition-all ${plan === "partner_split" ? "border-accent bg-accent/5" : "border-border hover:border-accent/50"}`}
+                  >
+                    <div className="font-semibold text-foreground mb-1">₦30k + ₦60k Commitment</div>
+                    <p className="font-display text-lg font-bold text-foreground">₦30,000 today</p>
+                    <p className="text-xs text-muted-foreground mt-1">₦60,000 logged as a tracked commitment</p>
+                  </button>
+                </div>
+              </div>
+            )}
 
             <div>
               <p className="font-semibold text-foreground mb-3">Select payment currency</p>
@@ -158,18 +206,19 @@ export default function FLIPPayment() {
                     <CreditCard className="w-5 h-5 text-accent" />
                     <span className="font-semibold text-foreground">Nigeria (NGN)</span>
                   </div>
-                  <p className="font-display text-2xl font-bold text-foreground">₦2,000</p>
+                  <p className="font-display text-2xl font-bold text-foreground">{ngnDisplay}</p>
                   <p className="text-xs text-muted-foreground mt-1">Card, transfer, USSD</p>
                 </button>
                 <button
                   onClick={() => setCurrency("USD")}
+                  disabled={plan === "partner_split"}
                   className={`text-left p-4 rounded-xl border-2 transition-all ${currency === "USD" ? "border-accent bg-accent/5" : "border-border hover:border-accent/50"}`}
                 >
                   <div className="flex items-center gap-2 mb-2">
                     <Globe className="w-5 h-5 text-accent" />
                     <span className="font-semibold text-foreground">Global (USD)</span>
                   </div>
-                  <p className="font-display text-2xl font-bold text-foreground">$1.30</p>
+                  <p className="font-display text-2xl font-bold text-foreground">{usdDisplay}</p>
                   <p className="text-xs text-muted-foreground mt-1">International cards</p>
                 </button>
               </div>
@@ -185,19 +234,25 @@ export default function FLIPPayment() {
                 {processing === "paystack" ? (
                   <><Loader2 className="w-5 h-5 animate-spin" /> Opening Paystack...</>
                 ) : (
-                  <>Pay {currency === "NGN" ? "₦2,000" : "$1.30"} with Paystack</>
+                  <>Pay {currency === "NGN" ? ngnDisplay : usdDisplay} with Paystack</>
                 )}
               </Button>
-              {currency === "USD" && (
+              {currency === "USD" && plan !== "partner_split" && (
                 <Button onClick={payStripe} disabled={!!processing} size="lg" variant="outline" className="w-full rounded-xl">
                   {processing === "stripe" ? (
                     <><Loader2 className="w-5 h-5 animate-spin" /> Redirecting to Stripe...</>
                   ) : (
-                    <>Pay $1.30 with Stripe</>
+                    <>Pay {usdDisplay} with Stripe</>
                   )}
                 </Button>
               )}
             </div>
+
+            {plan === "partner_split" && (
+              <p className="text-xs text-center text-muted-foreground">
+                You pay ₦30,000 now to confirm your spot. The remaining ₦60,000 is logged as a commitment and our team will follow up.
+              </p>
+            )}
 
             <Button variant="ghost" asChild className="w-full">
               <Link to="/programs/flip/apply"><ArrowLeft className="w-4 h-4" /> Edit Application</Link>

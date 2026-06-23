@@ -13,6 +13,7 @@ const PAYSTACK_BASE = "https://api.paystack.co";
 const AMOUNTS = {
   full: { NGN: 9_000_000, USD: 6_000 },           // ₦90,000 / $60
   installments: { NGN: 3_000_000, USD: 2_000 },   // ₦30,000 / $20 per month
+  partner_split: { NGN: 3_000_000, USD: 0 },      // ₦30,000 upfront, ₦60,000 commitment tracked
 };
 
 serve(async (req) => {
@@ -36,12 +37,12 @@ serve(async (req) => {
     const { application_id, currency, plan } = body as {
       application_id?: string;
       currency?: "NGN" | "USD";
-      plan?: "full" | "installments";
+      plan?: "full" | "installments" | "partner_split";
     };
 
-    if (!application_id || !currency || !["NGN", "USD"].includes(currency) || !plan || !["full", "installments"].includes(plan)) {
+    if (!application_id || !currency || !["NGN", "USD"].includes(currency) || !plan || !["full", "installments", "partner_split"].includes(plan)) {
       return new Response(
-        JSON.stringify({ error: "application_id, currency (NGN|USD), and plan (full|installments) are required" }),
+        JSON.stringify({ error: "application_id, currency (NGN|USD), and plan (full|installments|partner_split) are required" }),
         { status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" } },
       );
     }
@@ -50,7 +51,7 @@ serve(async (req) => {
 
     const { data: app, error: appErr } = await supabase
       .from("cap_applications")
-      .select("id, email, full_name, payment_status, payment_plan, payment_currency, installments_completed")
+      .select("id, email, full_name, payment_status, payment_plan, payment_currency, installments_completed, partner_code_id")
       .eq("id", application_id)
       .maybeSingle();
 
@@ -68,6 +69,14 @@ serve(async (req) => {
       });
     }
 
+    // Gate partner_split to applications that actually carry a valid partner code
+    if (plan === "partner_split" && !app.partner_code_id) {
+      return new Response(JSON.stringify({ error: "Partner split is only available with a valid partner reference code" }), {
+        status: 400,
+        headers: { ...corsHeaders, "Content-Type": "application/json" },
+      });
+    }
+
     // If installments already started, lock plan & currency
     let effectivePlan = plan;
     let effectiveCurrency = currency;
@@ -78,7 +87,18 @@ serve(async (req) => {
       }
     }
 
+    // partner_split is NGN-only
+    if (effectivePlan === "partner_split") {
+      effectiveCurrency = "NGN";
+    }
+
     const amount = AMOUNTS[effectivePlan][effectiveCurrency];
+    if (!amount) {
+      return new Response(JSON.stringify({ error: "Invalid plan/currency combination" }), {
+        status: 400,
+        headers: { ...corsHeaders, "Content-Type": "application/json" },
+      });
+    }
     const installmentNumber = effectivePlan === "installments" ? app.installments_completed + 1 : 0;
 
     const initRes = await fetch(`${PAYSTACK_BASE}/transaction/initialize`, {
@@ -113,14 +133,19 @@ serve(async (req) => {
     const { access_code, reference } = initJson.data;
 
     // Set the active payment plan + currency on first payment, and store this transaction's reference
+    const updatePayload: Record<string, unknown> = {
+      paystack_reference: reference,
+      payment_currency: effectiveCurrency,
+      payment_plan: effectivePlan,
+      total_amount: AMOUNTS.full[effectiveCurrency],
+    };
+    if (effectivePlan === "partner_split") {
+      // ₦60,000 commitment tracked in Naira units
+      updatePayload.outstanding_commitment = 60000;
+    }
     await supabase
       .from("cap_applications")
-      .update({
-        paystack_reference: reference,
-        payment_currency: effectiveCurrency,
-        payment_plan: effectivePlan,
-        total_amount: AMOUNTS.full[effectiveCurrency],
-      })
+      .update(updatePayload)
       .eq("id", application_id);
 
     return new Response(

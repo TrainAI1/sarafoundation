@@ -27,9 +27,10 @@ serve(async (req) => {
     }
 
     const body = await req.json();
-    const { application_id, currency } = body as {
+    const { application_id, currency, plan } = body as {
       application_id?: string;
       currency?: "NGN" | "USD";
+      plan?: "full" | "partner_split";
     };
 
     if (!application_id || !currency || !["NGN", "USD"].includes(currency)) {
@@ -38,12 +39,13 @@ serve(async (req) => {
         { status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" } },
       );
     }
+    const effectivePlan: "full" | "partner_split" = plan === "partner_split" ? "partner_split" : "full";
 
     const supabase = createClient(SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY);
 
     const { data: app, error: appErr } = await supabase
       .from("flip_applications")
-      .select("id, email, first_name, last_name, payment_status")
+      .select("id, email, first_name, last_name, payment_status, partner_code_id")
       .eq("id", application_id)
       .maybeSingle();
 
@@ -61,8 +63,27 @@ serve(async (req) => {
       });
     }
 
-    // NGN ₦2,000 = 200000 kobo. USD $1.30 = 130 cents.
-    const amount = currency === "NGN" ? 200000 : 130;
+    // Pricing:
+    //  - No partner code: NGN ₦2,000 (200_000 kobo) / USD $1.30 (130 cents)
+    //  - Partner code + full: NGN ₦90,000 (9_000_000 kobo) / USD $60 (6000 cents)
+    //  - Partner code + split: ₦30,000 upfront (3_000_000 kobo), NGN only, ₦60,000 commitment
+    if (effectivePlan === "partner_split" && !app.partner_code_id) {
+      return new Response(JSON.stringify({ error: "Partner split requires a valid partner reference code" }), {
+        status: 400,
+        headers: { ...corsHeaders, "Content-Type": "application/json" },
+      });
+    }
+    let effectiveCurrency = currency;
+    if (effectivePlan === "partner_split") effectiveCurrency = "NGN";
+
+    let amount: number;
+    if (effectivePlan === "partner_split") {
+      amount = 3_000_000;
+    } else if (app.partner_code_id) {
+      amount = effectiveCurrency === "NGN" ? 9_000_000 : 6_000;
+    } else {
+      amount = effectiveCurrency === "NGN" ? 200_000 : 130;
+    }
 
     const initRes = await fetch(`${PAYSTACK_BASE}/transaction/initialize`, {
       method: "POST",
@@ -73,11 +94,12 @@ serve(async (req) => {
       body: JSON.stringify({
         email: app.email,
         amount,
-        currency,
+        currency: effectiveCurrency,
         metadata: {
           application_id: app.id,
           first_name: app.first_name,
           last_name: app.last_name,
+          plan: effectivePlan,
           purpose: "FLIP Fellowship Enrollment",
         },
       }),
@@ -94,17 +116,21 @@ serve(async (req) => {
 
     const { access_code, reference } = initJson.data;
 
+    const updatePayload: Record<string, unknown> = {
+      paystack_reference: reference,
+      payment_currency: effectiveCurrency,
+      payment_amount: amount,
+    };
+    if (effectivePlan === "partner_split") {
+      updatePayload.outstanding_commitment = 60000;
+    }
     await supabase
       .from("flip_applications")
-      .update({
-        paystack_reference: reference,
-        payment_currency: currency,
-        payment_amount: amount,
-      })
+      .update(updatePayload)
       .eq("id", application_id);
 
     return new Response(
-      JSON.stringify({ access_code, reference, amount, currency }),
+      JSON.stringify({ access_code, reference, amount, currency: effectiveCurrency, plan: effectivePlan }),
       { status: 200, headers: { ...corsHeaders, "Content-Type": "application/json" } },
     );
   } catch (err) {
