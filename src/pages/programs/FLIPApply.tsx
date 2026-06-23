@@ -150,9 +150,13 @@ export default function FLIPApply() {
         partnerCodeId = row.id;
         partnerCodeNormalized = row.code;
       }
-      const { data: row, error } = await supabase
+      const newId = (typeof crypto !== "undefined" && "randomUUID" in crypto)
+        ? crypto.randomUUID()
+        : `${Date.now()}-${Math.random().toString(36).slice(2)}`;
+      const { error } = await supabase
       .from("flip_applications")
       .insert({
+        id: newId,
         email: data.email.trim(),
         first_name: data.first_name.trim(),
         last_name: data.last_name.trim(),
@@ -169,16 +173,14 @@ export default function FLIPApply() {
         payment_status: "pending",
         partner_code: partnerCodeNormalized,
         partner_code_id: partnerCodeId,
-      } as any)
-      .select("id")
-      .single();
-      if (error || !row) {
+      } as any);
+      if (error) {
         console.error("FLIP submit error:", error);
         toast.error(error?.message || "Could not save your application. Please try again.");
         setSubmitting(false);
         return;
       }
-      navigate(`/programs/flip/payment?app=${row.id}`);
+      navigate(`/programs/flip/payment?app=${newId}`);
     } catch (e: any) {
       console.error("FLIP submit exception:", e);
       toast.error(e?.message || "Network error. Please try again.");
