@@ -112,7 +112,7 @@ export default function GJPApply() {
       if (!data.whatsapp.trim()) newErrors.whatsapp = "Required";
     }
     if (s === 2) {
-      if (data.graduated === "yes" && !data.institution?.trim()) newErrors.institution = "Required";
+      if (data.graduated === "yes" && !data.university?.trim()) newErrors.university = "Required";
       if (data.graduated === "yes") {
         if (!data.graduation_year) {
           newErrors.graduation_year = "Required";
@@ -159,12 +159,13 @@ export default function GJPApply() {
         full_name: data.full_name.trim(),
         email: data.email.trim(),
         whatsapp: data.whatsapp.trim(),
+        age: data.age ? parseInt(data.age, 10) || null : null,
+        years_experience: data.years_experience?.trim() || null,
         graduated: data.graduated === "yes",
-        institution: data.institution?.trim() || null,
+        university: data.university?.trim() || null,
+        institution: data.university?.trim() || null,
         graduation_year: data.graduation_year?.trim() || null,
-        nysc_completed: data.nysc_completed === "yes",
-        nysc_year: data.nysc_year?.trim() || null,
-        nysc_number: data.nysc_number?.trim() || null,
+        nysc_completed: false,
         interested_in_tech: data.interested_in_tech === "yes",
         career_path: data.career_path,
         tech_skills_rating: data.interested_in_tech === "yes"
