@@ -22,7 +22,7 @@ const partnershipItems = [
 const programItems = [
   { title: "Career Advancement Program", href: "/programs/cap", description: "9-month rotational tech program" },
   { title: "Female Leadership Initiative", href: "/programs/flip", description: "Empowering women in tech" },
-  { title: "Govt Job Placement (GJP)", href: "/programs/gjp", description: "12-month paid placement for NYSC graduates" },
+  { title: "Employment & Job Placement (EJP)", href: "/programs/gjp", description: "Connecting Africa's top tech talent with employers" },
 ];
 
 export function Navbar() {
