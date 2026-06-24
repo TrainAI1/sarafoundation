@@ -414,6 +414,7 @@ export type Database = {
       gjp_applications: {
         Row: {
           additional_info: string | null
+          age: number | null
           applicant_status: string
           assigned_to: string | null
           cap_flip_cohort: string | null
@@ -436,10 +437,13 @@ export type Database = {
           status_notes: string | null
           status_updated_at: string
           tech_skills_rating: string | null
+          university: string | null
           whatsapp: string
+          years_experience: string | null
         }
         Insert: {
           additional_info?: string | null
+          age?: number | null
           applicant_status?: string
           assigned_to?: string | null
           cap_flip_cohort?: string | null
@@ -462,10 +466,13 @@ export type Database = {
           status_notes?: string | null
           status_updated_at?: string
           tech_skills_rating?: string | null
+          university?: string | null
           whatsapp: string
+          years_experience?: string | null
         }
         Update: {
           additional_info?: string | null
+          age?: number | null
           applicant_status?: string
           assigned_to?: string | null
           cap_flip_cohort?: string | null
@@ -488,7 +495,9 @@ export type Database = {
           status_notes?: string | null
           status_updated_at?: string
           tech_skills_rating?: string | null
+          university?: string | null
           whatsapp?: string
+          years_experience?: string | null
         }
         Relationships: []
       }
