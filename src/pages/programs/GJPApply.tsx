@@ -246,12 +246,26 @@ export default function GJPApply() {
                       className="mt-1.5 rounded-xl" placeholder="Lagos" />
                   </div>
                 </div>
+                <div className="grid sm:grid-cols-2 gap-4">
+                  <div>
+                    <Label htmlFor="age">Age</Label>
+                    <Input id="age" type="number" min={16} max={80} value={data.age}
+                      onChange={(e) => set("age", e.target.value)}
+                      className="mt-1.5 rounded-xl" placeholder="e.g. 24" />
+                  </div>
+                  <div>
+                    <Label htmlFor="years_experience">Years / Months of Experience</Label>
+                    <Input id="years_experience" value={data.years_experience}
+                      onChange={(e) => set("years_experience", e.target.value)}
+                      className="mt-1.5 rounded-xl" placeholder="e.g. 2 years, 6 months" />
+                  </div>
+                </div>
               </div>
             )}
 
             {step === 2 && (
               <div className="space-y-5">
-                <h2 className="font-display font-bold text-xl text-foreground">Academic & NYSC</h2>
+                <h2 className="font-display font-bold text-xl text-foreground">Academic Background</h2>
                 <div>
                   <Label>Have you graduated? *</Label>
                   <RadioGroup value={data.graduated} onValueChange={(v) => set("graduated", v as "yes" | "no")}
@@ -265,15 +279,15 @@ export default function GJPApply() {
                     ))}
                   </RadioGroup>
                 </div>
-                {data.graduated === "yes" && (
-                  <div className="grid sm:grid-cols-2 gap-4">
-                    <div>
-                      <Label htmlFor="institution">Institution *</Label>
-                      <Input id="institution" value={data.institution}
-                        onChange={(e) => set("institution", e.target.value)}
-                        className="mt-1.5 rounded-xl" placeholder="University of Lagos" />
-                      {errors.institution && <p className="text-destructive text-xs mt-1">{errors.institution}</p>}
-                    </div>
+                <div className="grid sm:grid-cols-2 gap-4">
+                  <div>
+                    <Label htmlFor="university">University {data.graduated === "yes" ? "*" : ""}</Label>
+                    <Input id="university" value={data.university}
+                      onChange={(e) => set("university", e.target.value)}
+                      className="mt-1.5 rounded-xl" placeholder="University of Lagos" />
+                    {errors.university && <p className="text-destructive text-xs mt-1">{errors.university}</p>}
+                  </div>
+                  {data.graduated === "yes" && (
                     <div>
                       <Label htmlFor="graduation_year">Graduation Year</Label>
                       <Select value={data.graduation_year} onValueChange={(v) => set("graduation_year", v)}>
@@ -289,42 +303,8 @@ export default function GJPApply() {
                       </p>
                       {errors.graduation_year && <p className="text-destructive text-xs mt-1">{errors.graduation_year}</p>}
                     </div>
-                  </div>
-                )}
-                <div>
-                  <Label>Have you completed NYSC? *</Label>
-                  <RadioGroup value={data.nysc_completed} onValueChange={(v) => set("nysc_completed", v as "yes" | "no")}
-                    className="mt-2 grid grid-cols-2 gap-2">
-                    {[["yes", "Yes"], ["no", "No"]].map(([v, l]) => (
-                      <Label key={v} htmlFor={`nysc-${v}`}
-                        className="flex items-center gap-2 p-3 rounded-xl border border-border hover:border-primary cursor-pointer">
-                        <RadioGroupItem value={v} id={`nysc-${v}`} />
-                        <span className="text-sm font-normal">{l}</span>
-                      </Label>
-                    ))}
-                  </RadioGroup>
+                  )}
                 </div>
-                {data.nysc_completed === "yes" && (
-                  <div className="grid sm:grid-cols-2 gap-4">
-                    <div>
-                      <Label htmlFor="nysc_year">NYSC Pass-Out Year</Label>
-                      <Input id="nysc_year" value={data.nysc_year}
-                        onChange={(e) => set("nysc_year", e.target.value)}
-                        className="mt-1.5 rounded-xl" placeholder="2024" />
-                    </div>
-                    <div>
-                      <Label htmlFor="nysc_number">NYSC Call-Up Number (optional)</Label>
-                      <Input id="nysc_number" value={data.nysc_number}
-                        onChange={(e) => set("nysc_number", e.target.value)}
-                        className="mt-1.5 rounded-xl" placeholder="e.g. NYSC/ABC/2024/12345" />
-                    </div>
-                  </div>
-                )}
-                {data.nysc_completed === "no" && (
-                  <div className="rounded-xl bg-amber-500/10 border border-amber-500/30 p-3 text-xs text-foreground">
-                    NYSC completion is currently a requirement for placement. You may still apply, but priority will go to graduates who have completed NYSC.
-                  </div>
-                )}
               </div>
             )}
 
