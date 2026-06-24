@@ -192,8 +192,8 @@ export default function GJPApply() {
   return (
     <div className="min-h-screen bg-background">
       <Helmet>
-        <title>Apply – Govt Job Placement (GJP) | Sara Foundation</title>
-        <meta name="description" content="Apply for the GJP 12-month government-backed placement opportunity for NYSC graduates. Only 500 priority slots available." />
+        <title>Apply – Employment & Job Placement Pipeline (EJP) | Sara Foundation</title>
+        <meta name="description" content="Apply to the Employment & Job Placement Pipeline (EJP) to be matched with employers across Africa hiring for tech and tech-adjacent roles." />
         <link rel="canonical" href="https://sarafoundationafrica.com/programs/gjp/apply" />
       </Helmet>
       <Navbar />
@@ -201,10 +201,10 @@ export default function GJPApply() {
         <div className="section-container px-4 max-w-3xl">
           <div className="text-center mb-8">
             <span className="inline-flex items-center gap-2 px-3 py-1.5 bg-primary/10 rounded-full text-primary text-xs font-medium mb-4">
-              <Briefcase className="w-3 h-3" /> GJP · 500 Slots Only
+              <Briefcase className="w-3 h-3" /> EJP · Talent Placement Pipeline
             </span>
             <h1 className="font-display text-3xl md:text-4xl font-bold text-foreground mb-2">
-              Apply for Government Placement
+              Apply for Employment & Job Placement
             </h1>
             <p className="text-muted-foreground text-sm md:text-base">
               Step {step} of {total} — takes about 3 minutes.
