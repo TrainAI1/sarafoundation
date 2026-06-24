@@ -49,12 +49,11 @@ const schema = z.object({
   full_name: z.string().trim().min(2, "Required").max(200),
   email: z.string().trim().email("Enter a valid email").max(255),
   whatsapp: z.string().trim().min(7, "Enter a valid WhatsApp number").max(30),
+  age: z.string().trim().optional().or(z.literal("")),
+  years_experience: z.string().trim().max(50).optional().or(z.literal("")),
   graduated: z.enum(["yes", "no"]),
-  institution: z.string().trim().max(200).optional().or(z.literal("")),
+  university: z.string().trim().max(200).optional().or(z.literal("")),
   graduation_year: z.string().trim().max(10).optional().or(z.literal("")),
-  nysc_completed: z.enum(["yes", "no"]),
-  nysc_year: z.string().trim().max(10).optional().or(z.literal("")),
-  nysc_number: z.string().trim().max(50).optional().or(z.literal("")),
   interested_in_tech: z.enum(["yes", "no"]),
   career_path: z.string().min(1, "Select your career path").max(150),
   tech_skills_rating: z.string().trim().max(1000).optional().or(z.literal("")),
@@ -70,8 +69,8 @@ type FormState = z.infer<typeof schema>;
 
 const initial: FormState = {
   full_name: "", email: "", whatsapp: "",
-  graduated: "yes", institution: "", graduation_year: "",
-  nysc_completed: "yes", nysc_year: "", nysc_number: "",
+  age: "", years_experience: "",
+  graduated: "yes", university: "", graduation_year: "",
   interested_in_tech: "yes",
   career_path: "", tech_skills_rating: "", current_status: "", state_of_residence: "",
   is_cap_flip_alumnus: "no", cap_flip_cohort: "",
@@ -79,8 +78,8 @@ const initial: FormState = {
 };
 
 const stepFields: Record<number, (keyof FormState)[]> = {
-  1: ["full_name", "email", "whatsapp", "state_of_residence"],
-  2: ["graduated", "institution", "graduation_year", "nysc_completed", "nysc_year", "nysc_number"],
+  1: ["full_name", "email", "whatsapp", "state_of_residence", "age", "years_experience"],
+  2: ["graduated", "university", "graduation_year"],
   3: ["interested_in_tech", "career_path", "current_status", "is_cap_flip_alumnus", "cap_flip_cohort", "referral_source", "additional_info"],
 };
 
