@@ -17,9 +17,9 @@ const headlineStats = [
 const pastProjects = [
   {
     icon: Briefcase,
-    title: "GJP — Government Job Placement (NJFP)",
-    summary: "Our partnership with the Nigerian government on the Nigerian Jubilee Fellowship Placement (NJFP) Program — referring NYSC graduates in tech-related fields for placement into government and partner roles.",
-    impact: "Federal Government partnership · NYSC tech graduates referred for placement",
+    title: "EJP — Employment & Job Placement Pipeline (Public Sector)",
+    summary: "Our public-sector placement work, including partnership with the Nigerian government on the Nigerian Jubilee Fellowship Placement (NJFP) Program — referring tech-trained graduates into government and partner roles.",
+    impact: "Federal Government partnership · Tech graduates referred for placement",
   },
   {
     icon: GraduationCap,
