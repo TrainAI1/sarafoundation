@@ -45,11 +45,22 @@ const referralSources = [
 
 const currentStatuses = ["Unemployed", "Freelancing", "Part-time", "Self-employed", "Other"];
 
+const ageRanges = ["Under 18", "18-22", "23-29", "30-35", "Above 35"];
+const genderOptions = ["Male", "Female"];
+const experienceRanges = [
+  "Less than 1 year",
+  "1-2 years",
+  "3-5 years",
+  "5-10 years",
+  "More than 10 years",
+];
+
 const schema = z.object({
   full_name: z.string().trim().min(2, "Required").max(200),
   email: z.string().trim().email("Enter a valid email").max(255),
   whatsapp: z.string().trim().min(7, "Enter a valid WhatsApp number").max(30),
-  age: z.string().trim().optional().or(z.literal("")),
+  age_range: z.string().trim().max(50).optional().or(z.literal("")),
+  gender: z.string().trim().max(20).optional().or(z.literal("")),
   years_experience: z.string().trim().max(50).optional().or(z.literal("")),
   graduated: z.enum(["yes", "no"]),
   university: z.string().trim().max(200).optional().or(z.literal("")),
@@ -58,7 +69,8 @@ const schema = z.object({
   career_path: z.string().min(1, "Select your career path").max(150),
   tech_skills_rating: z.string().trim().max(1000).optional().or(z.literal("")),
   current_status: z.string().max(50).optional().or(z.literal("")),
-  state_of_residence: z.string().trim().max(100).optional().or(z.literal("")),
+  country: z.string().trim().max(100).optional().or(z.literal("")),
+  city: z.string().trim().max(100).optional().or(z.literal("")),
   is_cap_flip_alumnus: z.enum(["yes", "no"]),
   cap_flip_cohort: z.string().trim().max(50).optional().or(z.literal("")),
   referral_source: z.string().max(150).optional().or(z.literal("")),
@@ -69,16 +81,16 @@ type FormState = z.infer<typeof schema>;
 
 const initial: FormState = {
   full_name: "", email: "", whatsapp: "",
-  age: "", years_experience: "",
+  age_range: "", gender: "", years_experience: "",
   graduated: "yes", university: "", graduation_year: "",
   interested_in_tech: "yes",
-  career_path: "", tech_skills_rating: "", current_status: "", state_of_residence: "",
+  career_path: "", tech_skills_rating: "", current_status: "", country: "", city: "",
   is_cap_flip_alumnus: "no", cap_flip_cohort: "",
   referral_source: "", additional_info: "",
 };
 
 const stepFields: Record<number, (keyof FormState)[]> = {
-  1: ["full_name", "email", "whatsapp", "state_of_residence", "age", "years_experience"],
+  1: ["full_name", "email", "whatsapp", "country", "city", "age_range", "gender", "years_experience"],
   2: ["graduated", "university", "graduation_year"],
   3: ["interested_in_tech", "career_path", "current_status", "is_cap_flip_alumnus", "cap_flip_cohort", "referral_source", "additional_info"],
 };
@@ -159,7 +171,8 @@ export default function GJPApply() {
         full_name: data.full_name.trim(),
         email: data.email.trim(),
         whatsapp: data.whatsapp.trim(),
-        age: data.age ? parseInt(data.age, 10) || null : null,
+        age_range: data.age_range || null,
+        gender: data.gender || null,
         years_experience: data.years_experience?.trim() || null,
         graduated: data.graduated === "yes",
         university: data.university?.trim() || null,
@@ -172,7 +185,9 @@ export default function GJPApply() {
           ? (data.tech_skills_rating?.trim() || null)
           : null,
         current_status: data.current_status || null,
-        state_of_residence: data.state_of_residence?.trim() || null,
+        country: data.country?.trim() || null,
+        city: data.city?.trim() || null,
+        state_of_residence: data.city?.trim() || null,
         is_cap_flip_alumnus: data.is_cap_flip_alumnus === "yes",
         cap_flip_cohort: data.cap_flip_cohort?.trim() || null,
         referral_source: data.referral_source || null,
@@ -240,24 +255,53 @@ export default function GJPApply() {
                     {errors.whatsapp && <p className="text-destructive text-xs mt-1">{errors.whatsapp}</p>}
                   </div>
                   <div>
-                    <Label htmlFor="state_of_residence">State of Residence</Label>
-                    <Input id="state_of_residence" value={data.state_of_residence}
-                      onChange={(e) => set("state_of_residence", e.target.value)}
+                    <Label>Gender</Label>
+                    <Select value={data.gender} onValueChange={(v) => set("gender", v)}>
+                      <SelectTrigger className="mt-1.5 rounded-xl">
+                        <SelectValue placeholder="Select gender" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        {genderOptions.map((g) => <SelectItem key={g} value={g}>{g}</SelectItem>)}
+                      </SelectContent>
+                    </Select>
+                  </div>
+                </div>
+                <div className="grid sm:grid-cols-2 gap-4">
+                  <div>
+                    <Label htmlFor="country">Country</Label>
+                    <Input id="country" value={data.country}
+                      onChange={(e) => set("country", e.target.value)}
+                      className="mt-1.5 rounded-xl" placeholder="Nigeria" />
+                  </div>
+                  <div>
+                    <Label htmlFor="city">City</Label>
+                    <Input id="city" value={data.city}
+                      onChange={(e) => set("city", e.target.value)}
                       className="mt-1.5 rounded-xl" placeholder="Lagos" />
                   </div>
                 </div>
                 <div className="grid sm:grid-cols-2 gap-4">
                   <div>
-                    <Label htmlFor="age">Age</Label>
-                    <Input id="age" type="number" min={16} max={80} value={data.age}
-                      onChange={(e) => set("age", e.target.value)}
-                      className="mt-1.5 rounded-xl" placeholder="e.g. 24" />
+                    <Label>Age Range</Label>
+                    <Select value={data.age_range} onValueChange={(v) => set("age_range", v)}>
+                      <SelectTrigger className="mt-1.5 rounded-xl">
+                        <SelectValue placeholder="Select age range" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        {ageRanges.map((a) => <SelectItem key={a} value={a}>{a}</SelectItem>)}
+                      </SelectContent>
+                    </Select>
                   </div>
                   <div>
-                    <Label htmlFor="years_experience">Years / Months of Experience</Label>
-                    <Input id="years_experience" value={data.years_experience}
-                      onChange={(e) => set("years_experience", e.target.value)}
-                      className="mt-1.5 rounded-xl" placeholder="e.g. 2 years, 6 months" />
+                    <Label>Years of Experience</Label>
+                    <Select value={data.years_experience} onValueChange={(v) => set("years_experience", v)}>
+                      <SelectTrigger className="mt-1.5 rounded-xl">
+                        <SelectValue placeholder="Select experience" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        {experienceRanges.map((r) => <SelectItem key={r} value={r}>{r}</SelectItem>)}
+                      </SelectContent>
+                    </Select>
                   </div>
                 </div>
               </div>

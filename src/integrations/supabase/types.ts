@@ -415,14 +415,18 @@ export type Database = {
         Row: {
           additional_info: string | null
           age: number | null
+          age_range: string | null
           applicant_status: string
           assigned_to: string | null
           cap_flip_cohort: string | null
           career_path: string
+          city: string | null
+          country: string | null
           created_at: string
           current_status: string | null
           email: string
           full_name: string
+          gender: string | null
           graduated: boolean
           graduation_year: string | null
           id: string
@@ -444,14 +448,18 @@ export type Database = {
         Insert: {
           additional_info?: string | null
           age?: number | null
+          age_range?: string | null
           applicant_status?: string
           assigned_to?: string | null
           cap_flip_cohort?: string | null
           career_path: string
+          city?: string | null
+          country?: string | null
           created_at?: string
           current_status?: string | null
           email: string
           full_name: string
+          gender?: string | null
           graduated: boolean
           graduation_year?: string | null
           id?: string
@@ -473,14 +481,18 @@ export type Database = {
         Update: {
           additional_info?: string | null
           age?: number | null
+          age_range?: string | null
           applicant_status?: string
           assigned_to?: string | null
           cap_flip_cohort?: string | null
           career_path?: string
+          city?: string | null
+          country?: string | null
           created_at?: string
           current_status?: string | null
           email?: string
           full_name?: string
+          gender?: string | null
           graduated?: boolean
           graduation_year?: string | null
           id?: string
