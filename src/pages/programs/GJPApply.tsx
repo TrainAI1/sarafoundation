@@ -45,11 +45,22 @@ const referralSources = [
 
 const currentStatuses = ["Unemployed", "Freelancing", "Part-time", "Self-employed", "Other"];
 
+const ageRanges = ["Under 18", "18-22", "23-29", "30-35", "Above 35"];
+const genderOptions = ["Male", "Female"];
+const experienceRanges = [
+  "Less than 1 year",
+  "1-2 years",
+  "3-5 years",
+  "5-10 years",
+  "More than 10 years",
+];
+
 const schema = z.object({
   full_name: z.string().trim().min(2, "Required").max(200),
   email: z.string().trim().email("Enter a valid email").max(255),
   whatsapp: z.string().trim().min(7, "Enter a valid WhatsApp number").max(30),
-  age: z.string().trim().optional().or(z.literal("")),
+  age_range: z.string().trim().max(50).optional().or(z.literal("")),
+  gender: z.string().trim().max(20).optional().or(z.literal("")),
   years_experience: z.string().trim().max(50).optional().or(z.literal("")),
   graduated: z.enum(["yes", "no"]),
   university: z.string().trim().max(200).optional().or(z.literal("")),
@@ -58,7 +69,8 @@ const schema = z.object({
   career_path: z.string().min(1, "Select your career path").max(150),
   tech_skills_rating: z.string().trim().max(1000).optional().or(z.literal("")),
   current_status: z.string().max(50).optional().or(z.literal("")),
-  state_of_residence: z.string().trim().max(100).optional().or(z.literal("")),
+  country: z.string().trim().max(100).optional().or(z.literal("")),
+  city: z.string().trim().max(100).optional().or(z.literal("")),
   is_cap_flip_alumnus: z.enum(["yes", "no"]),
   cap_flip_cohort: z.string().trim().max(50).optional().or(z.literal("")),
   referral_source: z.string().max(150).optional().or(z.literal("")),
@@ -69,16 +81,16 @@ type FormState = z.infer<typeof schema>;
 
 const initial: FormState = {
   full_name: "", email: "", whatsapp: "",
-  age: "", years_experience: "",
+  age_range: "", gender: "", years_experience: "",
   graduated: "yes", university: "", graduation_year: "",
   interested_in_tech: "yes",
-  career_path: "", tech_skills_rating: "", current_status: "", state_of_residence: "",
+  career_path: "", tech_skills_rating: "", current_status: "", country: "", city: "",
   is_cap_flip_alumnus: "no", cap_flip_cohort: "",
   referral_source: "", additional_info: "",
 };
 
 const stepFields: Record<number, (keyof FormState)[]> = {
-  1: ["full_name", "email", "whatsapp", "state_of_residence", "age", "years_experience"],
+  1: ["full_name", "email", "whatsapp", "country", "city", "age_range", "gender", "years_experience"],
   2: ["graduated", "university", "graduation_year"],
   3: ["interested_in_tech", "career_path", "current_status", "is_cap_flip_alumnus", "cap_flip_cohort", "referral_source", "additional_info"],
 };
