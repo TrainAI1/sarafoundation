@@ -52,6 +52,27 @@ serve(async (req) => {
     const plan = session?.metadata?.plan;
     const amount = Number(session?.amount_total || 0);
     const currency = (session?.currency || "").toUpperCase();
+    const expectedUnitAmount = Number(session?.metadata?.expected_unit_amount || 0);
+    const expectedCurrency = String(session?.metadata?.expected_currency || "").toUpperCase();
+
+    // For enrollment payments, refuse to mark paid if the captured amount/currency
+    // doesn't match the server-enforced expected fee stamped at session creation.
+    const isEnrollment = purpose === "flip" || purpose === "cap";
+    const amountMatches = !isEnrollment || (
+      expectedUnitAmount > 0 &&
+      amount === expectedUnitAmount &&
+      currency === expectedCurrency
+    );
+    if (paid && isEnrollment && !amountMatches) {
+      console.error("Stripe verify: amount mismatch", {
+        session_id, purpose, application_id, amount, currency, expectedUnitAmount, expectedCurrency,
+      });
+      return new Response(JSON.stringify({
+        paid: false,
+        error: "Payment amount does not match expected enrollment fee",
+        purpose, application_id, amount, currency,
+      }), { status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" } });
+    }
 
     if (paid && application_id) {
       const supabase = createClient(SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY);
