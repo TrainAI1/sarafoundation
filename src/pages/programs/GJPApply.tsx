@@ -171,7 +171,8 @@ export default function GJPApply() {
         full_name: data.full_name.trim(),
         email: data.email.trim(),
         whatsapp: data.whatsapp.trim(),
-        age: data.age ? parseInt(data.age, 10) || null : null,
+        age_range: data.age_range || null,
+        gender: data.gender || null,
         years_experience: data.years_experience?.trim() || null,
         graduated: data.graduated === "yes",
         university: data.university?.trim() || null,
@@ -184,7 +185,9 @@ export default function GJPApply() {
           ? (data.tech_skills_rating?.trim() || null)
           : null,
         current_status: data.current_status || null,
-        state_of_residence: data.state_of_residence?.trim() || null,
+        country: data.country?.trim() || null,
+        city: data.city?.trim() || null,
+        state_of_residence: data.city?.trim() || null,
         is_cap_flip_alumnus: data.is_cap_flip_alumnus === "yes",
         cap_flip_cohort: data.cap_flip_cohort?.trim() || null,
         referral_source: data.referral_source || null,
@@ -252,24 +255,53 @@ export default function GJPApply() {
                     {errors.whatsapp && <p className="text-destructive text-xs mt-1">{errors.whatsapp}</p>}
                   </div>
                   <div>
-                    <Label htmlFor="state_of_residence">State of Residence</Label>
-                    <Input id="state_of_residence" value={data.state_of_residence}
-                      onChange={(e) => set("state_of_residence", e.target.value)}
+                    <Label>Gender</Label>
+                    <Select value={data.gender} onValueChange={(v) => set("gender", v)}>
+                      <SelectTrigger className="mt-1.5 rounded-xl">
+                        <SelectValue placeholder="Select gender" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        {genderOptions.map((g) => <SelectItem key={g} value={g}>{g}</SelectItem>)}
+                      </SelectContent>
+                    </Select>
+                  </div>
+                </div>
+                <div className="grid sm:grid-cols-2 gap-4">
+                  <div>
+                    <Label htmlFor="country">Country</Label>
+                    <Input id="country" value={data.country}
+                      onChange={(e) => set("country", e.target.value)}
+                      className="mt-1.5 rounded-xl" placeholder="Nigeria" />
+                  </div>
+                  <div>
+                    <Label htmlFor="city">City</Label>
+                    <Input id="city" value={data.city}
+                      onChange={(e) => set("city", e.target.value)}
                       className="mt-1.5 rounded-xl" placeholder="Lagos" />
                   </div>
                 </div>
                 <div className="grid sm:grid-cols-2 gap-4">
                   <div>
-                    <Label htmlFor="age">Age</Label>
-                    <Input id="age" type="number" min={16} max={80} value={data.age}
-                      onChange={(e) => set("age", e.target.value)}
-                      className="mt-1.5 rounded-xl" placeholder="e.g. 24" />
+                    <Label>Age Range</Label>
+                    <Select value={data.age_range} onValueChange={(v) => set("age_range", v)}>
+                      <SelectTrigger className="mt-1.5 rounded-xl">
+                        <SelectValue placeholder="Select age range" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        {ageRanges.map((a) => <SelectItem key={a} value={a}>{a}</SelectItem>)}
+                      </SelectContent>
+                    </Select>
                   </div>
                   <div>
-                    <Label htmlFor="years_experience">Years / Months of Experience</Label>
-                    <Input id="years_experience" value={data.years_experience}
-                      onChange={(e) => set("years_experience", e.target.value)}
-                      className="mt-1.5 rounded-xl" placeholder="e.g. 2 years, 6 months" />
+                    <Label>Years of Experience</Label>
+                    <Select value={data.years_experience} onValueChange={(v) => set("years_experience", v)}>
+                      <SelectTrigger className="mt-1.5 rounded-xl">
+                        <SelectValue placeholder="Select experience" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        {experienceRanges.map((r) => <SelectItem key={r} value={r}>{r}</SelectItem>)}
+                      </SelectContent>
+                    </Select>
                   </div>
                 </div>
               </div>
