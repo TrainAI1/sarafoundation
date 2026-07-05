@@ -113,10 +113,13 @@ export default function CAPApply() {
       toast.error("Please review your answers.");
       return;
     }
+    // Partner waiver code — full fee waived, skip payment entirely
+    const WAIVER_CODE = "TRAINFREE456";
+    const isWaiver = (data.partner_code || "").trim().toUpperCase() === WAIVER_CODE;
     // Validate partner reference code if supplied
     let partnerCodeId: string | null = null;
     let partnerCodeNormalized: string | null = null;
-    if (data.partner_code && data.partner_code.trim()) {
+    if (data.partner_code && data.partner_code.trim() && !isWaiver) {
       const { data: codeRows, error: codeErr } = await supabase
         .rpc("validate_partner_code", {
           _code: data.partner_code.trim(),
@@ -148,10 +151,12 @@ export default function CAPApply() {
         specialization: data.specialization?.trim() || null,
         motivation: data.motivation?.trim() || null,
         referral_source: data.referral_source?.trim() || null,
-        payment_plan: "full",
-        payment_status: "pending",
-        partner_code: partnerCodeNormalized,
+        payment_plan: isWaiver ? "waiver" : "full",
+        payment_status: isWaiver ? "paid" : "pending",
+        paid_amount: 0,
+        partner_code: isWaiver ? WAIVER_CODE : partnerCodeNormalized,
         partner_code_id: partnerCodeId,
+        status_notes: isWaiver ? "Partner waiver code used — fee waived" : null,
       } as any);
     setSubmitting(false);
     if (error) {
@@ -159,7 +164,12 @@ export default function CAPApply() {
       toast.error(error.message || "Could not save your application. Please try again.");
       return;
     }
-    navigate(`/programs/cap/payment?app=${newId}`);
+    if (isWaiver) {
+      toast.success("Waiver code accepted — your spot is confirmed!");
+      navigate(`/programs/cap/success?app=${newId}`);
+    } else {
+      navigate(`/programs/cap/payment?app=${newId}`);
+    }
   };
 
   return (

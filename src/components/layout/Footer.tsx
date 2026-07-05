@@ -76,6 +76,9 @@ export function Footer() {
             <p className="text-white/60 text-sm mb-8 leading-relaxed">
               Empowering the next generation of African tech entrepreneurs through innovation, diversity, and inclusion.
             </p>
+            <p className="text-white/70 text-sm mb-6 font-medium">
+              Headquartered in London, United Kingdom.
+            </p>
             
             {/* Newsletter */}
             <div className="space-y-4">
