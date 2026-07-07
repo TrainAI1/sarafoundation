@@ -116,10 +116,36 @@ export default function CAPApply() {
     // Partner waiver code — full fee waived, skip payment entirely
     const WAIVER_CODE = "TRAINFREE456";
     const isWaiver = (data.partner_code || "").trim().toUpperCase() === WAIVER_CODE;
+    if (isWaiver) {
+      const { data: resp, error: fnErr } = await supabase.functions.invoke("submit-cap-waiver", {
+        body: {
+          waiver_code: data.partner_code,
+          full_name: data.full_name.trim(),
+          email: data.email.trim(),
+          phone: data.phone.trim(),
+          country: data.country.trim(),
+          university: data.university.trim(),
+          year_of_study: data.year_of_study,
+          preferred_track: data.preferred_track,
+          specialization: data.specialization?.trim() || null,
+          motivation: data.motivation?.trim() || null,
+          referral_source: data.referral_source?.trim() || null,
+        },
+      });
+      setSubmitting(false);
+      if (fnErr || (resp as any)?.error) {
+        console.error("waiver submit error:", fnErr || resp);
+        toast.error(((resp as any)?.error) || fnErr?.message || "Could not submit waiver application.");
+        return;
+      }
+      toast.success("Waiver code accepted — your spot is confirmed!");
+      navigate(`/programs/cap/success?app=${(resp as any)?.id || ""}`);
+      return;
+    }
     // Validate partner reference code if supplied
     let partnerCodeId: string | null = null;
     let partnerCodeNormalized: string | null = null;
-    if (data.partner_code && data.partner_code.trim() && !isWaiver) {
+    if (data.partner_code && data.partner_code.trim()) {
       const { data: codeRows, error: codeErr } = await supabase
         .rpc("validate_partner_code", {
           _code: data.partner_code.trim(),
@@ -151,12 +177,12 @@ export default function CAPApply() {
         specialization: data.specialization?.trim() || null,
         motivation: data.motivation?.trim() || null,
         referral_source: data.referral_source?.trim() || null,
-        payment_plan: isWaiver ? "waiver" : "full",
-        payment_status: isWaiver ? "paid" : "pending",
+        payment_plan: "full",
+        payment_status: "pending",
         paid_amount: 0,
-        partner_code: isWaiver ? WAIVER_CODE : partnerCodeNormalized,
+        partner_code: partnerCodeNormalized,
         partner_code_id: partnerCodeId,
-        status_notes: isWaiver ? "Partner waiver code used — fee waived" : null,
+        status_notes: null,
       } as any);
     setSubmitting(false);
     if (error) {
@@ -164,12 +190,7 @@ export default function CAPApply() {
       toast.error(error.message || "Could not save your application. Please try again.");
       return;
     }
-    if (isWaiver) {
-      toast.success("Waiver code accepted — your spot is confirmed!");
-      navigate(`/programs/cap/success?app=${newId}`);
-    } else {
-      navigate(`/programs/cap/payment?app=${newId}`);
-    }
+    navigate(`/programs/cap/payment?app=${newId}`);
   };
 
   return (
