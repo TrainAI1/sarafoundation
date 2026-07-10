@@ -130,9 +130,13 @@ export type Database = {
           applicant_status: string
           assigned_to: string | null
           country: string
+          course_of_study: string | null
           created_at: string
+          date_of_birth: string | null
+          education_level: string | null
           email: string
           full_name: string
+          gender: string | null
           id: string
           installments_completed: number
           motivation: string | null
@@ -148,6 +152,7 @@ export type Database = {
           phone: string
           preferred_track: string
           referral_source: string | null
+          referral_source_other: string | null
           specialization: string | null
           status_notes: string | null
           status_updated_at: string
@@ -159,9 +164,13 @@ export type Database = {
           applicant_status?: string
           assigned_to?: string | null
           country: string
+          course_of_study?: string | null
           created_at?: string
+          date_of_birth?: string | null
+          education_level?: string | null
           email: string
           full_name: string
+          gender?: string | null
           id?: string
           installments_completed?: number
           motivation?: string | null
@@ -177,6 +186,7 @@ export type Database = {
           phone: string
           preferred_track: string
           referral_source?: string | null
+          referral_source_other?: string | null
           specialization?: string | null
           status_notes?: string | null
           status_updated_at?: string
@@ -188,9 +198,13 @@ export type Database = {
           applicant_status?: string
           assigned_to?: string | null
           country?: string
+          course_of_study?: string | null
           created_at?: string
+          date_of_birth?: string | null
+          education_level?: string | null
           email?: string
           full_name?: string
+          gender?: string | null
           id?: string
           installments_completed?: number
           motivation?: string | null
@@ -206,6 +220,7 @@ export type Database = {
           phone?: string
           preferred_track?: string
           referral_source?: string | null
+          referral_source_other?: string | null
           specialization?: string | null
           status_notes?: string | null
           status_updated_at?: string
