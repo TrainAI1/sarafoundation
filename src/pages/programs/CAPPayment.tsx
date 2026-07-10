@@ -274,18 +274,19 @@ export default function CAPPayment() {
             </div>
 
             <div className="grid gap-2">
-              <Button onClick={payPaystack} disabled={!!processing} size="lg" className="w-full glow-effect rounded-xl">
-                {processing === "paystack" ? (
-                  <><Loader2 className="w-5 h-5 animate-spin" /> Opening Paystack...</>
-                ) : (
-                  <>Pay {currentPrice} with Paystack
-                    {plan === "installments" && !lockedPlan && " (1st installment)"}
-                    {lockedPlan && ` · Installment ${installmentNumber} of 3`}
-                  </>
-                )}
-              </Button>
-              {currency === "USD" && (
-                <Button onClick={payStripe} disabled={!!processing} size="lg" variant="outline" className="w-full rounded-xl">
+              {currency === "NGN" ? (
+                <Button onClick={payPaystack} disabled={!!processing} size="lg" className="w-full glow-effect rounded-xl">
+                  {processing === "paystack" ? (
+                    <><Loader2 className="w-5 h-5 animate-spin" /> Opening Paystack...</>
+                  ) : (
+                    <>Pay {currentPrice} with Paystack
+                      {plan === "installments" && !lockedPlan && " (1st installment)"}
+                      {lockedPlan && ` · Installment ${installmentNumber} of 3`}
+                    </>
+                  )}
+                </Button>
+              ) : (
+                <Button onClick={payStripe} disabled={!!processing} size="lg" className="w-full glow-effect rounded-xl">
                   {processing === "stripe" ? (
                     <><Loader2 className="w-5 h-5 animate-spin" /> Redirecting to Stripe...</>
                   ) : (
@@ -293,6 +294,11 @@ export default function CAPPayment() {
                   )}
                 </Button>
               )}
+              <p className="text-[11px] text-muted-foreground text-center">
+                {currency === "NGN"
+                  ? "Naira payments are processed by Paystack."
+                  : "International payments are processed by Stripe."}
+              </p>
             </div>
 
             {!lockedPlan && (
