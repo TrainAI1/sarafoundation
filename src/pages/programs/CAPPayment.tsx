@@ -45,11 +45,11 @@ export default function CAPPayment() {
       return;
     }
     (async () => {
-      const { data, error } = await supabase
-        .from("cap_applications")
-        .select("id, email, full_name, payment_status, payment_plan, payment_currency, paid_amount, installments_completed, preferred_track, partner_code, partner_code_id")
-        .eq("id", appId)
-        .maybeSingle();
+      const { data: rows, error } = await (supabase.rpc as any)(
+        "get_cap_application_for_payment",
+        { _id: appId },
+      );
+      const data = Array.isArray(rows) ? rows[0] : rows;
       if (error || !data) {
         toast.error("Application not found.");
         navigate("/programs/cap/apply", { replace: true });
