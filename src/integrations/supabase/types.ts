@@ -728,6 +728,22 @@ export type Database = {
       }
       can_edit_content: { Args: never; Returns: boolean }
       can_moderate_submissions: { Args: never; Returns: boolean }
+      get_cap_application_for_payment: {
+        Args: { _id: string }
+        Returns: {
+          email: string
+          full_name: string
+          id: string
+          installments_completed: number
+          paid_amount: number
+          partner_code: string
+          partner_code_id: string
+          payment_currency: string
+          payment_plan: string
+          payment_status: string
+          preferred_track: string
+        }[]
+      }
       get_gjp_status_by_email_appid: {
         Args: { _app_id_prefix: string; _email: string }
         Returns: {
