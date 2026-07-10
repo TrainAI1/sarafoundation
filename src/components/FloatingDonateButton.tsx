@@ -94,18 +94,21 @@ function DonateContent() {
 
       <div className="grid grid-cols-3 gap-2 mt-3 text-center">
         <div className="rounded-lg bg-muted/50 p-2">
-          <div className="text-base sm:text-lg font-bold gradient-text">₦10k</div>
-          <div className="text-[10px] text-muted-foreground">1 student</div>
+          <div className="text-base sm:text-lg font-bold gradient-text">£500</div>
+          <div className="text-[10px] text-muted-foreground">Full sponsorship</div>
         </div>
         <div className="rounded-lg bg-muted/50 p-2">
-          <div className="text-base sm:text-lg font-bold gradient-text-accent">$7</div>
-          <div className="text-[10px] text-muted-foreground">Training</div>
+          <div className="text-base sm:text-lg font-bold gradient-text-accent">£50</div>
+          <div className="text-[10px] text-muted-foreground">One module</div>
         </div>
         <div className="rounded-lg bg-muted/50 p-2">
-          <div className="text-base sm:text-lg font-bold gradient-text">£5</div>
-          <div className="text-[10px] text-muted-foreground">Tech access</div>
+          <div className="text-base sm:text-lg font-bold gradient-text">£10</div>
+          <div className="text-[10px] text-muted-foreground">Weekly / monthly</div>
         </div>
       </div>
+      <p className="text-[10px] text-muted-foreground text-center mt-2">
+        Any amount helps — small recurring gifts add up.
+      </p>
     </>
   );
 }
