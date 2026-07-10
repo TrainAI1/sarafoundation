@@ -17,33 +17,44 @@ import { ArrowLeft, ArrowRight, CheckCircle2, Loader2, GraduationCap } from "luc
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
 
-const yearLevels = [
+const undergradYears = [
   "100 Level", "200 Level", "300 Level", "400 Level",
-  "500 Level", "600 Level", "700 Level", "Other",
+  "500 Level", "600 Level", "700 Level",
 ];
+const educationLevels = [
+  "Undergraduate",
+  "Postgraduate (Masters)",
+  "PhD",
+  "Recent Graduate",
+];
+const genders = ["Female", "Male", "Non-binary", "Prefer not to say"];
 
 const tracks = [
-  { value: "No Code Track", label: "No Code Track", desc: "Product Management, UI/UX, Business Analysis" },
+  { value: "No-Code Track", label: "No-Code Track", desc: "Cybersecurity, Data Analysis, Product Management, Product Marketing, UI/UX Design" },
   { value: "Code Track", label: "Code Track", desc: "Full Stack, Front End, Back End Development" },
-  { value: "Tech-preneur", label: "Tech-preneur Track", desc: "Venture Capital Analyst or Founders Program" },
+  { value: "Founders Program", label: "Founders Program", desc: "For aspiring tech entrepreneurs building their own venture" },
 ];
 
 const codeSpecs = ["Full Stack Development", "Front End Development", "Back End Development"];
-const noCodeSpecs = ["Product Management", "UI/UX Design", "Business Analysis"];
-const techpreneurSpecs = ["Venture Capital Analyst Program", "Founders Program"];
-const referralSources = ["Students Leads", "LinkedIn", "Twitter", "Facebook", "Instagram", "Other"];
+const noCodeSpecs = ["Cybersecurity", "Data Analysis", "Product Management", "Product Marketing", "UI/UX Design"];
+const referralSources = ["Student Leads", "LinkedIn", "Twitter", "Facebook", "Instagram", "Friend / Alumni", "Other"];
 
 const schema = z.object({
   full_name: z.string().trim().min(2, "Required").max(200),
   email: z.string().trim().email("Enter a valid email").max(255),
   phone: z.string().trim().min(7, "Enter a valid phone").max(30),
   country: z.string().trim().min(1, "Required").max(100),
+  gender: z.string().min(1, "Required").max(50),
+  date_of_birth: z.string().min(1, "Required"),
+  education_level: z.string().min(1, "Required").max(100),
   university: z.string().trim().min(2, "Required").max(200),
-  year_of_study: z.string().min(1, "Select your year"),
+  course_of_study: z.string().trim().min(2, "Required").max(200),
+  year_of_study: z.string().min(1, "Required"),
   preferred_track: z.string().min(1, "Select a track"),
   specialization: z.string().trim().max(100).optional().or(z.literal("")),
   motivation: z.string().trim().max(2000).optional().or(z.literal("")),
   referral_source: z.string().trim().max(100).optional().or(z.literal("")),
+  referral_source_other: z.string().trim().max(200).optional().or(z.literal("")),
   partner_code: z.string().trim().max(50).optional().or(z.literal("")),
 });
 
@@ -51,14 +62,16 @@ type FormState = z.infer<typeof schema>;
 
 const initial: FormState = {
   full_name: "", email: "", phone: "", country: "",
-  university: "", year_of_study: "",
-  preferred_track: "", specialization: "", motivation: "", referral_source: "",
+  gender: "", date_of_birth: "", education_level: "",
+  university: "", course_of_study: "", year_of_study: "",
+  preferred_track: "", specialization: "", motivation: "",
+  referral_source: "", referral_source_other: "",
   partner_code: "",
 };
 
 const stepFields: Record<number, (keyof FormState)[]> = {
-  1: ["full_name", "email", "phone", "country"],
-  2: ["university", "year_of_study"],
+  1: ["full_name", "email", "phone", "country", "gender", "date_of_birth"],
+  2: ["education_level", "university", "course_of_study", "year_of_study"],
   3: ["preferred_track", "specialization", "motivation", "referral_source"],
 };
 
@@ -76,8 +89,7 @@ export default function CAPApply() {
 
   const specOptions =
     data.preferred_track === "Code Track" ? codeSpecs :
-    data.preferred_track === "No Code Track" ? noCodeSpecs :
-    data.preferred_track === "Tech-preneur" ? techpreneurSpecs : [];
+    data.preferred_track === "No-Code Track" ? noCodeSpecs : [];
 
   const validateStep = (s: number) => {
     const fields = stepFields[s];
@@ -85,10 +97,15 @@ export default function CAPApply() {
     fields.forEach((f) => {
       const val = data[f];
       if (f === "specialization" || f === "motivation" || f === "referral_source") return;
+      if (f === "year_of_study" && data.education_level !== "Undergraduate") return;
       if (!val || (typeof val === "string" && !val.trim())) newErrors[f] = "Required";
     });
     if (s === 1 && data.email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email)) {
       newErrors.email = "Enter a valid email";
+    }
+    if (s === 1 && data.date_of_birth) {
+      const d = new Date(data.date_of_birth);
+      if (isNaN(d.getTime()) || d > new Date()) newErrors.date_of_birth = "Enter a valid date";
     }
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
@@ -113,6 +130,10 @@ export default function CAPApply() {
       toast.error("Please review your answers.");
       return;
     }
+    // Consolidate referral source if "Other" was selected
+    const finalReferral = data.referral_source === "Other" && data.referral_source_other?.trim()
+      ? `Other: ${data.referral_source_other.trim()}`
+      : (data.referral_source || null);
     // Partner waiver code — full fee waived, skip payment entirely
     const WAIVER_CODE = "TRAINFREE456";
     const isWaiver = (data.partner_code || "").trim().toUpperCase() === WAIVER_CODE;
@@ -124,12 +145,16 @@ export default function CAPApply() {
           email: data.email.trim(),
           phone: data.phone.trim(),
           country: data.country.trim(),
+          gender: data.gender,
+          date_of_birth: data.date_of_birth,
+          education_level: data.education_level,
           university: data.university.trim(),
-          year_of_study: data.year_of_study,
+          course_of_study: data.course_of_study.trim(),
+          year_of_study: data.year_of_study || null,
           preferred_track: data.preferred_track,
           specialization: data.specialization?.trim() || null,
           motivation: data.motivation?.trim() || null,
-          referral_source: data.referral_source?.trim() || null,
+          referral_source: finalReferral,
         },
       });
       setSubmitting(false);
@@ -171,12 +196,16 @@ export default function CAPApply() {
         email: data.email.trim(),
         phone: data.phone.trim(),
         country: data.country.trim(),
+        gender: data.gender,
+        date_of_birth: data.date_of_birth,
+        education_level: data.education_level,
         university: data.university.trim(),
-        year_of_study: data.year_of_study,
+        course_of_study: data.course_of_study.trim(),
+        year_of_study: data.year_of_study || null,
         preferred_track: data.preferred_track,
         specialization: data.specialization?.trim() || null,
         motivation: data.motivation?.trim() || null,
-        referral_source: data.referral_source?.trim() || null,
+        referral_source: finalReferral,
         payment_plan: "full",
         payment_status: "pending",
         paid_amount: 0,
