@@ -11,8 +11,8 @@ const programs = [
     id: "cap",
     icon: GraduationCap,
     title: "Career Advancement Program (CAP)",
-    subtitle: "9-Month Rotational Program",
-    description: "A comprehensive program implemented through CAP TECH CLUBS in African universities, nurturing young Africans to become tech professionals and founders.",
+    subtitle: "Tech Employability & Entrepreneurial Practical Learning",
+    description: "A tech employability skills and entrepreneurial practical learning program, implemented through CAP TECH CLUBS in African universities, nurturing young Africans into tech professionals and founders.",
     image: studentsLabImg,
     phases: [
       { name: "Learn", icon: BookOpen, description: "Build foundational tech skills" },
