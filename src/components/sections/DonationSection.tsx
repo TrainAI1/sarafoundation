@@ -73,20 +73,23 @@ export function DonationSection() {
             </p>
 
             {/* Impact Cards */}
-            <div className="grid grid-cols-3 gap-3 md:gap-4 mb-8 md:mb-10">
+            <div className="grid grid-cols-3 gap-3 md:gap-4 mb-6 md:mb-8">
               <div className="card-modern p-4 md:p-6 group hover:border-primary/30 text-center">
-                <div className="text-2xl md:text-4xl font-bold font-display gradient-text mb-1 md:mb-2">₦10k</div>
-                <div className="text-xs md:text-sm text-muted-foreground">Sponsors one student</div>
+                <div className="text-2xl md:text-4xl font-bold font-display gradient-text mb-1 md:mb-2">£500</div>
+                <div className="text-xs md:text-sm text-muted-foreground">Fully sponsors one student</div>
               </div>
               <div className="card-modern p-4 md:p-6 group hover:border-accent/30 text-center">
-                <div className="text-2xl md:text-4xl font-bold font-display gradient-text-accent mb-1 md:mb-2">$7</div>
-                <div className="text-xs md:text-sm text-muted-foreground">One student's training</div>
+                <div className="text-2xl md:text-4xl font-bold font-display gradient-text-accent mb-1 md:mb-2">£50</div>
+                <div className="text-xs md:text-sm text-muted-foreground">Covers one learning module</div>
               </div>
               <div className="card-modern p-4 md:p-6 group hover:border-primary/30 text-center">
-                <div className="text-2xl md:text-4xl font-bold font-display gradient-text mb-1 md:mb-2">£5</div>
-                <div className="text-xs md:text-sm text-muted-foreground">Tech skills access</div>
+                <div className="text-2xl md:text-4xl font-bold font-display gradient-text mb-1 md:mb-2">£10</div>
+                <div className="text-xs md:text-sm text-muted-foreground">Weekly or monthly gift</div>
               </div>
             </div>
+            <p className="text-xs md:text-sm text-muted-foreground mb-6 md:mb-8">
+              Every gift matters — whether it's a one-off contribution or a small recurring donation each week or month, your generosity keeps a student learning.
+            </p>
 
             <Button size="lg" className="glow-effect group w-full sm:w-auto" asChild>
               <Link to="/contact">

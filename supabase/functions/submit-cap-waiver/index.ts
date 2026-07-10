@@ -18,7 +18,8 @@ serve(async (req) => {
     const {
       waiver_code,
       full_name, email, phone, country,
-      university, year_of_study,
+      gender, date_of_birth, education_level,
+      university, course_of_study, year_of_study,
       preferred_track, specialization, motivation, referral_source,
     } = body || {};
 
@@ -27,7 +28,7 @@ serve(async (req) => {
         status: 403, headers: { ...corsHeaders, "Content-Type": "application/json" },
       });
     }
-    const required = { full_name, email, phone, country, university, year_of_study, preferred_track };
+    const required = { full_name, email, phone, country, gender, date_of_birth, education_level, university, course_of_study, preferred_track };
     for (const [k, v] of Object.entries(required)) {
       if (!v || typeof v !== "string" || !v.trim()) {
         return new Response(JSON.stringify({ error: `Missing field: ${k}` }), {
@@ -49,12 +50,16 @@ serve(async (req) => {
         email: String(email).trim().slice(0, 255),
         phone: String(phone).trim().slice(0, 30),
         country: String(country).trim().slice(0, 100),
+        gender: String(gender).slice(0, 50),
+        date_of_birth: String(date_of_birth).slice(0, 30),
+        education_level: String(education_level).slice(0, 100),
         university: String(university).trim().slice(0, 200),
-        year_of_study: String(year_of_study),
+        course_of_study: String(course_of_study).trim().slice(0, 200),
+        year_of_study: year_of_study ? String(year_of_study).slice(0, 50) : null,
         preferred_track: String(preferred_track),
         specialization: specialization ? String(specialization).slice(0, 100) : null,
         motivation: motivation ? String(motivation).slice(0, 2000) : null,
-        referral_source: referral_source ? String(referral_source).slice(0, 100) : null,
+        referral_source: referral_source ? String(referral_source).slice(0, 200) : null,
         payment_plan: "waiver",
         payment_status: "paid",
         paid_amount: 0,
