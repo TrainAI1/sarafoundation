@@ -143,15 +143,16 @@ export function PaystackDonate({ compact = false }: { compact?: boolean }) {
       </div>
 
       <div className="grid gap-2">
-        <Button onClick={payPaystack} disabled={!!processing} size="lg" className="w-full glow-effect">
-          {processing === "paystack" ? (
-            <><Loader2 className="w-4 h-4 animate-spin" /> Opening Paystack...</>
-          ) : (
-            <><CreditCard className="w-4 h-4" /> Pay {SYMBOL[currency]}{Number(amount || 0).toLocaleString()} with Paystack</>
-          )}
-        </Button>
-        {currency !== "NGN" && (
-          <Button onClick={payStripe} disabled={!!processing} size="lg" variant="outline" className="w-full">
+        {currency === "NGN" ? (
+          <Button onClick={payPaystack} disabled={!!processing} size="lg" className="w-full glow-effect">
+            {processing === "paystack" ? (
+              <><Loader2 className="w-4 h-4 animate-spin" /> Opening Paystack...</>
+            ) : (
+              <><CreditCard className="w-4 h-4" /> Pay {SYMBOL[currency]}{Number(amount || 0).toLocaleString()} with Paystack</>
+            )}
+          </Button>
+        ) : (
+          <Button onClick={payStripe} disabled={!!processing} size="lg" className="w-full glow-effect">
             {processing === "stripe" ? (
               <><Loader2 className="w-4 h-4 animate-spin" /> Redirecting to Stripe...</>
             ) : (
@@ -159,6 +160,11 @@ export function PaystackDonate({ compact = false }: { compact?: boolean }) {
             )}
           </Button>
         )}
+        <p className="text-[10px] text-muted-foreground text-center">
+          {currency === "NGN"
+            ? "Naira donations are processed by Paystack."
+            : "International donations are processed by Stripe."}
+        </p>
       </div>
 
       <div className="flex items-start gap-2 text-[11px] text-muted-foreground">
