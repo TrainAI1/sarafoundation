@@ -280,6 +280,26 @@ export default function CAPApply() {
                     {errors.country && <p className="text-destructive text-xs mt-1">{errors.country}</p>}
                   </div>
                 </div>
+                <div className="grid sm:grid-cols-2 gap-4">
+                  <div>
+                    <Label>Gender *</Label>
+                    <Select value={data.gender} onValueChange={(v) => set("gender", v)}>
+                      <SelectTrigger className="mt-1.5 rounded-xl"><SelectValue placeholder="Select" /></SelectTrigger>
+                      <SelectContent>
+                        {genders.map((g) => <SelectItem key={g} value={g}>{g}</SelectItem>)}
+                      </SelectContent>
+                    </Select>
+                    {errors.gender && <p className="text-destructive text-xs mt-1">{errors.gender}</p>}
+                  </div>
+                  <div>
+                    <Label htmlFor="dob">Date of Birth *</Label>
+                    <Input id="dob" type="date" value={data.date_of_birth}
+                      max={new Date().toISOString().slice(0, 10)}
+                      onChange={(e) => set("date_of_birth", e.target.value)}
+                      className="mt-1.5 rounded-xl" />
+                    {errors.date_of_birth && <p className="text-destructive text-xs mt-1">{errors.date_of_birth}</p>}
+                  </div>
+                </div>
               </div>
             )}
 
@@ -287,26 +307,42 @@ export default function CAPApply() {
               <div className="space-y-5">
                 <h2 className="font-display font-bold text-xl text-foreground">Academic Background</h2>
                 <div>
-                  <Label htmlFor="university">Name of University *</Label>
+                  <Label>Current Education Level *</Label>
+                  <Select value={data.education_level}
+                    onValueChange={(v) => { set("education_level", v); if (v !== "Undergraduate") set("year_of_study", ""); }}>
+                    <SelectTrigger className="mt-1.5 rounded-xl"><SelectValue placeholder="Select your level" /></SelectTrigger>
+                    <SelectContent>
+                      {educationLevels.map((l) => <SelectItem key={l} value={l}>{l}</SelectItem>)}
+                    </SelectContent>
+                  </Select>
+                  {errors.education_level && <p className="text-destructive text-xs mt-1">{errors.education_level}</p>}
+                </div>
+                <div>
+                  <Label htmlFor="university">Name of University / Institution *</Label>
                   <Input id="university" value={data.university}
                     onChange={(e) => set("university", e.target.value)}
-                    className="mt-1.5 rounded-xl" placeholder="University of Lagos" />
+                    className="mt-1.5 rounded-xl" placeholder="e.g. University of Lagos" />
                   {errors.university && <p className="text-destructive text-xs mt-1">{errors.university}</p>}
                 </div>
                 <div>
-                  <Label>Current Year of Study *</Label>
-                  <RadioGroup value={data.year_of_study} onValueChange={(v) => set("year_of_study", v)}
-                    className="mt-2 grid grid-cols-2 sm:grid-cols-4 gap-2">
-                    {yearLevels.map((y) => (
-                      <Label key={y} htmlFor={`yr-${y}`}
-                        className="flex items-center gap-2 p-3 rounded-xl border border-border hover:border-primary cursor-pointer">
-                        <RadioGroupItem value={y} id={`yr-${y}`} />
-                        <span className="text-sm font-normal">{y}</span>
-                      </Label>
-                    ))}
-                  </RadioGroup>
-                  {errors.year_of_study && <p className="text-destructive text-xs mt-1">{errors.year_of_study}</p>}
+                  <Label htmlFor="course_of_study">Course of Study *</Label>
+                  <Input id="course_of_study" value={data.course_of_study}
+                    onChange={(e) => set("course_of_study", e.target.value)}
+                    className="mt-1.5 rounded-xl" placeholder="e.g. Computer Science" />
+                  {errors.course_of_study && <p className="text-destructive text-xs mt-1">{errors.course_of_study}</p>}
                 </div>
+                {data.education_level === "Undergraduate" && (
+                  <div>
+                    <Label>Current Year of Study *</Label>
+                    <Select value={data.year_of_study} onValueChange={(v) => set("year_of_study", v)}>
+                      <SelectTrigger className="mt-1.5 rounded-xl"><SelectValue placeholder="Select your year" /></SelectTrigger>
+                      <SelectContent>
+                        {undergradYears.map((y) => <SelectItem key={y} value={y}>{y}</SelectItem>)}
+                      </SelectContent>
+                    </Select>
+                    {errors.year_of_study && <p className="text-destructive text-xs mt-1">{errors.year_of_study}</p>}
+                  </div>
+                )}
               </div>
             )}
 
@@ -360,6 +396,15 @@ export default function CAPApply() {
                       {referralSources.map((s) => <SelectItem key={s} value={s}>{s}</SelectItem>)}
                     </SelectContent>
                   </Select>
+                  {data.referral_source === "Other" && (
+                    <Input
+                      value={data.referral_source_other}
+                      onChange={(e) => set("referral_source_other", e.target.value)}
+                      className="mt-2 rounded-xl"
+                      placeholder="Please tell us how you heard about us"
+                      maxLength={200}
+                    />
+                  )}
                 </div>
 
                 <div className="rounded-xl border border-dashed border-primary/40 p-4 bg-primary/5">
