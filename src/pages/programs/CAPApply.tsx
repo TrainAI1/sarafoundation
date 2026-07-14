@@ -49,7 +49,7 @@ const schema = z.object({
   education_level: z.string().min(1, "Required").max(100),
   university: z.string().trim().min(2, "Required").max(200),
   course_of_study: z.string().trim().min(2, "Required").max(200),
-  year_of_study: z.string().min(1, "Required"),
+  year_of_study: z.string().optional().or(z.literal("")),
   preferred_track: z.string().min(1, "Select a track"),
   specialization: z.string().trim().max(100).optional().or(z.literal("")),
   motivation: z.string().trim().max(2000).optional().or(z.literal("")),
