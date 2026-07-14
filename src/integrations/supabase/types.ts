@@ -158,7 +158,7 @@ export type Database = {
           status_updated_at: string
           total_amount: number | null
           university: string
-          year_of_study: string
+          year_of_study: string | null
         }
         Insert: {
           applicant_status?: string
@@ -192,7 +192,7 @@ export type Database = {
           status_updated_at?: string
           total_amount?: number | null
           university: string
-          year_of_study: string
+          year_of_study?: string | null
         }
         Update: {
           applicant_status?: string
@@ -226,7 +226,7 @@ export type Database = {
           status_updated_at?: string
           total_amount?: number | null
           university?: string
-          year_of_study?: string
+          year_of_study?: string | null
         }
         Relationships: [
           {

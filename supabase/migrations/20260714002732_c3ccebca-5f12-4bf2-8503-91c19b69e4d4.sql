@@ -1,0 +1,1 @@
+ALTER TABLE public.cap_applications ALTER COLUMN year_of_study DROP NOT NULL;
