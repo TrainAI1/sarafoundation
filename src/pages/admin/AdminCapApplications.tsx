@@ -47,6 +47,7 @@ export default function AdminCapApplications() {
   const [filter, setFilter] = useState<"all" | "paid" | "pending" | "installments">("all");
   const [search, setSearch] = useState("");
   const [trackFilter, setTrackFilter] = useState<string>("all");
+  const [cohortFilter, setCohortFilter] = useState<"all" | "cohort1" | "cohort3">("all");
   const [selected, setSelected] = useState<CapApp | null>(null);
   const [picked, setPicked] = useState<Set<string>>(new Set());
   const [emailDialog, setEmailDialog] = useState<{ recipients: string[]; mode: "single" | "bulk" } | null>(null);
@@ -69,6 +70,9 @@ export default function AdminCapApplications() {
       if (filter === "pending" && r.payment_status !== "pending") return false;
       if (filter === "installments" && (r.payment_plan !== "installments" || r.installments_completed === 0 || r.payment_status === "paid")) return false;
       if (trackFilter !== "all" && r.preferred_track !== trackFilter) return false;
+      const isCohort1 = (r.preferred_track || "").toLowerCase() === "cohort 1";
+      if (cohortFilter === "cohort1" && !isCohort1) return false;
+      if (cohortFilter === "cohort3" && isCohort1) return false;
       if (search) {
         const q = search.toLowerCase();
         return (
@@ -79,7 +83,12 @@ export default function AdminCapApplications() {
       }
       return true;
     });
-  }, [rows, filter, search, trackFilter]);
+  }, [rows, filter, search, trackFilter, cohortFilter]);
+
+  const cohortCounts = useMemo(() => {
+    const c1 = rows.filter((r) => (r.preferred_track || "").toLowerCase() === "cohort 1").length;
+    return { cohort1: c1, cohort3: rows.length - c1 };
+  }, [rows]);
 
   const trackCounts = useMemo(() => {
     const counts: Record<string, number> = {};
@@ -233,6 +242,20 @@ export default function AdminCapApplications() {
 
       {trackOptions.length > 0 && (
         <div className="flex gap-2 flex-wrap mb-4 items-center">
+          <span className="text-xs uppercase tracking-wider text-muted-foreground">Cohort:</span>
+          <Button size="sm" variant={cohortFilter === "all" ? "default" : "outline"}
+            onClick={() => setCohortFilter("all")} className="rounded-xl">
+            All ({rows.length})
+          </Button>
+          <Button size="sm" variant={cohortFilter === "cohort3" ? "default" : "outline"}
+            onClick={() => setCohortFilter("cohort3")} className="rounded-xl">
+            Cohort 3 ({cohortCounts.cohort3})
+          </Button>
+          <Button size="sm" variant={cohortFilter === "cohort1" ? "default" : "outline"}
+            onClick={() => setCohortFilter("cohort1")} className="rounded-xl">
+            Cohort 1 ({cohortCounts.cohort1})
+          </Button>
+          <span className="w-full sm:hidden" />
           <span className="text-xs uppercase tracking-wider text-muted-foreground">Track:</span>
           <Button size="sm" variant={trackFilter === "all" ? "default" : "outline"}
             onClick={() => setTrackFilter("all")} className="rounded-xl">
