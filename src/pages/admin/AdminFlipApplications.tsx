@@ -46,6 +46,7 @@ export default function AdminFlipApplications() {
   const [filter, setFilter] = useState<"all" | "paid" | "pending" | "failed">("all");
   const [search, setSearch] = useState("");
   const [trackFilter, setTrackFilter] = useState<string>("all");
+  const [cohortFilter, setCohortFilter] = useState<"all" | "cohort1" | "cohort2">("all");
   const [selected, setSelected] = useState<FlipApp | null>(null);
   const [emailDialog, setEmailDialog] = useState<{ recipients: string[]; mode: "single" | "bulk" } | null>(null);
   const { log } = useAuditLog();
@@ -74,6 +75,9 @@ export default function AdminFlipApplications() {
     return rows.filter((r) => {
       if (filter !== "all" && r.payment_status !== filter) return false;
       if (trackFilter !== "all" && r.preferred_track !== trackFilter) return false;
+      const isCohort1 = (r.preferred_track || "").toLowerCase() === "cohort 1";
+      if (cohortFilter === "cohort1" && !isCohort1) return false;
+      if (cohortFilter === "cohort2" && isCohort1) return false;
       if (search) {
         const q = search.toLowerCase();
         return (
@@ -84,7 +88,12 @@ export default function AdminFlipApplications() {
       }
       return true;
     });
-  }, [rows, filter, search, trackFilter]);
+  }, [rows, filter, search, trackFilter, cohortFilter]);
+
+  const cohortCounts = useMemo(() => {
+    const c1 = rows.filter((r) => (r.preferred_track || "").toLowerCase() === "cohort 1").length;
+    return { cohort1: c1, cohort2: rows.length - c1 };
+  }, [rows]);
 
   const trackCounts = useMemo(() => {
     const counts: Record<string, number> = {};
@@ -187,6 +196,20 @@ export default function AdminFlipApplications() {
 
       {trackOptions.length > 0 && (
         <div className="flex gap-2 flex-wrap mb-4 items-center">
+          <span className="text-xs uppercase tracking-wider text-muted-foreground">Cohort:</span>
+          <Button size="sm" variant={cohortFilter === "all" ? "default" : "outline"}
+            onClick={() => setCohortFilter("all")} className="rounded-xl">
+            All ({rows.length})
+          </Button>
+          <Button size="sm" variant={cohortFilter === "cohort2" ? "default" : "outline"}
+            onClick={() => setCohortFilter("cohort2")} className="rounded-xl">
+            Cohort 2 ({cohortCounts.cohort2})
+          </Button>
+          <Button size="sm" variant={cohortFilter === "cohort1" ? "default" : "outline"}
+            onClick={() => setCohortFilter("cohort1")} className="rounded-xl">
+            Cohort 1 ({cohortCounts.cohort1})
+          </Button>
+          <span className="w-full sm:hidden" />
           <span className="text-xs uppercase tracking-wider text-muted-foreground">Track:</span>
           <Button size="sm" variant={trackFilter === "all" ? "default" : "outline"}
             onClick={() => setTrackFilter("all")} className="rounded-xl">
