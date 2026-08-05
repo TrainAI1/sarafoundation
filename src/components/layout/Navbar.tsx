@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -29,6 +29,8 @@ export function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
+  const menuRef = useRef<HTMLDivElement>(null);
+  const triggerRef = useRef<HTMLButtonElement>(null);
 
   // Close mobile menu on route change
   useEffect(() => {
@@ -42,6 +44,25 @@ export function Navbar() {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  // Close mobile menu when tapping outside of it
+  useEffect(() => {
+    if (!mobileMenuOpen) return;
+    const handlePointerDown = (e: PointerEvent) => {
+      const target = e.target as Node;
+      if (menuRef.current?.contains(target) || triggerRef.current?.contains(target)) return;
+      setMobileMenuOpen(false);
+    };
+    const handleKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setMobileMenuOpen(false);
+    };
+    document.addEventListener("pointerdown", handlePointerDown);
+    document.addEventListener("keydown", handleKey);
+    return () => {
+      document.removeEventListener("pointerdown", handlePointerDown);
+      document.removeEventListener("keydown", handleKey);
+    };
+  }, [mobileMenuOpen]);
 
   const isHome = location.pathname === "/";
   const showDarkLogo = scrolled || !isHome;
@@ -174,6 +195,7 @@ export function Navbar() {
 
           {/* Mobile Menu Button */}
           <button
+            ref={triggerRef}
             className="lg:hidden p-2 text-foreground"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
@@ -185,8 +207,11 @@ export function Navbar() {
 
         {/* Mobile Menu */}
         {mobileMenuOpen && (
-          <div className="lg:hidden py-6 bg-background/95 backdrop-blur-xl rounded-2xl mt-2 border border-border/50 shadow-lg animate-fade-in">
-            <div className="flex flex-col gap-2 px-4">
+          <div
+            ref={menuRef}
+            className="lg:hidden py-4 bg-background/70 backdrop-blur-2xl rounded-2xl mt-2 mb-3 border border-border/50 shadow-xl animate-fade-in max-h-[calc(100dvh-6rem)] overflow-y-auto overscroll-contain"
+          >
+            <div className="flex flex-col gap-1 px-4 pb-2">
               <Link to="/" className="nav-link-modern py-3 px-4 rounded-xl hover:bg-secondary" onClick={() => setMobileMenuOpen(false)}>
                 Home
               </Link>
