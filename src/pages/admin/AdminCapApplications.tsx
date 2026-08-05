@@ -3,7 +3,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { toast } from "sonner";
-import { Download, Eye, Trash2, GraduationCap, X, Mail } from "lucide-react";
+import { Download, Eye, Trash2, GraduationCap, X, Mail, SlidersHorizontal, ChevronDown } from "lucide-react";
 import { format } from "date-fns";
 import StatusPipeline, { statusBadge, type ApplicationStatus } from "@/components/admin/StatusPipeline";
 import NotesPanel from "@/components/admin/NotesPanel";
@@ -51,6 +51,7 @@ export default function AdminCapApplications() {
   const [selected, setSelected] = useState<CapApp | null>(null);
   const [picked, setPicked] = useState<Set<string>>(new Set());
   const [emailDialog, setEmailDialog] = useState<{ recipients: string[]; mode: "single" | "bulk" } | null>(null);
+  const [filtersOpen, setFiltersOpen] = useState(false);
   const { log } = useAuditLog();
 
   const load = async () => {
@@ -104,6 +105,9 @@ export default function AdminCapApplications() {
   }, [rows]);
 
   const trackOptions = useMemo(() => Object.keys(trackCounts).sort(), [trackCounts]);
+
+  const activeFilterCount =
+    (filter !== "all" ? 1 : 0) + (cohortFilter !== "all" ? 1 : 0) + (trackFilter !== "all" ? 1 : 0);
 
   const stats = useMemo(() => ({
     total: rows.length,
@@ -225,15 +229,14 @@ export default function AdminCapApplications() {
 
       <div className="flex flex-col sm:flex-row gap-2 mb-4">
         <Input placeholder="Search name, email, or university..." value={search}
-          onChange={(e) => setSearch(e.target.value)} className="rounded-xl max-w-xs" />
-        <div className="flex gap-2 flex-wrap">
-          {(["all", "paid", "installments", "pending"] as const).map((f) => (
-            <Button key={f} size="sm" variant={filter === f ? "default" : "outline"}
-              onClick={() => setFilter(f)} className="capitalize rounded-xl">
-              {f}
-            </Button>
-          ))}
-        </div>
+          onChange={(e) => setSearch(e.target.value)} className="rounded-xl sm:max-w-xs" />
+        <Button size="sm" variant="outline" className="rounded-xl w-full sm:w-auto justify-between sm:justify-center"
+          onClick={() => setFiltersOpen((o) => !o)} aria-expanded={filtersOpen}>
+          <span className="flex items-center gap-2">
+            <SlidersHorizontal className="w-4 h-4" /> Filters{activeFilterCount ? ` (${activeFilterCount})` : ""}
+          </span>
+          <ChevronDown className={`w-4 h-4 transition-transform ${filtersOpen ? "rotate-180" : ""}`} />
+        </Button>
         <div className="flex gap-2 flex-wrap sm:ml-auto">
           <Button onClick={() => openEmail("selected")} size="sm" variant="outline" disabled={picked.size === 0} className="rounded-xl">
             <Mail className="w-4 h-4" /> Email selected ({picked.size})
@@ -244,8 +247,18 @@ export default function AdminCapApplications() {
         </div>
       </div>
 
-      {trackOptions.length > 0 && (
-        <div className="flex gap-2 flex-wrap mb-4 items-center">
+      {filtersOpen && (
+        <div className="card-modern p-4 mb-4 space-y-3">
+        <div className="flex gap-2 flex-wrap items-center">
+          <span className="text-xs uppercase tracking-wider text-muted-foreground">Payment:</span>
+          {(["all", "paid", "installments", "pending"] as const).map((f) => (
+            <Button key={f} size="sm" variant={filter === f ? "default" : "outline"}
+              onClick={() => setFilter(f)} className="capitalize rounded-xl">
+              {f}
+            </Button>
+          ))}
+        </div>
+        <div className="flex gap-2 flex-wrap items-center">
           <span className="text-xs uppercase tracking-wider text-muted-foreground">Cohort:</span>
           <Button size="sm" variant={cohortFilter === "all" ? "default" : "outline"}
             onClick={() => setCohortFilter("all")} className="rounded-xl">
@@ -263,7 +276,8 @@ export default function AdminCapApplications() {
             onClick={() => setCohortFilter("cohort1")} className="rounded-xl">
             Cohort 1 ({cohortCounts.cohort1})
           </Button>
-          <span className="w-full sm:hidden" />
+        </div>
+        <div className="flex gap-2 flex-wrap items-center">
           <span className="text-xs uppercase tracking-wider text-muted-foreground">Track:</span>
           <Button size="sm" variant={trackFilter === "all" ? "default" : "outline"}
             onClick={() => setTrackFilter("all")} className="rounded-xl">
@@ -275,6 +289,13 @@ export default function AdminCapApplications() {
               {t} ({trackCounts[t]})
             </Button>
           ))}
+        </div>
+          {activeFilterCount > 0 && (
+            <Button size="sm" variant="ghost" className="rounded-xl"
+              onClick={() => { setFilter("all"); setCohortFilter("all"); setTrackFilter("all"); }}>
+              Clear filters
+            </Button>
+          )}
         </div>
       )}
 
