@@ -47,7 +47,7 @@ export default function AdminCapApplications() {
   const [filter, setFilter] = useState<"all" | "paid" | "pending" | "installments">("all");
   const [search, setSearch] = useState("");
   const [trackFilter, setTrackFilter] = useState<string>("all");
-  const [cohortFilter, setCohortFilter] = useState<"all" | "cohort1" | "cohort3">("all");
+  const [cohortFilter, setCohortFilter] = useState<"all" | "cohort1" | "cohort2" | "cohort3">("all");
   const [selected, setSelected] = useState<CapApp | null>(null);
   const [picked, setPicked] = useState<Set<string>>(new Set());
   const [emailDialog, setEmailDialog] = useState<{ recipients: string[]; mode: "single" | "bulk" } | null>(null);
@@ -70,9 +70,12 @@ export default function AdminCapApplications() {
       if (filter === "pending" && r.payment_status !== "pending") return false;
       if (filter === "installments" && (r.payment_plan !== "installments" || r.installments_completed === 0 || r.payment_status === "paid")) return false;
       if (trackFilter !== "all" && r.preferred_track !== trackFilter) return false;
-      const isCohort1 = (r.preferred_track || "").toLowerCase() === "cohort 1";
+      const track = (r.preferred_track || "").toLowerCase();
+      const isCohort1 = track === "cohort 1";
+      const isCohort2 = track === "cohort 2";
       if (cohortFilter === "cohort1" && !isCohort1) return false;
-      if (cohortFilter === "cohort3" && isCohort1) return false;
+      if (cohortFilter === "cohort2" && !isCohort2) return false;
+      if (cohortFilter === "cohort3" && (isCohort1 || isCohort2)) return false;
       if (search) {
         const q = search.toLowerCase();
         return (
@@ -87,7 +90,8 @@ export default function AdminCapApplications() {
 
   const cohortCounts = useMemo(() => {
     const c1 = rows.filter((r) => (r.preferred_track || "").toLowerCase() === "cohort 1").length;
-    return { cohort1: c1, cohort3: rows.length - c1 };
+    const c2 = rows.filter((r) => (r.preferred_track || "").toLowerCase() === "cohort 2").length;
+    return { cohort1: c1, cohort2: c2, cohort3: rows.length - c1 - c2 };
   }, [rows]);
 
   const trackCounts = useMemo(() => {
@@ -250,6 +254,10 @@ export default function AdminCapApplications() {
           <Button size="sm" variant={cohortFilter === "cohort3" ? "default" : "outline"}
             onClick={() => setCohortFilter("cohort3")} className="rounded-xl">
             Cohort 3 ({cohortCounts.cohort3})
+          </Button>
+          <Button size="sm" variant={cohortFilter === "cohort2" ? "default" : "outline"}
+            onClick={() => setCohortFilter("cohort2")} className="rounded-xl">
+            Cohort 2 ({cohortCounts.cohort2})
           </Button>
           <Button size="sm" variant={cohortFilter === "cohort1" ? "default" : "outline"}
             onClick={() => setCohortFilter("cohort1")} className="rounded-xl">
