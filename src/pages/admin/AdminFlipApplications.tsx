@@ -107,6 +107,9 @@ export default function AdminFlipApplications() {
 
   const trackOptions = useMemo(() => Object.keys(trackCounts).sort(), [trackCounts]);
 
+  const activeFilterCount =
+    (filter !== "all" ? 1 : 0) + (cohortFilter !== "all" ? 1 : 0) + (trackFilter !== "all" ? 1 : 0);
+
   const stats = useMemo(() => ({
     total: rows.length,
     paid: rows.filter((r) => r.payment_status === "paid").length,
