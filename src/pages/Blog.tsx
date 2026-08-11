@@ -80,6 +80,14 @@ export default function Blog() {
         <meta name="twitter:title" content="Blog – Sara Foundation Africa" />
         <meta name="twitter:description" content="Stories, insights and updates from Sara Foundation's work empowering African tech talent." />
         <meta name="twitter:image" content="https://sarafoundationafrica.com/hero-students.jpg" />
+        <script type="application/ld+json">{JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://sarafoundationafrica.com/" },
+            { "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://sarafoundationafrica.com/blog" },
+          ],
+        })}</script>
       </Helmet>
       {dbPosts.length > 0 && (
         <Helmet>
@@ -88,6 +96,9 @@ export default function Blog() {
             "@type": "Blog",
             "name": "Sara Foundation Africa Blog",
             "url": "https://sarafoundationafrica.com/blog",
+            "description": "Stories, insights and updates from Sara Foundation's work empowering African tech talent.",
+            "inLanguage": "en",
+            "publisher": { "@type": "Organization", "name": "Sara Foundation Africa", "url": "https://sarafoundationafrica.com/" },
             "blogPost": dbPosts.slice(0, 10).map((p) => ({
               "@type": "BlogPosting",
               "headline": p.title,
@@ -150,7 +161,7 @@ export default function Blog() {
                   <Link to={`/blog/${post.slug}`}>
                     <div className="aspect-video overflow-hidden relative">
                       {post.image && typeof post.image === 'string' && post.image.startsWith('http') ? (
-                        <img src={post.image} alt={post.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                        <img src={post.image} alt={post.title} loading="lazy" decoding="async" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
                       ) : (
                         <div className="w-full h-full bg-gradient-to-br from-primary/20 to-accent/20 flex items-center justify-center">
                           <Newspaper className="w-12 h-12 text-primary/30" />

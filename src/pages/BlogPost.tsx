@@ -66,6 +66,11 @@ export default function BlogPostPage() {
         <meta property="og:type" content="article" />
         <meta property="og:url" content={`https://sarafoundationafrica.com/blog/${post.slug}`} />
         <meta property="og:image" content={post.cover_image || "https://sarafoundationafrica.com/hero-students.jpg"} />
+        <meta property="og:site_name" content="Sara Foundation Africa" />
+        <meta property="article:published_time" content={post.published_at || post.created_at} />
+        <meta property="article:modified_time" content={post.updated_at} />
+        {post.category && <meta property="article:section" content={post.category} />}
+        <meta property="article:author" content={post.author_name} />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content={post.title} />
         <meta name="twitter:description" content={post.excerpt || post.title} />
@@ -80,7 +85,20 @@ export default function BlogPostPage() {
           "publisher": { "@type": "Organization", "name": "Sara Foundation Africa", "logo": { "@type": "ImageObject", "url": "https://sarafoundationafrica.com/favicon.png" } },
           "datePublished": post.published_at || post.created_at,
           "dateModified": post.updated_at,
-          "mainEntityOfPage": `https://sarafoundationafrica.com/blog/${post.slug}`
+          "inLanguage": "en",
+          "articleSection": post.category || "News",
+          "wordCount": post.content ? post.content.trim().split(/\s+/).length : undefined,
+          "isPartOf": { "@type": "Blog", "name": "Sara Foundation Africa Blog", "@id": "https://sarafoundationafrica.com/blog" },
+          "mainEntityOfPage": { "@type": "WebPage", "@id": `https://sarafoundationafrica.com/blog/${post.slug}` }
+        })}</script>
+        <script type="application/ld+json">{JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://sarafoundationafrica.com/" },
+            { "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://sarafoundationafrica.com/blog" },
+            { "@type": "ListItem", "position": 3, "name": post.title, "item": `https://sarafoundationafrica.com/blog/${post.slug}` },
+          ]
         })}</script>
       </Helmet>
       <Navbar />
@@ -104,7 +122,7 @@ export default function BlogPostPage() {
           </div>
 
           {post.cover_image && (
-            <img src={post.cover_image} alt={post.title} className="w-full rounded-2xl mb-8 object-cover max-h-96" />
+            <img src={post.cover_image} alt={post.title} decoding="async" className="w-full rounded-2xl mb-8 object-cover max-h-96" />
           )}
 
           <div

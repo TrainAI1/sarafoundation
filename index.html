@@ -11,10 +11,74 @@
 
     <!-- Default OG/Twitter tags (overridden per-page by react-helmet-async) -->
     <meta property="og:site_name" content="Sara Foundation Africa" />
+    <meta property="og:title" content="Sara Foundation – Empowering African Tech Talent" />
+    <meta property="og:description" content="Sara Foundation equips African youth and women with tech skills, mentorship and job placement across 35 universities in 11 countries." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://sarafoundationafrica.com/" />
+    <meta property="og:locale" content="en_GB" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:site" content="@Sarafoundations" />
-    <meta name="fragment" content="!" />
+    <meta name="twitter:title" content="Sara Foundation – Empowering African Tech Talent" />
+    <meta name="twitter:description" content="Tech skills, mentorship and job placement for African youth and women across 35 universities in 11 countries." />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+    <meta name="theme-color" content="#1d4ed8" />
     <link rel="icon" type="image/png" href="/favicon.png">
+    <link rel="preconnect" href="https://vacqsktelcuxmjgyswio.supabase.co" crossorigin />
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": ["NGO", "EducationalOrganization"],
+            "@id": "https://sarafoundationafrica.com/#organization",
+            "name": "Sara Foundation Africa",
+            "alternateName": "Sara Foundation",
+            "url": "https://sarafoundationafrica.com/",
+            "logo": "https://sarafoundationafrica.com/favicon.png",
+            "description": "Non-profit equipping African youth and women with tech skills, mentorship and job placement through the CAP, FLIP and EJP programmes.",
+            "foundingDate": "2021",
+            "address": {
+              "@type": "PostalAddress",
+              "addressLocality": "London",
+              "addressCountry": "GB"
+            },
+            "areaServed": [
+              { "@type": "Place", "name": "Africa" },
+              { "@type": "Country", "name": "Nigeria" }
+            ],
+            "knowsAbout": [
+              "tech education in Africa",
+              "women in tech Africa",
+              "graduate job placement",
+              "software engineering training",
+              "cybersecurity training",
+              "data analysis training"
+            ],
+            "sameAs": [
+              "https://twitter.com/Sarafoundations",
+              "https://www.linkedin.com/company/sara-foundation-africa"
+            ]
+          },
+          {
+            "@type": "WebSite",
+            "@id": "https://sarafoundationafrica.com/#website",
+            "url": "https://sarafoundationafrica.com/",
+            "name": "Sara Foundation Africa",
+            "inLanguage": "en",
+            "publisher": { "@id": "https://sarafoundationafrica.com/#organization" },
+            "potentialAction": {
+              "@type": "SearchAction",
+              "target": {
+                "@type": "EntryPoint",
+                "urlTemplate": "https://sarafoundationafrica.com/blog?q={search_term_string}"
+              },
+              "query-input": "required name=search_term_string"
+            }
+          }
+        ]
+      }
+    </script>
     <script src="https://js.paystack.co/v2/inline.js"></script>
 </head>
 

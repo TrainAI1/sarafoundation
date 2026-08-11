@@ -1,8 +1,17 @@
 # Sara Foundation Africa
 
-> Non-profit empowering African youth and women with tech skills, mentorship, and career development across 35+ universities in 8 countries.
+> Non-profit headquartered in London, United Kingdom, equipping African youth and women with tech skills, mentorship and job placement across 35 universities in 11 African countries.
 
-Sara Foundation runs flagship programs (CAP, FLIP, GJP) that combine intensive learning, mentorship, and real-world projects to prepare African students for tech careers.
+Sara Foundation runs three flagship programmes — CAP (Career Advancement Program), FLIP (Female Leadership Initiative Program) and EJP (Employment & Job Placement) — combining intensive learning, mentorship and real-world projects to prepare African students and graduates for tech careers.
+
+## Verified impact figures
+
+- 35 partner universities
+- 763 CAP participants trained
+- 52 women trained through FLIP
+- 11 African countries reached
+- 705 people referred for job placement (includes 696 referred via EJP)
+- Sponsorship cost: £500 sponsors one student; £50 sponsors one module; £10 recurring monthly gifts are welcome
 
 ## Pages
 
@@ -11,15 +20,18 @@ Sara Foundation runs flagship programs (CAP, FLIP, GJP) that combine intensive l
 - [Contact](/contact): Email, phone, and office locations.
 - [Donate](/donation): Support our mission via Naira transfer, crypto, or GoFundMe.
 - [Blog](/blog): Articles on African tech education, women in tech, and graduate outcomes.
+- [Projects](/projects): Past projects, cohort data and impact reports.
+- [Volunteer](/volunteer): Volunteer as a mentor, student ambassador, speaker or trainer.
+- [Annual Reports](/annual-reports): 2024 and 2025 impact reports.
 
 ## Programs
 
-- [CAP Tech Hub](/programs/cap): Career Advancement Program — 13-week intensive (2 weeks learning, 10 weeks build, 1 week launch) and 6-week Fellowship paths.
-- [CAP Apply](/programs/cap/apply): Application form for CAP cohort.
-- [FLIP](/programs/flip): Female Leadership Initiative Program — mentorship and workshops for women in tech.
-- [FLIP Apply](/programs/flip/apply): Application form for FLIP fellowship.
-- [GJP](/programs/gjp): Graduate Jobs Program connecting graduates to tech roles.
-- [GJP Apply](/programs/gjp/apply): Application form for GJP.
+- [CAP Tech Hub](/programs/cap): Career Advancement Program — a 6-week intensive covering software engineering, cybersecurity, data analysis, product marketing and the founders track. Cohort 3 applications are open.
+- [CAP Apply](/programs/cap/apply): Application form for the CAP cohort, including partner reference codes.
+- [FLIP](/programs/flip): Female Leadership Initiative Program — mentorship, fellowships and workshops for women in tech across Africa.
+- [FLIP Apply](/programs/flip/apply): Application form for the FLIP fellowship.
+- [EJP](/programs/gjp): Employment & Job Placement — talent identification and employer matching, delivered in partnership with the Nigerian Jubilee Fellows Programme (NJFP).
+- [EJP Apply](/programs/gjp/apply): Application form for EJP talent placement.
 
 ## Partnership
 
@@ -32,3 +44,4 @@ Sara Foundation runs flagship programs (CAP, FLIP, GJP) that combine intensive l
 
 - [Privacy Policy](/privacy)
 - [Terms of Service](/terms)
+- [Contact email](mailto:info@sarafoundationafrica.com)
