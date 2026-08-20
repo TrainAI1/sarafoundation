@@ -17,16 +17,16 @@ export default function ProgramCAP() {
   return (
     <div className="min-h-screen bg-background">
       <Helmet>
-        <title>CAP Tech Hub – Career Advancement Program | Sara Foundation Africa</title>
+        <title>CAP Tech Hub – Community Access & Participation Pathway | Sara Foundation Africa</title>
         <meta name="description" content="CAP Tech Hub — a 6-week intensive program equipping African university students to launch real tech careers. 35 universities, 11 countries." />
         <link rel="canonical" href="https://sarafoundationafrica.com/programs/cap" />
-        <meta property="og:title" content="CAP Tech Hub – Career Advancement Program | Sara Foundation Africa" />
+        <meta property="og:title" content="CAP Tech Hub – Community Access & Participation Pathway | Sara Foundation Africa" />
         <meta property="og:description" content="A 6-week intensive program equipping African university students to launch real tech careers across 35 universities in 11 African countries." />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://sarafoundationafrica.com/programs/cap" />
         <meta property="og:image" content="https://sarafoundationafrica.com/hero-students.jpg" />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="CAP Tech Hub – Career Advancement Program | Sara Foundation Africa" />
+        <meta name="twitter:title" content="CAP Tech Hub – Community Access & Participation Pathway | Sara Foundation Africa" />
         <meta name="twitter:description" content="A 6-week intensive program equipping African university students to launch real tech careers across 35 universities in 11 African countries." />
         <meta name="twitter:image" content="https://sarafoundationafrica.com/hero-students.jpg" />
       </Helmet>

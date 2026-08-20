@@ -3,7 +3,7 @@ import { BookOpen, Rocket, Zap, Clock, CheckCircle2, ArrowRight } from "lucide-r
 const program = {
   label: "CAP Program",
   title: "6-Week Program for CAP",
-  subtitle: "Career Advancement Program — learn, build, and launch.",
+  subtitle: "Community Access & Participation Pathway — learn, build, and launch.",
   totalDuration: "6 Weeks",
   phases: [
     {

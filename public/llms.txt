@@ -2,7 +2,7 @@
 
 > Non-profit headquartered in London, United Kingdom, equipping African youth and women with tech skills, mentorship and job placement across 35 universities in 11 African countries.
 
-Sara Foundation runs three flagship programmes — CAP (Career Advancement Program), FLIP (Female Leadership Initiative Program) and EJP (Employment & Job Placement) — combining intensive learning, mentorship and real-world projects to prepare African students and graduates for tech careers.
+Sara Foundation runs three flagship programmes — CAP (Community Access & Participation Pathway), FLIP (Female Learning & Inclusion Pathway) and EJP (Educational Journey Pathway) — combining intensive learning, mentorship and real-world projects to prepare African students and graduates for tech careers.
 
 ## Verified impact figures
 
@@ -26,11 +26,11 @@ Sara Foundation runs three flagship programmes — CAP (Career Advancement Progr
 
 ## Programs
 
-- [CAP Tech Hub](/programs/cap): Career Advancement Program — a 6-week intensive covering software engineering, cybersecurity, data analysis, product marketing and the founders track. Cohort 3 applications are open.
+- [CAP Tech Hub](/programs/cap): Community Access & Participation Pathway — a 6-week intensive covering software engineering, cybersecurity, data analysis, product marketing and the founders track. Cohort 3 applications are open.
 - [CAP Apply](/programs/cap/apply): Application form for the CAP cohort, including partner reference codes.
-- [FLIP](/programs/flip): Female Leadership Initiative Program — mentorship, fellowships and workshops for women in tech across Africa.
+- [FLIP](/programs/flip): Female Learning & Inclusion Pathway — mentorship, fellowships and workshops for women in tech across Africa.
 - [FLIP Apply](/programs/flip/apply): Application form for the FLIP fellowship.
-- [EJP](/programs/gjp): Employment & Job Placement — talent identification and employer matching, delivered in partnership with the Nigerian Jubilee Fellows Programme (NJFP).
+- [EJP](/programs/gjp): Educational Journey Pathway — talent identification and employer matching, delivered in partnership with the Nigerian Jubilee Fellows Programme (NJFP).
 - [EJP Apply](/programs/gjp/apply): Application form for EJP talent placement.
 
 ## Partnership

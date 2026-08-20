@@ -20,7 +20,7 @@ const defaults = {
   headline_1: "Breaking Barriers,",
   headline_2: "Igniting Innovation,",
   headline_3: "Empowering Dreams.",
-  subheadline: "We're on a mission to empower the next generation of tech founders and professionals in Africa through inclusive programs that foster innovation and leadership.",
+  subheadline: "Empowering people through tech learning, inclusion and opportunity to build stronger communities.",
   cta_primary: "Join Our Mission",
   cta_secondary: "Partner with Us",
   badge: "Empowering African Tech Talent",

@@ -38,7 +38,7 @@ export default function CAPSuccess() {
               You're in CAP Cohort 3!
             </h1>
             <p className="text-muted-foreground text-base md:text-lg mb-8">
-              Welcome to the Career Advancement Program. Your spot is secured and our team will reach out
+              Welcome to the Community Access & Participation Pathway. Your spot is secured and our team will reach out
               within 48 hours with onboarding details and the WhatsApp community invite.
             </p>
 

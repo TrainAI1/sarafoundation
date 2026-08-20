@@ -71,7 +71,7 @@ export default function GJPStatus() {
     <div className="min-h-screen bg-background">
       <Helmet>
         <title>Check Application Status – GJP | Sara Foundation</title>
-        <meta name="description" content="Check the status of your Government Job Placement (GJP) application using your email and payment reference." />
+        <meta name="description" content="Check the status of your Educational Journey Pathway (EJP) application using your email and payment reference." />
         <link rel="canonical" href="https://sarafoundationafrica.com/programs/gjp/status" />
       </Helmet>
       <Navbar />

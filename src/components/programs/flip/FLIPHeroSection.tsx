@@ -33,7 +33,7 @@ export function FLIPHeroSection() {
               Women-Focused Tech Community
             </span>
             <h1 className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 md:mb-6 leading-tight">
-              Female Leadership Initiative Program (FLIP)
+              Female Learning & Inclusion Pathway (FLIP)
             </h1>
             <p className="text-base md:text-xl text-white/70 leading-relaxed mb-6 md:mb-8">
               A membership-based program providing women-focused tech communities that aims to empower and 

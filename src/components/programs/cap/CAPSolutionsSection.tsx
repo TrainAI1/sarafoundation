@@ -17,7 +17,7 @@ export function CAPSolutionsSection() {
         <div className="text-center max-w-3xl mx-auto mb-10 md:mb-16 px-4">
           <span className="section-badge mb-4 md:mb-6">About CAP</span>
           <h2 className="section-title text-foreground mb-4 md:mb-6">
-            What is the <span className="gradient-text">Career Advancement Program?</span>
+            What is the <span className="gradient-text">Community Access & Participation Pathway?</span>
           </h2>
           <p className="section-subtitle mx-auto">
             CAP is a 6-week intensive, student-led tech hub program embedded inside African universities
