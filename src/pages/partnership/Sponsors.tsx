@@ -172,7 +172,7 @@ export default function Sponsors() {
               with a focus on technology and entrepreneurship. Our goal is to foster Diversity, 
               Equity and Inclusion in technology and accelerate tech opportunities in Africa 
               leveraging our initiatives: the Community Access & Participation Pathway (CAP) and Female 
-              Leadership Initiative Program (FLIP).
+              Learning & Inclusion Pathway (FLIP).
             </p>
             <p className="text-sm md:text-lg text-white/60 mb-6 md:mb-8 max-w-3xl mx-auto">
               Through CAP, we establish tech hubs across African universities. Through FLIP, 
