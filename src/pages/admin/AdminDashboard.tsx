@@ -193,7 +193,7 @@ export default function AdminDashboard() {
     { label: "Contacts (7d)", value: kpis.contacts7, total: kpis.contactsTotal, change: changePct(kpis.contacts7, kpis.contacts7Prev), icon: Mail, color: "primary" },
     { label: "CAP Applications (7d)", value: kpis.cap7, total: kpis.cap, change: changePct(kpis.cap7, kpis.cap7Prev), icon: GraduationCap, color: "accent" },
     { label: "FLIP Applications (7d)", value: kpis.flip7, total: kpis.flip, change: changePct(kpis.flip7, kpis.flip7Prev), icon: GraduationCap, color: "success" },
-    { label: "GJP Applications (7d)", value: kpis.gjp7, total: kpis.gjp, change: changePct(kpis.gjp7, kpis.gjp7Prev), icon: Briefcase, color: "primary" },
+    { label: "EJP Applications (7d)", value: kpis.gjp7, total: kpis.gjp, change: changePct(kpis.gjp7, kpis.gjp7Prev), icon: Briefcase, color: "primary" },
     { label: "Newsletter Subs", value: kpis.subs7, total: kpis.subs, change: 0, icon: Newspaper, color: "accent" },
     { label: "Posts Published", value: kpis.postsPublished, total: kpis.posts, change: 0, icon: PenTool, color: "success" },
   ], [kpis]);
@@ -246,7 +246,7 @@ export default function AdminDashboard() {
         <div className="lg:col-span-2 card-modern p-4 md:p-5">
           <div className="flex items-center justify-between mb-4">
             <h3 className="font-display font-bold text-foreground text-sm">Applications · last 30 days</h3>
-            <span className="text-xs text-muted-foreground">CAP · FLIP · GJP</span>
+            <span className="text-xs text-muted-foreground">CAP · FLIP · EJP</span>
           </div>
           <div className="h-64">
             <ResponsiveContainer width="100%" height="100%">
@@ -271,7 +271,7 @@ export default function AdminDashboard() {
                 <Tooltip contentStyle={{ background: "hsl(var(--card))", border: "1px solid hsl(var(--border))", borderRadius: 8, fontSize: 12 }} />
                 <Area type="monotone" dataKey="cap" name="CAP" stackId="1" stroke="hsl(var(--primary))" fill="url(#g-cap)" strokeWidth={2} />
                 <Area type="monotone" dataKey="flip" name="FLIP" stackId="1" stroke="hsl(var(--accent))" fill="url(#g-flip)" strokeWidth={2} />
-                <Area type="monotone" dataKey="gjp" name="GJP" stackId="1" stroke="hsl(var(--success))" fill="url(#g-gjp)" strokeWidth={2} />
+                <Area type="monotone" dataKey="gjp" name="EJP" stackId="1" stroke="hsl(var(--success))" fill="url(#g-gjp)" strokeWidth={2} />
               </AreaChart>
             </ResponsiveContainer>
           </div>
@@ -289,7 +289,7 @@ export default function AdminDashboard() {
                 <Legend wrapperStyle={{ fontSize: 11 }} />
                 <Bar dataKey="cap" name="CAP" fill="hsl(var(--primary))" radius={[4, 4, 0, 0]} />
                 <Bar dataKey="flip" name="FLIP" fill="hsl(var(--accent))" radius={[4, 4, 0, 0]} />
-                <Bar dataKey="gjp" name="GJP" fill="hsl(var(--success))" radius={[4, 4, 0, 0]} />
+                <Bar dataKey="gjp" name="EJP" fill="hsl(var(--success))" radius={[4, 4, 0, 0]} />
               </BarChart>
             </ResponsiveContainer>
           </div>
