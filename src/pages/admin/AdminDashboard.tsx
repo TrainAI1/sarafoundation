@@ -179,7 +179,7 @@ export default function AdminDashboard() {
         ((gjpRecentRes.data ?? []) as { id: string; full_name: string; email: string; created_at: string }[]).map((r) => ({
           id: r.id, name: r.full_name, email: r.email, created_at: r.created_at,
         })),
-        "GJP", "/admin/gjp-applications"
+        "EJP", "/admin/gjp-applications"
       );
       appRows.sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime());
       setRecentApps(appRows.slice(0, 6));

@@ -489,7 +489,7 @@ export default function AdminGjpApplications() {
     }));
     ws["!cols"] = colWidths;
     const wb = XLSX.utils.book_new();
-    XLSX.utils.book_append_sheet(wb, ws, "GJP Applications");
+    XLSX.utils.book_append_sheet(wb, ws, "EJP Applications");
     XLSX.writeFile(wb, `gjp-applications-${new Date().toISOString().slice(0, 10)}.xlsx`);
     toast.success(`Exported ${data.length} applications to Excel`);
   };
@@ -529,7 +529,7 @@ export default function AdminGjpApplications() {
       <div className="mb-6 flex flex-col md:flex-row md:items-center md:justify-between gap-3">
         <div>
           <h1 className="font-display text-xl md:text-2xl font-bold text-foreground flex items-center gap-2">
-            <Briefcase className="w-5 h-5" /> GJP Applications
+            <Briefcase className="w-5 h-5" /> EJP Applications
           </h1>
           <p className="text-muted-foreground text-sm">
             {stats.total} total · {stats.tech} tech · {stats.total - stats.tech} non-tech · {stats.nyscDone} NYSC completed
@@ -913,7 +913,7 @@ export default function AdminGjpApplications() {
                   id="email-subject"
                   value={emailSubject}
                   onChange={(e) => setEmailSubject(e.target.value)}
-                  placeholder="GJP — update from Sara Foundation"
+                  placeholder="EJP — update from Sara Foundation"
                   className="mt-1 rounded-xl"
                 />
               </div>
@@ -923,7 +923,7 @@ export default function AdminGjpApplications() {
                   id="email-body"
                   value={emailBody}
                   onChange={(e) => setEmailBody(e.target.value)}
-                  placeholder="Hi, we have an update on your GJP application..."
+                  placeholder="Hi, we have an update on your EJP application..."
                   className="mt-1 rounded-xl min-h-[160px]"
                 />
               </div>
