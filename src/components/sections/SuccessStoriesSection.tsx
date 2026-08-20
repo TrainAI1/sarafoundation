@@ -23,10 +23,10 @@ const stories = [
   },
   {
     name: "Tunde A.",
-    role: "GJP Placement · Public Sector Tech",
+    role: "EJP Placement · Public Sector Tech",
     location: "Abuja, Nigeria",
     quote:
-      "Through GJP I got placed in a federal ministry's digital team. I'm now helping digitise services that touch millions of Nigerians every month.",
+      "Through EJP I got placed in a federal ministry's digital team. I'm now helping digitise services that touch millions of Nigerians every month.",
     outcome: "12-month paid placement in a federal ministry",
   },
 ];
