@@ -23,7 +23,7 @@ export function WorkWithUsSection() {
           
           <ScrollAnimation variant="fade-up" delay={0.1}>
             <h2 className="font-display text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4 md:mb-6 leading-tight">
-              We are on a mission to empower the next generation of tech founders and professionals.
+              Empowering people through tech learning, inclusion and opportunity to build stronger communities.
             </h2>
           </ScrollAnimation>
           

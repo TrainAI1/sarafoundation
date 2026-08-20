@@ -17,25 +17,25 @@ const headlineStats = [
 const pastProjects = [
   {
     icon: Briefcase,
-    title: "EJP — Employment & Job Placement Pipeline (Public Sector)",
+    title: "EJP — Educational Journey Pathway Pipeline (Public Sector)",
     summary: "Our public-sector placement work, including partnership with the Nigerian government on the Nigerian Jubilee Fellowship Placement (NJFP) Program — referring tech-trained graduates into government and partner roles.",
     impact: "Federal Government partnership · Tech graduates referred for placement",
   },
   {
     icon: GraduationCap,
     title: "CAP Cohorts 1 & 2 — Tech Hub Rollout",
-    summary: "Stood up Career Advancement Program tech hubs across 35 partner universities, training 763 students in software, design, data and product over two cohorts.",
+    summary: "Stood up Community Access & Participation Pathway tech hubs across 35 partner universities, training 763 students in software, design, data and product over two cohorts.",
     impact: "763 students trained · 35 universities · 11 African countries",
   },
   {
     icon: Sparkles,
     title: "FLIP Fellowship — Cohort 1",
-    summary: "Launched the Female Leadership Initiative Program with our first fellowship cohort — leadership coaching, technical mentorship and a Pan-African peer community for women in tech.",
+    summary: "Launched the Female Learning & Inclusion Pathway with our first fellowship cohort — leadership coaching, technical mentorship and a Pan-African peer community for women in tech.",
     impact: "52 women supported · Pan-African cohort · Mentor-matched",
   },
   {
     icon: Briefcase,
-    title: "EJP — Employment & Job Placement Pipeline",
+    title: "EJP — Educational Journey Pathway Pipeline",
     summary: "Connected qualified African tech talent with hiring partners across the continent. Together with placements from earlier cohorts, the program contributes to a cumulative total of 705 people referred for placement.",
     impact: "696 referred through EJP · 705 cumulative placements",
   },

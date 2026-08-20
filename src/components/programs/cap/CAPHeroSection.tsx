@@ -28,7 +28,7 @@ export function CAPHeroSection() {
           <div className="px-4 lg:px-0">
             <span className="inline-flex items-center gap-2 px-3 md:px-4 py-1.5 md:py-2 glass-card-dark rounded-full text-white/90 text-xs md:text-sm font-medium mb-4 md:mb-6">
               <GraduationCap className="w-3 h-3 md:w-4 md:h-4 text-accent" />
-              Career Advancement Program
+              Community Access & Participation Pathway
             </span>
             <h1 className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 md:mb-6 leading-tight">
               Empowering Africa's Next Generation of Tech Leaders.

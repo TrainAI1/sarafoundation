@@ -20,9 +20,9 @@ const partnershipItems = [
 ];
 
 const programItems = [
-  { title: "Career Advancement Program", href: "/programs/cap", description: "Tech employability skills & entrepreneurial practical learning program" },
-  { title: "Female Leadership Initiative", href: "/programs/flip", description: "Empowering women in tech" },
-  { title: "Employment & Job Placement (EJP)", href: "/programs/gjp", description: "Connecting Africa's top tech talent with employers" },
+  { title: "Community Access & Participation Pathway", href: "/programs/cap", description: "Tech employability skills & entrepreneurial practical learning program" },
+  { title: "Female Learning & Inclusion Pathway", href: "/programs/flip", description: "Empowering women in tech" },
+  { title: "Educational Journey Pathway (EJP)", href: "/programs/gjp", description: "Connecting Africa's top tech talent with employers" },
 ];
 
 export function Navbar() {

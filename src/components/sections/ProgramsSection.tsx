@@ -10,7 +10,7 @@ const programs = [
   {
     id: "cap",
     icon: GraduationCap,
-    title: "Career Advancement Program (CAP)",
+    title: "Community Access & Participation Pathway (CAP)",
     subtitle: "Tech Employability & Entrepreneurial Practical Learning",
     description: "A tech employability skills and entrepreneurial practical learning program, implemented through CAP TECH CLUBS in African universities, nurturing young Africans into tech professionals and founders.",
     image: studentsLabImg,
@@ -25,7 +25,7 @@ const programs = [
   {
     id: "flip",
     icon: Users,
-    title: "Female Leadership Initiative Program (FLIP)",
+    title: "Female Learning & Inclusion Pathway (FLIP)",
     subtitle: "Women-Focused Tech Community",
     description: "A membership-based program empowering women in tech to grow and succeed in Africa through mentorship, networking, and opportunities.",
     image: womenTechLeaders,
@@ -39,7 +39,7 @@ const programs = [
   {
     id: "ejp",
     icon: Briefcase,
-    title: "Employment & Job Placement (EJP)",
+    title: "Educational Journey Pathway (EJP)",
     subtitle: "Workforce Placement · 705+ Referred",
     description: "Connecting qualified African tech talent with employers across the continent through public and private sector partnerships — internships, graduate programmes and full-time roles.",
     image: graduatesCelebration,

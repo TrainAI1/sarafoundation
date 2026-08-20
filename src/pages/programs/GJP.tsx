@@ -19,10 +19,10 @@ export default function ProgramGJP() {
   return (
     <div className="min-h-screen bg-background">
       <Helmet>
-        <title>Employment & Job Placement Pipeline (EJP) – Sara Foundation Africa</title>
+        <title>Educational Journey Pathway Pipeline (EJP) – Sara Foundation Africa</title>
         <meta name="description" content="EJP connects Africa's top tech talent with employers across the continent. 705+ professionals referred for placement through public and private sector partnerships." />
         <link rel="canonical" href="https://sarafoundationafrica.com/programs/gjp" />
-        <meta property="og:title" content="EJP – Employment & Job Placement Pipeline" />
+        <meta property="og:title" content="EJP – Educational Journey Pathway Pipeline" />
         <meta property="og:description" content="Connecting Africa's top tech talent with employers. 705+ professionals referred for placement across Africa." />
       </Helmet>
       <Navbar />
@@ -36,7 +36,7 @@ export default function ProgramGJP() {
             <Sparkles className="w-3.5 h-3.5" /> 705+ Professionals Referred Across Africa
           </span>
           <h1 className="font-display text-3xl md:text-5xl lg:text-6xl font-bold text-foreground tracking-tight leading-tight mb-5">
-            Employment & Job Placement <span className="gradient-text">Pipeline (EJP)</span>
+            Educational Journey Pathway <span className="gradient-text">Pipeline (EJP)</span>
             <br className="hidden md:block" />
             <span className="text-2xl md:text-4xl block mt-2 text-muted-foreground font-semibold">
               Connecting Africa's Top Tech Talent with Employers

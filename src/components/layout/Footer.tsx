@@ -20,8 +20,8 @@ const quickLinks = [
 ];
 
 const programLinks = [
-  { title: "Career Advancement Program", href: "/programs/cap" },
-  { title: "Female Leadership Initiative", href: "/programs/flip" },
+  { title: "Community Access & Participation Pathway", href: "/programs/cap" },
+  { title: "Female Learning & Inclusion Pathway", href: "/programs/flip" },
 ];
 
 const getSocialLinks = (s: Record<string, string>) => [
@@ -74,7 +74,7 @@ export function Footer() {
               />
             </Link>
             <p className="text-white/60 text-sm mb-8 leading-relaxed">
-              Empowering the next generation of African tech entrepreneurs through innovation, diversity, and inclusion.
+              Empowering people through tech learning, inclusion and opportunity to build stronger communities.
             </p>
             <p className="text-white/70 text-sm mb-6 font-medium">
               Headquartered in London, United Kingdom.

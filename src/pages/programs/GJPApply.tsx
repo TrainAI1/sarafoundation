@@ -207,8 +207,8 @@ export default function GJPApply() {
   return (
     <div className="min-h-screen bg-background">
       <Helmet>
-        <title>Apply – Employment & Job Placement Pipeline (EJP) | Sara Foundation</title>
-        <meta name="description" content="Apply to the Employment & Job Placement Pipeline (EJP) to be matched with employers across Africa hiring for tech and tech-adjacent roles." />
+        <title>Apply – Educational Journey Pathway Pipeline (EJP) | Sara Foundation</title>
+        <meta name="description" content="Apply to the Educational Journey Pathway Pipeline (EJP) to be matched with employers across Africa hiring for tech and tech-adjacent roles." />
         <link rel="canonical" href="https://sarafoundationafrica.com/programs/gjp/apply" />
       </Helmet>
       <Navbar />
@@ -219,7 +219,7 @@ export default function GJPApply() {
               <Briefcase className="w-3 h-3" /> EJP · Talent Placement Pipeline
             </span>
             <h1 className="font-display text-3xl md:text-4xl font-bold text-foreground mb-2">
-              Apply for Employment & Job Placement
+              Apply for Educational Journey Pathway
             </h1>
             <p className="text-muted-foreground text-sm md:text-base">
               Step {step} of {total} — takes about 3 minutes.

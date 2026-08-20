@@ -23,7 +23,7 @@ const defaultSettings: Record<string, string> = {
   socialYoutube: "",
   newsletterTitle: "Stay Updated",
   newsletterDescription: "Get the latest news, success stories, and opportunities delivered to your inbox.",
-  footerText: "Empowering the next generation of African tech leaders.",
+  footerText: "Empowering people through tech learning, inclusion and opportunity to build stronger communities.",
   logoLight: "",
   logoDark: "",
   favicon: "",

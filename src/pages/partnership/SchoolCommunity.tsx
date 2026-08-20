@@ -161,7 +161,7 @@ export default function SchoolCommunity() {
               and promote Diversity, Equity and Inclusion in technology.
             </p>
             <p className="text-sm md:text-lg text-white/60 mb-6 md:mb-8 max-w-3xl mx-auto">
-              The Career Advancement Program (CAP) is an initiative of Sara Foundation Africa aimed at 
+              The Community Access & Participation Pathway (CAP) is an initiative of Sara Foundation Africa aimed at 
               establishing tech clubs across African universities and providing development opportunities 
               for the next generation of tech founders and tech professionals.
             </p>

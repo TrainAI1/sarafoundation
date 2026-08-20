@@ -171,7 +171,7 @@ export default function Sponsors() {
               We are a non-profit organization established to promote SDG 5 and SDG 8 in Africa 
               with a focus on technology and entrepreneurship. Our goal is to foster Diversity, 
               Equity and Inclusion in technology and accelerate tech opportunities in Africa 
-              leveraging our initiatives: the Career Advancement Program (CAP) and Female 
+              leveraging our initiatives: the Community Access & Participation Pathway (CAP) and Female 
               Leadership Initiative Program (FLIP).
             </p>
             <p className="text-sm md:text-lg text-white/60 mb-6 md:mb-8 max-w-3xl mx-auto">
