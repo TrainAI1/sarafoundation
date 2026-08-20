@@ -67,7 +67,7 @@ const advisors = [
 ];
 
 const keyInitiatives = [
-  { title: "CAP Tech Hub", description: "Empowering tech leaders, innovators, and experts through comprehensive career advancement programs.", image: studentsLabImg },
+  { title: "CAP Tech Hub", description: "Empowering tech leaders, innovators, and experts through comprehensive tech learning and career pathways.", image: studentsLabImg },
   { title: "FLIP Communities", description: "Women Professionals in Tech Africa and Women Founders in Tech Africa - building leadership pipelines.", image: womenCoworking },
 ];
 
@@ -213,8 +213,8 @@ export default function About() {
                   <div>
                     <h3 className="font-display font-bold text-xl text-foreground mb-2">Our Mission</h3>
                     <p className="text-muted-foreground">
-                      To foster Diversity, Equity, and Inclusion in African tech and develop the next 
-                      generation of African tech founders and entrepreneurs.
+                      Empowering people through tech learning, inclusion and opportunity to build 
+                      stronger communities.
                     </p>
                   </div>
                 </div>

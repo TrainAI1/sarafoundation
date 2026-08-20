@@ -41,7 +41,7 @@ const navGroups: NavGroup[] = [
       { label: "Newsletter", path: "/admin/newsletter", icon: Newspaper, cap: "submissions" },
       { label: "CAP Applications", path: "/admin/cap-applications", icon: GraduationCap, cap: "submissions" },
       { label: "FLIP Applications", path: "/admin/flip-applications", icon: GraduationCap, cap: "submissions" },
-      { label: "GJP Applications", path: "/admin/gjp-applications", icon: Briefcase, cap: "submissions" },
+      { label: "EJP Applications", path: "/admin/gjp-applications", icon: Briefcase, cap: "submissions" },
     ],
   },
   {
