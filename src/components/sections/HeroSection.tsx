@@ -55,24 +55,9 @@ export function HeroSection() {
 
   return (
     <section className="relative min-h-[100svh] flex flex-col overflow-hidden">
-      {/* Light background that blends into page */}
+      {/* Plain page background */}
       <div className="absolute inset-0 bg-background" />
 
-      {/* Subtle tinted mesh */}
-      <div className="absolute inset-0 opacity-60">
-      </div>
-
-      {/* Grid pattern (dark on white) */}
-      <div
-        className="absolute inset-0 opacity-[0.04]"
-        style={{
-          backgroundImage: `linear-gradient(hsl(var(--foreground)) 1px, transparent 1px), linear-gradient(90deg, hsl(var(--foreground)) 1px, transparent 1px)`,
-          backgroundSize: '64px 64px',
-        }}
-      />
-
-      {/* Bottom fade into page background for seamless scroll */}
-      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-32 z-[5] bg-gradient-to-b from-transparent to-background" />
 
       <div className="section-container relative z-10 pt-24 md:pt-28 pb-8 md:pb-10 w-full flex-1 flex flex-col">
         <div className="flex flex-col items-center text-center text-foreground space-y-4 md:space-y-5 max-w-3xl mx-auto px-2">
