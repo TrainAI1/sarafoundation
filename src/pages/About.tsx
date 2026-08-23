@@ -3,8 +3,8 @@ import { Footer } from "@/components/layout/Footer";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
-import { 
-  Target, Heart, Lightbulb, Globe, Users, Award, 
+import {
+  Target, Heart, Lightbulb, Globe, Users, Award,
   ArrowRight, Sparkles, Eye, Quote, Trophy
 } from "lucide-react";
 import communityWorkshop from "@/assets/community-workshop.jpg";
@@ -37,21 +37,21 @@ const values = [
 ];
 
 const coreTeam = [
-  { 
-    name: "Kalu Sarah", 
-    role: "Founder", 
+  {
+    name: "Kalu Sarah",
+    role: "Founder",
     bio: "Has worked with Goldman Sachs, Bloomberg, and Blackaion Capital. Also leads Train AI, an edtech platform for tech learners across Africa's $3.4B market.",
     photo: sarahPhoto,
   },
-  { 
-    name: "Inem Emmanuel", 
-    role: "Public Relations Specialist", 
+  {
+    name: "Inem Emmanuel",
+    role: "Public Relations Specialist",
     bio: "Grew social media reach to 5,365+ followers. Successfully hosted 15 live sessions including 8 LinkedIn Live and 7 Twitter Spaces.",
     photo: emmanuelPhoto,
   },
-  { 
-    name: "Emediong Joel", 
-    role: "Program Manager", 
+  {
+    name: "Emediong Joel",
+    role: "Program Manager",
     bio: "Expanded CAP to 35 universities across 11 African countries. Launched FLIP Fellowship and secured partnerships with Scintilla, Farmily, and more.",
     photo: emediongPhoto,
   },
@@ -117,7 +117,6 @@ export default function About() {
       {/* Hero */}
       <section className="pt-24 md:pt-32 pb-12 md:pb-20 bg-gradient-to-br from-primary via-primary/90 to-[hsl(240,80%,50%)] relative overflow-hidden">
         <div className="absolute inset-0 opacity-30">
-          <div className="absolute top-1/4 right-1/4 w-[300px] md:w-[500px] h-[300px] md:h-[500px] rounded-full bg-accent blur-[100px] md:blur-[150px]" />
         </div>
         <div className="section-container relative z-10">
           <div className="max-w-3xl px-4">
@@ -129,7 +128,7 @@ export default function About() {
               Transforming Africa's Tech Landscape
             </h1>
             <p className="text-base md:text-xl text-white/70 leading-relaxed">
-              Sara Foundation is a Non-Profit Organization dedicated to driving technology-focused 
+              Sara Foundation is a Non-Profit Organization dedicated to driving technology-focused
               impact in Africa through Diversity, Equity, and Inclusion (DEI).
             </p>
           </div>
@@ -158,7 +157,7 @@ export default function About() {
         <div className="section-container">
           <div className="flex flex-wrap items-center justify-center gap-3 md:gap-4">
             <span className="flex items-center gap-2 text-muted-foreground font-medium">
-              🌍 Present in 11 African countries:
+               Present in 11 African countries:
             </span>
             {countries.map((country) => (
               <span key={country.name} className="inline-flex items-center gap-2 px-3 py-1.5 bg-secondary rounded-full text-sm text-foreground">
@@ -182,23 +181,23 @@ export default function About() {
               </h2>
               <div className="space-y-4 text-muted-foreground leading-relaxed">
                 <p>
-                  Sara Foundation Africa was born from a simple yet powerful vision: to ensure that 
-                  every young African with a passion for technology has the opportunity to turn their 
+                  Sara Foundation Africa was born from a simple yet powerful vision: to ensure that
+                  every young African with a passion for technology has the opportunity to turn their
                   dreams into reality.
                 </p>
                 <p>
-                  We promote Sustainable Development Goals SDG 4 (Quality Education), SDG 5 (Gender Equality), 
+                  We promote Sustainable Development Goals SDG 4 (Quality Education), SDG 5 (Gender Equality),
                   and SDG 8 (Decent Work and Economic Growth) through tech clubs and women's communities.
                 </p>
                 <p>
-                  Today, we operate across 11 African countries with 35 university partners, 
-                  working alongside industry leaders to create pathways for young Africans to 
+                  Today, we operate across 11 African countries with 35 university partners,
+                  working alongside industry leaders to create pathways for young Africans to
                   thrive in the global tech ecosystem.
                 </p>
               </div>
               <div className="mt-6 rounded-2xl overflow-hidden shadow-lg">
-                <img 
-                  src={communityWorkshop} 
+                <img
+                  src={communityWorkshop}
                   alt="Sara Foundation community workshop"
                   className="w-full h-48 md:h-64 object-cover"
                 />
@@ -213,7 +212,7 @@ export default function About() {
                   <div>
                     <h3 className="font-display font-bold text-xl text-foreground mb-2">Our Mission</h3>
                     <p className="text-muted-foreground">
-                      Empowering people through tech learning, inclusion and opportunity to build 
+                      Empowering people through tech learning, inclusion and opportunity to build
                       stronger communities.
                     </p>
                   </div>
@@ -227,15 +226,15 @@ export default function About() {
                   <div>
                     <h3 className="font-display font-bold text-xl text-foreground mb-2">Our Vision</h3>
                     <p className="text-muted-foreground">
-                      An Africa where every young person, regardless of gender, background, or location, 
+                      An Africa where every young person, regardless of gender, background, or location,
                       has equal access to thrive in the global tech economy.
                     </p>
                   </div>
                 </div>
               </div>
               <div className="rounded-2xl overflow-hidden shadow-lg">
-                <img 
-                  src={techEntrepreneurs} 
+                <img
+                  src={techEntrepreneurs}
                   alt="Tech entrepreneurs collaborating"
                   className="w-full h-40 object-cover"
                 />
@@ -257,8 +256,8 @@ export default function About() {
           <div className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
             {keyInitiatives.map((initiative) => (
               <div key={initiative.title} className="card-modern overflow-hidden">
-                <img 
-                  src={initiative.image} 
+                <img
+                  src={initiative.image}
                   alt={initiative.title}
                   className="w-full h-40 md:h-48 object-cover"
                 />

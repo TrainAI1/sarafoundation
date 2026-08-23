@@ -27,8 +27,6 @@ export function ImpactSection() {
   return (
     <section className="py-16 md:py-24 bg-gradient-to-br from-foreground via-foreground/95 to-[hsl(240,20%,15%)] relative overflow-hidden">
       <div className="absolute inset-0 opacity-20">
-        <div className="absolute top-0 right-1/4 w-[500px] h-[500px] rounded-full bg-primary blur-[200px]" />
-        <div className="absolute bottom-0 left-1/4 w-[500px] h-[500px] rounded-full bg-accent blur-[200px]" />
       </div>
 
       <div className="section-container relative z-10">

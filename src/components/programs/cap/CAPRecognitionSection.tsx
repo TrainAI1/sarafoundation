@@ -35,13 +35,13 @@ export function CAPRecognitionSection() {
           <div className="card-modern p-6 md:p-8 text-center bg-gradient-to-br from-primary/5 to-accent/5 border-primary/20">
             <Award className="w-12 h-12 text-primary mx-auto mb-4" />
             <h3 className="font-display font-bold text-xl text-foreground mb-1">
-              🏆 Prestige Award Winner 2025/26
+               Prestige Award Winner 2025/26
             </h3>
             <p className="text-primary font-medium text-sm mb-3">
               London & South East England — Leadership Development Category
             </p>
             <p className="text-muted-foreground text-sm italic max-w-lg mx-auto">
-              "This recognition honours organisations making meaningful impact within their communities 
+              "This recognition honours organisations making meaningful impact within their communities
               and reinforces our position as a rising African nonprofit shaping the next generation of innovators."
             </p>
           </div>
@@ -61,8 +61,8 @@ export function CAPRecognitionSection() {
         </div>
 
         <p className="text-center text-muted-foreground text-sm mt-10 max-w-2xl mx-auto px-4">
-          Sara Foundation is a London based Non-Profit Organization established by Africans to drive 
-          technology focused impact in Africa, by fostering Diversity, Equity and Inclusion and developing 
+          Sara Foundation is a London based Non-Profit Organization established by Africans to drive
+          technology focused impact in Africa, by fostering Diversity, Equity and Inclusion and developing
           the next generation African tech founders and entrepreneurs.
         </p>
       </div>

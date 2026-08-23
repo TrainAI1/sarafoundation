@@ -36,8 +36,8 @@ export function CAPCTASection() {
 
         <div className="grid sm:grid-cols-3 gap-4 md:gap-6 max-w-3xl mx-auto mb-10">
           {actions.map((action) => (
-            <Link 
-              key={action.label} 
+            <Link
+              key={action.label}
               to={action.to}
               className="glass-card-dark p-5 md:p-6 rounded-xl hover:bg-white/20 transition-colors group text-center"
             >
@@ -49,8 +49,8 @@ export function CAPCTASection() {
         </div>
 
         <div className="text-white/50 text-xs space-y-1">
-          <p>📧 info@sarafoundationafrica.com &nbsp; 🌐 sarafoundationafrica.com</p>
-          <p>📞 +44 7435 126104 (UK) | +234 9076 66404 (NG)</p>
+          <p> info@sarafoundationafrica.com &nbsp;  sarafoundationafrica.com</p>
+          <p> +44 7435 126104 (UK) | +234 9076 66404 (NG)</p>
         </div>
       </div>
     </section>

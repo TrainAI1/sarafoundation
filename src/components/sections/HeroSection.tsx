@@ -60,8 +60,6 @@ export function HeroSection() {
 
       {/* Subtle tinted mesh */}
       <div className="absolute inset-0 opacity-60">
-        <div className="absolute -top-20 left-1/4 w-[300px] h-[300px] md:w-[600px] md:h-[600px] rounded-full bg-primary/10 blur-[80px] md:blur-[120px] animate-float" />
-        <div className="absolute bottom-0 right-1/4 w-[260px] h-[260px] md:w-[500px] md:h-[500px] rounded-full bg-accent/10 blur-[70px] md:blur-[100px] animate-float-delayed" />
       </div>
 
       {/* Grid pattern (dark on white) */}

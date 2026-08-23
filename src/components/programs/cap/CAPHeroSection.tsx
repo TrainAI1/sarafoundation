@@ -21,7 +21,6 @@ export function CAPHeroSection() {
         <div className="absolute inset-0 bg-gradient-to-br from-primary via-primary/90 to-[hsl(240,80%,50%)]" />
       </div>
       <div className="absolute inset-0 opacity-30">
-        <div className="absolute top-0 right-0 w-[400px] md:w-[600px] h-[400px] md:h-[600px] rounded-full bg-accent blur-[100px] md:blur-[150px]" />
       </div>
       <div className="section-container relative z-10">
         <div className="grid lg:grid-cols-2 gap-8 md:gap-12 items-center">
