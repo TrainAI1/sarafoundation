@@ -156,7 +156,6 @@ export default function Sponsors() {
       {/* Hero */}
       <section className="pt-28 md:pt-32 pb-16 md:pb-20 bg-gradient-to-br from-primary via-primary/90 to-[hsl(240,80%,50%)] relative overflow-hidden">
         <div className="absolute inset-0 opacity-30">
-          <div className="absolute top-1/4 right-1/4 w-[300px] md:w-[500px] h-[300px] md:h-[500px] rounded-full bg-accent blur-[100px] md:blur-[150px]" />
         </div>
         <div className="section-container relative z-10">
           <div className="max-w-4xl mx-auto text-center px-4">

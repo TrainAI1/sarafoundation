@@ -8,8 +8,6 @@ export function WorkWithUsSection() {
     <section className="py-16 md:py-24 bg-gradient-to-br from-primary via-primary/90 to-[hsl(240,80%,50%)] relative overflow-hidden">
       {/* Background effects */}
       <div className="absolute inset-0 opacity-30">
-        <div className="absolute top-1/4 right-1/4 w-[300px] md:w-[400px] h-[300px] md:h-[400px] rounded-full bg-accent blur-[100px] md:blur-[120px]" />
-        <div className="absolute bottom-1/4 left-1/4 w-[200px] md:w-[300px] h-[200px] md:h-[300px] rounded-full bg-white/20 blur-[80px] md:blur-[100px]" />
       </div>
 
       <div className="section-container relative z-10">

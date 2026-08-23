@@ -18,8 +18,6 @@ export function CTASection() {
     <section className="py-16 md:py-24 lg:py-32 relative overflow-hidden">
       <div className="absolute inset-0 bg-gradient-to-br from-primary via-primary/90 to-[hsl(240,80%,50%)]" />
       <div className="absolute inset-0 opacity-30">
-        <div className="absolute top-0 right-1/4 w-[400px] h-[400px] rounded-full bg-accent blur-[120px]" />
-        <div className="absolute bottom-0 left-1/4 w-[300px] h-[300px] rounded-full bg-white blur-[100px]" />
       </div>
 
       <div className="section-container relative z-10">

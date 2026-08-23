@@ -23,7 +23,6 @@ export function FLIPHeroSection() {
         <div className="absolute inset-0 bg-gradient-to-br from-accent via-accent/90 to-[hsl(350,80%,55%)]" />
       </div>
       <div className="absolute inset-0 opacity-30">
-        <div className="absolute bottom-0 left-0 w-[400px] md:w-[600px] h-[400px] md:h-[600px] rounded-full bg-primary blur-[100px] md:blur-[150px]" />
       </div>
       <div className="section-container relative z-10">
         <div className="grid lg:grid-cols-2 gap-8 md:gap-12 items-center">

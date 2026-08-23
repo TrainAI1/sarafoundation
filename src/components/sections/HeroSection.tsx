@@ -55,26 +55,9 @@ export function HeroSection() {
 
   return (
     <section className="relative min-h-[100svh] flex flex-col overflow-hidden">
-      {/* Light background that blends into page */}
+      {/* Plain page background */}
       <div className="absolute inset-0 bg-background" />
 
-      {/* Subtle tinted mesh */}
-      <div className="absolute inset-0 opacity-60">
-        <div className="absolute -top-20 left-1/4 w-[300px] h-[300px] md:w-[600px] md:h-[600px] rounded-full bg-primary/10 blur-[80px] md:blur-[120px] animate-float" />
-        <div className="absolute bottom-0 right-1/4 w-[260px] h-[260px] md:w-[500px] md:h-[500px] rounded-full bg-accent/10 blur-[70px] md:blur-[100px] animate-float-delayed" />
-      </div>
-
-      {/* Grid pattern (dark on white) */}
-      <div
-        className="absolute inset-0 opacity-[0.04]"
-        style={{
-          backgroundImage: `linear-gradient(hsl(var(--foreground)) 1px, transparent 1px), linear-gradient(90deg, hsl(var(--foreground)) 1px, transparent 1px)`,
-          backgroundSize: '64px 64px',
-        }}
-      />
-
-      {/* Bottom fade into page background for seamless scroll */}
-      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-32 z-[5] bg-gradient-to-b from-transparent to-background" />
 
       <div className="section-container relative z-10 pt-24 md:pt-28 pb-8 md:pb-10 w-full flex-1 flex flex-col">
         <div className="flex flex-col items-center text-center text-foreground space-y-4 md:space-y-5 max-w-3xl mx-auto px-2">
