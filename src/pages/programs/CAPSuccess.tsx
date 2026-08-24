@@ -31,7 +31,7 @@ export default function CAPSuccess() {
             <div className="w-20 h-20 mx-auto rounded-full bg-gradient-to-br from-primary to-[hsl(240,80%,50%)] flex items-center justify-center mb-6 glow-effect">
               <CheckCircle2 className="w-10 h-10 text-white" />
             </div>
-            <span className="inline-flex items-center gap-2 px-3 py-1.5 bg-primary/10 rounded-full text-primary text-xs font-semibold mb-4">
+            <span className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.18em] text-primary mb-4">
               <Sparkles className="w-3 h-3" /> Enrollment Confirmed
             </span>
             <h1 className="font-display text-3xl md:text-4xl font-bold text-foreground mb-3">

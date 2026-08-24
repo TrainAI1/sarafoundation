@@ -25,7 +25,7 @@ export function CAPHeroSection() {
       <div className="section-container relative z-10">
         <div className="grid lg:grid-cols-2 gap-8 md:gap-12 items-center">
           <div className="px-4 lg:px-0">
-            <span className="inline-flex items-center gap-2 px-3 md:px-4 py-1.5 md:py-2 glass-card-dark rounded-full text-white/90 text-xs md:text-sm font-medium mb-4 md:mb-6">
+            <span className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.18em] text-white/80 mb-4 mb-6">
               <GraduationCap className="w-3 h-3 md:w-4 md:h-4 text-accent" />
               Community Access & Participation Pathway
             </span>

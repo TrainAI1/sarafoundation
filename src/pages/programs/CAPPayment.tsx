@@ -189,7 +189,7 @@ export default function CAPPayment() {
                 <p className="font-semibold text-foreground mb-3">
                   Select payment plan
                   {isPartner && (
-                    <span className="ml-2 inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-primary/15 text-primary text-xs font-medium">
+                    <span className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.18em] text-primary">
                       Partner code applied
                     </span>
                   )}

@@ -17,7 +17,7 @@ export function FLIPMissionVisionSection() {
         {/* Countries */}
         <div className="flex flex-wrap justify-center gap-3 mb-10 md:mb-16 px-4">
           {countries.map((country) => (
-            <span key={country.name} className="inline-flex items-center gap-2 px-4 py-2 bg-card border border-border rounded-full text-sm text-foreground">
+            <span key={country.name} className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.18em] text-primary">
               <span className="text-lg">{country.flag}</span>
               {country.name}
             </span>

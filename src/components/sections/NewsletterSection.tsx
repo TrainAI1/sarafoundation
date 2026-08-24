@@ -47,7 +47,7 @@ export function NewsletterSection() {
             <div className="absolute bottom-0 left-0 w-48 h-48 bg-gradient-to-br from-accent/10 to-primary/10 rounded-full blur-3xl" />
 
             <div className="relative z-10 max-w-3xl mx-auto text-center">
-              <div className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 rounded-full text-primary text-sm font-medium mb-6">
+              <div className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.18em] text-primary mb-6">
                 <Mail className="w-4 h-4" />
                 Stay Updated
               </div>

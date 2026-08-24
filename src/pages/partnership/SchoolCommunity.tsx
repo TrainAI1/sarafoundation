@@ -146,7 +146,7 @@ export default function SchoolCommunity() {
         </div>
         <div className="section-container relative z-10">
           <div className="max-w-4xl mx-auto text-center px-4">
-            <span className="inline-flex items-center gap-2 px-4 py-2 glass-card-dark rounded-full text-white/90 text-sm font-medium mb-4 md:mb-6">
+            <span className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.18em] text-white/80 mb-4 mb-6">
               <GraduationCap className="w-4 h-4 text-accent" />
               School Community Partnership
             </span>

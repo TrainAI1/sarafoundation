@@ -33,7 +33,7 @@ export function ImpactSection() {
         <div className="grid lg:grid-cols-2 gap-10 md:gap-16 items-center mb-12 md:mb-16">
           <ScrollAnimation variant="slide-left">
             <div className="text-center lg:text-left">
-              <span className="inline-flex items-center gap-2 px-4 py-2 glass-card-dark rounded-full text-white/90 text-sm font-medium mb-6">
+              <span className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.18em] text-white/80 mb-6">
                 <TrendingUp className="w-4 h-4 text-accent" />
                 Our Impact
               </span>

@@ -120,7 +120,7 @@ export default function About() {
         </div>
         <div className="section-container relative z-10">
           <div className="max-w-3xl px-4">
-            <span className="inline-flex items-center gap-2 px-3 md:px-4 py-1.5 md:py-2 glass-card-dark rounded-full text-white/90 text-xs md:text-sm font-medium mb-4 md:mb-6">
+            <span className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.18em] text-white/80 mb-4 mb-6">
               <Sparkles className="w-3 h-3 md:w-4 md:h-4 text-accent" />
               About Us
             </span>
@@ -160,7 +160,7 @@ export default function About() {
                Present in 11 African countries:
             </span>
             {countries.map((country) => (
-              <span key={country.name} className="inline-flex items-center gap-2 px-3 py-1.5 bg-secondary rounded-full text-sm text-foreground">
+              <span key={country.name} className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.18em] text-primary">
                 <span className="text-base">{country.flag}</span>
                 {country.name}
               </span>
@@ -382,7 +382,7 @@ export default function About() {
                 )}
                 <h4 className="font-semibold text-foreground text-xs md:text-sm mb-0.5">{advisor.name}</h4>
                 <p className="text-muted-foreground text-xs mb-1">{advisor.affiliation}</p>
-                <span className="inline-block px-2 py-0.5 bg-primary/10 text-primary rounded-full text-xs">
+                <span className="inline-block text-xs font-semibold uppercase tracking-[0.18em] text-primary">
                   {advisor.expertise}
                 </span>
               </div>

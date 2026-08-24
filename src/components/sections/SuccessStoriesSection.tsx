@@ -37,7 +37,7 @@ export function SuccessStoriesSection() {
       <div className="section-container">
         <ScrollAnimation variant="fade-up">
           <div className="text-center max-w-3xl mx-auto mb-12">
-            <span className="inline-flex items-center gap-2 px-4 py-2 glass-card rounded-full text-sm font-medium mb-4">
+            <span className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.18em] text-primary mb-4">
               <Sparkles className="w-4 h-4 text-primary" />
               Success Stories
             </span>
@@ -61,7 +61,7 @@ export function SuccessStoriesSection() {
                   <div className="font-display font-bold text-foreground">{s.name}</div>
                   <div className="text-sm text-primary font-medium">{s.role}</div>
                   <div className="text-xs text-muted-foreground mt-1">{s.location}</div>
-                  <div className="mt-3 inline-flex text-xs font-semibold bg-primary/10 text-primary px-2.5 py-1 rounded-full">
+                  <div className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.18em] text-primary mt-3">
                     {s.outcome}
                   </div>
                 </div>
