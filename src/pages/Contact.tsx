@@ -6,7 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
-import { Mail, MapPin, Phone, Send, MessageSquare, Clock, CheckCircle2, Linkedin, Twitter, Instagram, HelpCircle, ArrowRight } from "lucide-react";
+import { Loader2, Mail, MapPin, Phone, Send, MessageSquare, Clock, CheckCircle2, Linkedin, Twitter, Instagram, HelpCircle, ArrowRight } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import communityWorkshop from "@/assets/community-workshop.jpg";
 import { supabase } from "@/integrations/supabase/client";
