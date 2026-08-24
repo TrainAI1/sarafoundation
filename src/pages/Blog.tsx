@@ -176,7 +176,7 @@ export default function Blog() {
                 )}
                 <div className="p-4 md:p-6">
                   <div className="flex flex-wrap items-center gap-2 md:gap-3 mb-3 md:mb-4">
-                    <span className="px-2 md:px-3 py-1 bg-primary/10 text-primary rounded-full text-xs font-medium">{post.category}</span>
+                    <span className="px-2 md:px-3 py-1 bg-primary/10 text-primary text-xs font-medium rounded">{post.category}</span>
                   </div>
                   <h3 className="font-display font-bold text-base md:text-lg text-foreground mb-2 md:mb-3 group-hover:text-primary transition-colors line-clamp-2">
                     {post.isDb ? <Link to={`/blog/${post.slug}`}>{post.title}</Link> : post.title}
