@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Mail, Send } from "lucide-react";
+import { Loader2, Mail, Send } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { ScrollAnimation } from "@/components/ui/scroll-animation";
 import { usePageContent } from "@/hooks/usePageContent";
@@ -71,7 +71,7 @@ export function NewsletterSection() {
                   required
                 />
                 <Button type="submit" size="lg" className="glow-effect" disabled={isLoading}>
-                  {isLoading ? : <Send className="w-5 h-5" />}
+                  {isLoading ? <Loader2 className="w-5 h-5 animate-spin" /> : <Send className="w-5 h-5" />}
                   Subscribe
                 </Button>
               </form>

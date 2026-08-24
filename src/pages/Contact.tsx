@@ -263,6 +263,7 @@ export default function Contact() {
                         disabled={isSubmitting}
                       >
                         {isSubmitting ? (
+                          <Loader2 className="w-5 h-5 animate-spin" />
                         ) : (
                           <Send className="w-5 h-5" />
                         )}
