@@ -39,7 +39,7 @@ export function ImpactSection() {
               </span>
               <h2 className="section-title text-white mb-6">
                 Making a Difference{" "}
-                <span className="bg-clip-text text-transparent bg-accent">
+                <span className="text-accent">
                   Across Africa
                 </span>
               </h2>
