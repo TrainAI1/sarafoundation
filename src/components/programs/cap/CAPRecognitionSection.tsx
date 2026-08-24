@@ -32,7 +32,7 @@ export function CAPRecognitionSection() {
 
         {/* Award */}
         <div className="max-w-2xl mx-auto mb-12 px-4">
-          <div className="card-modern p-6 md:p-8 text-center bg-gradient-to-br from-primary/5 to-accent/5 border-primary/20">
+          <div className="card-modern p-6 md:p-8 text-center bg-primary/5 border-primary/20">
             <Award className="w-12 h-12 text-primary mx-auto mb-4" />
             <h3 className="font-display font-bold text-xl text-foreground mb-1">
                Prestige Award Winner 2025/26

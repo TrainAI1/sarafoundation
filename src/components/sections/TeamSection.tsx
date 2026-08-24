@@ -63,7 +63,7 @@ function TeamMember({ name, role, bio }: TeamMemberProps) {
   return (
     <div className="card-modern p-6 md:p-8 text-center group">
       <div className="relative w-20 h-20 md:w-24 md:h-24 mx-auto mb-4 md:mb-6">
-        <div className="absolute inset-0 rounded-full bg-gradient-to-br from-primary to-accent opacity-80 group-hover:scale-105 transition-transform duration-300" />
+        <div className="absolute inset-0 rounded-full bg-primary opacity-80 group-hover:scale-105 transition-transform duration-300" />
         <div className="absolute inset-0.5 rounded-full bg-card flex items-center justify-center">
           <span className="text-xl md:text-2xl font-bold font-display gradient-text">
             {initials}

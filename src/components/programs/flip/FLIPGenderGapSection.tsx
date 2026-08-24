@@ -21,7 +21,7 @@ const approaches = [
 
 export function FLIPGenderGapSection() {
   return (
-    <section className="py-16 md:py-24 bg-gradient-to-br from-accent/5 to-primary/5">
+    <section className="py-16 md:py-24 bg-accent/5">
       <div className="section-container">
         <div className="text-center max-w-3xl mx-auto mb-10 md:mb-16 px-4">
           <span className="section-badge mb-4 md:mb-6">Our Approach</span>
@@ -48,7 +48,7 @@ export function FLIPGenderGapSection() {
         <div className="grid md:grid-cols-3 gap-6 md:gap-8 px-4 lg:px-0">
           {approaches.map((approach, index) => (
             <div key={approach.title} className="card-modern p-6 md:p-8 text-center group">
-              <div className="w-14 h-14 md:w-16 md:h-16 mx-auto rounded-xl md:rounded-2xl bg-gradient-to-br from-accent to-accent/60 flex items-center justify-center mb-5 md:mb-6 shadow-lg group-hover:scale-110 transition-transform">
+              <div className="w-14 h-14 md:w-16 md:h-16 mx-auto rounded-xl md:rounded-2xl bg-accent flex items-center justify-center mb-5 md:mb-6 shadow-lg group-hover:scale-110 transition-transform">
                 <approach.icon className="w-7 h-7 md:w-8 md:h-8 text-white" />
               </div>
               <div className="text-3xl md:text-4xl font-bold font-display text-accent/20 mb-2">

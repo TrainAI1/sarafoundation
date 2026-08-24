@@ -153,14 +153,14 @@ export default function Contact() {
       <Navbar />
       <main>
       {/* Hero with Image */}
-      <section className="pt-24 md:pt-32 pb-12 md:pb-20 bg-gradient-to-br from-primary via-primary/90 to-[hsl(240,80%,50%)] relative overflow-hidden">
+      <section className="pt-24 md:pt-32 pb-12 md:pb-20 bg-primary relative overflow-hidden">
         <div className="absolute inset-0">
           <img 
             src={communityWorkshop} 
             alt="Sara Foundation community"
             className="w-full h-full object-cover opacity-15"
           />
-          <div className="absolute inset-0 bg-gradient-to-br from-primary via-primary/90 to-[hsl(240,80%,50%)]" />
+          <div className="absolute inset-0 bg-primary" />
         </div>
         <div className="section-container relative z-10">
           <div className="max-w-3xl px-4">
@@ -188,7 +188,7 @@ export default function Contact() {
               <div className="card-modern p-6 md:p-8 lg:p-10">
                 {isSubmitted ? (
                   <div className="text-center py-12">
-                    <div className="w-20 h-20 mx-auto rounded-full bg-gradient-to-br from-primary to-accent flex items-center justify-center mb-6">
+                    <div className="w-20 h-20 mx-auto rounded-full bg-primary flex items-center justify-center mb-6">
                       <CheckCircle2 className="w-10 h-10 text-white" />
                     </div>
                     <h3 className="font-display font-bold text-2xl text-foreground mb-3">
@@ -292,7 +292,7 @@ export default function Contact() {
               <div className="grid gap-3 md:gap-4">
                 {contactInfo.map((item) => (
                   <div key={item.title} className="card-modern p-4 md:p-6 flex items-center gap-4 md:gap-5">
-                    <div className="w-12 h-12 md:w-14 md:h-14 rounded-xl md:rounded-2xl bg-gradient-to-br from-primary to-primary/60 flex items-center justify-center shadow-lg flex-shrink-0">
+                    <div className="w-12 h-12 md:w-14 md:h-14 rounded-xl md:rounded-2xl bg-primary flex items-center justify-center shadow-lg flex-shrink-0">
                       <item.icon className="w-5 h-5 md:w-6 md:h-6 text-white" />
                     </div>
                     <div className="min-w-0">
@@ -409,7 +409,7 @@ export default function Contact() {
               { city: "Lagos", country: "Nigeria", address: "Bafaj Crescent, Awoyaya-Eputu, Ibeju Lekki" },
             ].map((office) => (
               <div key={office.city} className="card-modern p-5 md:p-6 text-center">
-                <div className="w-10 h-10 md:w-12 md:h-12 mx-auto rounded-lg md:rounded-xl bg-gradient-to-br from-primary to-accent flex items-center justify-center mb-3 md:mb-4">
+                <div className="w-10 h-10 md:w-12 md:h-12 mx-auto rounded-lg md:rounded-xl bg-primary flex items-center justify-center mb-3 md:mb-4">
                   <MapPin className="w-5 h-5 md:w-6 md:h-6 text-white" />
                 </div>
                 <h3 className="font-display font-bold text-base md:text-lg text-foreground mb-1">{office.city}</h3>

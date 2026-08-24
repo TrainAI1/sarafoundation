@@ -54,7 +54,7 @@ export function FLIPBenefitsSection() {
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 px-4 lg:px-0">
           {benefits.map((benefit) => (
             <div key={benefit.title} className="card-modern p-5 md:p-6 group">
-              <div className="w-12 h-12 md:w-14 md:h-14 rounded-xl bg-gradient-to-br from-accent to-accent/60 flex items-center justify-center mb-4 shadow-lg group-hover:scale-110 transition-transform">
+              <div className="w-12 h-12 md:w-14 md:h-14 rounded-xl bg-accent flex items-center justify-center mb-4 shadow-lg group-hover:scale-110 transition-transform">
                 <benefit.icon className="w-6 h-6 md:w-7 md:h-7 text-white" />
               </div>
               <h3 className="font-display font-bold text-sm md:text-base text-foreground mb-2">

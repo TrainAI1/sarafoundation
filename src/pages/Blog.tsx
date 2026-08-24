@@ -113,10 +113,10 @@ export default function Blog() {
       <Navbar />
       <main>
       {/* Hero */}
-      <section className="pt-24 md:pt-32 pb-12 md:pb-20 bg-gradient-to-br from-primary via-primary/90 to-[hsl(240,80%,50%)] relative overflow-hidden">
+      <section className="pt-24 md:pt-32 pb-12 md:pb-20 bg-primary relative overflow-hidden">
         <div className="absolute inset-0">
           <img src={techConferenceSpeaker} alt="Tech conference" className="w-full h-full object-cover opacity-15" />
-          <div className="absolute inset-0 bg-gradient-to-br from-primary via-primary/90 to-[hsl(240,80%,50%)]" />
+          <div className="absolute inset-0 bg-primary" />
         </div>
         <div className="section-container relative z-10">
           <div className="max-w-3xl px-4">
@@ -163,7 +163,7 @@ export default function Blog() {
                       {post.image && typeof post.image === 'string' && post.image.startsWith('http') ? (
                         <img src={post.image} alt={post.title} loading="lazy" decoding="async" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
                       ) : (
-                        <div className="w-full h-full bg-gradient-to-br from-primary/20 to-accent/20 flex items-center justify-center">
+                        <div className="w-full h-full bg-primary/20 flex items-center justify-center">
                           <Newspaper className="w-12 h-12 text-primary/30" />
                         </div>
                       )}
@@ -202,7 +202,7 @@ export default function Blog() {
       </section>
 
       {/* Newsletter CTA */}
-      <section className="py-16 md:py-24 bg-gradient-to-br from-primary via-primary/90 to-[hsl(240,80%,50%)]">
+      <section className="py-16 md:py-24 bg-primary">
         <div className="section-container text-center px-4">
           <h2 className="font-display text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-4 md:mb-6">Never Miss an Update</h2>
           <p className="text-white/70 text-base md:text-lg mb-6 md:mb-8 max-w-2xl mx-auto">Subscribe to our newsletter and get the latest articles delivered to your inbox.</p>

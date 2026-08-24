@@ -115,7 +115,7 @@ export default function Projects() {
         </section>
 
         <section className="section-container pb-20">
-          <Card className="p-8 md:p-12 text-center bg-gradient-to-br from-primary/10 to-accent/10 border-primary/20">
+          <Card className="p-8 md:p-12 text-center bg-primary/10 border-primary/20">
             <h2 className="font-display font-bold text-2xl md:text-3xl mb-4">Read the full impact reports</h2>
             <p className="text-muted-foreground max-w-2xl mx-auto mb-6">
               Detailed cohort data, financials and outcomes are published in our annual reports. Support what's working

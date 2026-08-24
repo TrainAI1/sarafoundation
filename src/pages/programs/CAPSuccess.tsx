@@ -28,7 +28,7 @@ export default function CAPSuccess() {
       <main className="pt-24 md:pt-32 pb-16">
         <div className="section-container px-4 max-w-2xl">
           <div className="card-modern p-6 md:p-10 text-center">
-            <div className="w-20 h-20 mx-auto rounded-full bg-gradient-to-br from-primary to-[hsl(240,80%,50%)] flex items-center justify-center mb-6 glow-effect">
+            <div className="w-20 h-20 mx-auto rounded-full bg-primary flex items-center justify-center mb-6 glow-effect">
               <CheckCircle2 className="w-10 h-10 text-white" />
             </div>
             <span className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.18em] text-primary mb-4">

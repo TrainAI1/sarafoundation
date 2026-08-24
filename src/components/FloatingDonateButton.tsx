@@ -124,7 +124,7 @@ export function FloatingDonateButton() {
     <>
       <button
         onClick={() => setOpen(true)}
-        className="fixed bottom-6 right-6 z-50 flex items-center gap-2 rounded-full bg-gradient-to-r from-primary to-accent px-4 py-3 sm:px-5 sm:py-3.5 text-white font-semibold shadow-2xl transition-transform hover:scale-110 active:scale-95 animate-float-bounce"
+        className="fixed bottom-6 right-6 z-50 flex items-center gap-2 rounded-full bg-primary px-4 py-3 sm:px-5 sm:py-3.5 text-white font-semibold shadow-2xl transition-transform hover:scale-110 active:scale-95 animate-float-bounce"
         aria-label="Donate"
       >
         <Heart className="w-5 h-5 fill-white" />

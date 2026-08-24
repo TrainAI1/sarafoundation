@@ -42,7 +42,7 @@ export default function DonationSuccess() {
               <p className="text-muted-foreground">Confirming your donation...</p></>
             ) : state === "paid" ? (
               <>
-                <div className="w-20 h-20 mx-auto rounded-full bg-gradient-to-br from-primary to-[hsl(200,80%,55%)] flex items-center justify-center mb-6 glow-effect">
+                <div className="w-20 h-20 mx-auto rounded-full bg-primary flex items-center justify-center mb-6 glow-effect">
                   <CheckCircle2 className="w-10 h-10 text-white" />
                 </div>
                 <span className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.18em] text-primary mb-4">

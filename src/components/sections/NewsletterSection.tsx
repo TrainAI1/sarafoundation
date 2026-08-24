@@ -39,12 +39,12 @@ export function NewsletterSection() {
   };
 
   return (
-    <section className="py-16 md:py-24 bg-gradient-to-br from-primary/5 via-background to-accent/5">
+    <section className="py-16 md:py-24 bg-primary/5">
       <div className="section-container">
         <ScrollAnimation variant="scale-in">
           <div className="card-modern p-6 md:p-8 lg:p-12 xl:p-16 relative overflow-hidden">
-            <div className="absolute top-0 right-0 w-64 h-64 bg-gradient-to-br from-primary/10 to-accent/10 rounded-full blur-3xl" />
-            <div className="absolute bottom-0 left-0 w-48 h-48 bg-gradient-to-br from-accent/10 to-primary/10 rounded-full blur-3xl" />
+            <div className="absolute top-0 right-0 w-64 h-64 bg-primary/10 rounded-full blur-3xl" />
+            <div className="absolute bottom-0 left-0 w-48 h-48 bg-accent/10 rounded-full blur-3xl" />
 
             <div className="relative z-10 max-w-3xl mx-auto text-center">
               <div className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.18em] text-primary mb-6">

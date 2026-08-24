@@ -5,7 +5,7 @@ import { ScrollAnimation } from "@/components/ui/scroll-animation";
 
 export function WorkWithUsSection() {
   return (
-    <section className="py-16 md:py-24 bg-gradient-to-br from-primary via-primary/90 to-[hsl(240,80%,50%)] relative overflow-hidden">
+    <section className="py-16 md:py-24 bg-primary relative overflow-hidden">
       {/* Background effects */}
       <div className="absolute inset-0 opacity-30">
       </div>

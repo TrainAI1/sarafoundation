@@ -85,7 +85,7 @@ export default function Donation() {
       <Navbar />
       <main>
       {/* Hero */}
-      <section className="pt-24 md:pt-32 pb-12 md:pb-20 bg-gradient-to-br from-primary via-primary/90 to-[hsl(240,80%,50%)] relative overflow-hidden">
+      <section className="pt-24 md:pt-32 pb-12 md:pb-20 bg-primary relative overflow-hidden">
         <div className="absolute inset-0 opacity-30">
         </div>
         <div className="section-container relative z-10">
@@ -111,7 +111,7 @@ export default function Donation() {
           <div className="grid grid-cols-3 gap-4 md:gap-8 max-w-3xl mx-auto">
             {impactNumbers.map((item) => (
               <div key={item.label} className="text-center">
-                <div className="w-10 h-10 md:w-14 md:h-14 mx-auto rounded-xl md:rounded-2xl bg-gradient-to-br from-primary to-primary/60 flex items-center justify-center mb-2 md:mb-3 shadow-lg">
+                <div className="w-10 h-10 md:w-14 md:h-14 mx-auto rounded-xl md:rounded-2xl bg-primary flex items-center justify-center mb-2 md:mb-3 shadow-lg">
                   <item.icon className="w-5 h-5 md:w-7 md:h-7 text-white" />
                 </div>
                 <div className="text-2xl md:text-4xl font-bold font-display gradient-text mb-1">{item.number}</div>
@@ -207,7 +207,7 @@ export default function Donation() {
                   {story.quote}
                 </p>
                 <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-gradient-to-br from-primary to-accent flex items-center justify-center">
+                  <div className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-primary flex items-center justify-center">
                     <span className="text-white font-bold text-sm">
                       {story.name.split(' ').map(n => n[0]).join('')}
                     </span>
@@ -254,7 +254,7 @@ export default function Donation() {
       </section>
 
       {/* CTA */}
-      <section className="py-16 md:py-24 bg-gradient-to-br from-primary via-primary/90 to-[hsl(240,80%,50%)]">
+      <section className="py-16 md:py-24 bg-primary">
         <div className="section-container text-center px-4">
           <h2 className="font-display text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-4 md:mb-6">
             Have Questions About Donating?

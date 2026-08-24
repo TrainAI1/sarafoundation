@@ -11,14 +11,14 @@ const stats = [
 
 export function CAPHeroSection() {
   return (
-    <section className="pt-24 md:pt-32 pb-12 md:pb-20 bg-gradient-to-br from-primary via-primary/90 to-[hsl(240,80%,50%)] relative overflow-hidden">
+    <section className="pt-24 md:pt-32 pb-12 md:pb-20 bg-primary relative overflow-hidden">
       <div className="absolute inset-0">
         <img 
           src={capClassroom} 
           alt="African students learning in CAP Tech Hub"
           className="w-full h-full object-cover opacity-20"
         />
-        <div className="absolute inset-0 bg-gradient-to-br from-primary via-primary/90 to-[hsl(240,80%,50%)]" />
+        <div className="absolute inset-0 bg-primary" />
       </div>
       <div className="absolute inset-0 opacity-30">
       </div>

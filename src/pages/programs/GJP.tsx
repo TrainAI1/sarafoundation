@@ -29,7 +29,7 @@ export default function ProgramGJP() {
 
       {/* Hero */}
       <section className="relative pt-28 md:pt-36 pb-16 md:pb-20 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-b from-primary/5 via-background to-background" />
+        <div className="absolute inset-0 bg-primary/5" />
         <div className="absolute -top-20 right-1/4 w-[400px] h-[400px] rounded-full bg-primary/10 blur-3xl" />
         <div className="section-container relative px-4 max-w-4xl text-center">
           <span className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.18em] text-primary mb-5">
@@ -144,7 +144,7 @@ export default function ProgramGJP() {
           <div className="grid md:grid-cols-2 gap-4 md:gap-6">
             {steps.map((step, i) => (
               <div key={step.title} className="card-modern p-6 flex items-start gap-4">
-                <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-primary to-[hsl(240,80%,50%)] text-white flex items-center justify-center flex-shrink-0 font-display font-bold text-lg">
+                <div className="w-12 h-12 rounded-xl bg-primary text-white flex items-center justify-center flex-shrink-0 font-display font-bold text-lg">
                   {i + 1}
                 </div>
                 <div>

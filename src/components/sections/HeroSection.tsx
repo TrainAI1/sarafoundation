@@ -106,8 +106,8 @@ export function HeroSection() {
           className="relative mt-8 md:mt-10 -mx-4 sm:-mx-6 md:-mx-8 flex-1 flex items-end"
         >
           {/* Edge fades — match white background */}
-          <div className="pointer-events-none absolute inset-y-0 left-0 w-10 md:w-24 z-10 bg-gradient-to-r from-background to-transparent" />
-          <div className="pointer-events-none absolute inset-y-0 right-0 w-10 md:w-24 z-10 bg-gradient-to-l from-background to-transparent" />
+          <div className="pointer-events-none absolute inset-y-0 left-0 w-10 md:w-24 z-10 bg-background" />
+          <div className="pointer-events-none absolute inset-y-0 right-0 w-10 md:w-24 z-10 bg-background" />
 
           <div className="overflow-hidden w-full py-4 md:py-6">
             <div
@@ -146,9 +146,9 @@ export function HeroSection() {
                     key={`${card.name}-${i}`}
                     className={`relative shrink-0 ${widthClass} ${heightClass} ${tilt} ${offset} rounded-xl md:rounded-2xl overflow-hidden shadow-xl md:shadow-2xl ring-1 ring-white/10 ${
                       card.tone === "accent"
-                        ? "bg-gradient-to-br from-accent to-[hsl(350,80%,55%)]"
+                        ? "bg-accent"
                         : card.tone === "dark"
-                        ? "bg-gradient-to-br from-[hsl(240,40%,15%)] to-[hsl(240,60%,25%)]"
+                        ? "bg-[hsl(240,40%,15%)]"
                         : "bg-white"
                     }`}
                   >
@@ -172,7 +172,7 @@ export function HeroSection() {
                         </div>
                       </div>
                     ) : (
-                      <div className="absolute inset-x-0 bottom-0 p-2 md:p-3 bg-gradient-to-t from-black/85 via-black/40 to-transparent text-white">
+                      <div className="absolute inset-x-0 bottom-0 p-2 md:p-3 bg-black/85 text-white">
                         <div className="font-semibold text-[11px] md:text-sm leading-tight">{card.name}</div>
                         <div className="text-[9px] md:text-[10px] text-white/80 leading-tight">{card.role}</div>
                       </div>

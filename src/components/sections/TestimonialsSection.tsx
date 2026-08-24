@@ -61,7 +61,7 @@ export function TestimonialsSection() {
 
         <ScrollAnimation variant="scale-in" className="max-w-4xl mx-auto">
           <div className="card-modern p-5 md:p-8 lg:p-12 relative">
-            <div className="absolute -top-4 left-5 md:left-8 w-10 h-10 md:w-12 md:h-12 rounded-xl bg-gradient-to-br from-primary to-accent flex items-center justify-center shadow-lg">
+            <div className="absolute -top-4 left-5 md:left-8 w-10 h-10 md:w-12 md:h-12 rounded-xl bg-primary flex items-center justify-center shadow-lg">
               <Quote className="w-5 h-5 md:w-6 md:h-6 text-white" />
             </div>
 
@@ -77,7 +77,7 @@ export function TestimonialsSection() {
 
             <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
               <div className="flex items-center gap-3 md:gap-4">
-                <div className="w-11 h-11 md:w-14 md:h-14 rounded-full bg-gradient-to-br from-primary to-accent flex items-center justify-center text-white font-bold text-sm md:text-lg flex-shrink-0">
+                <div className="w-11 h-11 md:w-14 md:h-14 rounded-full bg-primary flex items-center justify-center text-white font-bold text-sm md:text-lg flex-shrink-0">
                   {current.name.split(' ').map(n => n[0]).join('')}
                 </div>
                 <div>

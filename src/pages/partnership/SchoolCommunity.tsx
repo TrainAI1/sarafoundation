@@ -141,7 +141,7 @@ export default function SchoolCommunity() {
       <Navbar />
       
       {/* Hero */}
-      <section className="pt-28 md:pt-32 pb-16 md:pb-20 bg-gradient-to-br from-primary via-primary/90 to-[hsl(240,80%,50%)] relative overflow-hidden">
+      <section className="pt-28 md:pt-32 pb-16 md:pb-20 bg-primary relative overflow-hidden">
         <div className="absolute inset-0 opacity-30">
         </div>
         <div className="section-container relative z-10">
@@ -195,7 +195,7 @@ export default function SchoolCommunity() {
               <div className="flex gap-4" style={{ minWidth: 'max-content' }}>
                 {partnerUniversities.map((uni) => (
                   <div key={uni.name} className="flex-shrink-0 w-[200px] md:w-[240px] p-4 md:p-5 rounded-xl bg-card border border-border/50 hover:border-primary/30 hover:shadow-md transition-all text-center">
-                    <div className="w-14 h-14 md:w-16 md:h-16 mx-auto rounded-xl bg-gradient-to-br from-primary/10 to-accent/10 flex items-center justify-center mb-3 overflow-hidden">
+                    <div className="w-14 h-14 md:w-16 md:h-16 mx-auto rounded-xl bg-primary/10 flex items-center justify-center mb-3 overflow-hidden">
                       {uni.logo ? (
                         <img src={uni.logo} alt={uni.name} className="w-11 h-11 md:w-12 md:h-12 object-contain" />
                       ) : (
@@ -232,7 +232,7 @@ export default function SchoolCommunity() {
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
             {whatYouGet.map((item) => (
               <div key={item.title} className="card-modern p-5 md:p-6">
-                <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary/10 to-accent/10 flex items-center justify-center mb-3">
+                <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center mb-3">
                   <CheckCircle2 className="w-5 h-5 text-primary" />
                 </div>
                 <h3 className="font-display font-bold text-base md:text-lg text-foreground mb-2">{item.title}</h3>
@@ -260,7 +260,7 @@ export default function SchoolCommunity() {
             {benefits.map((benefit) => (
               <div key={benefit.number} className="card-modern p-6 md:p-8 flex flex-col sm:flex-row gap-4 md:gap-6">
                 <div className="flex-shrink-0">
-                  <div className="w-12 h-12 md:w-14 md:h-14 rounded-xl md:rounded-2xl bg-gradient-to-br from-primary to-accent flex items-center justify-center text-white font-bold text-base md:text-lg">
+                  <div className="w-12 h-12 md:w-14 md:h-14 rounded-xl md:rounded-2xl bg-primary flex items-center justify-center text-white font-bold text-base md:text-lg">
                     {benefit.number}
                   </div>
                 </div>
@@ -306,7 +306,7 @@ export default function SchoolCommunity() {
               <div className="space-y-4">
                 {applicationSteps.map((item) => (
                   <div key={item.step} className="card-modern p-5 flex items-start gap-4">
-                    <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary to-accent flex items-center justify-center text-white font-bold text-sm flex-shrink-0">
+                    <div className="w-10 h-10 rounded-xl bg-primary flex items-center justify-center text-white font-bold text-sm flex-shrink-0">
                       {item.step}
                     </div>
                     <div>
@@ -352,7 +352,7 @@ export default function SchoolCommunity() {
       </section>
 
       {/* CTA */}
-      <section className="py-16 md:py-24 bg-gradient-to-br from-primary via-primary/90 to-[hsl(240,80%,50%)]">
+      <section className="py-16 md:py-24 bg-primary">
         <div className="section-container text-center px-4">
           <h2 className="font-display text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-4 md:mb-6">
             Ready to Bring Tech Education to Your Campus?
