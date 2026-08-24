@@ -64,10 +64,8 @@ export function TestimonialsSection() {
               <Quote className="w-5 h-5 md:w-6 md:h-6 text-white" />
             </div>
 
-            <div className="flex gap-1 mb-4 md:mb-6 pt-4">
-              {[...Array(current.rating || 5)].map((_, i) => (
-              ))}
-            </div>
+            <div className="pt-4" />
+
 
             <blockquote className="text-base md:text-xl lg:text-2xl text-foreground leading-relaxed mb-6 md:mb-8">
               "{current.quote}"
