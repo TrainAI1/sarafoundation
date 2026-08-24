@@ -98,17 +98,13 @@ export function HeroSection() {
           </motion.div>
         </div>
 
-        {/* Marquee — Outlier-style staggered cards */}
+        {/* Marquee — full-bleed edge-to-edge scrolling cards */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.5 }}
-          className="relative mt-8 md:mt-10 -mx-4 sm:-mx-6 md:-mx-8 flex-1 flex items-end"
+          className="relative mt-8 md:mt-10 flex-1 flex items-end w-screen ml-[50%] -translate-x-1/2"
         >
-          {/* Edge fades — match white background */}
-          <div className="pointer-events-none absolute inset-y-0 left-0 w-10 md:w-24 z-10 bg-background" />
-          <div className="pointer-events-none absolute inset-y-0 right-0 w-10 md:w-24 z-10 bg-background" />
-
           <div className="overflow-hidden w-full py-4 md:py-6">
             <div
               className="flex items-center gap-2.5 md:gap-4 w-max animate-scroll-left will-change-transform"
