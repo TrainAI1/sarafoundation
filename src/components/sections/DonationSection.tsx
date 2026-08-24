@@ -128,7 +128,7 @@ export function DonationSection() {
                 <div className="flex-1 min-w-0">
                   <div className="flex flex-wrap items-center gap-2 mb-1">
                     <h4 className="font-semibold text-foreground text-sm md:text-base">{method.title}</h4>
-                    <span className="text-xs px-2 py-0.5 bg-secondary rounded-full text-muted-foreground font-medium">
+                    <span className="text-xs px-2 py-0.5 bg-secondary text-muted-foreground font-medium rounded">
                       {method.provider}
                     </span>
                   </div>

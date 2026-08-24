@@ -122,7 +122,7 @@ export default function Partnership() {
         <div className="section-container relative z-10">
           <div className="grid lg:grid-cols-2 gap-8 md:gap-12 items-center">
             <div className="px-4 lg:px-0">
-              <span className="inline-flex items-center gap-2 px-3 md:px-4 py-1.5 md:py-2 glass-card-dark rounded-full text-white/90 text-xs md:text-sm font-medium mb-4 md:mb-6">
+              <span className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.18em] text-white/80 mb-4 mb-6">
                 <Handshake className="w-3 h-3 md:w-4 md:h-4 text-accent" />
                 Partnership Opportunities
               </span>
@@ -288,7 +288,7 @@ export default function Partnership() {
           <div className="grid md:grid-cols-2 gap-6 md:gap-8 max-w-4xl mx-auto px-4 lg:px-0">
             {testimonials.map((testimonial) => (
               <div key={testimonial.author} className="card-modern p-6 md:p-8">
-                <span className="inline-block px-3 py-1 bg-primary/10 text-primary rounded-full text-xs font-medium mb-4">
+                <span className="inline-block text-xs font-semibold uppercase tracking-[0.18em] text-primary mb-4">
                   {testimonial.type}
                 </span>
                 <p className="text-foreground text-base md:text-lg italic mb-6">

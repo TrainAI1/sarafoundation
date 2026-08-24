@@ -109,7 +109,7 @@ export default function BlogPostPage() {
           </Link>
 
           {post.category && (
-            <span className="inline-block px-3 py-1 bg-primary/10 text-primary rounded-full text-xs font-medium mb-4">
+            <span className="inline-block text-xs font-semibold uppercase tracking-[0.18em] text-primary mb-4">
               {post.category}
             </span>
           )}

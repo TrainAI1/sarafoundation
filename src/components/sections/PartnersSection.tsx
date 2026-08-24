@@ -64,7 +64,7 @@ export function PartnersSection() {
           {doubled.map((uni, i) => (
             <div
               key={`a-${i}`}
-              className="flex-shrink-0 inline-flex items-center gap-2.5 px-5 py-3 bg-card border border-border rounded-full hover:border-primary/30 transition-colors"
+              className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.18em] text-primary"
             >
               <span className="text-lg">{uni.country}</span>
               <span className="text-sm font-medium text-foreground whitespace-nowrap">
@@ -81,7 +81,7 @@ export function PartnersSection() {
           {[...doubled].reverse().map((uni, i) => (
             <div
               key={`b-${i}`}
-              className="flex-shrink-0 inline-flex items-center gap-2.5 px-5 py-3 bg-card border border-border rounded-full hover:border-primary/30 transition-colors"
+              className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.18em] text-primary"
             >
               <span className="text-lg">{uni.country}</span>
               <span className="text-sm font-medium text-foreground whitespace-nowrap">

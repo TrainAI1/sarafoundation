@@ -199,7 +199,7 @@ export default function FLIPApply() {
       <main className="pt-24 md:pt-32 pb-16">
         <div className="section-container px-4 max-w-3xl">
           <div className="text-center mb-8">
-            <span className="inline-flex items-center gap-2 px-3 py-1.5 bg-accent/10 rounded-full text-accent text-xs font-medium mb-4">
+            <span className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.18em] text-primary mb-4">
               <Users className="w-3 h-3" /> FLIP Fellowship Application
             </span>
             <h1 className="font-display text-3xl md:text-4xl font-bold text-foreground mb-2">

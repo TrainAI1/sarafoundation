@@ -120,7 +120,7 @@ export default function Blog() {
         </div>
         <div className="section-container relative z-10">
           <div className="max-w-3xl px-4">
-            <span className="inline-flex items-center gap-2 px-3 md:px-4 py-1.5 md:py-2 glass-card-dark rounded-full text-white/90 text-xs md:text-sm font-medium mb-4 md:mb-6">
+            <span className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.18em] text-white/80 mb-4 mb-6">
               <Newspaper className="w-3 h-3 md:w-4 md:h-4 text-accent" />
               Our Blog
             </span>
@@ -176,7 +176,7 @@ export default function Blog() {
                 )}
                 <div className="p-4 md:p-6">
                   <div className="flex flex-wrap items-center gap-2 md:gap-3 mb-3 md:mb-4">
-                    <span className="px-2 md:px-3 py-1 bg-primary/10 text-primary rounded-full text-xs font-medium">{post.category}</span>
+                    <span className="px-2 md:px-3 py-1 bg-primary/10 text-primary text-xs font-medium rounded">{post.category}</span>
                   </div>
                   <h3 className="font-display font-bold text-base md:text-lg text-foreground mb-2 md:mb-3 group-hover:text-primary transition-colors line-clamp-2">
                     {post.isDb ? <Link to={`/blog/${post.slug}`}>{post.title}</Link> : post.title}
