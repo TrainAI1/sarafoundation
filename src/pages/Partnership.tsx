@@ -3,10 +3,7 @@ import { Footer } from "@/components/layout/Footer";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
-import { 
-  Building, Users, GraduationCap, ArrowRight, CheckCircle2,
-  Handshake, Target, Sparkles, TrendingUp, Globe, Award
-} from "lucide-react";
+import { Building, Users, GraduationCap, ArrowRight, CheckCircle2, Handshake, Target, TrendingUp, Globe, Award } from "lucide-react";
 import partnershipMeeting from "@/assets/partnership-meeting.jpg";
 import techConferenceSpeaker from "@/assets/tech-conference-speaker.jpg";
 

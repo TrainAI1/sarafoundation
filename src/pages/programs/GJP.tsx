@@ -3,10 +3,7 @@ import { Footer } from "@/components/layout/Footer";
 import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import {
-  Briefcase, ArrowRight, Sparkles, Users, GraduationCap, BadgeCheck,
-  Building2, Globe, Handshake, Target, TrendingUp,
-} from "lucide-react";
+import { Briefcase, ArrowRight, Users, GraduationCap, BadgeCheck, Building2, Globe, Handshake, Target, TrendingUp } from "lucide-react";
 
 const steps = [
   { icon: GraduationCap, title: "Talent Identification", desc: "We source and engage qualified African tech professionals with relevant skills and career aspirations." },

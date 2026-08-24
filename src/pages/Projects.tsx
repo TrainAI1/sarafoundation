@@ -4,7 +4,7 @@ import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { Smartphone, Users, Briefcase, Sparkles, Building2, ArrowRight, GraduationCap, Globe } from "lucide-react";
+import { Smartphone, Users, Briefcase, Building2, ArrowRight, GraduationCap, Globe } from "lucide-react";
 
 const headlineStats = [
   { value: "35", label: "Universities", icon: Building2 },

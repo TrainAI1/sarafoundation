@@ -3,7 +3,7 @@ import { Helmet } from "react-helmet-async";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { Button } from "@/components/ui/button";
-import { CheckCircle2, ArrowRight, Sparkles, Search, Copy } from "lucide-react";
+import { CheckCircle2, ArrowRight, Search, Copy } from "lucide-react";
 import { toast } from "sonner";
 
 export default function GJPSuccess() {

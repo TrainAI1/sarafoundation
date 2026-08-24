@@ -1,4 +1,4 @@
-import { Sparkles, Briefcase, Rocket, Award } from "lucide-react";
+import { Briefcase, Rocket, Award } from "lucide-react";
 
 const tiers = [
   {

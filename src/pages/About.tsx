@@ -3,10 +3,7 @@ import { Footer } from "@/components/layout/Footer";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
-import {
-  Target, Heart, Lightbulb, Globe, Users, Award,
-  ArrowRight, Sparkles, Eye, Quote, Trophy
-} from "lucide-react";
+import { Target, Heart, Lightbulb, Globe, Users, Award, ArrowRight, Eye, Quote, Trophy } from "lucide-react";
 import communityWorkshop from "@/assets/community-workshop.jpg";
 import techEntrepreneurs from "@/assets/tech-entrepreneurs.jpg";
 import techConference from "@/assets/tech-conference.jpg";

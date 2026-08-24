@@ -1,4 +1,4 @@
-import { GraduationCap, Users, ArrowRight, Rocket, BookOpen, Zap, Star, Briefcase, BadgeCheck, ClipboardCheck } from "lucide-react";
+import { GraduationCap, Users, ArrowRight, Rocket, BookOpen, Zap, Briefcase, BadgeCheck, ClipboardCheck } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import studentsLabImg from "@/assets/students-tech-lab.jpg";

@@ -5,10 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import { toast } from "sonner";
-import { 
-  ArrowRight, Calendar, Clock, User, Tag,
-  Newspaper, Search, ChevronRight
-} from "lucide-react";
+import { ArrowRight, Calendar, Clock, User, Tag, Newspaper, Search, ChevronRight } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { supabase } from "@/integrations/supabase/client";
 import studentsLabImg from "@/assets/students-tech-lab.jpg";

@@ -1,4 +1,4 @@
-import { GraduationCap, Crown, Network, Users, DollarSign, Megaphone, Star } from "lucide-react";
+import { GraduationCap, Crown, Network, Users, DollarSign, Megaphone } from "lucide-react";
 
 const benefits = [
   {

@@ -4,10 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { 
-  Heart, ArrowRight, Award, Users, TrendingUp,
-  CheckCircle2, Sparkles, HelpCircle, ClipboardList, Star
-} from "lucide-react";
+import { Heart, ArrowRight, Award, Users, TrendingUp, CheckCircle2, HelpCircle, ClipboardList } from "lucide-react";
 import {
   Accordion,
   AccordionContent,
