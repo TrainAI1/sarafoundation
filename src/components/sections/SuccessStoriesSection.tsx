@@ -38,7 +38,6 @@ export function SuccessStoriesSection() {
         <ScrollAnimation variant="fade-up">
           <div className="text-center max-w-3xl mx-auto mb-12">
             <span className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.18em] text-primary mb-4">
-              <Sparkles className="w-4 h-4 text-primary" />
               Success Stories
             </span>
             <h2 className="section-title text-foreground mb-4">

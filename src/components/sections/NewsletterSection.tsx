@@ -71,7 +71,7 @@ export function NewsletterSection() {
                   required
                 />
                 <Button type="submit" size="lg" className="glow-effect" disabled={isLoading}>
-                  {isLoading ? <Sparkles className="w-5 h-5 animate-pulse" /> : <Send className="w-5 h-5" />}
+                  {isLoading ? : <Send className="w-5 h-5" />}
                   Subscribe
                 </Button>
               </form>

@@ -266,7 +266,6 @@ export default function Contact() {
                         disabled={isSubmitting}
                       >
                         {isSubmitting ? (
-                          <Sparkles className="w-5 h-5 animate-pulse" />
                         ) : (
                           <Send className="w-5 h-5" />
                         )}

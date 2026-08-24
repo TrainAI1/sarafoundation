@@ -46,7 +46,6 @@ export function TestimonialsSection() {
       <div className="section-container px-4">
         <ScrollAnimation variant="fade-up" className="text-center max-w-3xl mx-auto mb-8 md:mb-16">
           <span className="section-badge mb-4 md:mb-6">
-            <Star className="w-4 h-4" />
             {content.badge}
           </span>
           <h2 className="section-title text-foreground mb-4 md:mb-6">
@@ -67,7 +66,6 @@ export function TestimonialsSection() {
 
             <div className="flex gap-1 mb-4 md:mb-6 pt-4">
               {[...Array(current.rating || 5)].map((_, i) => (
-                <Star key={i} className="w-4 h-4 md:w-5 md:h-5 fill-accent text-accent" />
               ))}
             </div>
 

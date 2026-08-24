@@ -9,7 +9,7 @@ import { Smartphone, Users, Briefcase, Sparkles, Building2, ArrowRight, Graduati
 const headlineStats = [
   { value: "35", label: "Universities", icon: Building2 },
   { value: "763", label: "CAP Participants", icon: GraduationCap },
-  { value: "52", label: "Women Trained", icon: Sparkles },
+  { value: "52", label: "Women Trained", icon: Users },
   { value: "11", label: "African Countries", icon: Globe },
   { value: "705", label: "People Referred for Placement", icon: Briefcase },
 ];
@@ -28,7 +28,7 @@ const pastProjects = [
     impact: "763 students trained · 35 universities · 11 African countries",
   },
   {
-    icon: Sparkles,
+    icon: Users,
     title: "FLIP Fellowship — Cohort 1",
     summary: "Launched the Female Learning & Inclusion Pathway with our first fellowship cohort — leadership coaching, technical mentorship and a Pan-African peer community for women in tech.",
     impact: "52 women supported · Pan-African cohort · Mentor-matched",

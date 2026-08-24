@@ -30,7 +30,7 @@ export default function GJPSuccess() {
               <CheckCircle2 className="w-10 h-10 text-white" />
             </div>
             <span className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.18em] text-primary mb-4">
-              <Sparkles className="w-3 h-3" /> Application Received
+              Application Received
             </span>
             <h1 className="font-display text-3xl md:text-4xl font-bold text-foreground mb-3">
               You're on the GJP shortlist queue!

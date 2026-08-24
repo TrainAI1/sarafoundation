@@ -63,7 +63,6 @@ export function ProgramsSection() {
         {/* Header */}
         <ScrollAnimation variant="fade-up" className="text-center max-w-3xl mx-auto mb-10 md:mb-16 px-4">
           <span className="section-badge mb-6">
-            <Star className="w-4 h-4" />
             Our Initiatives
           </span>
           <h2 className="section-title text-foreground mb-6 text-balance">

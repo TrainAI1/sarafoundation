@@ -4,7 +4,7 @@ const tiers = [
   {
     category: "Tech Starter Members",
     color: "from-[hsl(160,70%,40%)] to-[hsl(160,70%,30%)]",
-    icon: Sparkles,
+    icon: Users,
     items: [
       "Members seeking to start a career in tech",
       "Founders with startups in ideation stage",

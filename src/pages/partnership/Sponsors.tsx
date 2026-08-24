@@ -192,7 +192,6 @@ export default function Sponsors() {
         <div className="section-container">
           <div className="text-center max-w-3xl mx-auto mb-10 md:mb-16 px-4">
             <span className="section-badge mb-4 md:mb-6">
-              <Sparkles className="w-4 h-4" />
               Our Sponsors
             </span>
             <h2 className="section-title text-foreground mb-4 md:mb-6">
@@ -224,7 +223,6 @@ export default function Sponsors() {
         <div className="section-container">
           <div className="text-center max-w-3xl mx-auto mb-10 md:mb-16 px-4">
             <span className="section-badge mb-4 md:mb-6">
-              <Sparkles className="w-4 h-4" />
               Benefits
             </span>
             <h2 className="section-title text-foreground mb-4 md:mb-6">
@@ -272,7 +270,6 @@ export default function Sponsors() {
         <div className="section-container">
           <div className="text-center max-w-3xl mx-auto mb-10 md:mb-16 px-4">
             <span className="section-badge mb-4 md:mb-6">
-              <Star className="w-4 h-4" />
               Sponsorship Tiers
             </span>
             <h2 className="section-title text-foreground mb-4 md:mb-6">
