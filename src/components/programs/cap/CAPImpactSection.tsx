@@ -14,7 +14,7 @@ const stats = [
 
 export function CAPImpactSection() {
   return (
-    <section className="py-16 md:py-24 bg-gradient-to-br from-primary/5 to-accent/5">
+    <section className="py-16 md:py-24 bg-primary/5">
       <div className="section-container">
         <div className="text-center max-w-3xl mx-auto mb-10 md:mb-16 px-4">
           <span className="section-badge mb-4 md:mb-6">Our Impact</span>

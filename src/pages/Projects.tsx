@@ -4,12 +4,12 @@ import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { Smartphone, Users, Briefcase, Sparkles, Building2, ArrowRight, GraduationCap, Globe } from "lucide-react";
+import { Smartphone, Users, Briefcase, Building2, ArrowRight, GraduationCap, Globe } from "lucide-react";
 
 const headlineStats = [
   { value: "35", label: "Universities", icon: Building2 },
   { value: "763", label: "CAP Participants", icon: GraduationCap },
-  { value: "52", label: "Women Trained", icon: Sparkles },
+  { value: "52", label: "Women Trained", icon: Users },
   { value: "11", label: "African Countries", icon: Globe },
   { value: "705", label: "People Referred for Placement", icon: Briefcase },
 ];
@@ -28,7 +28,7 @@ const pastProjects = [
     impact: "763 students trained · 35 universities · 11 African countries",
   },
   {
-    icon: Sparkles,
+    icon: Users,
     title: "FLIP Fellowship — Cohort 1",
     summary: "Launched the Female Learning & Inclusion Pathway with our first fellowship cohort — leadership coaching, technical mentorship and a Pan-African peer community for women in tech.",
     impact: "52 women supported · Pan-African cohort · Mentor-matched",
@@ -115,7 +115,7 @@ export default function Projects() {
         </section>
 
         <section className="section-container pb-20">
-          <Card className="p-8 md:p-12 text-center bg-gradient-to-br from-primary/10 to-accent/10 border-primary/20">
+          <Card className="p-8 md:p-12 text-center bg-primary/10 border-primary/20">
             <h2 className="font-display font-bold text-2xl md:text-3xl mb-4">Read the full impact reports</h2>
             <p className="text-muted-foreground max-w-2xl mx-auto mb-6">
               Detailed cohort data, financials and outcomes are published in our annual reports. Support what's working

@@ -4,7 +4,7 @@ import { Helmet } from "react-helmet-async";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { Button } from "@/components/ui/button";
-import { CheckCircle2, ArrowRight, Sparkles } from "lucide-react";
+import { CheckCircle2, ArrowRight } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 
 export default function CAPSuccess() {
@@ -28,11 +28,11 @@ export default function CAPSuccess() {
       <main className="pt-24 md:pt-32 pb-16">
         <div className="section-container px-4 max-w-2xl">
           <div className="card-modern p-6 md:p-10 text-center">
-            <div className="w-20 h-20 mx-auto rounded-full bg-gradient-to-br from-primary to-[hsl(240,80%,50%)] flex items-center justify-center mb-6 glow-effect">
+            <div className="w-20 h-20 mx-auto rounded-full bg-primary flex items-center justify-center mb-6 glow-effect">
               <CheckCircle2 className="w-10 h-10 text-white" />
             </div>
             <span className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.18em] text-primary mb-4">
-              <Sparkles className="w-3 h-3" /> Enrollment Confirmed
+              Enrollment Confirmed
             </span>
             <h1 className="font-display text-3xl md:text-4xl font-bold text-foreground mb-3">
               You're in CAP Cohort 3!

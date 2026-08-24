@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { ChevronLeft, ChevronRight, Quote, Star } from "lucide-react";
+import { ChevronLeft, ChevronRight, Quote } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ScrollAnimation } from "@/components/ui/scroll-animation";
 import { usePageContent } from "@/hooks/usePageContent";
@@ -46,7 +46,6 @@ export function TestimonialsSection() {
       <div className="section-container px-4">
         <ScrollAnimation variant="fade-up" className="text-center max-w-3xl mx-auto mb-8 md:mb-16">
           <span className="section-badge mb-4 md:mb-6">
-            <Star className="w-4 h-4" />
             {content.badge}
           </span>
           <h2 className="section-title text-foreground mb-4 md:mb-6">
@@ -61,15 +60,12 @@ export function TestimonialsSection() {
 
         <ScrollAnimation variant="scale-in" className="max-w-4xl mx-auto">
           <div className="card-modern p-5 md:p-8 lg:p-12 relative">
-            <div className="absolute -top-4 left-5 md:left-8 w-10 h-10 md:w-12 md:h-12 rounded-xl bg-gradient-to-br from-primary to-accent flex items-center justify-center shadow-lg">
+            <div className="absolute -top-4 left-5 md:left-8 w-10 h-10 md:w-12 md:h-12 rounded-xl bg-primary flex items-center justify-center shadow-lg">
               <Quote className="w-5 h-5 md:w-6 md:h-6 text-white" />
             </div>
 
-            <div className="flex gap-1 mb-4 md:mb-6 pt-4">
-              {[...Array(current.rating || 5)].map((_, i) => (
-                <Star key={i} className="w-4 h-4 md:w-5 md:h-5 fill-accent text-accent" />
-              ))}
-            </div>
+            <div className="pt-4" />
+
 
             <blockquote className="text-base md:text-xl lg:text-2xl text-foreground leading-relaxed mb-6 md:mb-8">
               "{current.quote}"
@@ -77,7 +73,7 @@ export function TestimonialsSection() {
 
             <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
               <div className="flex items-center gap-3 md:gap-4">
-                <div className="w-11 h-11 md:w-14 md:h-14 rounded-full bg-gradient-to-br from-primary to-accent flex items-center justify-center text-white font-bold text-sm md:text-lg flex-shrink-0">
+                <div className="w-11 h-11 md:w-14 md:h-14 rounded-full bg-primary flex items-center justify-center text-white font-bold text-sm md:text-lg flex-shrink-0">
                   {current.name.split(' ').map(n => n[0]).join('')}
                 </div>
                 <div>

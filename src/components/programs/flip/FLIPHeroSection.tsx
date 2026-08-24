@@ -12,7 +12,7 @@ const stats = [
 
 export function FLIPHeroSection() {
   return (
-    <section className="pt-24 md:pt-32 pb-12 md:pb-20 bg-gradient-to-br from-accent via-accent/90 to-[hsl(350,80%,55%)] relative overflow-hidden">
+    <section className="pt-24 md:pt-32 pb-12 md:pb-20 bg-accent relative overflow-hidden">
       {/* Background Image */}
       <div className="absolute inset-0">
         <img 
@@ -20,7 +20,7 @@ export function FLIPHeroSection() {
           alt="Women tech leaders"
           className="w-full h-full object-cover opacity-20"
         />
-        <div className="absolute inset-0 bg-gradient-to-br from-accent via-accent/90 to-[hsl(350,80%,55%)]" />
+        <div className="absolute inset-0 bg-accent" />
       </div>
       <div className="absolute inset-0 opacity-30">
       </div>

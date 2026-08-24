@@ -27,7 +27,7 @@ const sdgGoals = [
 
 export function SDGSection() {
   return (
-    <section className="py-12 md:py-16 bg-gradient-to-r from-primary via-[hsl(240,80%,50%)] to-accent">
+    <section className="py-12 md:py-16 bg-primary">
       <div className="section-container">
         <div className="grid md:grid-cols-3 gap-6 md:gap-8 px-4">
           {sdgGoals.map((goal, index) => (

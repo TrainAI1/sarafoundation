@@ -128,7 +128,7 @@ export default function AdminTeam() {
                 {m.photo ? (
                   <img src={m.photo} alt={m.name} className="w-10 h-10 rounded-full object-cover flex-shrink-0" />
                 ) : (
-                  <div className="w-10 h-10 rounded-full bg-gradient-to-br from-primary/20 to-accent/20 flex items-center justify-center flex-shrink-0">
+                  <div className="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center flex-shrink-0">
                     <span className="text-xs font-bold text-primary">{m.name.split(" ").map((n) => n[0]).join("").slice(0, 2)}</span>
                   </div>
                 )}

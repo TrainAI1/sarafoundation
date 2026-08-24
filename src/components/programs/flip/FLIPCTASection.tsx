@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 export function FLIPCTASection() {
   return (
-    <section className="py-16 md:py-24 bg-gradient-to-br from-accent via-accent/90 to-[hsl(350,80%,55%)]">
+    <section className="py-16 md:py-24 bg-accent">
       <div className="section-container text-center px-4">
         <h2 className="font-display text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-4 md:mb-6">
           Register Today and Be Part of This Initiative

@@ -16,7 +16,7 @@ export function CTASection() {
 
   return (
     <section className="py-16 md:py-24 lg:py-32 relative overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-br from-primary via-primary/90 to-[hsl(240,80%,50%)]" />
+      <div className="absolute inset-0 bg-primary" />
       <div className="absolute inset-0 opacity-30">
       </div>
 

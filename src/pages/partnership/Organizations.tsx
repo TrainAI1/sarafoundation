@@ -4,10 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { 
-  Building, ArrowRight, Briefcase, Landmark, Heart,
-  CheckCircle2, Handshake, ClipboardList, HelpCircle, FileText
-} from "lucide-react";
+import { Building, ArrowRight, Briefcase, Landmark, Heart, CheckCircle2, Handshake, ClipboardList, HelpCircle, FileText } from "lucide-react";
 import {
   Accordion,
   AccordionContent,
@@ -121,7 +118,7 @@ export default function Organizations() {
       <Navbar />
       
       {/* Hero */}
-      <section className="pt-28 md:pt-32 pb-16 md:pb-20 bg-gradient-to-br from-primary via-primary/90 to-[hsl(240,80%,50%)] relative overflow-hidden">
+      <section className="pt-28 md:pt-32 pb-16 md:pb-20 bg-primary relative overflow-hidden">
         <div className="absolute inset-0 opacity-30">
         </div>
         <div className="section-container relative z-10">
@@ -195,7 +192,7 @@ export default function Organizations() {
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
             {whatWeOffer.map((item) => (
               <div key={item.title} className="card-modern p-5 md:p-6">
-                <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary/10 to-accent/10 flex items-center justify-center mb-3">
+                <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center mb-3">
                   <CheckCircle2 className="w-5 h-5 text-primary" />
                 </div>
                 <h3 className="font-display font-bold text-base md:text-lg text-foreground mb-2">{item.title}</h3>
@@ -276,7 +273,7 @@ export default function Organizations() {
             {partnershipProcess.map((item, index) => (
               <div key={item.step} className="relative">
                 <div className="card-modern p-5 md:p-6 text-center h-full">
-                  <div className="w-10 h-10 md:w-12 md:h-12 mx-auto rounded-xl bg-gradient-to-br from-primary to-accent flex items-center justify-center text-white font-bold text-sm md:text-lg mb-3 md:mb-4">
+                  <div className="w-10 h-10 md:w-12 md:h-12 mx-auto rounded-xl bg-primary flex items-center justify-center text-white font-bold text-sm md:text-lg mb-3 md:mb-4">
                     {item.step}
                   </div>
                   <h3 className="font-display font-bold text-sm md:text-lg text-foreground mb-1 md:mb-2">{item.title}</h3>
@@ -322,7 +319,7 @@ export default function Organizations() {
       </section>
 
       {/* CTA */}
-      <section className="py-16 md:py-24 bg-gradient-to-br from-primary via-primary/90 to-[hsl(240,80%,50%)]">
+      <section className="py-16 md:py-24 bg-primary">
         <div className="section-container text-center px-4">
           <h2 className="font-display text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-4 md:mb-6">
             Ready to Make an Impact Together?

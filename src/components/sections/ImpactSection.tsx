@@ -25,7 +25,7 @@ export function ImpactSection() {
   ];
 
   return (
-    <section className="py-16 md:py-24 bg-gradient-to-br from-foreground via-foreground/95 to-[hsl(240,20%,15%)] relative overflow-hidden">
+    <section className="py-16 md:py-24 bg-foreground relative overflow-hidden">
       <div className="absolute inset-0 opacity-20">
       </div>
 
@@ -39,7 +39,7 @@ export function ImpactSection() {
               </span>
               <h2 className="section-title text-white mb-6">
                 Making a Difference{" "}
-                <span className="bg-clip-text text-transparent bg-gradient-to-r from-accent to-primary">
+                <span className="text-accent">
                   Across Africa
                 </span>
               </h2>
@@ -64,7 +64,7 @@ export function ImpactSection() {
           {impactStats.map((stat) => (
             <StaggerItem key={stat.label} variant="scale-in">
               <div className="glass-card-dark p-4 md:p-6 text-center group hover:bg-white/10 transition-colors">
-                <div className="w-10 h-10 md:w-12 md:h-12 mx-auto rounded-xl bg-gradient-to-br from-primary/30 to-accent/30 flex items-center justify-center mb-3 md:mb-4 group-hover:scale-110 transition-transform">
+                <div className="w-10 h-10 md:w-12 md:h-12 mx-auto rounded-xl bg-primary/30 flex items-center justify-center mb-3 md:mb-4 group-hover:scale-110 transition-transform">
                   <stat.icon className="w-5 h-5 md:w-6 md:h-6 text-white" />
                 </div>
                 <div className="text-2xl sm:text-3xl md:text-4xl font-bold font-display text-white mb-1">

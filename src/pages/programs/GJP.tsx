@@ -3,10 +3,7 @@ import { Footer } from "@/components/layout/Footer";
 import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import {
-  Briefcase, ArrowRight, Sparkles, Users, GraduationCap, BadgeCheck,
-  Building2, Globe, Handshake, Target, TrendingUp,
-} from "lucide-react";
+import { Briefcase, ArrowRight, Users, GraduationCap, BadgeCheck, Building2, Globe, Handshake, Target, TrendingUp } from "lucide-react";
 
 const steps = [
   { icon: GraduationCap, title: "Talent Identification", desc: "We source and engage qualified African tech professionals with relevant skills and career aspirations." },
@@ -29,11 +26,11 @@ export default function ProgramGJP() {
 
       {/* Hero */}
       <section className="relative pt-28 md:pt-36 pb-16 md:pb-20 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-b from-primary/5 via-background to-background" />
+        <div className="absolute inset-0 bg-primary/5" />
         <div className="absolute -top-20 right-1/4 w-[400px] h-[400px] rounded-full bg-primary/10 blur-3xl" />
         <div className="section-container relative px-4 max-w-4xl text-center">
           <span className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.18em] text-primary mb-5">
-            <Sparkles className="w-3.5 h-3.5" /> 705+ Professionals Referred Across Africa
+            705+ Professionals Referred Across Africa
           </span>
           <h1 className="font-display text-3xl md:text-5xl lg:text-6xl font-bold text-foreground tracking-tight leading-tight mb-5">
             Educational Journey Pathway <span className="gradient-text">Pipeline (EJP)</span>
@@ -144,7 +141,7 @@ export default function ProgramGJP() {
           <div className="grid md:grid-cols-2 gap-4 md:gap-6">
             {steps.map((step, i) => (
               <div key={step.title} className="card-modern p-6 flex items-start gap-4">
-                <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-primary to-[hsl(240,80%,50%)] text-white flex items-center justify-center flex-shrink-0 font-display font-bold text-lg">
+                <div className="w-12 h-12 rounded-xl bg-primary text-white flex items-center justify-center flex-shrink-0 font-display font-bold text-lg">
                   {i + 1}
                 </div>
                 <div>

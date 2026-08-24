@@ -77,7 +77,7 @@ export default function AnnualReports() {
         </section>
 
         <section className="section-container pb-24">
-          <Card className="p-8 text-center bg-gradient-to-br from-primary/10 to-accent/10 border-primary/20">
+          <Card className="p-8 text-center bg-primary/10 border-primary/20">
             <h2 className="font-display font-bold text-2xl mb-3">Questions about our reports?</h2>
             <p className="text-muted-foreground mb-6 max-w-xl mx-auto">
               Registered as Princess Sara Foundation in Nigeria (CAC charity number 7980056). Contact us for governance documents, audited financials, or partnership due-diligence packs.

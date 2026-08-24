@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Mail, Send, Sparkles } from "lucide-react";
+import { Loader2, Mail, Send } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { ScrollAnimation } from "@/components/ui/scroll-animation";
 import { usePageContent } from "@/hooks/usePageContent";
@@ -39,12 +39,12 @@ export function NewsletterSection() {
   };
 
   return (
-    <section className="py-16 md:py-24 bg-gradient-to-br from-primary/5 via-background to-accent/5">
+    <section className="py-16 md:py-24 bg-primary/5">
       <div className="section-container">
         <ScrollAnimation variant="scale-in">
           <div className="card-modern p-6 md:p-8 lg:p-12 xl:p-16 relative overflow-hidden">
-            <div className="absolute top-0 right-0 w-64 h-64 bg-gradient-to-br from-primary/10 to-accent/10 rounded-full blur-3xl" />
-            <div className="absolute bottom-0 left-0 w-48 h-48 bg-gradient-to-br from-accent/10 to-primary/10 rounded-full blur-3xl" />
+            <div className="absolute top-0 right-0 w-64 h-64 bg-primary/10 rounded-full blur-3xl" />
+            <div className="absolute bottom-0 left-0 w-48 h-48 bg-accent/10 rounded-full blur-3xl" />
 
             <div className="relative z-10 max-w-3xl mx-auto text-center">
               <div className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.18em] text-primary mb-6">
@@ -71,7 +71,7 @@ export function NewsletterSection() {
                   required
                 />
                 <Button type="submit" size="lg" className="glow-effect" disabled={isLoading}>
-                  {isLoading ? <Sparkles className="w-5 h-5 animate-pulse" /> : <Send className="w-5 h-5" />}
+                  {isLoading ? <Loader2 className="w-5 h-5 animate-spin" /> : <Send className="w-5 h-5" />}
                   Subscribe
                 </Button>
               </form>

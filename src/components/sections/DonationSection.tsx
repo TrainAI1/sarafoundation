@@ -105,7 +105,7 @@ export function DonationSection() {
             {/* Featured: Card payment via Paystack */}
             <div className="card-modern p-5 md:p-6 border-primary/30">
               <div className="flex items-center gap-3 mb-4">
-                <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-primary to-accent flex items-center justify-center shadow-lg">
+                <div className="w-12 h-12 rounded-xl bg-primary flex items-center justify-center shadow-lg">
                   <CreditCard className="w-6 h-6 text-white" />
                 </div>
                 <div>

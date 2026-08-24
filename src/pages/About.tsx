@@ -3,10 +3,7 @@ import { Footer } from "@/components/layout/Footer";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
-import {
-  Target, Heart, Lightbulb, Globe, Users, Award,
-  ArrowRight, Sparkles, Eye, Quote, Trophy
-} from "lucide-react";
+import { Target, Heart, Lightbulb, Globe, Users, Award, ArrowRight, Eye, Quote, Trophy } from "lucide-react";
 import communityWorkshop from "@/assets/community-workshop.jpg";
 import techEntrepreneurs from "@/assets/tech-entrepreneurs.jpg";
 import techConference from "@/assets/tech-conference.jpg";
@@ -115,13 +112,12 @@ export default function About() {
       <Navbar />
       <main>
       {/* Hero */}
-      <section className="pt-24 md:pt-32 pb-12 md:pb-20 bg-gradient-to-br from-primary via-primary/90 to-[hsl(240,80%,50%)] relative overflow-hidden">
+      <section className="pt-24 md:pt-32 pb-12 md:pb-20 bg-primary relative overflow-hidden">
         <div className="absolute inset-0 opacity-30">
         </div>
         <div className="section-container relative z-10">
           <div className="max-w-3xl px-4">
             <span className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.18em] text-white/80 mb-4 mb-6">
-              <Sparkles className="w-3 h-3 md:w-4 md:h-4 text-accent" />
               About Us
             </span>
             <h1 className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 md:mb-6 leading-tight">
@@ -206,7 +202,7 @@ export default function About() {
             <div className="grid gap-6">
               <div className="card-modern p-8">
                 <div className="flex items-start gap-4">
-                  <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-primary to-primary/60 flex items-center justify-center shadow-lg flex-shrink-0">
+                  <div className="w-14 h-14 rounded-2xl bg-primary flex items-center justify-center shadow-lg flex-shrink-0">
                     <Target className="w-7 h-7 text-white" />
                   </div>
                   <div>
@@ -220,7 +216,7 @@ export default function About() {
               </div>
               <div className="card-modern p-8">
                 <div className="flex items-start gap-4">
-                  <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-accent to-accent/60 flex items-center justify-center shadow-lg flex-shrink-0">
+                  <div className="w-14 h-14 rounded-2xl bg-accent flex items-center justify-center shadow-lg flex-shrink-0">
                     <Eye className="w-7 h-7 text-white" />
                   </div>
                   <div>
@@ -283,7 +279,7 @@ export default function About() {
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
             {values.map((value) => (
               <div key={value.title} className="card-modern p-5 md:p-8 text-center group">
-                <div className="w-12 h-12 md:w-16 md:h-16 mx-auto rounded-xl md:rounded-2xl bg-gradient-to-br from-primary to-primary/60 flex items-center justify-center mb-4 md:mb-6 shadow-lg group-hover:scale-110 transition-transform">
+                <div className="w-12 h-12 md:w-16 md:h-16 mx-auto rounded-xl md:rounded-2xl bg-primary flex items-center justify-center mb-4 md:mb-6 shadow-lg group-hover:scale-110 transition-transform">
                   <value.icon className="w-6 h-6 md:w-8 md:h-8 text-white" />
                 </div>
                 <h3 className="font-display font-bold text-base md:text-lg mb-2 md:mb-3 text-foreground">{value.title}</h3>
@@ -374,7 +370,7 @@ export default function About() {
                     <img src={advisor.photo} alt={advisor.name} className="w-full h-full object-cover" />
                   </div>
                 ) : (
-                  <div className="w-12 h-12 md:w-16 md:h-16 mx-auto rounded-full bg-gradient-to-br from-primary/10 to-accent/10 flex items-center justify-center mb-2 md:mb-3">
+                  <div className="w-12 h-12 md:w-16 md:h-16 mx-auto rounded-full bg-primary/10 flex items-center justify-center mb-2 md:mb-3">
                     <span className="text-sm md:text-lg font-bold text-primary">
                       {advisor.name.split(' ').map(n => n[0]).join('').slice(0, 2)}
                     </span>
@@ -407,7 +403,7 @@ export default function About() {
       </section>
 
       {/* CTA */}
-      <section className="py-16 md:py-24 bg-gradient-to-br from-primary via-primary/90 to-[hsl(240,80%,50%)]">
+      <section className="py-16 md:py-24 bg-primary">
         <div className="section-container text-center px-4">
           <h2 className="font-display text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-4 md:mb-6">
             Join Our Mission

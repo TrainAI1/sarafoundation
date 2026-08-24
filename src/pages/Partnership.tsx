@@ -3,10 +3,7 @@ import { Footer } from "@/components/layout/Footer";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
-import { 
-  Building, Users, GraduationCap, ArrowRight, CheckCircle2,
-  Handshake, Target, Sparkles, TrendingUp, Globe, Award
-} from "lucide-react";
+import { Building, Users, GraduationCap, ArrowRight, CheckCircle2, Handshake, Target, TrendingUp, Globe, Award } from "lucide-react";
 import partnershipMeeting from "@/assets/partnership-meeting.jpg";
 import techConferenceSpeaker from "@/assets/tech-conference-speaker.jpg";
 
@@ -110,14 +107,14 @@ export default function Partnership() {
       <Navbar />
       <main>
       {/* Hero with Image */}
-      <section className="pt-24 md:pt-32 pb-12 md:pb-20 bg-gradient-to-br from-primary via-primary/90 to-[hsl(240,80%,50%)] relative overflow-hidden">
+      <section className="pt-24 md:pt-32 pb-12 md:pb-20 bg-primary relative overflow-hidden">
         <div className="absolute inset-0">
           <img 
             src={partnershipMeeting} 
             alt="Partnership meeting"
             className="w-full h-full object-cover opacity-15"
           />
-          <div className="absolute inset-0 bg-gradient-to-br from-primary via-primary/90 to-[hsl(240,80%,50%)]" />
+          <div className="absolute inset-0 bg-primary" />
         </div>
         <div className="section-container relative z-10">
           <div className="grid lg:grid-cols-2 gap-8 md:gap-12 items-center">
@@ -229,7 +226,7 @@ export default function Partnership() {
           alt="Tech conference speaker"
           className="w-full h-full object-cover"
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-primary/60 to-accent/40" />
+        <div className="absolute inset-0 bg-primary/60" />
         <div className="absolute inset-0 flex items-center justify-center">
           <p className="text-white text-xl md:text-3xl font-display font-bold text-center px-4">
             Together, we create lasting impact across Africa
@@ -257,7 +254,7 @@ export default function Partnership() {
             {process.map((item, index) => (
               <div key={item.step} className="relative">
                 <div className="card-modern p-5 md:p-6 text-center h-full">
-                  <div className="w-10 h-10 md:w-12 md:h-12 mx-auto rounded-xl bg-gradient-to-br from-primary to-accent flex items-center justify-center text-white font-bold text-sm md:text-lg mb-3 md:mb-4">
+                  <div className="w-10 h-10 md:w-12 md:h-12 mx-auto rounded-xl bg-primary flex items-center justify-center text-white font-bold text-sm md:text-lg mb-3 md:mb-4">
                     {item.step}
                   </div>
                   <h3 className="font-display font-bold text-sm md:text-lg text-foreground mb-1 md:mb-2">{item.title}</h3>
@@ -277,7 +274,6 @@ export default function Partnership() {
         <div className="section-container">
           <div className="text-center max-w-3xl mx-auto mb-10 md:mb-16 px-4">
             <span className="section-badge mb-6">
-              <Sparkles className="w-4 h-4" />
               Partner Testimonials
             </span>
             <h2 className="section-title text-foreground mb-6">
@@ -295,7 +291,7 @@ export default function Partnership() {
                   "{testimonial.quote}"
                 </p>
                 <div className="flex items-center gap-4">
-                  <div className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-gradient-to-br from-primary to-accent flex items-center justify-center text-white font-bold text-sm">
+                  <div className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-primary flex items-center justify-center text-white font-bold text-sm">
                     {testimonial.author.split(' ').map(n => n[0]).join('')}
                   </div>
                   <div>
@@ -310,7 +306,7 @@ export default function Partnership() {
       </section>
 
       {/* CTA */}
-      <section className="py-16 md:py-24 bg-gradient-to-br from-primary via-primary/90 to-[hsl(240,80%,50%)]">
+      <section className="py-16 md:py-24 bg-primary">
         <div className="section-container text-center px-4">
           <h2 className="font-display text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-4 md:mb-6">
             Let's Create Impact Together
