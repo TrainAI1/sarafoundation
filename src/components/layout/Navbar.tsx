@@ -78,7 +78,7 @@ export function Navbar() {
       }`}
     >
       <nav className="section-container">
-        <div className="flex items-center justify-between h-18 md:h-24">
+        <div className="flex items-center justify-between h-20 md:h-24">
           {/* Logo */}
           <Link to="/" className="flex items-center">
             <img 
