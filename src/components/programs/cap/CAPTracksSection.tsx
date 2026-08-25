@@ -4,7 +4,7 @@ const tracks = [
   {
     name: "Code Track",
     icon: Code,
-    color: "from-primary to-[hsl(240,80%,50%)]",
+    color: "bg-primary",
     specializations: [
       "Full-Stack Development",
       "Front-End Development",
@@ -15,7 +15,7 @@ const tracks = [
   {
     name: "No-Code Track",
     icon: Layers,
-    color: "from-accent to-[hsl(350,80%,55%)]",
+    color: "bg-accent",
     specializations: [
       "Product Management",
       "Data Analysis",
@@ -27,7 +27,7 @@ const tracks = [
   {
     name: "Tech-Preneur Track",
     icon: Rocket,
-    color: "from-[hsl(160,70%,40%)] to-[hsl(160,70%,30%)]",
+    color: "bg-[hsl(160,70%,40%)]",
     specializations: [
       "Founders Program",
     ],
@@ -52,7 +52,7 @@ export function CAPTracksSection() {
         <div className="grid md:grid-cols-3 gap-6 md:gap-8 px-4 lg:px-0">
           {tracks.map((track) => (
             <div key={track.name} className="card-modern overflow-hidden group">
-              <div className={`p-6 md:p-8 bg-gradient-to-r ${track.color} text-white text-center`}>
+              <div className={`p-6 md:p-8 ${track.color} text-white text-center`}>
                 <div className="w-14 h-14 mx-auto rounded-xl bg-white/20 backdrop-blur-sm flex items-center justify-center mb-3">
                   <track.icon className="w-7 h-7" />
                 </div>

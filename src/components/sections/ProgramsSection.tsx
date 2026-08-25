@@ -19,7 +19,7 @@ const programs = [
       { name: "Build", icon: Rocket, description: "Create real-world projects" },
       { name: "Launch", icon: Zap, description: "Start your tech career" },
     ],
-    gradient: "from-primary to-[hsl(240,80%,50%)]",
+    gradient: "bg-primary",
     href: "/programs/cap",
   },
   {
@@ -33,7 +33,7 @@ const programs = [
       { name: "Women Professionals in Tech Africa (WPTA)", description: "Empowering women professionals, bridging the gender gap" },
       { name: "Women Founders in Tech Africa", description: "Supporting women-led startups and ventures" },
     ],
-    gradient: "from-accent to-[hsl(350,80%,55%)]",
+    gradient: "bg-accent",
     href: "/programs/flip",
   },
   {
@@ -48,7 +48,7 @@ const programs = [
       { name: "Match", icon: BookOpen, description: "Align candidates with hiring partners" },
       { name: "Placement", icon: BadgeCheck, description: "Internships, graduate & full-time roles" },
     ],
-    gradient: "from-primary to-accent",
+    gradient: "bg-primary",
     href: "/programs/gjp",
   },
 ];
@@ -86,7 +86,7 @@ export function ProgramsSection() {
                     alt={program.title}
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                   />
-                  <div className={`absolute inset-0 bg-gradient-to-t ${program.gradient} opacity-70`} />
+                  <div className={`absolute inset-0 ${program.gradient} opacity-70`} />
                   <div className="absolute bottom-0 left-0 right-0 p-5 md:p-8">
                     <div className="flex items-start gap-4 md:gap-5">
                       <div className="w-12 h-12 md:w-14 md:h-14 rounded-xl md:rounded-2xl bg-white/20 backdrop-blur-sm flex items-center justify-center flex-shrink-0">

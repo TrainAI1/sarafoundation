@@ -18,7 +18,7 @@ const program = {
         "Practical frameworks",
         "Community & peer learning",
       ],
-      color: "from-primary to-primary/80",
+      color: "bg-primary",
     },
     {
       name: "Build While Learning",
@@ -32,7 +32,7 @@ const program = {
         "Industry mentor oversight",
         "Portfolio-ready projects",
       ],
-      color: "from-[hsl(240,80%,50%)] to-[hsl(240,80%,40%)]",
+      color: "bg-[hsl(240,80%,50%)]",
     },
     {
       name: "Launch",
@@ -46,7 +46,7 @@ const program = {
         "CAP Talent Showcase",
         "Full-time job opportunities",
       ],
-      color: "from-accent to-accent/80",
+      color: "bg-accent",
     },
   ],
 };
@@ -64,7 +64,7 @@ function PhaseBlock({ data }: { data: typeof program }) {
       <div className="grid md:grid-cols-3 gap-6 md:gap-8 px-4 lg:px-0">
         {data.phases.map((phase, index) => (
             <div key={phase.name} className="card-modern overflow-hidden group relative">
-              <div className={`p-5 md:p-6 bg-gradient-to-r ${phase.color} text-white`}>
+              <div className={`p-5 md:p-6 ${phase.color} text-white`}>
                 <div className="flex items-center gap-3">
                   <div className="w-10 h-10 rounded-lg bg-white/20 backdrop-blur-sm flex items-center justify-center flex-shrink-0">
                     <phase.icon className="w-5 h-5" />

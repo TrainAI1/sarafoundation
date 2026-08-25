@@ -41,7 +41,7 @@ const sponsorBenefits = [
       "Be recognized as a supporter of women's empowerment and progress",
       "Showcase your commitment to diversity and inclusion in tech",
     ],
-    color: "from-primary to-[hsl(240,80%,50%)]",
+    color: "bg-primary",
   },
   {
     number: "02",
@@ -54,7 +54,7 @@ const sponsorBenefits = [
       "Collaborate and fund women-led startups on innovative projects",
       "Offer internships or mentorships to students",
     ],
-    color: "from-[hsl(240,80%,50%)] to-primary",
+    color: "bg-[hsl(240,80%,50%)]",
   },
   {
     number: "03",
@@ -68,7 +68,7 @@ const sponsorBenefits = [
       "Identify new suppliers and partners within the FLIP network to diversify your supply chain",
       "Generate new business opportunities and increase your revenue by supporting women-led startups",
     ],
-    color: "from-accent to-primary",
+    color: "bg-accent",
   },
 ];
 
@@ -234,7 +234,7 @@ export default function Sponsors() {
             {sponsorBenefits.map((benefit) => (
               <div key={benefit.number} className="card-modern overflow-hidden">
                 <div className="grid lg:grid-cols-3 gap-0">
-                  <div className={`p-6 md:p-8 bg-gradient-to-br ${benefit.color} text-white flex flex-col justify-center`}>
+                  <div className={`p-6 md:p-8 ${benefit.color} text-white flex flex-col justify-center`}>
                     <div className="flex items-center gap-3 md:gap-4 mb-3 md:mb-4">
                       <div className="w-12 h-12 md:w-14 md:h-14 rounded-xl md:rounded-2xl bg-white/20 backdrop-blur-sm flex items-center justify-center">
                         <benefit.icon className="w-6 h-6 md:w-7 md:h-7" />

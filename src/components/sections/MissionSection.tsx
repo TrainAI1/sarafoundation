@@ -9,25 +9,25 @@ const coreValues = [
     icon: Lightbulb,
     title: "Innovation",
     description: "Fostering creative solutions and cutting-edge technology to address Africa's unique challenges.",
-    gradient: "from-primary to-primary/60",
+    gradient: "bg-primary",
   },
   {
     icon: Users,
     title: "Collaboration",
     description: "Building strong partnerships across sectors to amplify our collective impact on the continent.",
-    gradient: "from-accent to-accent/60",
+    gradient: "bg-accent",
   },
   {
     icon: Heart,
     title: "DEI",
     description: "Championing Diversity, Equity, and Inclusion to ensure everyone has a seat at the table.",
-    gradient: "from-success to-success/60",
+    gradient: "bg-success",
   },
   {
     icon: Target,
     title: "Do Well, Do Good",
     description: "Creating sustainable impact while driving excellence in everything we do.",
-    gradient: "from-primary to-accent",
+    gradient: "bg-primary",
   },
 ];
 
@@ -75,7 +75,7 @@ export function MissionSection() {
           {coreValues.map((value) => (
             <StaggerItem key={value.title}>
               <div className="card-modern p-5 md:p-8 text-center group">
-                <div className={`w-12 h-12 md:w-16 md:h-16 mx-auto rounded-xl md:rounded-2xl bg-gradient-to-br ${value.gradient} flex items-center justify-center mb-4 md:mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg`}>
+                <div className={`w-12 h-12 md:w-16 md:h-16 mx-auto rounded-xl md:rounded-2xl ${value.gradient} flex items-center justify-center mb-4 md:mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg`}>
                   <value.icon className="w-6 h-6 md:w-8 md:h-8 text-white" />
                 </div>
                 <h3 className="font-display font-bold text-lg md:text-xl mb-2 md:mb-3 text-foreground">

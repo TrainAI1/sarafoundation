@@ -15,28 +15,28 @@ const donationMethods = [
     provider: "MoniePoint",
     description: "9076 664049",
     copyValue: "9076664049",
-    gradient: "from-primary to-primary/60",
+    gradient: "bg-primary",
   },
   {
     icon: Wallet,
     title: "USDT (TRC20)",
     description: "TMdq8t9WYCvgJA9aftXDzA3XUNX9V4MMG6",
     copyValue: "TMdq8t9WYCvgJA9aftXDzA3XUNX9V4MMG6",
-    gradient: "from-accent to-accent/60",
+    gradient: "bg-accent",
   },
   {
     icon: Wallet,
     title: "Ethereum (BEP20)",
     description: "0xe7dae2ef9740beacde6d9f584f67ecf2b8f396365",
     copyValue: "0xe7dae2ef9740beacde6d9f584f67ecf2b8f396365",
-    gradient: "from-primary/80 to-accent/80",
+    gradient: "bg-primary",
   },
   {
     icon: ExternalLink,
     title: "GoFundMe",
     description: "Support us through GoFundMe",
     link: "https://gofund.me/9559a00e",
-    gradient: "from-emerald-500 to-emerald-400",
+    gradient: "bg-emerald-500",
   },
 ];
 
@@ -62,7 +62,7 @@ function DonateContent() {
             className="flex flex-col sm:flex-row sm:items-center gap-2.5 sm:gap-3 rounded-xl border border-border p-3 hover:bg-muted/50 transition-colors"
           >
             <div className="flex items-center gap-3 flex-1 min-w-0">
-              <div className={`w-9 h-9 sm:w-10 sm:h-10 rounded-lg bg-gradient-to-br ${method.gradient} flex items-center justify-center flex-shrink-0`}>
+              <div className={`w-9 h-9 sm:w-10 sm:h-10 rounded-lg ${method.gradient} flex items-center justify-center flex-shrink-0`}>
                 <method.icon className="w-4 h-4 text-white" />
               </div>
               <div className="flex-1 min-w-0">
