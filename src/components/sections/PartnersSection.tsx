@@ -3,39 +3,39 @@ import { ScrollAnimation } from "@/components/ui/scroll-animation";
 
 const universities = [
   // Cohort 1
-  { name: "University of Ilorin", country: "🇳🇬" },
-  { name: "University of Lagos", country: "🇳🇬" },
-  { name: "University of Abuja", country: "🇳🇬" },
-  { name: "University of Ibadan", country: "🇳🇬" },
-  { name: "Federal University of Technology, Akure", country: "🇳🇬" },
-  { name: "Ajayi Crowther University", country: "🇳🇬" },
-  { name: "Ahmadu Bello University, Zaria", country: "🇳🇬" },
+  { name: "University of Ilorin", country: "Nigeria", flag: "🇳🇬" },
+  { name: "University of Lagos", country: "Nigeria", flag: "🇳🇬" },
+  { name: "University of Abuja", country: "Nigeria", flag: "🇳🇬" },
+  { name: "University of Ibadan", country: "Nigeria", flag: "🇳🇬" },
+  { name: "Federal University of Technology, Akure", country: "Nigeria", flag: "🇳🇬" },
+  { name: "Ajayi Crowther University", country: "Nigeria", flag: "🇳🇬" },
+  { name: "Ahmadu Bello University, Zaria", country: "Nigeria", flag: "🇳🇬" },
   // Cohort 2
-  { name: "Adeniran Ogunsanya College of Education", country: "🇳🇬" },
-  { name: "American Caregiving University", country: "🇿🇦" },
-  { name: "Babcock University", country: "🇳🇬" },
-  { name: "Benue State University", country: "🇳🇬" },
-  { name: "Cavendish University", country: "🇿🇲" },
-  { name: "Evans University", country: "🇺🇬" },
-  { name: "Federal Polytechnic Ilaro", country: "🇳🇬" },
-  { name: "Federal University Lokoja", country: "🇳🇬" },
-  { name: "Federal University of Oye Ekiti", country: "🇳🇬" },
-  { name: "Gateway Polytechnic Saapade", country: "🇳🇬" },
-  { name: "Kumasi Technical University", country: "🇬🇭" },
-  { name: "Ladoke Akintola University of Technology", country: "🇳🇬" },
-  { name: "Lagos State University", country: "🇳🇬" },
-  { name: "Makerere University", country: "🇺🇬" },
-  { name: "Micheal Okpara University of Agriculture", country: "🇳🇬" },
-  { name: "Modibbo Adama University, Yola", country: "🇳🇬" },
-  { name: "Mutesal Royal University", country: "🇺🇬" },
-  { name: "Narok University", country: "🇰🇪" },
-  { name: "National Open University of Nigeria", country: "🇳🇬" },
-  { name: "Obafemi Awolowo University", country: "🇳🇬" },
-  { name: "Polytechnic of Ibadan", country: "🇳🇬" },
-  { name: "Global Wealth University", country: "🇹🇬" },
-  { name: "University of Maiduguri", country: "🇳🇬" },
-  { name: "University of Nigeria, Nsukka", country: "🇳🇬" },
-  { name: "Asteven Energy Institute", country: "🇳🇬" },
+  { name: "Adeniran Ogunsanya College of Education", country: "Nigeria", flag: "🇳🇬" },
+  { name: "American Caregiving University", country: "South Africa", flag: "🇿🇦" },
+  { name: "Babcock University", country: "Nigeria", flag: "🇳🇬" },
+  { name: "Benue State University", country: "Nigeria", flag: "🇳🇬" },
+  { name: "Cavendish University", country: "Zambia", flag: "🇿🇲" },
+  { name: "Evans University", country: "Uganda", flag: "🇺🇬" },
+  { name: "Federal Polytechnic Ilaro", country: "Nigeria", flag: "🇳🇬" },
+  { name: "Federal University Lokoja", country: "Nigeria", flag: "🇳🇬" },
+  { name: "Federal University of Oye Ekiti", country: "Nigeria", flag: "🇳🇬" },
+  { name: "Gateway Polytechnic Saapade", country: "Nigeria", flag: "🇳🇬" },
+  { name: "Kumasi Technical University", country: "Ghana", flag: "🇬🇭" },
+  { name: "Ladoke Akintola University of Technology", country: "Nigeria", flag: "🇳🇬" },
+  { name: "Lagos State University", country: "Nigeria", flag: "🇳🇬" },
+  { name: "Makerere University", country: "Uganda", flag: "🇺🇬" },
+  { name: "Micheal Okpara University of Agriculture", country: "Nigeria", flag: "🇳🇬" },
+  { name: "Modibbo Adama University, Yola", country: "Nigeria", flag: "🇳🇬" },
+  { name: "Mutesal Royal University", country: "Uganda", flag: "🇺🇬" },
+  { name: "Narok University", country: "Kenya", flag: "🇰🇪" },
+  { name: "National Open University of Nigeria", country: "Nigeria", flag: "🇳🇬" },
+  { name: "Obafemi Awolowo University", country: "Nigeria", flag: "🇳🇬" },
+  { name: "Polytechnic of Ibadan", country: "Nigeria", flag: "🇳🇬" },
+  { name: "Global Wealth University", country: "Togo", flag: "🇹🇬" },
+  { name: "University of Maiduguri", country: "Nigeria", flag: "🇳🇬" },
+  { name: "University of Nigeria, Nsukka", country: "Nigeria", flag: "🇳🇬" },
+  { name: "Asteven Energy Institute", country: "Nigeria", flag: "🇳🇬" },
 ];
 
 export function PartnersSection() {
@@ -66,7 +66,7 @@ export function PartnersSection() {
               key={`a-${i}`}
               className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.18em] text-primary"
             >
-              <span className="text-lg">{uni.country}</span>
+              <span className="text-lg" role="img" aria-label={`${uni.country} flag`}>{uni.flag}</span>
               <span className="text-sm font-medium text-foreground whitespace-nowrap">
                 {uni.name}
               </span>
@@ -83,7 +83,7 @@ export function PartnersSection() {
               key={`b-${i}`}
               className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.18em] text-primary"
             >
-              <span className="text-lg">{uni.country}</span>
+              <span className="text-lg" role="img" aria-label={`${uni.country} flag`}>{uni.flag}</span>
               <span className="text-sm font-medium text-foreground whitespace-nowrap">
                 {uni.name}
               </span>

@@ -103,7 +103,7 @@ export function HeroSection() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.5 }}
-          className="relative mt-8 md:mt-10 flex-1 flex items-end w-screen ml-[50%] -translate-x-1/2"
+          className="relative left-1/2 -ml-[50vw] mt-8 md:mt-10 flex-1 flex items-end w-screen max-w-none"
         >
           <div className="overflow-hidden w-full py-4 md:py-6">
             <div

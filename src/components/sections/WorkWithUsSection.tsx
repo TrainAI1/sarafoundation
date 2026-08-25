@@ -1,4 +1,4 @@
-import { ArrowRight, Heart } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { ScrollAnimation } from "@/components/ui/scroll-animation";
@@ -13,8 +13,7 @@ export function WorkWithUsSection() {
       <div className="section-container relative z-10">
         <div className="max-w-3xl mx-auto text-center px-4">
           <ScrollAnimation variant="fade-up">
-            <div className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.18em] text-white/80 mb-4 mb-6">
-              <Heart className="w-4 h-4 text-accent" />
+            <div className="inline-flex items-center text-xs font-semibold uppercase tracking-[0.18em] text-white/80 mb-6">
               Work with Us
             </div>
           </ScrollAnimation>
