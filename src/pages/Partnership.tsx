@@ -22,7 +22,7 @@ const partnerTypes = [
     ],
     stats: { value: "50+", label: "Partner Universities" },
     href: "/partnership/school-community",
-    color: "from-primary to-[hsl(240,80%,50%)]",
+    color: "bg-primary",
   },
   {
     icon: Building,
@@ -38,7 +38,7 @@ const partnerTypes = [
     ],
     stats: { value: "100+", label: "Corporate Partners" },
     href: "/partnership/organizations",
-    color: "from-accent to-[hsl(350,80%,55%)]",
+    color: "bg-accent",
   },
   {
     icon: Handshake,
@@ -54,7 +54,7 @@ const partnerTypes = [
     ],
     stats: { value: "$2M+", label: "Funds Raised" },
     href: "/partnership/sponsors",
-    color: "from-[hsl(160,84%,39%)] to-primary",
+    color: "bg-[hsl(160,84%,39%)]",
   },
 ];
 
@@ -176,7 +176,7 @@ export default function Partnership() {
             {partnerTypes.map((type) => (
               <div key={type.title} className="card-modern overflow-hidden flex flex-col">
                 {/* Header */}
-                <div className={`p-6 bg-gradient-to-r ${type.color} text-white`}>
+                <div className={`p-6 ${type.color} text-white`}>
                   <div className="flex items-center gap-4 mb-4">
                     <div className="w-14 h-14 rounded-2xl bg-white/20 backdrop-blur-sm flex items-center justify-center">
                       <type.icon className="w-7 h-7" />

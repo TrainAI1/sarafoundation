@@ -12,7 +12,7 @@ const donationMethods = [
     description: "Account Number: 9076 664049",
     action: "Copy Account",
     copyValue: "9076664049",
-    gradient: "from-primary to-primary/60",
+    gradient: "bg-primary",
   },
   {
     icon: Wallet,
@@ -21,7 +21,7 @@ const donationMethods = [
     description: "TMdq8t9WYCvgJA9aftXDzA3XUNX9V4MMG6",
     action: "Copy Address",
     copyValue: "TMdq8t9WYCvgJA9aftXDzA3XUNX9V4MMG6",
-    gradient: "from-accent to-accent/60",
+    gradient: "bg-accent",
   },
   {
     icon: Wallet,
@@ -30,7 +30,7 @@ const donationMethods = [
     description: "0xe7dae2ef9740beacde6d9f584f67ecf2b8f396365",
     action: "Copy Address",
     copyValue: "0xe7dae2ef9740beacde6d9f584f67ecf2b8f396365",
-    gradient: "from-primary/80 to-accent/80",
+    gradient: "bg-primary",
   },
   {
     icon: ExternalLink,
@@ -39,7 +39,7 @@ const donationMethods = [
     description: "Support us through our GoFundMe campaign",
     action: "Donate on GoFundMe",
     link: "https://gofund.me/9559a00e",
-    gradient: "from-[hsl(var(--success))] to-[hsl(var(--success))]/60",
+    gradient: "bg-[hsl(var(--success))]",
   },
 ];
 
@@ -122,7 +122,7 @@ export function DonationSection() {
                 className="card-modern p-4 md:p-6 flex flex-col sm:flex-row items-start sm:items-center gap-4"
                 style={{ animationDelay: `${index * 0.1}s` }}
               >
-                <div className={`w-12 h-12 md:w-16 md:h-16 rounded-xl md:rounded-2xl bg-gradient-to-br ${method.gradient} flex items-center justify-center flex-shrink-0 shadow-lg`}>
+                <div className={`w-12 h-12 md:w-16 md:h-16 rounded-xl md:rounded-2xl ${method.gradient} flex items-center justify-center flex-shrink-0 shadow-lg`}>
                   <method.icon className="w-5 h-5 md:w-7 md:h-7 text-white" />
                 </div>
                 <div className="flex-1 min-w-0">

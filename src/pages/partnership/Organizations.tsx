@@ -42,7 +42,7 @@ const partnerCategories = [
       "Promote CSR in an impact-driven way empowering women",
       "Inclusion and Innovation Boost by promoting gender-based initiatives to drive innovation and societal impact",
     ],
-    color: "from-primary to-[hsl(240,80%,50%)]",
+    color: "bg-primary",
   },
   {
     number: "02",
@@ -54,7 +54,7 @@ const partnerCategories = [
       "Contribute to the development of the tech ecosystem and job creation to enhance economic growth",
       "Advance gender equality and women's empowerment goals and promote social impact",
     ],
-    color: "from-[hsl(240,80%,50%)] to-primary",
+    color: "bg-[hsl(240,80%,50%)]",
   },
   {
     number: "03",
@@ -66,7 +66,7 @@ const partnerCategories = [
       "Expand reach and influence through collaborations with FLIP",
       "Contribute to achieving shared goals of women's empowerment, gender equality and promote social impact",
     ],
-    color: "from-accent to-primary",
+    color: "bg-accent",
   },
 ];
 
@@ -219,7 +219,7 @@ export default function Organizations() {
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
             {partnerCategories.map((category) => (
               <div key={category.number} className="card-modern overflow-hidden flex flex-col">
-                <div className={`p-5 md:p-6 bg-gradient-to-r ${category.color} text-white`}>
+                <div className={`p-5 md:p-6 ${category.color} text-white`}>
                   <div className="flex items-center gap-3 md:gap-4 mb-3 md:mb-4">
                     <div className="w-12 h-12 md:w-14 md:h-14 rounded-xl md:rounded-2xl bg-white/20 backdrop-blur-sm flex items-center justify-center">
                       <category.icon className="w-6 h-6 md:w-7 md:h-7" />

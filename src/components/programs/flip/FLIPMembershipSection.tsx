@@ -3,7 +3,7 @@ import { Users, Briefcase, Rocket, Award } from "lucide-react";
 const tiers = [
   {
     category: "Tech Starter Members",
-    color: "from-[hsl(160,70%,40%)] to-[hsl(160,70%,30%)]",
+    color: "bg-[hsl(160,70%,40%)]",
     icon: Users,
     items: [
       "Members seeking to start a career in tech",
@@ -12,7 +12,7 @@ const tiers = [
   },
   {
     category: "Professional Members",
-    color: "from-primary to-[hsl(240,80%,50%)]",
+    color: "bg-primary",
     icon: Briefcase,
     items: [
       "Tier 1: Early stage careers (1-5 years experience)",
@@ -21,7 +21,7 @@ const tiers = [
   },
   {
     category: "Entrepreneur Members",
-    color: "from-accent to-[hsl(350,80%,55%)]",
+    color: "bg-accent",
     icon: Rocket,
     items: [
       "Tier 1: Pre-seed or seed stage startups (early-stage founders)",
@@ -30,7 +30,7 @@ const tiers = [
   },
   {
     category: "Honorary & Ally Members",
-    color: "from-[hsl(45,90%,50%)] to-[hsl(45,90%,40%)]",
+    color: "bg-primary",
     icon: Award,
     items: [
       "Honorary: 10+ years experience or led major African startups",
@@ -57,7 +57,7 @@ export function FLIPMembershipSection() {
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 px-4 lg:px-0">
           {tiers.map((tier) => (
             <div key={tier.category} className="card-modern overflow-hidden group">
-              <div className={`p-5 md:p-6 bg-gradient-to-r ${tier.color} text-white`}>
+              <div className={`p-5 md:p-6 ${tier.color} text-white`}>
                 <div className="flex items-center gap-3">
                   <div className="w-10 h-10 md:w-12 md:h-12 rounded-xl bg-white/20 backdrop-blur-sm flex items-center justify-center flex-shrink-0">
                     <tier.icon className="w-5 h-5 md:w-6 md:h-6" />
