@@ -1,4 +1,4 @@
-import { TrendingUp, Users, GraduationCap, HandCoins, Sparkles, ArrowRight } from "lucide-react";
+import { TrendingUp, GraduationCap, HandCoins, Globe, ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import impactLecture from "@/assets/impact-lecture.jpg";
@@ -11,17 +11,17 @@ export function ImpactSection() {
     reach_desc: "People reached through our channels, events and community activity. Reach is not the same as learners trained.",
     scholarships_value: "1,600",
     scholarships_desc: "Fully funded and subsidised places provided across our pathways.",
-    learners_value: "763",
-    learners_desc: "CAP learners who received fully funded access across Cohorts 1 and 2.",
-    ai_value: "170",
-    ai_desc: "AI training places delivered with partner organisations.",
+    universities_value: "35+",
+    universities_desc: "Universities represented across our CAP learning activity.",
+    countries_value: "11",
+    countries_desc: "African countries our participants have joined us from.",
   });
 
   const impactStats = [
     { icon: TrendingUp, value: c.reach_value, label: "Community Reach", description: c.reach_desc },
     { icon: HandCoins, value: c.scholarships_value, label: "Scholarships Provided", description: c.scholarships_desc },
-    { icon: GraduationCap, value: c.learners_value, label: "CAP Learners", description: c.learners_desc },
-    { icon: Sparkles, value: c.ai_value, label: "AI Training Places", description: c.ai_desc },
+    { icon: GraduationCap, value: c.universities_value, label: "Universities Represented", description: c.universities_desc },
+    { icon: Globe, value: c.countries_value, label: "African Countries", description: c.countries_desc },
   ];
 
   return (
@@ -40,7 +40,8 @@ export function ImpactSection() {
               </h2>
               <p className="text-lg text-white/60 leading-relaxed mx-auto lg:mx-0">
                 Each figure below measures a different thing. People reached, scholarships provided,
-                learners trained and training places are counted separately and are not unique individuals.
+                universities represented and countries reached are counted separately and are not unique
+                individuals.
               </p>
               <div className="mt-8">
                 <Button variant="accent" size="lg" className="group" asChild>
