@@ -18,9 +18,12 @@ const PRESETS: Record<Currency, number[]> = {
 
 const SYMBOL: Record<Currency, string> = { USD: "$", NGN: "₦", EUR: "€", GBP: "£" };
 
+// Keep preset labels short so four buttons never overflow a narrow screen
+const formatPreset = (v: number) => (v >= 1000 ? `${v / 1000}k` : v.toLocaleString());
+
 export function PaystackDonate({ compact = false }: { compact?: boolean }) {
   const [currency, setCurrency] = useState<Currency>("USD");
-  const [amount, setAmount] = useState<string>("25");
+  const [amount, setAmount] = useState<string>("100");
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [processing, setProcessing] = useState<null | "stripe" | "paystack">(null);
@@ -92,7 +95,7 @@ export function PaystackDonate({ compact = false }: { compact?: boolean }) {
 
   return (
     <div className={compact ? "space-y-3" : "space-y-4"}>
-      <div className="grid grid-cols-4 gap-2">
+      <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
         {(["USD", "NGN", "EUR", "GBP"] as Currency[]).map((c) => (
           <button
             key={c}
@@ -105,7 +108,7 @@ export function PaystackDonate({ compact = false }: { compact?: boolean }) {
         ))}
       </div>
 
-      <div className="grid grid-cols-4 gap-2">
+      <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
         {PRESETS[currency].map((v) => (
           <button
             key={v}
@@ -113,7 +116,7 @@ export function PaystackDonate({ compact = false }: { compact?: boolean }) {
             onClick={() => setAmount(String(v))}
             className={`p-2 rounded-lg border text-sm font-medium transition-all ${Number(amount) === v ? "border-primary bg-primary/10 text-foreground" : "border-border text-muted-foreground hover:border-primary/50"}`}
           >
-            {SYMBOL[currency]}{v.toLocaleString()}
+            {SYMBOL[currency]}{formatPreset(v)}
           </button>
         ))}
       </div>

@@ -51,8 +51,12 @@ export function CookieConsent() {
                   </Link>
                 </p>
               </div>
-              <button onClick={handleDecline} className="text-muted-foreground hover:text-foreground transition-colors">
-                <X className="w-4 h-4" />
+              <button
+                onClick={handleDecline}
+                aria-label="Dismiss cookie notice"
+                className="flex h-11 w-11 items-center justify-center text-muted-foreground hover:text-foreground transition-colors"
+              >
+                <X className="w-4 h-4" aria-hidden="true" />
               </button>
             </div>
             <div className="flex gap-2">

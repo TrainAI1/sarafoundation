@@ -57,7 +57,7 @@ export function ImpactReportSection() {
                           href={report.href}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="text-sm font-medium text-primary hover:underline"
+                          className="inline-block py-1.5 text-sm font-medium text-primary hover:underline"
                         >
                           Read the {report.year} impact report
                         </a>

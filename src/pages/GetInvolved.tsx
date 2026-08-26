@@ -121,7 +121,7 @@ const GetInvolved = () => {
             <div className="card-modern p-6 md:p-10 text-center">
               <p className="font-display text-xl md:text-2xl font-bold text-foreground leading-snug">
                 Every donation helps us reduce barriers to education and participation so that financial
-                circumstances do not prevent eligible adults from accessing learning opportunities.
+                circumstances do not prevent eligible young people from accessing learning opportunities.
               </p>
             </div>
             <div className="grid sm:grid-cols-2 gap-6 mt-10">

@@ -109,9 +109,21 @@
     @apply border-border;
   }
 
+  html,
   body {
     @apply bg-background text-foreground antialiased;
     font-family: 'Inter', system-ui, sans-serif;
+    /* Decorative blurred shapes and the full-bleed hero marquee must never
+       make the page itself scroll sideways on a phone. */
+    overflow-x: hidden;
+    max-width: 100%;
+  }
+
+  img,
+  video,
+  canvas,
+  svg {
+    max-width: 100%;
   }
 
   h1, h2, h3, h4, h5, h6 {

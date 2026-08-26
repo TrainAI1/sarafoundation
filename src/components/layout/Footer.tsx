@@ -114,10 +114,10 @@ export function Footer() {
           {/* Explore */}
           <div>
             <h4 className="font-display font-bold text-lg mb-6">Explore</h4>
-            <ul className="space-y-4">
+            <ul className="space-y-2">
               {exploreLinks.map((link) => (
                 <li key={link.title}>
-                  <Link to={link.href} className="text-white/60 hover:text-primary transition-colors text-sm">
+                  <Link to={link.href} className="inline-block py-1.5 text-white/60 hover:text-primary transition-colors text-sm">
                     {link.title}
                   </Link>
                 </li>
@@ -128,10 +128,10 @@ export function Footer() {
           {/* Get Involved */}
           <div>
             <h4 className="font-display font-bold text-lg mb-6">Get Involved</h4>
-            <ul className="space-y-4">
+            <ul className="space-y-2">
               {getInvolvedLinks.map((link) => (
                 <li key={link.title}>
-                  <Link to={link.href} className="text-white/60 hover:text-primary transition-colors text-sm">
+                  <Link to={link.href} className="inline-block py-1.5 text-white/60 hover:text-primary transition-colors text-sm">
                     {link.title}
                   </Link>
                 </li>
@@ -156,7 +156,7 @@ export function Footer() {
                 <div className="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center flex-shrink-0">
                   <Mail className="w-5 h-5 text-primary" />
                 </div>
-                <a href={`mailto:${settings.email}`} className="text-white/60 hover:text-primary text-sm transition-colors">
+                <a href={`mailto:${settings.email}`} className="inline-block py-1.5 text-white/60 hover:text-primary text-sm transition-colors">
                   {settings.email}
                 </a>
               </li>
@@ -198,7 +198,7 @@ export function Footer() {
             <ul className="flex flex-wrap gap-x-6 gap-y-2 justify-center md:justify-start">
               {trustLinks.map((link) => (
                 <li key={link.title}>
-                  <Link to={link.href} className="text-white/60 hover:text-primary transition-colors text-sm">
+                  <Link to={link.href} className="inline-block py-1.5 text-white/60 hover:text-primary transition-colors text-sm">
                     {link.title}
                   </Link>
                 </li>

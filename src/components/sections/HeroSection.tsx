@@ -20,7 +20,7 @@ const defaults = {
   headline_1: "Expanding Access to Digital Learning.",
   headline_2: "Building Inclusive Communities.",
   headline_3: "Supporting Tech Innovation.",
-  subheadline: "Sara Foundation Africa is an NGO widening access to digital inclusion, tech learning and innovation for adults and underserved communities in Africa.",
+  subheadline: "Sara Foundation Africa is an NGO widening access to digital inclusion, tech learning and innovation for young people, women and underserved communities in Africa.",
   cta_primary: "Donate",
   cta_secondary: "Explore Our Work",
   cta_tertiary: "Partner with Us",

@@ -94,15 +94,21 @@ export function TestimonialsSection() {
             </div>
           </div>
 
-          <div className="flex justify-center gap-2 mt-6 md:mt-8">
+          <div className="flex justify-center mt-4 md:mt-6">
             {testimonials.map((_, i) => (
               <button
                 key={i}
                 onClick={() => setCurrentIndex(i)}
-                className={`w-2.5 h-2.5 md:w-3 md:h-3 rounded-full transition-all ${
-                  i === currentIndex ? "bg-primary w-6 md:w-8" : "bg-border hover:bg-primary/50"
-                }`}
-              />
+                aria-label={`Show testimonial ${i + 1} of ${testimonials.length}`}
+                aria-current={i === currentIndex}
+                className="group flex h-11 w-8 items-center justify-center"
+              >
+                <span
+                  className={`block h-2.5 md:h-3 rounded-full transition-all ${
+                    i === currentIndex ? "bg-primary w-6 md:w-8" : "w-2.5 md:w-3 bg-border group-hover:bg-primary/50"
+                  }`}
+                />
+              </button>
             ))}
           </div>
         </ScrollAnimation>

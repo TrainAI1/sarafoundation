@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 import { Heart, X, CreditCard, Wallet, ExternalLink, Copy } from "lucide-react";
 import { Dialog, DialogContent, DialogPortal, DialogOverlay } from "@/components/ui/dialog";
 import * as DialogPrimitive from "@radix-ui/react-dialog";
@@ -34,16 +35,19 @@ const methods = [
 
 export function SessionDonationPopup() {
   const [open, setOpen] = useState(false);
+  const location = useLocation();
+  const onDonationPage = location.pathname.startsWith("/donation");
 
   useEffect(() => {
     if (typeof window === "undefined") return;
+    if (onDonationPage) return;
     if (sessionStorage.getItem(SESSION_KEY)) return;
     const t = setTimeout(() => {
       setOpen(true);
       sessionStorage.setItem(SESSION_KEY, "1");
     }, 1500);
     return () => clearTimeout(t);
-  }, []);
+  }, [onDonationPage]);
 
   const copy = (value: string, label: string) => {
     navigator.clipboard.writeText(value);

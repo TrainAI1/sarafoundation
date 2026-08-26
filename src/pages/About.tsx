@@ -187,8 +187,8 @@ export default function About() {
               <div className="space-y-4 text-muted-foreground leading-relaxed">
                 <p>
                   Sara Foundation Africa expands access to digital education and tech learning, promotes
-                  social inclusion and strengthens community capacity for adults and underserved
-                  communities in Africa.
+                  social inclusion and strengthens community capacity for young people, women and
+                  underserved communities in Africa.
                 </p>
                 <p>
                   We reduce barriers to learning and participation through structured digital education,
@@ -264,7 +264,7 @@ export default function About() {
             </h2>
             <p className="section-subtitle">
               We support young people aged 18 and above, particularly people from socially or economically
-              disadvantaged, underserved or underrepresented communities. This includes women and adults who
+              disadvantaged, underserved or underrepresented communities. This includes women and young people who
               face barriers to tech education, social inclusion and participation.
             </p>
           </div>

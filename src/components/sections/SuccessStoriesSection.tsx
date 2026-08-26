@@ -74,7 +74,7 @@ export function SuccessStoriesSection() {
               <Card className="p-6 h-full flex flex-col hover:shadow-xl transition-shadow">
                 <Link
                   to={s.pathwayHref}
-                  className="inline-flex self-start items-center text-xs font-semibold uppercase tracking-[0.18em] text-primary mb-4 hover:underline"
+                  className="inline-flex self-start items-center py-1 text-xs font-semibold uppercase tracking-[0.18em] text-primary mb-3 hover:underline"
                 >
                   {s.pathway} pathway
                 </Link>
@@ -88,7 +88,7 @@ export function SuccessStoriesSection() {
                       href={s.link}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 text-sm font-medium text-primary mt-3 hover:underline"
+                      className="inline-flex items-center gap-2 py-1.5 text-sm font-medium text-primary mt-2 hover:underline"
                     >
                       <PlayCircle className="w-4 h-4" aria-hidden="true" />
                       {s.linkLabel} for {s.name}

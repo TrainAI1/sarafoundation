@@ -16,7 +16,7 @@ import { CTASection } from "@/components/sections/CTASection";
 import { Helmet } from "react-helmet-async";
 
 const homeFaqs = [
-  { q: "Who can take part in the Community Access & Participation Pathway (CAP)?", a: "CAP is open to adults aged 18 and above across Africa, particularly people from underserved or underrepresented communities. No prior coding experience is needed. Learners have joined from 35+ universities across 11 African countries." },
+  { q: "Who can take part in the Community Access & Participation Pathway (CAP)?", a: "CAP is open to young people aged 18 and above across Africa, particularly people from underserved or underrepresented communities. No prior coding experience is needed. Learners have joined from 35+ universities across 11 African countries." },
   { q: "Is there a cost to take part?", a: "Where a programme has a participation fee, Sara Foundation Africa provides scholarships, bursaries, subsidised places or full fee waivers where funding allows. All 763 CAP learners across Cohorts 1 and 2 received fully funded access. Sponsored places are allocated on the basis of need and eligibility." },
   { q: "What is the time commitment for CAP?", a: "CAP is delivered through a Learn, Build and Launch structure with an 80/20 balance of practice to taught learning. Learners take part in expert sessions, guided project work and showcases, and typically dedicate 10 to 15 hours per week." },
   { q: "What is FLIP and who is it for?", a: "The Female Learning & Inclusion Pathway (FLIP) is our six-week tailored programme for women interested in technology, alongside fellowship, mentorship, workshop and community activities. It creates targeted opportunities where barriers or underrepresentation in tech learning have been identified." },
@@ -30,23 +30,23 @@ const Index = () => {
     <div className="min-h-screen">
       <Helmet>
         <title>Sara Foundation Africa | Digital Education &amp; Inclusion</title>
-        <meta name="description" content="Sara Foundation Africa expands access to digital education and tech learning, promotes social inclusion and strengthens community capacity for adults and underserved communities in Africa." />
+        <meta name="description" content="Sara Foundation Africa expands access to digital education and tech learning, promotes social inclusion and strengthens community capacity for young people, women and underserved communities in Africa." />
         <link rel="canonical" href="https://sarafoundationafrica.com/" />
         <meta property="og:title" content="Sara Foundation Africa | Digital Education &amp; Inclusion" />
-        <meta property="og:description" content="Sara Foundation Africa expands access to digital education and tech learning, promotes social inclusion and strengthens community capacity for adults and underserved communities in Africa." />
+        <meta property="og:description" content="Sara Foundation Africa expands access to digital education and tech learning, promotes social inclusion and strengthens community capacity for young people, women and underserved communities in Africa." />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://sarafoundationafrica.com/" />
         <meta property="og:image" content="https://sarafoundationafrica.com/hero-students.jpg" />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Sara Foundation Africa | Digital Education &amp; Inclusion" />
-        <meta name="twitter:description" content="Sara Foundation Africa expands access to digital education and tech learning, promotes social inclusion and strengthens community capacity for adults and underserved communities in Africa." />
+        <meta name="twitter:description" content="Sara Foundation Africa expands access to digital education and tech learning, promotes social inclusion and strengthens community capacity for young people, women and underserved communities in Africa." />
         <meta name="twitter:image" content="https://sarafoundationafrica.com/hero-students.jpg" />
         <script type="application/ld+json">{JSON.stringify({
           "@context": "https://schema.org",
           "@type": "NGO",
           "name": "Sara Foundation Africa",
           "alternateName": "Sara Foundation",
-          "description": "Sara Foundation Africa expands access to digital education and tech learning, promotes social inclusion and strengthens community capacity for adults and underserved communities in Africa.",
+          "description": "Sara Foundation Africa expands access to digital education and tech learning, promotes social inclusion and strengthens community capacity for young people, women and underserved communities in Africa.",
           "url": "https://sarafoundationafrica.com",
           "logo": "https://sarafoundationafrica.com/favicon.png",
           "foundingDate": "2023",

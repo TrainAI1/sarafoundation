@@ -14,7 +14,7 @@ import logoDark from "@/assets/logo-dark.png";
 
 const ourWorkItems = [
   { title: "How We Work", href: "/our-work", description: "Our delivery model, from understanding need to measuring public benefit" },
-  { title: "CAP: Community Access & Participation Pathway", href: "/programs/cap", description: "Structured digital education, mentoring and practical learning for underserved adults" },
+  { title: "CAP: Community Access & Participation Pathway", href: "/programs/cap", description: "Structured digital education, mentoring and practical learning for underserved young people" },
   { title: "FLIP: Female Learning & Inclusion Pathway", href: "/programs/flip", description: "Inclusive access to tech learning, mentoring and community for women" },
   { title: "EJP: Education Journey Pathway", href: "/programs/gjp", description: "Continued learning through insight, work-readiness education and experience" },
 ];

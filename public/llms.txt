@@ -1,6 +1,6 @@
 # Sara Foundation Africa
 
-> A public-benefit organisation headquartered in London, United Kingdom, expanding access to digital education and tech learning, promoting social inclusion and strengthening community capacity for adults and underserved communities in Africa.
+> A public-benefit organisation headquartered in London, United Kingdom, expanding access to digital education and tech learning, promoting social inclusion and strengthening community capacity for young people, women and underserved communities in Africa.
 
 Sara Foundation Africa reduces barriers to learning and participation through structured digital education, mentoring, practical projects, supportive networks, scholarships and access support, knowledge-sharing, volunteering and community activities. Three learning pathways — CAP (Community Access & Participation Pathway), FLIP (Female Learning & Inclusion Pathway) and EJP (Education Journey Pathway) — translate our charitable purposes into structured routes for learning, inclusion and continued development.
 
@@ -44,7 +44,7 @@ Sara Foundation Africa does not guarantee or promise employment through any of i
 
 ## Learning pathways
 
-- [CAP](/programs/cap): Structured digital education, mentoring and practical learning for young people and adults from underserved communities, delivered through CAP Tech Hubs with a Learn, Build, Launch structure and an 80/20 practice-to-learning balance.
+- [CAP](/programs/cap): Structured digital education, mentoring and practical learning for young people from underserved communities, delivered through CAP Tech Hubs with a Learn, Build, Launch structure and an 80/20 practice-to-learning balance.
 - [CAP Apply](/programs/cap/apply): Application form for CAP.
 - [FLIP](/programs/flip): Inclusive access to tech learning for women through fellowship, mentorship, workshops and community activity, including a six-week tailored programme.
 - [FLIP Apply](/programs/flip/apply): Application form for FLIP.

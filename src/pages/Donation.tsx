@@ -104,7 +104,7 @@ export default function Donation() {
             </p>
             <p className="mt-6 rounded-2xl bg-white/10 p-5 text-white font-medium leading-relaxed">
               Every donation helps us reduce barriers to education and participation so that financial
-              circumstances do not prevent eligible adults from accessing learning opportunities.
+              circumstances do not prevent eligible young people from accessing learning opportunities.
             </p>
           </div>
         </div>

@@ -82,7 +82,7 @@ type Metric = { value: string; label: string; definition: string };
 const dashboard: { pathway: string; blurb: string; href: string; metrics: Metric[] }[] = [
   {
     pathway: "CAP: Community Access & Participation Pathway",
-    blurb: "Structured digital education, mentoring and practical learning for young people and adults from underserved communities.",
+    blurb: "Structured digital education, mentoring and practical learning for young people from underserved communities.",
     href: "/programs/cap",
     metrics: [
       { value: "763", label: "CAP learners", definition: "Individuals who received fully funded access to practical digital learning across Cohorts 1 and 2." },

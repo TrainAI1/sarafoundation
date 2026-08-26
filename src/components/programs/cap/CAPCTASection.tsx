@@ -12,7 +12,7 @@ const actions = [
   {
     icon: Users,
     label: "Become a CAP Member",
-    sublabel: "Young people & adults",
+    sublabel: "Young people & women",
     to: "/programs/cap/apply",
   },
   {
