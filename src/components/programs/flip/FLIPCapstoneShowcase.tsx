@@ -55,6 +55,13 @@ export function FLIPCapstoneShowcase() {
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 px-4 lg:px-0">
           {capstones.map((item) => (
             <article key={item.number} className="card-modern p-6 h-full flex flex-col">
+              <div
+                className="mb-4 flex h-32 items-center justify-center rounded-xl border border-dashed border-border bg-secondary/60 px-3 text-center text-[11px] font-semibold uppercase tracking-[0.12em] text-muted-foreground"
+                role="img"
+                aria-label={`Image placeholder for the ${item.project} capstone project`}
+              >
+                [ASSET REQUIRED: {item.project} image]
+              </div>
               <div className="flex items-center gap-2 mb-4">
                 <span className="text-xs font-bold text-accent">{item.number}</span>
                 <span className="text-[11px] font-semibold uppercase tracking-[0.14em] text-muted-foreground">

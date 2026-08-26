@@ -18,6 +18,7 @@ const exploreLinks = [
 ];
 
 const getInvolvedLinks = [
+  { title: "Ways to Support Us", href: "/get-involved" },
   { title: "Donate", href: "/donation" },
   { title: "Partner with Us", href: "/partnership" },
   { title: "Volunteer / Mentor", href: "/volunteer" },

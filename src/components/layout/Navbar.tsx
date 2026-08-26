@@ -20,6 +20,7 @@ const ourWorkItems = [
 ];
 
 const getInvolvedItems = [
+  { title: "Ways to Support Us", href: "/get-involved", description: "All the ways you can help widen access to learning" },
   { title: "Donate", href: "/donation", description: "Fund scholarships, bursaries, resources and mentoring" },
   { title: "Partner with Us", href: "/partnership", description: "Collaborate with us to widen access to learning" },
   { title: "Volunteer / Mentor", href: "/volunteer", description: "Join 60+ mentors, trainers, speakers and facilitators" },
