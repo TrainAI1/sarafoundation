@@ -164,72 +164,7 @@ export default function Donation() {
       {/* Featured learner stories, one per pathway */}
       <SuccessStoriesSection />
 
-      {/* Impact Stories */}
-      <section className="py-16 md:py-24 bg-secondary/50">
-        <div className="section-container">
-          <div className="text-center max-w-3xl mx-auto mb-10 md:mb-16 px-4">
-            <span className="section-badge mb-4 md:mb-6">
-              Impact Stories
-            </span>
-            <h2 className="section-title text-foreground mb-4 md:mb-6">
-              Your Donations Make a Difference
-            </h2>
-            <p className="section-subtitle mx-auto">
-              Hear from the learners and participants whose journeys your support has made possible.
-            </p>
-          </div>
-
-          {/* Impact Images */}
-          <div className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto mb-10">
-            <div className="rounded-2xl overflow-hidden shadow-lg">
-              <img 
-                src={graduatesCelebration} 
-                alt="CAP program graduates celebrating their achievements"
-                loading="lazy"
-                className="w-full h-48 md:h-64 object-cover"
-              />
-              <div className="p-4 bg-card">
-                <p className="font-semibold text-foreground">CAP Graduates 2025</p>
-                <p className="text-sm text-muted-foreground">Learners celebrating their programme completion</p>
-              </div>
-            </div>
-            <div className="rounded-2xl overflow-hidden shadow-lg">
-              <img 
-                src={mentorshipSession} 
-                alt="A mentoring session between a mentor and a learner"
-                loading="lazy"
-                className="w-full h-48 md:h-64 object-cover"
-              />
-              <div className="p-4 bg-card">
-                <p className="font-semibold text-foreground">Mentorship in Action</p>
-                <p className="text-sm text-muted-foreground">One-on-one guidance with industry professionals</p>
-              </div>
-            </div>
-          </div>
-
-          <div className="grid md:grid-cols-2 gap-4 md:gap-6 max-w-4xl mx-auto">
-            {impactStories.map((story, index) => (
-              <div key={index} className="card-modern p-6 md:p-8">
-                <div className="text-4xl md:text-5xl text-primary/20 font-serif mb-4">"</div>
-                <p className="text-foreground text-base md:text-lg mb-6 leading-relaxed">
-                  {story.quote}
-                </p>
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-primary flex items-center justify-center">
-                    <span className="text-white font-bold text-sm">
-                      {story.name.split(' ').map(n => n[0]).join('')}
-                    </span>
-                  </div>
-                  <div>
-                    <p className="font-semibold text-foreground text-sm md:text-base">{story.name}</p>
-                    <p className="text-muted-foreground text-xs md:text-sm">{story.role}</p>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      {/* Impact Stories removed temporarily per request */}
 
       {/* FAQ */}
       <section className="py-16 md:py-24 bg-background">
