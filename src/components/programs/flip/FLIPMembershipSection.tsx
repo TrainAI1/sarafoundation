@@ -49,8 +49,8 @@ export function FLIPMembershipSection() {
             Find Your <span className="gradient-text-accent">Membership Tier</span>
           </h2>
           <p className="section-subtitle mx-auto">
-            Insights on our membership status for FLIP members in our Women Professionals in Tech 
-            and Women Founders in Tech communities.
+            Insights on our membership status for women taking part in FLIP learning, mentoring and
+            community activities.
           </p>
         </div>
 

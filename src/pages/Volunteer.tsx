@@ -17,6 +17,7 @@ const roles = [
   { icon: GraduationCap, title: "Tech Trainer / Facilitator", description: "Support educational resources, digital learning activities, virtual learning experiences and workshops for CAP and FLIP participants." },
   { icon: Mic, title: "Panellist / Speaker", description: "Share professional knowledge and experience through our events, conferences and sessions." },
   { icon: Users, title: "Knowledge & Expert Session Contributor", description: "Host educational sessions and share technology expertise with learners and women interested in technology." },
+  { icon: Users, title: "Student Ambassador", description: "Be a Sara Foundation ambassador at your university under our CAP Tech Hub initiative — champion the Foundation on campus, share learning opportunities and help peers take part." },
   { icon: Heart, title: "General Volunteer", description: "Not sure which role fits yet? Tell us what you can offer and we will find a way for you to contribute." },
 ];
 

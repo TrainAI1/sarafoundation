@@ -30,7 +30,7 @@ export function FLIPGenderGapSection() {
           </h2>
           <p className="section-subtitle mx-auto">
             The Female Learning & Inclusion Pathway addresses identified gaps for women in African tech 
-            through a multi-pronged approach leveraging the WPTA and WFTA initiatives.
+            through the FLIP Fellowship, FLIP Workshops and FLIP Conferences.
           </p>
         </div>
 

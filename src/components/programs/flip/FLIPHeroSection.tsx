@@ -50,7 +50,7 @@ export function FLIPHeroSection() {
                 </Link>
               </Button>
               <Button variant="heroSecondary" size="lg" asChild>
-                <Link to="#communities">Explore Communities</Link>
+                <Link to="#initiatives">Explore Our Initiatives</Link>
               </Button>
             </div>
           </div>

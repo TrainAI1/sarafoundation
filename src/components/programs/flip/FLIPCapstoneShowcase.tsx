@@ -1,3 +1,11 @@
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel";
+
 const capstones = [
   {
     number: "01",
@@ -52,37 +60,54 @@ export function FLIPCapstoneShowcase() {
           </p>
         </div>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 px-4 lg:px-0">
-          {capstones.map((item) => (
-            <article key={item.number} className="card-modern p-6 h-full flex flex-col">
-              <div
-                className="mb-4 flex h-32 items-center justify-center rounded-xl border border-dashed border-border bg-secondary/60 px-3 text-center text-[11px] font-semibold uppercase tracking-[0.12em] text-muted-foreground"
-                role="img"
-                aria-label={`Image placeholder for the ${item.project} capstone project`}
-              >
-                [ASSET REQUIRED: {item.project} image]
-              </div>
-              <div className="flex items-center gap-2 mb-4">
-                <span className="text-xs font-bold text-accent">{item.number}</span>
-                <span className="text-[11px] font-semibold uppercase tracking-[0.14em] text-muted-foreground">
-                  {item.category}
-                </span>
-              </div>
-              <h3 className="font-display font-bold text-lg text-foreground mb-1">{item.name}</h3>
-              <p className="text-sm font-medium text-accent mb-3">{item.project}</p>
-              <p className="text-muted-foreground text-sm leading-relaxed flex-1">{item.angle}</p>
-              {item.link && (
-                <a
-                  href={item.link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-sm font-medium text-accent mt-4 hover:underline"
-                >
-                  Read the capstone story for {item.name}
-                </a>
-              )}
-            </article>
-          ))}
+        <div className="px-4 lg:px-0">
+          <Carousel
+            opts={{ align: "start", loop: true }}
+            className="w-full"
+            aria-label="FLIP Fellowship Cohort 1 capstone projects"
+          >
+            <CarouselContent className="-ml-4">
+              {capstones.map((item) => (
+                <CarouselItem key={item.number} className="pl-4 basis-full md:basis-1/2">
+                  <article className="card-modern p-6 h-full flex flex-col">
+                    <div
+                      className="mb-4 flex h-32 items-center justify-center rounded-xl border border-dashed border-border bg-secondary/60 px-3 text-center text-[11px] font-semibold uppercase tracking-[0.12em] text-muted-foreground"
+                      role="img"
+                      aria-label={`Image placeholder for the ${item.project} capstone project`}
+                    >
+                      [ASSET REQUIRED: {item.project} image]
+                    </div>
+                    <div className="flex items-center gap-2 mb-4">
+                      <span className="text-xs font-bold text-accent">{item.number}</span>
+                      <span className="text-[11px] font-semibold uppercase tracking-[0.14em] text-muted-foreground">
+                        {item.category}
+                      </span>
+                    </div>
+                    <h3 className="font-display font-bold text-lg text-foreground mb-1">{item.name}</h3>
+                    <p className="text-sm font-medium text-accent mb-3">{item.project}</p>
+                    <p className="text-muted-foreground text-sm leading-relaxed flex-1">{item.angle}</p>
+                    {item.link && (
+                      <a
+                        href={item.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-sm font-medium text-accent mt-4 hover:underline"
+                      >
+                        Read the capstone story for {item.name}
+                      </a>
+                    )}
+                  </article>
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+            <div className="flex items-center justify-center gap-3 mt-8">
+              <CarouselPrevious className="static translate-y-0" />
+              <CarouselNext className="static translate-y-0" />
+            </div>
+          </Carousel>
+          <p className="text-center text-xs text-muted-foreground mt-4">
+            Use the arrows or swipe to see all five capstone projects.
+          </p>
         </div>
       </div>
     </section>

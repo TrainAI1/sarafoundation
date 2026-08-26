@@ -3,8 +3,7 @@ import { Footer } from "@/components/layout/Footer";
 import { Helmet } from "react-helmet-async";
 import { FLIPHeroSection } from "@/components/programs/flip/FLIPHeroSection";
 import { FLIPMissionVisionSection } from "@/components/programs/flip/FLIPMissionVisionSection";
-import { FLIPWPTASection } from "@/components/programs/flip/FLIPWPTASection";
-import { FLIPWFTASection } from "@/components/programs/flip/FLIPWFTASection";
+import { FLIPInitiativesSection } from "@/components/programs/flip/FLIPInitiativesSection";
 import { FLIPBenefitsSection } from "@/components/programs/flip/FLIPBenefitsSection";
 import { FLIPImpactSection } from "@/components/programs/flip/FLIPImpactSection";
 import { FLIPCapstoneShowcase } from "@/components/programs/flip/FLIPCapstoneShowcase";
@@ -32,8 +31,7 @@ export default function ProgramFLIP() {
       <Navbar />
       <FLIPHeroSection />
       <FLIPMissionVisionSection />
-      <FLIPWPTASection />
-      <FLIPWFTASection />
+      <FLIPInitiativesSection />
       <FLIPBenefitsSection />
       <FLIPImpactSection />
       <FLIPCapstoneShowcase />
