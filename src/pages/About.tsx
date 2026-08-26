@@ -11,7 +11,7 @@ import studentsLabImg from "@/assets/students-tech-lab.jpg";
 import womenCoworking from "@/assets/women-coworking.jpg";
 import sarahPhoto from "@/assets/team/sarah-kalu.jpg";
 import emmanuelPhoto from "@/assets/team/inem-emmanuel.jpg";
-import emediongPhoto from "@/assets/team/emediong-joel.jpg";
+import itoroPhoto from "@/assets/team/itoro.jpg";
 import tobyPhoto from "@/assets/team/toby-nwanede.jpg";
 import dolapoPhoto from "@/assets/team/dolapo-dahunsi.jpg";
 import fisayoPhoto from "@/assets/team/fisayo-adeyemi.jpg";
@@ -52,14 +52,14 @@ const coreTeam = [
   {
     name: "Inem Emmanuel",
     role: "Public Relations Specialist",
-    bio: "Grew social media reach to 5,365+ followers. Successfully hosted 15 live sessions including 8 LinkedIn Live and 7 Twitter Spaces.",
+    bio: "Expanded the Foundation's reach to 6,000 Africans and hosted over 47 knowledge sessions for the Foundation.",
     photo: emmanuelPhoto,
   },
   {
-    name: "Emediong Joel",
+    name: "Itoro",
     role: "Program Manager",
     bio: "Expanded CAP to 35 universities across 11 African countries. Launched FLIP Fellowship and secured partnerships with Scintilla, Farmily, and more.",
-    photo: emediongPhoto,
+    photo: itoroPhoto,
   },
 ];
 
@@ -69,7 +69,6 @@ const advisors = [
   { name: "Dolapo Dahunsi", affiliation: "General Electric", expertise: "HR Leader", photo: fisayoPhoto },
   { name: "Fisayo Adeyemi", affiliation: "Rayne Consults", expertise: "Business Analysis", photo: dolapoPhoto },
   { name: "Mercy Momah", affiliation: "Flour Mills of Nigeria", expertise: "PMO Consultant", photo: mercyPhoto },
-  { name: "Ayodeji Babatunde", affiliation: "VC Dialogues", expertise: "Venture Capital", photo: null },
 ];
 
 const keyInitiatives = [

@@ -9,10 +9,10 @@ const coreTeam = [
   { 
     name: "Inem Emmanuel", 
     role: "Public Relations Specialist", 
-    bio: "Grew the foundation's LinkedIn to 1,700+ followers, Twitter to 1,250+, Instagram to 700+, and Facebook to 1,600+. Successfully hosted 15 live sessions across platforms." 
+    bio: "Expanded the foundation's reach to 6,000 Africans and hosted over 47 knowledge sessions for the foundation." 
   },
   { 
-    name: "Emediong Joel", 
+    name: "Itoro", 
     role: "Program Manager", 
     bio: "Expanded CAP to 35 universities across 11 African countries. Launched the FLIP Fellowship and secured key partnerships with Scintilla Africa, Farmily, and more." 
   },
@@ -43,11 +43,6 @@ const advisors = [
     name: "Mercy Momah", 
     role: "Project Coach & PMO Consultant", 
     bio: "Head, Project Management Office at Flour Mills of Nigeria Plc. Certified PMP, Business Analyst Professional. Workshop facilitator for FLIP Fellowship." 
-  },
-  { 
-    name: "Ayodeji Babatunde", 
-    role: "Venture Capital Leader", 
-    bio: "Secured $2.3M for tech startups; founded VC Dialogues; Impact Officer for Global Shaper Community Atlanta." 
   },
 ];
 
