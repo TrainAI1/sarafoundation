@@ -53,7 +53,7 @@ export function PartnersSection() {
             Present in <span className="gradient-text">35 African Universities</span>
           </h2>
           <p className="section-subtitle mx-auto">
-            We have established CAP Tech Hubs across 11 African countries, empowering students on campus.
+            We have established CAP Tech Hubs across 8 African countries, supporting young people on campus.
           </p>
         </ScrollAnimation>
       </div>

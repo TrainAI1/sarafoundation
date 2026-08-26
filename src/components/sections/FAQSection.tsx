@@ -11,13 +11,13 @@ import { supabase } from "@/integrations/supabase/client";
 import { usePageContent } from "@/hooks/usePageContent";
 
 const defaultFaqs = [
-  { question: "Who can apply for the Community Access & Participation Pathway (CAP)?", answer: "CAP is open to university students across Africa who are passionate about technology. You don't need prior coding experience – just enthusiasm and commitment to learn. We currently have CAP Tech Hubs in 35 universities across 11 African countries." },
+  { question: "Who can apply for the Community Access & Participation Pathway (CAP)?", answer: "CAP is open to young people aged 18 and above across Africa, particularly people from underserved or underrepresented communities. No prior coding experience is needed. CAP Tech Hubs span 35 universities across 8 African countries." },
   { question: "How much does it cost to join the programs?", answer: "Both CAP and FLIP are completely free for participants. We believe in removing barriers to tech education and career advancement." },
   { question: "What is the time commitment for CAP?", answer: "CAP is a 9-month program divided into three phases: Learn (12 weekly expert sessions), Build (developing real MVPs), and Launch (showcasing projects to industry leaders). Participants typically dedicate 10-15 hours per week." },
   { question: "What is FLIP and who is it for?", answer: "The Female Learning & Inclusion Pathway (FLIP) creates inclusive access to digital learning for women through mentoring, structured learning, practical projects and supportive communities. It runs through three initiatives: the FLIP Fellowship, FLIP Workshops and FLIP Conferences, with an alumni network for those who have taken part." },
   { question: "How can organizations partner with Sara Foundation Africa?", answer: "We offer various partnership models including sponsorships, university collaborations, and corporate partnerships. Current partners include Scintilla Innovations, Farmily, ALX, KàdàràBrite, Train AI, and more." },
   { question: "Do students get real-world opportunities?", answer: "Yes! Through our partnerships, CAP students have secured internships at Farmily, full-time job offers, and showcased projects like ArtifyPro and CampusLink at our Talent Showcase in partnership with Scintilla Africa." },
-  { question: "Which countries do you operate in?", answer: "We currently operate across 11 African countries: Nigeria, Ghana, Kenya, South Africa, Uganda, Zambia, and Togo, with 35 university partners." },
+  { question: "Which countries do you operate in?", answer: "Our pathways together reach 11 unique African countries. CAP works across 8 countries with 35 universities represented, and FLIP reaches 6 countries." },
 ];
 
 export function FAQSection() {

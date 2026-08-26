@@ -5,7 +5,7 @@ const approaches = [
   {
     icon: Users,
     title: "Increase Representation",
-    description: "FLIP Workshops and mentorship programs will inspire more women to pursue leadership roles and entrepreneurial ventures.",
+    description: "FLIP workshops and mentoring inspire more women to pursue leadership roles and tech innovation.",
   },
   {
     icon: BookOpen,
@@ -15,7 +15,7 @@ const approaches = [
   {
     icon: Heart,
     title: "Empowerment Through Community",
-    description: "FLIP's women founders and professionals network will provide the support system women need to overcome challenges and thrive.",
+    description: "The FLIP community provides the support system women need to overcome barriers and keep progressing.",
   },
 ];
 

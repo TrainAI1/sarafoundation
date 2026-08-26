@@ -11,7 +11,7 @@ export function FLIPCTASection() {
         </h2>
         <p className="text-white/70 text-base md:text-lg mb-6 md:mb-8 max-w-2xl mx-auto">
           Connect with inspiring women who are shaping the future of tech in Africa. 
-          Join our community of leaders, founders, and professionals.
+          Join our community of women learning, mentoring and building in tech.
         </p>
         <div className="flex flex-col sm:flex-row gap-3 md:gap-4 justify-center">
           <Button variant="hero" size="lg" className="group" asChild>

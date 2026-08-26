@@ -6,7 +6,7 @@ import capClassroom from "@/assets/cap-classroom.jpg";
 const stats = [
   { value: "763", label: "CAP learners, fully funded" },
   { value: "35+", label: "Universities represented" },
-  { value: "11", label: "African countries" },
+  { value: "8", label: "African countries (CAP)" },
 ];
 
 export function CAPHeroSection() {

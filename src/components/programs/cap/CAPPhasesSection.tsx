@@ -11,7 +11,7 @@ const program = {
       number: "01",
       icon: BookOpen,
       duration: "2 Weeks",
-      description: "Immersive expert-led sessions across coding, no-code, product, cybersecurity, data, UI/UX and entrepreneurship.",
+      description: "Immersive expert-led sessions across coding, no-code, product management, product marketing, cybersecurity, data, UI/UX and tech innovation.",
       outcomes: [
         "Industry-expert sessions",
         "AI-powered curriculum",

@@ -63,7 +63,7 @@ export function CAPRecognitionSection() {
         <p className="text-center text-muted-foreground text-sm mt-10 max-w-2xl mx-auto px-4">
           Sara Foundation is a London based Non-Profit Organization established by Africans to drive
           technology focused impact in Africa, by fostering Diversity, Equity and Inclusion and developing
-          the next generation African tech founders and entrepreneurs.
+          the next generation of African tech innovators.
         </p>
       </div>
     </section>

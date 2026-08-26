@@ -1,6 +1,6 @@
 const stats = [
   { value: "763", label: "CAP learners", sub: "Received fully funded access to practical digital learning across Cohorts 1 and 2." },
-  { value: "35+", label: "Universities represented", sub: "Across African countries taking part in CAP activity." },
+  { value: "35+", label: "Universities represented", sub: "Across the 8 African countries reached by CAP activity." },
   { value: "23", label: "CAP expert sessions", sub: "Delivered during 2024 and 2025." },
   { value: "100", label: "CAP Conference 1.0 attendees", sub: "People who attended in person." },
   { value: "2", label: "Talent Showcases", sub: "Learners presenting their project work." },

@@ -8,7 +8,6 @@ import { FLIPBenefitsSection } from "@/components/programs/flip/FLIPBenefitsSect
 import { FLIPImpactSection } from "@/components/programs/flip/FLIPImpactSection";
 import { FLIPCapstoneShowcase } from "@/components/programs/flip/FLIPCapstoneShowcase";
 import { FLIPGenderGapSection } from "@/components/programs/flip/FLIPGenderGapSection";
-import { FLIPMembershipSection } from "@/components/programs/flip/FLIPMembershipSection";
 import { FLIPCTASection } from "@/components/programs/flip/FLIPCTASection";
 
 export default function ProgramFLIP() {
@@ -36,7 +35,6 @@ export default function ProgramFLIP() {
       <FLIPImpactSection />
       <FLIPCapstoneShowcase />
       <FLIPGenderGapSection />
-      <FLIPMembershipSection />
       <FLIPCTASection />
       <Footer />
     </div>

@@ -20,7 +20,7 @@ import mercyPhoto from "@/assets/team/mercy-momah.jpg";
 const milestones = [
   { year: "2023", title: "Foundation Established", description: "Sara Foundation Africa was founded in London with a vision to transform tech in Africa" },
   { year: "2024", title: "CAP Cohort 1 Launch", description: "Launched CAP Tech Hub in 7 Nigerian universities, welcoming the first cohort of learners" },
-  { year: "2024", title: "Pan-African Expansion", description: "Expanded to 35 universities across 11 African countries — a 360% growth" },
+  { year: "2024", title: "Pan-African Expansion", description: "Expanded to 35 universities across 8 African countries reached by CAP" },
   { year: "2025", title: "FLIP Fellowship Launch", description: "Kicked off FLIP with 21 women fellows across mentorship, workshops, and capstone projects" },
   { year: "2025", title: "Key Partnerships", description: "Secured partnerships with Scintilla, Farmily, Train AI, KàdàràBrite, Nanaade, and Platform Hub" },
   { year: "2025", title: "Prestige Award", description: "Won the London & South East England Prestige Awards 2025/26 in Leadership Development" },
@@ -58,7 +58,7 @@ const coreTeam = [
   {
     name: "Itoro",
     role: "Program Manager",
-    bio: "Expanded CAP to 35 universities across 11 African countries. Launched FLIP Fellowship and secured partnerships with Scintilla, Farmily, and more.",
+    bio: "Expanded CAP to 35 universities across 8 African countries. Launched FLIP Fellowship and secured partnerships with Scintilla, Farmily, and more.",
     photo: itoroPhoto,
   },
 ];
@@ -109,7 +109,7 @@ export default function About() {
           "url": "https://sarafoundationafrica.com",
           "logo": "https://sarafoundationafrica.com/favicon.png",
           "foundingDate": "2023",
-          "description": "Sara Foundation Africa fosters Diversity, Equity & Inclusion in African tech, operating across 11 African countries with 35 university partners.",
+          "description": "Sara Foundation Africa widens access to digital education and inclusion for young people and women, reaching 11 unique African countries across its pathways.",
           "sameAs": [
             "https://www.linkedin.com/company/sara-foundation/",
             "https://x.com/Sarafoundations",
@@ -200,9 +200,9 @@ export default function About() {
                   and SDG 8 (Decent Work and Economic Growth) through tech clubs and women's communities.
                 </p>
                 <p>
-                  Participants have joined us from 11 African countries, with 35+ universities represented
-                  across our CAP activity. CAP, FLIP and EJP translate our charitable purposes into clear
-                  learning pathways designed around public benefit.
+                  Together our pathways reach 11 unique African countries: CAP works across 8 countries with
+                  35+ universities represented, and FLIP works across 6. CAP, FLIP and EJP translate our
+                  charitable purposes into clear learning pathways designed around public benefit.
                 </p>
               </div>
               <div className="mt-6 rounded-2xl overflow-hidden shadow-lg">

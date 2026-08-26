@@ -7,7 +7,7 @@ const features = [
   "Industry-expert-led weekly sessions",
   "Real startup projects solving African problems",
   "Internship pathways on completion",
-  "Part of a network across 35 universities, 11 African countries",
+  "Part of a network across 35 universities in 8 African countries",
 ];
 
 export function CAPSolutionsSection() {
@@ -53,7 +53,7 @@ export function CAPSolutionsSection() {
             </div>
             <p className="text-muted-foreground text-sm">
               Empowering young people across Africa through technology to drive innovation,
-              entrepreneurship and socio-economic development.
+              tech innovation and socio-economic development.
             </p>
           </div>
           <div className="card-modern p-6 md:p-8 border-l-4 border-l-accent">

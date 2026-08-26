@@ -14,7 +14,7 @@ const benefits = [
   {
     icon: Network,
     title: "Networking and Community Access",
-    description: "Connect with a vibrant network of professionals and industry experts.",
+    description: "Connect with a vibrant network of women in tech and industry experts.",
   },
   {
     icon: Users,
@@ -24,7 +24,7 @@ const benefits = [
   {
     icon: DollarSign,
     title: "Access to Funding and Investment",
-    description: "Support opportunities for founders to connect with investors and funding.",
+    description: "Support opportunities for women building tech innovations to connect with funders.",
   },
   {
     icon: Megaphone,

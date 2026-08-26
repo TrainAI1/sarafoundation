@@ -430,8 +430,19 @@ export default function CAPApply() {
                   <div className="text-sm text-foreground">
                     <p className="font-semibold mb-1">Next: Choose your payment plan</p>
                     <p className="text-muted-foreground text-xs">
-                      Standard program fee is <strong>₦1,000,000 / £500</strong>. Subsidised partner pricing
-                      (₦90,000 full or ₦30,000 + ₦60,000 commitment) is unlocked with a valid partner code.
+                      Standard programme cost is <strong>₦1,000,000 / £500</strong>. Sara Foundation subsidises
+                      92% of that cost, so a subsidised place is <strong>₦90,000 / £45</strong> (or ₦30,000 +
+                      ₦60,000 commitment, or £15 per month across three months). Global participants pay $60
+                      once or $20 per month for three months. Your place includes three months of the
+                      programme plus alumni access, internship preparation support and learning partner access.
+                    </p>
+                    <p className="text-muted-foreground text-xs mt-2">
+                      Full fee waivers are available in addition to the subsidised 92% scholarship. If cost is
+                      a barrier, email{" "}
+                      <a href="mailto:info@sarafoundationafrica.com" className="text-primary hover:underline">
+                        info@sarafoundationafrica.com
+                      </a>{" "}
+                      for additional financial aid.
                     </p>
                   </div>
                 </div>

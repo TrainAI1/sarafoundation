@@ -7,7 +7,7 @@ const stats = [
   { value: "57", label: "Women across fellowship & mentorship" },
   { value: "93", label: "FLIP Conference 1.0 attendees" },
   { value: "108", label: "Recorded workshop attendances" },
-  { value: "4", label: "FLIP mentors" },
+  { value: "6", label: "African countries" },
 ];
 
 export function FLIPHeroSection() {

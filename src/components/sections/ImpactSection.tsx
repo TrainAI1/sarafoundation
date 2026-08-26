@@ -14,7 +14,7 @@ export function ImpactSection() {
     universities_value: "35+",
     universities_desc: "Universities represented across our CAP learning activity.",
     countries_value: "11",
-    countries_desc: "African countries our participants have joined us from.",
+    countries_desc: "Unique African countries reached across our pathways: 8 through CAP and 6 through FLIP.",
   });
 
   const impactStats = [

@@ -16,13 +16,13 @@ import { CTASection } from "@/components/sections/CTASection";
 import { Helmet } from "react-helmet-async";
 
 const homeFaqs = [
-  { q: "Who can take part in the Community Access & Participation Pathway (CAP)?", a: "CAP is open to young people aged 18 and above across Africa, particularly people from underserved or underrepresented communities. No prior coding experience is needed. Learners have joined from 35+ universities across 11 African countries." },
+  { q: "Who can take part in the Community Access & Participation Pathway (CAP)?", a: "CAP is open to young people aged 18 and above across Africa, particularly people from underserved or underrepresented communities. No prior coding experience is needed. Learners have joined from 35+ universities across the 8 African countries CAP reaches." },
   { q: "Is there a cost to take part?", a: "Where a programme has a participation fee, Sara Foundation Africa provides scholarships, bursaries, subsidised places or full fee waivers where funding allows. All 763 CAP learners across Cohorts 1 and 2 received fully funded access. Sponsored places are allocated on the basis of need and eligibility." },
   { q: "What is the time commitment for CAP?", a: "CAP is delivered through a Learn, Build and Launch structure with an 80/20 balance of practice to taught learning. Learners take part in expert sessions, guided project work and showcases, and typically dedicate 10 to 15 hours per week." },
   { q: "What is FLIP and who is it for?", a: "The Female Learning & Inclusion Pathway (FLIP) is our six-week tailored programme for women interested in technology, alongside fellowship, mentorship, workshop and community activities. It creates targeted opportunities where barriers or underrepresentation in tech learning have been identified." },
   { q: "What is EJP?", a: "The Education Journey Pathway (EJP) supports continued learning through insight sessions, work-readiness education, mentoring, educational exposure and referrals to suitable external opportunities. Sara Foundation Africa does not guarantee or promise employment through EJP." },
   { q: "How can organisations partner with Sara Foundation Africa?", a: "We work with universities, community organisations, educators, funders, employers and technology organisations where collaboration furthers our charitable purposes. Our trustees retain responsibility for programme decisions, beneficiary selection, partner due diligence and the use of charitable resources." },
-  { q: "Where do you work?", a: "Participants have joined from 11 African countries, with 35+ universities represented across our CAP activity." },
+  { q: "Where do you work?", a: "Together our pathways reach 11 unique African countries: CAP works across 8 countries with 35+ universities represented, and FLIP works across 6 countries." },
 ];
 
 const Index = () => {

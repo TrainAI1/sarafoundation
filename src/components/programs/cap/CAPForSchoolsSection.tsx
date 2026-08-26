@@ -10,12 +10,12 @@ const benefits = [
   {
     icon: Users,
     title: "Community Engagement & Retention",
-    description: "CAP-run hubs create vibrant multi-university learning communities, allowing young people to connect with peers across 11 African countries and 35 different universities.",
+    description: "CAP-run hubs create vibrant multi-university learning communities, allowing young people to connect with peers across 8 African countries and 35 different universities.",
   },
   {
     icon: Gift,
-    title: "Earn by Referring",
-    description: "CAP Tech Hubs although discounted by Sara Foundation offer referral tokens to university associations based on referral agreement.",
+    title: "Unlock Scholarships",
+    description: "Partnering associations unlock scholarships and subsidised places, so their student members can take part in CAP at a reduced cost or none at all.",
   },
   {
     icon: TrendingUp,
@@ -25,7 +25,7 @@ const benefits = [
   {
     icon: Globe,
     title: "Pan-African Visibility",
-    description: "Join a network of 35 universities across 11 African countries with growing global recognition.",
+    description: "Join a network of 35 universities across 8 African countries reached by CAP, within a foundation working across 11 countries.",
   },
   {
     icon: Award,
@@ -55,10 +55,11 @@ export function CAPForSchoolsSection() {
             <div className="card-modern p-5 bg-primary/5 border-l-4 border-l-primary">
               <Quote className="w-5 h-5 text-primary mb-2" />
               <p className="text-sm text-foreground italic mb-3">
-                "CAP Tech Hub boosted my confidence to a very great height. 
-                The self-explanatory course materials provide a lot of value."
+                "These weekly expert sessions have made my experience with CAP excellent so far."
               </p>
-              <p className="text-xs text-muted-foreground font-semibold">— CAP participant, UniAbuja CAP Hub</p>
+              <p className="text-xs text-muted-foreground font-semibold">
+                — Ridwan, 300 level, University of Lagos CAP Tech Hub member (2024 Impact Report)
+              </p>
             </div>
           </div>
 

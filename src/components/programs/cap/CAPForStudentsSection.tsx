@@ -10,7 +10,7 @@ const benefits = [
   {
     icon: Users,
     title: "Industry Mentorship",
-    description: "Weekly sessions with experienced tech professionals who guide each participant's learning journey.",
+    description: "Weekly sessions with experienced practitioners who guide each participant's learning journey.",
   },
   {
     icon: Briefcase,
@@ -25,7 +25,7 @@ const benefits = [
   {
     icon: Globe,
     title: "Pan-African Network",
-    description: "Join a community spanning 35 universities and 11 African countries across the African continent.",
+    description: "Join a community spanning 35 universities across the 8 African countries CAP reaches.",
   },
   {
     icon: BookOpen,

@@ -18,6 +18,7 @@ const tracks = [
     color: "bg-accent",
     specializations: [
       "Product Management",
+      "Product Marketing",
       "Data Analysis",
       "UI/UX Design",
       "Cybersecurity",
@@ -25,13 +26,13 @@ const tracks = [
     outcome: "Industry-ready exposure with hands-on case studies and live projects",
   },
   {
-    name: "Tech-Preneur Track",
+    name: "Tech Innovation Track",
     icon: Rocket,
     color: "bg-[hsl(160,70%,40%)]",
     specializations: [
-      "Founders Program",
+      "Innovators Program",
     ],
-    outcome: "Work on your startup idea right from university",
+    outcome: "Develop your innovation while you learn, with mentor support",
   },
 ];
 
@@ -46,7 +47,7 @@ export function CAPTracksSection() {
           </h2>
         </div>
         <p className="text-center text-muted-foreground text-sm mb-10 md:mb-16 max-w-2xl mx-auto px-4">
-          All tracks converge in the BUILD phase collaborating as a single startup team to ship a real product.
+          All tracks converge in the BUILD phase, collaborating as one project team to build a real product.
         </p>
 
         <div className="grid md:grid-cols-3 gap-6 md:gap-8 px-4 lg:px-0">

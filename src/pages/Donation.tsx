@@ -1,5 +1,6 @@
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
+import { SuccessStoriesSection } from "@/components/sections/SuccessStoriesSection";
 import { DonationSection } from "@/components/sections/DonationSection";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
@@ -159,6 +160,9 @@ export default function Donation() {
           </div>
         </div>
       </section>
+
+      {/* Featured learner stories, one per pathway */}
+      <SuccessStoriesSection />
 
       {/* Impact Stories */}
       <section className="py-16 md:py-24 bg-secondary/50">

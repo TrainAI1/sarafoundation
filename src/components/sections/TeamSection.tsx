@@ -14,7 +14,7 @@ const coreTeam = [
   { 
     name: "Itoro", 
     role: "Program Manager", 
-    bio: "Expanded CAP to 35 universities across 11 African countries. Launched the FLIP Fellowship and secured key partnerships with Scintilla Africa, Farmily, and more." 
+    bio: "Expanded CAP to 35 universities across 8 African countries. Launched the FLIP Fellowship and secured key partnerships with Scintilla Africa, Farmily, and more." 
   },
 ];
 

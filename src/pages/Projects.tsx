@@ -87,7 +87,7 @@ const dashboard: { pathway: string; blurb: string; href: string; metrics: Metric
     metrics: [
       { value: "763", label: "CAP learners", definition: "Individuals who received fully funded access to practical digital learning across Cohorts 1 and 2." },
       { value: "35+", label: "Universities represented", definition: "Institutions represented among CAP learners. Not partnership agreements." },
-      { value: "11", label: "African countries", definition: "Countries represented across our activity." },
+      { value: "8", label: "African countries (CAP)", definition: "Countries reached by CAP activity. FLIP reaches 6 countries; together the Foundation reaches 11 unique countries." },
       { value: "23", label: "CAP expert sessions", definition: "Expert-led sessions delivered during 2024 and 2025." },
       { value: "100", label: "CAP Conference attendees", definition: "People who attended CAP Conference 1.0 in person." },
       { value: "10", label: "Learner projects", definition: "Projects created by learners as evidence of applied learning. Not commercial businesses." },
@@ -106,6 +106,7 @@ const dashboard: { pathway: string; blurb: string; href: string; metrics: Metric
       { value: "93", label: "FLIP Conference attendees", definition: "Women who attended FLIP Conference 1.0." },
       { value: "5", label: "Capstone projects", definition: "Capstone learning projects completed by FLIP Cohort 1 fellows." },
       { value: "4", label: "FLIP mentors", definition: "Mentors supporting FLIP participants." },
+      { value: "6", label: "African countries (FLIP)", definition: "Countries reached by FLIP activity. Combined with CAP's 8, the Foundation reaches 11 unique countries." },
     ],
   },
   {
@@ -123,6 +124,7 @@ const dashboard: { pathway: string; blurb: string; href: string; metrics: Metric
 
 const crossCutting: Metric[] = [
   { value: "6,000+", label: "Community reach", definition: "People reached through our channels, events and community activity. Reach is not the same as learners trained." },
+  { value: "11", label: "Unique African countries", definition: "Unique countries reached across all pathways: 8 through CAP and 6 through FLIP, with overlap." },
   { value: "1,600", label: "Scholarships provided", definition: "Fully funded and subsidised places provided across pathways. Not unique individuals." },
   { value: "47", label: "Knowledge and expert sessions", definition: "Total sessions delivered across CAP and general programming." },
   { value: "60+", label: "Speakers, trainers, facilitators, mentors and volunteers", definition: "People in our contributor and volunteer network." },

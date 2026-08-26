@@ -5,6 +5,7 @@ const stats = [
   { value: "93", label: "FLIP Conference 1.0", sub: "Women who attended the conference." },
   { value: "2 + 4", label: "Speakers and panellists", sub: "Contributors to FLIP Conference 1.0." },
   { value: "4", label: "Mentors", sub: "Supporting FLIP participants." },
+  { value: "6", label: "African countries", sub: "Countries reached by FLIP, widening the Foundation's reach to 11 unique countries." },
   { value: "5", label: "Cohort 1 capstone projects", sub: "Completed as part of FLIP Fellowship 1.0." },
 ];
 
