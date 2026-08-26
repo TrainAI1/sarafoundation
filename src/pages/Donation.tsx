@@ -44,8 +44,8 @@ const whereItGoes = [
 const donationFaqDefaults = [
   { question: "Is my donation tax-deductible?", answer: "Sara Foundation Africa is a registered non-profit organization. We provide official donation receipts. Please consult your local tax advisor for deductibility in your jurisdiction." },
   { question: "Can I donate in currencies other than USD?", answer: "Yes! We accept donations in multiple currencies. Our payment partners handle currency conversion automatically." },
-  { question: "Can I set up a recurring donation?", answer: "Yes — you can donate weekly, monthly, or in any rhythm that works for you. Even small recurring gifts of £5–£10 add up to fully sponsor a learner's place." },
-  { question: "How much does it cost to sponsor a learner?", answer: "A full CAP learner sponsorship is £500 (or the equivalent in your currency). You can also contribute towards a sponsorship in smaller amounts, alone or combined with other donors." },
+  { question: "Can I set up a recurring donation?", answer: "Yes. You can donate weekly, monthly, or in any rhythm that works for you. £100 per month or £50 per week sponsors subsidised places, and smaller recurring gifts add up towards a full sponsorship." },
+  { question: "How much does it cost to sponsor a learner?", answer: "£500 fully sponsors a beneficiary (or the equivalent in your currency). You can also give £100 per month or £50 per week towards subsidised places, or contribute smaller amounts alone or combined with other donors." },
   { question: "How will I know my donation made an impact?", answer: "All donors receive an annual impact report showing exactly how funds were used. Major donors (£500+) receive quarterly updates." },
   { question: "Can I donate to a specific program?", answer: "Yes, you can specify whether your donation goes to CAP (university programs) or FLIP (women's leadership). Contact us to earmark your donation." },
 ];

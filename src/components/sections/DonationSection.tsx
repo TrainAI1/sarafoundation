@@ -67,28 +67,30 @@ export function DonationSection() {
               <span className="gradient-text">Access to Learning</span>
             </h2>
             <p className="text-muted-foreground text-base md:text-lg mb-8 md:mb-10 leading-relaxed">
-              Your donation directly supports scholarships, mentorship programs, 
-              and resources for young African tech entrepreneurs. Together, we can 
-              break barriers and create opportunities.
+              Your donation helps fund scholarships, bursaries, subsidised places,
+              educational resources and mentoring, so that financial circumstances do
+              not prevent eligible people from accessing learning.
             </p>
 
             {/* Impact Cards */}
             <div className="grid grid-cols-3 gap-3 md:gap-4 mb-6 md:mb-8">
               <div className="card-modern p-4 md:p-6 group hover:border-primary/30 text-center">
                 <div className="text-2xl md:text-4xl font-bold font-display gradient-text mb-1 md:mb-2">£500</div>
-                <div className="text-xs md:text-sm text-muted-foreground">Fully sponsors one student</div>
+                <div className="text-xs md:text-sm text-muted-foreground">Fully sponsors a beneficiary</div>
               </div>
               <div className="card-modern p-4 md:p-6 group hover:border-accent/30 text-center">
-                <div className="text-2xl md:text-4xl font-bold font-display gradient-text-accent mb-1 md:mb-2">£50</div>
-                <div className="text-xs md:text-sm text-muted-foreground">Covers one learning module</div>
+                <div className="text-[10px] md:text-xs font-semibold uppercase tracking-[0.14em] text-muted-foreground mb-1">Donate per period</div>
+                <div className="text-2xl md:text-4xl font-bold font-display gradient-text-accent mb-1 md:mb-2">£100</div>
+                <div className="text-xs md:text-sm text-muted-foreground">Per month, sponsors subsidised places</div>
               </div>
               <div className="card-modern p-4 md:p-6 group hover:border-primary/30 text-center">
-                <div className="text-2xl md:text-4xl font-bold font-display gradient-text mb-1 md:mb-2">£10</div>
-                <div className="text-xs md:text-sm text-muted-foreground">Weekly or monthly gift</div>
+                <div className="text-[10px] md:text-xs font-semibold uppercase tracking-[0.14em] text-muted-foreground mb-1">Donate per period</div>
+                <div className="text-2xl md:text-4xl font-bold font-display gradient-text mb-1 md:mb-2">£50</div>
+                <div className="text-xs md:text-sm text-muted-foreground">Per week, sponsors subsidised places</div>
               </div>
             </div>
             <p className="text-xs md:text-sm text-muted-foreground mb-6 md:mb-8">
-              Every gift matters — whether it's a one-off contribution or a small recurring donation each week or month, your generosity keeps a student learning.
+              Every gift matters, whether it is a one-off contribution or a recurring donation each week or month. Your generosity keeps someone learning.
             </p>
 
             <Button size="lg" className="glow-effect group w-full sm:w-auto" asChild>

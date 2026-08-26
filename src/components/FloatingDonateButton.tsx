@@ -95,19 +95,19 @@ function DonateContent() {
       <div className="grid grid-cols-3 gap-2 mt-3 text-center">
         <div className="rounded-lg bg-muted/50 p-2">
           <div className="text-base sm:text-lg font-bold gradient-text">£500</div>
-          <div className="text-[10px] text-muted-foreground">Full sponsorship</div>
+          <div className="text-[10px] text-muted-foreground">Sponsors a beneficiary</div>
         </div>
         <div className="rounded-lg bg-muted/50 p-2">
-          <div className="text-base sm:text-lg font-bold gradient-text-accent">£50</div>
-          <div className="text-[10px] text-muted-foreground">One module</div>
+          <div className="text-base sm:text-lg font-bold gradient-text-accent">£100</div>
+          <div className="text-[10px] text-muted-foreground">Per month</div>
         </div>
         <div className="rounded-lg bg-muted/50 p-2">
-          <div className="text-base sm:text-lg font-bold gradient-text">£10</div>
-          <div className="text-[10px] text-muted-foreground">Weekly / monthly</div>
+          <div className="text-base sm:text-lg font-bold gradient-text">£50</div>
+          <div className="text-[10px] text-muted-foreground">Per week</div>
         </div>
       </div>
       <p className="text-[10px] text-muted-foreground text-center mt-2">
-        Any amount helps — small recurring gifts add up.
+        Any amount helps. Recurring gifts sponsor subsidised places.
       </p>
     </>
   );

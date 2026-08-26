@@ -10,10 +10,10 @@ import { payWithPaystack, genRef } from "@/lib/paystack";
 type Currency = "USD" | "NGN" | "EUR" | "GBP";
 
 const PRESETS: Record<Currency, number[]> = {
-  USD: [10, 25, 50, 100],
-  NGN: [5000, 10000, 25000, 50000],
-  EUR: [10, 25, 50, 100],
-  GBP: [10, 25, 50, 100],
+  USD: [500, 250, 100, 50],
+  NGN: [500000, 250000, 100000, 10000],
+  EUR: [500, 250, 100, 50],
+  GBP: [500, 250, 100, 50],
 };
 
 const SYMBOL: Record<Currency, string> = { USD: "$", NGN: "₦", EUR: "€", GBP: "£" };
