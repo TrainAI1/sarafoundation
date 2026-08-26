@@ -26,6 +26,15 @@ const milestones = [
   { year: "2025", title: "Prestige Award", description: "Won the London & South East England Prestige Awards 2025/26 in Leadership Development" },
 ];
 
+const howWeWork = [
+  { title: "Structured learning pathways", description: "Clear educational outcomes designed around the needs of the people and communities we support." },
+  { title: "Mentoring and knowledge-sharing", description: "Mentoring, workshops, seminars, projects, presentations and expert sessions." },
+  { title: "Practical and experiential learning", description: "Opportunities for participants to apply what they learn through projects and showcases." },
+  { title: "Access support", description: "Scholarships, bursaries, subsidised places and educational assistance where funding allows." },
+  { title: "Community participation", description: "Peer learning, volunteering, supportive networks and learner-led community activity." },
+  { title: "Governance and oversight", description: "Trustee and board oversight of public benefit, safeguarding, finance, partnerships and international delivery." },
+];
+
 const values = [
   { icon: Lightbulb, title: "Innovation First", description: "We believe in the power of technology to transform lives and communities across Africa." },
   { icon: Users, title: "Community Driven", description: "Our strength lies in the vibrant communities we build and nurture together." },
@@ -82,17 +91,17 @@ export default function About() {
   return (
     <div className="min-h-screen bg-background">
       <Helmet>
-        <title>About Sara Foundation Africa – Transforming African Tech</title>
-        <meta name="description" content="Learn about Sara Foundation Africa's mission to foster Diversity, Equity & Inclusion in African tech. Operating across 11 African countries with 35 university partners." />
+        <title>About Sara Foundation Africa | Education &amp; Inclusion</title>
+        <meta name="description" content="Sara Foundation Africa widens access to tech education, digital inclusion and tech innovation by reducing barriers to participation and strengthening community capacity across Africa." />
         <link rel="canonical" href="https://sarafoundationafrica.com/about" />
         <meta property="og:title" content="About Us – Sara Foundation Africa" />
-        <meta property="og:description" content="Learn about Sara Foundation Africa's mission to foster Diversity, Equity & Inclusion in African tech." />
+        <meta property="og:description" content="Sara Foundation Africa widens access to tech education, digital inclusion and tech innovation by reducing barriers to participation and strengthening community capacity across Africa." />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://sarafoundationafrica.com/about" />
         <meta property="og:image" content="https://sarafoundationafrica.com/hero-students.jpg" />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="About Us – Sara Foundation Africa" />
-        <meta name="twitter:description" content="Learn about Sara Foundation Africa's mission to foster Diversity, Equity & Inclusion in African tech." />
+        <meta name="twitter:description" content="Sara Foundation Africa widens access to tech education, digital inclusion and tech innovation by reducing barriers to participation and strengthening community capacity across Africa." />
         <meta name="twitter:image" content="https://sarafoundationafrica.com/hero-students.jpg" />
         <script type="application/ld+json">{JSON.stringify({
           "@context": "https://schema.org",
@@ -110,7 +119,7 @@ export default function About() {
         })}</script>
       </Helmet>
       <Navbar />
-      <main>
+      <main id="main-content">
       {/* Hero */}
       <section className="pt-24 md:pt-32 pb-12 md:pb-20 bg-primary relative overflow-hidden">
         <div className="absolute inset-0 opacity-30">
@@ -121,11 +130,12 @@ export default function About() {
               About Us
             </span>
             <h1 className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 md:mb-6 leading-tight">
-              Transforming Africa's Tech Landscape
+              Education. Inclusion. Stronger Communities.
             </h1>
             <p className="text-base md:text-xl text-white/70 leading-relaxed">
-              Sara Foundation is a Non-Profit Organization dedicated to driving technology-focused
-              impact in Africa through Diversity, Equity, and Inclusion (DEI).
+              Sara Foundation Africa works to widen access to tech education, digital inclusion and tech
+              innovation by reducing barriers to participation and strengthening community capacity for
+              young people and underserved communities in Africa.
             </p>
           </div>
         </div>
@@ -177,24 +187,29 @@ export default function About() {
               </h2>
               <div className="space-y-4 text-muted-foreground leading-relaxed">
                 <p>
-                  Sara Foundation Africa was born from a simple yet powerful vision: to ensure that
-                  every young African with a passion for technology has the opportunity to turn their
-                  dreams into reality.
+                  Sara Foundation Africa expands access to digital education and tech learning, promotes
+                  social inclusion and strengthens community capacity for adults and underserved
+                  communities in Africa.
+                </p>
+                <p>
+                  We reduce barriers to learning and participation through structured digital education,
+                  mentoring, practical projects, supportive networks, scholarships and access support,
+                  knowledge-sharing, volunteering and community activities.
                 </p>
                 <p>
                   We promote Sustainable Development Goals SDG 4 (Quality Education), SDG 5 (Gender Equality),
                   and SDG 8 (Decent Work and Economic Growth) through tech clubs and women's communities.
                 </p>
                 <p>
-                  Today, we operate across 11 African countries with 35 university partners,
-                  working alongside industry leaders to create pathways for young Africans to
-                  thrive in the global tech ecosystem.
+                  Participants have joined us from 11 African countries, with 35+ universities represented
+                  across our CAP activity. CAP, FLIP and EJP translate our charitable purposes into clear
+                  learning pathways designed around public benefit.
                 </p>
               </div>
               <div className="mt-6 rounded-2xl overflow-hidden shadow-lg">
                 <img
                   src={communityWorkshop}
-                  alt="Sara Foundation community workshop"
+                  alt="Participants at a Sara Foundation Africa community workshop"
                   className="w-full h-48 md:h-64 object-cover"
                 />
               </div>
@@ -240,13 +255,59 @@ export default function About() {
         </div>
       </section>
 
+      {/* Who We Support */}
+      <section className="py-16 md:py-24 bg-secondary/50">
+        <div className="section-container">
+          <div className="max-w-3xl mx-auto text-center px-4">
+            <span className="section-badge mb-4 md:mb-6">Who We Support</span>
+            <h2 className="section-title text-foreground mb-6">
+              Learners facing barriers to participation
+            </h2>
+            <p className="section-subtitle">
+              We support young people aged 18 and above, particularly people from socially or economically
+              disadvantaged, underserved or underrepresented communities. This includes women and adults who
+              face barriers to tech education, social inclusion and participation.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* How We Work */}
+      <section className="py-16 md:py-24 bg-background">
+        <div className="section-container">
+          <div className="text-center max-w-3xl mx-auto mb-10 md:mb-16 px-4">
+            <span className="section-badge mb-4 md:mb-6">How We Work</span>
+            <h2 className="section-title text-foreground mb-4 md:mb-6">Our delivery model</h2>
+            <p className="section-subtitle mx-auto">
+              Every activity is linked to an approved charitable purpose and an intended public benefit.
+            </p>
+          </div>
+          <ol className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 max-w-5xl mx-auto">
+            {howWeWork.map((item, index) => (
+              <li key={item.title} className="card-modern p-6 h-full">
+                <span className="inline-flex items-center justify-center w-9 h-9 rounded-xl bg-primary text-white font-bold text-sm mb-4">
+                  {index + 1}
+                </span>
+                <h3 className="font-display font-bold text-lg text-foreground mb-2">{item.title}</h3>
+                <p className="text-muted-foreground text-sm leading-relaxed">{item.description}</p>
+              </li>
+            ))}
+          </ol>
+          <div className="text-center mt-10">
+            <Button variant="outline" size="lg" asChild>
+              <Link to="/our-work">See how our pathways work</Link>
+            </Button>
+          </div>
+        </div>
+      </section>
+
       {/* Key Initiatives */}
       <section className="py-16 md:py-24 bg-secondary/50">
         <div className="section-container">
           <div className="text-center max-w-3xl mx-auto mb-10 md:mb-16 px-4">
             <span className="section-badge mb-4 md:mb-6">Key Initiatives</span>
             <h2 className="section-title text-foreground mb-4 md:mb-6">
-              Our Flagship Programs
+              Our Learning Pathways
             </h2>
           </div>
           <div className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
@@ -329,14 +390,20 @@ export default function About() {
           <div className="text-center max-w-3xl mx-auto mb-10 md:mb-16 px-4">
             <span className="section-badge mb-4 md:mb-6">
               <Users className="w-4 h-4" />
-              Leadership
+              Leadership &amp; Governance
             </span>
             <h2 className="section-title text-foreground mb-4 md:mb-6">
               Meet Our Core Team
             </h2>
             <p className="section-subtitle mx-auto">
-              Dedicated leaders driving our mission to empower African tech talent.
+              Our leadership team and advisers guide programme design, partnerships and the responsible use
+              of charitable resources.
             </p>
+            <div className="mt-6">
+              <Button variant="outline" asChild>
+                <Link to="/transparency">Transparency &amp; Governance</Link>
+              </Button>
+            </div>
           </div>
 
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 mb-10 md:mb-16 max-w-4xl mx-auto">

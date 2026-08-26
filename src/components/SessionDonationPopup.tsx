@@ -70,7 +70,7 @@ export function SessionDonationPopup() {
               Support Our Mission
             </DialogPrimitive.Title>
             <DialogPrimitive.Description className="mt-1.5 text-sm text-muted-foreground">
-              Your donation empowers African tech talent through scholarships and mentorship.
+              Your donation helps reduce barriers to learning through scholarships, resources and mentoring.
             </DialogPrimitive.Description>
           </div>
 

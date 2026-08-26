@@ -39,12 +39,12 @@ const program = {
       number: "03",
       icon: Zap,
       duration: "1 Week",
-      description: "Internship placements for Code & No-Code students. Pre-seed funding pursuit for Tech-preneurs.",
+      description: "Learners present their work, share what they built and are referred to suitable further learning or experience opportunities where these are available.",
       outcomes: [
-        "Internship placement support",
-        "Certificate of Completion & Alumni Access",
+        "Referrals to further learning and experience opportunities",
+        "Certificate of completion and alumni community access",
         "CAP Talent Showcase",
-        "Full-time job opportunities",
+        "Continued mentoring and peer support",
       ],
       color: "bg-accent",
     },
@@ -113,10 +113,10 @@ export function CAPPhasesSection() {
         <div className="text-center max-w-3xl mx-auto mb-10 md:mb-16 px-4">
           <span className="section-badge mb-4 md:mb-6">Program Structure</span>
           <h2 className="section-title text-foreground mb-4 md:mb-6">
-            One Path. <span className="gradient-text">Real Outcomes.</span>
+            Learn. <span className="gradient-text">Build. Launch.</span>
           </h2>
           <p className="section-subtitle mx-auto">
-            A full 6-week CAP experience — learn, build, and launch your tech career.
+            A full 6-week CAP experience built on an 80/20 balance of practice to taught learning.
           </p>
         </div>
 

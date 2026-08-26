@@ -60,17 +60,17 @@ export default function Donation() {
   return (
     <div className="min-h-screen bg-background">
       <Helmet>
-        <title>Donate – Support African Tech Talent | Sara Foundation</title>
-        <meta name="description" content="Your donation supports scholarships, mentorship programs, and resources for young African tech entrepreneurs. Invest in Africa's tech future." />
+        <title>Donate | Widen Access to Digital Education | Sara Foundation Africa</title>
+        <meta name="description" content="Your donation helps fund scholarships, bursaries, subsidised places, educational resources and mentoring so financial circumstances do not prevent access to learning." />
         <link rel="canonical" href="https://sarafoundationafrica.com/donation" />
-        <meta property="og:title" content="Donate – Support African Tech Talent | Sara Foundation" />
-        <meta property="og:description" content="Your donation supports scholarships, mentorship programs, and resources for young African tech entrepreneurs." />
+        <meta property="og:title" content="Donate | Widen Access to Digital Education | Sara Foundation Africa" />
+        <meta property="og:description" content="Your donation helps fund scholarships, bursaries, subsidised places, educational resources and mentoring so financial circumstances do not prevent access to learning." />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://sarafoundationafrica.com/donation" />
         <meta property="og:image" content="https://sarafoundationafrica.com/hero-students.jpg" />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Donate – Support African Tech Talent | Sara Foundation" />
-        <meta name="twitter:description" content="Your donation supports scholarships, mentorship programs, and resources for young African tech entrepreneurs." />
+        <meta name="twitter:title" content="Donate | Widen Access to Digital Education | Sara Foundation Africa" />
+        <meta name="twitter:description" content="Your donation helps fund scholarships, bursaries, subsidised places, educational resources and mentoring so financial circumstances do not prevent access to learning." />
         <meta name="twitter:image" content="https://sarafoundationafrica.com/hero-students.jpg" />
         <script type="application/ld+json">{JSON.stringify({
           "@context": "https://schema.org",
@@ -92,14 +92,19 @@ export default function Donation() {
           <div className="max-w-3xl px-4">
             <span className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.18em] text-white/80 mb-4 mb-6">
               <Heart className="w-3 h-3 md:w-4 md:h-4 text-accent" />
-              Support Our Mission
+              Donate
             </span>
             <h1 className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 md:mb-6 leading-tight">
-              Invest in Africa's Tech Future
+              Help Widen Access to Learning
             </h1>
             <p className="text-base md:text-xl text-white/70 leading-relaxed">
-              Your donation directly supports scholarships, mentorship programs, and resources 
-              for young African tech entrepreneurs. Together, we can break barriers and create opportunities.
+              Donations help reduce barriers to learning. Depending on programme needs and available funding,
+              your support can contribute to scholarships, bursaries, subsidised participation, educational
+              resources, mentoring and community learning activities.
+            </p>
+            <p className="mt-6 rounded-2xl bg-white/10 p-5 text-white font-medium leading-relaxed">
+              Every donation helps us reduce barriers to education and participation so that financial
+              circumstances do not prevent eligible adults from accessing learning opportunities.
             </p>
           </div>
         </div>

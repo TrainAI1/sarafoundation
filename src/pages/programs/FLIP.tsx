@@ -6,6 +6,8 @@ import { FLIPMissionVisionSection } from "@/components/programs/flip/FLIPMission
 import { FLIPWPTASection } from "@/components/programs/flip/FLIPWPTASection";
 import { FLIPWFTASection } from "@/components/programs/flip/FLIPWFTASection";
 import { FLIPBenefitsSection } from "@/components/programs/flip/FLIPBenefitsSection";
+import { FLIPImpactSection } from "@/components/programs/flip/FLIPImpactSection";
+import { FLIPCapstoneShowcase } from "@/components/programs/flip/FLIPCapstoneShowcase";
 import { FLIPGenderGapSection } from "@/components/programs/flip/FLIPGenderGapSection";
 import { FLIPMembershipSection } from "@/components/programs/flip/FLIPMembershipSection";
 import { FLIPCTASection } from "@/components/programs/flip/FLIPCTASection";
@@ -14,17 +16,17 @@ export default function ProgramFLIP() {
   return (
     <div className="min-h-screen bg-background">
       <Helmet>
-        <title>FLIP – Female Learning & Inclusion Pathway | Sara Foundation Africa</title>
-        <meta name="description" content="The Female Learning & Inclusion Pathway (FLIP) empowers women in tech through mentorship, workshops, and leadership development across Africa." />
+        <title>FLIP — Female Learning &amp; Inclusion Pathway | Sara Foundation Africa</title>
+        <meta name="description" content="FLIP creates inclusive access to digital learning for women through mentoring, structured learning, practical projects, supportive communities and access support." />
         <link rel="canonical" href="https://sarafoundationafrica.com/programs/flip" />
-        <meta property="og:title" content="FLIP – Female Learning & Inclusion Pathway | Sara Foundation Africa" />
-        <meta property="og:description" content="FLIP empowers women in tech through mentorship, workshops, and leadership development across Africa." />
+        <meta property="og:title" content="FLIP — Female Learning &amp; Inclusion Pathway | Sara Foundation Africa" />
+        <meta property="og:description" content="FLIP creates inclusive access to digital learning for women through mentoring, structured learning, practical projects, supportive communities and access support." />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://sarafoundationafrica.com/programs/flip" />
         <meta property="og:image" content="https://sarafoundationafrica.com/hero-students.jpg" />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="FLIP – Female Learning & Inclusion Pathway | Sara Foundation Africa" />
-        <meta name="twitter:description" content="FLIP empowers women in tech through mentorship, workshops, and leadership development across Africa." />
+        <meta name="twitter:title" content="FLIP — Female Learning &amp; Inclusion Pathway | Sara Foundation Africa" />
+        <meta name="twitter:description" content="FLIP creates inclusive access to digital learning for women through mentoring, structured learning, practical projects, supportive communities and access support." />
         <meta name="twitter:image" content="https://sarafoundationafrica.com/hero-students.jpg" />
       </Helmet>
       <Navbar />
@@ -33,6 +35,8 @@ export default function ProgramFLIP() {
       <FLIPWPTASection />
       <FLIPWFTASection />
       <FLIPBenefitsSection />
+      <FLIPImpactSection />
+      <FLIPCapstoneShowcase />
       <FLIPGenderGapSection />
       <FLIPMembershipSection />
       <FLIPCTASection />

@@ -3,11 +3,11 @@ import { Award, ExternalLink } from "lucide-react";
 const partners = [
   {
     name: "Scintilla Africa",
-    role: "Industry exposure & internship recruitment",
+    role: "Industry exposure and experiential learning opportunities",
   },
   {
     name: "Farmily",
-    role: "Internship & full-time job placements",
+    role: "Host organisation for continued learning journeys",
   },
   {
     name: "Train AI",
@@ -15,7 +15,7 @@ const partners = [
   },
   {
     name: "Nanaade AI",
-    role: "CV & recruitment preparation support",
+    role: "Work-readiness education support",
   },
 ];
 

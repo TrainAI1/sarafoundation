@@ -140,7 +140,7 @@ export function FloatingDonateButton() {
                 Support Our Mission
               </DrawerTitle>
               <DrawerDescription className="text-sm">
-                Your donation empowers African tech talent through scholarships and mentorship.
+                Your donation helps reduce barriers to learning through scholarships, resources and mentoring.
               </DrawerDescription>
             </DrawerHeader>
             <div className="overflow-y-auto">
@@ -157,7 +157,7 @@ export function FloatingDonateButton() {
                 Support Our Mission
               </DialogTitle>
               <DialogDescription>
-                Your donation empowers African tech talent through scholarships and mentorship.
+                Your donation helps reduce barriers to learning through scholarships, resources and mentoring.
               </DialogDescription>
             </DialogHeader>
             <DonateContent />
