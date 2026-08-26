@@ -71,7 +71,7 @@ export function CAPProgramFeeSection() {
               </Link>
             </Button>
             <p className="text-xs text-muted-foreground mt-3">
-              Global students: pay $60 once or $20/month for 3 months
+              Global participants: pay $60 once or $20/month for 3 months
             </p>
           </div>
         </div>

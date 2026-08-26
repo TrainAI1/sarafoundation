@@ -44,7 +44,7 @@ Sara Foundation Africa does not guarantee or promise employment through any of i
 
 ## Learning pathways
 
-- [CAP](/programs/cap): Structured digital education, mentoring and practical learning for underserved adults, delivered through CAP Tech Hubs with a Learn, Build, Launch structure and an 80/20 practice-to-learning balance.
+- [CAP](/programs/cap): Structured digital education, mentoring and practical learning for young people and adults from underserved communities, delivered through CAP Tech Hubs with a Learn, Build, Launch structure and an 80/20 practice-to-learning balance.
 - [CAP Apply](/programs/cap/apply): Application form for CAP.
 - [FLIP](/programs/flip): Inclusive access to tech learning for women through fellowship, mentorship, workshops and community activity, including a six-week tailored programme.
 - [FLIP Apply](/programs/flip/apply): Application form for FLIP.

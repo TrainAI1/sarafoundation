@@ -108,7 +108,7 @@ const whatYouGet = [
 const faqs = [
   { q: "How long does the partnership process take?", a: "From initial contact to hub launch, the process typically takes 4–6 weeks depending on institutional readiness and logistics." },
   { q: "Is there a cost for the university?", a: "No, there is no cost. Sara Foundation provides the program at no charge. We only require institutional support such as a liaison and meeting space." },
-  { q: "Can multiple departments participate?", a: "Yes! We encourage cross-departmental participation. CAP is designed for students from any academic background interested in tech." },
+  { q: "Can multiple departments participate?", a: "Yes! We encourage cross-departmental participation. CAP is designed for young people and adults from any academic background who are interested in tech." },
   { q: "What is the minimum student count?", a: "We recommend a minimum of 20 students to form a viable hub, but we are flexible based on institutional context." },
   { q: "Does the partnership include online programs?", a: "Yes, many of our resources and sessions are available online, allowing hybrid participation for students." },
 ];

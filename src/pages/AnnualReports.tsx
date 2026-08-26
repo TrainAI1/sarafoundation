@@ -10,7 +10,7 @@ const reports = [
   {
     year: "2025",
     title: "Sara Foundation Africa — 2025 Impact Report",
-    summary: "763 students trained across 35 universities in 11 African countries, the launch of the FLIP Fellowship, expanded WPTA and WFTA communities, and our first Educational Journey Pathway cohort.",
+    summary: "763 learners trained across 35 universities in 11 African countries, the launch of the FLIP Fellowship, expanded WPTA and WFTA communities, and our first Educational Journey Pathway cohort.",
     href: "https://drive.google.com/file/d/1Ex55tpVH_RPB0VJygsUyw9Hp74RyPKR_/view?usp=drivesdk",
     status: "available" as const,
   },
@@ -43,7 +43,7 @@ export default function AnnualReports() {
             Transparency & <span className="gradient-text">accountability.</span>
           </h1>
           <p className="section-subtitle max-w-3xl">
-            We publish annual impact reports covering programs delivered, students reached, financial stewardship, and
+            We publish annual impact reports covering programmes delivered, learners reached, financial stewardship, and
             outcomes across our partner universities and countries. Read or download our reports below.
           </p>
         </section>

@@ -29,13 +29,13 @@ const impactStories = [
 ];
 
 const impactNumbers = [
-  { icon: Users, number: "500+", label: "Students Supported" },
+  { icon: Users, number: "763", label: "CAP Learners Supported" },
   { icon: GraduationCap, number: "8", label: "Countries Reached" },
   { icon: Lightbulb, number: "50+", label: "Partner Institutions" },
 ];
 
 const whereItGoes = [
-  { title: "Student Scholarships", percentage: "40%", description: "Directly funding tuition, equipment, and learning resources for students in our programs." },
+  { title: "Learner Scholarships", percentage: "40%", description: "Directly funding places, equipment and learning resources for young people and adults on our pathways." },
   { title: "Program Operations", percentage: "30%", description: "Running workshops, hackathons, mentorship sessions, and community events across Africa." },
   { title: "Technology & Infrastructure", percentage: "20%", description: "Building and maintaining tech hubs, online platforms, and digital learning tools." },
   { title: "Outreach & Growth", percentage: "10%", description: "Expanding to new countries, universities, and communities across the continent." },
@@ -44,8 +44,8 @@ const whereItGoes = [
 const donationFaqDefaults = [
   { question: "Is my donation tax-deductible?", answer: "Sara Foundation Africa is a registered non-profit organization. We provide official donation receipts. Please consult your local tax advisor for deductibility in your jurisdiction." },
   { question: "Can I donate in currencies other than USD?", answer: "Yes! We accept donations in multiple currencies. Our payment partners handle currency conversion automatically." },
-  { question: "Can I set up a recurring donation?", answer: "Yes — you can donate weekly, monthly, or in any rhythm that works for you. Even small recurring gifts of £5–£10 add up to fully sponsor a student's learning." },
-  { question: "How much does it cost to sponsor a student?", answer: "A full CAP student sponsorship is £500 (or the equivalent in your currency). You can also contribute towards a sponsorship in smaller amounts, alone or combined with other donors." },
+  { question: "Can I set up a recurring donation?", answer: "Yes — you can donate weekly, monthly, or in any rhythm that works for you. Even small recurring gifts of £5–£10 add up to fully sponsor a learner's place." },
+  { question: "How much does it cost to sponsor a learner?", answer: "A full CAP learner sponsorship is £500 (or the equivalent in your currency). You can also contribute towards a sponsorship in smaller amounts, alone or combined with other donors." },
   { question: "How will I know my donation made an impact?", answer: "All donors receive an annual impact report showing exactly how funds were used. Major donors (£500+) receive quarterly updates." },
   { question: "Can I donate to a specific program?", answer: "Yes, you can specify whether your donation goes to CAP (university programs) or FLIP (women's leadership). Contact us to earmark your donation." },
 ];
@@ -171,7 +171,7 @@ export default function Donation() {
               Your Donations Make a Difference
             </h2>
             <p className="section-subtitle mx-auto">
-              Hear from the students and entrepreneurs whose lives have been transformed by your generosity.
+              Hear from the learners and participants whose journeys your support has made possible.
             </p>
           </div>
 
@@ -186,13 +186,13 @@ export default function Donation() {
               />
               <div className="p-4 bg-card">
                 <p className="font-semibold text-foreground">CAP Graduates 2025</p>
-                <p className="text-sm text-muted-foreground">Students celebrating their program completion</p>
+                <p className="text-sm text-muted-foreground">Learners celebrating their programme completion</p>
               </div>
             </div>
             <div className="rounded-2xl overflow-hidden shadow-lg">
               <img 
                 src={mentorshipSession} 
-                alt="Mentorship session between advisor and student"
+                alt="A mentoring session between a mentor and a learner"
                 loading="lazy"
                 className="w-full h-48 md:h-64 object-cover"
               />

@@ -9,8 +9,8 @@ const benefits = [
   },
   {
     icon: Users,
-    title: "Student Engagement & Retention",
-    description: "CAP-run hubs create vibrant student multi-university communities, allowing students to connect with other students across 11 African countries and 35 different universities.",
+    title: "Community Engagement & Retention",
+    description: "CAP-run hubs create vibrant multi-university learning communities, allowing young people to connect with peers across 11 African countries and 35 different universities.",
   },
   {
     icon: Gift,
@@ -19,8 +19,8 @@ const benefits = [
   },
   {
     icon: TrendingUp,
-    title: "Proven Graduate Outcomes",
-    description: "CAP students have secured internships, full-time jobs, and pre-seed startup traction — boosting your ranking.",
+    title: "Continued Learning Journeys",
+    description: "CAP participants have gone on to internships, further learning and project work with organisations in our network.",
   },
   {
     icon: Globe,
@@ -48,7 +48,7 @@ export function CAPForSchoolsSection() {
             <div className="rounded-2xl overflow-hidden shadow-lg mb-6">
               <img 
                 src={capWomenGroup} 
-                alt="Students collaborating in CAP Hub"
+                alt="Young people collaborating at a CAP Tech Hub"
                 className="w-full h-48 object-cover"
               />
             </div>
@@ -58,7 +58,7 @@ export function CAPForSchoolsSection() {
                 "CAP Tech Hub boosted my confidence to a very great height. 
                 The self-explanatory course materials provide a lot of value."
               </p>
-              <p className="text-xs text-muted-foreground font-semibold">— Student, UniAbuja CAP Hub</p>
+              <p className="text-xs text-muted-foreground font-semibold">— CAP participant, UniAbuja CAP Hub</p>
             </div>
           </div>
 

@@ -13,7 +13,7 @@ const pathways = [
     icon: GraduationCap,
     title: "Community Access & Participation Pathway",
     description:
-      "Expands access to practical tech education through CAP Tech Hubs, structured learning, mentoring, projects and community-based learning for underserved adults.",
+      "Expands access to practical tech education through CAP Tech Hubs, structured learning, mentoring, projects and community-based learning for young people and adults from underserved communities.",
     image: studentsLabImg,
     imageAlt: "CAP learners taking part in a practical digital learning session",
     highlights: ["Structured digital learning", "Mentoring & guided projects", "Demo days & showcases"],

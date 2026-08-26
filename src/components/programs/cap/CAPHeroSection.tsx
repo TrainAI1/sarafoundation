@@ -32,7 +32,7 @@ export function CAPHeroSection() {
               Expanding Access. Building Confidence. Supporting Participation.
             </h1>
             <p className="text-base md:text-xl text-white/70 leading-relaxed mb-6 md:mb-8">
-              CAP helps adults from underserved and underrepresented communities access structured digital
+              CAP helps young people and adults from underserved and underrepresented communities access structured digital
               education, mentoring and practical learning. Participants build knowledge, practise new
               skills, work on projects, connect with peers and contribute to community learning.
             </p>

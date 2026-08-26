@@ -14,9 +14,9 @@ const partnerTypes = [
     description: "Partner with us to bring tech education and CAP Tech Clubs to your institution.",
     benefits: [
       "CAP Tech Club establishment",
-      "Student training programs",
+      "Training for young people and adults",
       "Curriculum integration support",
-      "Industry exposure for students",
+      "Industry exposure for participants",
       "Faculty development workshops",
       "Access to Sara Foundation network",
     ],

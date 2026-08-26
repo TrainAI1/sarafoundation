@@ -25,7 +25,7 @@ const program = {
       number: "02",
       icon: Rocket,
       duration: "4 Weeks",
-      description: "Apply skills in real time — students collaborate like a startup, solving real African problems through mentored sprints.",
+      description: "Apply skills in real time — participants collaborate as a team, working on real African problems through mentored sprints.",
       outcomes: [
         "Cross-track startup simulation",
         "Real-life project exposure",

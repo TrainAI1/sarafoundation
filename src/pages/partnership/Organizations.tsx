@@ -89,7 +89,7 @@ const whatWeOffer = [
 const faqs = [
   { q: "What types of organizations can partner with you?", a: "We welcome partnerships from corporates, government agencies, foundations, NGOs, and international development organizations committed to tech talent development in Africa." },
   { q: "Is there a minimum commitment period?", a: "We recommend a 12-month partnership to achieve meaningful impact, but we can customize the duration based on your objectives." },
-  { q: "How is impact measured?", a: "We track key metrics including students trained, women empowered, startups supported, and employment outcomes. Partners receive quarterly impact dashboards." },
+  { q: "How is impact measured?", a: "We track key metrics including learners trained, women supported, projects completed and continued learning journeys. Partners receive quarterly impact dashboards." },
   { q: "Can we customize the partnership?", a: "Absolutely. Every partnership is tailored to align with your organization's strategic goals and CSR objectives." },
 ];
 

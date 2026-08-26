@@ -11,7 +11,7 @@ const partners = [
   },
   {
     name: "Train AI",
-    role: "EdTech platform for student learning journeys",
+    role: "EdTech platform supporting learners' journeys",
   },
   {
     name: "Nanaade AI",

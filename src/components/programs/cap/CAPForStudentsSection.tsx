@@ -10,17 +10,17 @@ const benefits = [
   {
     icon: Users,
     title: "Industry Mentorship",
-    description: "12 weekly sessions with seasoned tech professionals who guide your learning journey.",
+    description: "Weekly sessions with experienced tech professionals who guide each participant's learning journey.",
   },
   {
     icon: Briefcase,
     title: "Referrals to Further Learning & Experience",
-    description: "CAP alumni have secured internships and full-time offers at companies like Farmily & Scintilla Africa.",
+    description: "Some CAP participants have continued their journeys through internships and roles with organisations in our network, such as Farmily and Scintilla Africa. Employment is not guaranteed.",
   },
   {
     icon: Rocket,
-    title: "Build a Real Startup",
-    description: "Launch phase teams have shipped real products like ArtifyPro and CampusLink.",
+    title: "Build a Real Project",
+    description: "Launch phase teams have built working projects such as ArtifyPro and Campuslink.",
   },
   {
     icon: Globe,
@@ -41,14 +41,14 @@ export function CAPForStudentsSection() {
         <div className="grid lg:grid-cols-3 gap-8 md:gap-12 px-4 lg:px-0">
           {/* Left sidebar */}
           <div className="lg:col-span-1">
-            <span className="section-badge mb-4 md:mb-6">For Students</span>
+            <span className="section-badge mb-4 md:mb-6">For Young People</span>
             <h2 className="font-display font-bold text-2xl md:text-3xl text-foreground mb-4 leading-tight">
-              Everything you need to launch your tech career while still in university.
+              Everything you need to build practical tech skills and keep learning.
             </h2>
             <div className="rounded-2xl overflow-hidden shadow-lg mb-6">
               <img 
                 src={capHappyCoder} 
-                alt="Happy CAP student coding"
+                alt="A CAP learner coding during a practical session"
                 className="w-full h-48 object-cover"
               />
             </div>

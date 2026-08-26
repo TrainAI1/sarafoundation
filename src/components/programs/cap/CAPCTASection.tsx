@@ -12,13 +12,13 @@ const actions = [
   {
     icon: Users,
     label: "Become a CAP Member",
-    sublabel: "University Students",
+    sublabel: "Young people & adults",
     to: "/programs/cap/apply",
   },
   {
     icon: Mail,
     label: "Get in Touch",
-    sublabel: "Individuals & Students",
+    sublabel: "Individuals & learners",
     to: "/contact",
   },
 ];
@@ -31,7 +31,7 @@ export function CAPCTASection() {
           Ready to Build Africa's Tech Future?
         </h2>
         <p className="text-white/70 text-base md:text-lg mb-8 md:mb-10 max-w-2xl mx-auto">
-          Partner with CAP Tech Hub. Empower your students. Shape the continent.
+          Partner with CAP Tech Hub. Support young people in your community. Widen access to learning.
         </p>
 
         <div className="grid sm:grid-cols-3 gap-4 md:gap-6 max-w-3xl mx-auto mb-10">

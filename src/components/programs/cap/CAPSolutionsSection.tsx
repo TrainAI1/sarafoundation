@@ -20,7 +20,7 @@ export function CAPSolutionsSection() {
             What is the <span className="gradient-text">Community Access & Participation Pathway?</span>
           </h2>
           <p className="section-subtitle mx-auto">
-            CAP is a 6-week intensive, student-led tech hub program embedded inside African universities
+            CAP is a 6-week intensive, learner-led tech hub programme delivered with African universities
             built on practical learning.
           </p>
         </div>
@@ -39,7 +39,7 @@ export function CAPSolutionsSection() {
           <div className="rounded-2xl overflow-hidden shadow-lg">
             <img 
               src={capWomanLaptop} 
-              alt="CAP student working on laptop"
+              alt="A CAP learner working on a laptop"
               className="w-full h-64 md:h-80 object-cover"
             />
           </div>
@@ -52,7 +52,7 @@ export function CAPSolutionsSection() {
               <h3 className="font-display font-bold text-lg text-foreground">Vision</h3>
             </div>
             <p className="text-muted-foreground text-sm">
-              Empowering African students through technology to drive innovation,
+              Empowering young people across Africa through technology to drive innovation,
               entrepreneurship and socio-economic development.
             </p>
           </div>
@@ -62,7 +62,7 @@ export function CAPSolutionsSection() {
               <h3 className="font-display font-bold text-lg text-foreground">Mission</h3>
             </div>
             <p className="text-muted-foreground text-sm">
-              Provide a platform for African students to explore, learn and apply
+              Provide a platform for young people across Africa to explore, learn and apply
               technology — fostering collaboration, skill and leadership.
             </p>
           </div>
