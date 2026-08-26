@@ -1,4 +1,11 @@
 import { ExternalLink } from "lucide-react";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel";
 
 type Project = {
   name: string;
@@ -143,40 +150,57 @@ export function CAPProjectShowcase() {
           </p>
         </div>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 px-4 lg:px-0">
-          {projects.map((project) => (
-            <article key={project.name} className="card-modern p-5 md:p-6 h-full flex flex-col">
-              <div
-                className="mb-4 flex h-32 items-center justify-center rounded-xl border border-dashed border-border bg-secondary/60 px-3 text-center text-[11px] font-semibold uppercase tracking-[0.12em] text-muted-foreground"
-                role="img"
-                aria-label={`Image placeholder for the ${project.name} project`}
-              >
-                [ASSET REQUIRED: {project.name} project image]
-              </div>
-              <span className="text-[11px] font-semibold uppercase tracking-[0.14em] text-primary">
-                {project.context}
-              </span>
-              <h3 className="font-display font-bold text-lg text-foreground mt-1 mb-4">{project.name}</h3>
-              <dl className="space-y-3 flex-1">
-                <Field label="Problem / learning need" value={project.need} />
-                <Field label="Skills applied" value={project.skills} />
-                <Field label="Project created" value={project.output} />
-                <Field label="Mentor or programme support" value={project.support} />
-                <Field label="Next learning step" value={project.nextStep} />
-              </dl>
-              {project.link && (
-                <a
-                  href={project.link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 text-sm font-medium text-primary mt-5 hover:underline"
-                >
-                  {project.linkLabel}: {project.name}
-                  <ExternalLink className="w-3.5 h-3.5" aria-hidden="true" />
-                </a>
-              )}
-            </article>
-          ))}
+        <div className="px-4 lg:px-0">
+          <Carousel
+            opts={{ align: "start", loop: true }}
+            className="w-full"
+            aria-label="CAP learner projects"
+          >
+            <CarouselContent className="-ml-4">
+              {projects.map((project) => (
+                <CarouselItem key={project.name} className="pl-4 basis-full md:basis-1/2">
+                  <article className="card-modern p-5 md:p-6 h-full flex flex-col">
+                    <div
+                      className="mb-4 flex h-32 items-center justify-center rounded-xl border border-dashed border-border bg-secondary/60 px-3 text-center text-[11px] font-semibold uppercase tracking-[0.12em] text-muted-foreground"
+                      role="img"
+                      aria-label={`Image placeholder for the ${project.name} project`}
+                    >
+                      [ASSET REQUIRED: {project.name} project image]
+                    </div>
+                    <span className="text-[11px] font-semibold uppercase tracking-[0.14em] text-primary">
+                      {project.context}
+                    </span>
+                    <h3 className="font-display font-bold text-lg text-foreground mt-1 mb-4">{project.name}</h3>
+                    <dl className="space-y-3 flex-1">
+                      <Field label="Problem / learning need" value={project.need} />
+                      <Field label="Skills applied" value={project.skills} />
+                      <Field label="Project created" value={project.output} />
+                      <Field label="Mentor or programme support" value={project.support} />
+                      <Field label="Next learning step" value={project.nextStep} />
+                    </dl>
+                    {project.link && (
+                      <a
+                        href={project.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-2 py-1.5 text-sm font-medium text-primary mt-5 hover:underline"
+                      >
+                        {project.linkLabel}: {project.name}
+                        <ExternalLink className="w-3.5 h-3.5" aria-hidden="true" />
+                      </a>
+                    )}
+                  </article>
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+            <div className="flex items-center justify-center gap-3 mt-8">
+              <CarouselPrevious className="static translate-y-0" />
+              <CarouselNext className="static translate-y-0" />
+            </div>
+          </Carousel>
+          <p className="text-center text-xs text-muted-foreground mt-4">
+            Use the arrows or swipe to see all {projects.length} learner projects.
+          </p>
         </div>
       </div>
     </section>
