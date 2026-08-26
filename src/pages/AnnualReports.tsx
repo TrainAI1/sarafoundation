@@ -10,14 +10,14 @@ const reports = [
   {
     year: "2025",
     title: "Sara Foundation Africa — 2025 Impact Report",
-    summary: "763 learners trained across 35 universities in 11 African countries, the launch of the FLIP Fellowship, expanded WPTA and WFTA communities, and our first Educational Journey Pathway cohort.",
+    summary: "763 learners trained across 35 universities in 11 African countries, the launch of the FLIP Fellowship, our first CAP and FLIP conferences, and continued Education Journey Pathway activity.",
     href: "https://drive.google.com/file/d/1Ex55tpVH_RPB0VJygsUyw9Hp74RyPKR_/view?usp=drivesdk",
     status: "available" as const,
   },
   {
     year: "2024",
     title: "Sara Foundation Africa — 2024 Impact Report",
-    summary: "Inaugural CAP cohort across founding partner universities, formation of the WPTA community, and the establishment of our governance, leadership team and operating model.",
+    summary: "Our first full year: the inaugural CAP cohort across founding partner universities, the start of our knowledge and expert sessions, and the establishment of our governance, leadership team and operating model.",
     href: "https://drive.google.com/file/d/1DjVw-vTf6ugcp75rFVCUCKM4zictzDKN/view?usp=drivesdk",
     status: "available" as const,
   },
@@ -36,7 +36,7 @@ export default function AnnualReports() {
         <meta property="og:type" content="website" />
       </Helmet>
       <Navbar />
-      <main className="pt-24 md:pt-32">
+      <main id="main-content" className="pt-24 md:pt-32">
         <section className="section-container pb-12">
           <span className="section-badge mb-4"><FileText className="w-4 h-4" /> Annual Reports</span>
           <h1 className="section-title text-foreground mb-4 max-w-3xl">

@@ -263,10 +263,11 @@ export default function Projects() {
                 </h2>
               </div>
               <p className="text-muted-foreground leading-relaxed mb-6">
-                Our annual reports set out what we delivered, who benefited and what we learned. Current and
-                future impact reports are published here and in our annual reports section.
+                Our annual reports set out what we delivered, who benefited and what we learned. The 2024 and 2025
+                reports are available now, and future reports are published here and in our annual reports
+                section.
               </p>
-              <div className="grid sm:grid-cols-2 gap-4">
+              <div className="grid sm:grid-cols-3 gap-4">
                 <div className="rounded-2xl border border-border p-5">
                   <h3 className="font-semibold text-foreground mb-2">2025 Impact Report</h3>
                   <a
@@ -276,6 +277,17 @@ export default function Projects() {
                     className="text-sm text-primary hover:underline"
                   >
                     Read the 2025 Impact Report
+                  </a>
+                </div>
+                <div className="rounded-2xl border border-border p-5">
+                  <h3 className="font-semibold text-foreground mb-2">2024 Impact Report</h3>
+                  <a
+                    href="https://drive.google.com/file/d/1DjVw-vTf6ugcp75rFVCUCKM4zictzDKN/view?usp=drivesdk"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-sm text-primary hover:underline"
+                  >
+                    Read the 2024 Impact Report
                   </a>
                 </div>
                 <div className="rounded-2xl border border-dashed border-border p-5">

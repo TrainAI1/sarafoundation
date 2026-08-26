@@ -55,12 +55,12 @@ export function HeroSection() {
   const loop = [...marqueeCards, ...marqueeCards];
 
   return (
-    <section className="relative min-h-[100svh] flex flex-col overflow-hidden">
+    <section className="relative overflow-hidden">
       {/* Plain page background */}
       <div className="absolute inset-0 bg-background" />
 
 
-      <div className="section-container relative z-10 pt-24 md:pt-28 pb-8 md:pb-10 w-full flex-1 flex flex-col">
+      <div className="section-container relative z-10 pt-24 md:pt-28 pb-8 md:pb-12 w-full">
         <div className="flex flex-col items-center text-center text-foreground space-y-4 md:space-y-5 max-w-3xl mx-auto px-2">
           <motion.h1
             initial={false}
@@ -107,7 +107,7 @@ export function HeroSection() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.5 }}
-          className="relative left-1/2 -ml-[50vw] mt-8 md:mt-10 flex-1 flex items-end w-screen max-w-none"
+          className="relative left-1/2 -ml-[50vw] mt-6 md:mt-10 w-screen max-w-none"
         >
           <div className="overflow-hidden w-full py-4 md:py-6">
             <div
