@@ -72,8 +72,30 @@ const advisors = [
 ];
 
 const keyInitiatives = [
-  { title: "CAP Tech Hub", description: "Empowering tech leaders, innovators, and experts through comprehensive tech learning and career pathways.", image: studentsLabImg },
-  { title: "FLIP Communities", description: "Women Professionals in Tech Africa and Women Founders in Tech Africa - building leadership pipelines.", image: womenCoworking },
+  {
+    title: "CAP: Community Access & Participation Pathway",
+    description:
+      "CAP Tech Hub helps young people from underserved and underrepresented communities access structured digital education, mentoring and practical learning. Participants build knowledge, practise new skills, work on projects, connect with peers and solve real life African problems.",
+    image: studentsLabImg,
+    imageAlt: "CAP learners working together during a practical learning session",
+    href: "/programs/cap",
+  },
+  {
+    title: "FLIP: Female Learning & Inclusion Pathway",
+    description:
+      "FLIP creates targeted opportunities for women where barriers or underrepresentation in tech learning have been identified. We close these barriers through our fellowships, workshops and conference.",
+    image: womenCoworking,
+    imageAlt: "Women taking part in a FLIP learning session",
+    href: "/programs/flip",
+  },
+  {
+    title: "EJP: Education Journey Pathway",
+    description:
+      "EJP supports continued learning through practical and experiential opportunities that complement participants' wider educational journeys. We do this through placement referrals, work readiness programmes and work exposure opportunities.",
+    image: techConference,
+    imageAlt: "Participants at a Sara Foundation Africa work-readiness session",
+    href: "/programs/gjp",
+  },
 ];
 
 const countries = [
@@ -309,19 +331,27 @@ export default function About() {
               Our Learning Pathways
             </h2>
           </div>
-          <div className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+          <div className="grid md:grid-cols-3 gap-6">
             {keyInitiatives.map((initiative) => (
-              <div key={initiative.title} className="card-modern overflow-hidden">
+              <article key={initiative.title} className="card-modern overflow-hidden h-full flex flex-col">
                 <img
                   src={initiative.image}
-                  alt={initiative.title}
+                  alt={initiative.imageAlt}
+                  loading="lazy"
                   className="w-full h-40 md:h-48 object-cover"
                 />
-                <div className="p-6 md:p-8 text-center">
-                  <h3 className="font-display font-bold text-xl text-foreground mb-3">{initiative.title}</h3>
-                  <p className="text-muted-foreground">{initiative.description}</p>
+                <div className="p-6 md:p-8 flex flex-col flex-1">
+                  <h3 className="font-display font-bold text-lg text-foreground mb-3">{initiative.title}</h3>
+                  <p className="text-muted-foreground text-sm leading-relaxed flex-1">{initiative.description}</p>
+                  <Link
+                    to={initiative.href}
+                    className="inline-flex items-center gap-2 py-1.5 mt-4 text-sm font-medium text-primary hover:underline"
+                  >
+                    Explore this pathway
+                    <ArrowRight className="w-4 h-4" aria-hidden="true" />
+                  </Link>
                 </div>
-              </div>
+              </article>
             ))}
           </div>
         </div>
