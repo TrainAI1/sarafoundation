@@ -208,7 +208,7 @@ export default function GJPApply() {
     <div className="min-h-screen bg-background">
       <Helmet>
         <title>Apply – Educational Journey Pathway Pipeline (EJP) | Sara Foundation</title>
-        <meta name="description" content="Apply to the Educational Journey Pathway Pipeline (EJP) to be matched with employers across Africa hiring for tech and tech-adjacent roles." />
+        <meta name="description" content="Express interest in the Education Journey Pathway (EJP) for insight sessions, work-readiness education, mentoring and referrals to further learning opportunities." />
         <link rel="canonical" href="https://sarafoundationafrica.com/programs/gjp/apply" />
       </Helmet>
       <Navbar />

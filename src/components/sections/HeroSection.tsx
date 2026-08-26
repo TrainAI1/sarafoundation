@@ -17,13 +17,14 @@ import womanFounderPitch from "@/assets/woman-founder-pitch.jpg";
 import graduatesCelebration from "@/assets/graduates-celebration.jpg";
 
 const defaults = {
-  headline_1: "Breaking Barriers,",
-  headline_2: "Igniting Innovation,",
-  headline_3: "Empowering Dreams.",
-  subheadline: "Empowering people through tech learning, inclusion and opportunity to build stronger communities.",
-  cta_primary: "Join Our Mission",
-  cta_secondary: "Partner with Us",
-  badge: "Empowering African Tech Talent",
+  headline_1: "Expanding Access to Digital Learning.",
+  headline_2: "Building Inclusive Communities.",
+  headline_3: "Supporting Tech Innovation.",
+  subheadline: "Sara Foundation Africa is an NGO widening access to digital inclusion, tech learning and innovation for adults and underserved communities in Africa.",
+  cta_primary: "Donate",
+  cta_secondary: "Explore Our Work",
+  cta_tertiary: "Partner with Us",
+  badge: "Education. Inclusion. Community Impact.",
   hero_image: "/hero-students.jpg",
 };
 
@@ -35,18 +36,18 @@ type MarqueeCard = {
 };
 
 const marqueeCards: MarqueeCard[] = [
-  { src: capHappyCoder, name: "Adaeze N.", role: "CAP Fellow, Nigeria", tone: "light" },
-  { src: womenTechLeaders, name: "200+", role: "Women in Tech", tone: "accent" },
-  { src: capWomanLaptop, name: "Fatima K.", role: "Frontend Track, Ghana", tone: "dark" },
-  { src: youngDeveloper, name: "Samuel O.", role: "Backend Track, Kenya", tone: "light" },
-  { src: capWomanYellow, name: "8", role: "Countries Reached", tone: "accent" },
-  { src: techEntrepreneurs, name: "Founders Lab", role: "Cohort 3", tone: "dark" },
-  { src: capWomanSmiling, name: "Chiamaka U.", role: "Product Track", tone: "light" },
-  { src: capWomenGroup, name: "FLIP Circle", role: "Lagos Chapter", tone: "dark" },
-  { src: womanFounderPitch, name: "Pitch Day", role: "Demo Showcase", tone: "light" },
-  { src: capManStudying, name: "Daniel A.", role: "Data Track, Rwanda", tone: "dark" },
-  { src: graduatesCelebration, name: "500+", role: "Alumni & Graduates", tone: "accent" },
-  { src: capWomanBraids, name: "Aisha M.", role: "Design Track, Uganda", tone: "light" },
+  { src: capHappyCoder, name: "CAP Tech Hub", role: "Practical learning session", tone: "light" },
+  { src: womenTechLeaders, name: "57", role: "Women across FLIP fellowship & mentorship", tone: "accent" },
+  { src: capWomanLaptop, name: "CAP learner", role: "Guided project work", tone: "dark" },
+  { src: youngDeveloper, name: "CAP learner", role: "Learner-led project build", tone: "light" },
+  { src: capWomanYellow, name: "11", role: "African countries reached", tone: "accent" },
+  { src: techEntrepreneurs, name: "Demo Day", role: "CAP Cohort 1 project showcase", tone: "dark" },
+  { src: capWomanSmiling, name: "Expert session", role: "CAP knowledge-sharing", tone: "light" },
+  { src: capWomenGroup, name: "FLIP community", role: "Peer learning and mentoring", tone: "dark" },
+  { src: womanFounderPitch, name: "Talent Showcase", role: "Presenting learner projects", tone: "light" },
+  { src: capManStudying, name: "CAP learner", role: "Structured digital learning", tone: "dark" },
+  { src: graduatesCelebration, name: "763", role: "CAP learners fully funded", tone: "accent" },
+  { src: capWomanBraids, name: "FLIP workshop", role: "Inclusive learning activity", tone: "light" },
 ];
 
 export function HeroSection() {
@@ -87,13 +88,16 @@ export function HeroSection() {
             className="flex flex-col sm:flex-row gap-3 justify-center w-full sm:w-auto pt-1"
           >
             <Button size="lg" className="group w-full sm:w-auto" asChild>
-              <Link to="/programs/cap">
+              <Link to="/donation">
                 {c.cta_primary}
                 <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </Link>
             </Button>
             <Button variant="outline" size="lg" className="w-full sm:w-auto" asChild>
-              <Link to="/partnership">{c.cta_secondary}</Link>
+              <Link to="/our-work">{c.cta_secondary}</Link>
+            </Button>
+            <Button variant="ghost" size="lg" className="w-full sm:w-auto" asChild>
+              <Link to="/partnership">{c.cta_tertiary}</Link>
             </Button>
           </motion.div>
         </div>
@@ -151,7 +155,7 @@ export function HeroSection() {
                     {card.tone !== "accent" && (
                       <img
                         src={card.src}
-                        alt={`Sara Foundation participant ${card.name} — ${card.role}`}
+                        alt={`Sara Foundation Africa programme activity — ${card.role}`}
                         loading={i < 4 ? "eager" : "lazy"}
                         fetchPriority={i === 0 ? "high" : "auto"}
                         decoding="async"

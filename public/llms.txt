@@ -1,44 +1,63 @@
 # Sara Foundation Africa
 
-> Non-profit headquartered in London, United Kingdom, equipping African youth and women with tech skills, mentorship and job placement across 35 universities in 11 African countries.
+> A public-benefit organisation headquartered in London, United Kingdom, expanding access to digital education and tech learning, promoting social inclusion and strengthening community capacity for adults and underserved communities in Africa.
 
-Sara Foundation runs three flagship programmes — CAP (Community Access & Participation Pathway), FLIP (Female Learning & Inclusion Pathway) and EJP (Educational Journey Pathway) — combining intensive learning, mentorship and real-world projects to prepare African students and graduates for tech careers.
+Sara Foundation Africa reduces barriers to learning and participation through structured digital education, mentoring, practical projects, supportive networks, scholarships and access support, knowledge-sharing, volunteering and community activities. Three learning pathways — CAP (Community Access & Participation Pathway), FLIP (Female Learning & Inclusion Pathway) and EJP (Education Journey Pathway) — translate our charitable purposes into structured routes for learning, inclusion and continued development.
 
-## Verified impact figures
+## Charitable focus areas
 
-- 35 partner universities
-- 763 CAP participants trained
-- 52 women trained through FLIP
-- 11 African countries reached
-- 705 people referred for job placement (includes 696 referred via EJP)
-- Sponsorship cost: £500 sponsors one student; £50 sponsors one module; £10 recurring monthly gifts are welcome
+- Digital Education: structured learning that builds digital literacy, practical skills and confidence to keep learning.
+- Social Inclusion: inclusive access to mentoring, supportive networks, resources and development opportunities.
+- Community Capacity Building: mentoring, volunteering, peer support and knowledge-sharing.
+
+## Verified impact figures (each measures a different thing; these are not unique individuals)
+
+- 763 CAP learners received fully funded access across Cohorts 1 and 2
+- 35+ universities represented; participants from 11 African countries
+- 47 knowledge and expert sessions delivered
+- 57 women participated across FLIP fellowship and mentorship activity
+- 108 recorded attendances across 3 FLIP workshops
+- 100 attendees at CAP Conference 1.0; 93 attendees at FLIP Conference 1.0
+- 10 CAP learner projects and 5 FLIP capstone projects
+- 2 Talent Showcases and 1 Demo Day
+- 170 AI training places delivered with partner organisations
+- 705 referrals for placement opportunities across historical activity (referrals are not confirmed placements)
+- 1,600 scholarships provided across pathways
+- Network of 60+ speakers, trainers, facilitators, mentors and volunteers
+- 6,000+ community reach (reach is not the same as learners trained)
+
+Sara Foundation Africa does not guarantee or promise employment through any of its pathways.
 
 ## Pages
 
-- [Home](/): Mission overview, programs, impact, and partners.
-- [About](/about): Our story, leadership team, and SDG alignment.
-- [Contact](/contact): Email, phone, and office locations.
-- [Donate](/donation): Support our mission via Naira transfer, crypto, or GoFundMe.
-- [Blog](/blog): Articles on African tech education, women in tech, and graduate outcomes.
-- [Projects](/projects): Past projects, cohort data and impact reports.
-- [Volunteer](/volunteer): Volunteer as a mentor, student ambassador, speaker or trainer.
-- [Annual Reports](/annual-reports): 2024 and 2025 impact reports.
+- [Home](/): Who we are, why we exist, our pathways and impact at a glance.
+- [About Us](/about): Mission, vision, who we support, how we work, leadership and governance.
+- [Our Work](/our-work): Delivery model and introduction to CAP, FLIP and EJP.
+- [Our Impact](/projects): Impact hierarchy, labelled evidence by pathway and annual reporting.
+- [Get Involved](/get-involved): Donate, partner, volunteer and mentor.
+- [News & Stories](/blog): Learner stories, project showcases, programme updates, impact and learning.
+- [Donate](/donation): Fund scholarships, bursaries, resources and mentoring.
+- [Transparency & Governance](/transparency): Charity status, purposes, trustees, policies, international delivery and reporting.
+- [Accessibility](/accessibility): Accessibility commitments and how to report a barrier.
+- [Annual Reports](/annual-reports): Published reports.
+- [Contact](/contact): Email, phone and office locations.
 
-## Programs
+## Learning pathways
 
-- [CAP Tech Hub](/programs/cap): Community Access & Participation Pathway — a 6-week intensive covering software engineering, cybersecurity, data analysis, product marketing and the founders track. Cohort 3 applications are open.
-- [CAP Apply](/programs/cap/apply): Application form for the CAP cohort, including partner reference codes.
-- [FLIP](/programs/flip): Female Learning & Inclusion Pathway — mentorship, fellowships and workshops for women in tech across Africa.
-- [FLIP Apply](/programs/flip/apply): Application form for the FLIP fellowship.
-- [EJP](/programs/gjp): Educational Journey Pathway — talent identification and employer matching, delivered in partnership with the Nigerian Jubilee Fellows Programme (NJFP).
-- [EJP Apply](/programs/gjp/apply): Application form for EJP talent placement.
+- [CAP](/programs/cap): Structured digital education, mentoring and practical learning for underserved adults, delivered through CAP Tech Hubs with a Learn, Build, Launch structure and an 80/20 practice-to-learning balance.
+- [CAP Apply](/programs/cap/apply): Application form for CAP.
+- [FLIP](/programs/flip): Inclusive access to tech learning for women through fellowship, mentorship, workshops and community activity, including a six-week tailored programme.
+- [FLIP Apply](/programs/flip/apply): Application form for FLIP.
+- [EJP](/programs/gjp): Continued learning through insight sessions, work-readiness education, mentoring, educational exposure and referrals to further learning. Employment is not guaranteed.
+- [EJP Express Interest](/programs/gjp/apply): Application form for EJP activity.
 
 ## Partnership
 
-- [Partnership Overview](/partnership): Ways to partner with Sara Foundation.
+- [Partnership Overview](/partnership): Ways to partner with Sara Foundation Africa.
 - [Schools & Communities](/partnership/school-community): University and community partnerships.
-- [Organizations](/partnership/organizations): Corporate and NGO partnerships.
+- [Organisations](/partnership/organizations): Organisational and NGO partnerships.
 - [Sponsors](/partnership/sponsors): Sponsorship opportunities.
+- [Volunteer / Mentor](/volunteer): Mentor, trainer, facilitator, speaker and expert session roles.
 
 ## Optional
 

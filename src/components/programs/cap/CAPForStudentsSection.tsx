@@ -14,7 +14,7 @@ const benefits = [
   },
   {
     icon: Briefcase,
-    title: "Internship & Job Placement",
+    title: "Referrals to Further Learning & Experience",
     description: "CAP alumni have secured internships and full-time offers at companies like Farmily & Scintilla Africa.",
   },
   {

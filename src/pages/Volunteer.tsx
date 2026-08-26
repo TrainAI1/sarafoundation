@@ -13,16 +13,17 @@ import { useToast } from "@/hooks/use-toast";
 import { Users, BookOpen, Mic, GraduationCap, Heart, Globe } from "lucide-react";
 
 const roles = [
-  { icon: BookOpen, title: "Mentor", description: "Guide CAP and FLIP cohort members 1:1 in software, design, data, product, or career growth. Time commitment: 2–4 hours per month, fully virtual." },
-  { icon: Users, title: "Student Ambassador", description: "Represent Sara Foundation on your campus, run tech-hub activities, and recruit cohort members. Open to students at our partner universities." },
-  { icon: Mic, title: "Speaker", description: "Deliver keynote talks, fireside chats, or panel sessions at our showcases, demo days, and cohort events — share your career story and expertise." },
-  { icon: GraduationCap, title: "Trainer", description: "Lead structured technical or soft-skill training for a CAP or FLIP cohort — workshops, bootcamps, or full curriculum tracks in your area of expertise." },
+  { icon: BookOpen, title: "Mentor", description: "Support learners through structured mentoring, feedback, reflection and knowledge-sharing. Typically 2–4 hours per month, fully virtual." },
+  { icon: GraduationCap, title: "Tech Trainer / Facilitator", description: "Support educational resources, digital learning activities, virtual learning experiences and workshops for CAP and FLIP participants." },
+  { icon: Mic, title: "Panellist / Speaker", description: "Share professional knowledge and experience through our events, conferences and sessions." },
+  { icon: Users, title: "Knowledge & Expert Session Contributor", description: "Host educational sessions and share technology expertise with learners and women interested in technology." },
+  { icon: Heart, title: "General Volunteer", description: "Not sure which role fits yet? Tell us what you can offer and we will find a way for you to contribute." },
 ];
 
 const benefits = [
-  { icon: Heart, title: "Make real impact", text: "Directly support young Africans entering tech careers." },
-  { icon: Globe, title: "Pan-African network", text: "Join a community of volunteers across 11 African countries." },
-  { icon: Users, title: "Recognition", text: "Volunteer certificates, references, and recognition at our annual showcase." },
+  { icon: Heart, title: "Reduce barriers to learning", text: "Help someone access education and participation they would otherwise miss." },
+  { icon: Globe, title: "Pan-African community", text: "Join volunteers and contributors supporting learners across 11 African countries." },
+  { icon: Users, title: "Recognition", text: "Volunteer certificates, references and recognition at our showcases and conferences." },
 ];
 
 export default function Volunteer() {
@@ -57,11 +58,11 @@ export default function Volunteer() {
   return (
     <div className="min-h-screen bg-background">
       <Helmet>
-        <title>Volunteer with Sara Foundation Africa</title>
-        <meta name="description" content="Volunteer as a mentor, student ambassador, speaker or trainer with Sara Foundation Africa. Help us empower African tech talent across 11 countries." />
+        <title>Volunteer &amp; Mentor | Sara Foundation Africa</title>
+        <meta name="description" content="Volunteer as a mentor, trainer, facilitator, speaker or expert session contributor and help widen access to digital education and inclusion across Africa." />
         <link rel="canonical" href="https://sarafoundationafrica.com/volunteer" />
         <meta property="og:title" content="Volunteer with Sara Foundation Africa" />
-        <meta property="og:description" content="Join our volunteer network across 11 African countries as a mentor, student ambassador, speaker or trainer." />
+        <meta property="og:description" content="Volunteer as a mentor, trainer, facilitator, speaker or expert session contributor and help widen access to digital education and inclusion across Africa." />
         <meta property="og:url" content="https://sarafoundationafrica.com/volunteer" />
         <meta property="og:type" content="website" />
         <script type="application/ld+json">{JSON.stringify({
@@ -73,16 +74,17 @@ export default function Volunteer() {
         })}</script>
       </Helmet>
       <Navbar />
-      <main className="pt-24 md:pt-32">
+      <main id="main-content" className="pt-24 md:pt-32">
         <section className="section-container pb-12">
           <span className="section-badge mb-4">Volunteer</span>
           <h1 className="section-title text-foreground mb-4 max-w-3xl">
-            Give your time. <span className="gradient-text">Change a life.</span>
+            Join Our Community of 60+ Volunteers, Speakers, Trainers,{" "}
+            <span className="gradient-text">Facilitators and Mentors</span>
           </h1>
           <p className="section-subtitle max-w-3xl">
-            Volunteers are the engine of Sara Foundation Africa. Whether you're a senior engineer who can mentor for a
-            few hours a month, a student who can champion us on campus, a designer who loves nonprofit work, or someone
-            who simply wants to help at events — there is a role for you.
+            Volunteers make our learning pathways possible. Whether you can mentor a learner for a few hours
+            a month, facilitate a workshop, speak at a session or contribute expertise in another way, there
+            is a role for you.
           </p>
         </section>
 
@@ -117,7 +119,7 @@ export default function Volunteer() {
 
         <section className="section-container pb-24">
           <Card className="p-6 md:p-10 max-w-2xl mx-auto">
-            <h2 className="font-display font-bold text-2xl md:text-3xl mb-2">Apply to volunteer</h2>
+            <h2 className="font-display font-bold text-2xl md:text-3xl mb-2">Become a volunteer</h2>
             <p className="text-muted-foreground mb-6 text-sm">We review applications weekly and reply within 7 business days.</p>
             <form onSubmit={submit} className="space-y-4">
               <div className="grid sm:grid-cols-2 gap-4">

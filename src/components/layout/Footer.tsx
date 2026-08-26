@@ -8,20 +8,33 @@ import { supabase } from "@/integrations/supabase/client";
 import { useState } from "react";
 import { useToast } from "@/hooks/use-toast";
 
-const quickLinks = [
+const exploreLinks = [
   { title: "Home", href: "/" },
   { title: "About Us", href: "/about" },
-  { title: "Projects", href: "/projects" },
-  { title: "Volunteer", href: "/volunteer" },
-  { title: "Annual Reports", href: "/annual-reports" },
-  { title: "Blog", href: "/blog" },
+  { title: "Our Work", href: "/our-work" },
+  { title: "Our Impact", href: "/projects" },
+  { title: "News & Stories", href: "/blog" },
   { title: "Contact", href: "/contact" },
-  { title: "Donate", href: "/donation" },
 ];
 
-const programLinks = [
-  { title: "Community Access & Participation Pathway", href: "/programs/cap" },
-  { title: "Female Learning & Inclusion Pathway", href: "/programs/flip" },
+const getInvolvedLinks = [
+  { title: "Ways to Support Us", href: "/get-involved" },
+  { title: "Donate", href: "/donation" },
+  { title: "Partner with Us", href: "/partnership" },
+  { title: "Volunteer / Mentor", href: "/volunteer" },
+  { title: "CAP — Community Access & Participation Pathway", href: "/programs/cap" },
+  { title: "FLIP — Female Learning & Inclusion Pathway", href: "/programs/flip" },
+  { title: "EJP — Education Journey Pathway", href: "/programs/gjp" },
+];
+
+const trustLinks = [
+  { title: "Transparency & Governance", href: "/transparency" },
+  { title: "Annual Reports", href: "/annual-reports" },
+  { title: "Safeguarding", href: "/transparency#safeguarding" },
+  { title: "Privacy", href: "/privacy" },
+  { title: "Cookies", href: "/privacy#cookies" },
+  { title: "Accessibility", href: "/accessibility" },
+  { title: "Terms", href: "/terms" },
 ];
 
 const getSocialLinks = (s: Record<string, string>) => [
@@ -98,16 +111,13 @@ export function Footer() {
             </div>
           </div>
 
-          {/* Quick Links */}
+          {/* Explore */}
           <div>
-            <h4 className="font-display font-bold text-lg mb-6">Quick Links</h4>
+            <h4 className="font-display font-bold text-lg mb-6">Explore</h4>
             <ul className="space-y-4">
-              {quickLinks.map((link) => (
+              {exploreLinks.map((link) => (
                 <li key={link.title}>
-                  <Link 
-                    to={link.href} 
-                    className="text-white/60 hover:text-primary transition-colors text-sm"
-                  >
+                  <Link to={link.href} className="text-white/60 hover:text-primary transition-colors text-sm">
                     {link.title}
                   </Link>
                 </li>
@@ -115,16 +125,13 @@ export function Footer() {
             </ul>
           </div>
 
-          {/* Programs */}
+          {/* Get Involved */}
           <div>
-            <h4 className="font-display font-bold text-lg mb-6">Our Programs</h4>
+            <h4 className="font-display font-bold text-lg mb-6">Get Involved</h4>
             <ul className="space-y-4">
-              {programLinks.map((link) => (
+              {getInvolvedLinks.map((link) => (
                 <li key={link.title}>
-                  <Link 
-                    to={link.href} 
-                    className="text-white/60 hover:text-primary transition-colors text-sm"
-                  >
+                  <Link to={link.href} className="text-white/60 hover:text-primary transition-colors text-sm">
                     {link.title}
                   </Link>
                 </li>
@@ -187,6 +194,17 @@ export function Footer() {
 
         {/* Bottom Bar */}
         <div className="mt-16 pt-8 border-t border-white/10 flex flex-col gap-4">
+          <nav aria-label="Transparency and policies">
+            <ul className="flex flex-wrap gap-x-6 gap-y-2 justify-center md:justify-start">
+              {trustLinks.map((link) => (
+                <li key={link.title}>
+                  <Link to={link.href} className="text-white/60 hover:text-primary transition-colors text-sm">
+                    {link.title}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </nav>
           <p className="text-white/50 text-xs md:text-sm leading-relaxed text-center md:text-left">
             Sara Foundation Africa is registered as <span className="text-white/80 font-medium">Princess Sara Foundation</span> in Nigeria with CAC charity number: <span className="text-white/80 font-medium">7980056</span>.
           </p>
@@ -194,14 +212,9 @@ export function Footer() {
           <p className="text-white/40 text-sm">
             © {new Date().getFullYear()} Sara Foundation Africa. All rights reserved.
           </p>
-          <div className="flex gap-6 text-sm">
-            <Link to="/privacy" className="text-white/40 hover:text-white transition-colors">
-              Privacy Policy
-            </Link>
-            <Link to="/terms" className="text-white/40 hover:text-white transition-colors">
-              Terms of Service
-            </Link>
-          </div>
+          <p className="text-white/40 text-sm">
+            Education. Inclusion. Community Impact.
+          </p>
           </div>
         </div>
       </div>

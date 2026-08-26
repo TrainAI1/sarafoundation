@@ -27,7 +27,7 @@ const partnerTypes = [
   {
     icon: Building,
     title: "Organizations",
-    description: "Corporate partnerships to drive tech talent development and CSR initiatives.",
+    description: "Organisational partnerships that widen access to digital education, inclusion and community learning.",
     benefits: [
       "Access to trained talent pool",
       "CSR impact reporting",
@@ -62,12 +62,12 @@ const impactAreas = [
   { icon: Users, value: "700+", label: "Lives Impacted" },
   { icon: Globe, value: "12+", label: "Countries" },
   { icon: GraduationCap, value: "50+", label: "Universities" },
-  { icon: Award, value: "85%", label: "Job Placement" },
+  { icon: Award, value: "1,600", label: "Scholarships provided" },
 ];
 
 const testimonials = [
   {
-    quote: "Partnering with Sara Foundation has allowed us to identify and recruit exceptional tech talent from across Africa.",
+    quote: "Partnering with Sara Foundation has allowed us to support learners across Africa and contribute to their learning journeys.",
     author: "Ifeoma Nwosu",
     role: "HR Director, Tech Corp Africa",
     type: "Corporate Partner",
@@ -92,16 +92,16 @@ export default function Partnership() {
     <div className="min-h-screen bg-background">
       <Helmet>
         <title>Partner with Us – Sara Foundation Africa</title>
-        <meta name="description" content="Explore partnership opportunities with Sara Foundation Africa. Join corporates, governments, and foundations driving tech talent development across Africa." />
+        <meta name="description" content="Partner with Sara Foundation Africa to widen access to digital education, inclusion and community learning across Africa." />
         <link rel="canonical" href="https://sarafoundationafrica.com/partnership" />
         <meta property="og:title" content="Partner with Us – Sara Foundation Africa" />
-        <meta property="og:description" content="Explore partnership opportunities with Sara Foundation Africa driving tech talent development across Africa." />
+        <meta property="og:description" content="Partner with Sara Foundation Africa to widen access to digital education, inclusion and community learning across Africa." />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://sarafoundationafrica.com/partnership" />
         <meta property="og:image" content="https://sarafoundationafrica.com/hero-students.jpg" />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Partner with Us – Sara Foundation Africa" />
-        <meta name="twitter:description" content="Explore partnership opportunities with Sara Foundation Africa driving tech talent development across Africa." />
+        <meta name="twitter:description" content="Partner with Sara Foundation Africa to widen access to digital education, inclusion and community learning across Africa." />
         <meta name="twitter:image" content="https://sarafoundationafrica.com/hero-students.jpg" />
       </Helmet>
       <Navbar />
@@ -127,8 +127,10 @@ export default function Partnership() {
                 Partner with Sara Foundation Africa
               </h1>
               <p className="text-base md:text-xl text-white/70 leading-relaxed mb-6 md:mb-8">
-                Join us in our mission to empower the next generation of African tech talent. 
-                Explore partnership opportunities that align with your goals.
+                We work with universities, community organisations, educators, funders, employers,
+                technology organisations and other suitable partners where collaboration helps further our
+                charitable purposes. Our trustees retain responsibility for programme decisions, beneficiary
+                selection, partner due diligence and the use of charitable resources.
               </p>
               <Button variant="hero" size="lg" asChild>
                 <Link to="/contact">

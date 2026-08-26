@@ -11,7 +11,7 @@ import { supabase } from "@/integrations/supabase/client";
 import studentsLabImg from "@/assets/students-tech-lab.jpg";
 import techConferenceSpeaker from "@/assets/tech-conference-speaker.jpg";
 
-const categories = ["All", "Programs", "Women in Tech", "Career", "Partnership", "Success Stories", "Industry"];
+const categories = ["All", "Learner Stories", "Project Showcases", "Programme Updates", "Impact & Learning", "Partnerships", "Governance & News"];
 
 export default function Blog() {
   const [selectedCategory, setSelectedCategory] = useState("All");
@@ -65,17 +65,17 @@ export default function Blog() {
   return (
     <div className="min-h-screen bg-background">
       <Helmet>
-        <title>Blog – Sara Foundation Africa</title>
-        <meta name="description" content="Stories, insights and updates from Sara Foundation's work empowering African tech talent." />
-        <meta property="og:title" content="Blog – Sara Foundation Africa" />
-        <meta property="og:description" content="Stories, insights and updates from Sara Foundation's work empowering African tech talent." />
+        <title>News &amp; Stories | Sara Foundation Africa</title>
+        <meta name="description" content="Learner stories, project showcases, programme updates, impact and learning, partnerships and governance news from Sara Foundation Africa." />
+        <meta property="og:title" content="News &amp; Stories | Sara Foundation Africa" />
+        <meta property="og:description" content="Learner stories, project showcases, programme updates, impact and learning, partnerships and governance news from Sara Foundation Africa." />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://sarafoundationafrica.com/blog" />
         <meta property="og:image" content="https://sarafoundationafrica.com/hero-students.jpg" />
         <link rel="canonical" href="https://sarafoundationafrica.com/blog" />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Blog – Sara Foundation Africa" />
-        <meta name="twitter:description" content="Stories, insights and updates from Sara Foundation's work empowering African tech talent." />
+        <meta name="twitter:title" content="News &amp; Stories | Sara Foundation Africa" />
+        <meta name="twitter:description" content="Learner stories, project showcases, programme updates, impact and learning, partnerships and governance news from Sara Foundation Africa." />
         <meta name="twitter:image" content="https://sarafoundationafrica.com/hero-students.jpg" />
         <script type="application/ld+json">{JSON.stringify({
           "@context": "https://schema.org",
@@ -93,7 +93,7 @@ export default function Blog() {
             "@type": "Blog",
             "name": "Sara Foundation Africa Blog",
             "url": "https://sarafoundationafrica.com/blog",
-            "description": "Stories, insights and updates from Sara Foundation's work empowering African tech talent.",
+            "description": "Learner stories, project showcases, programme updates, impact and learning, partnerships and governance news from Sara Foundation Africa.",
             "inLanguage": "en",
             "publisher": { "@type": "Organization", "name": "Sara Foundation Africa", "url": "https://sarafoundationafrica.com/" },
             "blogPost": dbPosts.slice(0, 10).map((p) => ({
@@ -112,20 +112,21 @@ export default function Blog() {
       {/* Hero */}
       <section className="pt-24 md:pt-32 pb-12 md:pb-20 bg-primary relative overflow-hidden">
         <div className="absolute inset-0">
-          <img src={techConferenceSpeaker} alt="Tech conference" className="w-full h-full object-cover opacity-15" />
+          <img src={techConferenceSpeaker} alt="" aria-hidden="true" className="w-full h-full object-cover opacity-15" />
           <div className="absolute inset-0 bg-primary" />
         </div>
         <div className="section-container relative z-10">
           <div className="max-w-3xl px-4">
             <span className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.18em] text-white/80 mb-4 mb-6">
               <Newspaper className="w-3 h-3 md:w-4 md:h-4 text-accent" />
-              Our Blog
+              News &amp; Stories
             </span>
             <h1 className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 md:mb-6 leading-tight">
-              Stories, Insights & Updates
+              Learning, People and Progress
             </h1>
             <p className="text-base md:text-xl text-white/70 leading-relaxed">
-              Stay updated with the latest news, success stories, and insights from the African tech ecosystem.
+              Stories from our programmes, communities and partners showing how access to learning, inclusion
+              and community participation come to life.
             </p>
           </div>
         </div>

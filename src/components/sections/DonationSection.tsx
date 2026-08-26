@@ -64,7 +64,7 @@ export function DonationSection() {
             </span>
             <h2 className="section-title text-foreground mb-4 md:mb-6 text-balance">
               Help Us Empower{" "}
-              <span className="gradient-text">African Tech Talent</span>
+              <span className="gradient-text">Access to Learning</span>
             </h2>
             <p className="text-muted-foreground text-base md:text-lg mb-8 md:mb-10 leading-relaxed">
               Your donation directly supports scholarships, mentorship programs, 

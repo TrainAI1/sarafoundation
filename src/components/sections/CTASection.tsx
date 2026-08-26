@@ -1,14 +1,14 @@
-import { ArrowRight, Users, Building, Rocket } from "lucide-react";
+import { ArrowRight, Heart, Building, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { ScrollAnimation } from "@/components/ui/scroll-animation";
 import { usePageContent } from "@/hooks/usePageContent";
 
 const defaults = {
-  headline: "Ready to Make a Difference?",
-  description: "Whether you're a student looking to start your tech journey, an organization seeking to partner, or a sponsor wanting to create impact — there's a place for you at Sara Foundation Africa.",
-  cta_primary: "Join as a Student",
-  cta_secondary: "Become a Partner",
+  headline: "Help widen access to digital education and tech inclusion",
+  description: "Give, partner, mentor or volunteer to help more people learn, participate and contribute to their communities.",
+  cta_primary: "Donate",
+  cta_secondary: "Partner with Us",
 };
 
 export function CTASection() {
@@ -24,7 +24,7 @@ export function CTASection() {
         <div className="text-center max-w-3xl mx-auto px-4">
           <ScrollAnimation variant="scale-in">
             <div className="inline-flex items-center justify-center w-12 h-12 md:w-16 md:h-16 rounded-xl md:rounded-2xl bg-white/10 backdrop-blur-sm mb-6 md:mb-8">
-              <Rocket className="w-6 h-6 md:w-8 md:h-8 text-white" />
+              <Sparkles className="w-6 h-6 md:w-8 md:h-8 text-white" aria-hidden="true" />
             </div>
           </ScrollAnimation>
           
@@ -41,15 +41,15 @@ export function CTASection() {
 
             <div className="flex flex-col sm:flex-row gap-3 md:gap-4 justify-center">
               <Button variant="hero" size="lg" className="group" asChild>
-                <Link to="/programs/cap">
-                  <Users className="w-5 h-5" />
+                <Link to="/donation">
+                  <Heart className="w-5 h-5" aria-hidden="true" />
                   {c.cta_primary}
                   <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                 </Link>
               </Button>
               <Button variant="heroSecondary" size="lg" className="group" asChild>
-                <Link to="/contact">
-                  <Building className="w-5 h-5" />
+                <Link to="/partnership">
+                  <Building className="w-5 h-5" aria-hidden="true" />
                   {c.cta_secondary}
                 </Link>
               </Button>

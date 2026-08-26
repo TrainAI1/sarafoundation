@@ -4,53 +4,56 @@ import { Link } from "react-router-dom";
 import capClassroom from "@/assets/cap-classroom.jpg";
 
 const stats = [
-  { value: "35", label: "Universities" },
-  { value: "8", label: "Countries" },
-  { value: "800+", label: "Students" },
+  { value: "763", label: "CAP learners, fully funded" },
+  { value: "35+", label: "Universities represented" },
+  { value: "11", label: "African countries" },
 ];
 
 export function CAPHeroSection() {
   return (
     <section className="pt-24 md:pt-32 pb-12 md:pb-20 bg-primary relative overflow-hidden">
       <div className="absolute inset-0">
-        <img 
-          src={capClassroom} 
-          alt="African students learning in CAP Tech Hub"
+        <img
+          src={capClassroom}
+          alt=""
+          aria-hidden="true"
           className="w-full h-full object-cover opacity-20"
         />
         <div className="absolute inset-0 bg-primary" />
       </div>
-      <div className="absolute inset-0 opacity-30">
-      </div>
       <div className="section-container relative z-10">
         <div className="grid lg:grid-cols-2 gap-8 md:gap-12 items-center">
           <div className="px-4 lg:px-0">
-            <span className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.18em] text-white/80 mb-4 mb-6">
-              <GraduationCap className="w-3 h-3 md:w-4 md:h-4 text-accent" />
-              Community Access & Participation Pathway
+            <span className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.18em] text-white/80 mb-6">
+              <GraduationCap className="w-3 h-3 md:w-4 md:h-4 text-accent" aria-hidden="true" />
+              Community Access &amp; Participation Pathway
             </span>
             <h1 className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 md:mb-6 leading-tight">
-              Empowering Africa's Next Generation of Tech Leaders.
+              Expanding Access. Building Confidence. Supporting Participation.
             </h1>
             <p className="text-base md:text-xl text-white/70 leading-relaxed mb-6 md:mb-8">
-              A 6-week intensive program equipping African university students
-              with the skills, projects, and confidence to launch real tech careers.
+              CAP helps adults from underserved and underrepresented communities access structured digital
+              education, mentoring and practical learning. Participants build knowledge, practise new
+              skills, work on projects, connect with peers and contribute to community learning.
             </p>
             <div className="flex flex-col sm:flex-row gap-3 md:gap-4">
               <Button variant="hero" size="lg" className="group" asChild>
                 <Link to="/programs/cap/apply">
-                  Join Cohort 3
+                  Apply to CAP
                   <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                 </Link>
+              </Button>
+              <Button variant="heroSecondary" size="lg" asChild>
+                <Link to="/projects">See our impact evidence</Link>
               </Button>
             </div>
           </div>
 
           <div className="relative mx-4 lg:mx-0">
             <div className="rounded-2xl md:rounded-3xl overflow-hidden shadow-2xl mb-6">
-              <img 
-                src={capClassroom} 
-                alt="Students collaborating in CAP Tech Hub"
+              <img
+                src={capClassroom}
+                alt="CAP learners collaborating during a practical learning session at a CAP Tech Hub"
                 className="w-full h-48 md:h-64 object-cover"
               />
             </div>
@@ -58,12 +61,16 @@ export function CAPHeroSection() {
               <div className="grid grid-cols-3 gap-4 md:gap-6">
                 {stats.map((stat) => (
                   <div key={stat.label} className="text-center p-2 md:p-4">
-                    <div className="text-2xl sm:text-3xl md:text-4xl font-bold font-display text-white mb-1 md:mb-2">{stat.value}</div>
+                    <div className="text-2xl sm:text-3xl md:text-4xl font-bold font-display text-white mb-1 md:mb-2">
+                      {stat.value}
+                    </div>
                     <div className="text-white/60 text-xs md:text-sm">{stat.label}</div>
                   </div>
                 ))}
               </div>
-              <p className="text-center text-white/50 text-xs mt-4">Backed by Sara Foundation Africa</p>
+              <p className="text-center text-white/50 text-xs mt-4">
+                Figures cover CAP Cohorts 1 and 2 (2024–2025).
+              </p>
             </div>
           </div>
         </div>

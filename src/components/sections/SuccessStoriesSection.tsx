@@ -1,33 +1,53 @@
-import { Quote } from "lucide-react";
+import { ArrowUpRight, PlayCircle } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { ScrollAnimation, StaggerContainer, StaggerItem } from "@/components/ui/scroll-animation";
 
-const stories = [
+type Story = {
+  pathway: "CAP" | "FLIP" | "EJP";
+  name: string;
+  headline: string;
+  summary: string;
+  evidence: string;
+  link?: string;
+  linkLabel: string;
+  pathwayHref: string;
+};
+
+const stories: Story[] = [
   {
-    name: "Chiamaka O.",
-    role: "CAP Alumna · Frontend Engineer",
-    location: "Lagos, Nigeria",
-    quote:
-      "I joined CAP with no coding background. Nine months later I shipped my first product at our Talent Showcase and landed a frontend role with a fintech the same quarter.",
-    outcome: "Hired at a Lagos fintech, 3 months after graduation",
+    pathway: "CAP",
+    name: "Akinlabi Isulameya",
+    headline: "Building Campuslink with a project team",
+    summary:
+      "Akinlabi shares how hands-on teamwork while developing the Campuslink app shaped his product-management and technical learning at CAP Tech Hub.",
+    evidence: "Learner project presented through CAP Tech Hub Cohort activity.",
+    link: "https://www.linkedin.com/posts/sara-foundation_sarafoundation-captechhub-cohortspotlight-activity-7462891845514219520-L8D4",
+    linkLabel: "Watch project story",
+    pathwayHref: "/programs/cap",
   },
   {
-    name: "Amara N.",
-    role: "FLIP Fellow · Product Manager",
-    location: "Accra, Ghana",
-    quote:
-      "FLIP gave me mentors who looked like me and a peer circle that still meets monthly. I went from junior analyst to PM at a pan-African scale-up within a year.",
-    outcome: "Promoted to PM within 12 months of joining FLIP",
+    pathway: "FLIP",
+    name: "Odugbayi Olamide",
+    headline: "Applying business intelligence to banking operations",
+    summary:
+      "For her FLIP capstone work, Olamide developed a BI-powered reconciliation performance tracker, applying business intelligence to day-to-day banking operations.",
+    evidence: "One of five FLIP Fellowship Cohort 1 capstone projects.",
+    link: "https://www.linkedin.com/posts/sara-foundation_flipfellowship-capstoneproject-fintech-activity-7399130514781233152-qsfI",
+    linkLabel: "Read capstone story",
+    pathwayHref: "/programs/flip",
   },
   {
-    name: "Tunde A.",
-    role: "EJP Placement · Public Sector Tech",
-    location: "Abuja, Nigeria",
-    quote:
-      "Through EJP I got placed in a federal ministry's digital team. I'm now helping digitise services that touch millions of Nigerians every month.",
-    outcome: "12-month paid placement in a federal ministry",
+    pathway: "EJP",
+    name: "Eniola",
+    headline: "Work-readiness learning through EJP",
+    summary:
+      "Eniola talks about the Government Jobs Placement initiative under EJP and how the work-readiness learning helped her build key skills for the workplace.",
+    evidence: "Participant account of work-readiness learning. SFA does not guarantee employment.",
+    link: "https://www.linkedin.com/posts/sara-foundation_sarafoundation-governmentjobplacementprogram-activity-7480888457888817152-IPj_",
+    linkLabel: "Watch participant story",
+    pathwayHref: "/programs/gjp",
   },
 ];
 
@@ -37,15 +57,13 @@ export function SuccessStoriesSection() {
       <div className="section-container">
         <ScrollAnimation variant="fade-up">
           <div className="text-center max-w-3xl mx-auto mb-12">
-            <span className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.18em] text-primary mb-4">
-              Success Stories
-            </span>
+            <span className="section-badge mb-4">Featured Stories</span>
             <h2 className="section-title text-foreground mb-4">
-              Real graduates. <span className="gradient-text">Real outcomes.</span>
+              Real Learners. <span className="gradient-text">Real Journeys.</span>
             </h2>
             <p className="section-subtitle">
-              Behind every statistic is a person whose career trajectory changed. Here are a few of the
-              alumni, fellows, and placements building the next era of African tech.
+              Behind every number is a learner, mentor or community member moving forward. Explore the
+              projects, learning experiences and personal journeys created through CAP, FLIP and EJP.
             </p>
           </div>
         </ScrollAnimation>
@@ -54,15 +72,29 @@ export function SuccessStoriesSection() {
           {stories.map((s) => (
             <StaggerItem key={s.name} variant="fade-up">
               <Card className="p-6 h-full flex flex-col hover:shadow-xl transition-shadow">
-                <Quote className="w-8 h-8 text-primary/40 mb-3" />
-                <p className="text-foreground/80 leading-relaxed mb-6 flex-1">"{s.quote}"</p>
+                <Link
+                  to={s.pathwayHref}
+                  className="inline-flex self-start items-center text-xs font-semibold uppercase tracking-[0.18em] text-primary mb-4 hover:underline"
+                >
+                  {s.pathway} pathway
+                </Link>
+                <h3 className="font-display font-bold text-lg text-foreground mb-2">{s.headline}</h3>
+                <p className="text-foreground/80 leading-relaxed mb-4 flex-1">{s.summary}</p>
                 <div className="border-t pt-4">
-                  <div className="font-display font-bold text-foreground">{s.name}</div>
-                  <div className="text-sm text-primary font-medium">{s.role}</div>
-                  <div className="text-xs text-muted-foreground mt-1">{s.location}</div>
-                  <div className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.18em] text-primary mt-3">
-                    {s.outcome}
-                  </div>
+                  <div className="font-semibold text-foreground text-sm">{s.name}</div>
+                  <p className="text-xs text-muted-foreground mt-1">{s.evidence}</p>
+                  {s.link && (
+                    <a
+                      href={s.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 text-sm font-medium text-primary mt-3 hover:underline"
+                    >
+                      <PlayCircle className="w-4 h-4" aria-hidden="true" />
+                      {s.linkLabel} for {s.name}
+                      <ArrowUpRight className="w-3.5 h-3.5" aria-hidden="true" />
+                    </a>
+                  )}
                 </div>
               </Card>
             </StaggerItem>
@@ -71,7 +103,7 @@ export function SuccessStoriesSection() {
 
         <div className="text-center mt-10">
           <Button asChild variant="outline" size="lg">
-            <Link to="/blog">Read more alumni stories</Link>
+            <Link to="/blog">Read more learner stories</Link>
           </Button>
         </div>
       </div>

@@ -2,7 +2,6 @@ import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { HeroSection } from "@/components/sections/HeroSection";
 import { SDGSection } from "@/components/sections/SDGSection";
-import { WorkWithUsSection } from "@/components/sections/WorkWithUsSection";
 import { MissionSection } from "@/components/sections/MissionSection";
 import { ProgramsSection } from "@/components/sections/ProgramsSection";
 import { ImpactSection } from "@/components/sections/ImpactSection";
@@ -17,37 +16,37 @@ import { CTASection } from "@/components/sections/CTASection";
 import { Helmet } from "react-helmet-async";
 
 const homeFaqs = [
-  { q: "Who can apply for the Community Access & Participation Pathway (CAP)?", a: "CAP is open to university students across Africa who are passionate about technology. You don't need prior coding experience – just enthusiasm and commitment to learn. We currently have CAP Tech Hubs in 35 universities across 11 African countries." },
-  { q: "How much does it cost to join the programs?", a: "Both CAP and FLIP are completely free for participants. We believe in removing barriers to tech education and career advancement." },
-  { q: "What is the time commitment for CAP?", a: "CAP is a 9-month program divided into three phases: Learn (12 weekly expert sessions), Build (developing real MVPs), and Launch (showcasing projects to industry leaders). Participants typically dedicate 10-15 hours per week." },
-  { q: "What is FLIP and who is it for?", a: "The Female Learning & Inclusion Pathway (FLIP) is a membership-based program empowering women in tech through mentorship, networking, and opportunities. It includes the Women Professionals in Tech Africa (WPTA) and Women Founders in Tech Africa (WFTA) communities." },
-  { q: "How can organizations partner with Sara Foundation Africa?", a: "We offer various partnership models including sponsorships, university collaborations, and corporate partnerships." },
-  { q: "Do students get real-world opportunities?", a: "Yes! Through our partnerships, CAP students have secured internships, full-time job offers, and showcased projects at our Talent Showcase." },
-  { q: "Which countries do you operate in?", a: "We currently operate across 11 African countries: Nigeria, Ghana, Kenya, South Africa, Uganda, Zambia, and Togo, with 35 university partners." },
+  { q: "Who can take part in the Community Access & Participation Pathway (CAP)?", a: "CAP is open to adults aged 18 and above across Africa, particularly people from underserved or underrepresented communities. No prior coding experience is needed. Learners have joined from 35+ universities across 11 African countries." },
+  { q: "Is there a cost to take part?", a: "Where a programme has a participation fee, Sara Foundation Africa provides scholarships, bursaries, subsidised places or full fee waivers where funding allows. All 763 CAP learners across Cohorts 1 and 2 received fully funded access. Sponsored places are allocated on the basis of need and eligibility." },
+  { q: "What is the time commitment for CAP?", a: "CAP is delivered through a Learn, Build and Launch structure with an 80/20 balance of practice to taught learning. Learners take part in expert sessions, guided project work and showcases, and typically dedicate 10 to 15 hours per week." },
+  { q: "What is FLIP and who is it for?", a: "The Female Learning & Inclusion Pathway (FLIP) is our six-week tailored programme for women interested in technology, alongside fellowship, mentorship, workshop and community activities. It creates targeted opportunities where barriers or underrepresentation in tech learning have been identified." },
+  { q: "What is EJP?", a: "The Education Journey Pathway (EJP) supports continued learning through insight sessions, work-readiness education, mentoring, educational exposure and referrals to suitable external opportunities. Sara Foundation Africa does not guarantee or promise employment through EJP." },
+  { q: "How can organisations partner with Sara Foundation Africa?", a: "We work with universities, community organisations, educators, funders, employers and technology organisations where collaboration furthers our charitable purposes. Our trustees retain responsibility for programme decisions, beneficiary selection, partner due diligence and the use of charitable resources." },
+  { q: "Where do you work?", a: "Participants have joined from 11 African countries, with 35+ universities represented across our CAP activity." },
 ];
 
 const Index = () => {
   return (
     <div className="min-h-screen">
       <Helmet>
-        <title>Sara Foundation – Empowering African Tech Talent</title>
-        <meta name="description" content="Sara Foundation empowers African youth and women with tech skills, mentorship, and career development across 35 universities in 11 African countries." />
+        <title>Sara Foundation Africa | Digital Education &amp; Inclusion</title>
+        <meta name="description" content="Sara Foundation Africa expands access to digital education and tech learning, promotes social inclusion and strengthens community capacity for adults and underserved communities in Africa." />
         <link rel="canonical" href="https://sarafoundationafrica.com/" />
-        <meta property="og:title" content="Sara Foundation – Empowering African Tech Talent" />
-        <meta property="og:description" content="Sara Foundation empowers African youth and women with tech skills, mentorship, and career development across 35 universities in 11 African countries." />
+        <meta property="og:title" content="Sara Foundation Africa | Digital Education &amp; Inclusion" />
+        <meta property="og:description" content="Sara Foundation Africa expands access to digital education and tech learning, promotes social inclusion and strengthens community capacity for adults and underserved communities in Africa." />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://sarafoundationafrica.com/" />
         <meta property="og:image" content="https://sarafoundationafrica.com/hero-students.jpg" />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Sara Foundation – Empowering African Tech Talent" />
-        <meta name="twitter:description" content="Sara Foundation empowers African youth and women with tech skills, mentorship, and career development across 35 universities in 11 African countries." />
+        <meta name="twitter:title" content="Sara Foundation Africa | Digital Education &amp; Inclusion" />
+        <meta name="twitter:description" content="Sara Foundation Africa expands access to digital education and tech learning, promotes social inclusion and strengthens community capacity for adults and underserved communities in Africa." />
         <meta name="twitter:image" content="https://sarafoundationafrica.com/hero-students.jpg" />
         <script type="application/ld+json">{JSON.stringify({
           "@context": "https://schema.org",
           "@type": "NGO",
           "name": "Sara Foundation Africa",
           "alternateName": "Sara Foundation",
-          "description": "Non-profit empowering African youth and women through tech education, mentorship, and career development across 35 universities in 11 African countries.",
+          "description": "Sara Foundation Africa expands access to digital education and tech learning, promotes social inclusion and strengthens community capacity for adults and underserved communities in Africa.",
           "url": "https://sarafoundationafrica.com",
           "logo": "https://sarafoundationafrica.com/favicon.png",
           "foundingDate": "2023",
@@ -77,15 +76,14 @@ const Index = () => {
         })}</script>
       </Helmet>
       <Navbar />
-      <main>
+      <main id="main-content">
         <HeroSection />
-        <SDGSection />
-        <WorkWithUsSection />
         <MissionSection />
         <ProgramsSection />
         <ImpactSection />
-        <ImpactReportSection />
         <SuccessStoriesSection />
+        <ImpactReportSection />
+        <SDGSection />
         <PartnersSection />
         <StrategicPartnersSection />
         <TestimonialsSection />

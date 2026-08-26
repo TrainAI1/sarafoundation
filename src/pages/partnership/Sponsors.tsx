@@ -91,7 +91,7 @@ const sponsorshipTiers = [
     amount: "$5,000 – $9,999",
     perks: [
       "Logo on event materials and website",
-      "Talent recruitment priority",
+      "Early sight of learner project showcases",
       "Bi-annual impact report",
       "2 scholarship naming rights",
       "Invitations to networking events",

@@ -1,4 +1,4 @@
-import { GraduationCap, Users, ArrowRight, Rocket, BookOpen, Zap, Briefcase, BadgeCheck, ClipboardCheck } from "lucide-react";
+import { GraduationCap, Users, Compass, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import studentsLabImg from "@/assets/students-tech-lab.jpg";
@@ -6,50 +6,51 @@ import womenTechLeaders from "@/assets/women-tech-leaders.jpg";
 import graduatesCelebration from "@/assets/graduates-celebration.jpg";
 import { ScrollAnimation, StaggerContainer, StaggerItem } from "@/components/ui/scroll-animation";
 
-const programs = [
+const pathways = [
   {
     id: "cap",
+    code: "CAP",
     icon: GraduationCap,
-    title: "Community Access & Participation Pathway (CAP)",
-    subtitle: "Tech Employability & Entrepreneurial Practical Learning",
-    description: "A tech employability skills and entrepreneurial practical learning program, implemented through CAP TECH CLUBS in African universities, nurturing young Africans into tech professionals and founders.",
+    title: "Community Access & Participation Pathway",
+    description:
+      "Expands access to practical tech education through CAP Tech Hubs, structured learning, mentoring, projects and community-based learning for underserved adults.",
     image: studentsLabImg,
-    phases: [
-      { name: "Learn", icon: BookOpen, description: "Build foundational tech skills" },
-      { name: "Build", icon: Rocket, description: "Create real-world projects" },
-      { name: "Launch", icon: Zap, description: "Start your tech career" },
-    ],
-    gradient: "bg-primary",
+    imageAlt: "CAP learners taking part in a practical digital learning session",
+    highlights: ["Structured digital learning", "Mentoring & guided projects", "Demo days & showcases"],
+    accent: "bg-primary",
+    cta: "Explore CAP",
     href: "/programs/cap",
+    variant: "default" as const,
   },
   {
     id: "flip",
+    code: "FLIP",
     icon: Users,
-    title: "Female Learning & Inclusion Pathway (FLIP)",
-    subtitle: "Women-Focused Tech Community",
-    description: "A membership-based program empowering women in tech to grow and succeed in Africa through mentorship, networking, and opportunities.",
+    title: "Female Learning & Inclusion Pathway",
+    description:
+      "Increases women's participation in tech learning through mentoring, inclusive opportunities, supportive communities and access to learning.",
     image: womenTechLeaders,
-    communities: [
-      { name: "Women Professionals in Tech Africa (WPTA)", description: "Empowering women professionals, bridging the gender gap" },
-      { name: "Women Founders in Tech Africa", description: "Supporting women-led startups and ventures" },
-    ],
-    gradient: "bg-accent",
+    imageAlt: "Women taking part in a FLIP learning and mentoring session",
+    highlights: ["Fellowship & mentorship", "Workshops & conference", "Capstone learning projects"],
+    accent: "bg-accent",
+    cta: "Explore FLIP",
     href: "/programs/flip",
+    variant: "accent" as const,
   },
   {
     id: "ejp",
-    icon: Briefcase,
-    title: "Educational Journey Pathway (EJP)",
-    subtitle: "Workforce Placement · 705+ Referred",
-    description: "Connecting qualified African tech talent with employers across the continent through public and private sector partnerships — internships, graduate programmes and full-time roles.",
+    code: "EJP",
+    icon: Compass,
+    title: "Education Journey Pathway",
+    description:
+      "Supports continued learning through insight, work-readiness education, mentoring, experiential exposure and referrals that deepen participants' learning journeys.",
     image: graduatesCelebration,
-    phases: [
-      { name: "Identify", icon: ClipboardCheck, description: "Source qualified African tech talent" },
-      { name: "Match", icon: BookOpen, description: "Align candidates with hiring partners" },
-      { name: "Placement", icon: BadgeCheck, description: "Internships, graduate & full-time roles" },
-    ],
-    gradient: "bg-primary",
+    imageAlt: "Participants at a Sara Foundation Africa work-readiness learning session",
+    highlights: ["Insight & knowledge sessions", "Work-readiness education", "Referrals to further learning"],
+    accent: "bg-primary",
+    cta: "Explore EJP",
     href: "/programs/gjp",
+    variant: "default" as const,
   },
 ];
 
@@ -60,97 +61,62 @@ export function ProgramsSection() {
       <div className="absolute bottom-0 left-0 w-[400px] h-[400px] rounded-full bg-accent/5 blur-3xl" />
 
       <div className="section-container relative z-10">
-        {/* Header */}
         <ScrollAnimation variant="fade-up" className="text-center max-w-3xl mx-auto mb-10 md:mb-16 px-4">
-          <span className="section-badge mb-6">
-            Our Initiatives
-          </span>
+          <span className="section-badge mb-6">Our Learning Pathways</span>
           <h2 className="section-title text-foreground mb-6 text-balance">
-            Programs That{" "}
-            <span className="gradient-text-accent">Transform Lives</span>
+            Three routes into{" "}
+            <span className="gradient-text-accent">learning and participation</span>
           </h2>
           <p className="section-subtitle mx-auto">
-            Our flagship programs are designed to equip young Africans with the skills, 
-            network, and resources they need to excel in the global tech industry.
+            CAP, FLIP and EJP turn our charitable purposes into structured learning pathways, each designed
+            around the barriers the people we support actually face.
           </p>
         </ScrollAnimation>
 
-        {/* Programs Grid */}
         <StaggerContainer className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8" staggerDelay={0.15}>
-          {programs.map((program) => (
-            <StaggerItem key={program.id} variant="scale-in">
-              <div className="card-modern overflow-hidden group">
+          {pathways.map((pathway) => (
+            <StaggerItem key={pathway.id} variant="scale-in">
+              <div className="card-modern overflow-hidden group h-full flex flex-col">
                 <div className="relative h-48 md:h-56 overflow-hidden">
-                  <img 
-                    src={program.image} 
-                    alt={program.title}
+                  <img
+                    src={pathway.image}
+                    alt={pathway.imageAlt}
+                    loading="lazy"
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                   />
-                  <div className={`absolute inset-0 ${program.gradient} opacity-70`} />
+                  <div className={`absolute inset-0 ${pathway.accent} opacity-70`} />
                   <div className="absolute bottom-0 left-0 right-0 p-5 md:p-8">
                     <div className="flex items-start gap-4 md:gap-5">
                       <div className="w-12 h-12 md:w-14 md:h-14 rounded-xl md:rounded-2xl bg-white/20 backdrop-blur-sm flex items-center justify-center flex-shrink-0">
-                        <program.icon className="w-6 h-6 md:w-7 md:h-7 text-white" />
+                        <pathway.icon className="w-6 h-6 md:w-7 md:h-7 text-white" />
                       </div>
                       <div>
-                        <span className="text-white/80 text-xs md:text-sm font-medium">{program.subtitle}</span>
-                        <h3 className="font-display font-bold text-lg md:text-xl lg:text-2xl text-white mt-1">
-                          {program.title}
+                        <span className="text-white/80 text-xs md:text-sm font-semibold uppercase tracking-[0.18em]">
+                          {pathway.code}
+                        </span>
+                        <h3 className="font-display font-bold text-lg md:text-xl text-white mt-1">
+                          {pathway.title}
                         </h3>
                       </div>
                     </div>
                   </div>
                 </div>
 
-                <div className="p-5 md:p-8">
-                  <p className="text-muted-foreground text-sm md:text-base mb-6 md:mb-8">
-                    {program.description}
-                  </p>
+                <div className="p-5 md:p-8 flex flex-col flex-1">
+                  <p className="text-muted-foreground text-sm md:text-base mb-6">{pathway.description}</p>
 
-                  {program.phases && (
-                    <div className="space-y-3 md:space-y-4 mb-6 md:mb-8">
-                      <h4 className="font-semibold text-foreground flex items-center gap-2 text-sm md:text-base">
-                        <span className="w-6 md:w-8 h-0.5 bg-primary rounded-full" />
-                        Program Phases
-                      </h4>
-                      <div className="grid grid-cols-3 gap-2 md:gap-4">
-                        {program.phases.map((phase) => (
-                          <div key={phase.name} className="text-center p-2 md:p-4 rounded-xl md:rounded-2xl bg-secondary/50 hover:bg-secondary transition-colors">
-                            <div className="w-8 h-8 md:w-12 md:h-12 mx-auto rounded-lg md:rounded-xl bg-primary/10 text-primary flex items-center justify-center mb-2 md:mb-3">
-                              <phase.icon className="w-4 h-4 md:w-6 md:h-6" />
-                            </div>
-                            <div className="font-semibold text-xs md:text-sm text-foreground">{phase.name}</div>
-                            <div className="text-xs text-muted-foreground mt-1 hidden sm:block">{phase.description}</div>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  )}
+                  <ul className="space-y-2 mb-6 md:mb-8">
+                    {pathway.highlights.map((item) => (
+                      <li key={item} className="flex items-start gap-3 text-sm text-foreground/80">
+                        <span className="mt-2 w-1.5 h-1.5 rounded-full bg-primary flex-shrink-0" />
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
 
-                  {program.communities && (
-                    <div className="space-y-3 md:space-y-4 mb-6 md:mb-8">
-                      <h4 className="font-semibold text-foreground flex items-center gap-2 text-sm md:text-base">
-                        <span className="w-6 md:w-8 h-0.5 bg-accent rounded-full" />
-                        Our Communities
-                      </h4>
-                      <div className="space-y-2 md:space-y-3">
-                        {program.communities.map((community) => (
-                          <div key={community.name} className="p-3 md:p-4 bg-secondary/50 rounded-xl md:rounded-2xl border border-border/50 hover:border-accent/30 transition-colors">
-                            <div className="font-medium text-xs md:text-sm text-foreground">{community.name}</div>
-                            <div className="text-xs text-muted-foreground mt-1 hidden sm:block">{community.description}</div>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  )}
-
-                  <Button 
-                    variant={program.id === 'cap' ? 'default' : 'accent'} 
-                    className="w-full group/btn"
-                    asChild
-                  >
-                    <Link to={program.href}>
-                      Learn More
+                  <Button variant={pathway.variant} className="w-full group/btn mt-auto" asChild>
+                    <Link to={pathway.href}>
+                      {pathway.cta}
                       <ArrowRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
                     </Link>
                   </Button>

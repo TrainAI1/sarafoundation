@@ -27,6 +27,10 @@ import GJPSuccess from "./pages/programs/GJPSuccess";
 import GJPStatus from "./pages/programs/GJPStatus";
 import Partnership from "./pages/Partnership";
 import Projects from "./pages/Projects";
+import OurWork from "./pages/OurWork";
+import GetInvolved from "./pages/GetInvolved";
+import Transparency from "./pages/Transparency";
+import Accessibility from "./pages/Accessibility";
 import Volunteer from "./pages/Volunteer";
 import AnnualReports from "./pages/AnnualReports";
 import SchoolCommunity from "./pages/partnership/SchoolCommunity";
@@ -98,6 +102,10 @@ const App = () => {
             <Route path="/partnership/organizations" element={<Organizations />} />
             <Route path="/partnership/sponsors" element={<Sponsors />} />
             <Route path="/projects" element={<Projects />} />
+            <Route path="/our-work" element={<OurWork />} />
+            <Route path="/get-involved" element={<GetInvolved />} />
+            <Route path="/transparency" element={<Transparency />} />
+            <Route path="/accessibility" element={<Accessibility />} />
             <Route path="/volunteer" element={<Volunteer />} />
             <Route path="/annual-reports" element={<AnnualReports />} />
             <Route path="/privacy" element={<Privacy />} />
