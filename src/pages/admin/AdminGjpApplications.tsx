@@ -913,7 +913,7 @@ export default function AdminGjpApplications() {
                   id="email-subject"
                   value={emailSubject}
                   onChange={(e) => setEmailSubject(e.target.value)}
-                  placeholder="EJP — update from Sara Foundation"
+                  placeholder="EJP: update from Sara Foundation"
                   className="mt-1 rounded-xl"
                 />
               </div>

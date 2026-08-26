@@ -29,16 +29,16 @@ const impactStories = [
 ];
 
 const impactNumbers = [
-  { icon: Users, number: "763", label: "CAP Learners Supported" },
-  { icon: GraduationCap, number: "8", label: "Countries Reached" },
-  { icon: Lightbulb, number: "50+", label: "Partner Institutions" },
+  { icon: Users, number: "763", label: "CAP learners fully funded" },
+  { icon: Heart, number: "57", label: "Women supported through FLIP" },
+  { icon: GraduationCap, number: "1,600", label: "Scholarships provided" },
+  { icon: Lightbulb, number: "11", label: "African countries reached" },
 ];
 
 const whereItGoes = [
-  { title: "Learner Scholarships", percentage: "40%", description: "Directly funding places, equipment and learning resources for young people and adults on our pathways." },
-  { title: "Program Operations", percentage: "30%", description: "Running workshops, hackathons, mentorship sessions, and community events across Africa." },
-  { title: "Technology & Infrastructure", percentage: "20%", description: "Building and maintaining tech hubs, online platforms, and digital learning tools." },
-  { title: "Outreach & Growth", percentage: "10%", description: "Expanding to new countries, universities, and communities across the continent." },
+  { title: "Technology & Infrastructure", percentage: "50%", description: "This covers course platforms, learning infrastructure and assessment management." },
+  { title: "Programme Operations", percentage: "40%", description: "This covers cohort management, impact reporting and the Foundation's operations." },
+  { title: "Growth & Outreach", percentage: "10%", description: "This covers publicity campaigns, promotion and online engagements." },
 ];
 
 const donationFaqDefaults = [
@@ -113,7 +113,7 @@ export default function Donation() {
       {/* Impact Numbers */}
       <section className="py-8 md:py-12 bg-background border-b">
         <div className="section-container">
-          <div className="grid grid-cols-3 gap-4 md:gap-8 max-w-3xl mx-auto">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-8 max-w-4xl mx-auto">
             {impactNumbers.map((item) => (
               <div key={item.label} className="text-center">
                 <div className="w-10 h-10 md:w-14 md:h-14 mx-auto rounded-xl md:rounded-2xl bg-primary flex items-center justify-center mb-2 md:mb-3 shadow-lg">
@@ -146,7 +146,7 @@ export default function Donation() {
             </p>
           </div>
 
-          <div className="grid sm:grid-cols-2 gap-4 md:gap-6 max-w-4xl mx-auto">
+          <div className="grid sm:grid-cols-3 gap-4 md:gap-6 max-w-5xl mx-auto">
             {whereItGoes.map((item) => (
               <div key={item.title} className="card-modern p-5 md:p-6">
                 <div className="flex items-center gap-3 mb-3">

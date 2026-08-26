@@ -15,16 +15,16 @@ export default function ProgramFLIP() {
   return (
     <div className="min-h-screen bg-background">
       <Helmet>
-        <title>FLIP — Female Learning &amp; Inclusion Pathway | Sara Foundation Africa</title>
+        <title>FLIP: Female Learning &amp; Inclusion Pathway | Sara Foundation Africa</title>
         <meta name="description" content="FLIP creates inclusive access to digital learning for women through mentoring, structured learning, practical projects, supportive communities and access support." />
         <link rel="canonical" href="https://sarafoundationafrica.com/programs/flip" />
-        <meta property="og:title" content="FLIP — Female Learning &amp; Inclusion Pathway | Sara Foundation Africa" />
+        <meta property="og:title" content="FLIP: Female Learning &amp; Inclusion Pathway | Sara Foundation Africa" />
         <meta property="og:description" content="FLIP creates inclusive access to digital learning for women through mentoring, structured learning, practical projects, supportive communities and access support." />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://sarafoundationafrica.com/programs/flip" />
         <meta property="og:image" content="https://sarafoundationafrica.com/hero-students.jpg" />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="FLIP — Female Learning &amp; Inclusion Pathway | Sara Foundation Africa" />
+        <meta name="twitter:title" content="FLIP: Female Learning &amp; Inclusion Pathway | Sara Foundation Africa" />
         <meta name="twitter:description" content="FLIP creates inclusive access to digital learning for women through mentoring, structured learning, practical projects, supportive communities and access support." />
         <meta name="twitter:image" content="https://sarafoundationafrica.com/hero-students.jpg" />
       </Helmet>

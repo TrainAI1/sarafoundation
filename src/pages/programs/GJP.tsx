@@ -50,13 +50,13 @@ export default function ProgramGJP() {
   return (
     <div className="min-h-screen bg-background">
       <Helmet>
-        <title>EJP — Education Journey Pathway | Sara Foundation Africa</title>
+        <title>EJP: Education Journey Pathway | Sara Foundation Africa</title>
         <meta
           name="description"
           content="The Education Journey Pathway supports continued learning through insight sessions, work-readiness education, mentoring, educational exposure and referrals to further learning."
         />
         <link rel="canonical" href="https://sarafoundationafrica.com/programs/gjp" />
-        <meta property="og:title" content="EJP — Education Journey Pathway | Sara Foundation Africa" />
+        <meta property="og:title" content="EJP: Education Journey Pathway | Sara Foundation Africa" />
         <meta
           property="og:description"
           content="Learning beyond the sessions: insight, work-readiness education, mentoring, experiential exposure and referrals that deepen participants' learning journeys."

@@ -81,7 +81,7 @@ type Metric = { value: string; label: string; definition: string };
 
 const dashboard: { pathway: string; blurb: string; href: string; metrics: Metric[] }[] = [
   {
-    pathway: "CAP — Community Access & Participation Pathway",
+    pathway: "CAP: Community Access & Participation Pathway",
     blurb: "Structured digital education, mentoring and practical learning for young people and adults from underserved communities.",
     href: "/programs/cap",
     metrics: [
@@ -96,7 +96,7 @@ const dashboard: { pathway: string; blurb: string; href: string; metrics: Metric
     ],
   },
   {
-    pathway: "FLIP — Female Learning & Inclusion Pathway",
+    pathway: "FLIP: Female Learning & Inclusion Pathway",
     blurb: "Inclusive access to tech learning, mentoring and community for women.",
     href: "/programs/flip",
     metrics: [
@@ -109,7 +109,7 @@ const dashboard: { pathway: string; blurb: string; href: string; metrics: Metric
     ],
   },
   {
-    pathway: "EJP — Education Journey Pathway",
+    pathway: "EJP: Education Journey Pathway",
     blurb: "Continued learning through insight, work-readiness education, mentoring and referrals.",
     href: "/programs/gjp",
     metrics: [

@@ -22,9 +22,9 @@ const getInvolvedLinks = [
   { title: "Donate", href: "/donation" },
   { title: "Partner with Us", href: "/partnership" },
   { title: "Volunteer / Mentor", href: "/volunteer" },
-  { title: "CAP — Community Access & Participation Pathway", href: "/programs/cap" },
-  { title: "FLIP — Female Learning & Inclusion Pathway", href: "/programs/flip" },
-  { title: "EJP — Education Journey Pathway", href: "/programs/gjp" },
+  { title: "CAP: Community Access & Participation Pathway", href: "/programs/cap" },
+  { title: "FLIP: Female Learning & Inclusion Pathway", href: "/programs/flip" },
+  { title: "EJP: Education Journey Pathway", href: "/programs/gjp" },
 ];
 
 const trustLinks = [

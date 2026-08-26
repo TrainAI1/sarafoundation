@@ -20,7 +20,7 @@ const partnerTypes = [
       "Faculty development workshops",
       "Access to Sara Foundation network",
     ],
-    stats: { value: "50+", label: "Partner Universities" },
+    stats: { value: "35+", label: "Universities represented" },
     href: "/partnership/school-community",
     color: "bg-primary",
   },
@@ -29,14 +29,14 @@ const partnerTypes = [
     title: "Organizations",
     description: "Organisational partnerships that widen access to digital education, inclusion and community learning.",
     benefits: [
-      "Access to trained talent pool",
+      "Support for structured learning activity",
       "CSR impact reporting",
       "Brand visibility across Africa",
       "Co-branded programs",
       "Employee volunteer opportunities",
-      "Talent pipeline development",
+      "Volunteer and mentoring opportunities for your team",
     ],
-    stats: { value: "100+", label: "Corporate Partners" },
+    stats: { value: "11", label: "African countries reached" },
     href: "/partnership/organizations",
     color: "bg-accent",
   },
@@ -45,39 +45,24 @@ const partnerTypes = [
     title: "Sponsors",
     description: "Support our mission through sponsorship and funding opportunities.",
     benefits: [
-      "Direct impact on African youth",
+      "Direct impact on access to learning",
       "Recognition across platforms",
       "Event sponsorship options",
       "Scholarship naming rights",
       "Exclusive networking events",
       "Impact dashboard access",
     ],
-    stats: { value: "$2M+", label: "Funds Raised" },
+    stats: { value: "1,600", label: "Scholarships provided" },
     href: "/partnership/sponsors",
     color: "bg-[hsl(160,84%,39%)]",
   },
 ];
 
 const impactAreas = [
-  { icon: Users, value: "700+", label: "Lives Impacted" },
-  { icon: Globe, value: "12+", label: "Countries" },
-  { icon: GraduationCap, value: "50+", label: "Universities" },
+  { icon: Users, value: "763", label: "CAP learners" },
+  { icon: Globe, value: "11", label: "African countries" },
+  { icon: GraduationCap, value: "35+", label: "Universities represented" },
   { icon: Award, value: "1,600", label: "Scholarships provided" },
-];
-
-const testimonials = [
-  {
-    quote: "Partnering with Sara Foundation has allowed us to support learners across Africa and contribute to their learning journeys.",
-    author: "Ifeoma Nwosu",
-    role: "HR Director, Tech Corp Africa",
-    type: "Corporate Partner",
-  },
-  {
-    quote: "The CAP Tech Club has transformed our students' career prospects. We've seen a 3x increase in tech internship placements.",
-    author: "Prof. Emmanuel Osei",
-    role: "Dean, University of Accra",
-    type: "University Partner",
-  },
 ];
 
 const process = [
@@ -265,42 +250,6 @@ export default function Partnership() {
                 {index < process.length - 1 && (
                   <div className="hidden lg:block absolute top-1/2 -right-3 w-6 h-0.5 bg-border" />
                 )}
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Testimonials */}
-      <section className="py-16 md:py-24 bg-background">
-        <div className="section-container">
-          <div className="text-center max-w-3xl mx-auto mb-10 md:mb-16 px-4">
-            <span className="section-badge mb-6">
-              Partner Testimonials
-            </span>
-            <h2 className="section-title text-foreground mb-6">
-              What Our Partners Say
-            </h2>
-          </div>
-
-          <div className="grid md:grid-cols-2 gap-6 md:gap-8 max-w-4xl mx-auto px-4 lg:px-0">
-            {testimonials.map((testimonial) => (
-              <div key={testimonial.author} className="card-modern p-6 md:p-8">
-                <span className="inline-block text-xs font-semibold uppercase tracking-[0.18em] text-primary mb-4">
-                  {testimonial.type}
-                </span>
-                <p className="text-foreground text-base md:text-lg italic mb-6">
-                  "{testimonial.quote}"
-                </p>
-                <div className="flex items-center gap-4">
-                  <div className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-primary flex items-center justify-center text-white font-bold text-sm">
-                    {testimonial.author.split(' ').map(n => n[0]).join('')}
-                  </div>
-                  <div>
-                    <p className="font-semibold text-foreground text-sm md:text-base">{testimonial.author}</p>
-                    <p className="text-sm text-muted-foreground">{testimonial.role}</p>
-                  </div>
-                </div>
               </div>
             ))}
           </div>

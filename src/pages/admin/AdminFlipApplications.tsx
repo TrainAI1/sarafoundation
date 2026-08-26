@@ -350,7 +350,7 @@ export default function AdminFlipApplications() {
         <EmailDialog
           recipients={emailDialog.recipients}
           mode={emailDialog.mode}
-          defaultSubject="FLIP — update from Sara Foundation"
+          defaultSubject="FLIP: update from Sara Foundation"
           onClose={() => setEmailDialog(null)}
           onSent={({ recipients }) => log({ action: "flip.email", entity: "flip", summary: `Emailed ${recipients.length}`, metadata: { count: recipients.length } })}
         />

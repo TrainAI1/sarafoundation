@@ -436,7 +436,7 @@ export default function AdminCapApplications() {
         <EmailDialog
           recipients={emailDialog.recipients}
           mode={emailDialog.mode}
-          defaultSubject="CAP — update from Sara Foundation"
+          defaultSubject="CAP: update from Sara Foundation"
           onClose={() => setEmailDialog(null)}
           onSent={({ recipients }) => log({ action: "cap.email", entity: "cap", summary: `Emailed ${recipients.length}`, metadata: { count: recipients.length } })}
         />
