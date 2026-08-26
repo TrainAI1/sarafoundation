@@ -329,20 +329,20 @@ export default function Contact() {
               <div className="rounded-2xl overflow-hidden shadow-lg">
                 <img 
                    src={communityWorkshop} 
-                   alt="Sara Foundation community event"
+                   alt="Participants at a Sara Foundation Africa community event"
                    loading="lazy"
                    className="w-full h-40 md:h-56 object-cover"
                  />
                 <div className="p-4 bg-card">
                   <p className="font-semibold text-foreground text-sm">Join Our Community</p>
-                  <p className="text-xs text-muted-foreground mb-3">Connecting with students and professionals across Africa</p>
+                  <p className="text-xs text-muted-foreground mb-3">Connecting young people and women across Africa</p>
                   <div className="flex flex-col gap-2">
-                    <a href="https://forms.gle/XxtkUK5WzNKnstAn7" target="_blank" rel="noopener noreferrer">
+                    <Link to="/programs/cap/apply">
                       <Button size="sm" className="w-full text-xs">
                         Join CAP Tech Hub
                         <ArrowRight className="w-3 h-3 ml-1" />
                       </Button>
-                    </a>
+                    </Link>
                     <Link to="/programs/flip/apply">
                       <Button size="sm" variant="outline" className="w-full text-xs">
                         Join FLIP Fellowship
