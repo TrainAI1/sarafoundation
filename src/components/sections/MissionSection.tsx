@@ -1,6 +1,6 @@
 import { MonitorSmartphone, HeartHandshake, Users } from "lucide-react";
-import studentsLabImg from "@/assets/students-tech-lab.jpg";
-import communityWorkshopImg from "@/assets/community-workshop.jpg";
+import studentsLabImg from "@/assets/why-we-exist-students-laptop.jpg";
+import communityWorkshopImg from "@/assets/why-we-exist-peer-learning.jpg";
 import { ScrollAnimation, StaggerContainer, StaggerItem } from "@/components/ui/scroll-animation";
 import { usePageContent } from "@/hooks/usePageContent";
 
@@ -57,13 +57,13 @@ export function MissionSection() {
             <div className="grid grid-cols-2 gap-4">
               <img
                 src={studentsLabImg}
-                alt="Learners taking part in a Sara Foundation Africa digital learning session"
+                alt="Student learning digital skills on a laptop in a community ICT training space"
                 className="w-full h-40 md:h-56 object-cover rounded-2xl shadow-lg"
                 loading="lazy"
               />
               <img
                 src={communityWorkshopImg}
-                alt="Participants at a Sara Foundation Africa community workshop"
+                alt="Learners studying together in a peer learning session with shared computers"
                 className="w-full h-40 md:h-56 object-cover rounded-2xl shadow-lg mt-6"
                 loading="lazy"
               />
