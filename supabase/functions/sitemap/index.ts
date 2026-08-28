@@ -52,15 +52,12 @@ Deno.serve(async (req) => {
       .eq("published", true)
       .order("published_at", { ascending: false });
 
-    const today = new Date().toISOString().split("T")[0];
-
     let xml = `<?xml version="1.0" encoding="UTF-8"?>\n`;
     xml += `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n`;
 
     for (const page of staticPages) {
       xml += `  <url>\n`;
       xml += `    <loc>${SITE_URL}${page.loc}</loc>\n`;
-      xml += `    <lastmod>${today}</lastmod>\n`;
       xml += `    <changefreq>${page.changefreq}</changefreq>\n`;
       xml += `    <priority>${page.priority}</priority>\n`;
       xml += `  </url>\n`;
@@ -68,10 +65,10 @@ Deno.serve(async (req) => {
 
     if (posts) {
       for (const post of posts) {
-        const lastmod = (post.updated_at || post.published_at || today).split("T")[0];
+        const lastmod = (post.updated_at || post.published_at || "").split("T")[0];
         xml += `  <url>\n`;
         xml += `    <loc>${SITE_URL}/blog/${post.slug}</loc>\n`;
-        xml += `    <lastmod>${lastmod}</lastmod>\n`;
+        if (lastmod) xml += `    <lastmod>${lastmod}</lastmod>\n`;
         xml += `    <changefreq>weekly</changefreq>\n`;
         xml += `    <priority>0.6</priority>\n`;
         xml += `  </url>\n`;
