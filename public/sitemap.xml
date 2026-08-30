@@ -1,28 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://sarafoundationafrica.com/</loc><lastmod>2026-05-16</lastmod><changefreq>weekly</changefreq><priority>1.0</priority></url>
-  <url><loc>https://sarafoundationafrica.com/about</loc><lastmod>2026-05-16</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://sarafoundationafrica.com/blog</loc><lastmod>2026-05-16</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://sarafoundationafrica.com/contact</loc><lastmod>2026-05-16</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://sarafoundationafrica.com/donation</loc><lastmod>2026-05-16</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://sarafoundationafrica.com/programs/cap</loc><lastmod>2026-05-16</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://sarafoundationafrica.com/programs/cap/apply</loc><lastmod>2026-05-16</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://sarafoundationafrica.com/programs/cap/payment</loc><lastmod>2026-05-16</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
-  <url><loc>https://sarafoundationafrica.com/programs/flip</loc><lastmod>2026-05-16</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://sarafoundationafrica.com/programs/flip/apply</loc><lastmod>2026-05-16</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://sarafoundationafrica.com/programs/flip/payment</loc><lastmod>2026-05-16</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
-  <url><loc>https://sarafoundationafrica.com/programs/gjp</loc><lastmod>2026-05-16</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://sarafoundationafrica.com/programs/gjp/apply</loc><lastmod>2026-05-16</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://sarafoundationafrica.com/programs/gjp/status</loc><lastmod>2026-05-16</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
-  <url><loc>https://sarafoundationafrica.com/partnership</loc><lastmod>2026-05-16</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://sarafoundationafrica.com/partnership/school-community</loc><lastmod>2026-05-16</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
-  <url><loc>https://sarafoundationafrica.com/partnership/organizations</loc><lastmod>2026-05-16</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
-  <url><loc>https://sarafoundationafrica.com/partnership/sponsors</loc><lastmod>2026-05-16</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
-  <url><loc>https://sarafoundationafrica.com/projects</loc><lastmod>2026-06-08</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://sarafoundationafrica.com/volunteer</loc><lastmod>2026-06-08</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://sarafoundationafrica.com/annual-reports</loc><lastmod>2026-06-08</lastmod><changefreq>yearly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://sarafoundationafrica.com/privacy</loc><lastmod>2026-05-16</lastmod><changefreq>yearly</changefreq><priority>0.3</priority></url>
-  <url><loc>https://sarafoundationafrica.com/terms</loc><lastmod>2026-05-16</lastmod><changefreq>yearly</changefreq><priority>0.3</priority></url>
+  <url><loc>https://sarafoundationafrica.com/</loc><changefreq>weekly</changefreq><priority>1.0</priority></url>
+  <url><loc>https://sarafoundationafrica.com/about</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://sarafoundationafrica.com/blog</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://sarafoundationafrica.com/contact</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://sarafoundationafrica.com/donation</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://sarafoundationafrica.com/programs/cap</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://sarafoundationafrica.com/programs/cap/apply</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://sarafoundationafrica.com/programs/cap/payment</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
+  <url><loc>https://sarafoundationafrica.com/programs/flip</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://sarafoundationafrica.com/programs/flip/apply</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://sarafoundationafrica.com/programs/flip/payment</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
+  <url><loc>https://sarafoundationafrica.com/programs/gjp</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://sarafoundationafrica.com/programs/gjp/apply</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://sarafoundationafrica.com/programs/gjp/status</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
+  <url><loc>https://sarafoundationafrica.com/partnership</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://sarafoundationafrica.com/partnership/school-community</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
+  <url><loc>https://sarafoundationafrica.com/partnership/organizations</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
+  <url><loc>https://sarafoundationafrica.com/partnership/sponsors</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
+  <url><loc>https://sarafoundationafrica.com/projects</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://sarafoundationafrica.com/volunteer</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://sarafoundationafrica.com/annual-reports</loc><changefreq>yearly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://sarafoundationafrica.com/privacy</loc><changefreq>yearly</changefreq><priority>0.3</priority></url>
+  <url><loc>https://sarafoundationafrica.com/terms</loc><changefreq>yearly</changefreq><priority>0.3</priority></url>
   <url><loc>https://sarafoundationafrica.com/blog/press-release-gjp-x-njfp</loc><lastmod>2026-08-11</lastmod><changefreq>weekly</changefreq><priority>0.6</priority></url>
   <url><loc>https://sarafoundationafrica.com/blog/cap-reshaping-tech-education-african-universities</loc><lastmod>2026-04-26</lastmod><changefreq>weekly</changefreq><priority>0.6</priority></url>
   <url><loc>https://sarafoundationafrica.com/blog/flip-building-female-tech-leaders-africa</loc><lastmod>2026-04-26</lastmod><changefreq>weekly</changefreq><priority>0.6</priority></url>
@@ -34,8 +34,8 @@
   <url><loc>https://sarafoundationafrica.com/programs/cap/success</loc><changefreq>yearly</changefreq><priority>0.3</priority></url>
   <url><loc>https://sarafoundationafrica.com/programs/flip/success</loc><changefreq>yearly</changefreq><priority>0.3</priority></url>
   <url><loc>https://sarafoundationafrica.com/programs/gjp/success</loc><changefreq>yearly</changefreq><priority>0.3</priority></url>
-  <url><loc>https://sarafoundationafrica.com/our-work</loc><lastmod>2026-08-26</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://sarafoundationafrica.com/get-involved</loc><lastmod>2026-08-26</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://sarafoundationafrica.com/transparency</loc><lastmod>2026-08-26</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://sarafoundationafrica.com/accessibility</loc><lastmod>2026-08-26</lastmod><changefreq>monthly</changefreq><priority>0.4</priority></url>
+  <url><loc>https://sarafoundationafrica.com/our-work</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://sarafoundationafrica.com/get-involved</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://sarafoundationafrica.com/transparency</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://sarafoundationafrica.com/accessibility</loc><changefreq>monthly</changefreq><priority>0.4</priority></url>
 </urlset>
