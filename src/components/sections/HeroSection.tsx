@@ -7,17 +7,11 @@ import eventGroupPhoto from "@/assets/events/DSC_3409.jpg.asset.json";
 import eventStudentMic from "@/assets/events/DSC_3253.jpg.asset.json";
 import eventSpeaker from "@/assets/events/DSC_3240.jpg.asset.json";
 import capHappyCoder from "@/assets/cap-happy-coder.jpg";
-import capWomanLaptop from "@/assets/cap-woman-laptop.jpg";
-import capWomanSmiling from "@/assets/cap-woman-smiling.jpg";
-import capWomanYellow from "@/assets/cap-woman-yellow.jpg";
 import capWomenGroup from "@/assets/cap-women-group.jpg";
-import capManStudying from "@/assets/cap-man-studying.jpg";
 import capWomanBraids from "@/assets/cap-woman-braids.jpg";
 import youngDeveloper from "@/assets/young-developer.jpg";
-import womenTechLeaders from "@/assets/women-tech-leaders.jpg";
 import techEntrepreneurs from "@/assets/tech-entrepreneurs.jpg";
 import womanFounderPitch from "@/assets/woman-founder-pitch.jpg";
-import graduatesCelebration from "@/assets/graduates-celebration.jpg";
 
 const defaults = {
   headline_1: "Expanding Access to Digital Learning.",
@@ -52,9 +46,6 @@ const marqueeCards: MarqueeCard[] = [
   { src: "", name: "763", role: "CAP learners fully funded", tone: "accent" },
   { src: capWomanBraids, name: "FLIP workshop", role: "Inclusive learning activity", tone: "light" },
 ];
-
-const unusedStock = [capWomanLaptop, capWomanSmiling, capWomanYellow, capManStudying, womenTechLeaders, graduatesCelebration];
-void unusedStock;
 
 
 
