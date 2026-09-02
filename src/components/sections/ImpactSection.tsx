@@ -1,7 +1,7 @@
 import { TrendingUp, GraduationCap, HandCoins, Globe, ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import impactLecture from "@/assets/impact-lecture.jpg";
+import impactLecture from "@/assets/events/DSC_3133-3.jpg.asset.json";
 import { ScrollAnimation, StaggerContainer, StaggerItem } from "@/components/ui/scroll-animation";
 import { usePageContent } from "@/hooks/usePageContent";
 
@@ -56,7 +56,7 @@ export function ImpactSection() {
           <ScrollAnimation variant="slide-right">
             <div className="rounded-2xl overflow-hidden shadow-2xl">
               <img
-                src={impactLecture}
+                src={impactLecture.url}
                 alt="Participants at a Sara Foundation Africa knowledge session"
                 className="w-full h-56 md:h-72 object-cover"
                 loading="lazy"

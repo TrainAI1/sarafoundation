@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import { Heart, Users, GraduationCap, Lightbulb, ArrowRight, HelpCircle, CheckCircle2 } from "lucide-react";
-import graduatesCelebration from "@/assets/cap-graduates-2025.jpg";
+import graduatesCelebration from "@/assets/events/DSC_3409.jpg.asset.json";
 import mentorshipSession from "@/assets/mentorship-session.jpg";
 import { useFAQItems } from "@/hooks/useFAQItems";
 import {

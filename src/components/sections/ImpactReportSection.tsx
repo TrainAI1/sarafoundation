@@ -2,7 +2,7 @@ import { FileText, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { ScrollAnimation } from "@/components/ui/scroll-animation";
-import capGraduates from "@/assets/cap-graduates-2025.jpg";
+import capGraduates from "@/assets/events/DSC_3409.jpg.asset.json";
 
 const reports = [
   {
@@ -80,8 +80,8 @@ export function ImpactReportSection() {
           <ScrollAnimation variant="slide-right">
             <div className="rounded-2xl overflow-hidden shadow-2xl">
               <img
-                src={capGraduates}
-                alt="CAP learners celebrating the completion of the 2025 cohort"
+                src={capGraduates.url}
+                alt="CAP Tech Hub cohort group photo at a Sara Foundation Africa event"
                 className="w-full h-64 md:h-96 object-cover"
                 loading="lazy"
               />
