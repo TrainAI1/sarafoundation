@@ -3,18 +3,13 @@ import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { usePageContent } from "@/hooks/usePageContent";
-import capHappyCoder from "@/assets/cap-happy-coder.jpg";
-import capWomanLaptop from "@/assets/cap-woman-laptop.jpg";
-import capWomanSmiling from "@/assets/cap-woman-smiling.jpg";
-import capWomanYellow from "@/assets/cap-woman-yellow.jpg";
-import capWomenGroup from "@/assets/cap-women-group.jpg";
-import capManStudying from "@/assets/cap-man-studying.jpg";
-import capWomanBraids from "@/assets/cap-woman-braids.jpg";
-import youngDeveloper from "@/assets/young-developer.jpg";
-import womenTechLeaders from "@/assets/women-tech-leaders.jpg";
-import techEntrepreneurs from "@/assets/tech-entrepreneurs.jpg";
-import womanFounderPitch from "@/assets/woman-founder-pitch.jpg";
-import graduatesCelebration from "@/assets/graduates-celebration.jpg";
+import eventGroupPhoto from "@/assets/events/DSC_3409.jpg.asset.json";
+import eventQuestionMic from "@/assets/events/DSC_3379.jpg.asset.json";
+import eventStudentMic from "@/assets/events/DSC_3253.jpg.asset.json";
+import eventAudienceFront from "@/assets/events/DSC_3217.jpg.asset.json";
+import eventLearnerFocus from "@/assets/events/DSC_3143.jpg.asset.json";
+import eventLectureHall from "@/assets/events/DSC_3133-3.jpg.asset.json";
+import eventSpeaker from "@/assets/events/DSC_3240.jpg.asset.json";
 
 const defaults = {
   headline_1: "Expanding Access to Digital Learning.",
@@ -36,19 +31,20 @@ type MarqueeCard = {
 };
 
 const marqueeCards: MarqueeCard[] = [
-  { src: capHappyCoder, name: "CAP Tech Hub", role: "Practical learning session", tone: "light" },
-  { src: womenTechLeaders, name: "57", role: "Women across FLIP fellowship & mentorship", tone: "accent" },
-  { src: capWomanLaptop, name: "CAP learner", role: "Guided project work", tone: "dark" },
-  { src: youngDeveloper, name: "CAP learner", role: "Learner-led project build", tone: "light" },
-  { src: capWomanYellow, name: "11", role: "African countries reached", tone: "accent" },
-  { src: techEntrepreneurs, name: "Demo Day", role: "CAP Cohort 1 project showcase", tone: "dark" },
-  { src: capWomanSmiling, name: "Expert session", role: "CAP knowledge-sharing", tone: "light" },
-  { src: capWomenGroup, name: "FLIP community", role: "Peer learning and mentoring", tone: "dark" },
-  { src: womanFounderPitch, name: "Talent Showcase", role: "Presenting learner projects", tone: "light" },
-  { src: capManStudying, name: "CAP learner", role: "Structured digital learning", tone: "dark" },
-  { src: graduatesCelebration, name: "763", role: "CAP learners fully funded", tone: "accent" },
-  { src: capWomanBraids, name: "FLIP workshop", role: "Inclusive learning activity", tone: "light" },
+  { src: eventGroupPhoto.url, name: "CAP Tech Hub", role: "Cohort group photo", tone: "light" },
+  { src: "", name: "57", role: "Women across FLIP fellowship & mentorship", tone: "accent" },
+  { src: eventSpeaker.url, name: "Expert session", role: "Speaker at CAP Tech Hub", tone: "dark" },
+  { src: eventStudentMic.url, name: "CAP learner", role: "Q&A during a live session", tone: "light" },
+  { src: "", name: "11", role: "African countries reached", tone: "accent" },
+  { src: eventLectureHall.url, name: "CAP Tech Hub", role: "Campus learning session", tone: "dark" },
+  { src: eventQuestionMic.url, name: "Community voices", role: "Audience contribution", tone: "light" },
+  { src: eventAudienceFront.url, name: "CAP community", role: "Participants at a session", tone: "dark" },
+  { src: eventLearnerFocus.url, name: "CAP learner", role: "Focused learning session", tone: "light" },
+  { src: eventLectureHall.url, name: "Talent Showcase", role: "Presenting learner projects", tone: "dark" },
+  { src: "", name: "763", role: "CAP learners fully funded", tone: "accent" },
+  { src: eventGroupPhoto.url, name: "CAP Tech Hub", role: "Cohort celebration", tone: "light" },
 ];
+
 
 export function HeroSection() {
   const { data: c } = usePageContent("home-hero", defaults);
