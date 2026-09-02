@@ -81,7 +81,7 @@ export function ImpactReportSection() {
             <div className="rounded-2xl overflow-hidden shadow-2xl">
               <img
                 src={capGraduates.url}
-                alt="CAP learners celebrating the completion of the 2025 cohort"
+                alt="CAP Tech Hub cohort group photo at a Sara Foundation Africa event"
                 className="w-full h-64 md:h-96 object-cover"
                 loading="lazy"
               />

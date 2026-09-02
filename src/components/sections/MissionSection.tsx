@@ -57,13 +57,13 @@ export function MissionSection() {
             <div className="grid grid-cols-2 gap-4">
               <img
                 src={adultLearnerImg.url}
-                alt="Adult learner working at a computer in an ICT training lab"
+                alt="CAP participant listening during a Sara Foundation Africa session"
                 className="w-full h-40 md:h-56 object-cover rounded-2xl shadow-lg"
                 loading="lazy"
               />
               <img
                 src={professionalLearningImg.url}
-                alt="Professionals collaborating with laptops at a technology learning session"
+                alt="Attendees at a Sara Foundation Africa campus session"
                 className="w-full h-40 md:h-56 object-cover rounded-2xl shadow-lg mt-6"
                 loading="lazy"
               />
