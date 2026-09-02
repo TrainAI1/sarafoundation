@@ -1,6 +1,6 @@
 import { MonitorSmartphone, HeartHandshake, Users } from "lucide-react";
-import adultLearnerImg from "@/assets/why-we-exist-adult-learner-lab.jpg";
-import professionalLearningImg from "@/assets/why-we-exist-professional-learning.jpg";
+import adultLearnerImg from "@/assets/events/DSC_3143.jpg.asset.json";
+import professionalLearningImg from "@/assets/events/DSC_3217.jpg.asset.json";
 import { ScrollAnimation, StaggerContainer, StaggerItem } from "@/components/ui/scroll-animation";
 import { usePageContent } from "@/hooks/usePageContent";
 
@@ -56,13 +56,13 @@ export function MissionSection() {
           <ScrollAnimation variant="slide-right">
             <div className="grid grid-cols-2 gap-4">
               <img
-                src={adultLearnerImg}
+                src={adultLearnerImg.url}
                 alt="Adult learner working at a computer in an ICT training lab"
                 className="w-full h-40 md:h-56 object-cover rounded-2xl shadow-lg"
                 loading="lazy"
               />
               <img
-                src={professionalLearningImg}
+                src={professionalLearningImg.url}
                 alt="Professionals collaborating with laptops at a technology learning session"
                 className="w-full h-40 md:h-56 object-cover rounded-2xl shadow-lg mt-6"
                 loading="lazy"
