@@ -56,7 +56,7 @@ export function ImpactSection() {
           <ScrollAnimation variant="slide-right">
             <div className="rounded-2xl overflow-hidden shadow-2xl">
               <img
-                src={impactLecture.url}
+                src={assetUrl(impactLecture)}
                 alt="Participants at a Sara Foundation Africa knowledge session"
                 className="w-full h-56 md:h-72 object-cover"
                 loading="lazy"

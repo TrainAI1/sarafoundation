@@ -56,13 +56,13 @@ export function MissionSection() {
           <ScrollAnimation variant="slide-right">
             <div className="grid grid-cols-2 gap-4">
               <img
-                src={adultLearnerImg.url}
+                src={assetUrl(adultLearnerImg)}
                 alt="CAP participant listening during a Sara Foundation Africa session"
                 className="w-full h-40 md:h-56 object-cover rounded-2xl shadow-lg"
                 loading="lazy"
               />
               <img
-                src={professionalLearningImg.url}
+                src={assetUrl(professionalLearningImg)}
                 alt="Attendees at a Sara Foundation Africa campus session"
                 className="w-full h-40 md:h-56 object-cover rounded-2xl shadow-lg mt-6"
                 loading="lazy"

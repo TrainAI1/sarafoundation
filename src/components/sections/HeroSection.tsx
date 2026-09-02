@@ -35,14 +35,14 @@ type MarqueeCard = {
 const marqueeCards: MarqueeCard[] = [
   { src: capHappyCoder, name: "CAP Tech Hub", role: "Practical learning session", tone: "light" },
   { src: "", name: "57", role: "Women across FLIP fellowship & mentorship", tone: "accent" },
-  { src: eventGroupPhoto.url, name: "CAP Tech Hub", role: "Cohort group photo", tone: "dark" },
+  { src: assetUrl(eventGroupPhoto), name: "CAP Tech Hub", role: "Cohort group photo", tone: "dark" },
   { src: youngDeveloper, name: "CAP learner", role: "Learner-led project build", tone: "light" },
   { src: "", name: "11", role: "African countries reached", tone: "accent" },
   { src: techEntrepreneurs, name: "Demo Day", role: "CAP Cohort 1 project showcase", tone: "dark" },
-  { src: eventStudentMic.url, name: "CAP learner", role: "Q&A during a live session", tone: "light" },
+  { src: assetUrl(eventStudentMic), name: "CAP learner", role: "Q&A during a live session", tone: "light" },
   { src: capWomenGroup, name: "FLIP community", role: "Peer learning and mentoring", tone: "dark" },
   { src: womanFounderPitch, name: "Talent Showcase", role: "Presenting learner projects", tone: "light" },
-  { src: eventSpeaker.url, name: "Expert session", role: "Speaker at a CAP Tech Hub event", tone: "dark" },
+  { src: assetUrl(eventSpeaker), name: "Expert session", role: "Speaker at a CAP Tech Hub event", tone: "dark" },
   { src: "", name: "763", role: "CAP learners fully funded", tone: "accent" },
   { src: capWomanBraids, name: "FLIP workshop", role: "Inclusive learning activity", tone: "light" },
 ];
