@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import { GraduationCap, ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import capClassroom from "@/assets/events/DSC_3133-3.jpg.asset.json";
+import { assetUrl } from "@/lib/assetUrl";
 
 const stats = [
   { value: "763", label: "CAP learners, fully funded" },
@@ -14,7 +15,7 @@ export function CAPHeroSection() {
     <section className="pt-24 md:pt-32 pb-12 md:pb-20 bg-primary relative overflow-hidden">
       <div className="absolute inset-0">
         <img
-          src={capClassroom.url}
+          src={assetUrl(capClassroom)}
           alt=""
           aria-hidden="true"
           className="w-full h-full object-cover opacity-20"
@@ -52,7 +53,7 @@ export function CAPHeroSection() {
           <div className="relative mx-4 lg:mx-0">
             <div className="rounded-2xl md:rounded-3xl overflow-hidden shadow-2xl mb-6">
               <img
-                src={capClassroom.url}
+                src={assetUrl(capClassroom)}
                 alt="CAP Tech Hub session in a university lecture hall with learners and a facilitator"
                 className="w-full h-48 md:h-64 object-cover"
               />

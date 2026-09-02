@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { ScrollAnimation } from "@/components/ui/scroll-animation";
 import capGraduates from "@/assets/events/DSC_3409.jpg.asset.json";
+import { assetUrl } from "@/lib/assetUrl";
 
 const reports = [
   {
@@ -80,7 +81,7 @@ export function ImpactReportSection() {
           <ScrollAnimation variant="slide-right">
             <div className="rounded-2xl overflow-hidden shadow-2xl">
               <img
-                src={capGraduates.url}
+                src={assetUrl(capGraduates)}
                 alt="CAP Tech Hub cohort group photo at a Sara Foundation Africa event"
                 className="w-full h-64 md:h-96 object-cover"
                 loading="lazy"
