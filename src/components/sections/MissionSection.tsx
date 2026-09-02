@@ -3,6 +3,7 @@ import adultLearnerImg from "@/assets/events/DSC_3143.jpg.asset.json";
 import professionalLearningImg from "@/assets/events/DSC_3217.jpg.asset.json";
 import { ScrollAnimation, StaggerContainer, StaggerItem } from "@/components/ui/scroll-animation";
 import { usePageContent } from "@/hooks/usePageContent";
+import { assetUrl } from "@/lib/assetUrl";
 
 const focusAreas = [
   {

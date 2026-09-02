@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { usePageContent } from "@/hooks/usePageContent";
+import { assetUrl } from "@/lib/assetUrl";
 import eventGroupPhoto from "@/assets/events/DSC_3409.jpg.asset.json";
 import eventStudentMic from "@/assets/events/DSC_3253.jpg.asset.json";
 import eventSpeaker from "@/assets/events/DSC_3240.jpg.asset.json";

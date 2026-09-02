@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import impactLecture from "@/assets/events/DSC_3133-3.jpg.asset.json";
 import { ScrollAnimation, StaggerContainer, StaggerItem } from "@/components/ui/scroll-animation";
 import { usePageContent } from "@/hooks/usePageContent";
+import { assetUrl } from "@/lib/assetUrl";
 
 export function ImpactSection() {
   const { data: c } = usePageContent("home-impact", {
