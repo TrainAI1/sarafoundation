@@ -11,7 +11,13 @@ import { supabase } from "@/integrations/supabase/client";
 import studentsLabImg from "@/assets/students-tech-lab.jpg";
 import techConferenceSpeaker from "@/assets/tech-conference-speaker.jpg";
 
-const categories = ["All", "Learner Stories", "Project Showcases", "Programme Updates", "Impact & Learning", "Partnerships", "Governance & News"];
+const categories = [
+  { value: "All", label: "All Stories" },
+  { value: "CAP", label: "CAP" },
+  { value: "FLIP", label: "FLIP" },
+  { value: "EJP", label: "EJP" },
+  { value: "Partnership", label: "Partnerships" },
+];
 
 export default function Blog() {
   const [selectedCategory, setSelectedCategory] = useState("All");
@@ -142,11 +148,11 @@ export default function Blog() {
             </div>
             <div className="flex flex-wrap gap-2">
               {categories.map((category) => (
-                <button key={category} onClick={() => setSelectedCategory(category)}
+                <button key={category.value} onClick={() => setSelectedCategory(category.value)}
                   className={`px-3 md:px-4 py-1.5 md:py-2 rounded-lg md:rounded-xl text-xs md:text-sm font-medium transition-all ${
-                    category === selectedCategory ? "bg-primary text-primary-foreground shadow-lg shadow-primary/25" : "bg-card text-foreground hover:bg-secondary border border-border"
+                    category.value === selectedCategory ? "bg-primary text-primary-foreground shadow-lg shadow-primary/25" : "bg-card text-foreground hover:bg-secondary border border-border"
                   }`}>
-                  {category}
+                  {category.label}
                 </button>
               ))}
             </div>
