@@ -11,7 +11,13 @@ import { supabase } from "@/integrations/supabase/client";
 import studentsLabImg from "@/assets/students-tech-lab.jpg";
 import techConferenceSpeaker from "@/assets/tech-conference-speaker.jpg";
 
-const categories = ["All", "Learner Stories", "Project Showcases", "Programme Updates", "Impact & Learning", "Partnerships", "Governance & News"];
+const categories = [
+  { value: "All", label: "All Stories" },
+  { value: "CAP", label: "CAP" },
+  { value: "FLIP", label: "FLIP" },
+  { value: "EJP", label: "EJP" },
+  { value: "Partnership", label: "Partnerships" },
+];
 
 export default function Blog() {
   const [selectedCategory, setSelectedCategory] = useState("All");
