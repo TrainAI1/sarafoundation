@@ -16,6 +16,7 @@ const categories = [
   { value: "CAP", label: "CAP" },
   { value: "FLIP", label: "FLIP" },
   { value: "EJP", label: "EJP" },
+  { value: "Impact", label: "Impact" },
   { value: "Partnership", label: "Partnerships" },
 ];
 
