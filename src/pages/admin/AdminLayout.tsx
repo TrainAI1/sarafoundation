@@ -6,7 +6,7 @@ import {
   LayoutDashboard, FileText, PenTool, LogOut, Home,
   Users, MessageSquare, Image, Settings, Menu, X, ChevronRight, Handshake,
   HelpCircle, Mail, Newspaper, BarChart3, GraduationCap, Shield, Briefcase,
-  UserCog, ScrollText
+  UserCog, ScrollText, Calendar
 } from "lucide-react";
 
 type Capability = "content" | "submissions" | "admin" | "any";
@@ -25,7 +25,7 @@ const navGroups: NavGroup[] = [
   {
     label: "Content", cap: "content",
     items: [
-      { label: "Blog Posts", path: "/admin/blog", icon: PenTool, cap: "content" },
+      { label: "News & Events", path: "/admin/blog", icon: Newspaper, cap: "content" },
       { label: "Pages", path: "/admin/pages", icon: FileText, cap: "content" },
       { label: "FAQ", path: "/admin/faq", icon: HelpCircle, cap: "content" },
       { label: "Partners", path: "/admin/partners", icon: Handshake, cap: "content" },

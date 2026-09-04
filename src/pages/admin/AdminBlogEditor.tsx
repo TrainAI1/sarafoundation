@@ -19,7 +19,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 
-const categories = ["Programs", "Women in Tech", "Career", "Partnership", "Success Stories", "Industry", "Annual Report", "General"];
+const categories = ["Events", "Workshops & Events", "Programs", "CAP", "FLIP", "EJP", "Women in Tech", "Career", "Partnership", "Success Stories", "Industry", "Annual Report", "General"];
 
 import { markdownToHtml } from "@/lib/markdown";
 

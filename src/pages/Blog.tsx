@@ -13,7 +13,8 @@ import studentsLabImg from "@/assets/students-tech-lab.jpg";
 import techConferenceSpeaker from "@/assets/tech-conference-speaker.jpg";
 
 const categories = [
-  { value: "All", label: "All Stories" },
+  { value: "All", label: "All Stories & Events" },
+  { value: "Events", label: "Events" },
   { value: "CAP", label: "CAP" },
   { value: "FLIP", label: "FLIP" },
   { value: "EJP", label: "EJP" },
@@ -64,7 +65,11 @@ export default function Blog() {
   }));
 
   const filteredPosts = allPosts.filter((post) => {
-    const matchesCategory = selectedCategory === "All" || post.category === selectedCategory;
+    const catLower = (post.category || "").toLowerCase();
+    const matchesCategory =
+      selectedCategory === "All" ||
+      post.category === selectedCategory ||
+      (selectedCategory === "Events" && catLower.includes("event"));
     const matchesSearch = post.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
                          (post.excerpt || "").toLowerCase().includes(searchQuery.toLowerCase());
     return matchesCategory && matchesSearch;

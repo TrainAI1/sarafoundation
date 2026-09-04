@@ -95,11 +95,11 @@ export default function AdminBlogList() {
     <div>
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 mb-6">
         <div>
-          <h1 className="font-display text-xl md:text-2xl font-bold text-foreground">Blog Posts</h1>
-          <p className="text-sm text-muted-foreground">{posts.length} posts total</p>
+          <h1 className="font-display text-xl md:text-2xl font-bold text-foreground">News, Events &amp; Stories</h1>
+          <p className="text-sm text-muted-foreground">{posts.length} entries total</p>
         </div>
         <Link to="/admin/blog/new">
-          <Button size="sm"><Plus className="w-4 h-4 mr-2" /> New Post</Button>
+          <Button size="sm"><Plus className="w-4 h-4 mr-2" /> New Entry / Event</Button>
         </Link>
       </div>
 
