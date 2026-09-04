@@ -50,14 +50,20 @@ export default function AdminHeroCards() {
 
   useEffect(() => {
     const fetchCards = async () => {
-      const { data } = await supabase.from("pages").select("*").eq("slug", "hero-marquee").single();
-      if (data && typeof data.content === "object" && data.content !== null) {
-        const content = data.content as { items?: MarqueeCard[] };
-        if (content.items && content.items.length > 0) {
-          setCards(content.items);
+      try {
+        const { data, error } = await supabase.from("pages").select("*").eq("slug", "hero-marquee").maybeSingle();
+        if (error) console.warn("Supabase fetch warning:", error.message);
+        if (data && typeof data.content === "object" && data.content !== null) {
+          const content = data.content as { items?: MarqueeCard[] };
+          if (content.items && content.items.length > 0) {
+            setCards(content.items);
+          }
         }
+      } catch (err) {
+        console.warn("Failed to load custom hero cards:", err);
+      } finally {
+        setLoading(false);
       }
-      setLoading(false);
     };
     fetchCards();
   }, []);
@@ -97,20 +103,26 @@ export default function AdminHeroCards() {
 
   const saveAll = async () => {
     setSaving(true);
-    const content = JSON.parse(JSON.stringify({ items: cards }));
-    const { data: existing } = await supabase.from("pages").select("id").eq("slug", "hero-marquee").single();
+    try {
+      const content = JSON.parse(JSON.stringify({ items: cards }));
+      const { data: existing, error: findErr } = await supabase.from("pages").select("id").eq("slug", "hero-marquee").maybeSingle();
+      if (findErr) console.warn("Supabase query check warning:", findErr.message);
 
-    if (existing) {
-      const { error } = await supabase.from("pages").update({ content }).eq("slug", "hero-marquee");
-      if (error) { toast.error(error.message); setSaving(false); return; }
-    } else {
-      const { error } = await supabase.from("pages").insert([{ slug: "hero-marquee", title: "Hero Marquee Cards", content }]);
-      if (error) { toast.error(error.message); setSaving(false); return; }
+      if (existing) {
+        const { error } = await supabase.from("pages").update({ content }).eq("slug", "hero-marquee");
+        if (error) { toast.error(`Error saving: ${error.message}`); setSaving(false); return; }
+      } else {
+        const { error } = await supabase.from("pages").insert([{ slug: "hero-marquee", title: "Hero Marquee Cards", content }]);
+        if (error) { toast.error(`Error creating: ${error.message}`); setSaving(false); return; }
+      }
+
+      toast.success("Hero Showcase Cards saved successfully!");
+      setEditing(null);
+    } catch (err: any) {
+      toast.error(err.message || "Failed to save showcase cards");
+    } finally {
+      setSaving(false);
     }
-
-    toast.success("Hero Showcase Cards saved successfully!");
-    setEditing(null);
-    setSaving(false);
   };
 
   if (loading) return <div className="animate-pulse text-muted-foreground">Loading cards...</div>;

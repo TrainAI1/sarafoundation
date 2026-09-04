@@ -33,14 +33,20 @@ export default function AdminTestimonials() {
 
   useEffect(() => {
     const fetchTestimonials = async () => {
-      const { data } = await supabase.from("pages").select("*").eq("slug", "testimonials").single();
-      if (data && typeof data.content === "object" && data.content !== null) {
-        const content = data.content as { items?: Testimonial[] };
-        if (content.items && content.items.length > 0) {
-          setTestimonials(content.items);
+      try {
+        const { data, error } = await supabase.from("pages").select("*").eq("slug", "testimonials").maybeSingle();
+        if (error) console.warn("Supabase fetch warning:", error.message);
+        if (data && typeof data.content === "object" && data.content !== null) {
+          const content = data.content as { items?: Testimonial[] };
+          if (content.items && content.items.length > 0) {
+            setTestimonials(content.items);
+          }
         }
+      } catch (err) {
+        console.warn("Failed to load testimonials:", err);
+      } finally {
+        setLoading(false);
       }
-      setLoading(false);
     };
     fetchTestimonials();
   }, []);
@@ -64,20 +70,26 @@ export default function AdminTestimonials() {
 
   const save = async () => {
     setSaving(true);
-    const content = JSON.parse(JSON.stringify({ items: testimonials }));
-    const { data: existing } = await supabase.from("pages").select("id").eq("slug", "testimonials").single();
+    try {
+      const content = JSON.parse(JSON.stringify({ items: testimonials }));
+      const { data: existing, error: findErr } = await supabase.from("pages").select("id").eq("slug", "testimonials").maybeSingle();
+      if (findErr) console.warn("Supabase query check warning:", findErr.message);
 
-    if (existing) {
-      const { error } = await supabase.from("pages").update({ content }).eq("slug", "testimonials");
-      if (error) { toast.error(error.message); setSaving(false); return; }
-    } else {
-      const { error } = await supabase.from("pages").insert([{ slug: "testimonials", title: "Testimonials", content }]);
-      if (error) { toast.error(error.message); setSaving(false); return; }
+      if (existing) {
+        const { error } = await supabase.from("pages").update({ content }).eq("slug", "testimonials");
+        if (error) { toast.error(`Error saving: ${error.message}`); setSaving(false); return; }
+      } else {
+        const { error } = await supabase.from("pages").insert([{ slug: "testimonials", title: "Testimonials", content }]);
+        if (error) { toast.error(`Error creating: ${error.message}`); setSaving(false); return; }
+      }
+
+      toast.success("Testimonials saved!");
+      setEditing(null);
+    } catch (err: any) {
+      toast.error(err.message || "Failed to save testimonials");
+    } finally {
+      setSaving(false);
     }
-
-    toast.success("Testimonials saved!");
-    setEditing(null);
-    setSaving(false);
   };
 
   if (loading) return <div className="animate-pulse text-muted-foreground">Loading...</div>;
