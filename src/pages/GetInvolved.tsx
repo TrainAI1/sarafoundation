@@ -4,58 +4,82 @@ import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import { Heart, Handshake, Users, ArrowRight } from "lucide-react";
+import { usePageContent } from "@/hooks/usePageContent";
+import { assetUrl } from "@/lib/assetUrl";
 import mentorshipSession from "@/assets/mentorship-session.jpg";
 
-const donationUses = [
-  "Scholarships",
-  "Bursaries",
-  "Subsidised participation",
-  "Educational resources",
-  "Mentoring",
-  "Community learning activities",
-];
-
-const partnerTypes = [
-  "Universities",
-  "Community organisations",
-  "Educators",
-  "Funders",
-  "Employers",
-  "Technology organisations",
-  "Programme and delivery partners",
-];
-
-const routes = [
-  {
-    icon: Heart,
-    title: "Donate",
-    description:
-      "Donations help reduce barriers to learning. Depending on programme needs and available funding, support can contribute to scholarships, bursaries, subsidised participation, educational resources, mentoring and community learning.",
-    cta: "Donate Now",
-    href: "/donation",
-    variant: "default" as const,
-  },
-  {
-    icon: Handshake,
-    title: "Partner with Us",
-    description:
-      "We work with organisations where collaboration furthers our charitable purposes. Our trustees retain responsibility for programme decisions, beneficiary selection, partner due diligence and the use of charitable resources.",
-    cta: "Partner with Us",
-    href: "/partnership",
-    variant: "outline" as const,
-  },
-  {
-    icon: Users,
-    title: "Volunteer / Mentor",
-    description:
-      "Join our community of 60+ volunteers, speakers, trainers, facilitators and mentors sharing knowledge with learners and women interested in technology.",
-    cta: "Become a Volunteer",
-    href: "/volunteer",
-    variant: "outline" as const,
-  },
-];
+const routeIcons: Record<string, typeof Heart> = {
+  "Donate": Heart,
+  "Partner with Us": Handshake,
+  "Volunteer / Mentor": Users,
+};
 
 const GetInvolved = () => {
+  const { data: c } = usePageContent("get-involved-page", {
+    hero_badge: "Get Involved",
+    hero_headline: "Help Widen Access to Learning",
+    hero_description:
+      "There are many ways to support Sara Foundation Africa through funding, partnership, volunteering, mentoring, knowledge-sharing or helping create inclusive learning opportunities.",
+    routes: [
+      {
+        title: "Donate",
+        description:
+          "Donations help reduce barriers to learning. Depending on programme needs and available funding, support can contribute to scholarships, bursaries, subsidised participation, educational resources, mentoring and community learning.",
+        cta: "Donate Now",
+        href: "/donation",
+        variant: "default",
+      },
+      {
+        title: "Partner with Us",
+        description:
+          "We work with organisations where collaboration furthers our charitable purposes. Our trustees retain responsibility for programme decisions, beneficiary selection, partner due diligence and the use of charitable resources.",
+        cta: "Partner with Us",
+        href: "/partnership",
+        variant: "outline",
+      },
+      {
+        title: "Volunteer / Mentor",
+        description:
+          "Join our community of 60+ volunteers, speakers, trainers, facilitators and mentors sharing knowledge with learners and women interested in technology.",
+        cta: "Become a Volunteer",
+        href: "/volunteer",
+        variant: "outline",
+      },
+    ],
+    public_benefit_statement:
+      "Every donation helps us reduce barriers to education and participation so that financial circumstances do not prevent eligible young people from accessing learning opportunities.",
+    donation_uses_heading: "What donations can support",
+    donation_uses: [
+      { text: "Scholarships" },
+      { text: "Bursaries" },
+      { text: "Subsidised participation" },
+      { text: "Educational resources" },
+      { text: "Mentoring" },
+      { text: "Community learning activities" },
+    ],
+    partner_types_heading: "Who we work with",
+    partner_types: [
+      { text: "Universities" },
+      { text: "Community organisations" },
+      { text: "Educators" },
+      { text: "Funders" },
+      { text: "Employers" },
+      { text: "Technology organisations" },
+      { text: "Programme and delivery partners" },
+    ],
+    closing_image: mentorshipSession,
+    closing_headline: "Share what you know",
+    closing_description:
+      "Mentors, trainers, facilitators, speakers and expert session contributors make our learning pathways possible. If you can give a few hours, you can help someone keep learning.",
+  });
+
+  const routes = c.routes.map((route: { title: string; description: string; cta: string; href: string; variant: "default" | "outline" }) => ({
+    ...route,
+    icon: routeIcons[route.title] ?? Heart,
+  }));
+  const donationUses = c.donation_uses.map((u: { text: string }) => u.text);
+  const partnerTypes = c.partner_types.map((p: { text: string }) => p.text);
+
   return (
     <div className="min-h-screen">
       <Helmet>
@@ -78,14 +102,13 @@ const GetInvolved = () => {
         <section className="pt-24 md:pt-32 pb-12 md:pb-20 bg-primary">
           <div className="section-container max-w-3xl px-4">
             <span className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.18em] text-white/80 mb-6">
-              Get Involved
+              {c.hero_badge}
             </span>
             <h1 className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 md:mb-6 leading-tight">
-              Help Widen Access to Learning
+              {c.hero_headline}
             </h1>
             <p className="text-base md:text-xl text-white/70 leading-relaxed">
-              There are many ways to support Sara Foundation Africa through funding, partnership,
-              volunteering, mentoring, knowledge-sharing or helping create inclusive learning opportunities.
+              {c.hero_description}
             </p>
           </div>
         </section>
@@ -103,7 +126,7 @@ const GetInvolved = () => {
                   <p className="text-muted-foreground text-sm leading-relaxed mb-6 flex-1">
                     {route.description}
                   </p>
-                  <Button variant={route.variant} className="w-full group" asChild>
+                  <Button variant={route.variant as "default" | "outline"} className="w-full group" asChild>
                     <Link to={route.href}>
                       {route.cta}
                       <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
@@ -120,14 +143,13 @@ const GetInvolved = () => {
           <div className="section-container max-w-4xl">
             <div className="card-modern p-6 md:p-10 text-center">
               <p className="font-display text-xl md:text-2xl font-bold text-foreground leading-snug">
-                Every donation helps us reduce barriers to education and participation so that financial
-                circumstances do not prevent eligible young people from accessing learning opportunities.
+                {c.public_benefit_statement}
               </p>
             </div>
             <div className="grid sm:grid-cols-2 gap-6 mt-10">
               <div>
                 <h3 className="font-display font-bold text-lg text-foreground mb-3">
-                  What donations can support
+                  {c.donation_uses_heading}
                 </h3>
                 <ul className="space-y-2">
                   {donationUses.map((use) => (
@@ -139,7 +161,7 @@ const GetInvolved = () => {
                 </ul>
               </div>
               <div>
-                <h3 className="font-display font-bold text-lg text-foreground mb-3">Who we work with</h3>
+                <h3 className="font-display font-bold text-lg text-foreground mb-3">{c.partner_types_heading}</h3>
                 <ul className="space-y-2">
                   {partnerTypes.map((type) => (
                     <li key={type} className="flex items-start gap-3 text-sm text-muted-foreground">
@@ -158,17 +180,19 @@ const GetInvolved = () => {
           <div className="section-container grid lg:grid-cols-2 gap-10 items-center">
             <div className="rounded-2xl overflow-hidden shadow-lg">
               <img
-                src={mentorshipSession}
+                src={assetUrl(c.closing_image) || mentorshipSession}
                 alt="A mentor supporting a learner during a Sara Foundation Africa session"
                 className="w-full h-64 md:h-80 object-cover"
                 loading="lazy"
+                onError={(e) => {
+                  e.currentTarget.src = mentorshipSession;
+                }}
               />
             </div>
             <div>
-              <h2 className="section-title text-foreground mb-4">Share what you know</h2>
+              <h2 className="section-title text-foreground mb-4">{c.closing_headline}</h2>
               <p className="section-subtitle mb-6">
-                Mentors, trainers, facilitators, speakers and expert session contributors make our learning
-                pathways possible. If you can give a few hours, you can help someone keep learning.
+                {c.closing_description}
               </p>
               <div className="flex flex-col sm:flex-row gap-3">
                 <Button size="lg" asChild>

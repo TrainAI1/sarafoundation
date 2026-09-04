@@ -33,7 +33,7 @@ type MarqueeCard = {
   tone: "light" | "dark" | "accent";
 };
 
-const marqueeCards: MarqueeCard[] = [
+const defaultMarqueeCards: MarqueeCard[] = [
   { src: capHappyCoder, name: "CAP Tech Hub", role: "Practical learning session", tone: "light" },
   { src: "", name: "57", role: "Women across FLIP fellowship & mentorship", tone: "accent" },
   { src: assetUrl(eventGroupPhoto), name: "CAP Tech Hub", role: "Cohort group photo", tone: "dark" },
@@ -52,6 +52,10 @@ const marqueeCards: MarqueeCard[] = [
 
 export function HeroSection() {
   const { data: c } = usePageContent("home-hero", defaults);
+  const { data: marqueeContent } = usePageContent("home-hero-marquee", {
+    marquee_cards: defaultMarqueeCards,
+  });
+  const marqueeCards = marqueeContent.marquee_cards as MarqueeCard[];
   const loop = [...marqueeCards, ...marqueeCards];
 
   return (
@@ -160,6 +164,9 @@ export function HeroSection() {
                         fetchPriority={i === 0 ? "high" : "auto"}
                         decoding="async"
                         className="absolute inset-0 w-full h-full object-cover"
+                        onError={(e) => {
+                          e.currentTarget.src = capHappyCoder;
+                        }}
                       />
                     )}
                     {card.tone === "accent" ? (

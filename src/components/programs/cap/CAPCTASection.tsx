@@ -1,56 +1,55 @@
 import { Button } from "@/components/ui/button";
 import { GraduationCap, Users, Mail, ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
+import { usePageContent } from "@/hooks/usePageContent";
 
-const actions = [
-  {
-    icon: GraduationCap,
-    label: "Enrol Your Hub",
-    sublabel: "School Associations",
-    to: "/partnership/school-community",
-  },
-  {
-    icon: Users,
-    label: "Become a CAP Member",
-    sublabel: "Young people & women",
-    to: "/programs/cap/apply",
-  },
-  {
-    icon: Mail,
-    label: "Get in Touch",
-    sublabel: "Individuals & learners",
-    to: "/contact",
-  },
-];
+const actionIcons = [GraduationCap, Users, Mail];
 
 export function CAPCTASection() {
+  const { data: c } = usePageContent("cap-cta", {
+    headline: "Ready to Build Africa's Tech Future?",
+    description: "Partner with CAP Tech Hub. Support young people in your community. Widen access to learning.",
+    actions: [
+      { label: "Enrol Your Hub", sublabel: "School Associations", to: "/partnership/school-community" },
+      { label: "Become a CAP Member", sublabel: "Young people & women", to: "/programs/cap/apply" },
+      { label: "Get in Touch", sublabel: "Individuals & learners", to: "/contact" },
+    ],
+    contact_line1: "info@sarafoundationafrica.com   sarafoundationafrica.com",
+    contact_line2: "+44 7435 126104 (UK) | +234 9076 66404 (NG)",
+  });
+
+  const actions = c.actions as { label: string; sublabel: string; to: string }[];
+
   return (
     <section className="py-16 md:py-24 bg-primary">
       <div className="section-container text-center px-4">
         <h2 className="font-display text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-4 md:mb-6">
-          Ready to Build Africa's Tech Future?
+          {c.headline}
         </h2>
         <p className="text-white/70 text-base md:text-lg mb-8 md:mb-10 max-w-2xl mx-auto">
-          Partner with CAP Tech Hub. Support young people in your community. Widen access to learning.
+          {c.description}
         </p>
 
         <div className="grid sm:grid-cols-3 gap-4 md:gap-6 max-w-3xl mx-auto mb-10">
-          {actions.map((action) => (
-            <Link
-              key={action.label}
-              to={action.to}
-              className="glass-card-dark p-5 md:p-6 rounded-xl hover:bg-white/20 transition-colors group text-center"
-            >
-              <action.icon className="w-8 h-8 text-white mx-auto mb-3" />
-              <h3 className="font-display font-bold text-white text-sm md:text-base mb-1">{action.label}</h3>
-              <p className="text-white/60 text-xs">{action.sublabel}</p>
-            </Link>
-          ))}
+          {actions.map((action, index) => {
+            const Icon = actionIcons[index % actionIcons.length];
+            return (
+              <Link
+                key={action.label}
+                to={action.to}
+                className="glass-card-dark p-5 md:p-6 rounded-xl hover:bg-white/20 transition-colors group text-center"
+              >
+                <Icon className="w-8 h-8 text-white mx-auto mb-3" />
+                <h3 className="font-display font-bold text-white text-sm md:text-base mb-1">{action.label}</h3>
+                <p className="text-white/60 text-xs">{action.sublabel}</p>
+              </Link>
+            );
+          })}
         </div>
 
         <div className="text-white/50 text-xs space-y-1">
-          <p> info@sarafoundationafrica.com &nbsp;  sarafoundationafrica.com</p>
-          <p> +44 7435 126104 (UK) | +234 9076 66404 (NG)</p>
+          <p>{c.contact_line1}</p>
+          <p>{c.contact_line2}</p>
         </div>
       </div>
     </section>

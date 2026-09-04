@@ -11,6 +11,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import { usePageContent } from "@/hooks/usePageContent";
 
 import scintillaImg from "@/assets/partners/scintilla.jpg";
 import familyImg from "@/assets/partners/farmily.jpg";
@@ -30,95 +31,63 @@ const currentSponsors = [
   { name: "Platform Hub", image: platformhubImg, tier: "Community Partner" },
 ];
 
-const sponsorBenefits = [
+// Icon and color are visual/structural and are matched to the saved list by position — not admin-editable.
+const sponsorBenefitMeta = [
+  { icon: Award, color: "bg-primary" },
+  { icon: Users, color: "bg-[hsl(240,80%,50%)]" },
+  { icon: TrendingUp, color: "bg-accent" },
+];
+
+const sponsorBenefitsDefault = [
   {
     number: "01",
-    icon: Award,
     title: "Enhanced Brand Reputation",
     subtitle: "Demonstrates Corporate Social Responsibility",
-    benefits: [
-      "Position your organization or higher institution by sponsoring students",
-      "Be recognized as a supporter of women's empowerment and progress",
-      "Showcase your commitment to diversity and inclusion in tech",
-    ],
-    color: "bg-primary",
+    benefits: "Position your organization or higher institution by sponsoring students\nBe recognized as a supporter of women's empowerment and progress\nShowcase your commitment to diversity and inclusion in tech",
   },
   {
     number: "02",
-    icon: Users,
     title: "Talent Acquisition and Development",
     subtitle: "Access to Skilled and Diverse Workforce",
-    benefits: [
-      "Position yourself as an attractive employer or investor for women and youth in tech",
-      "Contribute to the development of a skilled tech workforce in Africa",
-      "Collaborate and fund women-led startups on innovative projects",
-      "Offer internships or mentorships to students",
-    ],
-    color: "bg-[hsl(240,80%,50%)]",
+    benefits: "Position yourself as an attractive employer or investor for women and youth in tech\nContribute to the development of a skilled tech workforce in Africa\nCollaborate and fund women-led startups on innovative projects\nOffer internships or mentorships to students",
   },
   {
     number: "03",
-    icon: TrendingUp,
     title: "Market Access and Business Growth",
     subtitle: "Expand Your Reach in Africa",
-    benefits: [
-      "Reach a new and growing market segment of women consumers and businesses",
-      "Network with budding to influential individuals and organizations within the African tech ecosystem",
-      "Gain valuable insights into the African tech landscape and consumer trends",
-      "Identify new suppliers and partners within the FLIP network to diversify your supply chain",
-      "Generate new business opportunities and increase your revenue by supporting women-led startups",
-    ],
-    color: "bg-accent",
+    benefits: "Reach a new and growing market segment of women consumers and businesses\nNetwork with budding to influential individuals and organizations within the African tech ecosystem\nGain valuable insights into the African tech landscape and consumer trends\nIdentify new suppliers and partners within the FLIP network to diversify your supply chain\nGenerate new business opportunities and increase your revenue by supporting women-led startups",
   },
 ];
 
-const sponsorshipTiers = [
+const sponsorshipTiersDefault = [
   {
     name: "Platinum",
     amount: "$10,000+",
-    perks: [
-      "Logo on all event materials and website",
-      "Speaking slot at annual summit",
-      "Exclusive talent pipeline access",
-      "Quarterly impact report with your branding",
-      "5 scholarship naming rights",
-      "VIP access to all Sara Foundation events",
-    ],
-    featured: true,
+    perks: "Logo on all event materials and website\nSpeaking slot at annual summit\nExclusive talent pipeline access\nQuarterly impact report with your branding\n5 scholarship naming rights\nVIP access to all Sara Foundation events",
+    featured: "true",
   },
   {
     name: "Gold",
     amount: "$5,000 – $9,999",
-    perks: [
-      "Logo on event materials and website",
-      "Early sight of learner project showcases",
-      "Bi-annual impact report",
-      "2 scholarship naming rights",
-      "Invitations to networking events",
-    ],
-    featured: false,
+    perks: "Logo on event materials and website\nEarly sight of learner project showcases\nBi-annual impact report\n2 scholarship naming rights\nInvitations to networking events",
+    featured: "false",
   },
   {
     name: "Silver",
     amount: "$1,000 – $4,999",
-    perks: [
-      "Logo on website",
-      "Annual impact report",
-      "Recognition at events",
-      "Newsletter mentions",
-    ],
-    featured: false,
+    perks: "Logo on website\nAnnual impact report\nRecognition at events\nNewsletter mentions",
+    featured: "false",
   },
 ];
 
-const sponsorProcess = [
+const sponsorProcessDefault = [
   { step: "01", title: "Choose Your Tier", description: "Select a sponsorship level that aligns with your budget and goals." },
   { step: "02", title: "Discuss Goals", description: "We meet to understand what you want to achieve through sponsorship." },
   { step: "03", title: "Agreement & Payment", description: "Formalize sponsorship with clear deliverables and timelines." },
   { step: "04", title: "Activation & Reporting", description: "We activate your sponsorship and provide regular impact reports." },
 ];
 
-const faqs = [
+const faqsDefault = [
   { q: "Can I sponsor a specific program?", a: "Yes! You can sponsor CAP, FLIP, or specific events like hackathons and workshops. We'll tailor the sponsorship to your preferences." },
   { q: "How will my sponsorship be recognized?", a: "Depending on your tier, recognition includes logo placement, social media mentions, event speaking slots, newsletter features, and impact reports with your branding." },
   { q: "Is my sponsorship tax-deductible?", a: "Sara Foundation Africa is a registered non-profit. We provide official receipts for tax purposes. Please consult your tax advisor for specific advice." },
@@ -127,6 +96,29 @@ const faqs = [
 ];
 
 export default function Sponsors() {
+  const { data: c } = usePageContent("partnership-sponsors", {
+    hero_headline: "Sponsor Our Mission",
+    hero_description: "We are a non-profit organization established to promote SDG 5 and SDG 8 in Africa with a focus on technology and entrepreneurship. Our goal is to foster Diversity, Equity and Inclusion in technology and accelerate tech opportunities in Africa leveraging our initiatives: the Community Access & Participation Pathway (CAP) and Female Learning & Inclusion Pathway (FLIP).",
+    hero_description2: "Through CAP, we establish tech hubs across African universities. Through FLIP, we empower women tech professionals and tech founders for continued success in Africa.",
+    sponsor_benefits: sponsorBenefitsDefault,
+    sponsorship_tiers: sponsorshipTiersDefault,
+    process: sponsorProcessDefault,
+    faqs: faqsDefault,
+  });
+
+  const sponsorBenefits = (c.sponsor_benefits as typeof sponsorBenefitsDefault).map((item, i) => ({
+    ...item,
+    benefits: item.benefits.split("\n").map((b) => b.trim()).filter(Boolean),
+    ...(sponsorBenefitMeta[i] || sponsorBenefitMeta[sponsorBenefitMeta.length - 1]),
+  }));
+  const sponsorshipTiers = (c.sponsorship_tiers as typeof sponsorshipTiersDefault).map((tier) => ({
+    ...tier,
+    perks: tier.perks.split("\n").map((p) => p.trim()).filter(Boolean),
+    featured: tier.featured === "true",
+  }));
+  const sponsorProcess = c.process as typeof sponsorProcessDefault;
+  const faqs = c.faqs as typeof faqsDefault;
+
   return (
     <div className="min-h-screen bg-background">
       <Helmet>
@@ -161,18 +153,13 @@ export default function Sponsors() {
               Sponsors
             </span>
             <h1 className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 md:mb-6 leading-tight">
-              Sponsor Our Mission
+              {c.hero_headline}
             </h1>
             <p className="text-base md:text-xl text-white/70 leading-relaxed mb-6 md:mb-8 max-w-3xl mx-auto">
-              We are a non-profit organization established to promote SDG 5 and SDG 8 in Africa 
-              with a focus on technology and entrepreneurship. Our goal is to foster Diversity, 
-              Equity and Inclusion in technology and accelerate tech opportunities in Africa 
-              leveraging our initiatives: the Community Access & Participation Pathway (CAP) and Female 
-              Learning & Inclusion Pathway (FLIP).
+              {c.hero_description}
             </p>
             <p className="text-sm md:text-lg text-white/60 mb-6 md:mb-8 max-w-3xl mx-auto">
-              Through CAP, we establish tech hubs across African universities. Through FLIP, 
-              we empower women tech professionals and tech founders for continued success in Africa.
+              {c.hero_description2}
             </p>
             <Button variant="hero" size="lg" className="w-full sm:w-auto" asChild>
               <Link to="/contact">

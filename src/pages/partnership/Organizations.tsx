@@ -11,6 +11,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import { usePageContent } from "@/hooks/usePageContent";
 
 import scintillaImg from "@/assets/partners/scintilla.jpg";
 import familyImg from "@/assets/partners/farmily.jpg";
@@ -30,54 +31,39 @@ const strategicPartners = [
   { name: "Platform Hub", image: platformhubImg, type: "Community Partner" },
 ];
 
-const partnerCategories = [
+// Icon and color are visual/structural and are matched to the saved list by position — not admin-editable.
+const partnerCategoryMeta = [
+  { icon: Briefcase, color: "bg-primary" },
+  { icon: Landmark, color: "bg-[hsl(240,80%,50%)]" },
+  { icon: Heart, color: "bg-accent" },
+];
+
+const partnerCategoriesDefault = [
   {
     number: "01",
-    icon: Briefcase,
     title: "Corporates",
-    benefits: [
-      "Enhanced Brand Reputation",
-      "Talent Acquisition - Access to skilled and diverse workforce",
-      "Gain valuable market insights into the African tech market and consumer behavior",
-      "Promote CSR in an impact-driven way empowering women",
-      "Inclusion and Innovation Boost by promoting gender-based initiatives to drive innovation and societal impact",
-    ],
-    color: "bg-primary",
+    benefits: "Enhanced Brand Reputation\nTalent Acquisition - Access to skilled and diverse workforce\nGain valuable market insights into the African tech market and consumer behavior\nPromote CSR in an impact-driven way empowering women\nInclusion and Innovation Boost by promoting gender-based initiatives to drive innovation and societal impact",
   },
   {
     number: "02",
-    icon: Landmark,
     title: "Government",
-    benefits: [
-      "Access to data and insights to inform policymaking related to women in tech",
-      "Skill Development for women",
-      "Contribute to the development of the tech ecosystem and job creation to enhance economic growth",
-      "Advance gender equality and women's empowerment goals and promote social impact",
-    ],
-    color: "bg-[hsl(240,80%,50%)]",
+    benefits: "Access to data and insights to inform policymaking related to women in tech\nSkill Development for women\nContribute to the development of the tech ecosystem and job creation to enhance economic growth\nAdvance gender equality and women's empowerment goals and promote social impact",
   },
   {
     number: "03",
-    icon: Heart,
     title: "Foundations",
-    benefits: [
-      "Provide Resources for widened impact",
-      "Enhance organizational capabilities through partnerships and knowledge sharing",
-      "Expand reach and influence through collaborations with FLIP",
-      "Contribute to achieving shared goals of women's empowerment, gender equality and promote social impact",
-    ],
-    color: "bg-accent",
+    benefits: "Provide Resources for widened impact\nEnhance organizational capabilities through partnerships and knowledge sharing\nExpand reach and influence through collaborations with FLIP\nContribute to achieving shared goals of women's empowerment, gender equality and promote social impact",
   },
 ];
 
-const partnershipProcess = [
+const partnershipProcessDefault = [
   { step: "01", title: "Reach Out", description: "Contact us to express your interest in partnering." },
   { step: "02", title: "Discovery Call", description: "We discuss your organization's goals and how we can align." },
   { step: "03", title: "Partnership Proposal", description: "We create a tailored proposal with clear objectives and KPIs." },
   { step: "04", title: "Launch & Report", description: "We execute and provide regular impact reports." },
 ];
 
-const whatWeOffer = [
+const whatWeOfferDefault = [
   { title: "Co-branded Programs", description: "Joint initiatives that carry your brand alongside ours for maximum visibility." },
   { title: "Talent Pipeline", description: "Direct access to trained, vetted tech professionals from our programs." },
   { title: "Impact Reporting", description: "Quarterly reports detailing the impact of your partnership contribution." },
@@ -86,7 +72,7 @@ const whatWeOffer = [
   { title: "Thought Leadership", description: "Joint publications, webinars, and speaking engagements on key topics." },
 ];
 
-const faqs = [
+const faqsDefault = [
   { q: "What types of organizations can partner with you?", a: "We welcome partnerships from corporates, government agencies, foundations, NGOs, and international development organizations committed to tech talent development in Africa." },
   { q: "Is there a minimum commitment period?", a: "We recommend a 12-month partnership to achieve meaningful impact, but we can customize the duration based on your objectives." },
   { q: "How is impact measured?", a: "We track key metrics including learners trained, women supported, projects completed and continued learning journeys. Partners receive quarterly impact dashboards." },
@@ -94,6 +80,24 @@ const faqs = [
 ];
 
 export default function Organizations() {
+  const { data: c } = usePageContent("partnership-organizations", {
+    hero_headline: "Partner with Sara Foundation Africa",
+    hero_description: "We are a non-profit organization established to promote SDG 4, SDG 5 and SDG 8 in Africa with a focus on technology and entrepreneurship.",
+    what_we_offer: whatWeOfferDefault,
+    partner_categories: partnerCategoriesDefault,
+    process: partnershipProcessDefault,
+    faqs: faqsDefault,
+  });
+
+  const whatWeOffer = c.what_we_offer as typeof whatWeOfferDefault;
+  const partnerCategories = (c.partner_categories as typeof partnerCategoriesDefault).map((item, i) => ({
+    ...item,
+    benefits: item.benefits.split("\n").map((b) => b.trim()).filter(Boolean),
+    ...(partnerCategoryMeta[i] || partnerCategoryMeta[partnerCategoryMeta.length - 1]),
+  }));
+  const partnershipProcess = c.process as typeof partnershipProcessDefault;
+  const faqs = c.faqs as typeof faqsDefault;
+
   return (
     <div className="min-h-screen bg-background">
       <Helmet>
@@ -128,11 +132,10 @@ export default function Organizations() {
               Partners & Collaborators
             </span>
             <h1 className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 md:mb-6 leading-tight">
-              Partner with Sara Foundation Africa
+              {c.hero_headline}
             </h1>
             <p className="text-base md:text-xl text-white/70 leading-relaxed mb-6 md:mb-8 max-w-3xl mx-auto">
-              We are a non-profit organization established to promote SDG 4, SDG 5 and SDG 8 in Africa 
-              with a focus on technology and entrepreneurship.
+              {c.hero_description}
             </p>
             <Button variant="hero" size="lg" className="w-full sm:w-auto" asChild>
               <Link to="/contact">

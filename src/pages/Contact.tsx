@@ -19,13 +19,6 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 
-const contactInfo = [
-  { icon: Mail, title: "Email Us", value: "info@sarafoundationafrica.com", href: "mailto:info@sarafoundationafrica.com" },
-  { icon: Phone, title: "Call Us (UK)", value: "+44 7435 126104", href: "tel:+447435126104" },
-  { icon: Phone, title: "Call Us (NG)", value: "+234 9076 664049", href: "tel:+2349076664049" },
-  { icon: Clock, title: "Office Hours", value: "Mon - Fri, 9am - 5pm", href: null },
-];
-
 const socialLinks = [
   { icon: Linkedin, name: "LinkedIn", href: "https://www.linkedin.com/company/sara-foundation/" },
   { icon: Twitter, name: "Twitter/X", href: "https://x.com/Sarafoundations" },
@@ -59,10 +52,25 @@ export default function Contact() {
     : contactFaqDefaults;
 
   const { data: contactContent } = usePageContent("contact-info", {
+    headline: "Let's Start a Conversation",
+    description: "Have questions about our programs or want to partner with us? We'd love to hear from you.",
     email: "info@sarafoundationafrica.com",
     phone: "+44 7435 126104",
+    phone_ng: "+234 9076 664049",
+    office_hours: "Mon - Fri, 9am - 5pm",
     address: "E14 8AT, London, UK",
+    offices: [
+      { city: "London", country: "United Kingdom", address: "E14 8AT, London" },
+      { city: "Lagos", country: "Nigeria", address: "Bafaj Crescent, Awoyaya-Eputu, Ibeju Lekki" },
+    ],
   });
+
+  const contactInfo = [
+    { icon: Mail, title: "Email Us", value: contactContent.email, href: `mailto:${contactContent.email}` },
+    { icon: Phone, title: "Call Us (UK)", value: contactContent.phone, href: `tel:${contactContent.phone.replace(/\s+/g, "")}` },
+    { icon: Phone, title: "Call Us (NG)", value: contactContent.phone_ng, href: `tel:${contactContent.phone_ng.replace(/\s+/g, "")}` },
+    { icon: Clock, title: "Office Hours", value: contactContent.office_hours, href: null },
+  ];
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -166,11 +174,10 @@ export default function Contact() {
               Get in Touch
             </span>
             <h1 className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 md:mb-6 leading-tight">
-              Let's Start a Conversation
+              {contactContent.headline}
             </h1>
             <p className="text-base md:text-xl text-white/70 leading-relaxed">
-              Have questions about our programs or want to partner with us? 
-              We'd love to hear from you.
+              {contactContent.description}
             </p>
           </div>
         </div>
@@ -178,7 +185,7 @@ export default function Contact() {
 
       {/* Contact Section */}
       <section className="py-16 md:py-24">
-        <div className="section-container px-4 lg:px-0">
+        <div className="section-container">
           <div className="grid lg:grid-cols-2 gap-10 md:gap-16">
             {/* Contact Form */}
             <div>
@@ -389,7 +396,7 @@ export default function Contact() {
 
       {/* Office Locations */}
       <section className="py-16 md:py-24 bg-background">
-        <div className="section-container px-4 lg:px-0">
+        <div className="section-container">
           <div className="text-center max-w-3xl mx-auto mb-10 md:mb-16">
             <span className="section-badge mb-4 md:mb-6">
               <MapPin className="w-4 h-4" />
@@ -401,10 +408,7 @@ export default function Contact() {
           </div>
 
           <div className="grid sm:grid-cols-2 gap-4 md:gap-6 max-w-2xl mx-auto">
-            {[
-              { city: "London", country: "United Kingdom", address: "E14 8AT, London" },
-              { city: "Lagos", country: "Nigeria", address: "Bafaj Crescent, Awoyaya-Eputu, Ibeju Lekki" },
-            ].map((office) => (
+            {(contactContent.offices as { city: string; country: string; address: string }[]).map((office) => (
               <div key={office.city} className="card-modern p-5 md:p-6 text-center">
                 <div className="w-10 h-10 md:w-12 md:h-12 mx-auto rounded-lg md:rounded-xl bg-primary flex items-center justify-center mb-3 md:mb-4">
                   <MapPin className="w-5 h-5 md:w-6 md:h-6 text-white" />

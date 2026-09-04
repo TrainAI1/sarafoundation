@@ -8,6 +8,8 @@ import { Helmet } from "react-helmet-async";
 import { Heart, Users, GraduationCap, Lightbulb, ArrowRight, HelpCircle, CheckCircle2 } from "lucide-react";
 import mentorshipSession from "@/assets/mentorship-session.jpg";
 import { useFAQItems } from "@/hooks/useFAQItems";
+import { usePageContent } from "@/hooks/usePageContent";
+import { assetUrl } from "@/lib/assetUrl";
 import {
   Accordion,
   AccordionContent,
@@ -28,14 +30,17 @@ const impactStories = [
   },
 ];
 
-const impactNumbers = [
-  { icon: Users, number: "763", label: "CAP learners fully funded" },
-  { icon: Heart, number: "57", label: "Women supported through FLIP" },
-  { icon: GraduationCap, number: "1,600", label: "Scholarships provided" },
-  { icon: Lightbulb, number: "11", label: "African countries reached" },
+// Icons for impact numbers are matched to the saved list by position and are not admin-editable.
+const impactNumberIcons = [Users, Heart, GraduationCap, Lightbulb];
+
+const impactNumbersDefault = [
+  { number: "763", label: "CAP learners fully funded" },
+  { number: "57", label: "Women supported through FLIP" },
+  { number: "1,600", label: "Scholarships provided" },
+  { number: "11", label: "African countries reached" },
 ];
 
-const whereItGoes = [
+const whereItGoesDefault = [
   { title: "Technology & Infrastructure", percentage: "50%", description: "This covers course platforms, learning infrastructure and assessment management." },
   { title: "Programme Operations", percentage: "40%", description: "This covers cohort management, impact reporting and the Foundation's operations." },
   { title: "Growth & Outreach", percentage: "10%", description: "This covers publicity campaigns, promotion and online engagements." },
@@ -51,12 +56,29 @@ const donationFaqDefaults = [
 ];
 
 export default function Donation() {
+  const { data: c } = usePageContent("donation-page", {
+    headline: "Help Widen Access to Learning",
+    description: "Donations help reduce barriers to learning. Depending on programme needs and available funding, your support can contribute to scholarships, bursaries, subsidised participation, educational resources, mentoring and community learning activities.",
+    impact_text: "Every donation helps us reduce barriers to education and participation so that financial circumstances do not prevent eligible young people from accessing learning opportunities.",
+    hero_image: "",
+    impact_numbers: impactNumbersDefault,
+    where_it_goes: whereItGoesDefault,
+    faqs: donationFaqDefaults,
+  });
+
+  const impactNumbers = (c.impact_numbers as typeof impactNumbersDefault).map((item, i) => ({
+    ...item,
+    icon: impactNumberIcons[i] || impactNumberIcons[impactNumberIcons.length - 1],
+  }));
+  const whereItGoes = c.where_it_goes as typeof whereItGoesDefault;
+  const cmsFaqDefaults = c.faqs as typeof donationFaqDefaults;
+
   const { data: dbFaqs } = useFAQItems();
   const faqs = dbFaqs && dbFaqs.length > 0
     ? dbFaqs.filter(f => f.question.toLowerCase().includes("donat") || f.answer.toLowerCase().includes("donat"))
-    : donationFaqDefaults;
+    : cmsFaqDefaults;
   // If no donation-specific FAQs in DB, use defaults
-  const displayFaqs = faqs.length > 0 ? faqs : donationFaqDefaults;
+  const displayFaqs = faqs.length > 0 ? faqs : cmsFaqDefaults;
   return (
     <div className="min-h-screen bg-background">
       <Helmet>
@@ -87,6 +109,9 @@ export default function Donation() {
       {/* Hero */}
       <section className="pt-24 md:pt-32 pb-12 md:pb-20 bg-primary relative overflow-hidden">
         <div className="absolute inset-0 opacity-30">
+          {c.hero_image && (
+            <img src={assetUrl(c.hero_image)} alt="" aria-hidden="true" className="w-full h-full object-cover" />
+          )}
         </div>
         <div className="section-container relative z-10">
           <div className="max-w-3xl px-4">
@@ -95,16 +120,13 @@ export default function Donation() {
               Donate
             </span>
             <h1 className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 md:mb-6 leading-tight">
-              Help Widen Access to Learning
+              {c.headline}
             </h1>
             <p className="text-base md:text-xl text-white/70 leading-relaxed">
-              Donations help reduce barriers to learning. Depending on programme needs and available funding,
-              your support can contribute to scholarships, bursaries, subsidised participation, educational
-              resources, mentoring and community learning activities.
+              {c.description}
             </p>
             <p className="mt-6 rounded-2xl bg-white/10 p-5 text-white font-medium leading-relaxed">
-              Every donation helps us reduce barriers to education and participation so that financial
-              circumstances do not prevent eligible young people from accessing learning opportunities.
+              {c.impact_text}
             </p>
           </div>
         </div>
@@ -114,8 +136,8 @@ export default function Donation() {
       <section className="py-8 md:py-12 bg-background border-b">
         <div className="section-container">
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-8 max-w-4xl mx-auto">
-            {impactNumbers.map((item) => (
-              <div key={item.label} className="text-center">
+            {impactNumbers.map((item, idx) => (
+              <div key={`${item.label}-${idx}`} className="text-center">
                 <div className="w-10 h-10 md:w-14 md:h-14 mx-auto rounded-xl md:rounded-2xl bg-primary flex items-center justify-center mb-2 md:mb-3 shadow-lg">
                   <item.icon className="w-5 h-5 md:w-7 md:h-7 text-white" />
                 </div>

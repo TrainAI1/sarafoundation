@@ -13,17 +13,21 @@ import {
   Info,
   Sparkles,
 } from "lucide-react";
+import { usePageContent } from "@/hooks/usePageContent";
 
-const activities = [
-  { icon: Lightbulb, title: "Insight sessions", desc: "Sessions that help participants understand roles, sectors and how organisations work." },
-  { icon: BookOpen, title: "Work-readiness education", desc: "Learning that builds the practical knowledge and habits participants need in a workplace setting." },
-  { icon: Users, title: "Mentoring", desc: "Guidance, feedback and reflection with experienced practitioners." },
-  { icon: Compass, title: "Educational exposure", desc: "Experiential opportunities that complement a participant's wider educational journey." },
-  { icon: Share2, title: "Knowledge sessions", desc: "Expert-led sessions that deepen understanding of technology and professional practice." },
-  { icon: Sparkles, title: "Referrals", desc: "Referrals to suitable external opportunities where these provide genuine further learning or experience." },
+// Icons are matched to the saved list by position and are not admin-editable.
+const activityIcons = [Lightbulb, BookOpen, Users, Compass, Share2, Sparkles];
+
+const activitiesDefault = [
+  { title: "Insight sessions", desc: "Sessions that help participants understand roles, sectors and how organisations work." },
+  { title: "Work-readiness education", desc: "Learning that builds the practical knowledge and habits participants need in a workplace setting." },
+  { title: "Mentoring", desc: "Guidance, feedback and reflection with experienced practitioners." },
+  { title: "Educational exposure", desc: "Experiential opportunities that complement a participant's wider educational journey." },
+  { title: "Knowledge sessions", desc: "Expert-led sessions that deepen understanding of technology and professional practice." },
+  { title: "Referrals", desc: "Referrals to suitable external opportunities where these provide genuine further learning or experience." },
 ];
 
-const evidence = [
+const evidenceDefault = [
   {
     value: "696",
     label: "Candidates prepared and referred",
@@ -47,6 +51,23 @@ const evidence = [
 ];
 
 export default function ProgramGJP() {
+  const { data: c } = usePageContent("programs-gjp", {
+    hero_badge: "Education Journey Pathway",
+    hero_headline_prefix: "Learning Beyond the",
+    hero_headline_highlight: "Sessions",
+    hero_description: "EJP supports continued learning through practical and experiential opportunities that complement participants' wider educational journeys.",
+    no_guarantee_text: "Sara Foundation Africa does not guarantee or promise employment through EJP. Where employment, internship or placement outcomes are mentioned, they are examples of participants' continued journeys following learning, or referrals to opportunities held by other organisations.",
+    activities: activitiesDefault,
+    evidence: evidenceDefault,
+    continued_journeys_text: "Some participants have continued their journeys through internships and roles with organisations in our network, including Scintilla and Farmily. These outcomes are held by the host organisations and are recorded as examples of continued learning journeys, not as placements guaranteed by Sara Foundation Africa.",
+  });
+
+  const activities = (c.activities as typeof activitiesDefault).map((item, i) => ({
+    ...item,
+    icon: activityIcons[i] || activityIcons[activityIcons.length - 1],
+  }));
+  const evidence = c.evidence as typeof evidenceDefault;
+
   return (
     <div className="min-h-screen bg-background">
       <Helmet>
@@ -70,14 +91,13 @@ export default function ProgramGJP() {
           <div className="absolute -top-20 right-1/4 w-[400px] h-[400px] rounded-full bg-primary/10 blur-3xl" />
           <div className="section-container relative px-4 max-w-4xl text-center">
             <span className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.18em] text-primary mb-5">
-              Education Journey Pathway
+              {c.hero_badge}
             </span>
             <h1 className="font-display text-3xl md:text-5xl lg:text-6xl font-bold text-foreground tracking-tight leading-tight mb-5">
-              Learning Beyond the <span className="gradient-text">Sessions</span>
+              {c.hero_headline_prefix} <span className="gradient-text">{c.hero_headline_highlight}</span>
             </h1>
             <p className="text-base md:text-lg text-muted-foreground max-w-2xl mx-auto mb-8">
-              EJP supports continued learning through practical and experiential opportunities that
-              complement participants' wider educational journeys.
+              {c.hero_description}
             </p>
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
               <Button asChild size="lg" className="rounded-xl glow-effect">
@@ -104,9 +124,7 @@ export default function ProgramGJP() {
             <div className="flex items-start gap-4">
               <Info className="w-6 h-6 text-primary flex-shrink-0 mt-1" aria-hidden="true" />
               <p className="text-foreground font-medium leading-relaxed">
-                Sara Foundation Africa does not guarantee or promise employment through EJP. Where employment,
-                internship or placement outcomes are mentioned, they are examples of participants' continued
-                journeys following learning, or referrals to opportunities held by other organisations.
+                {c.no_guarantee_text}
               </p>
             </div>
           </div>
@@ -164,10 +182,7 @@ export default function ProgramGJP() {
               What participants have gone on to do
             </h2>
             <p className="text-muted-foreground text-base md:text-lg mb-6">
-              Some participants have continued their journeys through internships and roles with
-              organisations in our network, including Scintilla and Farmily. These outcomes are held by the
-              host organisations and are recorded as examples of continued learning journeys, not as
-              placements guaranteed by Sara Foundation Africa.
+              {c.continued_journeys_text}
             </p>
             <p className="text-sm text-muted-foreground mb-8">
               <span className="inline-block rounded-lg bg-secondary px-3 py-1 text-xs font-semibold uppercase tracking-[0.12em] border border-dashed border-border">

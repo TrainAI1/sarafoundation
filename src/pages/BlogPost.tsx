@@ -7,6 +7,8 @@ import { ArrowLeft, Calendar, User } from "lucide-react";
 import { Helmet } from "react-helmet-async";
 import { markdownToHtml } from "@/lib/markdown";
 import { BlogShareButtons } from "@/components/BlogShareButtons";
+import { assetUrl } from "@/lib/assetUrl";
+import studentsLabImg from "@/assets/students-tech-lab.jpg";
 import type { Tables } from "@/integrations/supabase/types";
 
 type BlogPost = Tables<"blog_posts">;
@@ -122,7 +124,15 @@ export default function BlogPostPage() {
           </div>
 
           {post.cover_image && (
-            <img src={post.cover_image} alt={post.title} decoding="async" className="w-full rounded-2xl mb-8 object-cover max-h-96" />
+            <img
+              src={assetUrl(post.cover_image)}
+              alt={post.title}
+              decoding="async"
+              className="w-full rounded-2xl mb-8 object-cover max-h-96"
+              onError={(e) => {
+                e.currentTarget.src = studentsLabImg;
+              }}
+            />
           )}
 
           <div

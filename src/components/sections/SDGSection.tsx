@@ -1,24 +1,29 @@
 import { BookOpen, Users, Briefcase } from "lucide-react";
 import { ScrollAnimation } from "@/components/ui/scroll-animation";
+import { usePageContent } from "@/hooks/usePageContent";
 
-const sdgGoals = [
+// Icons are code, not admin-editable content — kept in a local lookup keyed by SDG number.
+const sdgIcons: Record<number, typeof BookOpen> = {
+  4: BookOpen,
+  5: Users,
+  8: Briefcase,
+};
+
+const defaultSdgGoals = [
   {
     number: 4,
-    icon: BookOpen,
     title: "Quality Education",
     description: "To ensure inclusive and equitable quality education and promote lifelong learning opportunities for all.",
     color: "bg-primary",
   },
   {
     number: 5,
-    icon: Users,
     title: "Gender Equality",
     description: "To empower and uplift women entrepreneurs and professionals in technology, fostering a supportive community that encourages leadership, collaboration, and innovation.",
     color: "bg-[hsl(240,80%,50%)]",
   },
   {
     number: 8,
-    icon: Briefcase,
     title: "Decent Work & Economic Growth",
     description: "To foster a vibrant and collaborative tech community within African universities, driving innovation, skills development, and technology-driven solutions.",
     color: "bg-primary",
@@ -26,6 +31,15 @@ const sdgGoals = [
 ];
 
 export function SDGSection() {
+  const { data: c } = usePageContent("home-sdg", {
+    sdg_goals: defaultSdgGoals,
+  });
+
+  const sdgGoals = (c.sdg_goals as typeof defaultSdgGoals).map((goal) => ({
+    ...goal,
+    icon: sdgIcons[goal.number] ?? BookOpen,
+  }));
+
   return (
     <section className="py-12 md:py-16 bg-primary">
       <div className="section-container">

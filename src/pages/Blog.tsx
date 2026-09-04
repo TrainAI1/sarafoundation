@@ -8,6 +8,7 @@ import { toast } from "sonner";
 import { ArrowRight, Calendar, Clock, User, Tag, Newspaper, Search, ChevronRight } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { supabase } from "@/integrations/supabase/client";
+import { assetUrl } from "@/lib/assetUrl";
 import studentsLabImg from "@/assets/students-tech-lab.jpg";
 import techConferenceSpeaker from "@/assets/tech-conference-speaker.jpg";
 
@@ -54,7 +55,7 @@ export default function Blog() {
     id: p.id,
     title: p.title,
     excerpt: p.excerpt || "",
-    image: p.cover_image || studentsLabImg,
+    image: p.cover_image ? assetUrl(p.cover_image) : studentsLabImg,
     author_name: p.author_name,
     date: new Date(p.published_at || p.created_at).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" }),
     category: p.category || "General",
@@ -141,7 +142,7 @@ export default function Blog() {
 
       {/* Blog Content */}
       <section className="py-10 md:py-16 bg-secondary/30">
-        <div className="section-container px-4 lg:px-0">
+        <div className="section-container">
           <div className="flex flex-col gap-4 mb-8 md:mb-12">
             <div className="relative flex-1 max-w-md">
               <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
@@ -165,12 +166,24 @@ export default function Blog() {
                 {post.isDb ? (
                   <Link to={`/blog/${post.slug}`}>
                     <div className="aspect-video overflow-hidden relative">
-                      {post.image && typeof post.image === 'string' && post.image.startsWith('http') ? (
-                        <img src={post.image} alt={post.title} loading="lazy" decoding="async" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                      {post.image ? (
+                        <img
+                          src={post.image}
+                          alt={post.title}
+                          loading="lazy"
+                          decoding="async"
+                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                          onError={(e) => {
+                            e.currentTarget.src = studentsLabImg;
+                          }}
+                        />
                       ) : (
-                        <div className="w-full h-full bg-primary/20 flex items-center justify-center">
-                          <Newspaper className="w-12 h-12 text-primary/30" />
-                        </div>
+                        <img
+                          src={studentsLabImg}
+                          alt={post.title}
+                          loading="lazy"
+                          className="w-full h-full object-cover"
+                        />
                       )}
                     </div>
                   </Link>

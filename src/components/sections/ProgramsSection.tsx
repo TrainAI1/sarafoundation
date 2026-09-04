@@ -5,56 +5,70 @@ import studentsLabImg from "@/assets/students-tech-lab.jpg";
 import womenTechLeaders from "@/assets/women-tech-leaders.jpg";
 import graduatesCelebration from "@/assets/graduates-celebration.jpg";
 import { ScrollAnimation, StaggerContainer, StaggerItem } from "@/components/ui/scroll-animation";
-
-const pathways = [
-  {
-    id: "cap",
-    code: "CAP",
-    icon: GraduationCap,
-    title: "Community Access & Participation Pathway",
-    description:
-      "Expands access to practical tech education through CAP Tech Hubs, structured learning, mentoring, projects and community-based learning for young people from underserved communities.",
-    image: studentsLabImg,
-    imageAlt: "CAP learners taking part in a practical digital learning session",
-    highlights: ["Structured digital learning", "Mentoring & guided projects", "Demo days & showcases"],
-    accent: "bg-primary",
-    cta: "Explore CAP",
-    href: "/programs/cap",
-    variant: "default" as const,
-  },
-  {
-    id: "flip",
-    code: "FLIP",
-    icon: Users,
-    title: "Female Learning & Inclusion Pathway",
-    description:
-      "Increases women's participation in tech learning through mentoring, inclusive opportunities, supportive communities and access to learning.",
-    image: womenTechLeaders,
-    imageAlt: "Women taking part in a FLIP learning and mentoring session",
-    highlights: ["Fellowship & mentorship", "Workshops & conference", "Capstone learning projects"],
-    accent: "bg-accent",
-    cta: "Explore FLIP",
-    href: "/programs/flip",
-    variant: "accent" as const,
-  },
-  {
-    id: "ejp",
-    code: "EJP",
-    icon: Compass,
-    title: "Education Journey Pathway",
-    description:
-      "Supports continued learning through insight, work-readiness education, mentoring, experiential exposure and referrals that deepen participants' learning journeys.",
-    image: graduatesCelebration,
-    imageAlt: "Participants at a Sara Foundation Africa work-readiness learning session",
-    highlights: ["Insight & knowledge sessions", "Work-readiness education", "Referrals to further learning"],
-    accent: "bg-primary",
-    cta: "Explore EJP",
-    href: "/programs/gjp",
-    variant: "default" as const,
-  },
-];
+import { usePageContent } from "@/hooks/usePageContent";
+import { assetUrl } from "@/lib/assetUrl";
 
 export function ProgramsSection() {
+  const { data: c } = usePageContent("home-programs", {
+    badge: "Our Learning Pathways",
+    headline: "Three routes into learning and participation",
+    description: "CAP, FLIP and EJP turn our charitable purposes into structured learning pathways, each designed around the barriers the people we support actually face.",
+    cap_title: "Community Access & Participation Pathway",
+    cap_description: "Expands access to practical tech education through CAP Tech Hubs, structured learning, mentoring, projects and community-based learning for young people from underserved communities.",
+    cap_image: "",
+    flip_title: "Female Learning & Inclusion Pathway",
+    flip_description: "Increases women's participation in tech learning through mentoring, inclusive opportunities, supportive communities and access to learning.",
+    flip_image: "",
+    ejp_title: "Education Journey Pathway",
+    ejp_description: "Supports continued learning through insight, work-readiness education, mentoring, experiential exposure and referrals that deepen participants' learning journeys.",
+    ejp_image: "",
+  });
+
+  const pathways = [
+    {
+      id: "cap",
+      code: "CAP",
+      icon: GraduationCap,
+      title: c.cap_title,
+      description: c.cap_description,
+      image: c.cap_image ? assetUrl(c.cap_image) : studentsLabImg,
+      imageAlt: "CAP learners taking part in a practical digital learning session",
+      highlights: ["Structured digital learning", "Mentoring & guided projects", "Demo days & showcases"],
+      accent: "bg-primary",
+      cta: "Explore CAP",
+      href: "/programs/cap",
+      variant: "default" as const,
+    },
+    {
+      id: "flip",
+      code: "FLIP",
+      icon: Users,
+      title: c.flip_title,
+      description: c.flip_description,
+      image: c.flip_image ? assetUrl(c.flip_image) : womenTechLeaders,
+      imageAlt: "Women taking part in a FLIP learning and mentoring session",
+      highlights: ["Fellowship & mentorship", "Workshops & conference", "Capstone learning projects"],
+      accent: "bg-accent",
+      cta: "Explore FLIP",
+      href: "/programs/flip",
+      variant: "accent" as const,
+    },
+    {
+      id: "ejp",
+      code: "EJP",
+      icon: Compass,
+      title: c.ejp_title,
+      description: c.ejp_description,
+      image: c.ejp_image ? assetUrl(c.ejp_image) : graduatesCelebration,
+      imageAlt: "Participants at a Sara Foundation Africa work-readiness learning session",
+      highlights: ["Insight & knowledge sessions", "Work-readiness education", "Referrals to further learning"],
+      accent: "bg-primary",
+      cta: "Explore EJP",
+      href: "/programs/gjp",
+      variant: "default" as const,
+    },
+  ];
+
   return (
     <section className="py-16 md:py-24 lg:py-32 bg-secondary/50 relative overflow-hidden">
       <div className="absolute top-0 right-0 w-[500px] h-[500px] rounded-full bg-primary/5 blur-3xl" />
@@ -62,14 +76,12 @@ export function ProgramsSection() {
 
       <div className="section-container relative z-10">
         <ScrollAnimation variant="fade-up" className="text-center max-w-3xl mx-auto mb-10 md:mb-16 px-4">
-          <span className="section-badge mb-6">Our Learning Pathways</span>
+          <span className="section-badge mb-6">{c.badge}</span>
           <h2 className="section-title text-foreground mb-6 text-balance">
-            Three routes into{" "}
-            <span className="gradient-text-accent">learning and participation</span>
+            {c.headline}
           </h2>
           <p className="section-subtitle mx-auto">
-            CAP, FLIP and EJP turn our charitable purposes into structured learning pathways, each designed
-            around the barriers the people we support actually face.
+            {c.description}
           </p>
         </ScrollAnimation>
 
@@ -83,6 +95,9 @@ export function ProgramsSection() {
                     alt={pathway.imageAlt}
                     loading="lazy"
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    onError={(e) => {
+                      e.currentTarget.src = pathway.id === 'flip' ? womenTechLeaders : pathway.id === 'ejp' ? graduatesCelebration : studentsLabImg;
+                    }}
                   />
                   <div className={`absolute inset-0 ${pathway.accent} opacity-70`} />
                   <div className="absolute bottom-0 left-0 right-0 p-5 md:p-8">

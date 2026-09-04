@@ -1,6 +1,8 @@
 import { MonitorSmartphone, HeartHandshake, Users } from "lucide-react";
 import adultLearnerImg from "@/assets/events/DSC_3143.jpg.asset.json";
 import professionalLearningImg from "@/assets/events/DSC_3217.jpg.asset.json";
+import communityWorkshop from "@/assets/community-workshop.jpg";
+import techEntrepreneurs from "@/assets/tech-entrepreneurs.jpg";
 import { ScrollAnimation, StaggerContainer, StaggerItem } from "@/components/ui/scroll-animation";
 import { usePageContent } from "@/hooks/usePageContent";
 import { assetUrl } from "@/lib/assetUrl";
@@ -48,8 +50,7 @@ export function MissionSection() {
             <div>
               <span className="section-badge mb-6">{c.badge}</span>
               <h2 className="section-title text-foreground mb-6 text-balance">
-                Access to digital education and lifelong learning is{" "}
-                <span className="gradient-text">not equal</span>
+                {c.headline}
               </h2>
               <p className="section-subtitle">{c.description}</p>
             </div>
@@ -61,12 +62,18 @@ export function MissionSection() {
                 alt="CAP participant listening during a Sara Foundation Africa session"
                 className="w-full h-40 md:h-56 object-cover rounded-2xl shadow-lg"
                 loading="lazy"
+                onError={(e) => {
+                  e.currentTarget.src = communityWorkshop;
+                }}
               />
               <img
                 src={assetUrl(professionalLearningImg)}
                 alt="Attendees at a Sara Foundation Africa campus session"
                 className="w-full h-40 md:h-56 object-cover rounded-2xl shadow-lg mt-6"
                 loading="lazy"
+                onError={(e) => {
+                  e.currentTarget.src = techEntrepreneurs;
+                }}
               />
             </div>
           </ScrollAnimation>

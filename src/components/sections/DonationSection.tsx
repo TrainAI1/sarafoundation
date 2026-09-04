@@ -3,41 +3,54 @@ import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { toast } from "sonner";
 import { PaystackDonate } from "@/components/PaystackDonate";
+import { usePageContent } from "@/hooks/usePageContent";
 
-const donationMethods = [
+// Icons are code, not admin-editable content — kept in a local lookup keyed by id.
+const donationMethodIcons: Record<string, typeof CreditCard> = {
+  bank: CreditCard,
+  usdt: Wallet,
+  eth: Wallet,
+  gofundme: ExternalLink,
+};
+
+const defaultDonationMethods = [
   {
-    icon: CreditCard,
+    id: "bank",
     title: "Bank Transfer (Naira)",
     provider: "MoniePoint",
     description: "Account Number: 9076 664049",
     action: "Copy Account",
     copyValue: "9076664049",
+    link: "",
     gradient: "bg-primary",
   },
   {
-    icon: Wallet,
+    id: "usdt",
     title: "USDT",
     provider: "TRC20",
     description: "TMdq8t9WYCvgJA9aftXDzA3XUNX9V4MMG6",
     action: "Copy Address",
     copyValue: "TMdq8t9WYCvgJA9aftXDzA3XUNX9V4MMG6",
+    link: "",
     gradient: "bg-accent",
   },
   {
-    icon: Wallet,
+    id: "eth",
     title: "Ethereum",
     provider: "BEP20",
     description: "0xe7dae2ef9740beacde6d9f584f67ecf2b8f396365",
     action: "Copy Address",
     copyValue: "0xe7dae2ef9740beacde6d9f584f67ecf2b8f396365",
+    link: "",
     gradient: "bg-primary",
   },
   {
-    icon: ExternalLink,
+    id: "gofundme",
     title: "Crowdfunding",
     provider: "GoFundMe",
     description: "Support us through our GoFundMe campaign",
     action: "Donate on GoFundMe",
+    copyValue: "",
     link: "https://gofund.me/9559a00e",
     gradient: "bg-[hsl(var(--success))]",
   },
@@ -49,6 +62,15 @@ const handleCopy = (value: string, label: string) => {
 };
 
 export function DonationSection() {
+  const { data: c } = usePageContent("home-donation", {
+    donation_methods: defaultDonationMethods,
+  });
+
+  const donationMethods = (c.donation_methods as typeof defaultDonationMethods).map((method) => ({
+    ...method,
+    icon: donationMethodIcons[method.id] ?? CreditCard,
+  }));
+
   return (
     <section className="py-16 md:py-24 lg:py-32 bg-background relative overflow-hidden">
       {/* Background */}

@@ -4,44 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import { ShieldCheck, Scale, Users, FileText, Globe2, BookOpenCheck } from "lucide-react";
-
-const purposes = [
-  {
-    title: "Digital Education",
-    description:
-      "Advancing education by providing structured digital learning that builds digital literacy, practical skills, understanding of emerging technologies and confidence to continue learning.",
-  },
-  {
-    title: "Social Inclusion",
-    description:
-      "Promoting inclusion by providing access to mentoring, supportive networks, educational resources and development opportunities for people facing financial, social or structural barriers.",
-  },
-  {
-    title: "Community Capacity Building",
-    description:
-      "Strengthening communities through mentoring, volunteering, peer support, knowledge-sharing and opportunities for participants to contribute what they learn.",
-  },
-];
-
-const policies = [
-  "Safeguarding Policy",
-  "Conflicts of Interest Policy",
-  "Financial Controls / Anti-Fraud Policy",
-  "Complaints Policy",
-  "Privacy Policy",
-  "Cookies Policy",
-  "Accessibility Statement",
-  "Volunteer Code of Conduct",
-];
-
-const internationalControls = [
-  { title: "Due diligence", description: "Checks on delivery partners and organisations involved in overseas activity before funds or activities are approved." },
-  { title: "Written agreements", description: "Documented terms setting out the purpose, use of funds, reporting and safeguarding expectations for each partner." },
-  { title: "Monitoring", description: "Ongoing review of activity, spend and outcomes against the agreed charitable purpose." },
-  { title: "Safeguarding", description: "Safeguarding expectations applied to all activity involving participants, volunteers and partners." },
-  { title: "Financial controls", description: "Controls over the transfer, use and reconciliation of charitable funds used overseas." },
-  { title: "Trustee oversight", description: "Trustees retain responsibility for approving, reviewing and, where needed, pausing overseas activity." },
-];
+import { usePageContent } from "@/hooks/usePageContent";
 
 const Placeholder = ({ label }: { label: string }) => (
   <span className="inline-block rounded-lg bg-secondary px-3 py-1 text-xs font-semibold uppercase tracking-[0.12em] text-muted-foreground border border-dashed border-border">
@@ -50,6 +13,64 @@ const Placeholder = ({ label }: { label: string }) => (
 );
 
 const Transparency = () => {
+  const { data: c } = usePageContent("transparency-page", {
+    hero_badge: "Transparency & Governance",
+    hero_headline: "How we are governed and held to account",
+    hero_description:
+      "We are committed to public benefit, responsible stewardship and evidence-led learning. Our trustees oversee programme design, partnerships, safeguarding, finance, risk and international delivery.",
+    nigeria_registration: "Registered as Princess Sara Foundation with CAC charity number 7980056.",
+    uk_legal_form_placeholder: "[CONTENT REQUIRED: UK legal form and registration status]",
+    charity_reg_number_placeholder: "[CONTENT REQUIRED: Charity registration number]",
+    public_register_link_placeholder: "[CONTENT REQUIRED: Public register link]",
+    purposes: [
+      {
+        title: "Digital Education",
+        description:
+          "Advancing education by providing structured digital learning that builds digital literacy, practical skills, understanding of emerging technologies and confidence to continue learning.",
+      },
+      {
+        title: "Social Inclusion",
+        description:
+          "Promoting inclusion by providing access to mentoring, supportive networks, educational resources and development opportunities for people facing financial, social or structural barriers.",
+      },
+      {
+        title: "Community Capacity Building",
+        description:
+          "Strengthening communities through mentoring, volunteering, peer support, knowledge-sharing and opportunities for participants to contribute what they learn.",
+      },
+    ],
+    trustees_description:
+      "Trustees are responsible for the Foundation's charitable purposes, the protection of charitable resources, safeguarding, partner due diligence and beneficiary selection.",
+    trustees_placeholder: "[CONTENT REQUIRED: Trustee names, roles, relevant experience and governance responsibilities]",
+    policies_description:
+      "Safeguarding applies to all learning activity, mentoring, volunteering and events. Published policy documents will be linked here as they are approved.",
+    policies: [
+      { text: "Safeguarding Policy" },
+      { text: "Conflicts of Interest Policy" },
+      { text: "Financial Controls / Anti-Fraud Policy" },
+      { text: "Complaints Policy" },
+      { text: "Privacy Policy" },
+      { text: "Cookies Policy" },
+      { text: "Accessibility Statement" },
+      { text: "Volunteer Code of Conduct" },
+    ],
+    international_description: "Much of our learning activity is delivered outside the United Kingdom. The following controls apply to overseas activity.",
+    international_controls: [
+      { title: "Due diligence", description: "Checks on delivery partners and organisations involved in overseas activity before funds or activities are approved." },
+      { title: "Written agreements", description: "Documented terms setting out the purpose, use of funds, reporting and safeguarding expectations for each partner." },
+      { title: "Monitoring", description: "Ongoing review of activity, spend and outcomes against the agreed charitable purpose." },
+      { title: "Safeguarding", description: "Safeguarding expectations applied to all activity involving participants, volunteers and partners." },
+      { title: "Financial controls", description: "Controls over the transfer, use and reconciliation of charitable funds used overseas." },
+      { title: "Trustee oversight", description: "Trustees retain responsibility for approving, reviewing and, where needed, pausing overseas activity." },
+    ],
+    international_partner_placeholder: "[CONTENT REQUIRED: Description of Nigeria operating / delivery partner relationship]",
+    accounts_placeholder: "[CONTENT REQUIRED: Annual accounts]",
+  });
+
+  const purposes = c.purposes;
+  const policies = c.policies.map((p: { text: string }) => p.text);
+  const internationalControls = c.international_controls;
+
   return (
     <div className="min-h-screen">
       <Helmet>
@@ -66,15 +87,13 @@ const Transparency = () => {
           <div className="section-container">
             <div className="max-w-3xl px-4">
               <span className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.18em] text-white/80 mb-6">
-                Transparency &amp; Governance
+                {c.hero_badge}
               </span>
               <h1 className="font-display text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-4 md:mb-6 leading-tight">
-                How we are governed and held to account
+                {c.hero_headline}
               </h1>
               <p className="text-base md:text-xl text-white/70 leading-relaxed">
-                We are committed to public benefit, responsible stewardship and evidence-led learning. Our
-                trustees oversee programme design, partnerships, safeguarding, finance, risk and
-                international delivery.
+                {c.hero_description}
               </p>
             </div>
           </div>
@@ -91,25 +110,25 @@ const Transparency = () => {
               <div className="card-modern p-5">
                 <dt className="text-sm font-semibold text-foreground mb-1">Nigeria registration</dt>
                 <dd className="text-sm text-muted-foreground">
-                  Registered as Princess Sara Foundation with CAC charity number 7980056.
+                  {c.nigeria_registration}
                 </dd>
               </div>
               <div className="card-modern p-5">
                 <dt className="text-sm font-semibold text-foreground mb-1">UK legal form and status</dt>
                 <dd className="text-sm text-muted-foreground">
-                  <Placeholder label="[CONTENT REQUIRED: UK legal form and registration status]" />
+                  <Placeholder label={c.uk_legal_form_placeholder} />
                 </dd>
               </div>
               <div className="card-modern p-5">
                 <dt className="text-sm font-semibold text-foreground mb-1">Charity registration number</dt>
                 <dd className="text-sm text-muted-foreground">
-                  <Placeholder label="[CONTENT REQUIRED: Charity registration number]" />
+                  <Placeholder label={c.charity_reg_number_placeholder} />
                 </dd>
               </div>
               <div className="card-modern p-5">
                 <dt className="text-sm font-semibold text-foreground mb-1">Public register link</dt>
                 <dd className="text-sm text-muted-foreground">
-                  <Placeholder label="[CONTENT REQUIRED: Public register link]" />
+                  <Placeholder label={c.public_register_link_placeholder} />
                 </dd>
               </div>
             </dl>
@@ -142,11 +161,10 @@ const Transparency = () => {
               <h2 className="font-display text-2xl md:text-3xl font-bold text-foreground">Trustees</h2>
             </div>
             <p className="text-muted-foreground mb-6 leading-relaxed">
-              Trustees are responsible for the Foundation's charitable purposes, the protection of charitable
-              resources, safeguarding, partner due diligence and beneficiary selection.
+              {c.trustees_description}
             </p>
             <div className="card-modern p-6">
-              <Placeholder label="[CONTENT REQUIRED: Trustee names, roles, relevant experience and governance responsibilities]" />
+              <Placeholder label={c.trustees_placeholder} />
             </div>
             <p className="text-sm text-muted-foreground mt-4">
               Our leadership team and advisers are listed on the{" "}
@@ -168,8 +186,7 @@ const Transparency = () => {
               </h2>
             </div>
             <p className="text-muted-foreground mb-6 leading-relaxed">
-              Safeguarding applies to all learning activity, mentoring, volunteering and events. Published
-              policy documents will be linked here as they are approved.
+              {c.policies_description}
             </p>
             <ul className="grid sm:grid-cols-2 gap-3">
               {policies.map((policy) => (
@@ -202,8 +219,7 @@ const Transparency = () => {
               </h2>
             </div>
             <p className="text-muted-foreground mb-6 leading-relaxed">
-              Much of our learning activity is delivered outside the United Kingdom. The following controls
-              apply to overseas activity.
+              {c.international_description}
             </p>
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
               {internationalControls.map((control) => (
@@ -214,7 +230,7 @@ const Transparency = () => {
               ))}
             </div>
             <div className="card-modern p-6 mt-6">
-              <Placeholder label="[CONTENT REQUIRED: Description of Nigeria operating / delivery partner relationship]" />
+              <Placeholder label={c.international_partner_placeholder} />
             </div>
           </div>
         </section>
@@ -235,7 +251,7 @@ const Transparency = () => {
               </div>
               <div className="card-modern p-5">
                 <h3 className="font-semibold text-foreground mb-2">Accounts</h3>
-                <Placeholder label="[CONTENT REQUIRED: Annual accounts]" />
+                <Placeholder label={c.accounts_placeholder} />
               </div>
               <div className="card-modern p-5">
                 <h3 className="font-semibold text-foreground mb-2">Impact reports</h3>

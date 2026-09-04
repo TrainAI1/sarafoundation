@@ -1,57 +1,26 @@
 import { BookOpen, Rocket, Zap, Clock, CheckCircle2, ArrowRight } from "lucide-react";
+import { usePageContent } from "@/hooks/usePageContent";
 
-const program = {
-  label: "CAP Program",
-  title: "6-Week Program for CAP",
-  subtitle: "Community Access & Participation Pathway — learn, build, and launch.",
-  totalDuration: "6 Weeks",
-  phases: [
-    {
-      name: "Exclusive Learning",
-      number: "01",
-      icon: BookOpen,
-      duration: "2 Weeks",
-      description: "Immersive expert-led sessions across coding, no-code, product management, product marketing, cybersecurity, data, UI/UX and tech innovation.",
-      outcomes: [
-        "Industry-expert sessions",
-        "AI-powered curriculum",
-        "Practical frameworks",
-        "Community & peer learning",
-      ],
-      color: "bg-primary",
-    },
-    {
-      name: "Build While Learning",
-      number: "02",
-      icon: Rocket,
-      duration: "4 Weeks",
-      description: "Apply skills in real time — participants collaborate as a team, working on real African problems through mentored sprints.",
-      outcomes: [
-        "Cross-track startup simulation",
-        "Real-life project exposure",
-        "Industry mentor oversight",
-        "Portfolio-ready projects",
-      ],
-      color: "bg-[hsl(240,80%,50%)]",
-    },
-    {
-      name: "Launch",
-      number: "03",
-      icon: Zap,
-      duration: "1 Week",
-      description: "Learners present their work, share what they built and are referred to suitable further learning or experience opportunities where these are available.",
-      outcomes: [
-        "Referrals to further learning and experience opportunities",
-        "Certificate of completion and alumni community access",
-        "CAP Talent Showcase",
-        "Continued mentoring and peer support",
-      ],
-      color: "bg-accent",
-    },
-  ],
+const phaseIcons = [BookOpen, Rocket, Zap];
+const phaseColors = ["bg-primary", "bg-[hsl(240,80%,50%)]", "bg-accent"];
+
+type Phase = {
+  name: string;
+  number: string;
+  duration: string;
+  description: string;
+  outcomes_text: string;
 };
 
-function PhaseBlock({ data }: { data: typeof program }) {
+type Program = {
+  label: string;
+  title: string;
+  subtitle: string;
+  totalDuration: string;
+  phases: Phase[];
+};
+
+function PhaseBlock({ data }: { data: Program }) {
   return (
     <div className="mb-12 md:mb-16 last:mb-0">
       <div className="text-center max-w-3xl mx-auto mb-6 md:mb-10 px-4">
@@ -62,12 +31,16 @@ function PhaseBlock({ data }: { data: typeof program }) {
         <p className="text-sm md:text-base text-muted-foreground">{data.subtitle}</p>
       </div>
       <div className="grid md:grid-cols-3 gap-6 md:gap-8 px-4 lg:px-0">
-        {data.phases.map((phase, index) => (
+        {data.phases.map((phase, index) => {
+          const Icon = phaseIcons[index % phaseIcons.length];
+          const color = phaseColors[index % phaseColors.length];
+          const outcomes = phase.outcomes_text.split("\n").map((o) => o.trim()).filter(Boolean);
+          return (
             <div key={phase.name} className="card-modern overflow-hidden group relative">
-              <div className={`p-5 md:p-6 ${phase.color} text-white`}>
+              <div className={`p-5 md:p-6 ${color} text-white`}>
                 <div className="flex items-center gap-3">
                   <div className="w-10 h-10 rounded-lg bg-white/20 backdrop-blur-sm flex items-center justify-center flex-shrink-0">
-                    <phase.icon className="w-5 h-5" />
+                    <Icon className="w-5 h-5" />
                   </div>
                   <div>
                     <div className="text-xs font-medium text-white/70">{phase.number}</div>
@@ -85,7 +58,7 @@ function PhaseBlock({ data }: { data: typeof program }) {
                   {phase.description}
                 </p>
                 <ul className="space-y-2">
-                  {phase.outcomes.map((outcome) => (
+                  {outcomes.map((outcome) => (
                     <li key={outcome} className="flex items-center gap-2 text-xs md:text-sm text-foreground">
                       <CheckCircle2 className="w-4 h-4 text-primary flex-shrink-0" />
                       {outcome}
@@ -100,23 +73,66 @@ function PhaseBlock({ data }: { data: typeof program }) {
                 </div>
               )}
             </div>
-          ))}
+          );
+        })}
       </div>
     </div>
   );
 }
 
 export function CAPPhasesSection() {
+  const { data: c } = usePageContent("cap-phases", {
+    badge: "Program Structure",
+    headline_main: "Learn.",
+    headline_highlight: "Build. Launch.",
+    description: "A full 6-week CAP experience built on an 80/20 balance of practice to taught learning.",
+    program_label: "CAP Program",
+    program_title: "6-Week Program for CAP",
+    program_subtitle: "Community Access & Participation Pathway — learn, build, and launch.",
+    program_total_duration: "6 Weeks",
+    phases: [
+      {
+        name: "Exclusive Learning",
+        number: "01",
+        duration: "2 Weeks",
+        description: "Immersive expert-led sessions across coding, no-code, product management, product marketing, cybersecurity, data, UI/UX and tech innovation.",
+        outcomes_text: "Industry-expert sessions\nAI-powered curriculum\nPractical frameworks\nCommunity & peer learning",
+      },
+      {
+        name: "Build While Learning",
+        number: "02",
+        duration: "4 Weeks",
+        description: "Apply skills in real time — participants collaborate as a team, working on real African problems through mentored sprints.",
+        outcomes_text: "Cross-track startup simulation\nReal-life project exposure\nIndustry mentor oversight\nPortfolio-ready projects",
+      },
+      {
+        name: "Launch",
+        number: "03",
+        duration: "1 Week",
+        description: "Learners present their work, share what they built and are referred to suitable further learning or experience opportunities where these are available.",
+        outcomes_text: "Referrals to further learning and experience opportunities\nCertificate of completion and alumni community access\nCAP Talent Showcase\nContinued mentoring and peer support",
+      },
+    ],
+  });
+
+  const program: Program = {
+    label: c.program_label,
+    title: c.program_title,
+    subtitle: c.program_subtitle,
+    totalDuration: c.program_total_duration,
+    phases: c.phases,
+  };
+
   return (
     <section className="py-16 md:py-24 bg-background">
       <div className="section-container">
         <div className="text-center max-w-3xl mx-auto mb-10 md:mb-16 px-4">
-          <span className="section-badge mb-4 md:mb-6">Program Structure</span>
+          <span className="section-badge mb-4 md:mb-6">{c.badge}</span>
           <h2 className="section-title text-foreground mb-4 md:mb-6">
-            Learn. <span className="gradient-text">Build. Launch.</span>
+            {c.headline_main} <span className="gradient-text">{c.headline_highlight}</span>
           </h2>
           <p className="section-subtitle mx-auto">
-            A full 6-week CAP experience built on an 80/20 balance of practice to taught learning.
+            {c.description}
           </p>
         </div>
 

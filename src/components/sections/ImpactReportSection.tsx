@@ -3,9 +3,11 @@ import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { ScrollAnimation } from "@/components/ui/scroll-animation";
 import capGraduates from "@/assets/events/DSC_3409.jpg.asset.json";
+import graduatesCelebration from "@/assets/graduates-celebration.jpg";
 import { assetUrl } from "@/lib/assetUrl";
+import { usePageContent } from "@/hooks/usePageContent";
 
-const reports = [
+const defaultReports = [
   {
     year: "2025",
     title: "2025 Annual Impact Report",
@@ -23,6 +25,19 @@ const reports = [
 ];
 
 export function ImpactReportSection() {
+  const { data: c } = usePageContent("home-impact-reports", {
+    badge: "Annual Impact Reports",
+    headline_pre: "Read our",
+    headline_accent: "impact reports",
+    description:
+      "Our annual reports set out what we delivered, who benefited and what we learned. Both the 2024 and 2025 reports are available to read in full.",
+    reports: defaultReports,
+    image_caption_title: "CAP learners, Class of 2025",
+    image_caption_subtitle: "Celebrating our second cohort",
+  });
+
+  const reports = c.reports as typeof defaultReports;
+
   return (
     <section className="py-16 md:py-24 bg-secondary/50 relative overflow-hidden">
       <div className="section-container relative z-10">
@@ -32,14 +47,13 @@ export function ImpactReportSection() {
             <div>
               <span className="section-badge mb-4 md:mb-6">
                 <FileText className="w-4 h-4" aria-hidden="true" />
-                Annual Impact Reports
+                {c.badge}
               </span>
               <h2 className="section-title text-foreground mb-4 md:mb-6">
-                Read our <span className="gradient-text">impact reports</span>
+                {c.headline_pre} <span className="gradient-text">{c.headline_accent}</span>
               </h2>
               <p className="text-muted-foreground leading-relaxed mb-6 md:mb-8">
-                Our annual reports set out what we delivered, who benefited and what we learned. Both the
-                2024 and 2025 reports are available to read in full.
+                {c.description}
               </p>
 
               <ul className="space-y-4 mb-8">
@@ -85,10 +99,13 @@ export function ImpactReportSection() {
                 alt="CAP Tech Hub cohort group photo at a Sara Foundation Africa event"
                 className="w-full h-64 md:h-96 object-cover"
                 loading="lazy"
+                onError={(e) => {
+                  e.currentTarget.src = graduatesCelebration;
+                }}
               />
               <div className="bg-primary p-4 md:p-6 text-white text-center">
-                <p className="font-display font-bold text-lg">CAP learners, Class of 2025</p>
-                <p className="text-white/70 text-sm">Celebrating our second cohort</p>
+                <p className="font-display font-bold text-lg">{c.image_caption_title}</p>
+                <p className="text-white/70 text-sm">{c.image_caption_subtitle}</p>
               </div>
             </div>
           </ScrollAnimation>

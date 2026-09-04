@@ -4,6 +4,10 @@ import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import { Target, Heart, Lightbulb, Globe, Users, Award, ArrowRight, Eye, Quote, Trophy } from "lucide-react";
+import { usePageContent } from "@/hooks/usePageContent";
+import { useQuery } from "@tanstack/react-query";
+import { supabase } from "@/integrations/supabase/client";
+import { assetUrl } from "@/lib/assetUrl";
 import communityWorkshop from "@/assets/community-workshop.jpg";
 import techEntrepreneurs from "@/assets/tech-entrepreneurs.jpg";
 import techConference from "@/assets/tech-conference.jpg";
@@ -42,34 +46,39 @@ const values = [
   { icon: Globe, title: "Pan-African Vision", description: "We're building bridges across the continent to create a unified tech ecosystem." },
 ];
 
-const coreTeam = [
-  {
-    name: "Kalu Sarah",
-    role: "Founder",
-    bio: "Has worked with Goldman Sachs, Bloomberg, and Blackaion Capital. Also leads Train AI, an edtech platform for tech learners across Africa's $3.4B market.",
-    photo: sarahPhoto,
-  },
-  {
-    name: "Inem Emmanuel",
-    role: "Public Relations Specialist",
-    bio: "Expanded the Foundation's reach to 6,000 Africans and hosted over 47 knowledge sessions for the Foundation.",
-    photo: emmanuelPhoto,
-  },
-  {
-    name: "Itoro",
-    role: "Program Manager",
-    bio: "Expanded CAP to 35 universities across 8 African countries. Launched FLIP Fellowship and secured partnerships with Scintilla, Farmily, and more.",
-    photo: itoroPhoto,
-  },
+interface TeamMember {
+  id: number;
+  name: string;
+  role: string;
+  bio: string;
+  photo: string;
+  type: "core" | "advisor";
+  affiliation?: string;
+}
+
+const defaultTeam: TeamMember[] = [
+  { id: 1, type: "core", name: "Kalu Sarah", role: "Founder", bio: "Has worked with Goldman Sachs, Bloomberg, and Blackaion Capital. Also leads Train AI, an edtech platform for tech learners across Africa's $3.4B market.", photo: sarahPhoto },
+  { id: 2, type: "core", name: "Inem Emmanuel", role: "Public Relations Specialist", bio: "Expanded the Foundation's reach to 6,000 Africans and hosted over 47 knowledge sessions for the Foundation.", photo: emmanuelPhoto },
+  { id: 3, type: "core", name: "Itoro", role: "Program Manager", bio: "Expanded CAP to 35 universities across 8 African countries. Launched FLIP Fellowship and secured partnerships with Scintilla, Farmily, and more.", photo: itoroPhoto },
+  { id: 4, type: "advisor", name: "Toby Nwanede", role: "Startup Founder", affiliation: "Scintilla Innovations", bio: "Partner at PIF; Founded Scintilla Innovations; Lead Marketing Consultant at Shoprite Nigeria.", photo: tobyPhoto },
+  { id: 5, type: "advisor", name: "Ayoola Ademoye", role: "Business Strategy", affiliation: "Jisc (UK)", bio: "Over 12 years of experience; contributed to ACCA's success in Nigeria; Business Analyst at Jisc (UK).", photo: "" },
+  { id: 6, type: "advisor", name: "Dolapo Dahunsi", role: "HR Leader", affiliation: "General Electric", bio: "People Operations & Immigration Specialist for West Africa at General Electric (GE); Co-founded Career Pinnacle.", photo: dolapoPhoto },
+  { id: 7, type: "advisor", name: "Fisayo Adeyemi", role: "Business Analysis", affiliation: "Rayne Consults", bio: "Founder of Rayne Consults; 'The BA Influencer'; Director of Communications for IIBA Nigeria.", photo: fisayoPhoto },
+  { id: 8, type: "advisor", name: "Mercy Momah", role: "PMO Consultant", affiliation: "Flour Mills of Nigeria", bio: "Head, Project Management Office at Flour Mills of Nigeria Plc. Certified PMP, Business Analyst Professional.", photo: mercyPhoto },
 ];
 
-const advisors = [
-  { name: "Toby Nwanede", affiliation: "Scintilla Innovations", expertise: "Startup Founder", photo: tobyPhoto },
-  { name: "Ayoola Ademoye", affiliation: "Jisc (UK)", expertise: "Business Strategy", photo: null },
-  { name: "Dolapo Dahunsi", affiliation: "General Electric", expertise: "HR Leader", photo: fisayoPhoto },
-  { name: "Fisayo Adeyemi", affiliation: "Rayne Consults", expertise: "Business Analysis", photo: dolapoPhoto },
-  { name: "Mercy Momah", affiliation: "Flour Mills of Nigeria", expertise: "PMO Consultant", photo: mercyPhoto },
-];
+const defaultPhotoByName: Record<string, string> = {
+  "kalu sarah": sarahPhoto,
+  "sarah kalu": sarahPhoto,
+  "inem emmanuel": emmanuelPhoto,
+  "emmanuel inem": emmanuelPhoto,
+  "itoro": itoroPhoto,
+  "itoro inem": itoroPhoto,
+  "toby nwanede": tobyPhoto,
+  "dolapo dahunsi": dolapoPhoto,
+  "fisayo adeyemi": fisayoPhoto,
+  "mercy momah": mercyPhoto,
+};
 
 const keyInitiatives = [
   {
@@ -109,6 +118,50 @@ const countries = [
 ];
 
 export default function About() {
+  const { data: hero } = usePageContent("about-hero", {
+    headline: "Education. Inclusion. Stronger Communities.",
+    description: "Sara Foundation Africa works to widen access to tech education, digital inclusion and tech innovation by reducing barriers to participation and strengthening community capacity for young people and underserved communities in Africa.",
+    hero_image: "",
+  });
+
+  const { data: story } = usePageContent("about-story", {
+    paragraph1: "Sara Foundation Africa expands access to digital education and tech learning, promotes social inclusion and strengthens community capacity for young people, women and underserved communities in Africa.",
+    paragraph2: "We reduce barriers to learning and participation through structured digital education, mentoring, practical projects, supportive networks, scholarships and access support, knowledge-sharing, volunteering and community activities.",
+    paragraph3: "We promote Sustainable Development Goals SDG 4 (Quality Education), SDG 5 (Gender Equality), and SDG 8 (Decent Work and Economic Growth) through tech clubs and women's communities.",
+    mission_text: "Empowering people through tech learning, inclusion and opportunity to build stronger communities.",
+    vision_text: "An Africa where every young person, regardless of gender, background, or location, has equal access to thrive in the global tech economy.",
+    story_image1: communityWorkshop,
+    story_image2: techEntrepreneurs,
+  });
+  const storyParagraph4 = "Together our pathways reach 11 unique African countries: CAP works across 8 countries with 35+ universities represented, and FLIP works across 6. CAP, FLIP and EJP translate our charitable purposes into clear learning pathways designed around public benefit.";
+
+  const { data: teamContent } = usePageContent("about-team", {
+    badge: "Our Team",
+    headline: "Meet Our Core Team",
+    description: "Our leadership team and advisers guide programme design, partnerships and the responsible use of charitable resources.",
+  });
+
+  const { data: dbTeam } = useQuery({
+    queryKey: ["team-members-page"],
+    queryFn: async () => {
+      const { data } = await supabase.from("pages").select("content").eq("slug", "team-members").maybeSingle();
+      if (!data?.content) return null;
+      const c = data.content as { members?: TeamMember[] };
+      return c.members && c.members.length > 0 ? c.members : null;
+    },
+  });
+
+  const rawTeam = dbTeam || defaultTeam;
+  const team = rawTeam.map((m) => {
+    const defaultPhoto = defaultPhotoByName[m.name.toLowerCase().trim()] || "";
+    return {
+      ...m,
+      photo: m.photo ? assetUrl(m.photo) : defaultPhoto,
+    };
+  });
+  const coreTeam = team.filter((m) => m.type === "core");
+  const advisors = team.filter((m) => m.type === "advisor");
+
   return (
     <div className="min-h-screen bg-background">
       <Helmet>
@@ -143,20 +196,21 @@ export default function About() {
       <main id="main-content">
       {/* Hero */}
       <section className="pt-24 md:pt-32 pb-12 md:pb-20 bg-primary relative overflow-hidden">
-        <div className="absolute inset-0 opacity-30">
-        </div>
+        {hero.hero_image && (
+          <div className="absolute inset-0 opacity-30">
+            <img src={hero.hero_image} alt="" className="w-full h-full object-cover" />
+          </div>
+        )}
         <div className="section-container relative z-10">
           <div className="max-w-3xl px-4">
             <span className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.18em] text-white/80 mb-4 mb-6">
               About Us
             </span>
             <h1 className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 md:mb-6 leading-tight">
-              Education. Inclusion. Stronger Communities.
+              {hero.headline}
             </h1>
             <p className="text-base md:text-xl text-white/70 leading-relaxed">
-              Sara Foundation Africa works to widen access to tech education, digital inclusion and tech
-              innovation by reducing barriers to participation and strengthening community capacity for
-              young people and underserved communities in Africa.
+              {hero.description}
             </p>
           </div>
         </div>
@@ -207,31 +261,19 @@ export default function About() {
                 <span className="gradient-text">Tech Excellence</span>
               </h2>
               <div className="space-y-4 text-muted-foreground leading-relaxed">
-                <p>
-                  Sara Foundation Africa expands access to digital education and tech learning, promotes
-                  social inclusion and strengthens community capacity for young people, women and
-                  underserved communities in Africa.
-                </p>
-                <p>
-                  We reduce barriers to learning and participation through structured digital education,
-                  mentoring, practical projects, supportive networks, scholarships and access support,
-                  knowledge-sharing, volunteering and community activities.
-                </p>
-                <p>
-                  We promote Sustainable Development Goals SDG 4 (Quality Education), SDG 5 (Gender Equality),
-                  and SDG 8 (Decent Work and Economic Growth) through tech clubs and women's communities.
-                </p>
-                <p>
-                  Together our pathways reach 11 unique African countries: CAP works across 8 countries with
-                  35+ universities represented, and FLIP works across 6. CAP, FLIP and EJP translate our
-                  charitable purposes into clear learning pathways designed around public benefit.
-                </p>
+                <p>{story.paragraph1}</p>
+                <p>{story.paragraph2}</p>
+                <p>{story.paragraph3}</p>
+                <p>{storyParagraph4}</p>
               </div>
               <div className="mt-6 rounded-2xl overflow-hidden shadow-lg">
                 <img
-                  src={communityWorkshop}
+                  src={assetUrl(story.story_image1 || communityWorkshop)}
                   alt="Participants at a Sara Foundation Africa community workshop"
                   className="w-full h-48 md:h-64 object-cover"
+                  onError={(e) => {
+                    e.currentTarget.src = communityWorkshop;
+                  }}
                 />
               </div>
             </div>
@@ -244,8 +286,7 @@ export default function About() {
                   <div>
                     <h3 className="font-display font-bold text-xl text-foreground mb-2">Our Mission</h3>
                     <p className="text-muted-foreground">
-                      Empowering people through tech learning, inclusion and opportunity to build
-                      stronger communities.
+                      {story.mission_text}
                     </p>
                   </div>
                 </div>
@@ -258,17 +299,19 @@ export default function About() {
                   <div>
                     <h3 className="font-display font-bold text-xl text-foreground mb-2">Our Vision</h3>
                     <p className="text-muted-foreground">
-                      An Africa where every young person, regardless of gender, background, or location,
-                      has equal access to thrive in the global tech economy.
+                      {story.vision_text}
                     </p>
                   </div>
                 </div>
               </div>
               <div className="rounded-2xl overflow-hidden shadow-lg">
                 <img
-                  src={techEntrepreneurs}
+                  src={assetUrl(story.story_image2 || techEntrepreneurs)}
                   alt="Tech entrepreneurs collaborating"
                   className="w-full h-40 object-cover"
+                  onError={(e) => {
+                    e.currentTarget.src = techEntrepreneurs;
+                  }}
                 />
               </div>
             </div>
@@ -394,7 +437,7 @@ export default function About() {
           </div>
           <div className="max-w-3xl mx-auto px-4">
             {milestones.map((milestone, index) => (
-              <div key={milestone.year} className="flex gap-4 md:gap-6 mb-6 md:mb-8 last:mb-0">
+              <div key={`${milestone.year}-${milestone.title}`} className="flex gap-4 md:gap-6 mb-6 md:mb-8 last:mb-0">
                 <div className="flex flex-col items-center">
                   <div className="w-10 h-10 md:w-12 md:h-12 rounded-lg md:rounded-xl bg-primary flex items-center justify-center text-white font-bold text-xs md:text-sm">
                     {milestone.year}
@@ -419,14 +462,13 @@ export default function About() {
           <div className="text-center max-w-3xl mx-auto mb-10 md:mb-16 px-4">
             <span className="section-badge mb-4 md:mb-6">
               <Users className="w-4 h-4" />
-              Leadership &amp; Governance
+              {teamContent.badge}
             </span>
             <h2 className="section-title text-foreground mb-4 md:mb-6">
-              Meet Our Core Team
+              {teamContent.headline}
             </h2>
             <p className="section-subtitle mx-auto">
-              Our leadership team and advisers guide programme design, partnerships and the responsible use
-              of charitable resources.
+              {teamContent.description}
             </p>
             <div className="mt-6">
               <Button variant="outline" asChild>
@@ -437,9 +479,17 @@ export default function About() {
 
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 mb-10 md:mb-16 max-w-4xl mx-auto">
             {coreTeam.map((member) => (
-              <div key={member.name} className="card-modern p-4 md:p-6 text-center group">
+              <div key={member.id} className="card-modern p-4 md:p-6 text-center group">
                 <div className="w-20 h-20 md:w-28 md:h-28 mx-auto rounded-full overflow-hidden mb-3 md:mb-4 group-hover:scale-105 transition-transform ring-4 ring-primary/20">
-                  <img src={member.photo} alt={member.name} className="w-full h-full object-cover" />
+                  {member.photo ? (
+                    <img src={member.photo} alt={member.name} className="w-full h-full object-cover" />
+                  ) : (
+                    <div className="w-full h-full bg-primary/10 flex items-center justify-center">
+                      <span className="text-xl md:text-2xl font-bold text-primary">
+                        {member.name.split(' ').map(n => n[0]).join('').slice(0, 2)}
+                      </span>
+                    </div>
+                  )}
                 </div>
                 <h3 className="font-display font-bold text-sm md:text-lg text-foreground mb-0.5 md:mb-1">{member.name}</h3>
                 <p className="text-primary text-xs md:text-sm font-medium mb-1 md:mb-2">{member.role}</p>
@@ -460,7 +510,7 @@ export default function About() {
 
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 md:gap-4">
             {advisors.map((advisor) => (
-              <div key={advisor.name} className="card-modern p-4 md:p-5 text-center">
+              <div key={advisor.id} className="card-modern p-4 md:p-5 text-center">
                 {advisor.photo ? (
                   <div className="w-12 h-12 md:w-16 md:h-16 mx-auto rounded-full overflow-hidden mb-2 md:mb-3 ring-2 ring-primary/20">
                     <img src={advisor.photo} alt={advisor.name} className="w-full h-full object-cover" />
@@ -475,7 +525,7 @@ export default function About() {
                 <h4 className="font-semibold text-foreground text-xs md:text-sm mb-0.5">{advisor.name}</h4>
                 <p className="text-muted-foreground text-xs mb-1">{advisor.affiliation}</p>
                 <span className="inline-block text-xs font-semibold uppercase tracking-[0.18em] text-primary">
-                  {advisor.expertise}
+                  {advisor.role}
                 </span>
               </div>
             ))}

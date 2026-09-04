@@ -5,8 +5,9 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
+import { usePageContent } from "@/hooks/usePageContent";
 
-const capstones = [
+const defaultCapstones = [
   {
     number: "01",
     category: "Fintech",
@@ -46,17 +47,29 @@ const capstones = [
 ];
 
 export function FLIPCapstoneShowcase() {
+  const { data: c } = usePageContent("flip-capstone-showcase", {
+    badge: "FLIP Fellowship 1.0 Capstones",
+    headline_pre: "Five capstone projects,",
+    headline_accent: "five learning journeys",
+    description:
+      "Capstone work completed by FLIP Cohort 1 fellows. These are learning projects and business " +
+      "models developed during the fellowship, presented as evidence of applied learning.",
+    capstones: defaultCapstones,
+    footer_note: "Use the arrows or swipe to see all five capstone projects.",
+  });
+
+  const capstones = c.capstones as typeof defaultCapstones;
+
   return (
     <section className="py-16 md:py-24 bg-background">
       <div className="section-container">
         <div className="text-center max-w-3xl mx-auto mb-10 md:mb-16 px-4">
-          <span className="section-badge mb-4 md:mb-6">FLIP Fellowship 1.0 Capstones</span>
+          <span className="section-badge mb-4 md:mb-6">{c.badge}</span>
           <h2 className="section-title text-foreground mb-4 md:mb-6">
-            Five capstone projects, <span className="gradient-text-accent">five learning journeys</span>
+            {c.headline_pre} <span className="gradient-text-accent">{c.headline_accent}</span>
           </h2>
           <p className="section-subtitle mx-auto">
-            Capstone work completed by FLIP Cohort 1 fellows. These are learning projects and business
-            models developed during the fellowship, presented as evidence of applied learning.
+            {c.description}
           </p>
         </div>
 
@@ -106,7 +119,7 @@ export function FLIPCapstoneShowcase() {
             </div>
           </Carousel>
           <p className="text-center text-xs text-muted-foreground mt-4">
-            Use the arrows or swipe to see all five capstone projects.
+            {c.footer_note}
           </p>
         </div>
       </div>

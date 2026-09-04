@@ -2,6 +2,7 @@ import { TrendingUp, GraduationCap, HandCoins, Globe, ArrowRight } from "lucide-
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import impactLecture from "@/assets/events/DSC_3133-3.jpg.asset.json";
+import studentsLabImg from "@/assets/students-tech-lab.jpg";
 import { ScrollAnimation, StaggerContainer, StaggerItem } from "@/components/ui/scroll-animation";
 import { usePageContent } from "@/hooks/usePageContent";
 import { assetUrl } from "@/lib/assetUrl";
@@ -61,6 +62,9 @@ export function ImpactSection() {
                 alt="Participants at a Sara Foundation Africa knowledge session"
                 className="w-full h-56 md:h-72 object-cover"
                 loading="lazy"
+                onError={(e) => {
+                  e.currentTarget.src = studentsLabImg;
+                }}
               />
             </div>
           </ScrollAnimation>

@@ -11,34 +11,34 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import { usePageContent } from "@/hooks/usePageContent";
 
 import unilagLogo from "@/assets/logos/unilag.png";
 import uonLogo from "@/assets/logos/uon.png";
 import ashesiLogo from "@/assets/logos/ashesi.png";
 import uctLogo from "@/assets/logos/uct.png";
 
-const benefits = [
+// Icons are matched to the saved list by position and are not admin-editable.
+const benefitIcons = [BookOpen, Users, Lightbulb, Eye];
+
+const benefitsDefault = [
   {
     number: "01",
-    icon: BookOpen,
     title: "Access to Resources",
     description: "Partnering with Sara Foundation Africa can provide universities with access to various resources such as research, reports, and data. These resources can help universities to stay up-to-date with the latest trends and developments in the tech industry in Africa.",
   },
   {
     number: "02",
-    icon: Users,
     title: "Networking Opportunities",
     description: "Partnering with Sara Foundation Africa provides universities with the opportunity to connect with a network of tech professionals, entrepreneurs, and innovators across Africa, fostering collaboration and knowledge exchange.",
   },
   {
     number: "03",
-    icon: Lightbulb,
     title: "Social Impact",
     description: "Partnering with Sara Foundation Africa provides universities with the opportunity to make a positive social impact. By supporting the organization's initiatives, universities can contribute to the growth of the tech industry in Africa and help to promote Diversity, Equity and Inclusion in technology.",
   },
   {
     number: "04",
-    icon: Eye,
     title: "Institution Visibility",
     description: "Partnering with Sara Foundation Africa enhances your institution's visibility across the African tech ecosystem, positioning your university as a leader in tech education and innovation.",
   },
@@ -81,22 +81,22 @@ const partnerUniversities = [
   { name: "Asteven Energy Institute", country: "Nigeria", logo: null },
 ];
 
-const applicationSteps = [
+const applicationStepsDefault = [
   { step: "01", title: "Express Interest", description: "Fill out the partnership interest form on our website or contact us directly." },
   { step: "02", title: "Alignment Meeting", description: "We schedule a meeting to understand your institution's goals and how CAP can support them." },
   { step: "03", title: "MOU Signing", description: "Both parties sign a Memorandum of Understanding outlining roles and expectations." },
   { step: "04", title: "Hub Setup & Launch", description: "We work with your institution to set up the CAP Tech Hub and onboard students." },
 ];
 
-const eligibilityCriteria = [
-  "Accredited university or higher education institution in Africa",
-  "Dedicated faculty sponsor or liaison for the partnership",
-  "Space available on campus for tech club meetings and workshops",
-  "Commitment to promoting Diversity, Equity, and Inclusion",
-  "Willingness to share impact data and participate in reporting",
+const eligibilityCriteriaDefault = [
+  { text: "Accredited university or higher education institution in Africa" },
+  { text: "Dedicated faculty sponsor or liaison for the partnership" },
+  { text: "Space available on campus for tech club meetings and workshops" },
+  { text: "Commitment to promoting Diversity, Equity, and Inclusion" },
+  { text: "Willingness to share impact data and participate in reporting" },
 ];
 
-const whatYouGet = [
+const whatYouGetDefault = [
   { title: "CAP Tech Hub", description: "A fully equipped tech club on your campus with curated curriculum and resources." },
   { title: "Student Training", description: "Structured programs in software engineering, product management, data science, and more." },
   { title: "Mentorship Access", description: "Connect your students with industry professionals across Africa and beyond." },
@@ -105,7 +105,7 @@ const whatYouGet = [
   { title: "Community Events", description: "Hackathons, demo days, and networking events hosted at your institution." },
 ];
 
-const faqs = [
+const faqsDefault = [
   { q: "How long does the partnership process take?", a: "From initial contact to hub launch, the process typically takes 4–6 weeks depending on institutional readiness and logistics." },
   { q: "Is there a cost for the university?", a: "No, there is no cost. Sara Foundation provides the program at no charge. We only require institutional support such as a liaison and meeting space." },
   { q: "Can multiple departments participate?", a: "Yes! We encourage cross-departmental participation. CAP is designed for young people from any academic background who are interested in tech." },
@@ -114,6 +114,26 @@ const faqs = [
 ];
 
 export default function SchoolCommunity() {
+  const { data: c } = usePageContent("partnership-school-community", {
+    hero_headline: "Partner with Sara Foundation Africa",
+    hero_description: "Partnering with Sara Foundation Africa can provide universities with access to talent pools, networking opportunities, brand visibility, social impact, and valuable resources. We are excited to work with universities to contribute to the growth of the tech industry in Africa and promote Diversity, Equity and Inclusion in technology.",
+    hero_description2: "The Community Access & Participation Pathway (CAP) is an initiative of Sara Foundation Africa aimed at establishing tech clubs across African universities and providing development opportunities for the next generation of tech founders and tech professionals.",
+    benefits: benefitsDefault,
+    what_you_get: whatYouGetDefault,
+    eligibility_criteria: eligibilityCriteriaDefault,
+    application_steps: applicationStepsDefault,
+    faqs: faqsDefault,
+  });
+
+  const benefits = (c.benefits as typeof benefitsDefault).map((item, i) => ({
+    ...item,
+    icon: benefitIcons[i] || benefitIcons[benefitIcons.length - 1],
+  }));
+  const whatYouGet = c.what_you_get as typeof whatYouGetDefault;
+  const eligibilityCriteria = (c.eligibility_criteria as typeof eligibilityCriteriaDefault).map((item) => item.text);
+  const applicationSteps = c.application_steps as typeof applicationStepsDefault;
+  const faqs = c.faqs as typeof faqsDefault;
+
   return (
     <div className="min-h-screen bg-background">
       <Helmet>
@@ -148,18 +168,13 @@ export default function SchoolCommunity() {
               School Community Partnership
             </span>
             <h1 className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 md:mb-6 leading-tight">
-              Partner with Sara Foundation Africa
+              {c.hero_headline}
             </h1>
             <p className="text-base md:text-xl text-white/70 leading-relaxed mb-6 md:mb-8 max-w-3xl mx-auto">
-              Partnering with Sara Foundation Africa can provide universities with access to talent pools, 
-              networking opportunities, brand visibility, social impact, and valuable resources. We are 
-              excited to work with universities to contribute to the growth of the tech industry in Africa 
-              and promote Diversity, Equity and Inclusion in technology.
+              {c.hero_description}
             </p>
             <p className="text-sm md:text-lg text-white/60 mb-6 md:mb-8 max-w-3xl mx-auto">
-              The Community Access & Participation Pathway (CAP) is an initiative of Sara Foundation Africa aimed at 
-              establishing tech clubs across African universities and providing development opportunities 
-              for the next generation of tech founders and tech professionals.
+              {c.hero_description2}
             </p>
             <Button variant="hero" size="lg" className="w-full sm:w-auto" asChild>
               <Link to="/contact">

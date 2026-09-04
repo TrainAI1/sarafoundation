@@ -11,24 +11,51 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
 import { Users, BookOpen, Mic, GraduationCap, Heart, Globe } from "lucide-react";
+import { usePageContent } from "@/hooks/usePageContent";
 
-const roles = [
-  { icon: BookOpen, title: "Mentor", description: "Support learners through structured mentoring, feedback, reflection and knowledge-sharing. Typically 2–4 hours per month, fully virtual." },
-  { icon: GraduationCap, title: "Tech Trainer / Facilitator", description: "Support educational resources, digital learning activities, virtual learning experiences and workshops for CAP and FLIP participants." },
-  { icon: Mic, title: "Panellist / Speaker", description: "Share professional knowledge and experience through our events, conferences and sessions." },
-  { icon: Users, title: "Knowledge & Expert Session Contributor", description: "Host educational sessions and share technology expertise with learners and women interested in technology." },
-  { icon: Users, title: "Student Ambassador", description: "Be a Sara Foundation ambassador at your university under our CAP Tech Hub initiative — champion the Foundation on campus, share learning opportunities and help peers take part." },
-  { icon: Heart, title: "General Volunteer", description: "Not sure which role fits yet? Tell us what you can offer and we will find a way for you to contribute." },
-];
+const roleIcons: Record<string, typeof BookOpen> = {
+  "Mentor": BookOpen,
+  "Tech Trainer / Facilitator": GraduationCap,
+  "Panellist / Speaker": Mic,
+  "Knowledge & Expert Session Contributor": Users,
+  "Student Ambassador": Users,
+  "General Volunteer": Heart,
+};
 
-const benefits = [
-  { icon: Heart, title: "Reduce barriers to learning", text: "Help someone access education and participation they would otherwise miss." },
-  { icon: Globe, title: "Pan-African community", text: "Join volunteers and contributors supporting learners across 11 African countries." },
-  { icon: Users, title: "Recognition", text: "Volunteer certificates, references and recognition at our showcases and conferences." },
-];
+const benefitIcons: Record<string, typeof Heart> = {
+  "Reduce barriers to learning": Heart,
+  "Pan-African community": Globe,
+  "Recognition": Users,
+};
 
 export default function Volunteer() {
   const { toast } = useToast();
+  const { data: c } = usePageContent("volunteer-page", {
+    hero_badge: "Volunteer",
+    hero_headline_part1: "Join Our Community of 60+ Volunteers, Speakers, Trainers,",
+    hero_headline_part2: "Facilitators and Mentors",
+    hero_description:
+      "Volunteers make our learning pathways possible. Whether you can mentor a learner for a few hours a month, facilitate a workshop, speak at a session or contribute expertise in another way, there is a role for you.",
+    roles_headline: "Volunteer roles",
+    roles: [
+      { title: "Mentor", description: "Support learners through structured mentoring, feedback, reflection and knowledge-sharing. Typically 2–4 hours per month, fully virtual." },
+      { title: "Tech Trainer / Facilitator", description: "Support educational resources, digital learning activities, virtual learning experiences and workshops for CAP and FLIP participants." },
+      { title: "Panellist / Speaker", description: "Share professional knowledge and experience through our events, conferences and sessions." },
+      { title: "Knowledge & Expert Session Contributor", description: "Host educational sessions and share technology expertise with learners and women interested in technology." },
+      { title: "Student Ambassador", description: "Be a Sara Foundation ambassador at your university under our CAP Tech Hub initiative — champion the Foundation on campus, share learning opportunities and help peers take part." },
+      { title: "General Volunteer", description: "Not sure which role fits yet? Tell us what you can offer and we will find a way for you to contribute." },
+    ],
+    benefits: [
+      { title: "Reduce barriers to learning", text: "Help someone access education and participation they would otherwise miss." },
+      { title: "Pan-African community", text: "Join volunteers and contributors supporting learners across 11 African countries." },
+      { title: "Recognition", text: "Volunteer certificates, references and recognition at our showcases and conferences." },
+    ],
+    form_headline: "Become a volunteer",
+    form_description: "We review applications weekly and reply within 7 business days.",
+  });
+
+  const roles = c.roles.map((r: { title: string; description: string }) => ({ ...r, icon: roleIcons[r.title] ?? Heart }));
+  const benefits = c.benefits.map((b: { title: string; text: string }) => ({ ...b, icon: benefitIcons[b.title] ?? Heart }));
   const [submitting, setSubmitting] = useState(false);
   const [form, setForm] = useState({ firstName: "", lastName: "", email: "", role: "", message: "" });
 
@@ -77,20 +104,18 @@ export default function Volunteer() {
       <Navbar />
       <main id="main-content" className="pt-24 md:pt-32">
         <section className="section-container pb-12">
-          <span className="section-badge mb-4">Volunteer</span>
+          <span className="section-badge mb-4">{c.hero_badge}</span>
           <h1 className="section-title text-foreground mb-4 max-w-3xl">
-            Join Our Community of 60+ Volunteers, Speakers, Trainers,{" "}
-            <span className="gradient-text">Facilitators and Mentors</span>
+            {c.hero_headline_part1}{" "}
+            <span className="gradient-text">{c.hero_headline_part2}</span>
           </h1>
           <p className="section-subtitle max-w-3xl">
-            Volunteers make our learning pathways possible. Whether you can mentor a learner for a few hours
-            a month, facilitate a workshop, speak at a session or contribute expertise in another way, there
-            is a role for you.
+            {c.hero_description}
           </p>
         </section>
 
         <section className="section-container pb-16">
-          <h2 className="font-display font-bold text-2xl md:text-3xl mb-6">Volunteer roles</h2>
+          <h2 className="font-display font-bold text-2xl md:text-3xl mb-6">{c.roles_headline}</h2>
           <div className="grid md:grid-cols-2 gap-6">
             {roles.map(({ icon: Icon, ...r }) => (
               <Card key={r.title} className="p-6">
@@ -120,8 +145,8 @@ export default function Volunteer() {
 
         <section className="section-container pb-24">
           <Card className="p-6 md:p-10 max-w-2xl mx-auto">
-            <h2 className="font-display font-bold text-2xl md:text-3xl mb-2">Become a volunteer</h2>
-            <p className="text-muted-foreground mb-6 text-sm">We review applications weekly and reply within 7 business days.</p>
+            <h2 className="font-display font-bold text-2xl md:text-3xl mb-2">{c.form_headline}</h2>
+            <p className="text-muted-foreground mb-6 text-sm">{c.form_description}</p>
             <form onSubmit={submit} className="space-y-4">
               <div className="grid sm:grid-cols-2 gap-4">
                 <div>

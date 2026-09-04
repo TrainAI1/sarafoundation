@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 
-export function usePageContent(slug: string, defaults: Record<string, string> = {}) {
+export function usePageContent(slug: string, defaults: Record<string, any> = {}) {
   const { data, isLoading } = useQuery({
     queryKey: ["page-content", slug],
     queryFn: async () => {
@@ -11,7 +11,7 @@ export function usePageContent(slug: string, defaults: Record<string, string> = 
         .eq("slug", slug)
         .maybeSingle();
       if (error) throw error;
-      return (data?.content as Record<string, string>) ?? null;
+      return (data?.content as Record<string, any>) ?? null;
     },
     placeholderData: null,
     staleTime: 1000 * 60 * 5, // 5 min cache

@@ -1,69 +1,124 @@
 import { Linkedin, Twitter, Users2 } from "lucide-react";
+import { useQuery } from "@tanstack/react-query";
+import { supabase } from "@/integrations/supabase/client";
+import { assetUrl } from "@/lib/assetUrl";
+import sarahPhoto from "@/assets/team/sarah-kalu.jpg";
+import emmanuelPhoto from "@/assets/team/inem-emmanuel.jpg";
+import itoroPhoto from "@/assets/team/itoro.jpg";
+import tobyPhoto from "@/assets/team/toby-nwanede.jpg";
+import dolapoPhoto from "@/assets/team/dolapo-dahunsi.jpg";
+import fisayoPhoto from "@/assets/team/fisayo-adeyemi.jpg";
+import mercyPhoto from "@/assets/team/mercy-momah.jpg";
 
-const coreTeam = [
-  { 
-    name: "Kalu Sarah", 
-    role: "Founder", 
-    bio: "Leading professional with expertise in finance, technology, and strategy. Has worked with Goldman Sachs, Bloomberg, and Blackaion Capital. Also leads Train AI, an edtech platform for tech learners across Africa." 
-  },
-  { 
-    name: "Inem Emmanuel", 
-    role: "Public Relations Specialist", 
-    bio: "Expanded the foundation's reach to 6,000 Africans and hosted over 47 knowledge sessions for the foundation." 
-  },
-  { 
-    name: "Itoro", 
-    role: "Program Manager", 
-    bio: "Expanded CAP to 35 universities across 8 African countries. Launched the FLIP Fellowship and secured key partnerships with Scintilla Africa, Farmily, and more." 
-  },
-];
-
-const advisors = [
-  { 
-    name: "Toby Nwanede", 
-    role: "3-time Startup Founder", 
-    bio: "Partner at PIF; Founded Scintilla Innovations; Lead Marketing Consultant at Shoprite Nigeria." 
-  },
-  { 
-    name: "Ayoola Ademoye", 
-    role: "Business Development & Strategy Leader", 
-    bio: "Over 12 years of experience; contributed to ACCA's success in Nigeria; Business Analyst at Jisc (UK)." 
-  },
-  { 
-    name: "Dolapo Dahunsi", 
-    role: "African HR Leader", 
-    bio: "People Operations & Immigration Specialist for West Africa at General Electric (GE); Co-founded Career Pinnacle." 
-  },
-  { 
-    name: "Fisayo Adeyemi", 
-    role: "Business Analysis Leader", 
-    bio: "Founder of Rayne Consults; 'The BA Influencer'; Director of Communications for IIBA Nigeria. Mentor for FLIP No-Code Track." 
-  },
-  { 
-    name: "Mercy Momah", 
-    role: "Project Coach & PMO Consultant", 
-    bio: "Head, Project Management Office at Flour Mills of Nigeria Plc. Certified PMP, Business Analyst Professional. Workshop facilitator for FLIP Fellowship." 
-  },
-];
-
-interface TeamMemberProps {
+interface TeamMember {
+  id: number;
   name: string;
   role: string;
   bio: string;
+  photo?: string;
+  type: "core" | "advisor";
 }
 
-function TeamMember({ name, role, bio }: TeamMemberProps) {
+const defaultPhotoByName: Record<string, string> = {
+  "kalu sarah": sarahPhoto,
+  "sarah kalu": sarahPhoto,
+  "inem emmanuel": emmanuelPhoto,
+  "emmanuel inem": emmanuelPhoto,
+  "itoro": itoroPhoto,
+  "itoro inem": itoroPhoto,
+  "toby nwanede": tobyPhoto,
+  "dolapo dahunsi": dolapoPhoto,
+  "fisayo adeyemi": fisayoPhoto,
+  "mercy momah": mercyPhoto,
+};
+
+const defaultCoreTeam: TeamMember[] = [
+  {
+    id: 1,
+    type: "core",
+    name: "Kalu Sarah",
+    role: "Founder",
+    photo: sarahPhoto,
+    bio: "Leading professional with expertise in finance, technology, and strategy. Has worked with Goldman Sachs, Bloomberg, and Blackaion Capital. Also leads Train AI, an edtech platform for tech learners across Africa."
+  },
+  {
+    id: 2,
+    type: "core",
+    name: "Inem Emmanuel",
+    role: "Public Relations Specialist",
+    photo: emmanuelPhoto,
+    bio: "Expanded the foundation's reach to 6,000 Africans and hosted over 47 knowledge sessions for the foundation."
+  },
+  {
+    id: 3,
+    type: "core",
+    name: "Itoro",
+    role: "Program Manager",
+    photo: itoroPhoto,
+    bio: "Expanded CAP to 35 universities across 8 African countries. Launched the FLIP Fellowship and secured key partnerships with Scintilla Africa, Farmily, and more."
+  },
+];
+
+const defaultAdvisors: TeamMember[] = [
+  {
+    id: 4,
+    type: "advisor",
+    name: "Toby Nwanede",
+    role: "3-time Startup Founder",
+    photo: tobyPhoto,
+    bio: "Partner at PIF; Founded Scintilla Innovations; Lead Marketing Consultant at Shoprite Nigeria."
+  },
+  {
+    id: 5,
+    type: "advisor",
+    name: "Ayoola Ademoye",
+    role: "Business Development & Strategy Leader",
+    bio: "Over 12 years of experience; contributed to ACCA's success in Nigeria; Business Analyst at Jisc (UK)."
+  },
+  {
+    id: 6,
+    type: "advisor",
+    name: "Dolapo Dahunsi",
+    role: "African HR Leader",
+    photo: dolapoPhoto,
+    bio: "People Operations & Immigration Specialist for West Africa at General Electric (GE); Co-founded Career Pinnacle."
+  },
+  {
+    id: 7,
+    type: "advisor",
+    name: "Fisayo Adeyemi",
+    role: "Business Analysis Leader",
+    photo: fisayoPhoto,
+    bio: "Founder of Rayne Consults; 'The BA Influencer'; Director of Communications for IIBA Nigeria. Mentor for FLIP No-Code Track."
+  },
+  {
+    id: 8,
+    type: "advisor",
+    name: "Mercy Momah",
+    role: "Project Coach & PMO Consultant",
+    photo: mercyPhoto,
+    bio: "Head, Project Management Office at Flour Mills of Nigeria Plc. Certified PMP, Business Analyst Professional. Workshop facilitator for FLIP Fellowship."
+  },
+];
+
+function TeamMember({ name, role, bio, photo }: TeamMember) {
   const initials = name.split(' ').map(n => n[0]).join('');
-  
+
   return (
     <div className="card-modern p-6 md:p-8 text-center group">
       <div className="relative w-20 h-20 md:w-24 md:h-24 mx-auto mb-4 md:mb-6">
-        <div className="absolute inset-0 rounded-full bg-primary opacity-80 group-hover:scale-105 transition-transform duration-300" />
-        <div className="absolute inset-0.5 rounded-full bg-card flex items-center justify-center">
-          <span className="text-xl md:text-2xl font-bold font-display gradient-text">
-            {initials}
-          </span>
-        </div>
+        {photo ? (
+          <img src={photo} alt={name} className="absolute inset-0 w-full h-full rounded-full object-cover group-hover:scale-105 transition-transform duration-300" />
+        ) : (
+          <>
+            <div className="absolute inset-0 rounded-full bg-primary opacity-80 group-hover:scale-105 transition-transform duration-300" />
+            <div className="absolute inset-0.5 rounded-full bg-card flex items-center justify-center">
+              <span className="text-xl md:text-2xl font-bold font-display gradient-text">
+                {initials}
+              </span>
+            </div>
+          </>
+        )}
       </div>
       <h4 className="font-display font-bold text-base md:text-lg text-foreground">{name}</h4>
       <p className="text-primary font-medium text-xs md:text-sm mb-2">{role}</p>
@@ -81,6 +136,25 @@ function TeamMember({ name, role, bio }: TeamMemberProps) {
 }
 
 export function TeamSection() {
+  const { data: dbTeam } = useQuery({
+    queryKey: ["team-members-page"],
+    queryFn: async () => {
+      const { data } = await supabase.from("pages").select("content").eq("slug", "team-members").maybeSingle();
+      if (!data?.content) return null;
+      const c = data.content as { members?: TeamMember[] };
+      return c.members && c.members.length > 0 ? c.members : null;
+    },
+  });
+
+  const rawTeam = dbTeam || [...defaultCoreTeam, ...defaultAdvisors];
+  const team = rawTeam.map((m) => ({
+    ...m,
+    photo: m.photo ? assetUrl(m.photo) : defaultPhotoByName[m.name.toLowerCase().trim()] || m.photo || "",
+  }));
+
+  const coreTeam = team.filter((m) => m.type === "core");
+  const advisors = team.filter((m) => m.type === "advisor");
+
   return (
     <section className="py-16 md:py-24 lg:py-32 bg-secondary/50 relative overflow-hidden">
       {/* Background decoration */}

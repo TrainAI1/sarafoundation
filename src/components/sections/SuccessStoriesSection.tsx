@@ -3,6 +3,7 @@ import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { ScrollAnimation, StaggerContainer, StaggerItem } from "@/components/ui/scroll-animation";
+import { usePageContent } from "@/hooks/usePageContent";
 
 type Story = {
   pathway: "CAP" | "FLIP" | "EJP";
@@ -15,7 +16,7 @@ type Story = {
   pathwayHref: string;
 };
 
-const stories: Story[] = [
+const defaultStories: Story[] = [
   {
     pathway: "CAP",
     name: "Akinlabi Isulameya",
@@ -52,18 +53,28 @@ const stories: Story[] = [
 ];
 
 export function SuccessStoriesSection() {
+  const { data: c } = usePageContent("home-success-stories", {
+    badge: "Featured Stories",
+    headline_pre: "Real Learners.",
+    headline_accent: "Real Journeys.",
+    description:
+      "Behind every number is a learner, mentor or community member moving forward. Explore the projects, learning experiences and personal journeys created through CAP, FLIP and EJP.",
+    stories: defaultStories,
+  });
+
+  const stories = c.stories as Story[];
+
   return (
     <section className="py-16 md:py-24 bg-background">
       <div className="section-container">
         <ScrollAnimation variant="fade-up">
           <div className="text-center max-w-3xl mx-auto mb-12">
-            <span className="section-badge mb-4">Featured Stories</span>
+            <span className="section-badge mb-4">{c.badge}</span>
             <h2 className="section-title text-foreground mb-4">
-              Real Learners. <span className="gradient-text">Real Journeys.</span>
+              {c.headline_pre} <span className="gradient-text">{c.headline_accent}</span>
             </h2>
             <p className="section-subtitle">
-              Behind every number is a learner, mentor or community member moving forward. Explore the
-              projects, learning experiences and personal journeys created through CAP, FLIP and EJP.
+              {c.description}
             </p>
           </div>
         </ScrollAnimation>

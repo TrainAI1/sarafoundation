@@ -1,7 +1,8 @@
 import { GraduationCap } from "lucide-react";
 import { ScrollAnimation } from "@/components/ui/scroll-animation";
+import { usePageContent } from "@/hooks/usePageContent";
 
-const universities = [
+const defaultUniversities = [
   // Cohort 1
   { name: "University of Ilorin", country: "Nigeria", flag: "🇳🇬" },
   { name: "University of Lagos", country: "Nigeria", flag: "🇳🇬" },
@@ -39,6 +40,17 @@ const universities = [
 ];
 
 export function PartnersSection() {
+  const { data: c } = usePageContent("home-partners-universities", {
+    badge: "Our University Partners",
+    headline_pre: "Present in",
+    headline_accent: "35 African Universities",
+    description:
+      "We have established CAP Tech Hubs across 8 African countries, supporting young people on campus.",
+    countries_line: "Across Nigeria 🇳🇬 · Ghana 🇬🇭 · Kenya 🇰🇪 · South Africa 🇿🇦 · Uganda 🇺🇬 · Zambia 🇿🇲 · Togo 🇹🇬",
+    universities: defaultUniversities,
+  });
+
+  const universities = c.universities as typeof defaultUniversities;
   const doubled = [...universities, ...universities];
 
   return (
@@ -47,13 +59,13 @@ export function PartnersSection() {
         <ScrollAnimation variant="fade-up" className="text-center max-w-3xl mx-auto mb-10 md:mb-14 px-4">
           <span className="section-badge mb-6">
             <GraduationCap className="w-4 h-4" />
-            Our University Partners
+            {c.badge}
           </span>
           <h2 className="section-title text-foreground mb-4">
-            Present in <span className="gradient-text">35 African Universities</span>
+            {c.headline_pre} <span className="gradient-text">{c.headline_accent}</span>
           </h2>
           <p className="section-subtitle mx-auto">
-            We have established CAP Tech Hubs across 8 African countries, supporting young people on campus.
+            {c.description}
           </p>
         </ScrollAnimation>
       </div>
@@ -95,7 +107,7 @@ export function PartnersSection() {
       <div className="section-container">
         <ScrollAnimation variant="fade-in" className="text-center mt-10">
           <p className="text-muted-foreground text-sm">
-            Across Nigeria 🇳🇬 · Ghana 🇬🇭 · Kenya 🇰🇪 · South Africa 🇿🇦 · Uganda 🇺🇬 · Zambia 🇿🇲 · Togo 🇹🇬
+            {c.countries_line}
           </p>
         </ScrollAnimation>
       </div>

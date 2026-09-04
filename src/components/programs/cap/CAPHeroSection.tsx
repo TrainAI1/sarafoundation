@@ -2,23 +2,39 @@ import { Button } from "@/components/ui/button";
 import { GraduationCap, ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import capClassroom from "@/assets/events/DSC_3133-3.jpg.asset.json";
+import studentsLabImg from "@/assets/students-tech-lab.jpg";
 import { assetUrl } from "@/lib/assetUrl";
-
-const stats = [
-  { value: "763", label: "CAP learners, fully funded" },
-  { value: "35+", label: "Universities represented" },
-  { value: "8", label: "African countries (CAP)" },
-];
+import { usePageContent } from "@/hooks/usePageContent";
 
 export function CAPHeroSection() {
+  const { data: c } = usePageContent("programs-cap", {
+    badge: "Community Access & Participation Pathway",
+    hero_headline: "Expanding Access. Building Confidence. Supporting Participation.",
+    hero_description: "CAP helps young people from underserved and underrepresented communities access structured digital education, mentoring and practical learning. Participants build knowledge, practise new skills, work on projects, connect with peers and contribute to community learning.",
+    hero_image: "",
+    cta_primary_text: "Apply to CAP",
+    cta_secondary_text: "See our impact evidence",
+    stats: [
+      { value: "763", label: "CAP learners, fully funded" },
+      { value: "35+", label: "Universities represented" },
+      { value: "8", label: "African countries (CAP)" },
+    ],
+    stats_caption: "Figures cover CAP Cohorts 1 and 2 (2024–2025).",
+  });
+
+  const heroImage = c.hero_image ? assetUrl(c.hero_image) : assetUrl(capClassroom);
+
   return (
     <section className="pt-24 md:pt-32 pb-12 md:pb-20 bg-primary relative overflow-hidden">
       <div className="absolute inset-0">
         <img
-          src={assetUrl(capClassroom)}
+          src={heroImage}
           alt=""
           aria-hidden="true"
           className="w-full h-full object-cover opacity-20"
+          onError={(e) => {
+            e.currentTarget.src = studentsLabImg;
+          }}
         />
         <div className="absolute inset-0 bg-primary" />
       </div>
@@ -27,25 +43,23 @@ export function CAPHeroSection() {
           <div className="px-4 lg:px-0">
             <span className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.18em] text-white/80 mb-6">
               <GraduationCap className="w-3 h-3 md:w-4 md:h-4 text-accent" aria-hidden="true" />
-              Community Access &amp; Participation Pathway
+              {c.badge}
             </span>
             <h1 className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 md:mb-6 leading-tight">
-              Expanding Access. Building Confidence. Supporting Participation.
+              {c.hero_headline}
             </h1>
             <p className="text-base md:text-xl text-white/70 leading-relaxed mb-6 md:mb-8">
-              CAP helps young people from underserved and underrepresented communities access structured digital
-              education, mentoring and practical learning. Participants build knowledge, practise new
-              skills, work on projects, connect with peers and contribute to community learning.
+              {c.hero_description}
             </p>
             <div className="flex flex-col sm:flex-row gap-3 md:gap-4">
               <Button variant="hero" size="lg" className="group" asChild>
                 <Link to="/programs/cap/apply">
-                  Apply to CAP
+                  {c.cta_primary_text}
                   <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                 </Link>
               </Button>
               <Button variant="heroSecondary" size="lg" asChild>
-                <Link to="/projects">See our impact evidence</Link>
+                <Link to="/projects">{c.cta_secondary_text}</Link>
               </Button>
             </div>
           </div>
@@ -53,14 +67,17 @@ export function CAPHeroSection() {
           <div className="relative mx-4 lg:mx-0">
             <div className="rounded-2xl md:rounded-3xl overflow-hidden shadow-2xl mb-6">
               <img
-                src={assetUrl(capClassroom)}
+                src={heroImage}
                 alt="CAP Tech Hub session in a university lecture hall with learners and a facilitator"
                 className="w-full h-48 md:h-64 object-cover"
+                onError={(e) => {
+                  e.currentTarget.src = studentsLabImg;
+                }}
               />
             </div>
             <div className="glass-card-dark p-6 md:p-8 rounded-2xl md:rounded-3xl">
               <div className="grid grid-cols-3 gap-4 md:gap-6">
-                {stats.map((stat) => (
+                {c.stats.map((stat: { value: string; label: string }) => (
                   <div key={stat.label} className="text-center p-2 md:p-4">
                     <div className="text-2xl sm:text-3xl md:text-4xl font-bold font-display text-white mb-1 md:mb-2">
                       {stat.value}
@@ -70,7 +87,7 @@ export function CAPHeroSection() {
                 ))}
               </div>
               <p className="text-center text-white/50 text-xs mt-4">
-                Figures cover CAP Cohorts 1 and 2 (2024–2025).
+                {c.stats_caption}
               </p>
             </div>
           </div>

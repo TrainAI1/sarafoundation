@@ -5,25 +5,38 @@ import { Footer } from "@/components/layout/Footer";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { FileText, Download, Clock } from "lucide-react";
-
-const reports = [
-  {
-    year: "2025",
-    title: "Sara Foundation Africa — 2025 Impact Report",
-    summary: "763 learners trained across 35 universities in 8 African countries, the launch of the FLIP Fellowship, our first CAP and FLIP conferences, and continued Education Journey Pathway activity.",
-    href: "https://drive.google.com/file/d/1Ex55tpVH_RPB0VJygsUyw9Hp74RyPKR_/view?usp=drivesdk",
-    status: "available" as const,
-  },
-  {
-    year: "2024",
-    title: "Sara Foundation Africa — 2024 Impact Report",
-    summary: "Our first full year: the inaugural CAP cohort across founding partner universities, the start of our knowledge and expert sessions, and the establishment of our governance, leadership team and operating model.",
-    href: "https://drive.google.com/file/d/1DjVw-vTf6ugcp75rFVCUCKM4zictzDKN/view?usp=drivesdk",
-    status: "available" as const,
-  },
-];
+import { usePageContent } from "@/hooks/usePageContent";
 
 export default function AnnualReports() {
+  const { data: c } = usePageContent("annual-reports-page", {
+    hero_badge: "Annual Reports",
+    hero_headline_part1: "Transparency &",
+    hero_headline_gradient: "accountability.",
+    hero_description:
+      "We publish annual impact reports covering programmes delivered, learners reached, financial stewardship, and outcomes across our partner universities and countries. Read or download our reports below.",
+    reports: [
+      {
+        year: "2025",
+        title: "Sara Foundation Africa — 2025 Impact Report",
+        summary: "763 learners trained across 35 universities in 8 African countries, the launch of the FLIP Fellowship, our first CAP and FLIP conferences, and continued Education Journey Pathway activity.",
+        href: "https://drive.google.com/file/d/1Ex55tpVH_RPB0VJygsUyw9Hp74RyPKR_/view?usp=drivesdk",
+        status: "available",
+      },
+      {
+        year: "2024",
+        title: "Sara Foundation Africa — 2024 Impact Report",
+        summary: "Our first full year: the inaugural CAP cohort across founding partner universities, the start of our knowledge and expert sessions, and the establishment of our governance, leadership team and operating model.",
+        href: "https://drive.google.com/file/d/1DjVw-vTf6ugcp75rFVCUCKM4zictzDKN/view?usp=drivesdk",
+        status: "available",
+      },
+    ],
+    closing_headline: "Questions about our reports?",
+    closing_description:
+      "Registered as Princess Sara Foundation in Nigeria (CAC charity number 7980056). Contact us for governance documents, audited financials, or partnership due-diligence packs.",
+  });
+
+  const reports = c.reports as { year: string; title: string; summary: string; href: string; status: string }[];
+
   return (
     <div className="min-h-screen bg-background">
       <Helmet>
@@ -38,13 +51,12 @@ export default function AnnualReports() {
       <Navbar />
       <main id="main-content" className="pt-24 md:pt-32">
         <section className="section-container pb-12">
-          <span className="section-badge mb-4"><FileText className="w-4 h-4" /> Annual Reports</span>
+          <span className="section-badge mb-4"><FileText className="w-4 h-4" /> {c.hero_badge}</span>
           <h1 className="section-title text-foreground mb-4 max-w-3xl">
-            Transparency & <span className="gradient-text">accountability.</span>
+            {c.hero_headline_part1} <span className="gradient-text">{c.hero_headline_gradient}</span>
           </h1>
           <p className="section-subtitle max-w-3xl">
-            We publish annual impact reports covering programmes delivered, learners reached, financial stewardship, and
-            outcomes across our partner universities and countries. Read or download our reports below.
+            {c.hero_description}
           </p>
         </section>
 
@@ -78,9 +90,9 @@ export default function AnnualReports() {
 
         <section className="section-container pb-24">
           <Card className="p-8 text-center bg-primary/10 border-primary/20">
-            <h2 className="font-display font-bold text-2xl mb-3">Questions about our reports?</h2>
+            <h2 className="font-display font-bold text-2xl mb-3">{c.closing_headline}</h2>
             <p className="text-muted-foreground mb-6 max-w-xl mx-auto">
-              Registered as Princess Sara Foundation in Nigeria (CAC charity number 7980056). Contact us for governance documents, audited financials, or partnership due-diligence packs.
+              {c.closing_description}
             </p>
             <Button asChild><Link to="/contact">Contact us</Link></Button>
           </Card>

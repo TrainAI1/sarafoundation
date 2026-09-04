@@ -9,6 +9,7 @@ const defaults = {
   description: "Give, partner, mentor or volunteer to help more people learn, participate and contribute to their communities.",
   cta_primary: "Donate",
   cta_secondary: "Partner with Us",
+  bg_image: "",
 };
 
 export function CTASection() {
@@ -17,8 +18,11 @@ export function CTASection() {
   return (
     <section className="py-16 md:py-24 lg:py-32 relative overflow-hidden">
       <div className="absolute inset-0 bg-primary" />
-      <div className="absolute inset-0 opacity-30">
-      </div>
+      {c.bg_image && (
+        <div className="absolute inset-0 opacity-30">
+          <img src={c.bg_image} alt="" className="w-full h-full object-cover" />
+        </div>
+      )}
 
       <div className="section-container relative z-10">
         <div className="text-center max-w-3xl mx-auto px-4">

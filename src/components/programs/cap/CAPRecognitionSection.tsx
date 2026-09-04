@@ -1,32 +1,33 @@
-import { Award, ExternalLink } from "lucide-react";
-
-const partners = [
-  {
-    name: "Scintilla Africa",
-    role: "Industry exposure and experiential learning opportunities",
-  },
-  {
-    name: "Farmily",
-    role: "Host organisation for continued learning journeys",
-  },
-  {
-    name: "Train AI",
-    role: "EdTech platform supporting learners' journeys",
-  },
-  {
-    name: "Nanaade AI",
-    role: "Work-readiness education support",
-  },
-];
+import { Award } from "lucide-react";
+import { usePageContent } from "@/hooks/usePageContent";
 
 export function CAPRecognitionSection() {
+  const { data: c } = usePageContent("cap-recognition", {
+    badge: "Recognition & Partners",
+    headline_main: "Trusted. Recognised.",
+    headline_highlight: "Growing.",
+    award_title: "Prestige Award Winner 2025/26",
+    award_category: "London & South East England — Leadership Development Category",
+    award_quote: "This recognition honours organisations making meaningful impact within their communities and reinforces our position as a rising African nonprofit shaping the next generation of innovators.",
+    partners_title: "Strategic Partners",
+    partners: [
+      { name: "Scintilla Africa", role: "Industry exposure and experiential learning opportunities" },
+      { name: "Farmily", role: "Host organisation for continued learning journeys" },
+      { name: "Train AI", role: "EdTech platform supporting learners' journeys" },
+      { name: "Nanaade AI", role: "Work-readiness education support" },
+    ],
+    footer_text: "Sara Foundation is a London based Non-Profit Organization established by Africans to drive technology focused impact in Africa, by fostering Diversity, Equity and Inclusion and developing the next generation of African tech innovators.",
+  });
+
+  const partners = c.partners as { name: string; role: string }[];
+
   return (
     <section className="py-16 md:py-24 bg-secondary/50">
       <div className="section-container">
         <div className="text-center max-w-3xl mx-auto mb-10 md:mb-16 px-4">
-          <span className="section-badge mb-4 md:mb-6">Recognition & Partners</span>
+          <span className="section-badge mb-4 md:mb-6">{c.badge}</span>
           <h2 className="section-title text-foreground mb-4 md:mb-6">
-            Trusted. Recognised. <span className="gradient-text">Growing.</span>
+            {c.headline_main} <span className="gradient-text">{c.headline_highlight}</span>
           </h2>
         </div>
 
@@ -35,21 +36,20 @@ export function CAPRecognitionSection() {
           <div className="card-modern p-6 md:p-8 text-center bg-primary/5 border-primary/20">
             <Award className="w-12 h-12 text-primary mx-auto mb-4" />
             <h3 className="font-display font-bold text-xl text-foreground mb-1">
-               Prestige Award Winner 2025/26
+              {c.award_title}
             </h3>
             <p className="text-primary font-medium text-sm mb-3">
-              London & South East England — Leadership Development Category
+              {c.award_category}
             </p>
             <p className="text-muted-foreground text-sm italic max-w-lg mx-auto">
-              "This recognition honours organisations making meaningful impact within their communities
-              and reinforces our position as a rising African nonprofit shaping the next generation of innovators."
+              "{c.award_quote}"
             </p>
           </div>
         </div>
 
         {/* Partners */}
         <div className="px-4 lg:px-0">
-          <h3 className="font-display font-bold text-lg text-foreground text-center mb-6">Strategic Partners</h3>
+          <h3 className="font-display font-bold text-lg text-foreground text-center mb-6">{c.partners_title}</h3>
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
             {partners.map((partner) => (
               <div key={partner.name} className="card-modern p-5 md:p-6 text-center">
@@ -61,9 +61,7 @@ export function CAPRecognitionSection() {
         </div>
 
         <p className="text-center text-muted-foreground text-sm mt-10 max-w-2xl mx-auto px-4">
-          Sara Foundation is a London based Non-Profit Organization established by Africans to drive
-          technology focused impact in Africa, by fostering Diversity, Equity and Inclusion and developing
-          the next generation of African tech innovators.
+          {c.footer_text}
         </p>
       </div>
     </section>

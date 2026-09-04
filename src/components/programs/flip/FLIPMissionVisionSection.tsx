@@ -1,16 +1,31 @@
 import { Target, Eye } from "lucide-react";
-
-const countries = [
-  { name: "Nigeria", flag: "🇳🇬" },
-  { name: "Ghana", flag: "🇬🇭" },
-  { name: "Kenya", flag: "🇰🇪" },
-  { name: "South Africa", flag: "🇿🇦" },
-  { name: "Uganda", flag: "🇺🇬" },
-  { name: "Zambia", flag: "🇿🇲" },
-  { name: "Togo", flag: "🇹🇬" },
-];
+import { usePageContent } from "@/hooks/usePageContent";
 
 export function FLIPMissionVisionSection() {
+  const { data: c } = usePageContent("programs-flip", {
+    countries: [
+      { name: "Nigeria", flag: "🇳🇬" },
+      { name: "Ghana", flag: "🇬🇭" },
+      { name: "Kenya", flag: "🇰🇪" },
+      { name: "South Africa", flag: "🇿🇦" },
+      { name: "Uganda", flag: "🇺🇬" },
+      { name: "Zambia", flag: "🇿🇲" },
+      { name: "Togo", flag: "🇹🇬" },
+    ],
+    mission_heading: "Our Mission",
+    mission:
+      "FLIP's mission is to drive transformative change by building a vibrant, global community " +
+      "that supports, mentors, and uplifts women, advocating for equitable opportunities and " +
+      "inclusive practices within the tech industry.",
+    vision_heading: "Our Vision",
+    vision:
+      "FLIP envisions a tech industry where women leaders are pivotal in driving innovation and " +
+      "positive change. We strive to cultivate a diverse and inclusive digital future, where " +
+      "gender equity is achieved and women of all backgrounds have the opportunity to thrive, lead, and inspire.",
+  });
+
+  const countries = c.countries as { name: string; flag: string }[];
+
   return (
     <section className="py-16 md:py-24 bg-background">
       <div className="section-container">
@@ -33,12 +48,10 @@ export function FLIPMissionVisionSection() {
                 <Target className="w-7 h-7 md:w-8 md:h-8 text-white" />
               </div>
               <h3 className="font-display font-bold text-xl md:text-2xl text-foreground mb-3 md:mb-4">
-                Our Mission
+                {c.mission_heading}
               </h3>
               <p className="text-muted-foreground leading-relaxed">
-                FLIP's mission is to drive transformative change by building a vibrant, global community 
-                that supports, mentors, and uplifts women, advocating for equitable opportunities and 
-                inclusive practices within the tech industry.
+                {c.mission}
               </p>
             </div>
           </div>
@@ -51,12 +64,10 @@ export function FLIPMissionVisionSection() {
                 <Eye className="w-7 h-7 md:w-8 md:h-8 text-white" />
               </div>
               <h3 className="font-display font-bold text-xl md:text-2xl text-foreground mb-3 md:mb-4">
-                Our Vision
+                {c.vision_heading}
               </h3>
               <p className="text-muted-foreground leading-relaxed">
-                FLIP envisions a tech industry where women leaders are pivotal in driving innovation and 
-                positive change. We strive to cultivate a diverse and inclusive digital future, where 
-                gender equity is achieved and women of all backgrounds have the opportunity to thrive, lead, and inspire.
+                {c.vision}
               </p>
             </div>
           </div>

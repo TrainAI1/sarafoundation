@@ -6,66 +6,51 @@ import { Helmet } from "react-helmet-async";
 import { Building, Users, GraduationCap, ArrowRight, CheckCircle2, Handshake, Target, TrendingUp, Globe, Award } from "lucide-react";
 import partnershipMeeting from "@/assets/partnership-meeting.jpg";
 import techConferenceSpeaker from "@/assets/tech-conference-speaker.jpg";
+import { usePageContent } from "@/hooks/usePageContent";
+import { assetUrl } from "@/lib/assetUrl";
 
-const partnerTypes = [
+// Icon, link and color are structural/visual and are matched to the saved list by position — not admin-editable.
+const partnerTypeMeta = [
+  { icon: GraduationCap, href: "/partnership/school-community", color: "bg-primary" },
+  { icon: Building, href: "/partnership/organizations", color: "bg-accent" },
+  { icon: Handshake, href: "/partnership/sponsors", color: "bg-[hsl(160,84%,39%)]" },
+];
+
+const partnerTypesDefault = [
   {
-    icon: GraduationCap,
     title: "School Community",
     description: "Partner with us to bring tech education and CAP Tech Clubs to your institution.",
-    benefits: [
-      "CAP Tech Club establishment",
-      "Training for young people and women",
-      "Curriculum integration support",
-      "Industry exposure for participants",
-      "Faculty development workshops",
-      "Access to Sara Foundation network",
-    ],
-    stats: { value: "35+", label: "Universities represented" },
-    href: "/partnership/school-community",
-    color: "bg-primary",
+    benefits: "CAP Tech Club establishment\nTraining for young people and women\nCurriculum integration support\nIndustry exposure for participants\nFaculty development workshops\nAccess to Sara Foundation network",
+    stats_value: "35+",
+    stats_label: "Universities represented",
   },
   {
-    icon: Building,
     title: "Organizations",
     description: "Organisational partnerships that widen access to digital education, inclusion and community learning.",
-    benefits: [
-      "Support for structured learning activity",
-      "CSR impact reporting",
-      "Brand visibility across Africa",
-      "Co-branded programs",
-      "Employee volunteer opportunities",
-      "Volunteer and mentoring opportunities for your team",
-    ],
-    stats: { value: "11", label: "African countries reached" },
-    href: "/partnership/organizations",
-    color: "bg-accent",
+    benefits: "Support for structured learning activity\nCSR impact reporting\nBrand visibility across Africa\nCo-branded programs\nEmployee volunteer opportunities\nVolunteer and mentoring opportunities for your team",
+    stats_value: "11",
+    stats_label: "African countries reached",
   },
   {
-    icon: Handshake,
     title: "Sponsors",
     description: "Support our mission through sponsorship and funding opportunities.",
-    benefits: [
-      "Direct impact on access to learning",
-      "Recognition across platforms",
-      "Event sponsorship options",
-      "Scholarship naming rights",
-      "Exclusive networking events",
-      "Impact dashboard access",
-    ],
-    stats: { value: "1,600", label: "Scholarships provided" },
-    href: "/partnership/sponsors",
-    color: "bg-[hsl(160,84%,39%)]",
+    benefits: "Direct impact on access to learning\nRecognition across platforms\nEvent sponsorship options\nScholarship naming rights\nExclusive networking events\nImpact dashboard access",
+    stats_value: "1,600",
+    stats_label: "Scholarships provided",
   },
 ];
 
-const impactAreas = [
-  { icon: Users, value: "763", label: "CAP learners" },
-  { icon: Globe, value: "11", label: "African countries" },
-  { icon: GraduationCap, value: "35+", label: "Universities represented" },
-  { icon: Award, value: "1,600", label: "Scholarships provided" },
+// Icons for impact areas are matched to the saved list by position and are not admin-editable.
+const impactAreaIcons = [Users, Globe, GraduationCap, Award];
+
+const impactAreasDefault = [
+  { value: "763", label: "CAP learners" },
+  { value: "11", label: "African countries" },
+  { value: "35+", label: "Universities represented" },
+  { value: "1,600", label: "Scholarships provided" },
 ];
 
-const process = [
+const processDefault = [
   { step: "01", title: "Initial Contact", description: "Reach out to discuss partnership opportunities" },
   { step: "02", title: "Alignment Meeting", description: "We explore mutual goals and partnership models" },
   { step: "03", title: "Proposal & Agreement", description: "Formalize the partnership with clear objectives" },
@@ -73,6 +58,26 @@ const process = [
 ];
 
 export default function Partnership() {
+  const { data: c } = usePageContent("partnership-page", {
+    hero_headline: "Partner with Sara Foundation Africa",
+    hero_description: "We work with universities, community organisations, educators, funders, employers, technology organisations and other suitable partners where collaboration helps further our charitable purposes. Our trustees retain responsibility for programme decisions, beneficiary selection, partner due diligence and the use of charitable resources.",
+    hero_image: "",
+    image_break_text: "Together, we create lasting impact across Africa",
+    impact_areas: impactAreasDefault,
+    partner_types: partnerTypesDefault,
+    process: processDefault,
+  });
+
+  const impactAreas = (c.impact_areas as typeof impactAreasDefault).map((item, i) => ({
+    ...item,
+    icon: impactAreaIcons[i] || impactAreaIcons[impactAreaIcons.length - 1],
+  }));
+  const partnerTypes = (c.partner_types as typeof partnerTypesDefault).map((item, i) => ({
+    ...item,
+    benefits: item.benefits.split("\n").map((b) => b.trim()).filter(Boolean),
+    ...(partnerTypeMeta[i] || partnerTypeMeta[partnerTypeMeta.length - 1]),
+  }));
+  const process = c.process as typeof processDefault;
   return (
     <div className="min-h-screen bg-background">
       <Helmet>
@@ -94,10 +99,13 @@ export default function Partnership() {
       {/* Hero with Image */}
       <section className="pt-24 md:pt-32 pb-12 md:pb-20 bg-primary relative overflow-hidden">
         <div className="absolute inset-0">
-          <img 
-            src={partnershipMeeting} 
+          <img
+            src={c.hero_image ? assetUrl(c.hero_image) : partnershipMeeting}
             alt="Partnership meeting"
             className="w-full h-full object-cover opacity-15"
+            onError={(e) => {
+              e.currentTarget.src = partnershipMeeting;
+            }}
           />
           <div className="absolute inset-0 bg-primary" />
         </div>
@@ -109,13 +117,10 @@ export default function Partnership() {
                 Partnership Opportunities
               </span>
               <h1 className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 md:mb-6 leading-tight">
-                Partner with Sara Foundation Africa
+                {c.hero_headline}
               </h1>
               <p className="text-base md:text-xl text-white/70 leading-relaxed mb-6 md:mb-8">
-                We work with universities, community organisations, educators, funders, employers,
-                technology organisations and other suitable partners where collaboration helps further our
-                charitable purposes. Our trustees retain responsibility for programme decisions, beneficiary
-                selection, partner due diligence and the use of charitable resources.
+                {c.hero_description}
               </p>
               <Button variant="hero" size="lg" asChild>
                 <Link to="/contact">
@@ -129,8 +134,8 @@ export default function Partnership() {
             <div className="glass-card-dark p-6 md:p-8 rounded-2xl md:rounded-3xl mx-4 lg:mx-0">
               <h3 className="text-white font-semibold mb-4 md:mb-6 text-center text-sm md:text-base">Our Collective Impact</h3>
               <div className="grid grid-cols-2 gap-4 md:gap-6">
-                {impactAreas.map((stat) => (
-                  <div key={stat.label} className="text-center p-2 md:p-4">
+                {impactAreas.map((stat, idx) => (
+                  <div key={`${stat.label}-${idx}`} className="text-center p-2 md:p-4">
                     <stat.icon className="w-6 h-6 md:w-8 md:h-8 text-accent mx-auto mb-2" />
                     <div className="text-2xl md:text-3xl font-bold font-display text-white mb-1">{stat.value}</div>
                     <div className="text-white/60 text-xs md:text-sm">{stat.label}</div>
@@ -160,8 +165,8 @@ export default function Partnership() {
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 px-4 lg:px-0">
-            {partnerTypes.map((type) => (
-              <div key={type.title} className="card-modern overflow-hidden flex flex-col">
+            {partnerTypes.map((type, idx) => (
+              <div key={`${type.title}-${idx}`} className="card-modern overflow-hidden flex flex-col">
                 {/* Header */}
                 <div className={`p-6 ${type.color} text-white`}>
                   <div className="flex items-center gap-4 mb-4">
@@ -170,7 +175,7 @@ export default function Partnership() {
                     </div>
                     <div>
                       <h3 className="font-display font-bold text-xl">{type.title}</h3>
-                      <p className="text-white/80 text-sm">{type.stats.value} {type.stats.label}</p>
+                      <p className="text-white/80 text-sm">{type.stats_value} {type.stats_label}</p>
                     </div>
                   </div>
                   <p className="text-white/80 text-sm">{type.description}</p>
@@ -216,7 +221,7 @@ export default function Partnership() {
         <div className="absolute inset-0 bg-primary/60" />
         <div className="absolute inset-0 flex items-center justify-center">
           <p className="text-white text-xl md:text-3xl font-display font-bold text-center px-4">
-            Together, we create lasting impact across Africa
+            {c.image_break_text}
           </p>
         </div>
       </section>
@@ -239,7 +244,7 @@ export default function Partnership() {
 
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 px-4 lg:px-0">
             {process.map((item, index) => (
-              <div key={item.step} className="relative">
+              <div key={`${item.step}-${index}`} className="relative">
                 <div className="card-modern p-5 md:p-6 text-center h-full">
                   <div className="w-10 h-10 md:w-12 md:h-12 mx-auto rounded-xl bg-primary flex items-center justify-center text-white font-bold text-sm md:text-lg mb-3 md:mb-4">
                     {item.step}

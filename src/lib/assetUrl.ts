@@ -7,14 +7,14 @@ const CANONICAL_ORIGIN = "https://sarafoundation.lovable.app";
 
 type AssetPointer = { url: string };
 
-export function assetUrl(pointer: AssetPointer | string): string {
-  const url = typeof pointer === "string" ? pointer : pointer.url;
+export function assetUrl(pointer?: AssetPointer | string | null): string {
+  if (!pointer) return "";
+  const url = typeof pointer === "string" ? pointer : pointer?.url;
+  if (!url) return "";
   if (!url.startsWith("/__l5e/")) return url;
   if (typeof window === "undefined") return `${CANONICAL_ORIGIN}${url}`;
   const host = window.location.hostname;
   const isLovableHost =
-    host === "localhost" ||
-    host === "127.0.0.1" ||
     host.endsWith("lovable.app") ||
     host.endsWith("lovableproject.com") ||
     host.endsWith("lovable.dev");

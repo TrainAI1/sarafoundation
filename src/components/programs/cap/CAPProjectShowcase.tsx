@@ -6,6 +6,7 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
+import { usePageContent } from "@/hooks/usePageContent";
 
 type Project = {
   name: string;
@@ -19,7 +20,7 @@ type Project = {
   linkLabel?: string;
 };
 
-const projects: Project[] = [
+const defaultProjects: Project[] = [
   {
     name: "ArtifyPro",
     context: "CAP Tech Hub project",
@@ -136,17 +137,26 @@ const Field = ({ label, value }: { label: string; value: string | null }) => (
 );
 
 export function CAPProjectShowcase() {
+  const { data: c } = usePageContent("cap-project-showcase", {
+    badge: "Project Showcase",
+    headline_main: "Evidence of",
+    headline_highlight: "applied learning",
+    description: "These are learner projects created during CAP activity. They are presented as evidence of applied learning, not as commercial businesses or start-ups.",
+    projects: defaultProjects,
+  });
+
+  const projects = c.projects as Project[];
+
   return (
     <section className="py-16 md:py-24 bg-secondary/50">
       <div className="section-container">
         <div className="text-center max-w-3xl mx-auto mb-10 md:mb-16 px-4">
-          <span className="section-badge mb-4 md:mb-6">Project Showcase</span>
+          <span className="section-badge mb-4 md:mb-6">{c.badge}</span>
           <h2 className="section-title text-foreground mb-4 md:mb-6">
-            Evidence of <span className="gradient-text">applied learning</span>
+            {c.headline_main} <span className="gradient-text">{c.headline_highlight}</span>
           </h2>
           <p className="section-subtitle mx-auto">
-            These are learner projects created during CAP activity. They are presented as evidence of applied
-            learning, not as commercial businesses or start-ups.
+            {c.description}
           </p>
         </div>
 
