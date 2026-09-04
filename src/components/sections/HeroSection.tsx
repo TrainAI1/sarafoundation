@@ -3,6 +3,8 @@ import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { usePageContent } from "@/hooks/usePageContent";
+import { useQuery } from "@tanstack/react-query";
+import { supabase } from "@/integrations/supabase/client";
 import { assetUrl } from "@/lib/assetUrl";
 import eventGroupPhoto from "@/assets/events/DSC_3409.jpg.asset.json";
 import eventStudentMic from "@/assets/events/DSC_3253.jpg.asset.json";
@@ -52,11 +54,19 @@ const defaultMarqueeCards: MarqueeCard[] = [
 
 export function HeroSection() {
   const { data: c } = usePageContent("home-hero", defaults);
-  const { data: marqueeContent } = usePageContent("home-hero-marquee", {
-    marquee_cards: defaultMarqueeCards,
+
+  const { data: dbMarqueeCards } = useQuery({
+    queryKey: ["hero-marquee-cards"],
+    queryFn: async () => {
+      const { data } = await supabase.from("pages").select("content").eq("slug", "hero-marquee").maybeSingle();
+      if (!data?.content) return null;
+      const content = data.content as Record<string, unknown>;
+      return content.items as MarqueeCard[] | undefined;
+    },
   });
-  const marqueeCards = marqueeContent.marquee_cards as MarqueeCard[];
-  const loop = [...marqueeCards, ...marqueeCards];
+
+  const cardsToRender = dbMarqueeCards && dbMarqueeCards.length > 0 ? dbMarqueeCards : defaultMarqueeCards;
+  const loop = [...cardsToRender, ...cardsToRender];
 
   return (
     <section className="relative overflow-hidden">

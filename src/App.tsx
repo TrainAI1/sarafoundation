@@ -44,6 +44,7 @@ import AdminBlogEditor from "./pages/admin/AdminBlogEditor";
 import AdminPages from "./pages/admin/AdminPages";
 import AdminPartners from "./pages/admin/AdminPartners";
 import AdminTestimonials from "./pages/admin/AdminTestimonials";
+import AdminHeroCards from "./pages/admin/AdminHeroCards";
 import AdminTeam from "./pages/admin/AdminTeam";
 import AdminSettings from "./pages/admin/AdminSettings";
 import AdminFAQ from "./pages/admin/AdminFAQ";
@@ -120,6 +121,7 @@ const App = () => {
               <Route path="pages" element={<AdminPages />} />
               <Route path="partners" element={<AdminPartners />} />
               <Route path="testimonials" element={<AdminTestimonials />} />
+              <Route path="hero-cards" element={<AdminHeroCards />} />
               <Route path="team" element={<AdminTeam />} />
               <Route path="settings" element={<AdminSettings />} />
               <Route path="faq" element={<AdminFAQ />} />

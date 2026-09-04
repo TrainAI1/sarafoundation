@@ -26,6 +26,7 @@ const navGroups: NavGroup[] = [
     label: "Content", cap: "content",
     items: [
       { label: "News & Events", path: "/admin/blog", icon: Newspaper, cap: "content" },
+      { label: "Hero Showcase Cards", path: "/admin/hero-cards", icon: Image, cap: "content" },
       { label: "Pages", path: "/admin/pages", icon: FileText, cap: "content" },
       { label: "FAQ", path: "/admin/faq", icon: HelpCircle, cap: "content" },
       { label: "Partners", path: "/admin/partners", icon: Handshake, cap: "content" },
