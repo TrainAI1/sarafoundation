@@ -115,7 +115,7 @@ export function ImageUpload({
           <img
             src={displayImage}
             alt={label}
-            className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-[1.02]"
+            className="w-full h-full object-cover"
             onError={(e) => {
               (e.currentTarget as HTMLImageElement).src = "/hero-students.jpg";
             }}
@@ -124,18 +124,18 @@ export function ImageUpload({
           {/* Badge indicating default vs custom */}
           <div className="absolute top-2 left-2 z-10">
             {hasCustomValue ? (
-              <span className="text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded-full bg-emerald-600 text-white shadow-sm flex items-center gap-1">
+              <span className="text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded bg-success text-success-foreground flex items-center gap-1">
                 <Check className="w-2.5 h-2.5" /> Custom Image
               </span>
             ) : (
-              <span className="text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded-full bg-primary/90 text-white shadow-sm backdrop-blur-sm">
+              <span className="text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded bg-primary text-primary-foreground">
                 Default Site Photo
               </span>
             )}
           </div>
 
           {/* Hover Overlay */}
-          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex flex-col justify-end p-3 z-10">
+          <div className="absolute inset-0 bg-foreground/80 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col justify-end p-3 z-10">
             <p className="text-xs text-white/90 font-medium line-clamp-1 mb-2">
               {hasCustomValue ? "Custom image active" : "Using current site default photo"}
             </p>
@@ -190,7 +190,7 @@ export function ImageUpload({
             </div>
           ) : (
             <div className="flex flex-col items-center gap-2.5 max-w-xs">
-              <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary group-hover:scale-110 transition-transform">
+              <div className="w-10 h-10 rounded bg-primary/10 flex items-center justify-center text-primary">
                 <ImageIcon className="w-5 h-5" />
               </div>
               <div>
