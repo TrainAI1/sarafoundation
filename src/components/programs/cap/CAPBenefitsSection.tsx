@@ -1,7 +1,7 @@
-import { BookOpen, Users, Presentation, Trophy, Wrench, MessagesSquare, Share2, Sparkles, HeartHandshake } from "lucide-react";
+import { BookOpen, Users, Presentation, Trophy, Wrench, MessagesSquare, Share2, Lightbulb, HeartHandshake } from "lucide-react";
 import { usePageContent } from "@/hooks/usePageContent";
 
-const benefitIcons = [BookOpen, Users, Sparkles, Trophy, Wrench, MessagesSquare, Presentation, Share2, HeartHandshake];
+const benefitIcons = [BookOpen, Users, Lightbulb, Trophy, Wrench, MessagesSquare, Presentation, Share2, HeartHandshake];
 
 export function CAPBenefitsSection() {
   const { data: c } = usePageContent("cap-benefits", {

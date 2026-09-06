@@ -11,12 +11,12 @@ import {
   Lightbulb,
   Share2,
   Info,
-  Sparkles,
+  BriefcaseBusiness,
 } from "lucide-react";
 import { usePageContent } from "@/hooks/usePageContent";
 
 // Icons are matched to the saved list by position and are not admin-editable.
-const activityIcons = [Lightbulb, BookOpen, Users, Compass, Share2, Sparkles];
+const activityIcons = [Lightbulb, BookOpen, Users, Compass, Share2, BriefcaseBusiness];
 
 const activitiesDefault = [
   { title: "Insight sessions", desc: "Sessions that help participants understand roles, sectors and how organisations work." },
@@ -88,13 +88,12 @@ export default function ProgramGJP() {
         {/* Hero */}
         <section className="relative pt-28 md:pt-36 pb-16 md:pb-20 overflow-hidden">
           <div className="absolute inset-0 bg-primary/5" />
-          <div className="absolute -top-20 right-1/4 w-[400px] h-[400px] rounded-full bg-primary/10 blur-3xl" />
           <div className="section-container relative px-4 max-w-4xl text-center">
             <span className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.18em] text-primary mb-5">
               {c.hero_badge}
             </span>
             <h1 className="font-display text-3xl md:text-5xl lg:text-6xl font-bold text-foreground tracking-tight leading-tight mb-5">
-              {c.hero_headline_prefix} <span className="gradient-text">{c.hero_headline_highlight}</span>
+              {c.hero_headline_prefix} <span className="text-primary">{c.hero_headline_highlight}</span>
             </h1>
             <p className="text-base md:text-lg text-muted-foreground max-w-2xl mx-auto mb-8">
               {c.hero_description}

@@ -94,15 +94,15 @@ function DonateContent() {
 
       <div className="grid grid-cols-3 gap-2 mt-3 text-center">
         <div className="rounded-lg bg-muted/50 p-2">
-          <div className="text-base sm:text-lg font-bold gradient-text">£500</div>
+          <div className="text-base sm:text-lg font-bold text-primary">£500</div>
           <div className="text-[10px] text-muted-foreground">Sponsors a beneficiary</div>
         </div>
         <div className="rounded-lg bg-muted/50 p-2">
-          <div className="text-base sm:text-lg font-bold gradient-text-accent">£100</div>
+          <div className="text-base sm:text-lg font-bold text-accent">£100</div>
           <div className="text-[10px] text-muted-foreground">Per month</div>
         </div>
         <div className="rounded-lg bg-muted/50 p-2">
-          <div className="text-base sm:text-lg font-bold gradient-text">£50</div>
+          <div className="text-base sm:text-lg font-bold text-primary">£50</div>
           <div className="text-[10px] text-muted-foreground">Per week</div>
         </div>
       </div>
@@ -124,7 +124,7 @@ export function FloatingDonateButton() {
     <>
       <button
         onClick={() => setOpen(true)}
-        className="fixed bottom-6 right-6 z-50 flex items-center gap-2 rounded-full bg-primary px-4 py-3 sm:px-5 sm:py-3.5 text-white font-semibold shadow-2xl transition-transform hover:scale-110 active:scale-95 animate-float-bounce"
+        className="fixed bottom-6 right-6 z-50 flex items-center gap-2 rounded-full bg-primary px-4 py-3 sm:px-5 sm:py-3.5 text-white font-semibold shadow-md transition-colors hover:bg-primary/90"
         aria-label="Donate"
       >
         <Heart className="w-5 h-5 fill-white" />

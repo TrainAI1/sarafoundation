@@ -5,7 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { ImageUpload } from "@/components/admin/ImageUpload";
 import { toast } from "sonner";
-import { Plus, Trash2, Save, Sparkles, Loader2, Edit, MoveUp, MoveDown, Layers } from "lucide-react";
+import { Plus, Trash2, Save, BarChart3, Loader2, Edit, MoveUp, MoveDown, Layers } from "lucide-react";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { assetUrl } from "@/lib/assetUrl";
 
@@ -152,7 +152,7 @@ export default function AdminHeroCards() {
               <div className="flex items-center gap-3 min-w-0 flex-1 cursor-pointer" onClick={() => setEditing(editing === card.id ? null : card.id)}>
                 {card.tone === "accent" ? (
                   <div className="w-12 h-12 rounded-xl bg-accent text-white flex flex-col items-center justify-center font-bold text-xs flex-shrink-0">
-                    <Sparkles className="w-4 h-4 mb-0.5" />
+                    <BarChart3 className="w-4 h-4 mb-0.5" />
                     <span>Stat</span>
                   </div>
                 ) : card.src ? (
