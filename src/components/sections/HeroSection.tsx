@@ -1,3 +1,4 @@
+import type React from "react";
 import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
@@ -171,7 +172,11 @@ export function HeroSection() {
                         src={card.src}
                         alt={`Sara Foundation Africa programme activity — ${card.role}`}
                         loading={i < 4 ? "eager" : "lazy"}
-                        fetchPriority={i === 0 ? "high" : "auto"}
+                        // React 18's runtime does not know the camelCase fetchPriority prop yet (support
+                        // lands in React 19), so it silently drops it and warns; @types/react already knows
+                        // it, so we cannot just lowercase the prop without breaking the type check. Spread
+                        // the real lowercase HTML attribute instead so it actually reaches the <img> tag.
+                        {...({ fetchpriority: i === 0 ? "high" : "auto" } as unknown as React.ImgHTMLAttributes<HTMLImageElement>)}
                         decoding="async"
                         className="absolute inset-0 w-full h-full object-cover"
                         onError={(e) => {

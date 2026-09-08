@@ -5,12 +5,13 @@ import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import { toast } from "sonner";
-import { ArrowRight, Calendar, Clock, User, Tag, Newspaper, Search, ChevronRight } from "lucide-react";
+import { ArrowRight, Calendar, Clock, User, Tag, Newspaper, Search, ChevronRight, Mail, Send } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { supabase } from "@/integrations/supabase/client";
+import { usePageContent } from "@/hooks/usePageContent";
 import { assetUrl } from "@/lib/assetUrl";
 import studentsLabImg from "@/assets/students-tech-lab.jpg";
-import techConferenceSpeaker from "@/assets/tech-conference-speaker.jpg";
+import techEntrepreneurs from "@/assets/tech-entrepreneurs.jpg";
 
 const categories = [
   { value: "All", label: "All Stories & Events" },
@@ -23,6 +24,15 @@ const categories = [
 ];
 
 export default function Blog() {
+  const { data: hero } = usePageContent("blog-hero", {
+    badge: "News & Stories",
+    headline: "Learning, People and Progress",
+    description:
+      "Stories from our programmes, communities and partners showing how access to learning, inclusion and community participation come to life.",
+    image: "",
+  });
+  const heroImage = hero.image ? assetUrl(hero.image) : techEntrepreneurs;
+
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [searchQuery, setSearchQuery] = useState("");
   const [dbPosts, setDbPosts] = useState<any[]>([]);
@@ -124,23 +134,62 @@ export default function Blog() {
       <main>
       {/* Hero */}
       <section className="pt-24 md:pt-32 pb-12 md:pb-20 bg-primary relative overflow-hidden">
-        <div className="absolute inset-0">
-          <img src={techConferenceSpeaker} alt="" aria-hidden="true" className="w-full h-full object-cover opacity-15" />
-          <div className="absolute inset-0 bg-primary" />
-        </div>
-        <div className="section-container relative z-10">
-          <div className="max-w-3xl px-4">
-            <span className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.18em] text-white/80 mb-4 mb-6">
-              <Newspaper className="w-3 h-3 md:w-4 md:h-4 text-accent" />
-              News &amp; Stories
-            </span>
-            <h1 className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 md:mb-6 leading-tight">
-              Learning, People and Progress
-            </h1>
-            <p className="text-base md:text-xl text-white/70 leading-relaxed">
-              Stories from our programmes, communities and partners showing how access to learning, inclusion
-              and community participation come to life.
-            </p>
+        <div className="section-container relative z-10 px-4">
+          <div className="grid lg:grid-cols-2 gap-8 md:gap-12 items-center">
+            <div>
+              <span className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.18em] text-white/80 mb-4 mb-6">
+                <Newspaper className="w-3 h-3 md:w-4 md:h-4 text-accent" />
+                {hero.badge}
+              </span>
+              <h1 className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 md:mb-6 leading-tight">
+                {hero.headline}
+              </h1>
+              <p className="text-base md:text-xl text-white/70 leading-relaxed mb-6 md:mb-8">
+                {hero.description}
+              </p>
+
+              <div className="glass-card-dark p-4 md:p-6 rounded-2xl md:rounded-3xl max-w-lg">
+                <div className="flex items-center gap-2 mb-3">
+                  <Mail className="w-4 h-4 text-accent" aria-hidden="true" />
+                  <p className="text-white text-sm font-semibold">Get new stories in your inbox</p>
+                </div>
+                <form
+                  onSubmit={(e) => {
+                    e.preventDefault();
+                    handleNewsletterSubscribe();
+                  }}
+                  className="flex flex-col sm:flex-row gap-2"
+                >
+                  <Input
+                    type="email"
+                    required
+                    placeholder="Your email address"
+                    value={newsletterEmail}
+                    onChange={(e) => setNewsletterEmail(e.target.value)}
+                    className="rounded-xl h-11 bg-white/10 border-white/20 text-white placeholder:text-white/50"
+                  />
+                  <Button type="submit" variant="hero" className="group h-11 shrink-0" disabled={subscribing}>
+                    {subscribing ? "Subscribing..." : "Subscribe"}
+                    <Send className="w-4 h-4 group-hover:translate-x-1 transition-transform" aria-hidden="true" />
+                  </Button>
+                </form>
+                <p className="text-white/40 text-xs mt-2">No spam. Unsubscribe anytime.</p>
+              </div>
+            </div>
+
+            <div className="mx-4 lg:mx-0">
+              <div className="rounded-2xl md:rounded-3xl overflow-hidden shadow-2xl">
+                <img
+                  src={heroImage}
+                  alt="Sara Foundation Africa community members and partners at a programme event"
+                  className="w-full h-56 md:h-96 object-cover"
+                  loading="eager"
+                  onError={(e) => {
+                    e.currentTarget.src = techEntrepreneurs;
+                  }}
+                />
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -221,18 +270,6 @@ export default function Blog() {
               <p className="text-muted-foreground">Try adjusting your search or filter criteria.</p>
             </div>
           )}
-        </div>
-      </section>
-
-      {/* Newsletter CTA */}
-      <section className="py-16 md:py-24 bg-primary">
-        <div className="section-container text-center px-4">
-          <h2 className="font-display text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-4 md:mb-6">Never Miss an Update</h2>
-          <p className="text-white/70 text-base md:text-lg mb-6 md:mb-8 max-w-2xl mx-auto">Subscribe to our newsletter and get the latest articles delivered to your inbox.</p>
-          <div className="flex flex-col sm:flex-row gap-3 md:gap-4 justify-center max-w-md mx-auto">
-            <Input type="email" placeholder="Enter your email" value={newsletterEmail} onChange={(e) => setNewsletterEmail(e.target.value)} className="rounded-xl h-12 bg-white/10 border-white/20 text-white placeholder:text-white/50" />
-            <Button variant="hero" size="lg" onClick={handleNewsletterSubscribe} disabled={subscribing}>{subscribing ? "Subscribing..." : "Subscribe"}</Button>
-          </div>
         </div>
       </section>
 

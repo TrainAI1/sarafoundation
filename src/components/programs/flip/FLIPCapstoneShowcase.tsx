@@ -6,6 +6,20 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 import { usePageContent } from "@/hooks/usePageContent";
+import { assetUrl } from "@/lib/assetUrl";
+import womanFounderPitch from "@/assets/woman-founder-pitch.jpg";
+import capWomanLaptop from "@/assets/cap-woman-laptop.jpg";
+import studentsLabImg from "@/assets/students-tech-lab.jpg";
+import womenCoworking from "@/assets/women-coworking.jpg";
+import capWomanBraids from "@/assets/cap-woman-braids.jpg";
+
+const capstoneFallbackImages: Record<string, string> = {
+  "01": womanFounderPitch,
+  "02": capWomanLaptop,
+  "03": studentsLabImg,
+  "04": womenCoworking,
+  "05": capWomanBraids,
+};
 
 const defaultCapstones = [
   {
@@ -14,6 +28,7 @@ const defaultCapstones = [
     name: "Odugbayi Olamide",
     project: "BI-powered reconciliation performance tracker",
     angle: "Applying business intelligence to banking operations.",
+    image: womanFounderPitch,
     link: "https://www.linkedin.com/posts/sara-foundation_flipfellowship-capstoneproject-fintech-activity-7399130514781233152-qsfI",
   },
   {
@@ -22,6 +37,7 @@ const defaultCapstones = [
     name: "Anita Olang",
     project: "Personal AI stylist",
     angle: "Using AI to make wardrobe recommendations based on individual preferences.",
+    image: capWomanLaptop,
   },
   {
     number: "03",
@@ -29,6 +45,7 @@ const defaultCapstones = [
     name: "Ann Eberechuku",
     project: "Schoollink Global",
     angle: "Designing a tracking solution for school marketing.",
+    image: studentsLabImg,
   },
   {
     number: "04",
@@ -36,6 +53,7 @@ const defaultCapstones = [
     name: "Happiness Stephen",
     project: "Style Pick App",
     angle: "Supporting designers and tailors through AI-assisted style selection.",
+    image: womenCoworking,
   },
   {
     number: "05",
@@ -43,6 +61,7 @@ const defaultCapstones = [
     name: "Stella Adetoyese",
     project: "AI-powered customer feedback intelligence system",
     angle: "Turning customer feedback into actionable service insights.",
+    image: capWomanBraids,
   },
 ];
 
@@ -80,38 +99,46 @@ export function FLIPCapstoneShowcase() {
             aria-label="FLIP Fellowship Cohort 1 capstone projects"
           >
             <CarouselContent className="-ml-4">
-              {capstones.map((item) => (
-                <CarouselItem key={item.number} className="pl-4 basis-full md:basis-1/2">
-                  <article className="card-modern p-6 h-full flex flex-col">
-                    <div
-                      className="mb-4 flex h-32 items-center justify-center rounded-xl border border-dashed border-border bg-secondary/60 px-3 text-center text-[11px] font-semibold uppercase tracking-[0.12em] text-muted-foreground"
-                      role="img"
-                      aria-label={`Image placeholder for the ${item.project} capstone project`}
-                    >
-                      [ASSET REQUIRED: {item.project} image]
-                    </div>
-                    <div className="flex items-center gap-2 mb-4">
-                      <span className="text-xs font-bold text-accent">{item.number}</span>
-                      <span className="text-[11px] font-semibold uppercase tracking-[0.14em] text-muted-foreground">
-                        {item.category}
-                      </span>
-                    </div>
-                    <h3 className="font-display font-bold text-lg text-foreground mb-1">{item.name}</h3>
-                    <p className="text-sm font-medium text-accent mb-3">{item.project}</p>
-                    <p className="text-muted-foreground text-sm leading-relaxed flex-1">{item.angle}</p>
-                    {item.link && (
-                      <a
-                        href={item.link}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-sm font-medium text-accent mt-4 hover:underline"
-                      >
-                        Read the capstone story for {item.name}
-                      </a>
-                    )}
-                  </article>
-                </CarouselItem>
-              ))}
+              {capstones.map((item) => {
+                const fallbackImg = capstoneFallbackImages[item.number] || womanFounderPitch;
+                const imgSrc = item.image ? assetUrl(item.image) : fallbackImg;
+                return (
+                  <CarouselItem key={item.number} className="pl-4 basis-full md:basis-1/2">
+                    <article className="card-modern overflow-hidden p-6 h-full flex flex-col">
+                      <div className="mb-4 h-48 rounded-xl overflow-hidden shadow-sm bg-muted">
+                        <img
+                          src={imgSrc}
+                          alt={`${item.name} - ${item.project}`}
+                          className="w-full h-full object-cover"
+                          loading="lazy"
+                          onError={(e) => {
+                            e.currentTarget.src = fallbackImg;
+                          }}
+                        />
+                      </div>
+                      <div className="flex items-center gap-2 mb-4">
+                        <span className="text-xs font-bold text-accent">{item.number}</span>
+                        <span className="text-[11px] font-semibold uppercase tracking-[0.14em] text-muted-foreground">
+                          {item.category}
+                        </span>
+                      </div>
+                      <h3 className="font-display font-bold text-lg text-foreground mb-1">{item.name}</h3>
+                      <p className="text-sm font-medium text-accent mb-3">{item.project}</p>
+                      <p className="text-muted-foreground text-sm leading-relaxed flex-1">{item.angle}</p>
+                      {item.link && (
+                        <a
+                          href={item.link}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-sm font-medium text-accent mt-4 hover:underline"
+                        >
+                          Read the capstone story for {item.name}
+                        </a>
+                      )}
+                    </article>
+                  </CarouselItem>
+                );
+              })}
             </CarouselContent>
             <div className="flex items-center justify-center gap-3 mt-8">
               <CarouselPrevious className="static translate-y-0" />

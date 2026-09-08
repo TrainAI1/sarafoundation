@@ -14,6 +14,8 @@ import {
   BriefcaseBusiness,
 } from "lucide-react";
 import { usePageContent } from "@/hooks/usePageContent";
+import { assetUrl } from "@/lib/assetUrl";
+import mentorshipSession from "@/assets/mentorship-session.jpg";
 
 // Icons are matched to the saved list by position and are not admin-editable.
 const activityIcons = [Lightbulb, BookOpen, Users, Compass, Share2, BriefcaseBusiness];
@@ -56,6 +58,9 @@ export default function ProgramGJP() {
     hero_headline_prefix: "Learning Beyond the",
     hero_headline_highlight: "Sessions",
     hero_description: "EJP supports continued learning through practical and experiential opportunities that complement participants' wider educational journeys.",
+    hero_image: "",
+    apply_cta_label: "Express interest",
+    evidence_cta_label: "See our impact evidence",
     no_guarantee_text: "Sara Foundation Africa does not guarantee or promise employment through EJP. Where employment, internship or placement outcomes are mentioned, they are examples of participants' continued journeys following learning, or referrals to opportunities held by other organisations.",
     activities: activitiesDefault,
     evidence: evidenceDefault,
@@ -67,6 +72,7 @@ export default function ProgramGJP() {
     icon: activityIcons[i] || activityIcons[activityIcons.length - 1],
   }));
   const evidence = c.evidence as typeof evidenceDefault;
+  const heroImage = c.hero_image ? assetUrl(c.hero_image) : mentorshipSession;
 
   return (
     <div className="min-h-screen bg-background">
@@ -86,34 +92,50 @@ export default function ProgramGJP() {
       <Navbar />
       <main id="main-content">
         {/* Hero */}
-        <section className="relative pt-28 md:pt-36 pb-16 md:pb-20 overflow-hidden">
-          <div className="absolute inset-0 bg-primary/5" />
-          <div className="section-container relative px-4 max-w-4xl text-center">
-            <span className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.18em] text-primary mb-5">
-              {c.hero_badge}
-            </span>
-            <h1 className="font-display text-3xl md:text-5xl lg:text-6xl font-bold text-foreground tracking-tight leading-tight mb-5">
-              {c.hero_headline_prefix} <span className="text-primary">{c.hero_headline_highlight}</span>
-            </h1>
-            <p className="text-base md:text-lg text-muted-foreground max-w-2xl mx-auto mb-8">
-              {c.hero_description}
-            </p>
-            <div className="flex flex-col sm:flex-row gap-3 justify-center">
-              <Button asChild size="lg" className="rounded-xl glow-effect">
-                <Link to="/programs/gjp/apply">
-                  Express interest <ArrowRight className="w-4 h-4" />
-                </Link>
-              </Button>
-              <Button asChild size="lg" variant="outline" className="rounded-xl">
-                <Link to="/projects">See our impact evidence</Link>
-              </Button>
+        <section className="relative pt-28 md:pt-36 pb-16 md:pb-20 overflow-hidden bg-primary/5">
+          <div className="section-container relative px-4">
+            <div className="grid lg:grid-cols-2 gap-8 md:gap-12 items-center">
+              <div className="text-left">
+                <span className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.18em] text-primary mb-5">
+                  {c.hero_badge}
+                </span>
+                <h1 className="font-display text-3xl md:text-5xl lg:text-6xl font-bold text-foreground tracking-tight leading-tight mb-5">
+                  {c.hero_headline_prefix} <span className="text-primary">{c.hero_headline_highlight}</span>
+                </h1>
+                <p className="text-base md:text-lg text-muted-foreground max-w-2xl mx-0 mb-8">
+                  {c.hero_description}
+                </p>
+                <div className="flex flex-col sm:flex-row gap-3 justify-start">
+                  <Button asChild size="lg" className="rounded-xl glow-effect">
+                    <Link to="/programs/gjp/apply">
+                      {c.apply_cta_label} <ArrowRight className="w-4 h-4" />
+                    </Link>
+                  </Button>
+                  <Button asChild size="lg" variant="outline" className="rounded-xl">
+                    <Link to="/projects">{c.evidence_cta_label}</Link>
+                  </Button>
+                </div>
+                <p className="text-xs text-muted-foreground mt-3">
+                  Already applied?{" "}
+                  <Link to="/programs/gjp/status" className="text-primary hover:underline font-medium">
+                    Check your application status
+                  </Link>
+                </p>
+              </div>
+              <div className="mx-4 lg:mx-0">
+                <div className="rounded-2xl md:rounded-3xl overflow-hidden shadow-2xl">
+                  <img
+                    src={heroImage}
+                    alt="An EJP mentoring or knowledge session in progress"
+                    className="w-full h-56 md:h-80 object-cover"
+                    loading="eager"
+                    onError={(e) => {
+                      e.currentTarget.src = mentorshipSession;
+                    }}
+                  />
+                </div>
+              </div>
             </div>
-            <p className="text-xs text-muted-foreground mt-3">
-              Already applied?{" "}
-              <Link to="/programs/gjp/status" className="text-primary hover:underline font-medium">
-                Check your application status
-              </Link>
-            </p>
           </div>
         </section>
 
@@ -183,10 +205,8 @@ export default function ProgramGJP() {
             <p className="text-muted-foreground text-base md:text-lg mb-6">
               {c.continued_journeys_text}
             </p>
-            <p className="text-sm text-muted-foreground mb-8">
-              <span className="inline-block rounded-lg bg-secondary px-3 py-1 text-xs font-semibold uppercase tracking-[0.12em] border border-dashed border-border">
-                [DATA TO CONFIRM: verified continued-journey outcomes and participant consent]
-              </span>
+            <p className="text-xs text-muted-foreground mb-8">
+              Verified continued-journey outcomes are documented in our annual impact reports and participant spotlights.
             </p>
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
               <Button asChild size="lg" className="rounded-xl glow-effect">

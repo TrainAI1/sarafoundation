@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { CreditCard, Loader2, ShieldCheck } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -6,27 +6,68 @@ import { Label } from "@/components/ui/label";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
 import { payWithPaystack, genRef } from "@/lib/paystack";
+import { type Currency, CURRENCY_SYMBOL, useVisitorCurrency } from "@/hooks/useVisitorCurrency";
 
-type Currency = "USD" | "NGN" | "EUR" | "GBP";
-
-const PRESETS: Record<Currency, number[]> = {
+export const PRESETS: Record<Currency, number[]> = {
   USD: [500, 250, 100, 50],
   NGN: [500000, 250000, 100000, 10000],
   EUR: [500, 250, 100, 50],
   GBP: [500, 250, 100, 50],
 };
 
-const SYMBOL: Record<Currency, string> = { USD: "$", NGN: "₦", EUR: "€", GBP: "£" };
+const SYMBOL = CURRENCY_SYMBOL;
 
 // Keep preset labels short so four buttons never overflow a narrow screen
 const formatPreset = (v: number) => (v >= 1000 ? `${v / 1000}k` : v.toLocaleString());
 
-export function PaystackDonate({ compact = false }: { compact?: boolean }) {
-  const [currency, setCurrency] = useState<Currency>("USD");
-  const [amount, setAmount] = useState<string>("100");
+type PaystackDonateProps = {
+  compact?: boolean;
+  /** Pass this + onCurrencyChange to keep this widget's currency in sync with
+   * other UI on the page (e.g. price cards above it). Omit both to let this
+   * widget detect and manage the visitor's currency on its own. */
+  currency?: Currency;
+  onCurrencyChange?: (currency: Currency) => void;
+};
+
+export function PaystackDonate({ compact = false, currency: controlledCurrency, onCurrencyChange }: PaystackDonateProps) {
+  const { currency: detectedCurrency } = useVisitorCurrency();
+  const [internalCurrency, setInternalCurrency] = useState<Currency>(controlledCurrency ?? detectedCurrency);
+  const currency = controlledCurrency ?? internalCurrency;
+  const [userPickedCurrency, setUserPickedCurrency] = useState(false);
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [processing, setProcessing] = useState<null | "stripe" | "paystack">(null);
+  // Default to a single, locale-relevant currency instead of showing every
+  // option at once; the visitor can still reveal the full picker if the
+  // detected one isn't right for them.
+  const [showCurrencyPicker, setShowCurrencyPicker] = useState(!compact);
+  const [amount, setAmount] = useState<string>(String(PRESETS[currency][1]));
+
+  // When this instance manages its own currency (no controlledCurrency prop),
+  // adopt the detected currency once it resolves, unless the visitor has
+  // already picked one themselves.
+  useEffect(() => {
+    if (controlledCurrency === undefined && !userPickedCurrency) {
+      setInternalCurrency(detectedCurrency);
+    }
+  }, [detectedCurrency, controlledCurrency, userPickedCurrency]);
+
+  // Reset the amount to the new currency's default preset whenever the
+  // effective currency changes, however it changed (detection, a parent
+  // controlling it, or the visitor picking one here).
+  const prevCurrencyRef = useRef(currency);
+  useEffect(() => {
+    if (prevCurrencyRef.current !== currency) {
+      setAmount(String(PRESETS[currency][1]));
+      prevCurrencyRef.current = currency;
+    }
+  }, [currency]);
+
+  const pickCurrency = (cur: Currency) => {
+    setUserPickedCurrency(true);
+    if (onCurrencyChange) onCurrencyChange(cur);
+    else setInternalCurrency(cur);
+  };
 
   const validate = () => {
     const amt = Number(amount);
@@ -95,18 +136,28 @@ export function PaystackDonate({ compact = false }: { compact?: boolean }) {
 
   return (
     <div className={compact ? "space-y-3" : "space-y-4"}>
-      <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
-        {(["USD", "NGN", "EUR", "GBP"] as Currency[]).map((c) => (
-          <button
-            key={c}
-            type="button"
-            onClick={() => { setCurrency(c); setAmount(String(PRESETS[c][1])); }}
-            className={`p-2 rounded-lg border-2 text-xs font-semibold transition-all ${currency === c ? "border-primary bg-primary/5 text-foreground" : "border-border text-muted-foreground hover:border-primary/50"}`}
-          >
-            {SYMBOL[c]} {c}
-          </button>
-        ))}
-      </div>
+      {showCurrencyPicker ? (
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
+          {(["USD", "NGN", "EUR", "GBP"] as Currency[]).map((cur) => (
+            <button
+              key={cur}
+              type="button"
+              onClick={() => pickCurrency(cur)}
+              className={`p-2 rounded-lg border-2 text-xs font-semibold transition-all ${currency === cur ? "border-primary bg-primary/5 text-foreground" : "border-border text-muted-foreground hover:border-primary/50"}`}
+            >
+              {SYMBOL[cur]} {cur}
+            </button>
+          ))}
+        </div>
+      ) : (
+        <button
+          type="button"
+          onClick={() => setShowCurrencyPicker(true)}
+          className="text-xs text-muted-foreground underline underline-offset-2 hover:text-foreground"
+        >
+          Paying in {SYMBOL[currency]} {currency} — change currency
+        </button>
+      )}
 
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
         {PRESETS[currency].map((v) => (

@@ -1,4 +1,7 @@
 import { usePageContent } from "@/hooks/usePageContent";
+import { ScrollAnimation, StaggerContainer, StaggerItem } from "@/components/ui/scroll-animation";
+import { assetUrl } from "@/lib/assetUrl";
+import graduatesCelebration from "@/assets/graduates-celebration.jpg";
 
 export function CAPImpactSection() {
   const { data: c } = usePageContent("cap-impact", {
@@ -16,32 +19,53 @@ export function CAPImpactSection() {
       { value: "3", label: "Project mentors", sub: "Supporting active learner projects." },
       { value: "10", label: "Learner projects", sub: "Documented outputs of applied learning." },
     ],
+    image: "",
   });
 
   const stats = c.stats as { value: string; label: string; sub: string }[];
+  const featuredImage = c.image ? assetUrl(c.image) : graduatesCelebration;
 
   return (
     <section className="py-16 md:py-24 bg-primary/5">
       <div className="section-container">
-        <div className="text-center max-w-3xl mx-auto mb-10 md:mb-16 px-4">
-          <span className="section-badge mb-4 md:mb-6">{c.badge}</span>
-          <h2 className="section-title text-foreground mb-4 md:mb-6">
-            {c.headline_main} <span className="gradient-text">{c.headline_highlight}</span>
-          </h2>
-          <p className="section-subtitle mx-auto">
-            {c.description}
-          </p>
+        <div className="grid lg:grid-cols-2 gap-8 md:gap-12 items-center mb-10 md:mb-16 px-4 lg:px-0">
+          <ScrollAnimation variant="slide-left">
+            <div className="text-left">
+              <span className="section-badge mb-4 md:mb-6">{c.badge}</span>
+              <h2 className="section-title text-foreground mb-4 md:mb-6">
+                {c.headline_main} <span className="gradient-text">{c.headline_highlight}</span>
+              </h2>
+              <p className="section-subtitle mx-0">
+                {c.description}
+              </p>
+            </div>
+          </ScrollAnimation>
+          <ScrollAnimation variant="slide-right">
+            <div className="rounded-2xl overflow-hidden shadow-2xl">
+              <img
+                src={featuredImage}
+                alt="CAP learners celebrating their achievements at a graduation and awards ceremony"
+                className="w-full h-56 md:h-72 object-cover"
+                loading="lazy"
+                onError={(e) => {
+                  e.currentTarget.src = graduatesCelebration;
+                }}
+              />
+            </div>
+          </ScrollAnimation>
         </div>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 px-4 lg:px-0">
+        <StaggerContainer className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 px-4 lg:px-0" staggerDelay={0.08}>
           {stats.map((stat) => (
-            <div key={stat.label} className="card-modern p-5 md:p-6 text-center h-full">
-              <div className="text-3xl md:text-4xl font-bold font-display text-primary mb-2">{stat.value}</div>
-              <h3 className="font-display font-bold text-sm text-foreground mb-1">{stat.label}</h3>
-              <p className="text-muted-foreground text-xs leading-relaxed">{stat.sub}</p>
-            </div>
+            <StaggerItem key={stat.label} variant="scale-in">
+              <div className="card-modern p-5 md:p-6 text-center h-full">
+                <div className="text-3xl md:text-4xl font-bold font-display text-primary mb-2">{stat.value}</div>
+                <h3 className="font-display font-bold text-sm text-foreground mb-1">{stat.label}</h3>
+                <p className="text-muted-foreground text-xs leading-relaxed">{stat.sub}</p>
+              </div>
+            </StaggerItem>
           ))}
-        </div>
+        </StaggerContainer>
       </div>
     </section>
   );

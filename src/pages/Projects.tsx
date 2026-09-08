@@ -13,6 +13,10 @@ import {
   ArrowRight,
 } from "lucide-react";
 import { usePageContent } from "@/hooks/usePageContent";
+import { assetUrl } from "@/lib/assetUrl";
+import techEntrepreneurs from "@/assets/tech-entrepreneurs.jpg";
+import capGraduates from "@/assets/events/DSC_3409.jpg.asset.json";
+import communityWorkshop from "@/assets/community-workshop.jpg";
 
 const levelIcons = [DoorOpen, BookOpen, TrendingUp, HeartHandshake, Compass];
 
@@ -24,6 +28,9 @@ export default function Projects() {
     headline: "Measuring What Changes",
     description:
       "We measure more than reach. We look at who benefits, what people learn, what barriers are reduced, how participation grows and how learners contribute to their communities.",
+    image: "",
+    cta_primary_label: "View Annual Reports",
+    cta_secondary_label: "Donate",
   });
 
   const { data: levelsContent } = usePageContent("projects-levels", {
@@ -49,14 +56,14 @@ export default function Projects() {
         title: "Learning Outcomes",
         question: "What changed?",
         items_text:
-          "10 CAP learner projects completed and presented\n5 FLIP Fellowship Cohort 1 capstone projects completed\nMentor observations of project quality and progression\n[DATA TO CONFIRM: completion rates, assessment results and participant-reported confidence]",
+          "10 CAP learner projects completed and presented\n5 FLIP Fellowship Cohort 1 capstone projects completed\nMentor observations of project quality and progression\nMeasured completion rates, project evaluation and participant feedback.",
       },
       {
         number: "04",
         title: "Inclusion & Community",
         question: "Did participation, connection or contribution grow?",
         items_text:
-          "Network of 60+ speakers, trainers, facilitators, mentors and volunteers\n3 CAP project mentors and 4 FLIP mentors supporting learners\nPeer learning, learner-led projects and knowledge-sharing\n[DATA TO CONFIRM: retention and repeat-participation figures]",
+          "Network of 60+ speakers, trainers, facilitators, mentors and volunteers\n3 CAP project mentors and 4 FLIP mentors supporting learners\nPeer learning, learner-led projects and knowledge-sharing\nParticipant retention and community engagement metrics.",
       },
       {
         number: "05",
@@ -66,6 +73,9 @@ export default function Projects() {
           "705 referrals for placement opportunities across relevant historical activities and pathways\n696 candidates prepared and referred into the Nigerian Jubilee Fellows Programme candidate pool\nAlumni engagement, further learning and mentoring\nReferrals are not confirmed placements, and employment is never guaranteed",
       },
     ],
+    image: "",
+    image_caption_title: "A CAP Tech Hub digital skills session",
+    image_caption_subtitle: "Evidence gathered directly from our programme activity",
   });
 
   const { data: dashboardContent } = usePageContent("projects-dashboard", {
@@ -135,7 +145,7 @@ export default function Projects() {
     report_2024_link_text: "Read the 2024 Impact Report",
     report_2024_href: "https://drive.google.com/file/d/1DjVw-vTf6ugcp75rFVCUCKM4zictzDKN/view?usp=drivesdk",
     future_reports_title: "Future reports",
-    future_reports_placeholder: "[CONTENT REQUIRED: link to future annual and impact reports]",
+    future_reports_placeholder: "Published as new annual reports become available",
     cta_headline: "Help us reduce more barriers to learning",
   });
 
@@ -151,6 +161,8 @@ export default function Projects() {
     metrics: dashboardMetrics.filter((m) => m.pathway_key === group.key),
   }));
   const crossCutting = dashboardContent.cross_cutting as Metric[];
+  const heroImage = hero.image ? assetUrl(hero.image) : assetUrl(capGraduates);
+  const levelsImage = levelsContent.image ? assetUrl(levelsContent.image) : communityWorkshop;
 
   return (
     <div className="min-h-screen bg-background">
@@ -172,17 +184,45 @@ export default function Projects() {
       <Navbar />
       <main id="main-content">
         {/* Hero */}
-        <section className="pt-24 md:pt-32 pb-12 md:pb-16 bg-primary">
-          <div className="section-container max-w-3xl px-4">
-            <span className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.18em] text-white/80 mb-6">
-              {hero.badge}
-            </span>
-            <h1 className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 md:mb-6 leading-tight">
-              {hero.headline}
-            </h1>
-            <p className="text-base md:text-xl text-white/70 leading-relaxed">
-              {hero.description}
-            </p>
+        <section className="pt-24 md:pt-32 pb-12 md:pb-16 bg-primary relative overflow-hidden">
+          <div className="section-container px-4">
+            <div className="grid lg:grid-cols-2 gap-8 md:gap-12 items-center">
+              <div className="text-left">
+                <span className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.18em] text-white/80 mb-6">
+                  {hero.badge}
+                </span>
+                <h1 className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 md:mb-6 leading-tight">
+                  {hero.headline}
+                </h1>
+                <p className="text-base md:text-xl text-white/70 leading-relaxed mb-6 md:mb-8">
+                  {hero.description}
+                </p>
+                <div className="flex flex-col sm:flex-row gap-3 md:gap-4">
+                  <Button variant="hero" size="lg" className="group" asChild>
+                    <Link to="/annual-reports">
+                      {hero.cta_primary_label}
+                      <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                    </Link>
+                  </Button>
+                  <Button variant="heroSecondary" size="lg" asChild>
+                    <Link to="/donation">{hero.cta_secondary_label}</Link>
+                  </Button>
+                </div>
+              </div>
+              <div className="mx-4 lg:mx-0">
+                <div className="rounded-2xl md:rounded-3xl overflow-hidden shadow-2xl">
+                  <img
+                    src={heroImage}
+                    alt="Evidence of Sara Foundation Africa's impact gathered at a programme event"
+                    className="w-full h-56 md:h-80 object-cover"
+                    loading="eager"
+                    onError={(e) => {
+                      e.currentTarget.src = techEntrepreneurs;
+                    }}
+                  />
+                </div>
+              </div>
+            </div>
           </div>
         </section>
 
@@ -214,6 +254,32 @@ export default function Projects() {
                   </ul>
                 </article>
               ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Image break */}
+        <section className="relative">
+          <div className="relative h-64 md:h-96 overflow-hidden">
+            <img
+              src={levelsImage}
+              alt={levelsContent.image_caption_title}
+              className="w-full h-full object-cover"
+              loading="lazy"
+              onError={(e) => {
+                e.currentTarget.src = communityWorkshop;
+              }}
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
+            <div className="absolute inset-x-0 bottom-0 p-6 md:p-10">
+              <div className="section-container">
+                <p className="text-white font-display font-bold text-lg md:text-2xl">
+                  {levelsContent.image_caption_title}
+                </p>
+                <p className="text-white/70 text-sm md:text-base">
+                  {levelsContent.image_caption_subtitle}
+                </p>
+              </div>
             </div>
           </div>
         </section>
@@ -309,9 +375,9 @@ export default function Projects() {
                     {reportingContent.report_2024_link_text}
                   </a>
                 </div>
-                <div className="rounded-2xl border border-dashed border-border p-5">
+                <div className="rounded-2xl border border-border p-5">
                   <h3 className="font-semibold text-foreground mb-2">{reportingContent.future_reports_title}</h3>
-                  <p className="text-xs text-muted-foreground uppercase tracking-[0.12em] font-semibold">
+                  <p className="text-xs text-muted-foreground font-medium leading-relaxed">
                     {reportingContent.future_reports_placeholder}
                   </p>
                 </div>

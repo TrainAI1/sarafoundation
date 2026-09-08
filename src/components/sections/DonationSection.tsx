@@ -1,9 +1,11 @@
+import { useEffect, useState } from "react";
 import { Heart, CreditCard, Wallet, ExternalLink, Gift, Copy } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { toast } from "sonner";
-import { PaystackDonate } from "@/components/PaystackDonate";
+import { PaystackDonate, PRESETS } from "@/components/PaystackDonate";
 import { usePageContent } from "@/hooks/usePageContent";
+import { useVisitorCurrency, CURRENCY_SYMBOL, type Currency } from "@/hooks/useVisitorCurrency";
 
 // Icons are code, not admin-editable content — kept in a local lookup keyed by id.
 const donationMethodIcons: Record<string, typeof CreditCard> = {
@@ -65,11 +67,35 @@ export function DonationSection() {
   const { data: c } = usePageContent("home-donation", {
     donation_methods: defaultDonationMethods,
   });
+  const { currency: detectedCurrency } = useVisitorCurrency();
+  // Owned here (not inside PaystackDonate) so the price cards below stay in
+  // sync with whatever currency the visitor ends up paying in, including if
+  // they change it themselves inside the card-payment widget.
+  const [currency, setCurrency] = useState<Currency>(detectedCurrency);
+  const [userPickedCurrency, setUserPickedCurrency] = useState(false);
+  useEffect(() => {
+    if (!userPickedCurrency) setCurrency(detectedCurrency);
+  }, [detectedCurrency, userPickedCurrency]);
+  const symbol = CURRENCY_SYMBOL[currency];
+  // Tier amounts follow the same per-currency presets used by the card
+  // payment widget, so "fully sponsors" / "per month" / "per week" line up
+  // with real preset amounts in the visitor's own currency.
+  const [tierFull, , tierMonthly, tierWeekly] = PRESETS[currency];
 
-  const donationMethods = (c.donation_methods as typeof defaultDonationMethods).map((method) => ({
+  const allDonationMethods = (c.donation_methods as typeof defaultDonationMethods).map((method) => ({
     ...method,
     icon: donationMethodIcons[method.id] ?? CreditCard,
   }));
+  // Show one relevant manual-transfer method for the visitor's currency
+  // instead of every currency at once (Naira bank transfer in Nigeria,
+  // crypto elsewhere); crowdfunding stays visible either way since it isn't
+  // currency-specific.
+  const donationMethods = allDonationMethods.filter((method) => {
+    if (method.id === "bank") return currency === "NGN";
+    if (method.id === "usdt") return currency !== "NGN";
+    if (method.id === "eth") return false;
+    return true;
+  });
 
   return (
     <section className="py-16 md:py-24 lg:py-32 bg-background relative overflow-hidden">
@@ -95,19 +121,19 @@ export function DonationSection() {
             </p>
 
             {/* Impact Cards */}
-            <div className="grid grid-cols-3 gap-3 md:gap-4 mb-6 md:mb-8">
-              <div className="card-modern p-4 md:p-6 group hover:border-primary/30 text-center">
-                <div className="text-2xl md:text-4xl font-bold font-display gradient-text mb-1 md:mb-2">£500</div>
+            <div className="grid grid-cols-3 gap-2 md:gap-4 mb-6 md:mb-8">
+              <div className="card-modern p-3 md:p-6 group hover:border-primary/30 text-center">
+                <div className="text-lg sm:text-xl md:text-3xl font-bold font-display gradient-text mb-1 md:mb-2 leading-tight break-words">{symbol}{tierFull.toLocaleString()}</div>
                 <div className="text-xs md:text-sm text-muted-foreground">Fully sponsors a beneficiary</div>
               </div>
-              <div className="card-modern p-4 md:p-6 group hover:border-accent/30 text-center">
+              <div className="card-modern p-3 md:p-6 group hover:border-accent/30 text-center">
                 <div className="text-[10px] md:text-xs font-semibold uppercase tracking-[0.14em] text-muted-foreground mb-1">Donate per period</div>
-                <div className="text-2xl md:text-4xl font-bold font-display gradient-text-accent mb-1 md:mb-2">£100</div>
+                <div className="text-lg sm:text-xl md:text-3xl font-bold font-display gradient-text-accent mb-1 md:mb-2 leading-tight break-words">{symbol}{tierMonthly.toLocaleString()}</div>
                 <div className="text-xs md:text-sm text-muted-foreground">Per month, sponsors subsidised places</div>
               </div>
-              <div className="card-modern p-4 md:p-6 group hover:border-primary/30 text-center">
+              <div className="card-modern p-3 md:p-6 group hover:border-primary/30 text-center">
                 <div className="text-[10px] md:text-xs font-semibold uppercase tracking-[0.14em] text-muted-foreground mb-1">Donate per period</div>
-                <div className="text-2xl md:text-4xl font-bold font-display gradient-text mb-1 md:mb-2">£50</div>
+                <div className="text-lg sm:text-xl md:text-3xl font-bold font-display gradient-text mb-1 md:mb-2 leading-tight break-words">{symbol}{tierWeekly.toLocaleString()}</div>
                 <div className="text-xs md:text-sm text-muted-foreground">Per week, sponsors subsidised places</div>
               </div>
             </div>
@@ -137,7 +163,11 @@ export function DonationSection() {
                   <p className="text-xs text-muted-foreground">Instant · Visa, Mastercard, Verve, Transfer</p>
                 </div>
               </div>
-              <PaystackDonate compact />
+              <PaystackDonate
+                compact
+                currency={currency}
+                onCurrencyChange={(cur) => { setUserPickedCurrency(true); setCurrency(cur); }}
+              />
             </div>
 
             {donationMethods.map((method, index) => (

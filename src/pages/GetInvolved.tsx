@@ -7,6 +7,7 @@ import { Heart, Handshake, Users, ArrowRight } from "lucide-react";
 import { usePageContent } from "@/hooks/usePageContent";
 import { assetUrl } from "@/lib/assetUrl";
 import mentorshipSession from "@/assets/mentorship-session.jpg";
+import communityWorkshop from "@/assets/community-workshop.jpg";
 
 const routeIcons: Record<string, typeof Heart> = {
   "Donate": Heart,
@@ -20,6 +21,7 @@ const GetInvolved = () => {
     hero_headline: "Help Widen Access to Learning",
     hero_description:
       "There are many ways to support Sara Foundation Africa through funding, partnership, volunteering, mentoring, knowledge-sharing or helping create inclusive learning opportunities.",
+    hero_image: "",
     routes: [
       {
         title: "Donate",
@@ -77,6 +79,7 @@ const GetInvolved = () => {
     ...route,
     icon: routeIcons[route.title] ?? Heart,
   }));
+  const heroImage = c.hero_image ? assetUrl(c.hero_image) : communityWorkshop;
   const donationUses = c.donation_uses.map((u: { text: string }) => u.text);
   const partnerTypes = c.partner_types.map((p: { text: string }) => p.text);
 
@@ -99,17 +102,32 @@ const GetInvolved = () => {
       </Helmet>
       <Navbar />
       <main id="main-content">
-        <section className="pt-24 md:pt-32 pb-12 md:pb-20 bg-primary">
-          <div className="section-container max-w-3xl px-4">
-            <span className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.18em] text-white/80 mb-6">
-              {c.hero_badge}
-            </span>
-            <h1 className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 md:mb-6 leading-tight">
-              {c.hero_headline}
-            </h1>
-            <p className="text-base md:text-xl text-white/70 leading-relaxed">
-              {c.hero_description}
-            </p>
+        <section className="pt-24 md:pt-32 pb-12 md:pb-20 bg-primary overflow-hidden">
+          <div className="section-container px-4">
+            <div className="grid lg:grid-cols-2 gap-8 md:gap-12 items-center">
+              <div className="text-left">
+                <span className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.18em] text-white/80 mb-6">
+                  {c.hero_badge}
+                </span>
+                <h1 className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 md:mb-6 leading-tight">
+                  {c.hero_headline}
+                </h1>
+                <p className="text-base md:text-xl text-white/70 leading-relaxed">
+                  {c.hero_description}
+                </p>
+              </div>
+              <div className="mx-0">
+                <div className="rounded-2xl md:rounded-3xl overflow-hidden shadow-2xl">
+                  <img
+                    src={heroImage}
+                    alt="Volunteers, mentors and community partners working with Sara Foundation Africa"
+                    className="w-full h-56 md:h-96 object-cover"
+                    loading="eager"
+                    onError={(e) => { e.currentTarget.src = communityWorkshop; }}
+                  />
+                </div>
+              </div>
+            </div>
           </div>
         </section>
 

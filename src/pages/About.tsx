@@ -13,6 +13,7 @@ import techEntrepreneurs from "@/assets/tech-entrepreneurs.jpg";
 import techConference from "@/assets/tech-conference.jpg";
 import studentsLabImg from "@/assets/students-tech-lab.jpg";
 import womenCoworking from "@/assets/women-coworking.jpg";
+import prestigeAward from "@/assets/prestige-award.jpg";
 import sarahPhoto from "@/assets/team/sarah-kalu.jpg";
 import emmanuelPhoto from "@/assets/team/inem-emmanuel.jpg";
 import itoroPhoto from "@/assets/team/itoro.jpg";
@@ -196,38 +197,38 @@ export default function About() {
       <main id="main-content">
       {/* Hero */}
       <section className="pt-24 md:pt-32 pb-12 md:pb-20 bg-primary relative overflow-hidden">
-        {hero.hero_image && (
-          <div className="absolute inset-0 opacity-30">
-            <img src={hero.hero_image} alt="" className="w-full h-full object-cover" />
-          </div>
-        )}
         <div className="section-container relative z-10">
-          <div className="max-w-3xl px-4">
-            <span className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.18em] text-white/80 mb-4 mb-6">
-              About Us
-            </span>
-            <h1 className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 md:mb-6 leading-tight">
-              {hero.headline}
-            </h1>
-            <p className="text-base md:text-xl text-white/70 leading-relaxed">
-              {hero.description}
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* Recognition Banner */}
-      <section className="py-6 md:py-8 bg-accent/10 border-y border-accent/20">
-        <div className="section-container">
-          <div className="flex flex-col md:flex-row items-center justify-center gap-4 text-center">
-            <Trophy className="w-8 h-8 text-accent" />
-            <div>
-              <p className="font-display font-bold text-foreground text-lg md:text-xl">
-                London & South East England Prestige Awards 2025/26
+          <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
+            <div className="max-w-xl px-4 text-left">
+              <span className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.18em] text-white/80 mb-4 mb-6">
+                About Us
+              </span>
+              <h1 className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 md:mb-6 leading-tight">
+                {hero.headline}
+              </h1>
+              <p className="text-base md:text-xl text-white/70 leading-relaxed mb-6">
+                {hero.description}
               </p>
-              <p className="text-muted-foreground text-sm">
-                Winner in the Leadership Development Category
-              </p>
+              <div className="flex items-center gap-3 bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl px-4 py-3 max-w-md">
+                <Trophy className="w-8 h-8 text-accent flex-shrink-0" />
+                <div>
+                  <p className="font-display font-bold text-white text-sm md:text-base leading-snug">
+                    London & South East England Prestige Awards 2025/26
+                  </p>
+                  <p className="text-white/70 text-xs md:text-sm">
+                    Winner in the Leadership Development Category
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div className="px-4">
+              <div className="rounded-2xl overflow-hidden shadow-2xl border border-white/10">
+                <img
+                  src={hero.hero_image ? assetUrl(hero.hero_image) : prestigeAward}
+                  alt="Sara Foundation Africa — London & South East England Prestige Awards 2025/26 winner"
+                  className="w-full h-full object-cover"
+                />
+              </div>
             </div>
           </div>
         </div>

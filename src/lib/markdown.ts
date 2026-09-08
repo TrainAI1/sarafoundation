@@ -12,14 +12,14 @@ function escapeHtml(s: string): string {
 
 export function markdownToHtml(md: string): string {
   // Escape any raw HTML first so authored markdown cannot inject tags.
-  let html = escapeHtml(md)
+  const html = escapeHtml(md)
     .replace(/^### (.+)$/gm, '<h3 class="text-lg font-bold mt-4 mb-2">$1</h3>')
     .replace(/^## (.+)$/gm, '<h2 class="text-xl font-bold mt-5 mb-2">$1</h2>')
     .replace(/^# (.+)$/gm, '<h1 class="text-2xl font-bold mt-6 mb-3">$1</h1>')
     .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
     .replace(/\*(.+?)\*/g, '<em>$1</em>')
     .replace(/`(.+?)`/g, '<code class="bg-secondary px-1 py-0.5 rounded text-sm">$1</code>')
-    .replace(/^\- (.+)$/gm, '<li class="ml-4 list-disc">$1</li>')
+    .replace(/^- (.+)$/gm, '<li class="ml-4 list-disc">$1</li>')
     .replace(/^\d+\. (.+)$/gm, '<li class="ml-4 list-decimal">$1</li>')
     .replace(/^> (.+)$/gm, '<blockquote class="border-l-4 border-primary pl-4 italic text-muted-foreground my-2">$1</blockquote>')
     .replace(/^---$/gm, '<hr class="my-4 border-border" />')
@@ -30,6 +30,6 @@ export function markdownToHtml(md: string): string {
   const wrapped = `<p class="mb-3">${html}</p>`;
   return DOMPurify.sanitize(wrapped, {
     USE_PROFILES: { html: true },
-    ALLOWED_URI_REGEXP: /^(?:(?:https?|mailto|tel):|[^a-z]|[a-z+.\-]+(?:[^a-z+.\-:]|$))/i,
+    ALLOWED_URI_REGEXP: /^(?:(?:https?|mailto|tel):|[^a-z]|[a-z+.-]+(?:[^a-z+.\-:]|$))/i,
   });
 }

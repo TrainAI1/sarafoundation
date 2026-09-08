@@ -32,11 +32,13 @@ export function ImpactReportSection() {
     description:
       "Our annual reports set out what we delivered, who benefited and what we learned. Both the 2024 and 2025 reports are available to read in full.",
     reports: defaultReports,
+    image: "",
     image_caption_title: "CAP learners, Class of 2025",
     image_caption_subtitle: "Celebrating our second cohort",
   });
 
   const reports = c.reports as typeof defaultReports;
+  const featuredImage = c.image ? assetUrl(c.image) : assetUrl(capGraduates);
 
   return (
     <section className="py-16 md:py-24 bg-secondary/50 relative overflow-hidden">
@@ -95,7 +97,7 @@ export function ImpactReportSection() {
           <ScrollAnimation variant="slide-right">
             <div className="rounded-2xl overflow-hidden shadow-2xl">
               <img
-                src={assetUrl(capGraduates)}
+                src={featuredImage}
                 alt="CAP Tech Hub cohort group photo at a Sara Foundation Africa event"
                 className="w-full h-64 md:h-96 object-cover"
                 loading="lazy"

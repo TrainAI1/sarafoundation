@@ -42,9 +42,11 @@ export default function AdminBlogEditor() {
   const [showPreview, setShowPreview] = useState(false);
   const [hasUnsavedChanges, setHasUnsavedChanges] = useState(false);
 
+  const [loadError, setLoadError] = useState(false);
+
   useEffect(() => {
     if (!isNew && id) {
-      supabase.from("blog_posts").select("*").eq("id", id).single().then(({ data }) => {
+      supabase.from("blog_posts").select("*").eq("id", id).single().then(({ data, error }) => {
         if (data) {
           setTitle(data.title);
           setSlug(data.slug);
@@ -55,6 +57,11 @@ export default function AdminBlogEditor() {
           setAuthorName(data.author_name);
           setPublished(data.published);
           setCharCount(data.content.length);
+        } else {
+          // Fetch failed or the post no longer exists — don't leave a blank form
+          // an admin could accidentally save over the real post with empty content.
+          setLoadError(true);
+          toast.error(error?.message || "Couldn't load this post. Please go back and try again.");
         }
       });
     }
@@ -115,6 +122,10 @@ export default function AdminBlogEditor() {
   ];
 
   const handleSave = async (shouldPublish?: boolean) => {
+    if (!isNew && loadError) {
+      toast.error("This post failed to load, so saving is disabled to avoid overwriting it. Please refresh and try again.");
+      return;
+    }
     if (!title.trim() || !slug.trim()) {
       toast.error("Title and slug are required");
       return;

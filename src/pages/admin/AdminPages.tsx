@@ -27,6 +27,8 @@ import communityWorkshop from "@/assets/community-workshop.jpg";
 import womenCoworking from "@/assets/women-coworking.jpg";
 import mentorshipSession from "@/assets/mentorship-session.jpg";
 import partnershipMeeting from "@/assets/partnership-meeting.jpg";
+import capImpactPhoto from "@/assets/events/DSC_3145.jpg.asset.json";
+import flipImpactPhoto from "@/assets/events/DSC_3379.jpg.asset.json";
 
 type Page = Tables<"pages">;
 
@@ -43,7 +45,8 @@ interface ListField {
   label: string;
   type: "list";
   itemLabel: string;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  placeholder?: string;
+  helperText?: string;
   itemFields: SimpleField[];
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   defaultItem: Record<string, any>;
@@ -133,6 +136,7 @@ const defaultPages: PageDef[] = [
     { key: "universities_desc", label: "Universities Represented (description)", type: "textarea", placeholder: "Universities represented across our CAP learning activity." },
     { key: "countries_value", label: "African Countries (value)", type: "text", placeholder: "11" },
     { key: "countries_desc", label: "African Countries (description)", type: "textarea", placeholder: "Unique African countries reached across our pathways." },
+    { key: "image", label: "Featured Impact Section Image", type: "image", placeholder: studentsLabImg },
   ]},
 
   {
@@ -186,10 +190,11 @@ const defaultPages: PageDef[] = [
       { key: "link", label: "Link URL (optional)", type: "text", placeholder: "" },
       { key: "linkLabel", label: "Link Label", type: "text", placeholder: "" },
       { key: "pathwayHref", label: "Pathway Page URL", type: "text", placeholder: "" },
-    ], defaultItem: { pathway: "CAP", name: "", headline: "", summary: "", evidence: "", link: "", linkLabel: "", pathwayHref: "" }, defaultItems: [
-      { pathway: "CAP", name: "Akinlabi Isulameya", headline: "Building Campuslink with a project team", summary: "Akinlabi shares how hands-on teamwork while developing the Campuslink app shaped his learning at CAP Tech Hub.", evidence: "Learner project presented through CAP Tech Hub Cohort activity.", link: "https://www.linkedin.com/posts/sara-foundation_sarafoundation-captechhub-cohortspotlight-activity-7462891845514219520-L8D4", linkLabel: "Watch project story", pathwayHref: "/programs/cap" },
-      { pathway: "FLIP", name: "Odugbayi Olamide", headline: "Applying business intelligence to banking operations", summary: "For her FLIP capstone work, Olamide developed a BI-powered reconciliation performance tracker.", evidence: "One of five FLIP Fellowship Cohort 1 capstone projects.", link: "https://www.linkedin.com/posts/sara-foundation_flipfellowship-capstoneproject-fintech-activity-7399130514781233152-qsfI", linkLabel: "Read capstone story", pathwayHref: "/programs/flip" },
-      { pathway: "EJP", name: "Eniola", headline: "Work-readiness learning through EJP", summary: "Eniola talks about the Government Jobs Placement initiative under EJP and how it helped her build key workplace skills.", evidence: "Participant account of work-readiness learning. SFA does not guarantee employment.", link: "https://www.linkedin.com/posts/sara-foundation_sarafoundation-governmentjobplacementprogram-activity-7480888457888817152-IPj_", linkLabel: "Watch participant story", pathwayHref: "/programs/gjp" },
+      { key: "image", label: "Video Thumbnail", type: "image", placeholder: "" },
+    ], defaultItem: { pathway: "CAP", name: "", headline: "", summary: "", evidence: "", link: "", linkLabel: "", pathwayHref: "", image: "" }, defaultItems: [
+      { pathway: "CAP", name: "Akinlabi Isulameya", headline: "Building Campuslink with a project team", summary: "Akinlabi shares how hands-on teamwork while developing the Campuslink app shaped his learning at CAP Tech Hub.", evidence: "Learner project presented through CAP Tech Hub Cohort activity.", link: "https://www.linkedin.com/posts/sara-foundation_sarafoundation-captechhub-cohortspotlight-activity-7462891845514219520-L8D4", linkLabel: "Watch project story", pathwayHref: "/programs/cap", image: "" },
+      { pathway: "FLIP", name: "Odugbayi Olamide", headline: "Applying business intelligence to banking operations", summary: "For her FLIP capstone work, Olamide developed a BI-powered reconciliation performance tracker.", evidence: "One of five FLIP Fellowship Cohort 1 capstone projects.", link: "https://www.linkedin.com/posts/sara-foundation_flipfellowship-capstoneproject-fintech-activity-7399130514781233152-qsfI", linkLabel: "Read capstone story", pathwayHref: "/programs/flip", image: "" },
+      { pathway: "EJP", name: "Eniola", headline: "Work-readiness learning through EJP", summary: "Eniola talks about the Government Jobs Placement initiative under EJP and how it helped her build key workplace skills.", evidence: "Participant account of work-readiness learning. SFA does not guarantee employment.", link: "https://www.linkedin.com/posts/sara-foundation_sarafoundation-governmentjobplacementprogram-activity-7480888457888817152-IPj_", linkLabel: "Watch participant story", pathwayHref: "/programs/gjp", image: "" },
     ]},
   ]},
 
@@ -273,6 +278,7 @@ const defaultPages: PageDef[] = [
       { year: "2025", title: "2025 Annual Impact Report", summary: "763 CAP learners given fully funded access across Cohorts 1 and 2, the launch of the FLIP Fellowship and our first FLIP and CAP conferences.", href: "https://drive.google.com/file/d/1Ex55tpVH_RPB0VJygsUyw9Hp74RyPKR_/view?usp=drivesdk" },
       { year: "2024", title: "2024 Annual Impact Report", summary: "Our first full year: the inaugural CAP cohort, the start of our knowledge and expert sessions, and the leadership, governance and operating model behind the work.", href: "https://drive.google.com/file/d/1DjVw-vTf6ugcp75rFVCUCKM4zictzDKN/view?usp=drivesdk" },
     ]},
+    { key: "image", label: "Featured Impact Reports Section Image", type: "image", placeholder: assetUrl(eventGroupPhoto) },
     { key: "image_caption_title", label: "Image Caption Title", type: "text", placeholder: "CAP learners, Class of 2025" },
     { key: "image_caption_subtitle", label: "Image Caption Subtitle", type: "text", placeholder: "Celebrating our second cohort" },
   ]},
@@ -555,9 +561,10 @@ const defaultPages: PageDef[] = [
       { key: "output", label: "Project Created", type: "textarea", placeholder: "" },
       { key: "support", label: "Mentor / Programme Support", type: "textarea", placeholder: "" },
       { key: "nextStep", label: "Next Learning Step", type: "textarea", placeholder: "" },
+      { key: "image", label: "Project Image", type: "image", placeholder: "" },
       { key: "link", label: "External Link", type: "text", placeholder: "" },
       { key: "linkLabel", label: "Link Label", type: "text", placeholder: "" },
-    ], defaultItem: { name: "", context: "", need: "", skills: "", output: "", support: "", nextStep: "", link: "", linkLabel: "" }, defaultItems: [
+    ], defaultItem: { name: "", context: "", need: "", skills: "", output: "", support: "", nextStep: "", image: "", link: "", linkLabel: "" }, defaultItems: [
       { name: "ArtifyPro", context: "CAP Tech Hub project", need: "", skills: "", output: "Learner project presented through CAP Tech Hub activity.", support: "Supported by CAP project mentors.", nextStep: "", link: "https://www.linkedin.com/posts/sara-foundation_sarafoundation-captechhub-artifypro-activity-7452626779514732544-0BcX", linkLabel: "Watch project" },
       { name: "Campuslink", context: "CAP Tech Hub project", need: "", skills: "Product management and technical collaboration practised in a team setting.", output: "Campuslink app developed by a CAP learner project team.", support: "Team-based project work with CAP mentor oversight.", nextStep: "Continued product and technical learning.", link: "https://www.linkedin.com/posts/sara-foundation_sarafoundation-captechhub-cohortspotlight-activity-7462891845514219520-L8D4", linkLabel: "Watch story" },
       { name: "StudyPath AI", context: "CAP Tech Hub project", need: "", skills: "", output: "Learner project developed during CAP activity.", support: "Supported by CAP project mentors.", nextStep: "", link: "", linkLabel: "" },
@@ -593,6 +600,7 @@ const defaultPages: PageDef[] = [
       { value: "3", label: "Project mentors", sub: "Supporting active learner projects." },
       { value: "10", label: "Learner projects", sub: "Documented outputs of applied learning." },
     ]},
+    { key: "image", label: "Featured Impact Photo", type: "image", placeholder: assetUrl(capImpactPhoto) },
   ]},
 
   {
@@ -761,6 +769,7 @@ const defaultPages: PageDef[] = [
       { value: "6", label: "African countries", sub: "Countries reached by FLIP, widening the Foundation's reach to 11 unique countries." },
       { value: "5", label: "Cohort 1 capstone projects", sub: "Completed as part of FLIP Fellowship 1.0." },
     ]},
+    { key: "image", label: "Featured Impact Photo", type: "image", placeholder: assetUrl(flipImpactPhoto) },
   ]},
 
   {
@@ -778,13 +787,14 @@ const defaultPages: PageDef[] = [
       { key: "name", label: "Name", type: "text", placeholder: "" },
       { key: "project", label: "Project", type: "text", placeholder: "" },
       { key: "angle", label: "Angle/Summary", type: "textarea", placeholder: "" },
+      { key: "image", label: "Project Image", type: "image", placeholder: "" },
       { key: "link", label: "External Link (optional)", type: "text", placeholder: "" },
-    ], defaultItem: { number: "", category: "", name: "", project: "", angle: "", link: "" }, defaultItems: [
-      { number: "01", category: "Fintech", name: "Odugbayi Olamide", project: "BI-powered reconciliation performance tracker", angle: "Applying business intelligence to banking operations.", link: "https://www.linkedin.com/posts/sara-foundation_flipfellowship-capstoneproject-fintech-activity-7399130514781233152-qsfI" },
-      { number: "02", category: "Fashion AI", name: "Anita Olang", project: "Personal AI stylist", angle: "Using AI to make wardrobe recommendations based on individual preferences.", link: "" },
-      { number: "03", category: "EdTech", name: "Ann Eberechuku", project: "Schoollink Global", angle: "Designing a tracking solution for school marketing.", link: "" },
-      { number: "04", category: "Creative AI", name: "Happiness Stephen", project: "Style Pick App", angle: "Supporting designers and tailors through AI-assisted style selection.", link: "" },
-      { number: "05", category: "Customer Intelligence", name: "Stella Adetoyese", project: "AI-powered customer feedback intelligence system", angle: "Turning customer feedback into actionable service insights.", link: "" },
+    ], defaultItem: { number: "", category: "", name: "", project: "", angle: "", image: "", link: "" }, defaultItems: [
+      { number: "01", category: "Fintech", name: "Odugbayi Olamide", project: "BI-powered reconciliation performance tracker", angle: "Applying business intelligence to banking operations.", image: womanFounderPitch, link: "https://www.linkedin.com/posts/sara-foundation_flipfellowship-capstoneproject-fintech-activity-7399130514781233152-qsfI" },
+      { number: "02", category: "Fashion AI", name: "Anita Olang", project: "Personal AI stylist", angle: "Using AI to make wardrobe recommendations based on individual preferences.", image: capWomanLaptop, link: "" },
+      { number: "03", category: "EdTech", name: "Ann Eberechuku", project: "Schoollink Global", angle: "Designing a tracking solution for school marketing.", image: studentsLabImg, link: "" },
+      { number: "04", category: "Creative AI", name: "Happiness Stephen", project: "Style Pick App", angle: "Supporting designers and tailors through AI-assisted style selection.", image: womenCoworking, link: "" },
+      { number: "05", category: "Customer Intelligence", name: "Stella Adetoyese", project: "AI-powered customer feedback intelligence system", angle: "Turning customer feedback into actionable service insights.", image: capWomanBraids, link: "" },
     ]},
   ]},
 
@@ -867,6 +877,9 @@ const defaultPages: PageDef[] = [
     { key: "hero_headline_prefix", label: "Hero Headline (plain part)", type: "text", placeholder: "Learning Beyond the" },
     { key: "hero_headline_highlight", label: "Hero Headline (highlighted word)", type: "text", placeholder: "Sessions" },
     { key: "hero_description", label: "Hero Description", type: "textarea", placeholder: "EJP supports continued learning through practical and experiential opportunities." },
+    { key: "hero_image", label: "Hero Image", type: "image", placeholder: mentorshipSession },
+    { key: "apply_cta_label", label: "Primary CTA Label", type: "text", placeholder: "Express interest" },
+    { key: "evidence_cta_label", label: "Secondary CTA Label", type: "text", placeholder: "See our impact evidence" },
     { key: "no_guarantee_text", label: "No-Guarantee Statement", type: "textarea", placeholder: "Sara Foundation Africa does not guarantee or promise employment through EJP." },
     { key: "activities", label: "Activities", type: "list", itemLabel: "Activity", itemFields: [
       { key: "title", label: "Title", type: "text", placeholder: "" },
@@ -1092,6 +1105,9 @@ const defaultPages: PageDef[] = [
     { key: "badge", label: "Hero Badge", type: "text", placeholder: "Our Impact" },
     { key: "headline", label: "Hero Headline", type: "text", placeholder: "Measuring What Changes" },
     { key: "description", label: "Hero Description", type: "textarea", placeholder: "We measure more than reach. We look at who benefits, what people learn and how barriers are reduced." },
+    { key: "image", label: "Hero Image", type: "image", placeholder: techEntrepreneurs },
+    { key: "cta_primary_label", label: "Primary Button Label", type: "text", placeholder: "View Annual Reports" },
+    { key: "cta_secondary_label", label: "Secondary Button Label", type: "text", placeholder: "Donate" },
   ]},
 
   {
@@ -1108,10 +1124,13 @@ const defaultPages: PageDef[] = [
     ], defaultItem: { number: "", title: "", question: "", items_text: "" }, defaultItems: [
       { number: "01", title: "Access", question: "Who participated and what barrier was reduced?", items_text: "763 CAP learners received fully funded access across Cohorts 1 and 2\n1,600 scholarships provided across pathways\n57 scholarships supporting women across FLIP fellowship and mentorship\nBursaries, subsidised places and fee waivers where funding allows" },
       { number: "02", title: "Learning Activity", question: "What did Sara Foundation Africa provide?", items_text: "47 knowledge and expert sessions across CAP and general programming\n3 FLIP workshops with 108 recorded attendances\n170 AI training places delivered with partner organisations\n2 Talent Showcases and 1 Demo Day\nMentoring, guided project support and learning resources" },
-      { number: "03", title: "Learning Outcomes", question: "What changed?", items_text: "10 CAP learner projects completed and presented\n5 FLIP Fellowship Cohort 1 capstone projects completed\nMentor observations of project quality and progression\n[DATA TO CONFIRM: completion rates, assessment results and participant-reported confidence]" },
-      { number: "04", title: "Inclusion & Community", question: "Did participation, connection or contribution grow?", items_text: "Network of 60+ speakers, trainers, facilitators, mentors and volunteers\n3 CAP project mentors and 4 FLIP mentors supporting learners\nPeer learning, learner-led projects and knowledge-sharing\n[DATA TO CONFIRM: retention and repeat-participation figures]" },
+      { number: "03", title: "Learning Outcomes", question: "What changed?", items_text: "10 CAP learner projects completed and presented\n5 FLIP Fellowship Cohort 1 capstone projects completed\nMentor observations of project quality and progression\nMeasured completion rates, project evaluation and participant feedback." },
+      { number: "04", title: "Inclusion & Community", question: "Did participation, connection or contribution grow?", items_text: "Network of 60+ speakers, trainers, facilitators, mentors and volunteers\n3 CAP project mentors and 4 FLIP mentors supporting learners\nPeer learning, learner-led projects and knowledge-sharing\nParticipant retention and community engagement metrics." },
       { number: "05", title: "Continued Journey", question: "What happened following the learning activity?", items_text: "705 referrals for placement opportunities across relevant historical activities and pathways\n696 candidates prepared and referred into the Nigerian Jubilee Fellows Programme candidate pool\nAlumni engagement, further learning and mentoring\nReferrals are not confirmed placements, and employment is never guaranteed" },
     ]},
+    { key: "image", label: "Image Break Photo", type: "image", placeholder: communityWorkshop },
+    { key: "image_caption_title", label: "Image Caption Title", type: "text", placeholder: "A CAP Tech Hub digital skills session" },
+    { key: "image_caption_subtitle", label: "Image Caption Subtitle", type: "text", placeholder: "Evidence gathered directly from our programme activity" },
   ]},
 
   {
@@ -1184,8 +1203,18 @@ const defaultPages: PageDef[] = [
     { key: "report_2024_link_text", label: "2024 Report Link Text", type: "text", placeholder: "Read the 2024 Impact Report" },
     { key: "report_2024_href", label: "2024 Report URL", type: "text", placeholder: "https://drive.google.com/file/d/1DjVw-vTf6ugcp75rFVCUCKM4zictzDKN/view?usp=drivesdk" },
     { key: "future_reports_title", label: "Future Reports Title", type: "text", placeholder: "Future reports" },
-    { key: "future_reports_placeholder", label: "Future Reports Placeholder", type: "text", placeholder: "[CONTENT REQUIRED: link to future annual and impact reports]" },
+    { key: "future_reports_placeholder", label: "Future Reports Placeholder", type: "text", placeholder: "Published as new annual reports become available" },
     { key: "cta_headline", label: "CTA Headline", type: "text", placeholder: "Help us reduce more barriers to learning" },
+  ]},
+
+  {
+    slug: "blog-hero",
+    category: "other",
+    categoryLabel: "Other Pages", title: "News & Stories Hero (/blog)", icon: Layout, previewPath: "/blog", fields: [
+    { key: "badge", label: "Hero Badge", type: "text", placeholder: "News & Stories" },
+    { key: "headline", label: "Hero Headline", type: "text", placeholder: "Learning, People and Progress" },
+    { key: "description", label: "Hero Description", type: "textarea", placeholder: "Stories from our programmes, communities and partners showing how access to learning, inclusion and community participation come to life." },
+    { key: "image", label: "Hero Image", type: "image", placeholder: techEntrepreneurs },
   ]},
 
   {
@@ -1236,6 +1265,7 @@ const defaultPages: PageDef[] = [
     { key: "hero_badge", label: "Hero Badge", type: "text", placeholder: "Get Involved" },
     { key: "hero_headline", label: "Hero Headline", type: "text", placeholder: "Help Widen Access to Learning" },
     { key: "hero_description", label: "Hero Description", type: "textarea", placeholder: "There are many ways to support Sara Foundation Africa through funding, partnership, volunteering, mentoring or knowledge-sharing." },
+    { key: "hero_image", label: "Hero Image", type: "image", placeholder: "" },
     { key: "routes", label: "Ways to Get Involved", type: "list", itemLabel: "Route", itemFields: [
       { key: "title", label: "Title (controls icon: Donate / Partner with Us / Volunteer / Mentor)", type: "text", placeholder: "" },
       { key: "description", label: "Description", type: "textarea", placeholder: "" },

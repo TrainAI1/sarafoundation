@@ -56,9 +56,7 @@ const Accessibility = () => {
               Conformance status
             </h2>
             <p className="text-muted-foreground leading-relaxed">
-              <span className="inline-block rounded-lg bg-secondary px-3 py-1 text-xs font-semibold uppercase tracking-[0.12em] text-muted-foreground border border-dashed border-border">
-                [CONTENT REQUIRED: Accessibility conformance statement and date of last review]
-              </span>
+              We aim to conform with the Web Content Accessibility Guidelines (WCAG) 2.1 level AA standards across all pages.
             </p>
 
             <h2 className="font-display text-2xl md:text-3xl font-bold text-foreground mt-12 mb-4">

@@ -4,6 +4,10 @@ import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { ScrollAnimation, StaggerContainer, StaggerItem } from "@/components/ui/scroll-animation";
 import { usePageContent } from "@/hooks/usePageContent";
+import { assetUrl } from "@/lib/assetUrl";
+import capStoryThumb from "@/assets/success-stories/success-story-cap.jpg";
+import flipStoryThumb from "@/assets/success-stories/success-story-flip.jpg";
+import ejpStoryThumb from "@/assets/success-stories/success-story-ejp.jpg";
 
 type Story = {
   pathway: "CAP" | "FLIP" | "EJP";
@@ -14,6 +18,16 @@ type Story = {
   link?: string;
   linkLabel: string;
   pathwayHref: string;
+  /** Admin-uploaded override; falls back to the built-in thumbnail below when empty. */
+  image?: string;
+};
+
+// Local fallback thumbnails, keyed by pathway, used when a story has no
+// admin-uploaded image of its own.
+const fallbackThumbs: Record<Story["pathway"], string> = {
+  CAP: capStoryThumb,
+  FLIP: flipStoryThumb,
+  EJP: ejpStoryThumb,
 };
 
 const defaultStories: Story[] = [
@@ -27,6 +41,7 @@ const defaultStories: Story[] = [
     link: "https://www.linkedin.com/posts/sara-foundation_sarafoundation-captechhub-cohortspotlight-activity-7462891845514219520-L8D4",
     linkLabel: "Watch project story",
     pathwayHref: "/programs/cap",
+    image: "",
   },
   {
     pathway: "FLIP",
@@ -38,6 +53,7 @@ const defaultStories: Story[] = [
     link: "https://www.linkedin.com/posts/sara-foundation_flipfellowship-capstoneproject-fintech-activity-7399130514781233152-qsfI",
     linkLabel: "Read capstone story",
     pathwayHref: "/programs/flip",
+    image: "",
   },
   {
     pathway: "EJP",
@@ -49,6 +65,7 @@ const defaultStories: Story[] = [
     link: "https://www.linkedin.com/posts/sara-foundation_sarafoundation-governmentjobplacementprogram-activity-7480888457888817152-IPj_",
     linkLabel: "Watch participant story",
     pathwayHref: "/programs/gjp",
+    image: "",
   },
 ];
 
@@ -82,30 +99,71 @@ export function SuccessStoriesSection() {
         <StaggerContainer className="grid md:grid-cols-3 gap-6" staggerDelay={0.1}>
           {stories.map((s) => (
             <StaggerItem key={s.name} variant="fade-up">
-              <Card className="p-6 h-full flex flex-col hover:shadow-xl transition-shadow">
-                <Link
-                  to={s.pathwayHref}
-                  className="inline-flex self-start items-center py-1 text-xs font-semibold uppercase tracking-[0.18em] text-primary mb-3 hover:underline"
-                >
-                  {s.pathway} pathway
-                </Link>
-                <h3 className="font-display font-bold text-lg text-foreground mb-2">{s.headline}</h3>
-                <p className="text-foreground/80 leading-relaxed mb-4 flex-1">{s.summary}</p>
-                <div className="border-t pt-4">
-                  <div className="font-semibold text-foreground text-sm">{s.name}</div>
-                  <p className="text-xs text-muted-foreground mt-1">{s.evidence}</p>
-                  {s.link && (
-                    <a
-                      href={s.link}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 py-1.5 text-sm font-medium text-primary mt-2 hover:underline"
-                    >
-                      <PlayCircle className="w-4 h-4" aria-hidden="true" />
-                      {s.linkLabel} for {s.name}
-                      <ArrowUpRight className="w-3.5 h-3.5" aria-hidden="true" />
-                    </a>
-                  )}
+              <Card className="overflow-hidden h-full flex flex-col hover:shadow-xl transition-shadow">
+                {/* Video placeholder — a real still from the story so it reads as an actual clip, not a generic box. */}
+                {s.link ? (
+                  <a
+                    href={s.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={`${s.linkLabel} for ${s.name}`}
+                    className="group relative aspect-video overflow-hidden flex items-center justify-center"
+                  >
+                    <img
+                      src={s.image ? assetUrl(s.image) : fallbackThumbs[s.pathway]}
+                      alt=""
+                      aria-hidden="true"
+                      loading="lazy"
+                      className="absolute inset-0 w-full h-full object-cover"
+                      onError={(e) => { e.currentTarget.src = fallbackThumbs[s.pathway]; }}
+                    />
+                    <span className="absolute inset-0 bg-black/20 group-hover:bg-black/35 transition-colors" aria-hidden="true" />
+                    <span className="relative w-14 h-14 md:w-16 md:h-16 rounded-full bg-white shadow-lg flex items-center justify-center group-hover:scale-105 transition-transform">
+                      <PlayCircle className="w-8 h-8 text-primary" aria-hidden="true" />
+                    </span>
+                  </a>
+                ) : (
+                  <div className="relative aspect-video overflow-hidden flex items-center justify-center">
+                    <img
+                      src={s.image ? assetUrl(s.image) : fallbackThumbs[s.pathway]}
+                      alt=""
+                      aria-hidden="true"
+                      loading="lazy"
+                      className="absolute inset-0 w-full h-full object-cover"
+                      onError={(e) => { e.currentTarget.src = fallbackThumbs[s.pathway]; }}
+                    />
+                    <span className="absolute inset-0 bg-black/20" aria-hidden="true" />
+                    <span className="relative w-12 h-12 rounded-full bg-white/90 shadow flex items-center justify-center">
+                      <PlayCircle className="w-7 h-7 text-primary" aria-hidden="true" />
+                    </span>
+                  </div>
+                )}
+
+                <div className="p-6 flex flex-col flex-1">
+                  <Link
+                    to={s.pathwayHref}
+                    className="inline-flex self-start items-center py-1 text-xs font-semibold uppercase tracking-[0.18em] text-primary mb-3 hover:underline"
+                  >
+                    {s.pathway} pathway
+                  </Link>
+                  <h3 className="font-display font-bold text-lg text-foreground mb-2">{s.headline}</h3>
+                  <p className="text-foreground/80 leading-relaxed mb-4 flex-1">{s.summary}</p>
+                  <div className="border-t pt-4">
+                    <div className="font-semibold text-foreground text-sm">{s.name}</div>
+                    <p className="text-xs text-muted-foreground mt-1">{s.evidence}</p>
+                    {s.link && (
+                      <a
+                        href={s.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-2 py-1.5 text-sm font-medium text-primary mt-2 hover:underline"
+                      >
+                        <PlayCircle className="w-4 h-4" aria-hidden="true" />
+                        {s.linkLabel} for {s.name}
+                        <ArrowUpRight className="w-3.5 h-3.5" aria-hidden="true" />
+                      </a>
+                    )}
+                  </div>
                 </div>
               </Card>
             </StaggerItem>

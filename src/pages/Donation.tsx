@@ -106,8 +106,8 @@ export default function Donation() {
       </Helmet>
       <Navbar />
       <main>
-      {/* Hero */}
-      <section className="pt-24 md:pt-32 pb-12 md:pb-20 bg-primary relative overflow-hidden">
+      {/* Hero (with impact numbers folded in, so there's no dead gap before the next section) */}
+      <section className="pt-24 md:pt-32 pb-12 md:pb-16 bg-primary relative overflow-hidden">
         <div className="absolute inset-0 opacity-30">
           {c.hero_image && (
             <img src={assetUrl(c.hero_image)} alt="" aria-hidden="true" className="w-full h-full object-cover" />
@@ -129,22 +129,19 @@ export default function Donation() {
               {c.impact_text}
             </p>
           </div>
-        </div>
-      </section>
 
-      {/* Impact Numbers */}
-      <section className="py-8 md:py-12 bg-background border-b">
-        <div className="section-container">
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-8 max-w-4xl mx-auto">
-            {impactNumbers.map((item, idx) => (
-              <div key={`${item.label}-${idx}`} className="text-center">
-                <div className="w-10 h-10 md:w-14 md:h-14 mx-auto rounded-xl md:rounded-2xl bg-primary flex items-center justify-center mb-2 md:mb-3 shadow-lg">
-                  <item.icon className="w-5 h-5 md:w-7 md:h-7 text-white" />
+          <div className="mt-10 md:mt-12 px-4">
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-5 max-w-4xl">
+              {impactNumbers.map((item, idx) => (
+                <div key={`${item.label}-${idx}`} className="glass-card-dark rounded-xl md:rounded-2xl p-4 md:p-5 text-center">
+                  <div className="w-10 h-10 md:w-12 md:h-12 mx-auto rounded-xl bg-white/15 flex items-center justify-center mb-2 md:mb-3">
+                    <item.icon className="w-5 h-5 md:w-6 md:h-6 text-white" />
+                  </div>
+                  <div className="text-2xl md:text-3xl font-bold font-display text-white mb-1">{item.number}</div>
+                  <div className="text-xs md:text-sm text-white/70">{item.label}</div>
                 </div>
-                <div className="text-2xl md:text-4xl font-bold font-display gradient-text mb-1">{item.number}</div>
-                <div className="text-xs md:text-sm text-muted-foreground">{item.label}</div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
         </div>
       </section>

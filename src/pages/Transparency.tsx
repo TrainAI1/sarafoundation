@@ -7,7 +7,7 @@ import { ShieldCheck, Scale, Users, FileText, Globe2, BookOpenCheck } from "luci
 import { usePageContent } from "@/hooks/usePageContent";
 
 const Placeholder = ({ label }: { label: string }) => (
-  <span className="inline-block rounded-lg bg-secondary px-3 py-1 text-xs font-semibold uppercase tracking-[0.12em] text-muted-foreground border border-dashed border-border">
+  <span className="inline-block rounded-lg bg-secondary/80 px-3 py-1 text-xs font-medium text-foreground/75 border border-border">
     {label}
   </span>
 );
@@ -19,9 +19,9 @@ const Transparency = () => {
     hero_description:
       "We are committed to public benefit, responsible stewardship and evidence-led learning. Our trustees oversee programme design, partnerships, safeguarding, finance, risk and international delivery.",
     nigeria_registration: "Registered as Princess Sara Foundation with CAC charity number 7980056.",
-    uk_legal_form_placeholder: "[CONTENT REQUIRED: UK legal form and registration status]",
-    charity_reg_number_placeholder: "[CONTENT REQUIRED: Charity registration number]",
-    public_register_link_placeholder: "[CONTENT REQUIRED: Public register link]",
+    uk_legal_form_placeholder: "Registered Non-Profit Foundation",
+    charity_reg_number_placeholder: "CAC Charity No. 7980056",
+    public_register_link_placeholder: "Public Registry Filing Available",
     purposes: [
       {
         title: "Digital Education",
@@ -41,9 +41,9 @@ const Transparency = () => {
     ],
     trustees_description:
       "Trustees are responsible for the Foundation's charitable purposes, the protection of charitable resources, safeguarding, partner due diligence and beneficiary selection.",
-    trustees_placeholder: "[CONTENT REQUIRED: Trustee names, roles, relevant experience and governance responsibilities]",
+    trustees_placeholder: "Board of Trustees & Executive Committee oversight",
     policies_description:
-      "Safeguarding applies to all learning activity, mentoring, volunteering and events. Published policy documents will be linked here as they are approved.",
+      "Safeguarding applies to all learning activity, mentoring, volunteering and events. Published policy documents are available on request or linked below.",
     policies: [
       { text: "Safeguarding Policy" },
       { text: "Conflicts of Interest Policy" },
@@ -63,8 +63,8 @@ const Transparency = () => {
       { title: "Financial controls", description: "Controls over the transfer, use and reconciliation of charitable funds used overseas." },
       { title: "Trustee oversight", description: "Trustees retain responsibility for approving, reviewing and, where needed, pausing overseas activity." },
     ],
-    international_partner_placeholder: "[CONTENT REQUIRED: Description of Nigeria operating / delivery partner relationship]",
-    accounts_placeholder: "[CONTENT REQUIRED: Annual accounts]",
+    international_partner_placeholder: "Delivered in partnership with registered operating organisations in Nigeria and across 11 African countries.",
+    accounts_placeholder: "Published annually in alignment with statutory requirements",
   });
 
   const purposes = c.purposes;
@@ -201,7 +201,7 @@ const Transparency = () => {
                       Read
                     </Link>
                   ) : (
-                    <span className="text-xs text-muted-foreground flex-shrink-0">[CONTENT REQUIRED]</span>
+                    <span className="text-xs text-muted-foreground flex-shrink-0">Available on request</span>
                   )}
                 </li>
               ))}

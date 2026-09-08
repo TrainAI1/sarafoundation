@@ -17,6 +17,7 @@ export function ImpactSection() {
     universities_desc: "Universities represented across our CAP learning activity.",
     countries_value: "11",
     countries_desc: "Unique African countries reached across our pathways: 8 through CAP and 6 through FLIP.",
+    image: "",
   });
 
   const impactStats = [
@@ -25,6 +26,8 @@ export function ImpactSection() {
     { icon: GraduationCap, value: c.universities_value, label: "Universities Represented", description: c.universities_desc },
     { icon: Globe, value: c.countries_value, label: "African Countries", description: c.countries_desc },
   ];
+
+  const featuredImage = c.image ? assetUrl(c.image) : assetUrl(impactLecture);
 
   return (
     <section className="py-16 md:py-24 bg-foreground relative overflow-hidden">
@@ -58,7 +61,7 @@ export function ImpactSection() {
           <ScrollAnimation variant="slide-right">
             <div className="rounded-2xl overflow-hidden shadow-2xl">
               <img
-                src={assetUrl(impactLecture)}
+                src={featuredImage}
                 alt="Participants at a Sara Foundation Africa knowledge session"
                 className="w-full h-56 md:h-72 object-cover"
                 loading="lazy"
