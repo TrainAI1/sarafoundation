@@ -114,33 +114,35 @@ export default function Donation() {
           )}
         </div>
         <div className="section-container relative z-10">
-          <div className="max-w-3xl px-4">
-            <span className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.18em] text-white/80 mb-4 mb-6">
-              <Heart className="w-3 h-3 md:w-4 md:h-4 text-accent" />
-              Donate
-            </span>
-            <h1 className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 md:mb-6 leading-tight">
-              {c.headline}
-            </h1>
-            <p className="text-base md:text-xl text-white/70 leading-relaxed">
-              {c.description}
-            </p>
-            <p className="mt-6 rounded-2xl bg-white/10 p-5 text-white font-medium leading-relaxed">
-              {c.impact_text}
-            </p>
-          </div>
+          <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+            <div className="max-w-xl px-4">
+              <span className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.18em] text-white/80 mb-4 mb-6">
+                <Heart className="w-3 h-3 md:w-4 md:h-4 text-accent" />
+                Donate
+              </span>
+              <h1 className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 md:mb-6 leading-tight">
+                {c.headline}
+              </h1>
+              <p className="text-base md:text-xl text-white/70 leading-relaxed">
+                {c.description}
+              </p>
+              <p className="mt-6 rounded-2xl bg-white/10 p-5 text-white font-medium leading-relaxed">
+                {c.impact_text}
+              </p>
+            </div>
 
-          <div className="mt-10 md:mt-12 px-4">
-            <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-5 max-w-4xl">
-              {impactNumbers.map((item, idx) => (
-                <div key={`${item.label}-${idx}`} className="glass-card-dark rounded-xl md:rounded-2xl p-4 md:p-5 text-center">
-                  <div className="w-10 h-10 md:w-12 md:h-12 mx-auto rounded-xl bg-white/15 flex items-center justify-center mb-2 md:mb-3">
-                    <item.icon className="w-5 h-5 md:w-6 md:h-6 text-white" />
+            <div className="px-4">
+              <div className="grid grid-cols-2 gap-3 md:gap-4 max-w-sm mx-auto lg:mx-0 lg:max-w-none">
+                {impactNumbers.map((item, idx) => (
+                  <div key={`${item.label}-${idx}`} className="glass-card-dark rounded-xl md:rounded-2xl p-3 md:p-4 text-center">
+                    <div className="w-8 h-8 md:w-10 md:h-10 mx-auto rounded-lg bg-white/15 flex items-center justify-center mb-2">
+                      <item.icon className="w-4 h-4 md:w-5 md:h-5 text-white" />
+                    </div>
+                    <div className="text-xl md:text-2xl font-bold font-display text-white mb-1">{item.number}</div>
+                    <div className="text-xs text-white/70">{item.label}</div>
                   </div>
-                  <div className="text-2xl md:text-3xl font-bold font-display text-white mb-1">{item.number}</div>
-                  <div className="text-xs md:text-sm text-white/70">{item.label}</div>
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
           </div>
         </div>

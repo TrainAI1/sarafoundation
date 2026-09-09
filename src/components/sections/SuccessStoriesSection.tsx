@@ -1,4 +1,5 @@
-import { ArrowUpRight, PlayCircle } from "lucide-react";
+import { useState } from "react";
+import { ArrowUpRight, PlayCircle, ChevronDown, ChevronUp } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
@@ -69,7 +70,20 @@ const defaultStories: Story[] = [
   },
 ];
 
-export function SuccessStoriesSection() {
+// Stories beyond this count are hidden behind "Show more stories" so admins can
+// add as many as they like from the admin section without the grid growing
+// unbounded on the page.
+const VISIBLE_STORIES = 3;
+
+type SuccessStoriesSectionProps = {
+  /** Anchor id so other pages can deep-link to this section (e.g. "/projects#journeys"). */
+  id?: string;
+  /** Show a secondary button pointing to this same section on the Our Impact page. Default true; pass false when this instance IS that page's copy, to avoid a self-referential link. */
+  linkToImpact?: boolean;
+};
+
+export function SuccessStoriesSection({ id, linkToImpact = true }: SuccessStoriesSectionProps = {}) {
+  const [expanded, setExpanded] = useState(false);
   const { data: c } = usePageContent("home-success-stories", {
     badge: "Featured Stories",
     headline_pre: "Real Learners.",
@@ -80,9 +94,11 @@ export function SuccessStoriesSection() {
   });
 
   const stories = c.stories as Story[];
+  const visibleStories = expanded ? stories : stories.slice(0, VISIBLE_STORIES);
+  const hasMoreStories = stories.length > VISIBLE_STORIES;
 
   return (
-    <section className="py-16 md:py-24 bg-background">
+    <section id={id} className="py-16 md:py-24 bg-background">
       <div className="section-container">
         <ScrollAnimation variant="fade-up">
           <div className="text-center max-w-3xl mx-auto mb-12">
@@ -97,8 +113,8 @@ export function SuccessStoriesSection() {
         </ScrollAnimation>
 
         <StaggerContainer className="grid md:grid-cols-3 gap-6" staggerDelay={0.1}>
-          {stories.map((s) => (
-            <StaggerItem key={s.name} variant="fade-up">
+          {visibleStories.map((s, idx) => (
+            <StaggerItem key={`${s.name}-${idx}`} variant="fade-up">
               <Card className="overflow-hidden h-full flex flex-col hover:shadow-xl transition-shadow">
                 {/* Video placeholder — a real still from the story so it reads as an actual clip, not a generic box. */}
                 {s.link ? (
@@ -170,10 +186,27 @@ export function SuccessStoriesSection() {
           ))}
         </StaggerContainer>
 
-        <div className="text-center mt-10">
-          <Button asChild variant="outline" size="lg">
-            <Link to="/blog">Read more learner stories</Link>
-          </Button>
+        <div className="text-center mt-10 flex flex-col sm:flex-row gap-3 justify-center">
+          {hasMoreStories && (
+            <Button
+              type="button"
+              variant="outline"
+              size="lg"
+              onClick={() => setExpanded((v) => !v)}
+              className="group"
+            >
+              {expanded ? (
+                <>Show less <ChevronUp className="w-4 h-4" aria-hidden="true" /></>
+              ) : (
+                <>Show more stories <ChevronDown className="w-4 h-4" aria-hidden="true" /></>
+              )}
+            </Button>
+          )}
+          {linkToImpact && (
+            <Button asChild variant="outline" size="lg">
+              <Link to="/projects#journeys">See all journeys in Our Impact</Link>
+            </Button>
+          )}
         </div>
       </div>
     </section>

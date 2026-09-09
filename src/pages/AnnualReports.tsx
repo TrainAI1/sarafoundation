@@ -55,12 +55,19 @@ export default function AnnualReports() {
           <h1 className="section-title text-foreground mb-4 max-w-3xl">
             {c.hero_headline_part1} <span className="gradient-text">{c.hero_headline_gradient}</span>
           </h1>
-          <p className="section-subtitle max-w-3xl">
+          <p className="section-subtitle max-w-3xl mb-6">
             {c.hero_description}
           </p>
+          {reports[0] && (
+            <Button size="lg" asChild>
+              <a href="#reports">
+                <Download className="w-4 h-4 mr-1" /> Read the latest report
+              </a>
+            </Button>
+          )}
         </section>
 
-        <section className="section-container pb-20">
+        <section id="reports" className="section-container pb-20">
           <div className="grid md:grid-cols-2 gap-6">
             {reports.map(r => (
               <Card key={r.year} className="p-8">

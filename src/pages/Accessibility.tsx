@@ -1,5 +1,6 @@
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
+import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 
@@ -31,10 +32,13 @@ const Accessibility = () => {
             <h1 className="font-display text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-4 md:mb-6 leading-tight">
               Accessibility
             </h1>
-            <p className="text-base md:text-xl text-white/70 leading-relaxed">
+            <p className="text-base md:text-xl text-white/70 leading-relaxed mb-6">
               Many of the people we support reach us on a mobile device and on limited data. We want this
               website to work for them.
             </p>
+            <Button variant="heroSecondary" size="lg" asChild>
+              <Link to="/contact">Report an accessibility issue</Link>
+            </Button>
           </div>
         </section>
 

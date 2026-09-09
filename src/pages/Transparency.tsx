@@ -92,9 +92,17 @@ const Transparency = () => {
               <h1 className="font-display text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-4 md:mb-6 leading-tight">
                 {c.hero_headline}
               </h1>
-              <p className="text-base md:text-xl text-white/70 leading-relaxed">
+              <p className="text-base md:text-xl text-white/70 leading-relaxed mb-6">
                 {c.hero_description}
               </p>
+              <div className="flex flex-col sm:flex-row gap-3">
+                <Button variant="hero" size="lg" asChild>
+                  <Link to="/annual-reports">View Annual Reports</Link>
+                </Button>
+                <Button variant="heroSecondary" size="lg" asChild>
+                  <Link to="/contact">Contact Us</Link>
+                </Button>
+              </div>
             </div>
           </div>
         </section>

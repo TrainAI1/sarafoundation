@@ -114,9 +114,20 @@ const OurWork = () => {
               <h1 className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 md:mb-6 leading-tight">
                 {c.hero_headline}
               </h1>
-              <p className="text-base md:text-xl text-white/70 leading-relaxed">
+              <p className="text-base md:text-xl text-white/70 leading-relaxed mb-6 md:mb-8">
                 {c.hero_description}
               </p>
+              <div className="flex flex-col sm:flex-row gap-3 md:gap-4">
+                <Button variant="hero" size="lg" className="group" asChild>
+                  <a href="#pathways">
+                    See our pathways
+                    <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                  </a>
+                </Button>
+                <Button variant="heroSecondary" size="lg" asChild>
+                  <Link to="/partnership">Partner with Us</Link>
+                </Button>
+              </div>
             </div>
           </div>
         </section>
@@ -162,7 +173,7 @@ const OurWork = () => {
         </section>
 
         {/* Pathways */}
-        <section className="py-16 md:py-24 bg-background">
+        <section id="pathways" className="py-16 md:py-24 bg-background">
           <div className="section-container">
             <div className="text-center max-w-3xl mx-auto mb-10 md:mb-16 px-4">
               <span className="section-badge mb-4 md:mb-6">{c.pathways_badge}</span>

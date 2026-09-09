@@ -122,6 +122,8 @@ const defaultPages: PageDef[] = [
     { key: "badge", label: "Section Badge", type: "text", placeholder: "Why We Exist" },
     { key: "headline", label: "Headline", type: "text", placeholder: "Access to digital education and lifelong learning is not equal" },
     { key: "description", label: "Description", type: "textarea", placeholder: "Sara Foundation Africa is dedicated to..." },
+    { key: "image1", label: "Left Photo", type: "image", placeholder: communityWorkshop },
+    { key: "image2", label: "Right Photo", type: "image", placeholder: techEntrepreneurs },
   ]},
 
   {
@@ -176,12 +178,12 @@ const defaultPages: PageDef[] = [
   {
     slug: "home-success-stories",
     category: "home",
-    categoryLabel: "Home Page", title: "Featured Success Stories", icon: MessageSquare, previewPath: "/#success-stories", fields: [
+    categoryLabel: "Home Page", title: "Featured Success Stories (also shown on /projects)", icon: MessageSquare, previewPath: "/#success-stories", fields: [
     { key: "badge", label: "Section Badge", type: "text", placeholder: "Featured Stories" },
     { key: "headline_pre", label: "Headline (before accent)", type: "text", placeholder: "Real Learners." },
     { key: "headline_accent", label: "Headline (accent)", type: "text", placeholder: "Real Journeys." },
     { key: "description", label: "Description", type: "textarea", placeholder: "Behind every number is a learner, mentor or community member moving forward." },
-    { key: "stories", label: "Stories", type: "list", itemLabel: "Story", itemFields: [
+    { key: "stories", label: "Stories", type: "list", itemLabel: "Story", helperText: "Add as many as you like — the page shows the first 3, with a \"Show more stories\" button to reveal the rest.", itemFields: [
       { key: "pathway", label: "Pathway (CAP/FLIP/EJP)", type: "text", placeholder: "" },
       { key: "name", label: "Name", type: "text", placeholder: "" },
       { key: "headline", label: "Headline", type: "text", placeholder: "" },
@@ -264,12 +266,12 @@ const defaultPages: PageDef[] = [
   {
     slug: "home-impact-reports",
     category: "home",
-    categoryLabel: "Home Page", title: "Impact Reports Download Links", icon: BarChart3, previewPath: "/#impact-reports", fields: [
+    categoryLabel: "Home Page", title: "Impact Reports (also shown on /projects)", icon: BarChart3, previewPath: "/projects#annual-impact-reporting", fields: [
     { key: "badge", label: "Section Badge", type: "text", placeholder: "Annual Impact Reports" },
     { key: "headline_pre", label: "Headline (before accent)", type: "text", placeholder: "Read our" },
     { key: "headline_accent", label: "Headline (accent)", type: "text", placeholder: "impact reports" },
     { key: "description", label: "Description", type: "textarea", placeholder: "Our annual reports set out what we delivered, who benefited and what we learned." },
-    { key: "reports", label: "Reports", type: "list", itemLabel: "Report", itemFields: [
+    { key: "reports", label: "Reports", type: "list", itemLabel: "Report", helperText: "Add as many as you like — the page shows the first two, with a \"Show more\" toggle to reveal the rest.", itemFields: [
       { key: "year", label: "Year", type: "text", placeholder: "" },
       { key: "title", label: "Title", type: "text", placeholder: "" },
       { key: "summary", label: "Summary", type: "textarea", placeholder: "" },
@@ -1193,17 +1195,7 @@ const defaultPages: PageDef[] = [
   {
     slug: "projects-reporting",
     category: "projects",
-    categoryLabel: "Projects & Impact", title: "Annual Impact Reporting & Archives", icon: BarChart3, previewPath: "/projects", fields: [
-    { key: "headline", label: "Headline", type: "text", placeholder: "Annual impact reporting" },
-    { key: "description", label: "Description", type: "textarea", placeholder: "Our annual reports set out what we delivered, who benefited and what we learned." },
-    { key: "report_2025_title", label: "2025 Report Title", type: "text", placeholder: "2025 Impact Report" },
-    { key: "report_2025_link_text", label: "2025 Report Link Text", type: "text", placeholder: "Read the 2025 Impact Report" },
-    { key: "report_2025_href", label: "2025 Report URL", type: "text", placeholder: "https://drive.google.com/file/d/1Ex55tpVH_RPB0VJygsUyw9Hp74RyPKR_/view?usp=drivesdk" },
-    { key: "report_2024_title", label: "2024 Report Title", type: "text", placeholder: "2024 Impact Report" },
-    { key: "report_2024_link_text", label: "2024 Report Link Text", type: "text", placeholder: "Read the 2024 Impact Report" },
-    { key: "report_2024_href", label: "2024 Report URL", type: "text", placeholder: "https://drive.google.com/file/d/1DjVw-vTf6ugcp75rFVCUCKM4zictzDKN/view?usp=drivesdk" },
-    { key: "future_reports_title", label: "Future Reports Title", type: "text", placeholder: "Future reports" },
-    { key: "future_reports_placeholder", label: "Future Reports Placeholder", type: "text", placeholder: "Published as new annual reports become available" },
+    categoryLabel: "Projects & Impact", title: "Our Impact — Closing CTA", icon: BarChart3, previewPath: "/projects", fields: [
     { key: "cta_headline", label: "CTA Headline", type: "text", placeholder: "Help us reduce more barriers to learning" },
   ]},
 

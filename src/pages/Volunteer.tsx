@@ -109,12 +109,20 @@ export default function Volunteer() {
             {c.hero_headline_part1}{" "}
             <span className="gradient-text">{c.hero_headline_part2}</span>
           </h1>
-          <p className="section-subtitle max-w-3xl">
+          <p className="section-subtitle max-w-3xl mb-6">
             {c.hero_description}
           </p>
+          <div className="flex flex-col sm:flex-row gap-3">
+            <Button size="lg" asChild>
+              <a href="#volunteer-form">Apply to volunteer</a>
+            </Button>
+            <Button size="lg" variant="outline" asChild>
+              <a href="#volunteer-roles">See volunteer roles</a>
+            </Button>
+          </div>
         </section>
 
-        <section className="section-container pb-16">
+        <section id="volunteer-roles" className="section-container pb-16">
           <h2 className="font-display font-bold text-2xl md:text-3xl mb-6">{c.roles_headline}</h2>
           <div className="grid md:grid-cols-2 gap-6">
             {roles.map(({ icon: Icon, ...r }) => (
@@ -143,7 +151,7 @@ export default function Volunteer() {
           </div>
         </section>
 
-        <section className="section-container pb-24">
+        <section id="volunteer-form" className="section-container pb-24">
           <Card className="p-6 md:p-10 max-w-2xl mx-auto">
             <h2 className="font-display font-bold text-2xl md:text-3xl mb-2">{c.form_headline}</h2>
             <p className="text-muted-foreground mb-6 text-sm">{c.form_description}</p>

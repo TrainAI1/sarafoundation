@@ -37,6 +37,8 @@ export function MissionSection() {
     headline: "Access to digital education and lifelong learning is not equal",
     description:
       "Financial, social, educational and structural barriers can limit who gets to learn, participate and build confidence in an increasingly digital world. Sara Foundation Africa exists to reduce those barriers by expanding access to digital learning, creating inclusive opportunities and strengthening the communities around learners.",
+    image1: "",
+    image2: "",
   });
 
   return (
@@ -58,7 +60,7 @@ export function MissionSection() {
           <ScrollAnimation variant="slide-right">
             <div className="grid grid-cols-2 gap-4">
               <img
-                src={assetUrl(adultLearnerImg)}
+                src={c.image1 ? assetUrl(c.image1) : assetUrl(adultLearnerImg)}
                 alt="CAP participant listening during a Sara Foundation Africa session"
                 className="w-full h-40 md:h-56 object-cover rounded-2xl shadow-lg"
                 loading="lazy"
@@ -67,7 +69,7 @@ export function MissionSection() {
                 }}
               />
               <img
-                src={assetUrl(professionalLearningImg)}
+                src={c.image2 ? assetUrl(c.image2) : assetUrl(professionalLearningImg)}
                 alt="Attendees at a Sara Foundation Africa campus session"
                 className="w-full h-40 md:h-56 object-cover rounded-2xl shadow-lg mt-6"
                 loading="lazy"

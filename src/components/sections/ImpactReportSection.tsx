@@ -1,4 +1,5 @@
-import { FileText, ArrowRight } from "lucide-react";
+import { useState } from "react";
+import { FileText, ArrowRight, ChevronDown, ChevronUp } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { ScrollAnimation } from "@/components/ui/scroll-animation";
@@ -24,7 +25,17 @@ const defaultReports = [
   },
 ];
 
-export function ImpactReportSection() {
+// Reports beyond this count are hidden behind "Show more" so admins can add
+// as many as they like without the section growing unbounded on the page.
+const VISIBLE_REPORTS = 2;
+
+type ImpactReportSectionProps = {
+  /** Anchor id so other pages can deep-link to this section. */
+  id?: string;
+};
+
+export function ImpactReportSection({ id }: ImpactReportSectionProps = {}) {
+  const [expanded, setExpanded] = useState(false);
   const { data: c } = usePageContent("home-impact-reports", {
     badge: "Annual Impact Reports",
     headline_pre: "Read our",
@@ -38,10 +49,12 @@ export function ImpactReportSection() {
   });
 
   const reports = c.reports as typeof defaultReports;
+  const visibleReports = expanded ? reports : reports.slice(0, VISIBLE_REPORTS);
+  const hasMore = reports.length > VISIBLE_REPORTS;
   const featuredImage = c.image ? assetUrl(c.image) : assetUrl(capGraduates);
 
   return (
-    <section className="py-16 md:py-24 bg-secondary/50 relative overflow-hidden">
+    <section id={id} className="py-16 md:py-24 bg-secondary/50 relative overflow-hidden">
       <div className="section-container relative z-10">
         <div className="grid lg:grid-cols-2 gap-10 md:gap-16 items-center">
           {/* Content */}
@@ -58,8 +71,8 @@ export function ImpactReportSection() {
                 {c.description}
               </p>
 
-              <ul className="space-y-4 mb-8">
-                {reports.map((report) => (
+              <ul className="space-y-4 mb-4">
+                {visibleReports.map((report) => (
                   <li key={report.year} className="card-modern p-5">
                     <div className="flex items-start gap-4">
                       <span className="inline-flex items-center justify-center rounded-xl bg-primary px-3 py-2 text-sm font-bold text-white flex-shrink-0">
@@ -84,12 +97,28 @@ export function ImpactReportSection() {
                 ))}
               </ul>
 
-              <Button variant="outline" size="lg" className="group" asChild>
-                <Link to="/annual-reports">
-                  All annual reports
-                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                </Link>
-              </Button>
+              {hasMore && (
+                <button
+                  type="button"
+                  onClick={() => setExpanded((v) => !v)}
+                  className="inline-flex items-center gap-1.5 text-sm font-medium text-primary hover:underline mb-6"
+                >
+                  {expanded ? (
+                    <>Show less <ChevronUp className="w-4 h-4" aria-hidden="true" /></>
+                  ) : (
+                    <>Show more ({reports.length - VISIBLE_REPORTS} more) <ChevronDown className="w-4 h-4" aria-hidden="true" /></>
+                  )}
+                </button>
+              )}
+
+              <div className={hasMore ? "mt-2" : ""}>
+                <Button variant="outline" size="lg" className="group" asChild>
+                  <Link to="/annual-reports">
+                    All annual reports
+                    <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                  </Link>
+                </Button>
+              </div>
             </div>
           </ScrollAnimation>
 

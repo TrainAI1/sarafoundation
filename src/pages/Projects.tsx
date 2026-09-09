@@ -9,10 +9,11 @@ import {
   TrendingUp,
   HeartHandshake,
   Compass,
-  FileText,
   ArrowRight,
 } from "lucide-react";
 import { usePageContent } from "@/hooks/usePageContent";
+import { SuccessStoriesSection } from "@/components/sections/SuccessStoriesSection";
+import { ImpactReportSection } from "@/components/sections/ImpactReportSection";
 import { assetUrl } from "@/lib/assetUrl";
 import techEntrepreneurs from "@/assets/tech-entrepreneurs.jpg";
 import capGraduates from "@/assets/events/DSC_3409.jpg.asset.json";
@@ -135,17 +136,6 @@ export default function Projects() {
   });
 
   const { data: reportingContent } = usePageContent("projects-reporting", {
-    headline: "Annual impact reporting",
-    description:
-      "Our annual reports set out what we delivered, who benefited and what we learned. The 2024 and 2025 reports are available now, and future reports are published here and in our annual reports section.",
-    report_2025_title: "2025 Impact Report",
-    report_2025_link_text: "Read the 2025 Impact Report",
-    report_2025_href: "https://drive.google.com/file/d/1Ex55tpVH_RPB0VJygsUyw9Hp74RyPKR_/view?usp=drivesdk",
-    report_2024_title: "2024 Impact Report",
-    report_2024_link_text: "Read the 2024 Impact Report",
-    report_2024_href: "https://drive.google.com/file/d/1DjVw-vTf6ugcp75rFVCUCKM4zictzDKN/view?usp=drivesdk",
-    future_reports_title: "Future reports",
-    future_reports_placeholder: "Published as new annual reports become available",
     cta_headline: "Help us reduce more barriers to learning",
   });
 
@@ -339,60 +329,27 @@ export default function Projects() {
           </div>
         </section>
 
-        {/* Annual impact report module */}
-        <section className="py-16 md:py-20">
+        {/* Journeys — real learner stories, shared with the homepage section and
+            fully admin-editable there (Home Page > Featured Success Stories). */}
+        <SuccessStoriesSection id="journeys" linkToImpact={false} />
+
+        {/* Annual impact reporting — fully admin-editable list (Home Page > Impact
+            Reports Download Links), with a "Show more" toggle once there are more
+            than a couple of reports. */}
+        <ImpactReportSection id="annual-impact-reporting" />
+
+        <section className="py-10 md:py-14">
           <div className="section-container max-w-4xl">
-            <div className="card-modern p-6 md:p-10">
-              <div className="flex items-center gap-3 mb-4">
-                <FileText className="w-6 h-6 text-primary" aria-hidden="true" />
-                <h2 className="font-display text-2xl md:text-3xl font-bold text-foreground">
-                  {reportingContent.headline}
-                </h2>
-              </div>
-              <p className="text-muted-foreground leading-relaxed mb-6">
-                {reportingContent.description}
-              </p>
-              <div className="grid sm:grid-cols-3 gap-4">
-                <div className="rounded-2xl border border-border p-5">
-                  <h3 className="font-semibold text-foreground mb-2">{reportingContent.report_2025_title}</h3>
-                  <a
-                    href={reportingContent.report_2025_href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-sm text-primary hover:underline"
-                  >
-                    {reportingContent.report_2025_link_text}
-                  </a>
-                </div>
-                <div className="rounded-2xl border border-border p-5">
-                  <h3 className="font-semibold text-foreground mb-2">{reportingContent.report_2024_title}</h3>
-                  <a
-                    href={reportingContent.report_2024_href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-sm text-primary hover:underline"
-                  >
-                    {reportingContent.report_2024_link_text}
-                  </a>
-                </div>
-                <div className="rounded-2xl border border-border p-5">
-                  <h3 className="font-semibold text-foreground mb-2">{reportingContent.future_reports_title}</h3>
-                  <p className="text-xs text-muted-foreground font-medium leading-relaxed">
-                    {reportingContent.future_reports_placeholder}
-                  </p>
-                </div>
-              </div>
-              <div className="flex flex-col sm:flex-row gap-3 mt-8">
-                <Button asChild>
-                  <Link to="/annual-reports">
-                    View annual reports
-                    <ArrowRight className="w-4 h-4" />
-                  </Link>
-                </Button>
-                <Button variant="outline" asChild>
-                  <Link to="/transparency">Transparency &amp; Governance</Link>
-                </Button>
-              </div>
+            <div className="flex flex-col sm:flex-row gap-3 justify-center">
+              <Button asChild>
+                <Link to="/annual-reports">
+                  View annual reports
+                  <ArrowRight className="w-4 h-4" />
+                </Link>
+              </Button>
+              <Button variant="outline" asChild>
+                <Link to="/transparency">Transparency &amp; Governance</Link>
+              </Button>
             </div>
           </div>
         </section>

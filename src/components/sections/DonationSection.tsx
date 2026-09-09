@@ -122,18 +122,18 @@ export function DonationSection() {
 
             {/* Impact Cards */}
             <div className="grid grid-cols-3 gap-2 md:gap-4 mb-6 md:mb-8">
-              <div className="card-modern p-3 md:p-6 group hover:border-primary/30 text-center">
-                <div className="text-lg sm:text-xl md:text-3xl font-bold font-display gradient-text mb-1 md:mb-2 leading-tight break-words">{symbol}{tierFull.toLocaleString()}</div>
+              <div className="card-modern p-2 sm:p-3 md:p-6 group hover:border-primary/30 text-center">
+                <div className="text-base sm:text-lg md:text-xl lg:text-2xl font-bold font-display gradient-text mb-1 md:mb-2 leading-tight whitespace-nowrap">{symbol}{tierFull.toLocaleString()}</div>
                 <div className="text-xs md:text-sm text-muted-foreground">Fully sponsors a beneficiary</div>
               </div>
-              <div className="card-modern p-3 md:p-6 group hover:border-accent/30 text-center">
+              <div className="card-modern p-2 sm:p-3 md:p-6 group hover:border-accent/30 text-center">
                 <div className="text-[10px] md:text-xs font-semibold uppercase tracking-[0.14em] text-muted-foreground mb-1">Donate per period</div>
-                <div className="text-lg sm:text-xl md:text-3xl font-bold font-display gradient-text-accent mb-1 md:mb-2 leading-tight break-words">{symbol}{tierMonthly.toLocaleString()}</div>
+                <div className="text-base sm:text-lg md:text-xl lg:text-2xl font-bold font-display gradient-text-accent mb-1 md:mb-2 leading-tight whitespace-nowrap">{symbol}{tierMonthly.toLocaleString()}</div>
                 <div className="text-xs md:text-sm text-muted-foreground">Per month, sponsors subsidised places</div>
               </div>
-              <div className="card-modern p-3 md:p-6 group hover:border-primary/30 text-center">
+              <div className="card-modern p-2 sm:p-3 md:p-6 group hover:border-primary/30 text-center">
                 <div className="text-[10px] md:text-xs font-semibold uppercase tracking-[0.14em] text-muted-foreground mb-1">Donate per period</div>
-                <div className="text-lg sm:text-xl md:text-3xl font-bold font-display gradient-text mb-1 md:mb-2 leading-tight break-words">{symbol}{tierWeekly.toLocaleString()}</div>
+                <div className="text-base sm:text-lg md:text-xl lg:text-2xl font-bold font-display gradient-text mb-1 md:mb-2 leading-tight whitespace-nowrap">{symbol}{tierWeekly.toLocaleString()}</div>
                 <div className="text-xs md:text-sm text-muted-foreground">Per week, sponsors subsidised places</div>
               </div>
             </div>
