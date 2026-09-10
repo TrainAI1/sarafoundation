@@ -9,6 +9,14 @@ import { assetUrl } from "@/lib/assetUrl";
 import capStoryThumb from "@/assets/success-stories/success-story-cap.jpg";
 import flipStoryThumb from "@/assets/success-stories/success-story-flip.jpg";
 import ejpStoryThumb from "@/assets/success-stories/success-story-ejp.jpg";
+import fisayoAdeyemiImg from "@/assets/team/fisayo-adeyemi.jpg";
+import mercyMomahImg from "@/assets/team/mercy-momah.jpg";
+import scintillaImg from "@/assets/partners/scintilla.jpg";
+import graduatesCelebrationImg from "@/assets/graduates-celebration.jpg";
+import techEntrepreneursImg from "@/assets/tech-entrepreneurs.jpg";
+import capGraduatesJson from "@/assets/events/DSC_3409.jpg.asset.json";
+import techConferenceImg from "@/assets/tech-conference.jpg";
+import mentorshipSessionImg from "@/assets/mentorship-session.jpg";
 
 type Story = {
   pathway: "CAP" | "FLIP" | "EJP";
@@ -78,7 +86,7 @@ const defaultStories: Story[] = [
     link: "https://www.linkedin.com/posts/sara-foundation_flip-womenintech-sarafoundation-activity-7381988281527189506-W4cZ",
     linkLabel: "Watch the session",
     pathwayHref: "/programs/flip",
-    image: "",
+    image: fisayoAdeyemiImg,
   },
   {
     pathway: "FLIP",
@@ -90,7 +98,7 @@ const defaultStories: Story[] = [
     link: "https://www.linkedin.com/posts/sara-foundation_sarafoundation-womenintech-leadership-activity-7384999379415429120-cVtD",
     linkLabel: "Watch the session",
     pathwayHref: "/programs/flip",
-    image: "",
+    image: mercyMomahImg,
   },
   {
     pathway: "CAP",
@@ -102,7 +110,7 @@ const defaultStories: Story[] = [
     link: "https://www.linkedin.com/posts/sara-foundation_captechhub-sarafoundation-scintillaafrica-activity-7388436773833678848-RaVv",
     linkLabel: "Watch the showcase",
     pathwayHref: "/programs/cap",
-    image: "",
+    image: scintillaImg,
   },
   {
     pathway: "FLIP",
@@ -114,7 +122,7 @@ const defaultStories: Story[] = [
     link: "https://www.linkedin.com/posts/sara-foundation_flipfellowship-womenintech-leadership-activity-7388585608623079424-zuPr",
     linkLabel: "Watch the graduation",
     pathwayHref: "/programs/flip",
-    image: "",
+    image: graduatesCelebrationImg,
   },
   {
     pathway: "CAP",
@@ -126,7 +134,7 @@ const defaultStories: Story[] = [
     link: "https://www.linkedin.com/posts/sara-foundation_captechhub-talentshowcase-techinnovation-activity-7463588941724536832-lYKz",
     linkLabel: "Watch the showcase",
     pathwayHref: "/programs/cap",
-    image: "",
+    image: techEntrepreneursImg,
   },
   {
     pathway: "CAP",
@@ -138,7 +146,7 @@ const defaultStories: Story[] = [
     link: "https://www.linkedin.com/posts/sara-foundation_cap-tech-hub-cohort-1-proudly-presents-the-activity-7451188125441228800-m91D",
     linkLabel: "Watch the demo day",
     pathwayHref: "/programs/cap",
-    image: "",
+    image: assetUrl(capGraduatesJson),
   },
   {
     pathway: "EJP",
@@ -150,7 +158,7 @@ const defaultStories: Story[] = [
     link: "https://www.linkedin.com/posts/sara-foundation_navigating-career-paths-in-2026-live-session-activity-7442479667288358912-Vbe2",
     linkLabel: "Watch the session",
     pathwayHref: "/programs/gjp",
-    image: "",
+    image: techConferenceImg,
   },
   {
     pathway: "EJP",
@@ -162,7 +170,7 @@ const defaultStories: Story[] = [
     link: "https://www.linkedin.com/posts/sara-foundation_techcareer-sarafoundation-harryzahavi-activity-7401871800164417536-9_0v",
     linkLabel: "Watch the session",
     pathwayHref: "/programs/gjp",
-    image: "",
+    image: mentorshipSessionImg,
   },
 ];
 
