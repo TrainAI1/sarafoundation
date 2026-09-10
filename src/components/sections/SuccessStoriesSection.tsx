@@ -199,10 +199,10 @@ export function SuccessStoriesSection({ id, linkToImpact = true }: SuccessStorie
     // accidentally wipe them out and crash the page.
   });
 
-  // Always start from the built-in list. Any admin-added extra stories stored in
-  // Supabase are appended after, guarded against null / non-array bad data.
-  const adminExtra = Array.isArray(c.stories) ? (c.stories as Story[]) : [];
-  const stories: Story[] = [...defaultStories, ...adminExtra];
+  // Use admin-saved stories from Supabase if present, or fall back to defaultStories
+  const stories: Story[] = (Array.isArray(c.stories) && c.stories.length > 0)
+    ? (c.stories as Story[])
+    : defaultStories;
   const visibleStories = expanded ? stories : stories.slice(0, VISIBLE_STORIES);
   const hasMoreStories = stories.length > VISIBLE_STORIES;
 
