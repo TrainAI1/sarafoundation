@@ -212,7 +212,19 @@ export default function AdminHeroCards() {
           <h1 className="font-display text-xl md:text-2xl font-bold text-foreground">Hero Showcase Cards</h1>
           <p className="text-sm text-muted-foreground">Edit the images, stat callouts, and text displayed on the homepage scrolling marquee.</p>
         </div>
-        <div className="flex gap-2">
+        <div className="flex flex-wrap gap-2">
+          <input
+            ref={bulkInputRef}
+            type="file"
+            accept="image/*"
+            multiple
+            className="hidden"
+            onChange={(e) => { handleBulkUpload(e.target.files); e.target.value = ""; }}
+          />
+          <Button size="sm" variant="outline" onClick={() => bulkInputRef.current?.click()} disabled={bulkUploading}>
+            {bulkUploading ? <Loader2 className="w-4 h-4 mr-2 animate-spin" /> : <Images className="w-4 h-4 mr-2" />}
+            {bulkUploading ? "Uploading..." : "Change all images"}
+          </Button>
           <Button size="sm" onClick={addNew}>
             <Plus className="w-4 h-4 mr-2" /> Add Card
           </Button>
