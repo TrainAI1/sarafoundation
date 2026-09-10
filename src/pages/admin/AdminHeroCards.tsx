@@ -267,6 +267,27 @@ export default function AdminHeroCards() {
               </div>
 
               <div className="flex items-center gap-1 flex-shrink-0">
+                {card.tone !== "accent" && (
+                  <>
+                    <input
+                      ref={(el) => { rowInputRefs.current[card.id] = el; }}
+                      type="file"
+                      accept="image/*"
+                      className="hidden"
+                      onChange={(e) => { handleReplaceUpload(card.id, e.target.files?.[0]); e.target.value = ""; }}
+                    />
+                    <Button
+                      variant="ghost"
+                      size="icon"
+                      className="w-8 h-8"
+                      onClick={() => rowInputRefs.current[card.id]?.click()}
+                      disabled={uploadingId === card.id}
+                      title="Replace image"
+                    >
+                      {uploadingId === card.id ? <Loader2 className="w-3.5 h-3.5 animate-spin" /> : <Upload className="w-3.5 h-3.5" />}
+                    </Button>
+                  </>
+                )}
                 <Button variant="ghost" size="icon" className="w-7 h-7" disabled={idx === 0} onClick={() => moveCard(idx, "up")} title="Move Up">
                   <MoveUp className="w-3.5 h-3.5" />
                 </Button>
