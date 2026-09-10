@@ -178,26 +178,11 @@ const defaultPages: PageDef[] = [
   {
     slug: "home-success-stories",
     category: "home",
-    categoryLabel: "Home Page", title: "Featured Success Stories (also shown on /projects)", icon: MessageSquare, previewPath: "/#success-stories", fields: [
+    categoryLabel: "Home Page", title: "Success Stories — Section Heading (also shown on /projects)", icon: MessageSquare, previewPath: "/#success-stories", fields: [
     { key: "badge", label: "Section Badge", type: "text", placeholder: "Featured Stories" },
     { key: "headline_pre", label: "Headline (before accent)", type: "text", placeholder: "Real Learners." },
     { key: "headline_accent", label: "Headline (accent)", type: "text", placeholder: "Real Journeys." },
     { key: "description", label: "Description", type: "textarea", placeholder: "Behind every number is a learner, mentor or community member moving forward." },
-    { key: "stories", label: "Stories", type: "list", itemLabel: "Story", helperText: "Add as many as you like — the page shows the first 3, with a \"Show more stories\" button to reveal the rest.", itemFields: [
-      { key: "pathway", label: "Pathway (CAP/FLIP/EJP)", type: "text", placeholder: "" },
-      { key: "name", label: "Name", type: "text", placeholder: "" },
-      { key: "headline", label: "Headline", type: "text", placeholder: "" },
-      { key: "summary", label: "Summary", type: "textarea", placeholder: "" },
-      { key: "evidence", label: "Evidence", type: "text", placeholder: "" },
-      { key: "link", label: "Link URL (optional)", type: "text", placeholder: "" },
-      { key: "linkLabel", label: "Link Label", type: "text", placeholder: "" },
-      { key: "pathwayHref", label: "Pathway Page URL", type: "text", placeholder: "" },
-      { key: "image", label: "Video Thumbnail", type: "image", placeholder: "" },
-    ], defaultItem: { pathway: "CAP", name: "", headline: "", summary: "", evidence: "", link: "", linkLabel: "", pathwayHref: "", image: "" }, defaultItems: [
-      { pathway: "CAP", name: "Akinlabi Isulameya", headline: "Building Campuslink with a project team", summary: "Akinlabi shares how hands-on teamwork while developing the Campuslink app shaped his learning at CAP Tech Hub.", evidence: "Learner project presented through CAP Tech Hub Cohort activity.", link: "https://www.linkedin.com/posts/sara-foundation_sarafoundation-captechhub-cohortspotlight-activity-7462891845514219520-L8D4", linkLabel: "Watch project story", pathwayHref: "/programs/cap", image: "" },
-      { pathway: "FLIP", name: "Odugbayi Olamide", headline: "Applying business intelligence to banking operations", summary: "For her FLIP capstone work, Olamide developed a BI-powered reconciliation performance tracker.", evidence: "One of five FLIP Fellowship Cohort 1 capstone projects.", link: "https://www.linkedin.com/posts/sara-foundation_flipfellowship-capstoneproject-fintech-activity-7399130514781233152-qsfI", linkLabel: "Read capstone story", pathwayHref: "/programs/flip", image: "" },
-      { pathway: "EJP", name: "Eniola", headline: "Work-readiness learning through EJP", summary: "Eniola talks about the Government Jobs Placement initiative under EJP and how it helped her build key workplace skills.", evidence: "Participant account of work-readiness learning. SFA does not guarantee employment.", link: "https://www.linkedin.com/posts/sara-foundation_sarafoundation-governmentjobplacementprogram-activity-7480888457888817152-IPj_", linkLabel: "Watch participant story", pathwayHref: "/programs/gjp", image: "" },
-    ]},
   ]},
 
   {
