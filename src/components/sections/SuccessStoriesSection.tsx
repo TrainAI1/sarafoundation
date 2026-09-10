@@ -3,7 +3,7 @@ import { ArrowUpRight, PlayCircle, ChevronDown, ChevronUp } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
-import { ScrollAnimation, StaggerContainer, StaggerItem } from "@/components/ui/scroll-animation";
+import { ScrollAnimation } from "@/components/ui/scroll-animation";
 import { usePageContent } from "@/hooks/usePageContent";
 import { assetUrl } from "@/lib/assetUrl";
 import capStoryThumb from "@/assets/success-stories/success-story-cap.jpg";
@@ -213,11 +213,11 @@ export function SuccessStoriesSection({ id, linkToImpact = true }: SuccessStorie
           </div>
         </ScrollAnimation>
 
-        <StaggerContainer className="grid md:grid-cols-3 gap-6" staggerDelay={0.1}>
+        <div className="grid md:grid-cols-3 gap-6">
           {visibleStories.map((s, idx) => (
-            <StaggerItem key={`${s.name}-${idx}`} variant="fade-up">
+            <div key={`${s.name}-${idx}`} className="h-full">
               <Card className="overflow-hidden h-full flex flex-col hover:shadow-xl transition-shadow">
-                {/* Video placeholder — a real still from the story so it reads as an actual clip, not a generic box. */}
+                {/* Thumbnail — clicking opens the LinkedIn post */}
                 {s.link ? (
                   <a
                     href={s.link}
@@ -283,9 +283,9 @@ export function SuccessStoriesSection({ id, linkToImpact = true }: SuccessStorie
                   </div>
                 </div>
               </Card>
-            </StaggerItem>
+            </div>
           ))}
-        </StaggerContainer>
+        </div>
 
         <div className="text-center mt-10 flex flex-col sm:flex-row gap-3 justify-center">
           {hasMoreStories && (
