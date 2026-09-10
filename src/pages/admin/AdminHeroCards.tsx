@@ -101,28 +101,102 @@ export default function AdminHeroCards() {
     setCards(newCards);
   };
 
-  const saveAll = async () => {
+  const persist = async (list: MarqueeCard[]) => {
     setSaving(true);
     try {
-      const content = JSON.parse(JSON.stringify({ items: cards }));
+      const content = JSON.parse(JSON.stringify({ items: list }));
       const { data: existing, error: findErr } = await supabase.from("pages").select("id").eq("slug", "hero-marquee").maybeSingle();
       if (findErr) console.warn("Supabase query check warning:", findErr.message);
 
       if (existing) {
         const { error } = await supabase.from("pages").update({ content }).eq("slug", "hero-marquee");
-        if (error) { toast.error(`Error saving: ${error.message}`); setSaving(false); return; }
+        if (error) { toast.error(`Error saving: ${error.message}`); return false; }
       } else {
         const { error } = await supabase.from("pages").insert([{ slug: "hero-marquee", title: "Hero Marquee Cards", content }]);
-        if (error) { toast.error(`Error creating: ${error.message}`); setSaving(false); return; }
+        if (error) { toast.error(`Error creating: ${error.message}`); return false; }
       }
-
-      toast.success("Hero Showcase Cards saved successfully!");
-      setEditing(null);
+      return true;
     } catch (err: any) {
       toast.error(err.message || "Failed to save showcase cards");
+      return false;
     } finally {
       setSaving(false);
     }
+  };
+
+  const saveAll = async () => {
+    const ok = await persist(cards);
+    if (ok) {
+      toast.success("Hero Showcase Cards saved successfully!");
+      setEditing(null);
+    }
+  };
+
+  const uploadImage = async (file: File) => {
+    if (!file.type.startsWith("image/")) {
+      toast.error(`${file.name} is not an image`);
+      return null;
+    }
+    if (file.size > 5 * 1024 * 1024) {
+      toast.error(`${file.name} is larger than 5MB`);
+      return null;
+    }
+    const ext = file.name.split(".").pop();
+    const fileName = `hero-cards/${Date.now()}-${Math.random().toString(36).slice(2)}.${ext}`;
+    const { error } = await supabase.storage.from("site-assets").upload(fileName, file);
+    if (error) {
+      toast.error(`Upload failed: ${error.message}`);
+      return null;
+    }
+    return supabase.storage.from("site-assets").getPublicUrl(fileName).data.publicUrl;
+  };
+
+  const handleBulkUpload = async (files: FileList | null) => {
+    if (!files || files.length === 0) return;
+    setBulkUploading(true);
+    const uploaded: string[] = [];
+    for (const file of Array.from(files)) {
+      const url = await uploadImage(file);
+      if (url) uploaded.push(url);
+    }
+    setBulkUploading(false);
+    if (uploaded.length === 0) return;
+
+    let nextId = Math.max(...cards.map((c) => c.id || 0), 0);
+    const imageCards = cards.filter((c) => c.tone !== "accent");
+    const replacedIds = new Set<number>();
+    const updated = cards.map((card) => {
+      if (card.tone === "accent") return card;
+      const idx = imageCards.indexOf(card);
+      if (idx < uploaded.length) {
+        replacedIds.add(card.id);
+        return { ...card, src: uploaded[idx] };
+      }
+      return card;
+    });
+    const extras = uploaded.slice(replacedIds.size).map((src) => ({
+      id: ++nextId,
+      src,
+      name: "New Showcase",
+      role: "Card description",
+      tone: "light" as const,
+    }));
+    const next = [...updated, ...extras];
+    setCards(next);
+    const ok = await persist(next);
+    if (ok) toast.success(`${uploaded.length} carousel image${uploaded.length > 1 ? "s" : ""} updated and published`);
+  };
+
+  const handleReplaceUpload = async (id: number, file: File | undefined) => {
+    if (!file) return;
+    setUploadingId(id);
+    const url = await uploadImage(file);
+    setUploadingId(null);
+    if (!url) return;
+    const next = cards.map((c) => (c.id === id ? { ...c, src: url } : c));
+    setCards(next);
+    const ok = await persist(next);
+    if (ok) toast.success("Image replaced and published");
   };
 
   if (loading) return <div className="animate-pulse text-muted-foreground">Loading cards...</div>;
