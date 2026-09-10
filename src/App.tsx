@@ -6,38 +6,6 @@ import { BrowserRouter, Routes, Route, useNavigate } from "react-router-dom";
 import { useEffect, Component, type ReactNode } from "react";
 import { HelmetProvider } from "react-helmet-async";
 import { ScrollToTop } from "./components/ScrollToTop";
-
-// ── Error boundary ─────────────────────────────────────────────────────────
-// Catches any unhandled render errors and shows a readable message instead of
-// a blank white screen, so we can diagnose problems quickly.
-class ErrorBoundary extends Component<
-  { children: ReactNode },
-  { error: Error | null }
-> {
-  constructor(props: { children: ReactNode }) {
-    super(props);
-    this.state = { error: null };
-  }
-  static getDerivedStateFromError(error: Error) {
-    return { error };
-  }
-  render() {
-    if (this.state.error) {
-      return (
-        <div style={{ padding: "2rem", fontFamily: "monospace", color: "#cc0000" }}>
-          <h2 style={{ marginBottom: "1rem" }}>Something went wrong</h2>
-          <pre style={{ whiteSpace: "pre-wrap", background: "#fff0f0", padding: "1rem", borderRadius: "8px" }}>
-            {this.state.error.message}
-            {"\n\n"}
-            {this.state.error.stack}
-          </pre>
-        </div>
-      );
-    }
-    return this.props.children;
-  }
-}
-// ──────────────────────────────────────────────────────────────────────────
 import Index from "./pages/Index";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
@@ -99,87 +67,119 @@ import { CookieConsent } from "./components/CookieConsent";
 import { FloatingDonateButton } from "./components/FloatingDonateButton";
 import { SessionDonationPopup } from "./components/SessionDonationPopup";
 
+// ── Error boundary ─────────────────────────────────────────────────────────
+// Catches any unhandled render errors and shows a readable message instead of
+// a blank white screen, so the real crash reason is visible in the browser.
+class ErrorBoundary extends Component<
+  { children: ReactNode },
+  { error: Error | null }
+> {
+  constructor(props: { children: ReactNode }) {
+    super(props);
+    this.state = { error: null };
+  }
+  static getDerivedStateFromError(error: Error) {
+    return { error };
+  }
+  render() {
+    if (this.state.error) {
+      return (
+        <div style={{ padding: "2rem", fontFamily: "monospace", color: "#cc0000" }}>
+          <h2 style={{ marginBottom: "1rem" }}>Something went wrong</h2>
+          <pre style={{ whiteSpace: "pre-wrap", background: "#fff0f0", padding: "1rem", borderRadius: "8px" }}>
+            {this.state.error.message}
+            {"\n\n"}
+            {this.state.error.stack}
+          </pre>
+        </div>
+      );
+    }
+    return this.props.children;
+  }
+}
+// ──────────────────────────────────────────────────────────────────────────
+
 const queryClient = new QueryClient();
 
 const App = () => {
   return (
-  <ErrorBoundary>
-  <QueryClientProvider client={queryClient}>
-    <HelmetProvider>
-      <TooltipProvider>
-        <Toaster />
-        <Sonner />
-        <BrowserRouter>
-          <SpaRedirectHandler />
-          <ScrollToTop />
-          <Routes>
-            <Route path="/" element={<Index />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/contact" element={<Contact />} />
-            <Route path="/blog" element={<Blog />} />
-            <Route path="/blog/:slug" element={<BlogPost />} />
-            <Route path="/donation" element={<Donation />} />
-            <Route path="/donation-success" element={<DonationSuccess />} />
-            <Route path="/programs/cap" element={<ProgramCAP />} />
-            <Route path="/programs/cap/apply" element={<CAPApply />} />
-            <Route path="/programs/cap/payment" element={<CAPPayment />} />
-            <Route path="/programs/cap/success" element={<CAPSuccess />} />
-            <Route path="/programs/flip" element={<ProgramFLIP />} />
-            <Route path="/programs/flip/apply" element={<FLIPApply />} />
-            <Route path="/programs/flip/payment" element={<FLIPPayment />} />
-            <Route path="/programs/flip/success" element={<FLIPSuccess />} />
-            <Route path="/programs/gjp" element={<ProgramGJP />} />
-            <Route path="/programs/gjp/apply" element={<GJPApply />} />
-            <Route path="/programs/gjp/success" element={<GJPSuccess />} />
-            <Route path="/programs/gjp/status" element={<GJPStatus />} />
-            <Route path="/partnership" element={<Partnership />} />
-            <Route path="/partnership/school-community" element={<SchoolCommunity />} />
-            <Route path="/partnership/organizations" element={<Organizations />} />
-            <Route path="/partnership/sponsors" element={<Sponsors />} />
-            <Route path="/projects" element={<Projects />} />
-            <Route path="/our-work" element={<OurWork />} />
-            <Route path="/get-involved" element={<GetInvolved />} />
-            <Route path="/transparency" element={<Transparency />} />
-            <Route path="/accessibility" element={<Accessibility />} />
-            <Route path="/volunteer" element={<Volunteer />} />
-            <Route path="/annual-reports" element={<AnnualReports />} />
-            <Route path="/privacy" element={<Privacy />} />
-            <Route path="/terms" element={<Terms />} />
-            <Route path="/admin/login" element={<AdminLogin />} />
-            <Route path="/admin/reset-password" element={<AdminResetPassword />} />
-            <Route path="/admin" element={<AdminLayout />}>
-              <Route index element={<AdminDashboard />} />
-              <Route path="analytics" element={<AdminAnalytics />} />
-              <Route path="blog" element={<AdminBlogList />} />
-              <Route path="blog/:id" element={<AdminBlogEditor />} />
-              <Route path="pages" element={<AdminPages />} />
-              <Route path="partners" element={<AdminPartners />} />
-              <Route path="testimonials" element={<AdminTestimonials />} />
-              <Route path="stories" element={<AdminStories />} />
-              <Route path="hero-cards" element={<AdminHeroCards />} />
-              <Route path="team" element={<AdminTeam />} />
-              <Route path="settings" element={<AdminSettings />} />
-              <Route path="faq" element={<AdminFAQ />} />
-              <Route path="contacts" element={<AdminContacts />} />
-              <Route path="newsletter" element={<AdminNewsletter />} />
-              <Route path="media" element={<AdminMedia />} />
-              <Route path="flip-applications" element={<AdminFlipApplications />} />
-              <Route path="cap-applications" element={<AdminCapApplications />} />
-              <Route path="gjp-applications" element={<AdminGjpApplications />} />
-              <Route path="site-health" element={<AdminSiteHealth />} />
-              <Route path="users" element={<AdminUsers />} />
-              <Route path="audit-log" element={<AdminAuditLog />} />
-            </Route>
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-          <CookieConsent />
-          <FloatingDonateButton />
-          <SessionDonationPopup />
-        </BrowserRouter>
-      </TooltipProvider>
-    </HelmetProvider>
-  </QueryClientProvider>
-  </ErrorBoundary>
+    <ErrorBoundary>
+      <QueryClientProvider client={queryClient}>
+        <HelmetProvider>
+          <TooltipProvider>
+            <Toaster />
+            <Sonner />
+            <BrowserRouter>
+              <SpaRedirectHandler />
+              <ScrollToTop />
+              <Routes>
+                <Route path="/" element={<Index />} />
+                <Route path="/about" element={<About />} />
+                <Route path="/contact" element={<Contact />} />
+                <Route path="/blog" element={<Blog />} />
+                <Route path="/blog/:slug" element={<BlogPost />} />
+                <Route path="/donation" element={<Donation />} />
+                <Route path="/donation-success" element={<DonationSuccess />} />
+                <Route path="/programs/cap" element={<ProgramCAP />} />
+                <Route path="/programs/cap/apply" element={<CAPApply />} />
+                <Route path="/programs/cap/payment" element={<CAPPayment />} />
+                <Route path="/programs/cap/success" element={<CAPSuccess />} />
+                <Route path="/programs/flip" element={<ProgramFLIP />} />
+                <Route path="/programs/flip/apply" element={<FLIPApply />} />
+                <Route path="/programs/flip/payment" element={<FLIPPayment />} />
+                <Route path="/programs/flip/success" element={<FLIPSuccess />} />
+                <Route path="/programs/gjp" element={<ProgramGJP />} />
+                <Route path="/programs/gjp/apply" element={<GJPApply />} />
+                <Route path="/programs/gjp/success" element={<GJPSuccess />} />
+                <Route path="/programs/gjp/status" element={<GJPStatus />} />
+                <Route path="/partnership" element={<Partnership />} />
+                <Route path="/partnership/school-community" element={<SchoolCommunity />} />
+                <Route path="/partnership/organizations" element={<Organizations />} />
+                <Route path="/partnership/sponsors" element={<Sponsors />} />
+                <Route path="/projects" element={<Projects />} />
+                <Route path="/our-work" element={<OurWork />} />
+                <Route path="/get-involved" element={<GetInvolved />} />
+                <Route path="/transparency" element={<Transparency />} />
+                <Route path="/accessibility" element={<Accessibility />} />
+                <Route path="/volunteer" element={<Volunteer />} />
+                <Route path="/annual-reports" element={<AnnualReports />} />
+                <Route path="/privacy" element={<Privacy />} />
+                <Route path="/terms" element={<Terms />} />
+                <Route path="/admin/login" element={<AdminLogin />} />
+                <Route path="/admin/reset-password" element={<AdminResetPassword />} />
+                <Route path="/admin" element={<AdminLayout />}>
+                  <Route index element={<AdminDashboard />} />
+                  <Route path="analytics" element={<AdminAnalytics />} />
+                  <Route path="blog" element={<AdminBlogList />} />
+                  <Route path="blog/:id" element={<AdminBlogEditor />} />
+                  <Route path="pages" element={<AdminPages />} />
+                  <Route path="partners" element={<AdminPartners />} />
+                  <Route path="testimonials" element={<AdminTestimonials />} />
+                  <Route path="stories" element={<AdminStories />} />
+                  <Route path="hero-cards" element={<AdminHeroCards />} />
+                  <Route path="team" element={<AdminTeam />} />
+                  <Route path="settings" element={<AdminSettings />} />
+                  <Route path="faq" element={<AdminFAQ />} />
+                  <Route path="contacts" element={<AdminContacts />} />
+                  <Route path="newsletter" element={<AdminNewsletter />} />
+                  <Route path="media" element={<AdminMedia />} />
+                  <Route path="flip-applications" element={<AdminFlipApplications />} />
+                  <Route path="cap-applications" element={<AdminCapApplications />} />
+                  <Route path="gjp-applications" element={<AdminGjpApplications />} />
+                  <Route path="site-health" element={<AdminSiteHealth />} />
+                  <Route path="users" element={<AdminUsers />} />
+                  <Route path="audit-log" element={<AdminAuditLog />} />
+                </Route>
+                <Route path="*" element={<NotFound />} />
+              </Routes>
+              <CookieConsent />
+              <FloatingDonateButton />
+              <SessionDonationPopup />
+            </BrowserRouter>
+          </TooltipProvider>
+        </HelmetProvider>
+      </QueryClientProvider>
+    </ErrorBoundary>
   );
 };
 
