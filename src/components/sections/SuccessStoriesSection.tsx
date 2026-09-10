@@ -186,10 +186,15 @@ export function SuccessStoriesSection({ id, linkToImpact = true }: SuccessStorie
     headline_accent: "Real Journeys.",
     description:
       "Behind every number is a learner, mentor or community member moving forward. Explore the projects, learning experiences and personal journeys created through CAP, FLIP and EJP.",
-    stories: defaultStories,
+    // Note: stories intentionally omitted from defaults — we always use
+    // defaultStories as the canonical base so Supabase data can never
+    // accidentally wipe them out and crash the page.
   });
 
-  const stories = c.stories as Story[];
+  // Always start from the built-in list. Any admin-added extra stories stored in
+  // Supabase are appended after, guarded against null / non-array bad data.
+  const adminExtra = Array.isArray(c.stories) ? (c.stories as Story[]) : [];
+  const stories: Story[] = [...defaultStories, ...adminExtra];
   const visibleStories = expanded ? stories : stories.slice(0, VISIBLE_STORIES);
   const hasMoreStories = stories.length > VISIBLE_STORIES;
 
