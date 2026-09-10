@@ -47,6 +47,10 @@ export default function AdminHeroCards() {
   const [editing, setEditing] = useState<number | null>(null);
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
+  const [bulkUploading, setBulkUploading] = useState(false);
+  const [uploadingId, setUploadingId] = useState<number | null>(null);
+  const bulkInputRef = useRef<HTMLInputElement>(null);
+  const rowInputRefs = useRef<Record<number, HTMLInputElement | null>>({});
 
   useEffect(() => {
     const fetchCards = async () => {
