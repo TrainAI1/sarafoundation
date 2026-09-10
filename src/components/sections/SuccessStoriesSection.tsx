@@ -68,6 +68,102 @@ const defaultStories: Story[] = [
     pathwayHref: "/programs/gjp",
     image: "",
   },
+  {
+    pathway: "FLIP",
+    name: "Fisayo Adeyemi — FLIP Workshop",
+    headline: "Effective Communication & Personal Branding in Tech",
+    summary:
+      "Fisayo Adeyemi, Founder & Lead Coach at Rayne Consults and two-time IIBA Nigeria board member, led a live FLIP session on how effective communication and personal branding elevate influence, visibility and career success in tech.",
+    evidence: "FLIP Women in Tech Workshop — LinkedIn Live, October 2025.",
+    link: "https://www.linkedin.com/posts/sara-foundation_flip-womenintech-sarafoundation-activity-7381988281527189506-W4cZ",
+    linkLabel: "Watch the session",
+    pathwayHref: "/programs/flip",
+    image: "",
+  },
+  {
+    pathway: "FLIP",
+    name: "Mercy Momah — FLIP Workshop",
+    headline: "Women in Tech Leadership: Challenges & Opportunities",
+    summary:
+      "Mercy Mosunmola Momah, a PMP-certified PMO Consultant with 20+ years across IT, telecoms, healthcare and banking, shared powerful insights on navigating leadership barriers and unlocking new opportunities for women in tech.",
+    evidence: "FLIP Women in Tech Leadership Workshop — LinkedIn Live, 2025.",
+    link: "https://www.linkedin.com/posts/sara-foundation_sarafoundation-womenintech-leadership-activity-7384999379415429120-cVtD",
+    linkLabel: "Watch the session",
+    pathwayHref: "/programs/flip",
+    image: "",
+  },
+  {
+    pathway: "CAP",
+    name: "CAP Tech Hub — Talent Showcase",
+    headline: "CAP cohort talent showcase: live project presentations",
+    summary:
+      "Project groups from CAP Tech Hub presented the creative and technical solutions developed across their 6-month learning journey — spanning front-end and back-end development, UI/UX, project management and business analysis.",
+    evidence: "CAP Tech Hub Talent Presentation Showcase, October 2025 — LinkedIn Live.",
+    link: "https://www.linkedin.com/posts/sara-foundation_captechhub-sarafoundation-scintillaafrica-activity-7388436773833678848-RaVv",
+    linkLabel: "Watch the showcase",
+    pathwayHref: "/programs/cap",
+    image: "",
+  },
+  {
+    pathway: "FLIP",
+    name: "FLIP Fellowship — Capstone & Graduation",
+    headline: "FLIP Cohort 1 capstone presentations and graduation ceremony",
+    summary:
+      "FLIP Fellows celebrated the completion of their fellowship with capstone presentations addressing real-world challenges in tech, business and social impact — marking the graduation of the first cohort of women changemakers.",
+    evidence: "FLIP Fellowship Cohort 1 Capstone Presentation & Graduation — LinkedIn Live, October 2025.",
+    link: "https://www.linkedin.com/posts/sara-foundation_flipfellowship-womenintech-leadership-activity-7388585608623079424-zuPr",
+    linkLabel: "Watch the graduation",
+    pathwayHref: "/programs/flip",
+    image: "",
+  },
+  {
+    pathway: "CAP",
+    name: "CAP Tech Hub Cohort 2 — Talent Showcase",
+    headline: "Cohort 2 talent showcase: pitching real-world tech solutions",
+    summary:
+      "CAP Tech Hub's second talent showcase brought together cohort project teams to pitch, demonstrate and defend the web solutions and tech products they built from scratch — celebrating innovation, resilience and Africa's next generation of tech leaders.",
+    evidence: "CAP Tech Hub Talent Presentation Showcase, May 2026 — LinkedIn Live.",
+    link: "https://www.linkedin.com/posts/sara-foundation_captechhub-talentshowcase-techinnovation-activity-7463588941724536832-lYKz",
+    linkLabel: "Watch the showcase",
+    pathwayHref: "/programs/cap",
+    image: "",
+  },
+  {
+    pathway: "CAP",
+    name: "CAP Tech Hub Cohort 1 — Grand Finale",
+    headline: "CAP Cohort 1 Grand Finale: Demo Day & Graduation",
+    summary:
+      "CAP Tech Hub Cohort 1's Grand Finale brought together final project demos, a panel with industry experts Imaobong Ofana and Victor Emmanuel, and a certificate ceremony — marking the beginning of new opportunities for the graduating cohort.",
+    evidence: "CAP Tech Hub Cohort 1 Demo Session & Graduation — LinkedIn Live, April 2026.",
+    link: "https://www.linkedin.com/posts/sara-foundation_cap-tech-hub-cohort-1-proudly-presents-the-activity-7451188125441228800-m91D",
+    linkLabel: "Watch the demo day",
+    pathwayHref: "/programs/cap",
+    image: "",
+  },
+  {
+    pathway: "EJP",
+    name: "Franklin Oladipo — EJP Career Session",
+    headline: "Navigating career paths in 2026: a live conversation",
+    summary:
+      "Franklin Oladipo, Co-founder of Storipod, joined Sara Foundation for an honest conversation on what navigating a career in 2026 actually looks like — sharing practical insights for anyone trying to find direction, stay relevant and move forward with clarity.",
+    evidence: "Sara Foundation EJP knowledge session — LinkedIn Live, April 2026.",
+    link: "https://www.linkedin.com/posts/sara-foundation_navigating-career-paths-in-2026-live-session-activity-7442479667288358912-Vbe2",
+    linkLabel: "Watch the session",
+    pathwayHref: "/programs/gjp",
+    image: "",
+  },
+  {
+    pathway: "EJP",
+    name: "Harry Zahavi — EJP Career Session",
+    headline: "Think like a pro: starting out, standing out and thriving in tech",
+    summary:
+      "Harry Zahavi — software developer, founder of rigitiX and CodeRigi, and leader of The Geniuses Catalyst Circle — shared his framework for breaking into tech, blending technical depth with visionary thinking to build a long-term career that stands out.",
+    evidence: "Sara Foundation EJP knowledge session — LinkedIn Live, December 2025.",
+    link: "https://www.linkedin.com/posts/sara-foundation_techcareer-sarafoundation-harryzahavi-activity-7401871800164417536-9_0v",
+    linkLabel: "Watch the session",
+    pathwayHref: "/programs/gjp",
+    image: "",
+  },
 ];
 
 // Stories beyond this count are hidden behind "Show more stories" so admins can
