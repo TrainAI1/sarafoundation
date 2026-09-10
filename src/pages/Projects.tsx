@@ -139,18 +139,25 @@ export default function Projects() {
     cta_headline: "Help us reduce more barriers to learning",
   });
 
-  const levels = levelsContent.levels.map((level: { number: string; title: string; question: string; items_text: string }, index: number) => ({
+  const rawLevels = Array.isArray(levelsContent.levels) ? levelsContent.levels : [];
+  const levels = rawLevels.map((level: { number: string; title: string; question: string; items_text: string }, index: number) => ({
     ...level,
-    items: level.items_text.split("\n").filter(Boolean),
+    items: typeof level.items_text === "string" ? level.items_text.split("\n").filter(Boolean) : [],
     icon: levelIcons[index] ?? levelIcons[levelIcons.length - 1],
   }));
-  const dashboardGroups = dashboardContent.dashboard_groups as { key: string; pathway: string; blurb: string; href: string }[];
-  const dashboardMetrics = dashboardContent.dashboard_metrics as (Metric & { pathway_key: string })[];
+  const dashboardGroups = Array.isArray(dashboardContent.dashboard_groups)
+    ? (dashboardContent.dashboard_groups as { key: string; pathway: string; blurb: string; href: string }[])
+    : [];
+  const dashboardMetrics = Array.isArray(dashboardContent.dashboard_metrics)
+    ? (dashboardContent.dashboard_metrics as (Metric & { pathway_key: string })[])
+    : [];
   const dashboard = dashboardGroups.map((group) => ({
     ...group,
     metrics: dashboardMetrics.filter((m) => m.pathway_key === group.key),
   }));
-  const crossCutting = dashboardContent.cross_cutting as Metric[];
+  const crossCutting = Array.isArray(dashboardContent.cross_cutting)
+    ? (dashboardContent.cross_cutting as Metric[])
+    : [];
   const heroImage = hero.image ? assetUrl(hero.image) : assetUrl(capGraduates);
   const levelsImage = levelsContent.image ? assetUrl(levelsContent.image) : communityWorkshop;
 
