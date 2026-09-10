@@ -1,11 +1,11 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { ImageUpload } from "@/components/admin/ImageUpload";
 import { toast } from "sonner";
-import { Plus, Trash2, Save, BarChart3, Loader2, Edit, MoveUp, MoveDown, Layers } from "lucide-react";
+import { Plus, Trash2, Save, BarChart3, Loader2, Edit, MoveUp, MoveDown, Layers, Upload, Images } from "lucide-react";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { assetUrl } from "@/lib/assetUrl";
 
