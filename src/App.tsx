@@ -3,9 +3,41 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, useNavigate } from "react-router-dom";
-import { useEffect } from "react";
+import { useEffect, Component, type ReactNode } from "react";
 import { HelmetProvider } from "react-helmet-async";
 import { ScrollToTop } from "./components/ScrollToTop";
+
+// ── Error boundary ─────────────────────────────────────────────────────────
+// Catches any unhandled render errors and shows a readable message instead of
+// a blank white screen, so we can diagnose problems quickly.
+class ErrorBoundary extends Component<
+  { children: ReactNode },
+  { error: Error | null }
+> {
+  constructor(props: { children: ReactNode }) {
+    super(props);
+    this.state = { error: null };
+  }
+  static getDerivedStateFromError(error: Error) {
+    return { error };
+  }
+  render() {
+    if (this.state.error) {
+      return (
+        <div style={{ padding: "2rem", fontFamily: "monospace", color: "#cc0000" }}>
+          <h2 style={{ marginBottom: "1rem" }}>Something went wrong</h2>
+          <pre style={{ whiteSpace: "pre-wrap", background: "#fff0f0", padding: "1rem", borderRadius: "8px" }}>
+            {this.state.error.message}
+            {"\n\n"}
+            {this.state.error.stack}
+          </pre>
+        </div>
+      );
+    }
+    return this.props.children;
+  }
+}
+// ──────────────────────────────────────────────────────────────────────────
 import Index from "./pages/Index";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
@@ -71,6 +103,7 @@ const queryClient = new QueryClient();
 
 const App = () => {
   return (
+  <ErrorBoundary>
   <QueryClientProvider client={queryClient}>
     <HelmetProvider>
       <TooltipProvider>
@@ -146,6 +179,7 @@ const App = () => {
       </TooltipProvider>
     </HelmetProvider>
   </QueryClientProvider>
+  </ErrorBoundary>
   );
 };
 
