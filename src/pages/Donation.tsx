@@ -58,8 +58,8 @@ const donationFaqDefaults = [
 export default function Donation() {
   const { data: c } = usePageContent("donation-page", {
     headline: "Help Widen Access to Learning",
-    description: "Donations help reduce barriers to learning. Depending on programme needs and available funding, your support can contribute to scholarships, bursaries, subsidised participation, educational resources, mentoring and community learning activities.",
-    impact_text: "Every donation helps us reduce barriers to education and participation so that financial circumstances do not prevent eligible young people from accessing learning opportunities.",
+    description: "Your gift funds scholarships, subsidised places and mentoring across Africa.",
+    impact_text: "",
     hero_image: "",
     impact_numbers: impactNumbersDefault,
     where_it_goes: whereItGoesDefault,
@@ -126,9 +126,11 @@ export default function Donation() {
               <p className="text-base md:text-xl text-white/70 leading-relaxed">
                 {c.description}
               </p>
-              <p className="mt-6 rounded-2xl bg-white/10 p-5 text-white font-medium leading-relaxed">
-                {c.impact_text}
-              </p>
+              {c.impact_text ? (
+                <p className="mt-6 rounded-2xl bg-white/10 p-5 text-white font-medium leading-relaxed">
+                  {c.impact_text}
+                </p>
+              ) : null}
             </div>
 
             <div className="px-4">
