@@ -8,11 +8,16 @@ import {
 } from "@/components/ui/carousel";
 import { usePageContent } from "@/hooks/usePageContent";
 import { assetUrl } from "@/lib/assetUrl";
-import capHappyCoder from "@/assets/cap-happy-coder.jpg";
 import youngDeveloper from "@/assets/young-developer.jpg";
 import techEntrepreneurs from "@/assets/tech-entrepreneurs.jpg";
 import studentsLabImg from "@/assets/students-tech-lab.jpg";
-import capWomanLaptop from "@/assets/cap-woman-laptop.jpg";
+import capProjectArtify from "@/assets/cap-project-artify.jpg";
+import capProjectEchonav from "@/assets/cap-project-echonav.jpg";
+import capProjectCarpool from "@/assets/cap-project-carpool.jpg";
+import capProjectHexcars from "@/assets/cap-project-hexcars.jpg";
+import capProjectShopping from "@/assets/cap-project-shopping.jpg";
+import capProjectFamconnect from "@/assets/cap-project-famconnect.jpg";
+import capProjectTodo from "@/assets/cap-project-todo.jpg";
 
 type Project = {
   name: string;
@@ -28,11 +33,16 @@ type Project = {
 };
 
 const projectFallbackImages = [
-  capHappyCoder,
+  capProjectArtify,
   youngDeveloper,
   techEntrepreneurs,
   studentsLabImg,
-  capWomanLaptop,
+  capProjectEchonav,
+  capProjectCarpool,
+  capProjectHexcars,
+  capProjectShopping,
+  capProjectFamconnect,
+  capProjectTodo,
 ];
 
 const defaultProjects: Project[] = [
