@@ -9,6 +9,7 @@ import { Link } from "react-router-dom";
 import { Loader2, Mail, MapPin, Phone, Send, MessageSquare, Clock, CheckCircle2, Linkedin, Twitter, Instagram, HelpCircle, ArrowRight } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import communityWorkshop from "@/assets/community-workshop.jpg";
+import contactTeam from "@/assets/contact-team.jpg";
 import { supabase } from "@/integrations/supabase/client";
 import { usePageContent } from "@/hooks/usePageContent";
 import { useFAQItems } from "@/hooks/useFAQItems";
@@ -334,9 +335,9 @@ export default function Contact() {
 
               {/* Image instead of map */}
               <div className="rounded-2xl overflow-hidden shadow-lg">
-                <img 
-                   src={communityWorkshop} 
-                   alt="Participants at a Sara Foundation Africa community event"
+                <img
+                   src={contactTeam}
+                   alt="Sara Foundation Africa team members collaborating around a laptop"
                    loading="lazy"
                    className="w-full h-40 md:h-56 object-cover"
                  />

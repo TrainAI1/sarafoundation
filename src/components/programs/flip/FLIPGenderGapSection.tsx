@@ -1,5 +1,5 @@
 import { Users, BookOpen, Heart, LucideIcon } from "lucide-react";
-import womenCoworking from "@/assets/women-coworking.jpg";
+import womenCoworking from "@/assets/flip-woman-whiteboard.jpg";
 import { usePageContent } from "@/hooks/usePageContent";
 import { assetUrl } from "@/lib/assetUrl";
 
