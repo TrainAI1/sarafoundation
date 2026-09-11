@@ -26,18 +26,6 @@ export function CAPHeroSection() {
 
   return (
     <section className="pt-24 md:pt-32 pb-12 md:pb-20 bg-primary relative overflow-hidden">
-      <div className="absolute inset-0">
-        <img
-          src={heroImage}
-          alt=""
-          aria-hidden="true"
-          className="w-full h-full object-cover opacity-20"
-          onError={(e) => {
-            e.currentTarget.src = studentsLabImg;
-          }}
-        />
-        <div className="absolute inset-0 bg-primary" />
-      </div>
       <div className="section-container relative z-10">
         <div className="grid lg:grid-cols-2 gap-8 md:gap-12 items-center">
           <div className="px-4 lg:px-0">

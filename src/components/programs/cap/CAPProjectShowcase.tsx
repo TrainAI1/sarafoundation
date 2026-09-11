@@ -8,11 +8,16 @@ import {
 } from "@/components/ui/carousel";
 import { usePageContent } from "@/hooks/usePageContent";
 import { assetUrl } from "@/lib/assetUrl";
-import capHappyCoder from "@/assets/cap-happy-coder.jpg";
 import youngDeveloper from "@/assets/young-developer.jpg";
 import techEntrepreneurs from "@/assets/tech-entrepreneurs.jpg";
 import studentsLabImg from "@/assets/students-tech-lab.jpg";
-import capWomanLaptop from "@/assets/cap-woman-laptop.jpg";
+import capProjectArtify from "@/assets/cap-project-artify.jpg";
+import capProjectEchonav from "@/assets/cap-project-echonav.jpg";
+import capProjectCarpool from "@/assets/cap-project-carpool.jpg";
+import capProjectHexcars from "@/assets/cap-project-hexcars.jpg";
+import capProjectShopping from "@/assets/cap-project-shopping.jpg";
+import capProjectFamconnect from "@/assets/cap-project-famconnect.jpg";
+import capProjectTodo from "@/assets/cap-project-todo.jpg";
 
 type Project = {
   name: string;
@@ -28,11 +33,16 @@ type Project = {
 };
 
 const projectFallbackImages = [
-  capHappyCoder,
+  capProjectArtify,
   youngDeveloper,
   techEntrepreneurs,
   studentsLabImg,
-  capWomanLaptop,
+  capProjectEchonav,
+  capProjectCarpool,
+  capProjectHexcars,
+  capProjectShopping,
+  capProjectFamconnect,
+  capProjectTodo,
 ];
 
 const defaultProjects: Project[] = [
@@ -44,7 +54,7 @@ const defaultProjects: Project[] = [
     output: "Learner project presented through CAP Tech Hub activity.",
     support: "Supported by CAP project mentors.",
     nextStep: "Continued feature development and user feedback.",
-    image: capHappyCoder,
+    image: capProjectArtify,
     link: "https://www.linkedin.com/posts/sara-foundation_sarafoundation-captechhub-artifypro-activity-7452626779514732544-0BcX",
     linkLabel: "Watch project",
   },
@@ -88,7 +98,7 @@ const defaultProjects: Project[] = [
     output: "Project presented at CAP Conference 2025.",
     support: "Presented through CAP Conference activity.",
     nextStep: "Community testing and feedback gathering.",
-    image: capWomanLaptop,
+    image: capProjectEchonav,
     link: "https://www.linkedin.com/posts/sara-foundation_captechhubconference2025-techforgood-innovation-activity-7300539568489984000-gC-e",
     linkLabel: "See project",
   },
@@ -100,7 +110,7 @@ const defaultProjects: Project[] = [
     output: "Project presented at CAP Conference.",
     support: "Presented through CAP Conference activity.",
     nextStep: "Pilot rollout at selected campus hub.",
-    image: capHappyCoder,
+    image: capProjectCarpool,
   },
   {
     name: "Hexcars",
@@ -110,7 +120,7 @@ const defaultProjects: Project[] = [
     output: "Web application built by a CAP learner.",
     support: "Developed through CAP Tech Hub learning activity.",
     nextStep: "Enhancing user verification features.",
-    image: youngDeveloper,
+    image: capProjectHexcars,
     link: "https://www.linkedin.com/posts/sara-foundation_captechhub-webdevelopment-fullstackdeveloper-activity-7244363803411279873-AW6B",
     linkLabel: "See project",
   },
@@ -122,7 +132,7 @@ const defaultProjects: Project[] = [
     output: "Shopping cart application built by a CAP learner.",
     support: "Developed through CAP Tech Hub learning activity.",
     nextStep: "Integrating payment gateway APIs.",
-    image: techEntrepreneurs,
+    image: capProjectShopping,
     link: "https://www.linkedin.com/posts/sara-foundation_fullstackdevelopment-captechhub-ecommercesolutions-activity-7247641276110557184-52gy",
     linkLabel: "See project",
   },
@@ -134,7 +144,7 @@ const defaultProjects: Project[] = [
     output: "Learner project developed during CAP activity.",
     support: "Supported by CAP project mentors.",
     nextStep: "User feedback and mobile responsiveness tuning.",
-    image: studentsLabImg,
+    image: capProjectFamconnect,
   },
   {
     name: "To-do List App",
@@ -144,7 +154,7 @@ const defaultProjects: Project[] = [
     output: "To-do list web app built by a CAP learner.",
     support: "Developed through CAP Tech Hub learning activity.",
     nextStep: "Adding local storage persistence and subtasks.",
-    image: capWomanLaptop,
+    image: capProjectTodo,
     link: "https://www.linkedin.com/posts/sara-foundation_project-spotlight-to-do-list-web-app-by-activity-7250183374852546561-x_vO",
     linkLabel: "See project",
   },

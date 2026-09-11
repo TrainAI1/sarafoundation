@@ -1,7 +1,7 @@
 import { usePageContent } from "@/hooks/usePageContent";
 import { ScrollAnimation, StaggerContainer, StaggerItem } from "@/components/ui/scroll-animation";
 import { assetUrl } from "@/lib/assetUrl";
-import womenCoworking from "@/assets/women-coworking.jpg";
+import womenCoworking from "@/assets/flip-women-presenting.jpg";
 
 const defaultStats = [
   { value: "57", label: "Women", sub: "Participated across FLIP fellowship and mentorship programmes during 2024–2026, supported by 57 scholarships." },
