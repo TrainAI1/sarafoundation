@@ -31,21 +31,6 @@ export function FLIPHeroSection() {
 
   return (
     <section className="pt-24 md:pt-32 pb-12 md:pb-20 bg-accent relative overflow-hidden">
-      {/* Background Image */}
-      <div className="absolute inset-0">
-        <img
-          src={heroImage}
-          alt=""
-          aria-hidden="true"
-          className="w-full h-full object-cover opacity-20"
-          onError={(e) => {
-            e.currentTarget.src = womenTechLeaders;
-          }}
-        />
-        <div className="absolute inset-0 bg-accent" />
-      </div>
-      <div className="absolute inset-0 opacity-30">
-      </div>
       <div className="section-container relative z-10">
         <div className="grid lg:grid-cols-2 gap-8 md:gap-12 items-center">
           <div className="px-4 lg:px-0">
