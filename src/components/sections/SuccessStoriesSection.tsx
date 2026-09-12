@@ -50,9 +50,18 @@ export function SuccessStoriesSection({ id, linkToImpact = true, showAll = false
           </div>
         </ScrollAnimation>
 
-        <div className="grid md:grid-cols-3 gap-6">
+        <div
+          className={
+            showAll
+              ? "flex gap-6 overflow-x-auto snap-x snap-mandatory pb-4 -mx-4 px-4 scroll-smooth"
+              : "grid md:grid-cols-3 gap-6"
+          }
+        >
           {visibleStories.map((s, idx) => (
-            <div key={`${s.name}-${idx}`} className="h-full">
+            <div
+              key={`${s.name}-${idx}`}
+              className={showAll ? "snap-start shrink-0 w-[85%] sm:w-[19rem] lg:w-[22rem]" : "h-full"}
+            >
               <Card className="overflow-hidden h-full flex flex-col hover:shadow-xl transition-shadow">
                 {/* Thumbnail — clicking opens the LinkedIn post */}
                 {s.link ? (
@@ -123,6 +132,10 @@ export function SuccessStoriesSection({ id, linkToImpact = true, showAll = false
             </div>
           ))}
         </div>
+
+        {showAll && (
+          <p className="text-xs text-muted-foreground mt-3">Swipe or scroll sideways to see all {visibleStories.length} stories.</p>
+        )}
 
         <div className="text-center mt-10 flex flex-col sm:flex-row gap-3 justify-center">
           {linkToImpact && (
