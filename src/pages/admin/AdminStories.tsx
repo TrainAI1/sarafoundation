@@ -13,7 +13,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { toast } from "sonner";
-import { Plus, Trash2, Save, PlayCircle, Loader2, ArrowUp, ArrowDown, Info } from "lucide-react";
+import { Plus, Trash2, Save, PlayCircle, Loader2, ArrowUp, ArrowDown, Info, GripVertical } from "lucide-react";
 import { successStories, type StoryPathway } from "@/data/successStories";
 
 interface Story {
@@ -47,6 +47,7 @@ export default function AdminStories() {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [restFields, setRestFields] = useState<Record<string, any>>({});
   const [editing, setEditing] = useState<number | null>(null);
+  const [draggedId, setDraggedId] = useState<number | null>(null);
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
 
@@ -123,6 +124,23 @@ export default function AdminStories() {
     setStories(next);
   };
 
+  const dropAt = (targetId: number) => {
+    if (draggedId === null || draggedId === targetId) {
+      setDraggedId(null);
+      return;
+    }
+    setStories((current) => {
+      const from = current.findIndex((story) => story.id === draggedId);
+      const to = current.findIndex((story) => story.id === targetId);
+      if (from < 0 || to < 0) return current;
+      const reordered = [...current];
+      const [moved] = reordered.splice(from, 1);
+      reordered.splice(to, 0, moved);
+      return reordered;
+    });
+    setDraggedId(null);
+  };
+
   const save = async () => {
     const missingName = stories.find((s) => !s.name.trim());
     if (missingName) {
@@ -172,14 +190,23 @@ export default function AdminStories() {
         <Info className="w-4 h-4 text-primary flex-shrink-0 mt-0.5" />
         <p className="text-xs md:text-sm text-muted-foreground">
           The first {VISIBLE_ON_PAGE} stories appear on the Home page. The full verified collection appears on
-          Our Impact. Use the up/down arrows to control which stories are featured first.
+          Our Impact. Drag a story to any position, or use the arrows for precise ordering.
         </p>
       </div>
 
       <div className="space-y-3">
         {stories.map((s, index) => (
-          <div key={s.id} className="card-modern overflow-hidden">
+          <div
+            key={s.id}
+            draggable
+            onDragStart={() => setDraggedId(s.id)}
+            onDragEnd={() => setDraggedId(null)}
+            onDragOver={(event) => event.preventDefault()}
+            onDrop={() => dropAt(s.id)}
+            className={`card-modern overflow-hidden transition-opacity ${draggedId === s.id ? "opacity-50" : "opacity-100"}`}
+          >
             <div className="p-3 md:p-4 flex items-start justify-between gap-3">
+              <GripVertical className="w-5 h-5 mt-1 text-muted-foreground cursor-grab flex-shrink-0" aria-label="Drag to reorder" />
               <div className="flex-1 min-w-0 cursor-pointer" onClick={() => setEditing(editing === s.id ? null : s.id)}>
                 <div className="flex items-center gap-2 mb-1">
                   {s.image && <img src={s.image} alt={s.name} className="w-10 h-8 rounded object-cover flex-shrink-0" />}

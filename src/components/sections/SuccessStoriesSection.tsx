@@ -50,17 +50,11 @@ export function SuccessStoriesSection({ id, linkToImpact = true, showAll = false
           </div>
         </ScrollAnimation>
 
-        <div
-          className={
-            showAll
-              ? "flex gap-6 overflow-x-auto snap-x snap-mandatory pb-4 -mx-4 px-4 scroll-smooth"
-              : "grid md:grid-cols-3 gap-6"
-          }
-        >
+        <div className={showAll ? "grid sm:grid-cols-2 lg:grid-cols-3 gap-5" : "grid md:grid-cols-3 gap-6"}>
           {visibleStories.map((s, idx) => (
             <div
               key={`${s.name}-${idx}`}
-              className={showAll ? "snap-start shrink-0 w-[85%] sm:w-[19rem] lg:w-[22rem]" : "h-full"}
+              className="h-full"
             >
               <Card className="overflow-hidden h-full flex flex-col hover:shadow-xl transition-shadow">
                 {/* Thumbnail — clicking opens the LinkedIn post */}
@@ -70,7 +64,7 @@ export function SuccessStoriesSection({ id, linkToImpact = true, showAll = false
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label={`${s.linkLabel} for ${s.name}`}
-                    className="group relative aspect-video overflow-hidden flex items-center justify-center"
+                    className="group relative aspect-[16/8] overflow-hidden flex items-center justify-center"
                   >
                     <img
                       src={s.image ? assetUrl(s.image) : fallbackStoryThumbs[s.pathway]}
@@ -81,12 +75,12 @@ export function SuccessStoriesSection({ id, linkToImpact = true, showAll = false
                       onError={(e) => { e.currentTarget.src = fallbackStoryThumbs[s.pathway]; }}
                     />
                     <span className="absolute inset-0 bg-black/20 group-hover:bg-black/35 transition-colors" aria-hidden="true" />
-                    <span className="relative w-14 h-14 md:w-16 md:h-16 rounded-full bg-white shadow-lg flex items-center justify-center group-hover:scale-105 transition-transform">
-                      <PlayCircle className="w-8 h-8 text-primary" aria-hidden="true" />
+                    <span className="relative w-11 h-11 rounded-full bg-card shadow-lg flex items-center justify-center group-hover:scale-105 transition-transform">
+                      <PlayCircle className="w-6 h-6 text-primary" aria-hidden="true" />
                     </span>
                   </a>
                 ) : (
-                  <div className="relative aspect-video overflow-hidden flex items-center justify-center">
+                  <div className="relative aspect-[16/8] overflow-hidden flex items-center justify-center">
                     <img
                       src={s.image ? assetUrl(s.image) : fallbackStoryThumbs[s.pathway]}
                       alt=""
@@ -96,22 +90,22 @@ export function SuccessStoriesSection({ id, linkToImpact = true, showAll = false
                       onError={(e) => { e.currentTarget.src = fallbackStoryThumbs[s.pathway]; }}
                     />
                     <span className="absolute inset-0 bg-black/20" aria-hidden="true" />
-                    <span className="relative w-12 h-12 rounded-full bg-white/90 shadow flex items-center justify-center">
-                      <PlayCircle className="w-7 h-7 text-primary" aria-hidden="true" />
+                    <span className="relative w-11 h-11 rounded-full bg-card/90 shadow flex items-center justify-center">
+                      <PlayCircle className="w-6 h-6 text-primary" aria-hidden="true" />
                     </span>
                   </div>
                 )}
 
-                <div className="p-6 flex flex-col flex-1">
+                <div className="p-4 md:p-5 flex flex-col flex-1">
                   <Link
                     to={s.pathwayHref}
-                    className="inline-flex self-start items-center py-1 text-xs font-semibold uppercase tracking-[0.18em] text-primary mb-3 hover:underline"
+                    className="inline-flex self-start items-center py-1 text-[11px] font-semibold uppercase tracking-[0.18em] text-primary mb-2 hover:underline"
                   >
                     {s.pathway === "Foundation" ? "Foundation update" : `${s.pathway} pathway`}
                   </Link>
-                  <h3 className="font-display font-bold text-lg text-foreground mb-2">{s.headline}</h3>
-                  <p className="text-foreground/80 leading-relaxed mb-4 flex-1">{s.summary}</p>
-                  <div className="border-t pt-4">
+                  <h3 className="font-display font-bold text-base text-foreground mb-1.5 leading-snug">{s.headline}</h3>
+                  <p className="text-sm text-foreground/80 leading-relaxed mb-3 flex-1">{s.summary}</p>
+                  <div className="border-t pt-3">
                     <div className="font-semibold text-foreground text-sm">{s.name}</div>
                     <p className="text-xs text-muted-foreground mt-1">{s.evidence}</p>
                     {s.link && (
@@ -119,7 +113,7 @@ export function SuccessStoriesSection({ id, linkToImpact = true, showAll = false
                         href={s.link}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex items-center gap-2 py-1.5 text-sm font-medium text-primary mt-2 hover:underline"
+                        className="inline-flex items-center gap-1.5 py-1 text-xs font-medium text-primary mt-1.5 hover:underline"
                       >
                         <PlayCircle className="w-4 h-4" aria-hidden="true" />
                         {s.linkLabel} for {s.name}
@@ -132,10 +126,6 @@ export function SuccessStoriesSection({ id, linkToImpact = true, showAll = false
             </div>
           ))}
         </div>
-
-        {showAll && (
-          <p className="text-xs text-muted-foreground mt-3">Swipe or scroll sideways to see all {visibleStories.length} stories.</p>
-        )}
 
         <div className="text-center mt-10 flex flex-col sm:flex-row gap-3 justify-center">
           {linkToImpact && (
