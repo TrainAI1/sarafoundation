@@ -110,51 +110,95 @@ export default function Volunteer() {
       </Helmet>
       <Navbar />
       <main id="main-content" className="pt-24 md:pt-32">
-        <section className="section-container pb-12">
-          <span className="section-badge mb-4">{c.hero_badge}</span>
-          <h1 className="section-title text-foreground mb-4 max-w-3xl">
-            {c.hero_headline_part1}{" "}
-            <span className="gradient-text">{c.hero_headline_part2}</span>
-          </h1>
-          <p className="section-subtitle max-w-3xl mb-6">
-            {c.hero_description}
-          </p>
-          <div className="flex flex-col sm:flex-row gap-3">
-            <Button size="lg" asChild>
-              <a href="#volunteer-form">Apply to volunteer</a>
-            </Button>
-            <Button size="lg" variant="outline" asChild>
-              <a href="#volunteer-roles">See volunteer roles</a>
-            </Button>
+        <section className="section-container pb-12 md:pb-16">
+          <div className="grid lg:grid-cols-2 gap-8 md:gap-12 items-center">
+            <ScrollAnimation variant="slide-left">
+              <div>
+                <span className="section-badge mb-4">{c.hero_badge}</span>
+                <h1 className="section-title text-foreground mb-4">
+                  {c.hero_headline_part1}{" "}
+                  <span className="gradient-text">{c.hero_headline_part2}</span>
+                </h1>
+                <p className="section-subtitle mx-0 mb-6">
+                  {c.hero_description}
+                </p>
+                <div className="flex flex-col sm:flex-row gap-3">
+                  <Button size="lg" asChild>
+                    <a href="#volunteer-form">Apply to volunteer</a>
+                  </Button>
+                  <Button size="lg" variant="outline" asChild>
+                    <a href="#volunteer-roles">See volunteer roles</a>
+                  </Button>
+                </div>
+              </div>
+            </ScrollAnimation>
+            <ScrollAnimation variant="slide-right">
+              <div className="rounded-2xl overflow-hidden shadow-2xl">
+                <img
+                  src={c.hero_image ? assetUrl(c.hero_image) : volunteerHero}
+                  alt="A mentor supporting a learner during a Sara Foundation mentoring session"
+                  className="w-full h-64 md:h-[26rem] object-cover"
+                  loading="eager"
+                  onError={(e) => { e.currentTarget.src = volunteerHero; }}
+                />
+              </div>
+            </ScrollAnimation>
           </div>
         </section>
 
         <section id="volunteer-roles" className="section-container pb-16">
-          <h2 className="font-display font-bold text-2xl md:text-3xl mb-6">{c.roles_headline}</h2>
-          <div className="grid md:grid-cols-2 gap-6">
+          <ScrollAnimation variant="fade-up">
+            <div className="text-center max-w-2xl mx-auto mb-10">
+              <h2 className="section-title text-foreground mb-3">{c.roles_headline}</h2>
+              <p className="section-subtitle">Pick the way you would like to give your time. Every role is flexible and fully remote unless stated.</p>
+            </div>
+          </ScrollAnimation>
+          <StaggerContainer className="grid md:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6" staggerDelay={0.08}>
             {roles.map(({ icon: Icon, ...r }) => (
-              <Card key={r.title} className="p-6">
-                <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-4">
-                  <Icon className="w-6 h-6 text-primary" />
-                </div>
-                <h3 className="font-display font-bold text-lg mb-2">{r.title}</h3>
-                <p className="text-muted-foreground text-sm leading-relaxed">{r.description}</p>
-              </Card>
+              <StaggerItem key={r.title} variant="scale-in">
+                <Card className="card-modern p-6 h-full group hover:shadow-xl transition-shadow">
+                  <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                    <Icon className="w-6 h-6 text-primary" aria-hidden="true" />
+                  </div>
+                  <h3 className="font-display font-bold text-lg mb-2">{r.title}</h3>
+                  <p className="text-muted-foreground text-sm leading-relaxed">{r.description}</p>
+                </Card>
+              </StaggerItem>
             ))}
-          </div>
+          </StaggerContainer>
         </section>
 
         <section className="section-container pb-16">
-          <div className="grid md:grid-cols-3 gap-6">
-            {benefits.map(({ icon: Icon, title, text }) => (
-              <div key={title} className="text-center p-6">
-                <div className="w-14 h-14 mx-auto rounded-2xl bg-primary/10 flex items-center justify-center mb-3">
-                  <Icon className="w-7 h-7 text-primary" />
+          <StaggerContainer className="grid sm:grid-cols-3 gap-4" staggerDelay={0.1}>
+            {[
+              { src: volunteerWorkshop, alt: "Volunteers facilitating a community learning workshop" },
+              { src: volunteerSpeaker, alt: "A speaker addressing an audience at a Sara Foundation event" },
+              { src: volunteerCommunity, alt: "Women in technology gathered at a Sara Foundation session" },
+            ].map((img) => (
+              <StaggerItem key={img.src} variant="fade-up">
+                <div className="rounded-2xl overflow-hidden shadow-lg">
+                  <img src={img.src} alt={img.alt} loading="lazy" className="w-full h-48 md:h-56 object-cover hover:scale-105 transition-transform duration-500" />
                 </div>
-                <h3 className="font-display font-bold mb-1">{title}</h3>
-                <p className="text-sm text-muted-foreground">{text}</p>
-              </div>
+              </StaggerItem>
             ))}
+          </StaggerContainer>
+        </section>
+
+        <section className="py-16 md:py-20 bg-foreground">
+          <div className="section-container">
+            <StaggerContainer className="grid md:grid-cols-3 gap-6" staggerDelay={0.1}>
+              {benefits.map(({ icon: Icon, title, text }) => (
+                <StaggerItem key={title} variant="scale-in">
+                  <div className="glass-card-dark p-6 md:p-7 text-center h-full">
+                    <div className="w-14 h-14 mx-auto rounded-2xl bg-primary/30 flex items-center justify-center mb-3">
+                      <Icon className="w-7 h-7 text-white" aria-hidden="true" />
+                    </div>
+                    <h3 className="font-display font-bold text-white mb-1">{title}</h3>
+                    <p className="text-sm text-white/60 leading-relaxed">{text}</p>
+                  </div>
+                </StaggerItem>
+              ))}
+            </StaggerContainer>
           </div>
         </section>
 
