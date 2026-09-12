@@ -1,5 +1,5 @@
 import { Users, BookOpen, Heart, LucideIcon } from "lucide-react";
-import womenCoworking from "@/assets/flip-woman-whiteboard.jpg";
+import womenInTechWorkshop from "@/assets/success-stories/linkedin/linkedin-8.jpg.asset.json";
 import { usePageContent } from "@/hooks/usePageContent";
 import { assetUrl } from "@/lib/assetUrl";
 
@@ -33,7 +33,8 @@ export function FLIPGenderGapSection() {
   });
 
   const approaches = c.approaches as typeof defaultApproaches;
-  const image = c.image ? assetUrl(c.image) : womenCoworking;
+  const fallbackImage = assetUrl(womenInTechWorkshop);
+  const image = c.image ? assetUrl(c.image) : fallbackImage;
 
   return (
     <section className="py-16 md:py-24 bg-accent/5">
@@ -53,10 +54,10 @@ export function FLIPGenderGapSection() {
           <div className="rounded-2xl overflow-hidden shadow-lg">
             <img
               src={image}
-              alt="African women collaborating in a co-working space"
+              alt="Sara Foundation Women in Tech workshop announcement"
               className="w-full h-48 md:h-72 object-cover"
               onError={(e) => {
-                e.currentTarget.src = womenCoworking;
+                e.currentTarget.src = fallbackImage;
               }}
             />
           </div>

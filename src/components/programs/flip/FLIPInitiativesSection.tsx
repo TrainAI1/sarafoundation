@@ -4,6 +4,8 @@ import { Award, Presentation, Mic2, ArrowRight, Users, LucideIcon } from "lucide
 import womenTechLeaders from "@/assets/women-tech-leaders.jpg";
 import womenCoworking from "@/assets/women-coworking.jpg";
 import capWomenGroup from "@/assets/cap-women-group.jpg";
+import fellowshipShowcase from "@/assets/success-stories/linkedin/linkedin-6.jpg.asset.json";
+import womenInTechWorkshop from "@/assets/success-stories/linkedin/linkedin-7.jpg.asset.json";
 import { usePageContent } from "@/hooks/usePageContent";
 import { assetUrl } from "@/lib/assetUrl";
 
@@ -14,8 +16,8 @@ const initiativeIcons: Record<string, LucideIcon> = {
 };
 
 const initiativeFallbackImages: Record<string, string> = {
-  fellowship: womenTechLeaders,
-  workshops: womenCoworking,
+  fellowship: assetUrl(fellowshipShowcase),
+  workshops: assetUrl(womenInTechWorkshop),
   conferences: capWomenGroup,
 };
 

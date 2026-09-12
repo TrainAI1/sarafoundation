@@ -1,5 +1,5 @@
 import { Users, Rocket, DollarSign, Eye, LucideIcon } from "lucide-react";
-import womanFounderPitch from "@/assets/woman-founder-pitch.jpg";
+import professionalDevelopmentSession from "@/assets/success-stories/linkedin/linkedin-4.jpg.asset.json";
 import { usePageContent } from "@/hooks/usePageContent";
 import { assetUrl } from "@/lib/assetUrl";
 
@@ -38,7 +38,8 @@ export function FLIPWFTASection() {
   });
 
   const features = c.features as typeof defaultFeatures;
-  const image = c.image ? assetUrl(c.image) : womanFounderPitch;
+  const fallbackImage = assetUrl(professionalDevelopmentSession);
+  const image = c.image ? assetUrl(c.image) : fallbackImage;
 
   return (
     <section className="py-16 md:py-24 bg-background">
@@ -81,10 +82,10 @@ export function FLIPWFTASection() {
             <div className="rounded-2xl md:rounded-3xl overflow-hidden shadow-xl">
               <img
                 src={image}
-                alt="Woman founder pitching to investors"
+                alt="Sara Foundation professional development session announcement"
                 className="w-full h-48 md:h-64 object-cover"
                 onError={(e) => {
-                  e.currentTarget.src = womanFounderPitch;
+                  e.currentTarget.src = fallbackImage;
                 }}
               />
             </div>
