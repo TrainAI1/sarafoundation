@@ -164,6 +164,50 @@ export default function BlogPostPage() {
               url={`https://sarafoundationafrica.com/blog/${post.slug}`}
             />
           </div>
+
+          {related.length > 0 && (
+            <section className="mt-14 pt-10 border-t border-border">
+              <div className="flex items-end justify-between gap-4 mb-6">
+                <h2 className="font-display text-2xl font-bold text-foreground">Read next</h2>
+                <Link to="/blog" className="text-sm font-medium text-primary hover:underline whitespace-nowrap">
+                  All posts →
+                </Link>
+              </div>
+              <div className="grid sm:grid-cols-3 gap-5">
+                {related.map((r) => (
+                  <Link
+                    key={r.id}
+                    to={`/blog/${r.slug}`}
+                    className="group rounded-2xl overflow-hidden border border-border bg-card hover:shadow-xl transition-shadow flex flex-col"
+                  >
+                    <img
+                      src={r.cover_image ? assetUrl(r.cover_image) : studentsLabImg}
+                      alt={r.title}
+                      loading="lazy"
+                      className="w-full h-36 object-cover group-hover:scale-105 transition-transform duration-500"
+                      onError={(e) => { e.currentTarget.src = studentsLabImg; }}
+                    />
+                    <div className="p-4 flex flex-col flex-1">
+                      {r.category && (
+                        <span className="text-[0.65rem] font-semibold uppercase tracking-[0.18em] text-primary mb-2">
+                          {r.category}
+                        </span>
+                      )}
+                      <h3 className="font-display font-bold text-sm text-foreground leading-snug mb-2 group-hover:text-primary transition-colors">
+                        {r.title}
+                      </h3>
+                      {r.excerpt && (
+                        <p className="text-xs text-muted-foreground leading-relaxed line-clamp-3">{r.excerpt}</p>
+                      )}
+                      <span className="mt-3 text-xs font-medium text-muted-foreground">
+                        {new Date(r.published_at || r.created_at).toLocaleDateString()}
+                      </span>
+                    </div>
+                  </Link>
+                ))}
+              </div>
+            </section>
+          )}
         </div>
       </article>
       <Footer />
