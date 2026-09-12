@@ -1706,6 +1706,20 @@ export default function AdminPages() {
             </button>
           );
         })}
+
+        <button
+          type="button"
+          onClick={() => setPhotosOnly((v) => !v)}
+          className={`flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs font-semibold whitespace-nowrap transition-all border ${
+            photosOnly
+              ? "bg-primary text-primary-foreground border-primary shadow-sm"
+              : "bg-card text-foreground hover:bg-secondary border-border"
+          }`}
+          title="Show only sections that contain a photo you can change"
+        >
+          <Image className="w-3.5 h-3.5" />
+          <span>Photos only</span>
+        </button>
       </div>
 
       {/* Sections List */}
