@@ -202,8 +202,19 @@ export default function Volunteer() {
           </div>
         </section>
 
-        <section id="volunteer-form" className="section-container pb-24">
-          <Card className="p-6 md:p-10 max-w-2xl mx-auto">
+        <section id="volunteer-form" className="section-container py-16 md:py-24">
+          <div className="grid lg:grid-cols-[0.9fr_1.1fr] gap-8 items-stretch">
+            <ScrollAnimation variant="slide-left" className="hidden lg:block">
+              <div className="rounded-2xl overflow-hidden shadow-2xl h-full">
+                <img
+                  src={volunteerForm}
+                  alt="Students working together in a technology lab"
+                  loading="lazy"
+                  className="w-full h-full min-h-[28rem] object-cover"
+                />
+              </div>
+            </ScrollAnimation>
+          <Card className="p-6 md:p-10">
             <h2 className="font-display font-bold text-2xl md:text-3xl mb-2">{c.form_headline}</h2>
             <p className="text-muted-foreground mb-6 text-sm">{c.form_description}</p>
             <form onSubmit={submit} className="space-y-4">
