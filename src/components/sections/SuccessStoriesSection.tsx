@@ -7,9 +7,7 @@ import { usePageContent } from "@/hooks/usePageContent";
 import { assetUrl } from "@/lib/assetUrl";
 import { fallbackStoryThumbs, successStories, type SuccessStory } from "@/data/successStories";
 
-// Stories beyond this count are hidden behind "Show more stories" so admins can
-// add as many as they like from the admin section without the grid growing
-// unbounded on the page.
+// The homepage remains intentionally concise; Our Impact renders the full list.
 const VISIBLE_STORIES = 3;
 
 type SuccessStoriesSectionProps = {
@@ -28,12 +26,10 @@ export function SuccessStoriesSection({ id, linkToImpact = true, showAll = false
     headline_accent: "Real Journeys.",
     description:
       "Behind every number is a learner, mentor or community member moving forward. Explore the projects, learning experiences and personal journeys created through CAP, FLIP and EJP.",
-    // Note: stories intentionally omitted from defaults — we always use
-    // defaultStories as the canonical base so Supabase data can never
-    // accidentally wipe them out and crash the page.
+    // Stories are omitted here because the verified collection below is the fallback.
   });
 
-  // Use admin-saved stories from Supabase if present, or fall back to defaultStories
+  // Use admin-saved stories when present, or fall back to the verified collection.
   const stories: SuccessStory[] = (Array.isArray(c.stories) && c.stories.length > 0)
     ? (c.stories as SuccessStory[])
     : successStories;
