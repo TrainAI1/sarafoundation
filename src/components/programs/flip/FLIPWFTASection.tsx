@@ -39,7 +39,10 @@ export function FLIPWFTASection() {
 
   const features = c.features as typeof defaultFeatures;
   const fallbackImage = assetUrl(professionalDevelopmentSession);
-  const image = c.image ? assetUrl(c.image) : fallbackImage;
+  const savedImage = c.image ? assetUrl(c.image) : "";
+  const image = savedImage && !savedImage.includes("1788947604493-vx4i65ca60i.jpg")
+    ? savedImage
+    : fallbackImage;
 
   return (
     <section className="py-16 md:py-24 bg-background">

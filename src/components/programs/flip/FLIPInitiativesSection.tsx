@@ -21,6 +21,11 @@ const initiativeFallbackImages: Record<string, string> = {
   conferences: capWomenGroup,
 };
 
+const replacedStockImageFragments: Record<string, string> = {
+  fellowship: "1788947515753-v8zfoonexqs.jpg",
+  workshops: "1788947461217-d1ad1zwnw07.jpg",
+};
+
 const defaultInitiatives = [
   {
     id: "fellowship",
@@ -85,9 +90,11 @@ export function FLIPInitiativesSection() {
         <div className="grid md:grid-cols-3 gap-6 md:gap-8 px-4 lg:px-0">
           {initiatives.map((initiative) => {
             const Icon = initiativeIcons[initiative.id] ?? Award;
-            const image = initiative.image
-              ? assetUrl(initiative.image)
-              : initiativeFallbackImages[initiative.id] ?? womenTechLeaders;
+            const fallbackImage = initiativeFallbackImages[initiative.id] ?? womenTechLeaders;
+            const savedImage = initiative.image ? assetUrl(initiative.image) : "";
+            const image = savedImage && !savedImage.includes(replacedStockImageFragments[initiative.id])
+              ? savedImage
+              : fallbackImage;
             return (
               <article key={initiative.id ?? initiative.name} className="card-modern overflow-hidden h-full flex flex-col">
                 <img

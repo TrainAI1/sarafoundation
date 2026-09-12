@@ -42,7 +42,10 @@ export function FLIPWPTASection() {
 
   const features = c.features as typeof defaultFeatures;
   const fallbackImage = assetUrl(careerPathsSession);
-  const image = c.image ? assetUrl(c.image) : fallbackImage;
+  const savedImage = c.image ? assetUrl(c.image) : "";
+  const image = savedImage && !savedImage.includes("1788947720651-eectpbi9me5.jpg")
+    ? savedImage
+    : fallbackImage;
 
   return (
     <section id="communities" className="py-16 md:py-24 bg-secondary/50">
