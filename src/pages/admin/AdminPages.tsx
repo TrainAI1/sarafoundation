@@ -1788,6 +1788,12 @@ export default function AdminPages() {
                     className="w-full flex items-center justify-between p-3.5 md:p-4 hover:bg-secondary/40 transition-colors text-left"
                   >
                     <div className="flex items-center gap-3.5 min-w-0">
+                      <span
+                        className="w-6 h-6 rounded-full bg-secondary text-muted-foreground text-[11px] font-bold flex items-center justify-center flex-shrink-0"
+                        title="Position on the page, counting from the top"
+                      >
+                        {positionInPage(pageDef)}
+                      </span>
                       <div className="w-9 h-9 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0 text-primary">
                         <Icon className="w-4 h-4" />
                       </div>
