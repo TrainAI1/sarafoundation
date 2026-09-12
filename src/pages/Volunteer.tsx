@@ -14,7 +14,7 @@ import { Users, BookOpen, Mic, GraduationCap, Heart, Globe } from "lucide-react"
 import { usePageContent } from "@/hooks/usePageContent";
 import { ScrollAnimation, StaggerContainer, StaggerItem } from "@/components/ui/scroll-animation";
 import { assetUrl } from "@/lib/assetUrl";
-import volunteerHero from "@/assets/mentorship-session.jpg";
+import volunteerHero from "@/assets/flip-women-presenting.jpg";
 import volunteerWorkshop from "@/assets/community-workshop.jpg";
 import volunteerSpeaker from "@/assets/tech-conference-speaker.jpg";
 import volunteerCommunity from "@/assets/women-tech-leaders.jpg";
