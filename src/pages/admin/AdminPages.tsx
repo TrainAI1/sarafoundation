@@ -29,6 +29,11 @@ import mentorshipSession from "@/assets/mentorship-session.jpg";
 import partnershipMeeting from "@/assets/partnership-meeting.jpg";
 import capImpactPhoto from "@/assets/events/DSC_3145.jpg.asset.json";
 import flipImpactPhoto from "@/assets/events/DSC_3379.jpg.asset.json";
+import linkedinCareerPaths from "@/assets/success-stories/linkedin/linkedin-3.jpg.asset.json";
+import linkedinProfessionalDevelopment from "@/assets/success-stories/linkedin/linkedin-4.jpg.asset.json";
+import linkedinFellowshipShowcase from "@/assets/success-stories/linkedin/linkedin-6.jpg.asset.json";
+import linkedinWorkshopLeadership from "@/assets/success-stories/linkedin/linkedin-7.jpg.asset.json";
+import linkedinWorkshopBranding from "@/assets/success-stories/linkedin/linkedin-8.jpg.asset.json";
 
 type Page = Tables<"pages">;
 
@@ -684,8 +689,8 @@ const defaultPages: PageDef[] = [
       { key: "image", label: "Image", type: "image", placeholder: "" },
       { key: "imageAlt", label: "Image Alt Text", type: "text", placeholder: "" },
     ], defaultItem: { id: "", name: "", description: "", evidence: "", image: "", imageAlt: "" }, defaultItems: [
-      { id: "fellowship", name: "FLIP Fellowship", description: "A structured fellowship combining tailored learning, mentoring and a capstone project.", evidence: "57 women across fellowship and mentorship activity · 5 Cohort 1 capstone projects", image: womenTechLeaders, imageAlt: "Women taking part in a FLIP fellowship learning session" },
-      { id: "workshops", name: "FLIP Workshops", description: "Practical sessions on personal brand, leadership and career progression, led by women working in technology.", evidence: "3 workshops · 108 recorded attendances", image: womenCoworking, imageAlt: "Participants at a FLIP workshop" },
+      { id: "fellowship", name: "FLIP Fellowship", description: "A structured fellowship combining tailored learning, mentoring and a capstone project.", evidence: "57 women across fellowship and mentorship activity · 5 Cohort 1 capstone projects", image: assetUrl(linkedinFellowshipShowcase), imageAlt: "Sara Foundation FLIP fellowship talent presentation showcase announcement" },
+      { id: "workshops", name: "FLIP Workshops", description: "Practical sessions on personal brand, leadership and career progression, led by women working in technology.", evidence: "3 workshops · 108 recorded attendances", image: assetUrl(linkedinWorkshopLeadership), imageAlt: "Sara Foundation Women in Tech leadership workshop announcement" },
       { id: "conferences", name: "FLIP Conferences", description: "Community gatherings that bring participants, speakers and panellists together to share knowledge.", evidence: "FLIP Conference 1.0 · 93 women attended · 2 speakers and 4 panellists", image: capWomenGroup, imageAlt: "Attendees at FLIP Conference 1.0" },
     ]},
     { key: "alumni_headline", label: "Alumni Section Headline", type: "text", placeholder: "Join our FLIP alumni network" },
@@ -723,7 +728,7 @@ const defaultPages: PageDef[] = [
     { key: "headline_pre", label: "Headline (before highlight)", type: "text", placeholder: "How FLIP Tackles the" },
     { key: "headline_accent", label: "Headline (highlighted)", type: "text", placeholder: "Tech Gender Gap" },
     { key: "description", label: "Description", type: "textarea", placeholder: "The Female Learning & Inclusion Pathway addresses identified gaps for women in African tech." },
-    { key: "image", label: "Featured Image", type: "image", placeholder: womenCoworking },
+    { key: "image", label: "Featured Image", type: "image", placeholder: assetUrl(linkedinWorkshopBranding) },
     { key: "approaches", label: "Approaches", type: "list", itemLabel: "Approach", itemFields: [
       { key: "title", label: "Title", type: "text", placeholder: "" },
       { key: "description", label: "Description", type: "textarea", placeholder: "" },
@@ -793,7 +798,7 @@ const defaultPages: PageDef[] = [
     { key: "headline_pre", label: "Headline (before highlight)", type: "text", placeholder: "Women Founders In Tech Africa" },
     { key: "headline_accent", label: "Headline (highlighted)", type: "text", placeholder: "(WFTA)" },
     { key: "description", label: "Description", type: "textarea", placeholder: "Our initiative plays a pivotal role in closing gender gaps and fostering a thriving ecosystem of female entrepreneurs." },
-    { key: "image", label: "Image", type: "image", placeholder: womanFounderPitch },
+    { key: "image", label: "Image", type: "image", placeholder: assetUrl(linkedinProfessionalDevelopment) },
     { key: "features", label: "Features", type: "list", itemLabel: "Feature", itemFields: [
       { key: "title", label: "Title", type: "text", placeholder: "" },
       { key: "description", label: "Description", type: "textarea", placeholder: "" },
@@ -813,7 +818,7 @@ const defaultPages: PageDef[] = [
     { key: "headline_pre", label: "Headline (before highlight)", type: "text", placeholder: "Women Professionals In Tech Africa" },
     { key: "headline_accent", label: "Headline (highlighted)", type: "text", placeholder: "(WPTA)" },
     { key: "description", label: "Description", type: "textarea", placeholder: "Our initiative fosters a vibrant community that empowers women professionals in African tech." },
-    { key: "image", label: "Image", type: "image", placeholder: womenTechLeaders },
+    { key: "image", label: "Image", type: "image", placeholder: assetUrl(linkedinCareerPaths) },
     { key: "features", label: "Features", type: "list", itemLabel: "Feature", itemFields: [
       { key: "title", label: "Title", type: "text", placeholder: "" },
       { key: "description", label: "Description", type: "textarea", placeholder: "" },

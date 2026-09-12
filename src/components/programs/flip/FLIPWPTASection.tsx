@@ -1,5 +1,5 @@
 import { Briefcase, Users, Network, Megaphone, BookOpen, LucideIcon } from "lucide-react";
-import womenTechLeaders from "@/assets/women-tech-leaders.jpg";
+import careerPathsSession from "@/assets/success-stories/linkedin/linkedin-3.jpg.asset.json";
 import { usePageContent } from "@/hooks/usePageContent";
 import { assetUrl } from "@/lib/assetUrl";
 
@@ -41,7 +41,11 @@ export function FLIPWPTASection() {
   });
 
   const features = c.features as typeof defaultFeatures;
-  const image = c.image ? assetUrl(c.image) : womenTechLeaders;
+  const fallbackImage = assetUrl(careerPathsSession);
+  const savedImage = c.image ? assetUrl(c.image) : "";
+  const image = savedImage && !savedImage.includes("1788947720651-eectpbi9me5.jpg")
+    ? savedImage
+    : fallbackImage;
 
   return (
     <section id="communities" className="py-16 md:py-24 bg-secondary/50">
@@ -62,10 +66,10 @@ export function FLIPWPTASection() {
             <div className="rounded-2xl md:rounded-3xl overflow-hidden shadow-xl">
               <img
                 src={image}
-                alt="Women professionals in tech Africa"
+                alt="Sara Foundation career paths session announcement"
                 className="w-full h-48 md:h-64 object-cover"
                 onError={(e) => {
-                  e.currentTarget.src = womenTechLeaders;
+                  e.currentTarget.src = fallbackImage;
                 }}
               />
             </div>
