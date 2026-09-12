@@ -1660,7 +1660,7 @@ export default function AdminPages() {
             </span>
           </div>
           <p className="text-muted-foreground text-sm">
-            Organized by page and section. Edits save to Supabase and reflect live on the website.
+            Listed in the same order they appear on the website, top to bottom. Edits show on the live site once saved.
           </p>
         </div>
         <div className="relative w-full md:w-72">
