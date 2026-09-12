@@ -16,10 +16,12 @@ type BlogPost = Tables<"blog_posts">;
 export default function BlogPostPage() {
   const { slug } = useParams();
   const [post, setPost] = useState<BlogPost | null>(null);
+  const [related, setRelated] = useState<BlogPost[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchPost = async () => {
+      setLoading(true);
       const { data } = await supabase
         .from("blog_posts")
         .select("*")
@@ -28,6 +30,22 @@ export default function BlogPostPage() {
         .maybeSingle();
       setPost(data);
       setLoading(false);
+
+      if (data) {
+        const { data: others } = await supabase
+          .from("blog_posts")
+          .select("*")
+          .eq("published", true)
+          .neq("slug", data.slug)
+          .order("published_at", { ascending: false })
+          .limit(12);
+        const list = others ?? [];
+        const sameCategory = list.filter((p) => data.category && p.category === data.category);
+        const rest = list.filter((p) => !sameCategory.includes(p));
+        setRelated([...sameCategory, ...rest].slice(0, 3));
+      } else {
+        setRelated([]);
+      }
     };
     fetchPost();
   }, [slug]);
