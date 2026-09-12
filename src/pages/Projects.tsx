@@ -352,9 +352,12 @@ export default function Projects() {
               <h3 className="font-display font-bold text-xl md:text-2xl text-foreground mb-5">
                 {dashboardContent.cross_cutting_headline}
               </h3>
-              <div className="flex gap-4 overflow-x-auto snap-x snap-mandatory pb-3 -mx-4 px-4">
-                {crossCutting.map((metric) => (
-                  <div key={metric.label} className="card-modern p-5 snap-start shrink-0 w-[80%] sm:w-64">
+              <div className="grid sm:grid-cols-2 gap-4 max-w-3xl mx-auto">
+                {crossCutting.map((metric, index) => (
+                  <div
+                    key={metric.label}
+                    className={`card-modern p-5 ${index === crossCutting.length - 1 && crossCutting.length % 2 === 1 ? "sm:col-span-2 sm:w-[calc(50%-0.5rem)] sm:justify-self-center" : ""}`}
+                  >
                     <div className="text-3xl font-bold font-display text-accent mb-1">{metric.value}</div>
                     <h4 className="font-semibold text-sm text-foreground mb-2">{metric.label}</h4>
                     <p className="text-xs text-muted-foreground leading-relaxed">{metric.definition}</p>
