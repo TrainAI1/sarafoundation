@@ -1634,14 +1634,15 @@ export default function AdminPages() {
     });
   };
 
-  const filteredPages = defaultPages.filter((p) => {
+  const filteredPages = orderedPages.filter((p) => {
     const matchesCategory = selectedCategory === "all" || p.category === selectedCategory;
     const matchesSearch =
       !searchQuery ||
       p.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
       p.slug.toLowerCase().includes(searchQuery.toLowerCase()) ||
       p.categoryLabel.toLowerCase().includes(searchQuery.toLowerCase());
-    return matchesCategory && matchesSearch;
+    const matchesPhotos = !photosOnly || p.fields.some((f) => f.type === "image");
+    return matchesCategory && matchesSearch && matchesPhotos;
   });
 
   if (loading) return <div className="animate-pulse text-muted-foreground p-8 text-center">Loading page sections...</div>;
