@@ -12,6 +12,13 @@ import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
 import { Users, BookOpen, Mic, GraduationCap, Heart, Globe } from "lucide-react";
 import { usePageContent } from "@/hooks/usePageContent";
+import { ScrollAnimation, StaggerContainer, StaggerItem } from "@/components/ui/scroll-animation";
+import { assetUrl } from "@/lib/assetUrl";
+import volunteerHero from "@/assets/mentorship-session.jpg";
+import volunteerWorkshop from "@/assets/community-workshop.jpg";
+import volunteerSpeaker from "@/assets/tech-conference-speaker.jpg";
+import volunteerCommunity from "@/assets/women-tech-leaders.jpg";
+import volunteerForm from "@/assets/students-tech-lab.jpg";
 
 const roleIcons: Record<string, typeof BookOpen> = {
   "Mentor": BookOpen,
