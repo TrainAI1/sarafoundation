@@ -12,6 +12,8 @@ import {
   ArrowRight,
 } from "lucide-react";
 import { usePageContent } from "@/hooks/usePageContent";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { SuccessStoriesSection } from "@/components/sections/SuccessStoriesSection";
 import { ImpactReportSection } from "@/components/sections/ImpactReportSection";
 import { assetUrl } from "@/lib/assetUrl";
