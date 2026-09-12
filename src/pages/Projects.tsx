@@ -338,7 +338,7 @@ export default function Projects() {
 
         {/* Journeys — real learner stories, shared with the homepage section and
             fully admin-editable there (Home Page > Featured Success Stories). */}
-        <SuccessStoriesSection id="journeys" linkToImpact={false} />
+        <SuccessStoriesSection id="journeys" linkToImpact={false} showAll />
 
         {/* Annual impact reporting — fully admin-editable list (Home Page > Impact
             Reports Download Links), with a "Show more" toggle once there are more
