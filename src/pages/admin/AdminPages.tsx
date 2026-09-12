@@ -1454,6 +1454,89 @@ const PAGE_CATEGORIES: { id: "all" | PageCategory; label: string; icon: typeof L
   { id: "other", label: "Other Pages", icon: Globe },
 ];
 
+// The exact order each section appears on the live website, top to bottom.
+// Sections not listed here fall back to the order they are defined in.
+const SITE_ORDER: string[] = [
+  // Home page (matches src/pages/Index.tsx)
+  "home-hero",
+  "home-hero-marquee",
+  "home-mission",
+  "home-programs",
+  "home-impact",
+  "home-success-stories",
+  "home-sdg",
+  "home-partners-universities",
+  "home-testimonials",
+  "home-faq",
+  "home-newsletter",
+  "home-cta",
+  "home-work-with-us",
+  "home-donation",
+  "home-impact-reports",
+  // About
+  "about-hero",
+  "about-story",
+  "about-team",
+  // CAP
+  "programs-cap",
+  "cap-problems",
+  "cap-solutions",
+  "cap-benefits",
+  "cap-tracks",
+  "cap-phases",
+  "cap-for-students",
+  "cap-for-schools",
+  "cap-project-showcase",
+  "cap-recognition",
+  "cap-impact",
+  "cap-program-fee",
+  "cap-cta",
+  // FLIP
+  "programs-flip",
+  "flip-gender-gap",
+  "flip-initiatives",
+  "flip-benefits",
+  "flip-wfta",
+  "flip-wpta",
+  "flip-membership",
+  "flip-capstone-showcase",
+  "flip-impact",
+  "flip-cta",
+  // EJP
+  "programs-gjp",
+  // Partnerships
+  "partnership-page",
+  "partnership-school-community",
+  "partnership-organizations",
+  "partnership-sponsors",
+  // Our Impact
+  "projects-hero",
+  "projects-levels",
+  "projects-dashboard",
+  "projects-reporting",
+  // Other pages, in main-menu order
+  "our-work-page",
+  "get-involved-page",
+  "volunteer-page",
+  "blog-hero",
+  "donation-page",
+  "transparency-page",
+  "annual-reports-page",
+  "contact-info",
+];
+
+const siteOrderIndex = (slug: string) => {
+  const i = SITE_ORDER.indexOf(slug);
+  return i === -1 ? SITE_ORDER.length + 1 : i;
+};
+
+const orderedPages: PageDef[] = [...defaultPages].sort(
+  (a, b) => siteOrderIndex(a.slug) - siteOrderIndex(b.slug)
+);
+
+const positionInPage = (page: PageDef) =>
+  orderedPages.filter((p) => p.category === page.category).indexOf(page) + 1;
+
 export default function AdminPages() {
   const [pages, setPages] = useState<Page[]>([]);
   const [expandedSlug, setExpandedSlug] = useState<string | null>(null);
@@ -1462,6 +1545,7 @@ export default function AdminPages() {
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState<string | null>(null);
   const [searchQuery, setSearchQuery] = useState("");
+  const [photosOnly, setPhotosOnly] = useState(false);
 
   // Build the default (pre-fill) values for a page from its field config,
   // so the admin editor shows the site's current live copy even before anything is saved.
@@ -1551,14 +1635,15 @@ export default function AdminPages() {
     });
   };
 
-  const filteredPages = defaultPages.filter((p) => {
+  const filteredPages = orderedPages.filter((p) => {
     const matchesCategory = selectedCategory === "all" || p.category === selectedCategory;
     const matchesSearch =
       !searchQuery ||
       p.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
       p.slug.toLowerCase().includes(searchQuery.toLowerCase()) ||
       p.categoryLabel.toLowerCase().includes(searchQuery.toLowerCase());
-    return matchesCategory && matchesSearch;
+    const matchesPhotos = !photosOnly || p.fields.some((f) => f.type === "image");
+    return matchesCategory && matchesSearch && matchesPhotos;
   });
 
   if (loading) return <div className="animate-pulse text-muted-foreground p-8 text-center">Loading page sections...</div>;
@@ -1575,7 +1660,7 @@ export default function AdminPages() {
             </span>
           </div>
           <p className="text-muted-foreground text-sm">
-            Organized by page and section. Edits save to Supabase and reflect live on the website.
+            Listed in the same order they appear on the website, top to bottom. Edits show on the live site once saved.
           </p>
         </div>
         <div className="relative w-full md:w-72">
@@ -1621,6 +1706,20 @@ export default function AdminPages() {
             </button>
           );
         })}
+
+        <button
+          type="button"
+          onClick={() => setPhotosOnly((v) => !v)}
+          className={`flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs font-semibold whitespace-nowrap transition-all border ${
+            photosOnly
+              ? "bg-primary text-primary-foreground border-primary shadow-sm"
+              : "bg-card text-foreground hover:bg-secondary border-border"
+          }`}
+          title="Show only sections that contain a photo you can change"
+        >
+          <Image className="w-3.5 h-3.5" />
+          <span>Photos only</span>
+        </button>
       </div>
 
       {/* Sections List */}
@@ -1689,6 +1788,12 @@ export default function AdminPages() {
                     className="w-full flex items-center justify-between p-3.5 md:p-4 hover:bg-secondary/40 transition-colors text-left"
                   >
                     <div className="flex items-center gap-3.5 min-w-0">
+                      <span
+                        className="w-6 h-6 rounded-full bg-secondary text-muted-foreground text-[11px] font-bold flex items-center justify-center flex-shrink-0"
+                        title="Position on the page, counting from the top"
+                      >
+                        {positionInPage(pageDef)}
+                      </span>
                       <div className="w-9 h-9 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0 text-primary">
                         <Icon className="w-4 h-4" />
                       </div>
