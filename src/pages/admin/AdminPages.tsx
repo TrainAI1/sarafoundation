@@ -1454,6 +1454,89 @@ const PAGE_CATEGORIES: { id: "all" | PageCategory; label: string; icon: typeof L
   { id: "other", label: "Other Pages", icon: Globe },
 ];
 
+// The exact order each section appears on the live website, top to bottom.
+// Sections not listed here fall back to the order they are defined in.
+const SITE_ORDER: string[] = [
+  // Home page (matches src/pages/Index.tsx)
+  "home-hero",
+  "home-hero-marquee",
+  "home-mission",
+  "home-programs",
+  "home-impact",
+  "home-success-stories",
+  "home-sdg",
+  "home-partners-universities",
+  "home-testimonials",
+  "home-faq",
+  "home-newsletter",
+  "home-cta",
+  "home-work-with-us",
+  "home-donation",
+  "home-impact-reports",
+  // About
+  "about-hero",
+  "about-story",
+  "about-team",
+  // CAP
+  "programs-cap",
+  "cap-problems",
+  "cap-solutions",
+  "cap-benefits",
+  "cap-tracks",
+  "cap-phases",
+  "cap-for-students",
+  "cap-for-schools",
+  "cap-project-showcase",
+  "cap-recognition",
+  "cap-impact",
+  "cap-program-fee",
+  "cap-cta",
+  // FLIP
+  "programs-flip",
+  "flip-gender-gap",
+  "flip-initiatives",
+  "flip-benefits",
+  "flip-wfta",
+  "flip-wpta",
+  "flip-membership",
+  "flip-capstone-showcase",
+  "flip-impact",
+  "flip-cta",
+  // EJP
+  "programs-gjp",
+  // Partnerships
+  "partnership-page",
+  "partnership-school-community",
+  "partnership-organizations",
+  "partnership-sponsors",
+  // Our Impact
+  "projects-hero",
+  "projects-levels",
+  "projects-dashboard",
+  "projects-reporting",
+  // Other pages, in main-menu order
+  "our-work-page",
+  "get-involved-page",
+  "volunteer-page",
+  "blog-hero",
+  "donation-page",
+  "transparency-page",
+  "annual-reports-page",
+  "contact-info",
+];
+
+const siteOrderIndex = (slug: string) => {
+  const i = SITE_ORDER.indexOf(slug);
+  return i === -1 ? SITE_ORDER.length + 1 : i;
+};
+
+const orderedPages: PageDef[] = [...defaultPages].sort(
+  (a, b) => siteOrderIndex(a.slug) - siteOrderIndex(b.slug)
+);
+
+const positionInPage = (page: PageDef) =>
+  orderedPages.filter((p) => p.category === page.category).indexOf(page) + 1;
+
 export default function AdminPages() {
   const [pages, setPages] = useState<Page[]>([]);
   const [expandedSlug, setExpandedSlug] = useState<string | null>(null);
