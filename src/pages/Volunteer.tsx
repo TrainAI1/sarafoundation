@@ -250,6 +250,7 @@ export default function Volunteer() {
               </Button>
             </form>
           </Card>
+          </div>
         </section>
       </main>
       <Footer />
