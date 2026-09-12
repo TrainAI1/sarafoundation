@@ -1545,6 +1545,7 @@ export default function AdminPages() {
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState<string | null>(null);
   const [searchQuery, setSearchQuery] = useState("");
+  const [photosOnly, setPhotosOnly] = useState(false);
 
   // Build the default (pre-fill) values for a page from its field config,
   // so the admin editor shows the site's current live copy even before anything is saved.
