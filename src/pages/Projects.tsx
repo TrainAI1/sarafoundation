@@ -230,28 +230,47 @@ export default function Projects() {
               <span className="section-badge mb-4 md:mb-6">{levelsContent.badge}</span>
               <h2 className="section-title text-foreground mb-4 md:mb-6">{levelsContent.headline}</h2>
             </div>
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
+            <Accordion
+              type="single"
+              collapsible
+              defaultValue={levels[0]?.title}
+              className="max-w-4xl mx-auto space-y-3 px-4 lg:px-0"
+            >
               {levels.map((level) => (
-                <article key={level.title} className="card-modern p-6 h-full">
-                  <div className="flex items-center gap-3 mb-4">
-                    <span className="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-primary text-white font-bold text-sm">
-                      {level.number}
+                <AccordionItem
+                  key={level.title}
+                  value={level.title}
+                  className="card-modern border-none px-5 md:px-6"
+                >
+                  <AccordionTrigger className="hover:no-underline py-5 text-left">
+                    <span className="flex items-center gap-4">
+                      <span className="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-primary text-white font-bold text-sm flex-shrink-0">
+                        {level.number}
+                      </span>
+                      <span>
+                        <span className="flex items-center gap-2 font-display font-bold text-base md:text-lg text-foreground">
+                          <level.icon className="w-4 h-4 text-primary" aria-hidden="true" />
+                          {level.title}
+                        </span>
+                        <span className="block text-sm text-muted-foreground italic font-normal mt-1">
+                          {level.question}
+                        </span>
+                      </span>
                     </span>
-                    <level.icon className="w-5 h-5 text-primary" aria-hidden="true" />
-                  </div>
-                  <h3 className="font-display font-bold text-lg text-foreground mb-1">{level.title}</h3>
-                  <p className="text-sm text-muted-foreground italic mb-4">{level.question}</p>
-                  <ul className="space-y-2">
-                    {level.items.map((item) => (
-                      <li key={item} className="flex items-start gap-3 text-sm text-foreground/80">
-                        <span className="mt-2 w-1.5 h-1.5 rounded-full bg-primary flex-shrink-0" aria-hidden="true" />
-                        {item}
-                      </li>
-                    ))}
-                  </ul>
-                </article>
+                  </AccordionTrigger>
+                  <AccordionContent>
+                    <ul className="space-y-2 pl-0 md:pl-14 pb-2">
+                      {level.items.map((item) => (
+                        <li key={item} className="flex items-start gap-3 text-sm text-foreground/80">
+                          <span className="mt-2 w-1.5 h-1.5 rounded-full bg-primary flex-shrink-0" aria-hidden="true" />
+                          {item}
+                        </li>
+                      ))}
+                    </ul>
+                  </AccordionContent>
+                </AccordionItem>
               ))}
-            </div>
+            </Accordion>
           </div>
         </section>
 
