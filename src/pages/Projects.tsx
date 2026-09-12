@@ -313,9 +313,17 @@ export default function Projects() {
               </p>
             </div>
 
-            <div className="space-y-10 md:space-y-14">
+            <Tabs defaultValue={dashboard[0]?.key} className="w-full">
+              <TabsList className="mx-auto flex w-full max-w-xl h-auto flex-wrap justify-center gap-1 p-1">
+                {dashboard.map((group) => (
+                  <TabsTrigger key={group.key} value={group.key} className="flex-1 min-w-[5rem] uppercase tracking-wide">
+                    {group.key}
+                  </TabsTrigger>
+                ))}
+              </TabsList>
+
               {dashboard.map((group) => (
-                <div key={group.pathway}>
+                <TabsContent key={group.key} value={group.key} className="mt-8">
                   <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-3 mb-5">
                     <div>
                       <h3 className="font-display font-bold text-xl md:text-2xl text-foreground">
@@ -327,7 +335,7 @@ export default function Projects() {
                       <Link to={group.href}>Explore the pathway</Link>
                     </Button>
                   </div>
-                  <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                  <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 max-h-[32rem] overflow-y-auto pr-1">
                     {group.metrics.map((metric) => (
                       <div key={metric.label} className="card-modern p-5 h-full">
                         <div className="text-3xl font-bold font-display text-primary mb-1">{metric.value}</div>
@@ -336,22 +344,22 @@ export default function Projects() {
                       </div>
                     ))}
                   </div>
-                </div>
+                </TabsContent>
               ))}
+            </Tabs>
 
-              <div>
-                <h3 className="font-display font-bold text-xl md:text-2xl text-foreground mb-5">
-                  {dashboardContent.cross_cutting_headline}
-                </h3>
-                <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
-                  {crossCutting.map((metric) => (
-                    <div key={metric.label} className="card-modern p-5 h-full">
-                      <div className="text-3xl font-bold font-display text-accent mb-1">{metric.value}</div>
-                      <h4 className="font-semibold text-sm text-foreground mb-2">{metric.label}</h4>
-                      <p className="text-xs text-muted-foreground leading-relaxed">{metric.definition}</p>
-                    </div>
-                  ))}
-                </div>
+            <div className="mt-12 md:mt-16">
+              <h3 className="font-display font-bold text-xl md:text-2xl text-foreground mb-5">
+                {dashboardContent.cross_cutting_headline}
+              </h3>
+              <div className="flex gap-4 overflow-x-auto snap-x snap-mandatory pb-3 -mx-4 px-4">
+                {crossCutting.map((metric) => (
+                  <div key={metric.label} className="card-modern p-5 snap-start shrink-0 w-[80%] sm:w-64">
+                    <div className="text-3xl font-bold font-display text-accent mb-1">{metric.value}</div>
+                    <h4 className="font-semibold text-sm text-foreground mb-2">{metric.label}</h4>
+                    <p className="text-xs text-muted-foreground leading-relaxed">{metric.definition}</p>
+                  </div>
+                ))}
               </div>
             </div>
           </div>
