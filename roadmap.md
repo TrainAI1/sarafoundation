@@ -6,7 +6,7 @@
 - [x] Verify links, images, layout, and admin defaults.
 - [x] Replace selected stock images with authentic LinkedIn post screenshots.
 - [x] Verify each replacement fits its section and does not repeat on the same page.
-- [ ] Arrange the five across-pathway figures in a compact 2, 2, 1 grid.
-- [ ] Shorten featured story cards without removing verified information.
-- [ ] Add drag-and-drop story ordering in the admin view.
-- [ ] Verify the Impact and admin story layouts.
+- [x] Arrange the five across-pathway figures in a compact 2, 2, 1 grid.
+- [x] Shorten featured story cards without removing verified information.
+- [x] Add drag-and-drop story ordering in the admin view.
+- [x] Verify the Impact and admin story layouts.
