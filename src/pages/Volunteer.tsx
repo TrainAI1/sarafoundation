@@ -136,7 +136,7 @@ export default function Volunteer() {
               <div className="rounded-2xl overflow-hidden shadow-2xl">
                 <img
                   src={c.hero_image ? assetUrl(c.hero_image) : volunteerHero}
-                  alt="A mentor supporting a learner during a Sara Foundation mentoring session"
+                  alt="Women presenting during a Sara Foundation session"
                   className="w-full h-64 md:h-[26rem] object-cover"
                   loading="eager"
                   onError={(e) => { e.currentTarget.src = volunteerHero; }}
