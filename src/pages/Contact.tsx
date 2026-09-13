@@ -162,9 +162,10 @@ export default function Contact() {
       <section className="pt-24 md:pt-32 pb-12 md:pb-20 bg-primary relative overflow-hidden">
         <div className="absolute inset-0">
           <img 
-            src={communityWorkshop} 
+            src={contactContent.hero_image ? assetUrl(contactContent.hero_image) : communityWorkshop} 
             alt="Sara Foundation community"
             className="w-full h-full object-cover opacity-15"
+            onError={(e) => { e.currentTarget.src = communityWorkshop; }}
           />
           <div className="absolute inset-0 bg-primary" />
         </div>
