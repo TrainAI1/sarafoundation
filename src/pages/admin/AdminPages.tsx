@@ -1354,6 +1354,11 @@ const defaultPages: PageDef[] = [
     { key: "hero_headline_part1", label: "Hero Headline (part 1)", type: "text", placeholder: "Join Our Community of 60+ Volunteers, Speakers, Trainers," },
     { key: "hero_headline_part2", label: "Hero Headline (gradient part)", type: "text", placeholder: "Facilitators and Mentors" },
     { key: "hero_description", label: "Hero Description", type: "textarea", placeholder: "Volunteers make our learning pathways possible." },
+    { key: "hero_image", label: "Hero Photo", type: "image", placeholder: "", helperText: "Large photo beside the headline at the top of the page." },
+    { key: "gallery_image1", label: "Photo Strip — Left", type: "image", placeholder: "", helperText: "First of the three photos below the volunteer roles." },
+    { key: "gallery_image2", label: "Photo Strip — Middle", type: "image", placeholder: "" },
+    { key: "gallery_image3", label: "Photo Strip — Right", type: "image", placeholder: "" },
+    { key: "form_image", label: "Application Form Photo", type: "image", placeholder: "", helperText: "Photo shown beside the volunteer application form." },
     { key: "roles_headline", label: "Roles Section Headline", type: "text", placeholder: "Volunteer roles" },
     { key: "roles", label: "Volunteer Roles", type: "list", itemLabel: "Role", itemFields: [
       { key: "title", label: "Title (controls icon and form dropdown value)", type: "text", placeholder: "" },
