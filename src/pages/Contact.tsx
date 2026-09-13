@@ -12,6 +12,7 @@ import communityWorkshop from "@/assets/community-workshop.jpg";
 import contactTeam from "@/assets/contact-team.jpg";
 import { supabase } from "@/integrations/supabase/client";
 import { usePageContent } from "@/hooks/usePageContent";
+import { assetUrl } from "@/lib/assetUrl";
 import { useFAQItems } from "@/hooks/useFAQItems";
 import {
   Accordion,
