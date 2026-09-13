@@ -1500,15 +1500,16 @@ const SITE_ORDER: string[] = [
   "cap-cta",
   // FLIP
   "programs-flip",
-  "flip-gender-gap",
   "flip-initiatives",
   "flip-benefits",
+  "flip-impact",
+  "flip-capstone-showcase",
+  "flip-gender-gap",
+  "flip-cta",
+  // Legacy FLIP sections not currently rendered on the public page
   "flip-wfta",
   "flip-wpta",
   "flip-membership",
-  "flip-capstone-showcase",
-  "flip-impact",
-  "flip-cta",
   // EJP
   "programs-gjp",
   // Partnerships
@@ -1536,6 +1537,15 @@ const siteOrderIndex = (slug: string) => {
   const i = SITE_ORDER.indexOf(slug);
   return i === -1 ? SITE_ORDER.length + 1 : i;
 };
+
+const imageFieldCount = (page: PageDef) =>
+  page.fields.reduce((count, field) => {
+    if (field.type === "image") return count + 1;
+    if (field.type === "list") {
+      return count + field.itemFields.filter((itemField) => itemField.type === "image").length;
+    }
+    return count;
+  }, 0);
 
 const orderedPages: PageDef[] = [...defaultPages].sort(
   (a, b) => siteOrderIndex(a.slug) - siteOrderIndex(b.slug)
@@ -1649,7 +1659,7 @@ export default function AdminPages() {
       p.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
       p.slug.toLowerCase().includes(searchQuery.toLowerCase()) ||
       p.categoryLabel.toLowerCase().includes(searchQuery.toLowerCase());
-    const matchesPhotos = !photosOnly || p.fields.some((f) => f.type === "image");
+    const matchesPhotos = !photosOnly || imageFieldCount(p) > 0;
     return matchesCategory && matchesSearch && matchesPhotos;
   });
 
@@ -1753,7 +1763,7 @@ export default function AdminPages() {
             const exists = pages.find((p) => p.slug === pageDef.slug);
             const isExpanded = expandedSlug === pageDef.slug;
             const Icon = pageDef.icon;
-            const imageFields = pageDef.fields.filter((f) => f.type === "image").length;
+            const imageFields = imageFieldCount(pageDef);
             const listFields = pageDef.fields.filter(isListField).length;
 
             // Show group divider when the category changes in "all" mode
@@ -1914,7 +1924,10 @@ export default function AdminPages() {
                       )}
 
                       {/* List fields (repeatable items) */}
-                      {pageDef.fields.filter(isListField).map((field) => {
+                      {pageDef.fields
+                        .filter(isListField)
+                        .filter((field) => !photosOnly || field.itemFields.some((itemField) => itemField.type === "image"))
+                        .map((field) => {
                         const items = (editValues[pageDef.slug]?.[field.key] as Record<string, any>[]) || [];
                         return (
                           <div key={field.key} className="space-y-3">
@@ -1938,7 +1951,7 @@ export default function AdminPages() {
                                 <div key={index} className="rounded-xl border border-border p-3.5 space-y-3 bg-secondary/30">
                                   <div className="flex items-center justify-between border-b border-border/50 pb-2">
                                     <span className="text-xs font-bold text-foreground">
-                                      {field.itemLabel} #{index + 1}
+                                      {item.name || item.title || item.project || `${field.itemLabel} #${index + 1}`}
                                     </span>
                                     <div className="flex items-center gap-1">
                                       <Button
@@ -1977,14 +1990,16 @@ export default function AdminPages() {
                                   </div>
 
                                   <div className="grid gap-3 sm:grid-cols-2">
-                                    {field.itemFields.map((itemField) => (
+                                    {field.itemFields
+                                      .filter((itemField) => !photosOnly || itemField.type === "image")
+                                      .map((itemField) => (
                                       <div key={itemField.key} className={itemField.type === "textarea" ? "sm:col-span-2 space-y-1.5" : "space-y-1.5"}>
                                         <Label className="text-xs">{itemField.label}</Label>
                                         {itemField.type === "image" ? (
                                           <ImageUpload
                                             value={item[itemField.key] || ""}
                                             onChange={(url) => updateListItem(pageDef.slug, field.key, index, itemField.key, url)}
-                                            placeholder={itemField.placeholder || ""}
+                                            placeholder={item[itemField.key] || field.defaultItems[index]?.[itemField.key] || itemField.placeholder || ""}
                                             helperText={itemField.helperText}
                                             folder={`${pageDef.slug}-${field.key}`}
                                             label={`Upload ${itemField.label}`}
