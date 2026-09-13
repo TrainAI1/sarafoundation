@@ -1428,6 +1428,8 @@ const defaultPages: PageDef[] = [
     categoryLabel: "Other Pages", title: "Contact & Office Locations (/contact)", icon: Phone, previewPath: "/contact", fields: [
     { key: "headline", label: "Headline", type: "text", placeholder: "Let's Start a Conversation" },
     { key: "description", label: "Description", type: "textarea", placeholder: "Have questions about our programs or want to partner with us? We'd love to hear from you." },
+    { key: "hero_image", label: "Hero Background Photo", type: "image", placeholder: "", helperText: "Background photo behind the blue header at the top of the contact page." },
+    { key: "team_image", label: "Join Our Community Photo", type: "image", placeholder: "", helperText: "Photo in the 'Join Our Community' card beside the contact form." },
     { key: "email", label: "Contact Email", type: "text", placeholder: "info@sarafoundationafrica.com" },
     { key: "phone", label: "Phone Number (UK)", type: "text", placeholder: "+44 7435 126104" },
     { key: "phone_ng", label: "Phone Number (NG)", type: "text", placeholder: "+234 9076 664049" },
