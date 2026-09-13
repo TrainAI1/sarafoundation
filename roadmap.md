@@ -10,5 +10,5 @@
 - [x] Shorten featured story cards without removing verified information.
 - [x] Add drag-and-drop story ordering in the admin view.
 - [x] Verify the Impact and admin story layouts.
-- [ ] Make nested section photos visible in the Pages photo filter.
-- [ ] Verify every FLIP photo section appears in website order.
+- [x] Make nested section photos visible in the Pages photo filter.
+- [x] Verify every FLIP photo section appears in website order.
