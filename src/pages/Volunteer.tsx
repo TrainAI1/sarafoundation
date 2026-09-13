@@ -171,9 +171,9 @@ export default function Volunteer() {
         <section className="section-container pb-16">
           <StaggerContainer className="grid sm:grid-cols-3 gap-4" staggerDelay={0.1}>
             {[
-              { src: volunteerWorkshop, alt: "Volunteers facilitating a community learning workshop" },
-              { src: volunteerSpeaker, alt: "A speaker addressing an audience at a Sara Foundation event" },
-              { src: volunteerCommunity, alt: "Women in technology gathered at a Sara Foundation session" },
+              { src: c.gallery_image1 ? assetUrl(c.gallery_image1) : volunteerWorkshop, fallback: volunteerWorkshop, alt: "Volunteers facilitating a community learning workshop" },
+              { src: c.gallery_image2 ? assetUrl(c.gallery_image2) : volunteerSpeaker, fallback: volunteerSpeaker, alt: "A speaker addressing an audience at a Sara Foundation event" },
+              { src: c.gallery_image3 ? assetUrl(c.gallery_image3) : volunteerCommunity, fallback: volunteerCommunity, alt: "Women in technology gathered at a Sara Foundation session" },
             ].map((img) => (
               <StaggerItem key={img.src} variant="fade-up">
                 <div className="rounded-2xl overflow-hidden shadow-lg">
