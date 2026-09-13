@@ -1500,15 +1500,16 @@ const SITE_ORDER: string[] = [
   "cap-cta",
   // FLIP
   "programs-flip",
-  "flip-gender-gap",
   "flip-initiatives",
   "flip-benefits",
+  "flip-impact",
+  "flip-capstone-showcase",
+  "flip-gender-gap",
+  "flip-cta",
+  // Legacy FLIP sections not currently rendered on the public page
   "flip-wfta",
   "flip-wpta",
   "flip-membership",
-  "flip-capstone-showcase",
-  "flip-impact",
-  "flip-cta",
   // EJP
   "programs-gjp",
   // Partnerships
@@ -1923,7 +1924,10 @@ export default function AdminPages() {
                       )}
 
                       {/* List fields (repeatable items) */}
-                      {pageDef.fields.filter(isListField).map((field) => {
+                      {pageDef.fields
+                        .filter(isListField)
+                        .filter((field) => !photosOnly || field.itemFields.some((itemField) => itemField.type === "image"))
+                        .map((field) => {
                         const items = (editValues[pageDef.slug]?.[field.key] as Record<string, any>[]) || [];
                         return (
                           <div key={field.key} className="space-y-3">
@@ -1947,7 +1951,7 @@ export default function AdminPages() {
                                 <div key={index} className="rounded-xl border border-border p-3.5 space-y-3 bg-secondary/30">
                                   <div className="flex items-center justify-between border-b border-border/50 pb-2">
                                     <span className="text-xs font-bold text-foreground">
-                                      {field.itemLabel} #{index + 1}
+                                      {item.name || item.title || item.project || `${field.itemLabel} #${index + 1}`}
                                     </span>
                                     <div className="flex items-center gap-1">
                                       <Button
@@ -1986,14 +1990,16 @@ export default function AdminPages() {
                                   </div>
 
                                   <div className="grid gap-3 sm:grid-cols-2">
-                                    {field.itemFields.map((itemField) => (
+                                    {field.itemFields
+                                      .filter((itemField) => !photosOnly || itemField.type === "image")
+                                      .map((itemField) => (
                                       <div key={itemField.key} className={itemField.type === "textarea" ? "sm:col-span-2 space-y-1.5" : "space-y-1.5"}>
                                         <Label className="text-xs">{itemField.label}</Label>
                                         {itemField.type === "image" ? (
                                           <ImageUpload
                                             value={item[itemField.key] || ""}
                                             onChange={(url) => updateListItem(pageDef.slug, field.key, index, itemField.key, url)}
-                                            placeholder={itemField.placeholder || ""}
+                                            placeholder={item[itemField.key] || field.defaultItems[index]?.[itemField.key] || itemField.placeholder || ""}
                                             helperText={itemField.helperText}
                                             folder={`${pageDef.slug}-${field.key}`}
                                             label={`Upload ${itemField.label}`}
