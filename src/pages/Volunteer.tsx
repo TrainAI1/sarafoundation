@@ -177,7 +177,7 @@ export default function Volunteer() {
             ].map((img) => (
               <StaggerItem key={img.src} variant="fade-up">
                 <div className="rounded-2xl overflow-hidden shadow-lg">
-                  <img src={img.src} alt={img.alt} loading="lazy" className="w-full h-48 md:h-56 object-cover hover:scale-105 transition-transform duration-500" />
+                  <img src={img.src} alt={img.alt} loading="lazy" className="w-full h-48 md:h-56 object-cover hover:scale-105 transition-transform duration-500" onError={(e) => { e.currentTarget.src = img.fallback; }} />
                 </div>
               </StaggerItem>
             ))}
@@ -207,10 +207,11 @@ export default function Volunteer() {
             <ScrollAnimation variant="slide-left" className="hidden lg:block">
               <div className="rounded-2xl overflow-hidden shadow-2xl h-full">
                 <img
-                  src={volunteerForm}
+                  src={c.form_image ? assetUrl(c.form_image) : volunteerForm}
                   alt="Students working together in a technology lab"
                   loading="lazy"
                   className="w-full h-full min-h-[28rem] object-cover"
+                  onError={(e) => { e.currentTarget.src = volunteerForm; }}
                 />
               </div>
             </ScrollAnimation>
