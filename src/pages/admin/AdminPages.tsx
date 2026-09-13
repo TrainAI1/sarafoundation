@@ -1354,6 +1354,11 @@ const defaultPages: PageDef[] = [
     { key: "hero_headline_part1", label: "Hero Headline (part 1)", type: "text", placeholder: "Join Our Community of 60+ Volunteers, Speakers, Trainers," },
     { key: "hero_headline_part2", label: "Hero Headline (gradient part)", type: "text", placeholder: "Facilitators and Mentors" },
     { key: "hero_description", label: "Hero Description", type: "textarea", placeholder: "Volunteers make our learning pathways possible." },
+    { key: "hero_image", label: "Hero Photo", type: "image", placeholder: "", helperText: "Large photo beside the headline at the top of the page." },
+    { key: "gallery_image1", label: "Photo Strip — Left", type: "image", placeholder: "", helperText: "First of the three photos below the volunteer roles." },
+    { key: "gallery_image2", label: "Photo Strip — Middle", type: "image", placeholder: "" },
+    { key: "gallery_image3", label: "Photo Strip — Right", type: "image", placeholder: "" },
+    { key: "form_image", label: "Application Form Photo", type: "image", placeholder: "", helperText: "Photo shown beside the volunteer application form." },
     { key: "roles_headline", label: "Roles Section Headline", type: "text", placeholder: "Volunteer roles" },
     { key: "roles", label: "Volunteer Roles", type: "list", itemLabel: "Role", itemFields: [
       { key: "title", label: "Title (controls icon and form dropdown value)", type: "text", placeholder: "" },
@@ -1423,6 +1428,8 @@ const defaultPages: PageDef[] = [
     categoryLabel: "Other Pages", title: "Contact & Office Locations (/contact)", icon: Phone, previewPath: "/contact", fields: [
     { key: "headline", label: "Headline", type: "text", placeholder: "Let's Start a Conversation" },
     { key: "description", label: "Description", type: "textarea", placeholder: "Have questions about our programs or want to partner with us? We'd love to hear from you." },
+    { key: "hero_image", label: "Hero Background Photo", type: "image", placeholder: "", helperText: "Background photo behind the blue header at the top of the contact page." },
+    { key: "team_image", label: "Join Our Community Photo", type: "image", placeholder: "", helperText: "Photo in the 'Join Our Community' card beside the contact form." },
     { key: "email", label: "Contact Email", type: "text", placeholder: "info@sarafoundationafrica.com" },
     { key: "phone", label: "Phone Number (UK)", type: "text", placeholder: "+44 7435 126104" },
     { key: "phone_ng", label: "Phone Number (NG)", type: "text", placeholder: "+234 9076 664049" },

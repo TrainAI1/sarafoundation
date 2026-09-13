@@ -171,13 +171,13 @@ export default function Volunteer() {
         <section className="section-container pb-16">
           <StaggerContainer className="grid sm:grid-cols-3 gap-4" staggerDelay={0.1}>
             {[
-              { src: volunteerWorkshop, alt: "Volunteers facilitating a community learning workshop" },
-              { src: volunteerSpeaker, alt: "A speaker addressing an audience at a Sara Foundation event" },
-              { src: volunteerCommunity, alt: "Women in technology gathered at a Sara Foundation session" },
+              { src: c.gallery_image1 ? assetUrl(c.gallery_image1) : volunteerWorkshop, fallback: volunteerWorkshop, alt: "Volunteers facilitating a community learning workshop" },
+              { src: c.gallery_image2 ? assetUrl(c.gallery_image2) : volunteerSpeaker, fallback: volunteerSpeaker, alt: "A speaker addressing an audience at a Sara Foundation event" },
+              { src: c.gallery_image3 ? assetUrl(c.gallery_image3) : volunteerCommunity, fallback: volunteerCommunity, alt: "Women in technology gathered at a Sara Foundation session" },
             ].map((img) => (
               <StaggerItem key={img.src} variant="fade-up">
                 <div className="rounded-2xl overflow-hidden shadow-lg">
-                  <img src={img.src} alt={img.alt} loading="lazy" className="w-full h-48 md:h-56 object-cover hover:scale-105 transition-transform duration-500" />
+                  <img src={img.src} alt={img.alt} loading="lazy" className="w-full h-48 md:h-56 object-cover hover:scale-105 transition-transform duration-500" onError={(e) => { e.currentTarget.src = img.fallback; }} />
                 </div>
               </StaggerItem>
             ))}
@@ -207,10 +207,11 @@ export default function Volunteer() {
             <ScrollAnimation variant="slide-left" className="hidden lg:block">
               <div className="rounded-2xl overflow-hidden shadow-2xl h-full">
                 <img
-                  src={volunteerForm}
+                  src={c.form_image ? assetUrl(c.form_image) : volunteerForm}
                   alt="Students working together in a technology lab"
                   loading="lazy"
                   className="w-full h-full min-h-[28rem] object-cover"
+                  onError={(e) => { e.currentTarget.src = volunteerForm; }}
                 />
               </div>
             </ScrollAnimation>

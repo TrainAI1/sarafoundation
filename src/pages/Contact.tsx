@@ -12,6 +12,7 @@ import communityWorkshop from "@/assets/community-workshop.jpg";
 import contactTeam from "@/assets/contact-team.jpg";
 import { supabase } from "@/integrations/supabase/client";
 import { usePageContent } from "@/hooks/usePageContent";
+import { assetUrl } from "@/lib/assetUrl";
 import { useFAQItems } from "@/hooks/useFAQItems";
 import {
   Accordion,
@@ -162,9 +163,10 @@ export default function Contact() {
       <section className="pt-24 md:pt-32 pb-12 md:pb-20 bg-primary relative overflow-hidden">
         <div className="absolute inset-0">
           <img 
-            src={communityWorkshop} 
+            src={contactContent.hero_image ? assetUrl(contactContent.hero_image) : communityWorkshop} 
             alt="Sara Foundation community"
             className="w-full h-full object-cover opacity-15"
+            onError={(e) => { e.currentTarget.src = communityWorkshop; }}
           />
           <div className="absolute inset-0 bg-primary" />
         </div>
@@ -336,10 +338,11 @@ export default function Contact() {
               {/* Image instead of map */}
               <div className="rounded-2xl overflow-hidden shadow-lg">
                 <img
-                   src={contactTeam}
+                   src={contactContent.team_image ? assetUrl(contactContent.team_image) : contactTeam}
                    alt="Sara Foundation Africa team members collaborating around a laptop"
                    loading="lazy"
                    className="w-full h-40 md:h-56 object-cover"
+                   onError={(e) => { e.currentTarget.src = contactTeam; }}
                  />
                 <div className="p-4 bg-card">
                   <p className="font-semibold text-foreground text-sm">Join Our Community</p>
