@@ -338,10 +338,11 @@ export default function Contact() {
               {/* Image instead of map */}
               <div className="rounded-2xl overflow-hidden shadow-lg">
                 <img
-                   src={contactTeam}
+                   src={contactContent.team_image ? assetUrl(contactContent.team_image) : contactTeam}
                    alt="Sara Foundation Africa team members collaborating around a laptop"
                    loading="lazy"
                    className="w-full h-40 md:h-56 object-cover"
+                   onError={(e) => { e.currentTarget.src = contactTeam; }}
                  />
                 <div className="p-4 bg-card">
                   <p className="font-semibold text-foreground text-sm">Join Our Community</p>
