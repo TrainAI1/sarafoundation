@@ -1537,6 +1537,15 @@ const siteOrderIndex = (slug: string) => {
   return i === -1 ? SITE_ORDER.length + 1 : i;
 };
 
+const imageFieldCount = (page: PageDef) =>
+  page.fields.reduce((count, field) => {
+    if (field.type === "image") return count + 1;
+    if (field.type === "list") {
+      return count + field.itemFields.filter((itemField) => itemField.type === "image").length;
+    }
+    return count;
+  }, 0);
+
 const orderedPages: PageDef[] = [...defaultPages].sort(
   (a, b) => siteOrderIndex(a.slug) - siteOrderIndex(b.slug)
 );
@@ -1649,7 +1658,7 @@ export default function AdminPages() {
       p.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
       p.slug.toLowerCase().includes(searchQuery.toLowerCase()) ||
       p.categoryLabel.toLowerCase().includes(searchQuery.toLowerCase());
-    const matchesPhotos = !photosOnly || p.fields.some((f) => f.type === "image");
+    const matchesPhotos = !photosOnly || imageFieldCount(p) > 0;
     return matchesCategory && matchesSearch && matchesPhotos;
   });
 
@@ -1753,7 +1762,7 @@ export default function AdminPages() {
             const exists = pages.find((p) => p.slug === pageDef.slug);
             const isExpanded = expandedSlug === pageDef.slug;
             const Icon = pageDef.icon;
-            const imageFields = pageDef.fields.filter((f) => f.type === "image").length;
+            const imageFields = imageFieldCount(pageDef);
             const listFields = pageDef.fields.filter(isListField).length;
 
             // Show group divider when the category changes in "all" mode
