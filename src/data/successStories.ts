@@ -154,4 +154,15 @@ export const successStories: SuccessStory[] = [
     pathwayHref: "/programs/flip",
     image: fisayoAdeyemiThumb.url,
   },
+  {
+    pathway: "FLIP",
+    name: "CAMA Women Plumbers x Sara Foundation",
+    headline: "Equipping women plumbers with digital tools",
+    summary: "A transformative virtual session designed to equip women plumbers with digital tools, innovative solutions and entrepreneurial mindsets to build sustainable businesses and thrive in a connected world.",
+    evidence: "CAMA Women Plumbers x Sara Foundation virtual session on Zoom, 12 September 2026, 11:00 WAT / 1:00 EAT.",
+    link: "https://www.linkedin.com/posts/sara-foundation_camawomen-sarafoundationafrica-womeninplumbing-activity-7504219602067976193-ZUYi",
+    linkLabel: "See the session",
+    pathwayHref: "/programs/flip",
+    image: camaWomenPlumbersThumb.url,
+  },
 ];
