@@ -9,6 +9,7 @@ import flipGraduationThumb from "@/assets/success-stories/linkedin/linkedin-5.jp
 import scintillaShowcaseThumb from "@/assets/success-stories/linkedin/linkedin-6.jpg.asset.json";
 import mercyMomahThumb from "@/assets/success-stories/linkedin/linkedin-7.jpg.asset.json";
 import fisayoAdeyemiThumb from "@/assets/success-stories/linkedin/linkedin-8.jpg.asset.json";
+import camaWomenPlumbersThumb from "@/assets/success-stories/linkedin/linkedin-9.png.asset.json";
 
 export type StoryPathway = "CAP" | "FLIP" | "EJP" | "Foundation";
 
