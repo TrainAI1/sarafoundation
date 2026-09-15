@@ -232,11 +232,11 @@ export default function AdminStories() {
                     {s.pathway}
                   </span>
                   <span className="font-medium text-foreground text-sm truncate">{s.name || "New Story"}</span>
-                  {index >= VISIBLE_ON_PAGE && (
-                    <span className="text-[10px] px-1.5 py-0.5 rounded bg-muted text-muted-foreground flex-shrink-0">
-                      Our Impact only
-                    </span>
-                  )}
+                  <span className="text-[10px] px-1.5 py-0.5 rounded bg-muted text-muted-foreground flex-shrink-0">
+                    {s.pages.length
+                      ? PAGE_OPTIONS.filter((p) => s.pages.includes(p.value)).map((p) => p.label.replace(" page", "")).join(", ")
+                      : "Hidden"}
+                  </span>
                 </div>
                 <p className="text-xs text-muted-foreground line-clamp-1">{s.headline}</p>
               </div>
