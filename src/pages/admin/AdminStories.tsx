@@ -88,6 +88,9 @@ export default function AdminStories() {
                 linkLabel: s.linkLabel || "",
                 pathwayHref: s.pathwayHref || "",
                 image: s.image || "",
+                pages: (Array.isArray(s.pages) ? s.pages.filter(isStoryPage) : []).length
+                  ? (s.pages as unknown[]).filter(isStoryPage)
+                  : defaultPagesForIndex(i),
               }))
             );
           }
