@@ -28,6 +28,7 @@ import womenCoworking from "@/assets/women-coworking.jpg";
 import mentorshipSession from "@/assets/mentorship-session.jpg";
 import partnershipMeeting from "@/assets/partnership-meeting.jpg";
 import capImpactPhoto from "@/assets/events/DSC_3145.jpg.asset.json";
+import capImpactLearners from "@/assets/cap-impact-learners.jpg";
 import flipImpactPhoto from "@/assets/events/DSC_3379.jpg.asset.json";
 import linkedinCareerPaths from "@/assets/success-stories/linkedin/linkedin-3.jpg.asset.json";
 import linkedinProfessionalDevelopment from "@/assets/success-stories/linkedin/linkedin-4.jpg.asset.json";
