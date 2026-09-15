@@ -23,7 +23,7 @@ export function CAPImpactSection() {
   });
 
   const stats = c.stats as { value: string; label: string; sub: string }[];
-  const featuredImage = c.image ? assetUrl(c.image) : graduatesCelebration;
+  const featuredImage = c.image ? assetUrl(c.image) : capImpactLearners;
 
   return (
     <section className="py-16 md:py-24 bg-primary/5">
@@ -44,11 +44,11 @@ export function CAPImpactSection() {
             <div className="rounded-2xl overflow-hidden shadow-2xl">
               <img
                 src={featuredImage}
-                alt="CAP learners celebrating their achievements at a graduation and awards ceremony"
+                alt="CAP learners standing together with their notebooks after a practical learning session"
                 className="w-full h-56 md:h-72 object-cover"
                 loading="lazy"
                 onError={(e) => {
-                  e.currentTarget.src = graduatesCelebration;
+                  e.currentTarget.src = capImpactLearners;
                 }}
               />
             </div>
