@@ -136,6 +136,19 @@ export default function About() {
   });
   const storyParagraph4 = "Together our pathways reach 11 unique African countries: CAP works across 8 countries with 35+ universities represented, and FLIP works across 6. CAP, FLIP and EJP translate our charitable purposes into clear learning pathways designed around public benefit.";
 
+  const { data: initiativesContent } = usePageContent("about-initiatives", {
+    badge: "Key Initiatives",
+    headline: "Our Learning Pathways",
+    initiatives: keyInitiatives.map((i) => ({ ...i, image: "" })),
+  });
+  const initiatives = (initiativesContent.initiatives?.length ? initiativesContent.initiatives : keyInitiatives).map(
+    (item, index) => ({
+      ...keyInitiatives[index],
+      ...item,
+      image: item.image ? assetUrl(item.image) : keyInitiatives[index]?.image || keyInitiatives[0].image,
+    })
+  );
+
   const { data: teamContent } = usePageContent("about-team", {
     badge: "Our Team",
     headline: "Meet Our Core Team",
@@ -370,13 +383,13 @@ export default function About() {
       <section className="py-16 md:py-24 bg-secondary/50">
         <div className="section-container">
           <div className="text-center max-w-3xl mx-auto mb-10 md:mb-16 px-4">
-            <span className="section-badge mb-4 md:mb-6">Key Initiatives</span>
+            <span className="section-badge mb-4 md:mb-6">{initiativesContent.badge}</span>
             <h2 className="section-title text-foreground mb-4 md:mb-6">
-              Our Learning Pathways
+              {initiativesContent.headline}
             </h2>
           </div>
           <div className="grid md:grid-cols-3 gap-6">
-            {keyInitiatives.map((initiative) => (
+            {initiatives.map((initiative) => (
               <article key={initiative.title} className="card-modern overflow-hidden h-full flex flex-col">
                 <img
                   src={initiative.image}

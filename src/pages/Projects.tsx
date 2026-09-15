@@ -352,15 +352,31 @@ export default function Projects() {
               <h3 className="font-display font-bold text-xl md:text-2xl text-foreground mb-5">
                 {dashboardContent.cross_cutting_headline}
               </h3>
-              <div className="grid sm:grid-cols-2 gap-4 max-w-3xl mx-auto">
+              <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
                 {crossCutting.map((metric, index) => (
                   <div
                     key={metric.label}
-                    className={`card-modern p-5 ${index === crossCutting.length - 1 && crossCutting.length % 2 === 1 ? "sm:col-span-2 sm:w-[calc(50%-0.5rem)] sm:justify-self-center" : ""}`}
+                    className={
+                      index === 0
+                        ? "card-modern p-6 md:p-7 bg-accent/5 border-accent/20 sm:col-span-2 flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-6"
+                        : "card-modern p-5 flex flex-col"
+                    }
                   >
-                    <div className="text-3xl font-bold font-display text-accent mb-1">{metric.value}</div>
-                    <h4 className="font-semibold text-sm text-foreground mb-2">{metric.label}</h4>
-                    <p className="text-xs text-muted-foreground leading-relaxed">{metric.definition}</p>
+                    <div
+                      className={
+                        index === 0
+                          ? "text-4xl md:text-5xl font-bold font-display text-accent sm:w-40 flex-shrink-0"
+                          : "text-3xl font-bold font-display text-accent mb-1"
+                      }
+                    >
+                      {metric.value}
+                    </div>
+                    <div>
+                      <h4 className={index === 0 ? "font-semibold text-base text-foreground mb-1" : "font-semibold text-sm text-foreground mb-2"}>
+                        {metric.label}
+                      </h4>
+                      <p className="text-xs text-muted-foreground leading-relaxed">{metric.definition}</p>
+                    </div>
                   </div>
                 ))}
               </div>
