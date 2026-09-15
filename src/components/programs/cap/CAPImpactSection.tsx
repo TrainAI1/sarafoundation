@@ -1,7 +1,7 @@
 import { usePageContent } from "@/hooks/usePageContent";
 import { ScrollAnimation, StaggerContainer, StaggerItem } from "@/components/ui/scroll-animation";
 import { assetUrl } from "@/lib/assetUrl";
-import graduatesCelebration from "@/assets/graduates-celebration.jpg";
+import capImpactLearners from "@/assets/cap-impact-learners.jpg";
 
 export function CAPImpactSection() {
   const { data: c } = usePageContent("cap-impact", {
