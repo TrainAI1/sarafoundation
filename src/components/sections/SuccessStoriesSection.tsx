@@ -40,7 +40,12 @@ export function SuccessStoriesSection({ id, linkToImpact = true, audience, showA
   const stories: SuccessStory[] = (Array.isArray(c.stories) && c.stories.length > 0)
     ? (c.stories as SuccessStory[])
     : successStories;
-  const visibleStories = showAll ? stories : stories.slice(0, VISIBLE_STORIES);
+  const visibleStories =
+    slice === "home"
+      ? stories.slice(0, HOME_COUNT)
+      : slice === "donation"
+        ? stories.slice(HOME_COUNT, HOME_COUNT + DONATION_COUNT)
+        : stories.slice(HOME_COUNT + DONATION_COUNT);
 
   return (
     <section id={id} className="py-16 md:py-24 bg-background">
