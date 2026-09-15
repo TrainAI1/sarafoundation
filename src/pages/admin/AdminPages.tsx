@@ -335,6 +335,25 @@ const defaultPages: PageDef[] = [
   ]},
 
   {
+    slug: "about-initiatives",
+    category: "about",
+    categoryLabel: "About Us", title: "Key Initiatives (Learning Pathways)", icon: Info, previewPath: "/about", fields: [
+    { key: "badge", label: "Section Badge", type: "text", placeholder: "Key Initiatives" },
+    { key: "headline", label: "Headline", type: "text", placeholder: "Our Learning Pathways" },
+    { key: "initiatives", label: "Pathway Cards", type: "list", itemLabel: "Pathway", itemFields: [
+      { key: "title", label: "Title", type: "text", placeholder: "" },
+      { key: "description", label: "Description", type: "textarea", placeholder: "" },
+      { key: "image", label: "Card Image", type: "image", placeholder: "" },
+      { key: "imageAlt", label: "Image Alt Text", type: "text", placeholder: "" },
+      { key: "href", label: "Link", type: "text", placeholder: "" },
+    ], defaultItem: { title: "", description: "", image: "", imageAlt: "", href: "" }, defaultItems: [
+      { title: "CAP: Community Access & Participation Pathway", description: "", image: studentsLabImg, imageAlt: "CAP learners working together during a practical learning session", href: "/programs/cap" },
+      { title: "FLIP: Female Learning & Inclusion Pathway", description: "", image: womenCoworking, imageAlt: "Women taking part in a FLIP learning session", href: "/programs/flip" },
+      { title: "EJP: Education Journey Pathway", description: "", image: aboutEjpPhoto, imageAlt: "Participants at a Sara Foundation Africa work-readiness session", href: "/programs/gjp" },
+    ]},
+  ]},
+
+  {
     slug: "about-team",
     category: "about",
     categoryLabel: "About Us", title: "Team Section Header", icon: Users, previewPath: "/about", fields: [
