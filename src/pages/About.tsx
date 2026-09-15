@@ -136,6 +136,19 @@ export default function About() {
   });
   const storyParagraph4 = "Together our pathways reach 11 unique African countries: CAP works across 8 countries with 35+ universities represented, and FLIP works across 6. CAP, FLIP and EJP translate our charitable purposes into clear learning pathways designed around public benefit.";
 
+  const { data: initiativesContent } = usePageContent("about-initiatives", {
+    badge: "Key Initiatives",
+    headline: "Our Learning Pathways",
+    initiatives: keyInitiatives.map((i) => ({ ...i, image: "" })),
+  });
+  const initiatives = (initiativesContent.initiatives?.length ? initiativesContent.initiatives : keyInitiatives).map(
+    (item, index) => ({
+      ...keyInitiatives[index],
+      ...item,
+      image: item.image ? assetUrl(item.image) : keyInitiatives[index]?.image || keyInitiatives[0].image,
+    })
+  );
+
   const { data: teamContent } = usePageContent("about-team", {
     badge: "Our Team",
     headline: "Meet Our Core Team",
