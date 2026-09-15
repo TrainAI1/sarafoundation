@@ -206,8 +206,8 @@ export default function AdminStories() {
       <div className="rounded-xl border border-primary/20 bg-primary/5 p-3 md:p-4 mb-6 flex gap-3">
         <Info className="w-4 h-4 text-primary flex-shrink-0 mt-0.5" />
         <p className="text-xs md:text-sm text-muted-foreground">
-          The first {VISIBLE_ON_PAGE} stories appear on the Home page. The full verified collection appears on
-          Our Impact. Drag a story to any position, or use the arrows for precise ordering.
+          Open a story and tick the pages it should appear on — Home, Donate, Our Impact, or any combination.
+          A story with no page ticked stays hidden. Drag a story to change the order, or use the arrows.
         </p>
       </div>
 
