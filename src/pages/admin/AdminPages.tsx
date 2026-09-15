@@ -1504,6 +1504,7 @@ const SITE_ORDER: string[] = [
   // About
   "about-hero",
   "about-story",
+  "about-initiatives",
   "about-team",
   // CAP
   "programs-cap",
