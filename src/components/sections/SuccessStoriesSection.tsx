@@ -62,7 +62,7 @@ export function SuccessStoriesSection({ id, linkToImpact = true, audience, showA
           </div>
         </ScrollAnimation>
 
-        <div className={showAll ? "grid sm:grid-cols-2 lg:grid-cols-3 gap-5" : "grid md:grid-cols-3 gap-6"}>
+        <div className={slice === "impact" ? "grid sm:grid-cols-2 lg:grid-cols-3 gap-5" : "grid md:grid-cols-3 gap-6"}>
           {visibleStories.map((s, idx) => (
             <div
               key={`${s.name}-${idx}`}
