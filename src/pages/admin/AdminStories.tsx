@@ -27,17 +27,30 @@ interface Story {
   linkLabel: string;
   pathwayHref: string;
   image: string;
+  pages: StoryPage[];
 }
 
 const SLUG = "home-success-stories";
-// Keep in sync with VISIBLE_STORIES in src/components/sections/SuccessStoriesSection.tsx
-const VISIBLE_ON_PAGE = 3;
+
+const PAGE_OPTIONS: { value: StoryPage; label: string }[] = [
+  { value: "home", label: "Home page" },
+  { value: "donation", label: "Donate page" },
+  { value: "impact", label: "Our Impact page" },
+];
+
+const isStoryPage = (v: unknown): v is StoryPage =>
+  v === "home" || v === "donation" || v === "impact";
+
+// Used only for stories saved before page selection existed.
+const defaultPagesForIndex = (index: number): StoryPage[] =>
+  index < 3 ? ["home"] : index < 6 ? ["donation"] : ["impact"];
 
 const defaultStories: Story[] = successStories.map((story, index) => ({
   ...story,
   id: index + 1,
   link: story.link || "",
   image: story.image || "",
+  pages: story.pages?.length ? story.pages : defaultPagesForIndex(index),
 }));
 
 export default function AdminStories() {
