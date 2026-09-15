@@ -255,6 +255,32 @@ export default function AdminStories() {
 
             {editing === s.id && (
               <div className="p-3 md:p-4 border-t border-border space-y-3">
+                <div>
+                  <Label className="text-xs">Show this video on</Label>
+                  <div className="flex flex-wrap gap-2 mt-1.5">
+                    {PAGE_OPTIONS.map((p) => {
+                      const active = s.pages.includes(p.value);
+                      return (
+                        <button
+                          key={p.value}
+                          type="button"
+                          aria-pressed={active}
+                          onClick={() => togglePage(s.id, p.value)}
+                          className={`text-xs rounded-full border px-3 py-1.5 transition-colors ${
+                            active
+                              ? "bg-primary text-primary-foreground border-primary"
+                              : "bg-background text-muted-foreground border-border hover:border-primary/50"
+                          }`}
+                        >
+                          {p.label}
+                        </button>
+                      );
+                    })}
+                  </div>
+                  <p className="text-[11px] text-muted-foreground mt-1.5">
+                    Tick every page this video should appear on. Untick all to hide it.
+                  </p>
+                </div>
                 <div className="grid gap-3 sm:grid-cols-2">
                   <div>
                     <Label className="text-xs">Pathway</Label>
