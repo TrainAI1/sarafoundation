@@ -117,6 +117,7 @@ export default function AdminStories() {
       linkLabel: "",
       pathwayHref: "",
       image: "",
+      pages: ["impact"],
     };
     setStories([...stories, newStory]);
     setEditing(newId);
