@@ -7,19 +7,26 @@ import { usePageContent } from "@/hooks/usePageContent";
 import { assetUrl } from "@/lib/assetUrl";
 import { fallbackStoryThumbs, successStories, type SuccessStory } from "@/data/successStories";
 
-// The homepage remains intentionally concise; Our Impact renders the full list.
-const VISIBLE_STORIES = 3;
+// Stories are split so no video repeats across pages:
+// home = first 3, donation = next 3, impact = everything after that.
+const HOME_COUNT = 3;
+const DONATION_COUNT = 3;
+
+type StoryAudience = "home" | "donation" | "impact";
 
 type SuccessStoriesSectionProps = {
   /** Anchor id so other pages can deep-link to this section (e.g. "/projects#journeys"). */
   id?: string;
   /** Show a secondary button pointing to this same section on the Our Impact page. Default true; pass false when this instance IS that page's copy, to avoid a self-referential link. */
   linkToImpact?: boolean;
-  /** Display the complete verified collection instead of the three homepage features. */
+  /** Which slice of the verified collection this page shows. */
+  audience?: StoryAudience;
+  /** Deprecated alias for audience="impact". */
   showAll?: boolean;
 };
 
-export function SuccessStoriesSection({ id, linkToImpact = true, showAll = false }: SuccessStoriesSectionProps = {}) {
+export function SuccessStoriesSection({ id, linkToImpact = true, audience, showAll = false }: SuccessStoriesSectionProps = {}) {
+  const slice: StoryAudience = audience ?? (showAll ? "impact" : "home");
   const { data: c } = usePageContent("home-success-stories", {
     badge: "Featured Stories",
     headline_pre: "Real Learners.",
@@ -33,7 +40,12 @@ export function SuccessStoriesSection({ id, linkToImpact = true, showAll = false
   const stories: SuccessStory[] = (Array.isArray(c.stories) && c.stories.length > 0)
     ? (c.stories as SuccessStory[])
     : successStories;
-  const visibleStories = showAll ? stories : stories.slice(0, VISIBLE_STORIES);
+  const visibleStories =
+    slice === "home"
+      ? stories.slice(0, HOME_COUNT)
+      : slice === "donation"
+        ? stories.slice(HOME_COUNT, HOME_COUNT + DONATION_COUNT)
+        : stories.slice(HOME_COUNT + DONATION_COUNT);
 
   return (
     <section id={id} className="py-16 md:py-24 bg-background">
@@ -50,7 +62,7 @@ export function SuccessStoriesSection({ id, linkToImpact = true, showAll = false
           </div>
         </ScrollAnimation>
 
-        <div className={showAll ? "grid sm:grid-cols-2 lg:grid-cols-3 gap-5" : "grid md:grid-cols-3 gap-6"}>
+        <div className={slice === "impact" ? "grid sm:grid-cols-2 lg:grid-cols-3 gap-5" : "grid md:grid-cols-3 gap-6"}>
           {visibleStories.map((s, idx) => (
             <div
               key={`${s.name}-${idx}`}

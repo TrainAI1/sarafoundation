@@ -184,7 +184,7 @@ export default function Donation() {
       </section>
 
       {/* Featured learner stories, one per pathway */}
-      <SuccessStoriesSection />
+      <SuccessStoriesSection audience="donation" />
 
       {/* Impact Stories removed temporarily per request */}
 
