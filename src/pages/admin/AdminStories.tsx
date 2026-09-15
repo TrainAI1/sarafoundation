@@ -127,6 +127,16 @@ export default function AdminStories() {
     setStories((prev) => prev.map((s) => (s.id === id ? { ...s, [field]: value } : s)));
   };
 
+  const togglePage = (id: number, page: StoryPage) => {
+    setStories((prev) =>
+      prev.map((s) =>
+        s.id === id
+          ? { ...s, pages: s.pages.includes(page) ? s.pages.filter((p) => p !== page) : [...s.pages, page] }
+          : s
+      )
+    );
+  };
+
   const remove = (id: number) => {
     if (!confirm("Remove this story? This can't be undone once you save.")) return;
     setStories((prev) => prev.filter((s) => s.id !== id));
