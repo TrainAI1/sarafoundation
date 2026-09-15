@@ -14,7 +14,7 @@ import {
 } from "@/components/ui/select";
 import { toast } from "sonner";
 import { Plus, Trash2, Save, PlayCircle, Loader2, ArrowUp, ArrowDown, Info, GripVertical } from "lucide-react";
-import { successStories, type StoryPathway } from "@/data/successStories";
+import { successStories, type StoryPathway, type StoryPage } from "@/data/successStories";
 
 interface Story {
   id: number;
