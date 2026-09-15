@@ -14,7 +14,7 @@ import {
 } from "@/components/ui/select";
 import { toast } from "sonner";
 import { Plus, Trash2, Save, PlayCircle, Loader2, ArrowUp, ArrowDown, Info, GripVertical } from "lucide-react";
-import { successStories, type StoryPathway } from "@/data/successStories";
+import { successStories, type StoryPathway, type StoryPage } from "@/data/successStories";
 
 interface Story {
   id: number;
@@ -27,17 +27,30 @@ interface Story {
   linkLabel: string;
   pathwayHref: string;
   image: string;
+  pages: StoryPage[];
 }
 
 const SLUG = "home-success-stories";
-// Keep in sync with VISIBLE_STORIES in src/components/sections/SuccessStoriesSection.tsx
-const VISIBLE_ON_PAGE = 3;
+
+const PAGE_OPTIONS: { value: StoryPage; label: string }[] = [
+  { value: "home", label: "Home page" },
+  { value: "donation", label: "Donate page" },
+  { value: "impact", label: "Our Impact page" },
+];
+
+const isStoryPage = (v: unknown): v is StoryPage =>
+  v === "home" || v === "donation" || v === "impact";
+
+// Used only for stories saved before page selection existed.
+const defaultPagesForIndex = (index: number): StoryPage[] =>
+  index < 3 ? ["home"] : index < 6 ? ["donation"] : ["impact"];
 
 const defaultStories: Story[] = successStories.map((story, index) => ({
   ...story,
   id: index + 1,
   link: story.link || "",
   image: story.image || "",
+  pages: story.pages?.length ? story.pages : defaultPagesForIndex(index),
 }));
 
 export default function AdminStories() {
@@ -75,6 +88,9 @@ export default function AdminStories() {
                 linkLabel: s.linkLabel || "",
                 pathwayHref: s.pathwayHref || "",
                 image: s.image || "",
+                pages: (Array.isArray(s.pages) ? s.pages.filter(isStoryPage) : []).length
+                  ? (s.pages as unknown[]).filter(isStoryPage)
+                  : defaultPagesForIndex(i),
               }))
             );
           }
@@ -101,6 +117,7 @@ export default function AdminStories() {
       linkLabel: "",
       pathwayHref: "",
       image: "",
+      pages: ["impact"],
     };
     setStories([...stories, newStory]);
     setEditing(newId);
@@ -108,6 +125,16 @@ export default function AdminStories() {
 
   const updateField = (id: number, field: keyof Story, value: string) => {
     setStories((prev) => prev.map((s) => (s.id === id ? { ...s, [field]: value } : s)));
+  };
+
+  const togglePage = (id: number, page: StoryPage) => {
+    setStories((prev) =>
+      prev.map((s) =>
+        s.id === id
+          ? { ...s, pages: s.pages.includes(page) ? s.pages.filter((p) => p !== page) : [...s.pages, page] }
+          : s
+      )
+    );
   };
 
   const remove = (id: number) => {
@@ -189,8 +216,8 @@ export default function AdminStories() {
       <div className="rounded-xl border border-primary/20 bg-primary/5 p-3 md:p-4 mb-6 flex gap-3">
         <Info className="w-4 h-4 text-primary flex-shrink-0 mt-0.5" />
         <p className="text-xs md:text-sm text-muted-foreground">
-          The first {VISIBLE_ON_PAGE} stories appear on the Home page. The full verified collection appears on
-          Our Impact. Drag a story to any position, or use the arrows for precise ordering.
+          Open a story and tick the pages it should appear on — Home, Donate, Our Impact, or any combination.
+          A story with no page ticked stays hidden. Drag a story to change the order, or use the arrows.
         </p>
       </div>
 
@@ -215,11 +242,11 @@ export default function AdminStories() {
                     {s.pathway}
                   </span>
                   <span className="font-medium text-foreground text-sm truncate">{s.name || "New Story"}</span>
-                  {index >= VISIBLE_ON_PAGE && (
-                    <span className="text-[10px] px-1.5 py-0.5 rounded bg-muted text-muted-foreground flex-shrink-0">
-                      Our Impact only
-                    </span>
-                  )}
+                  <span className="text-[10px] px-1.5 py-0.5 rounded bg-muted text-muted-foreground flex-shrink-0">
+                    {s.pages.length
+                      ? PAGE_OPTIONS.filter((p) => s.pages.includes(p.value)).map((p) => p.label.replace(" page", "")).join(", ")
+                      : "Hidden"}
+                  </span>
                 </div>
                 <p className="text-xs text-muted-foreground line-clamp-1">{s.headline}</p>
               </div>
@@ -238,6 +265,32 @@ export default function AdminStories() {
 
             {editing === s.id && (
               <div className="p-3 md:p-4 border-t border-border space-y-3">
+                <div>
+                  <Label className="text-xs">Show this video on</Label>
+                  <div className="flex flex-wrap gap-2 mt-1.5">
+                    {PAGE_OPTIONS.map((p) => {
+                      const active = s.pages.includes(p.value);
+                      return (
+                        <button
+                          key={p.value}
+                          type="button"
+                          aria-pressed={active}
+                          onClick={() => togglePage(s.id, p.value)}
+                          className={`text-xs rounded-full border px-3 py-1.5 transition-colors ${
+                            active
+                              ? "bg-primary text-primary-foreground border-primary"
+                              : "bg-background text-muted-foreground border-border hover:border-primary/50"
+                          }`}
+                        >
+                          {p.label}
+                        </button>
+                      );
+                    })}
+                  </div>
+                  <p className="text-[11px] text-muted-foreground mt-1.5">
+                    Tick every page this video should appear on. Untick all to hide it.
+                  </p>
+                </div>
                 <div className="grid gap-3 sm:grid-cols-2">
                   <div>
                     <Label className="text-xs">Pathway</Label>

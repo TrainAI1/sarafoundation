@@ -13,6 +13,9 @@ import camaWomenPlumbersThumb from "@/assets/success-stories/linkedin/linkedin-9
 
 export type StoryPathway = "CAP" | "FLIP" | "EJP" | "Foundation";
 
+/** Which website pages a story is shown on. */
+export type StoryPage = "home" | "donation" | "impact";
+
 export type SuccessStory = {
   pathway: StoryPathway;
   name: string;
@@ -23,6 +26,8 @@ export type SuccessStory = {
   linkLabel: string;
   pathwayHref: string;
   image?: string;
+  /** Pages this story appears on; when unset the positional split is used. */
+  pages?: StoryPage[];
 };
 
 export const fallbackStoryThumbs: Record<StoryPathway, string> = {

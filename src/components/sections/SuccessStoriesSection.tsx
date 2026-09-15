@@ -40,8 +40,12 @@ export function SuccessStoriesSection({ id, linkToImpact = true, audience, showA
   const stories: SuccessStory[] = (Array.isArray(c.stories) && c.stories.length > 0)
     ? (c.stories as SuccessStory[])
     : successStories;
-  const visibleStories =
-    slice === "home"
+  // When the admin has chosen pages for at least one story, respect those choices.
+  // Otherwise fall back to the positional split (home = 3, donate = 3, impact = rest).
+  const hasExplicitPages = stories.some((s) => Array.isArray(s.pages) && s.pages.length > 0);
+  const visibleStories = hasExplicitPages
+    ? stories.filter((s) => Array.isArray(s.pages) && s.pages.includes(slice))
+    : slice === "home"
       ? stories.slice(0, HOME_COUNT)
       : slice === "donation"
         ? stories.slice(HOME_COUNT, HOME_COUNT + DONATION_COUNT)
