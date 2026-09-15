@@ -26,6 +26,8 @@ export type SuccessStory = {
   linkLabel: string;
   pathwayHref: string;
   image?: string;
+  /** Pages this story appears on; when unset the positional split is used. */
+  pages?: StoryPage[];
 };
 
 export const fallbackStoryThumbs: Record<StoryPathway, string> = {
