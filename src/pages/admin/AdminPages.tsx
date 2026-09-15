@@ -592,7 +592,7 @@ const defaultPages: PageDef[] = [
       { value: "3", label: "Project mentors", sub: "Supporting active learner projects." },
       { value: "10", label: "Learner projects", sub: "Documented outputs of applied learning." },
     ]},
-    { key: "image", label: "Featured Impact Photo", type: "image", placeholder: assetUrl(capImpactPhoto) },
+    { key: "image", label: "Featured Impact Photo", type: "image", placeholder: capImpactLearners },
   ]},
 
   {
