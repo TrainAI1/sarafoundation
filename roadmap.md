@@ -14,4 +14,4 @@
 - [x] Verify every FLIP photo section appears in website order.
 - [x] Refresh dense CAP page card grids while preserving all content.
 - [x] Refresh dense FLIP page card grids while preserving all content.
-- [ ] Verify CAP and FLIP desktop and mobile layouts, images, and content.
+- [x] Verify CAP and FLIP desktop and mobile layouts, images, and content.
