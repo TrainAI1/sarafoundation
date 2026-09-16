@@ -226,46 +226,41 @@ export default function ProgramGJP() {
 
         {/* Evidence with context */}
         <section className="py-14 md:py-20">
-          <div className="section-container px-4 max-w-5xl">
-            <ScrollAnimation variant="fade-up" className="text-center mb-10">
-              <span className="section-badge mb-4">Historical Activity, In Context</span>
-              <h2 className="section-title text-foreground mb-4">What EJP activity has delivered</h2>
-              <p className="section-subtitle mx-auto max-w-2xl">
-                Every figure below is labelled with what it actually counts. Referrals, training places and
-                sessions measure different things and are not unique individuals.
-              </p>
-            </ScrollAnimation>
-            <StaggerContainer className="grid gap-4 md:gap-6 sm:grid-cols-2" staggerDelay={0.1}>
-              {evidence.map((item, i) => (
-                <StaggerItem
-                  key={item.label}
-                  variant="fade-up"
-                  className={i === 0 ? "sm:col-span-2" : ""}
-                >
-                  <div
-                    className={`card-modern h-full ${
-                      i === 0
-                        ? "p-6 md:p-8 bg-accent/5 border-accent/20 flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-8"
-                        : "p-6 flex flex-col"
-                    }`}
-                  >
-                    <div
-                      className={`font-bold font-display text-primary ${
-                        i === 0 ? "text-5xl md:text-6xl sm:w-44 flex-shrink-0" : "text-4xl mb-2"
-                      }`}
-                    >
-                      {item.value}
+          <div className="section-container px-4 max-w-6xl">
+            <div className="grid lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)] gap-8 md:gap-14 items-start">
+              <ScrollAnimation variant="fade-up" className="lg:sticky lg:top-28">
+                <span className="section-badge mb-4">Historical Activity, In Context</span>
+                <h2 className="section-title text-foreground mb-4">What EJP activity has delivered</h2>
+                <p className="section-subtitle">
+                  Every figure is labelled with what it actually counts. Referrals, training places and
+                  sessions measure different things and are not unique individuals.
+                </p>
+              </ScrollAnimation>
+
+              <StaggerContainer className="divide-y divide-border border-y border-border" staggerDelay={0.1}>
+                {evidence.map((item, i) => (
+                  <StaggerItem key={item.label} variant="fade-up">
+                    <div className="group py-6 md:py-7 flex gap-5 md:gap-8">
+                      <div className="flex-shrink-0 w-20 md:w-28">
+                        <div className="font-display text-3xl md:text-4xl font-bold text-primary tabular-nums leading-none">
+                          {item.value}
+                        </div>
+                        <div className="mt-2 text-[10px] font-semibold uppercase tracking-[0.18em] text-muted-foreground/60">
+                          {String(i + 1).padStart(2, "0")}
+                        </div>
+                      </div>
+                      <div className="min-w-0">
+                        <h3 className="font-display font-bold text-foreground mb-1.5">{item.label}</h3>
+                        <p className="text-sm text-muted-foreground leading-relaxed">{item.sub}</p>
+                      </div>
                     </div>
-                    <div>
-                      <h3 className="font-display font-bold text-foreground mb-2">{item.label}</h3>
-                      <p className="text-sm text-muted-foreground leading-relaxed">{item.sub}</p>
-                    </div>
-                  </div>
-                </StaggerItem>
-              ))}
-            </StaggerContainer>
+                  </StaggerItem>
+                ))}
+              </StaggerContainer>
+            </div>
           </div>
         </section>
+
 
 
         {/* Continued journeys */}
