@@ -915,6 +915,9 @@ const defaultPages: PageDef[] = [
       { value: "23", label: "Knowledge sessions", sub: "Knowledge and insight sessions delivered to participants." },
       { value: "170", label: "AI training places", sub: "Delivered with partner organisations: 100 with Regamos Foundation and 70 through ALX Africa AI Essentials training." },
     ]},
+    { key: "activities_image", label: "Activities Section Image", type: "image", placeholder: aboutEjpPhoto },
+    { key: "evidence_image", label: "Evidence Section Image", type: "image", placeholder: youngDeveloper },
+    { key: "journeys_image", label: "Continued Journeys Image", type: "image", placeholder: graduatesCelebration },
     { key: "continued_journeys_text", label: "Continued Journeys Text", type: "textarea", placeholder: "Some participants have continued their journeys through internships and roles with organisations in our network." },
   ]},
 
