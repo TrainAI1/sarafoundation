@@ -79,6 +79,9 @@ export default function ProgramGJP() {
   }));
   const evidence = c.evidence as typeof evidenceDefault;
   const heroImage = c.hero_image ? assetUrl(c.hero_image) : mentorshipSession;
+  const activitiesImage = c.activities_image ? assetUrl(c.activities_image) : techConference;
+  const evidenceImage = c.evidence_image ? assetUrl(c.evidence_image) : youngDeveloper;
+  const journeysImage = c.journeys_image ? assetUrl(c.journeys_image) : graduatesCelebration;
 
   return (
     <div className="min-h-screen bg-background">
