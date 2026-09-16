@@ -262,15 +262,12 @@ export default function ProgramGJP() {
               </ScrollAnimation>
 
               <StaggerContainer className="divide-y divide-border border-y border-border" staggerDelay={0.1}>
-                {evidence.map((item, i) => (
+                {evidence.map((item) => (
                   <StaggerItem key={item.label} variant="fade-up">
                     <div className="group py-6 md:py-7 flex gap-5 md:gap-8">
                       <div className="flex-shrink-0 w-20 md:w-28">
                         <div className="font-display text-3xl md:text-4xl font-bold text-primary tabular-nums leading-none">
                           {item.value}
-                        </div>
-                        <div className="mt-2 text-[10px] font-semibold uppercase tracking-[0.18em] text-muted-foreground/60">
-                          {String(i + 1).padStart(2, "0")}
                         </div>
                       </div>
                       <div className="min-w-0">
