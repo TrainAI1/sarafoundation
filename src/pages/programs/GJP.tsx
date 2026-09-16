@@ -129,7 +129,7 @@ export default function ProgramGJP() {
               </div>
 
               <div className="relative mx-4 lg:mx-0">
-                <div className="rounded-2xl md:rounded-3xl overflow-hidden shadow-2xl mb-6 bg-white">
+                <div className="rounded-2xl md:rounded-3xl overflow-hidden shadow-2xl bg-white">
                   <img
                     src={heroImage}
                     alt="An EJP mentoring or knowledge session in progress"
@@ -140,22 +140,8 @@ export default function ProgramGJP() {
                     }}
                   />
                 </div>
-                <div className="glass-card-dark p-6 md:p-8 rounded-2xl md:rounded-3xl">
-                  <div className="grid grid-cols-3 gap-4 md:gap-6">
-                    {evidence.slice(0, 3).map((stat) => (
-                      <div key={stat.label} className="text-center p-2 md:p-4">
-                        <div className="text-2xl sm:text-3xl md:text-4xl font-bold font-display text-white mb-1 md:mb-2">
-                          {stat.value}
-                        </div>
-                        <div className="text-white/60 text-xs md:text-sm">{stat.label}</div>
-                      </div>
-                    ))}
-                  </div>
-                  <p className="text-center text-white/50 text-xs mt-4">
-                    Historical EJP activity. Referrals and training places are not confirmed placements.
-                  </p>
-                </div>
               </div>
+
             </div>
           </div>
         </section>
