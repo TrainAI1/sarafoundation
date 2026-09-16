@@ -62,7 +62,7 @@ export function FLIPGenderGapSection() {
           </ScrollAnimation>
 
         <StaggerContainer className="divide-y divide-border border-y border-border" staggerDelay={0.1}>
-          {approaches.map((approach, index) => {
+          {approaches.map((approach) => {
             const Icon = approachIcons[index % approachIcons.length];
             return (
               <StaggerItem key={approach.title} variant="fade-up">
