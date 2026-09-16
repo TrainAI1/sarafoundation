@@ -178,12 +178,26 @@ export default function ProgramGJP() {
                     className={feature ? "sm:col-span-2 lg:col-span-2 lg:row-span-2" : ""}
                   >
                     <div
-                      className={`card-modern group h-full flex ${
+                      className={`card-modern group h-full flex relative overflow-hidden ${
                         feature
-                          ? "flex-col justify-between p-7 md:p-9 bg-primary text-primary-foreground border-primary"
+                          ? "flex-col justify-between p-7 md:p-9 min-h-[20rem] bg-primary text-primary-foreground border-primary"
                           : "flex-col p-6"
                       }`}
                     >
+                      {feature && (
+                        <>
+                          <img
+                            src={activitiesFeatureImage}
+                            alt=""
+                            aria-hidden="true"
+                            className="absolute inset-0 w-full h-full object-cover"
+                            loading="lazy"
+                          />
+                          <div className="absolute inset-0 bg-gradient-to-t from-primary via-primary/85 to-primary/50" />
+                        </>
+                      )}
+                      <div className="relative z-10 flex flex-col h-full">
+
                       <div className="flex items-start justify-between gap-4 mb-4">
                         <span
                           className={`inline-flex items-center justify-center w-11 h-11 rounded-xl ${
