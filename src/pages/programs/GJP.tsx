@@ -62,7 +62,9 @@ export default function ProgramGJP() {
     hero_headline_highlight: "Sessions",
     hero_description: "EJP supports continued learning through practical and experiential opportunities that complement participants' wider educational journeys.",
     hero_image: "",
+    activities_feature_image: "",
     journeys_image: "",
+
     apply_cta_label: "Express interest",
     evidence_cta_label: "See our impact evidence",
     no_guarantee_text: "Sara Foundation Africa does not guarantee or promise employment through EJP. Where employment, internship or placement outcomes are mentioned, they are examples of participants' continued journeys following learning, or referrals to opportunities held by other organisations.",
