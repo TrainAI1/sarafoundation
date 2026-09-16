@@ -82,6 +82,10 @@ export default function ProgramGJP() {
   const evidence = c.evidence as typeof evidenceDefault;
   const heroImage = c.hero_image ? assetUrl(c.hero_image) : mentorshipSession;
   const journeysImage = c.journeys_image ? assetUrl(c.journeys_image) : graduatesCelebration;
+  const activitiesFeatureImage = c.activities_feature_image
+    ? assetUrl(c.activities_feature_image)
+    : studentsTechLab;
+
 
   return (
     <div className="min-h-screen bg-background">
