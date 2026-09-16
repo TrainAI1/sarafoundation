@@ -891,6 +891,8 @@ const defaultPages: PageDef[] = [
     { key: "hero_headline_highlight", label: "Hero Headline (highlighted word)", type: "text", placeholder: "Sessions" },
     { key: "hero_description", label: "Hero Description", type: "textarea", placeholder: "EJP supports continued learning through practical and experiential opportunities." },
     { key: "hero_image", label: "Hero Image", type: "image", placeholder: mentorshipSession },
+    { key: "activities_feature_image", label: "Activities Feature Card Background", type: "image", placeholder: mentorshipSession },
+
     { key: "apply_cta_label", label: "Primary CTA Label", type: "text", placeholder: "Express interest" },
     { key: "evidence_cta_label", label: "Secondary CTA Label", type: "text", placeholder: "See our impact evidence" },
     { key: "no_guarantee_text", label: "No-Guarantee Statement", type: "textarea", placeholder: "Sara Foundation Africa does not guarantee or promise employment through EJP." },
