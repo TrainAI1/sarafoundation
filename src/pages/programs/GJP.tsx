@@ -201,7 +201,7 @@ export default function ProgramGJP() {
                             className="absolute inset-0 w-full h-full object-cover"
                             loading="lazy"
                           />
-                          <div className="absolute inset-0 bg-gradient-to-t from-primary via-primary/85 to-primary/50" />
+                          <div className="absolute inset-0 bg-gradient-to-t from-primary via-primary/75 to-primary/25" />
                         </>
                       )}
                       <div className="relative z-10 flex flex-col h-full">
