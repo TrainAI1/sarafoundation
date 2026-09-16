@@ -230,7 +230,9 @@ export default function ProgramGJP() {
                           {activity.desc}
                         </p>
                       </div>
+                      </div>
                     </div>
+
                   </StaggerItem>
                 );
               })}
