@@ -232,31 +232,57 @@ export default function ProgramGJP() {
                 </div>
               ))}
             </div>
+            <div className="mt-8 md:mt-10 rounded-2xl md:rounded-3xl overflow-hidden shadow-xl">
+              <img
+                src={evidenceImage}
+                alt="An EJP participant working on a laptop during a work-readiness session"
+                className="w-full h-48 md:h-64 object-cover"
+                loading="lazy"
+                onError={(e) => {
+                  e.currentTarget.src = youngDeveloper;
+                }}
+              />
+            </div>
           </div>
         </section>
 
         {/* Continued journeys */}
         <section className="py-14 md:py-20">
-          <div className="section-container px-4 max-w-3xl text-center">
-            <span className="section-badge mb-4">Continued Journeys</span>
-            <h2 className="section-title text-foreground mb-5">
-              What participants have gone on to do
-            </h2>
-            <p className="text-muted-foreground text-base md:text-lg mb-6">
-              {c.continued_journeys_text}
-            </p>
-            <p className="text-xs text-muted-foreground mb-8">
-              Verified continued-journey outcomes are documented in our annual impact reports and participant spotlights.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-3 justify-center">
-              <Button asChild size="lg" className="rounded-xl glow-effect">
-                <Link to="/blog">
-                  Read learner stories <ArrowRight className="w-4 h-4" />
-                </Link>
-              </Button>
-              <Button asChild size="lg" variant="outline" className="rounded-xl">
-                <Link to="/partnership">Partner with us</Link>
-              </Button>
+          <div className="section-container px-4">
+            <div className="grid lg:grid-cols-2 gap-8 md:gap-12 items-center max-w-5xl mx-auto">
+              <div>
+                <span className="section-badge mb-4">Continued Journeys</span>
+                <h2 className="section-title text-foreground mb-5">
+                  What participants have gone on to do
+                </h2>
+                <p className="text-muted-foreground text-base md:text-lg mb-6">
+                  {c.continued_journeys_text}
+                </p>
+                <p className="text-xs text-muted-foreground mb-8">
+                  Verified continued-journey outcomes are documented in our annual impact reports and participant spotlights.
+                </p>
+                <div className="flex flex-col sm:flex-row gap-3">
+                  <Button asChild size="lg" className="rounded-xl glow-effect">
+                    <Link to="/blog">
+                      Read learner stories <ArrowRight className="w-4 h-4" />
+                    </Link>
+                  </Button>
+                  <Button asChild size="lg" variant="outline" className="rounded-xl">
+                    <Link to="/partnership">Partner with us</Link>
+                  </Button>
+                </div>
+              </div>
+              <div className="rounded-2xl md:rounded-3xl overflow-hidden shadow-xl order-first lg:order-last">
+                <img
+                  src={journeysImage}
+                  alt="Graduates celebrating after completing their learning journey"
+                  className="w-full h-56 md:h-80 object-cover"
+                  loading="lazy"
+                  onError={(e) => {
+                    e.currentTarget.src = graduatesCelebration;
+                  }}
+                />
+              </div>
             </div>
           </div>
         </section>
