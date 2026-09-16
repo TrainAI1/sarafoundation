@@ -1,6 +1,8 @@
 import { BookOpen, Users, Presentation, Trophy, Wrench, MessagesSquare, Share2, Lightbulb, HeartHandshake } from "lucide-react";
 import { usePageContent } from "@/hooks/usePageContent";
 import { StaggerContainer, StaggerItem } from "@/components/ui/scroll-animation";
+import { assetUrl } from "@/lib/assetUrl";
+import capClassroom from "@/assets/cap-classroom.jpg";
 
 const benefitIcons = [BookOpen, Users, Lightbulb, Trophy, Wrench, MessagesSquare, Presentation, Share2, HeartHandshake];
 
@@ -8,6 +10,7 @@ export function CAPBenefitsSection() {
   const { data: c } = usePageContent("cap-benefits", {
     badge: "Benefits to Participants",
     headline: "What CAP provides",
+    featured_image: capClassroom,
     benefits: [
       { title: "Structured digital learning", description: "Sessions and resources that build digital literacy and practical skills." },
       { title: "Mentoring and guided project support", description: "Mentors supporting learners through project work and reflection." },
@@ -22,6 +25,7 @@ export function CAPBenefitsSection() {
   });
 
   const benefits = c.benefits as { title: string; description: string }[];
+  const featuredImage = assetUrl(c.featured_image) || capClassroom;
 
   return (
     <section className="py-16 md:py-24 bg-background">
@@ -36,12 +40,18 @@ export function CAPBenefitsSection() {
             const featured = index === 0;
             return (
               <StaggerItem key={benefit.title} variant="fade-up" className={featured ? "sm:col-span-2 lg:col-span-2 lg:row-span-2" : ""}>
-              <div className={`card-modern p-5 md:p-6 h-full flex flex-col ${featured ? "bg-primary border-primary justify-end min-h-64 md:p-8" : ""}`}>
-                <span className={`inline-flex items-center justify-center w-11 h-11 rounded-xl mb-4 ${featured ? "bg-primary-foreground/15 text-primary-foreground" : "bg-primary/10 text-primary"}`}>
+              <div className={`card-modern p-5 md:p-6 h-full flex flex-col relative overflow-hidden ${featured ? "bg-primary border-primary justify-end min-h-64 md:p-8" : ""}`}>
+                {featured && (
+                  <>
+                    <img src={featuredImage} alt="CAP participants learning digital skills" loading="lazy" className="absolute inset-0 h-full w-full object-cover" />
+                    <span className="absolute inset-0 bg-primary/80" aria-hidden="true" />
+                  </>
+                )}
+                <span className={`relative inline-flex items-center justify-center w-11 h-11 rounded-xl mb-4 ${featured ? "bg-primary-foreground/15 text-primary-foreground" : "bg-primary/10 text-primary"}`}>
                   <Icon className="w-5 h-5" aria-hidden="true" />
                 </span>
-                <h3 className={`font-display font-bold mb-2 ${featured ? "text-2xl md:text-3xl text-primary-foreground" : "text-base text-foreground"}`}>{benefit.title}</h3>
-                <p className={`text-sm leading-relaxed ${featured ? "text-primary-foreground/75 max-w-md" : "text-muted-foreground"}`}>{benefit.description}</p>
+                <h3 className={`relative font-display font-bold mb-2 ${featured ? "text-2xl md:text-3xl text-primary-foreground" : "text-base text-foreground"}`}>{benefit.title}</h3>
+                <p className={`relative text-sm leading-relaxed ${featured ? "text-primary-foreground/90 max-w-md" : "text-muted-foreground"}`}>{benefit.description}</p>
               </div>
               </StaggerItem>
             );

@@ -25,6 +25,7 @@ import womenTechLeaders from "@/assets/women-tech-leaders.jpg";
 import graduatesCelebration from "@/assets/graduates-celebration.jpg";
 import communityWorkshop from "@/assets/community-workshop.jpg";
 import womenCoworking from "@/assets/women-coworking.jpg";
+import flipWomanWhiteboard from "@/assets/flip-woman-whiteboard.jpg";
 import mentorshipSession from "@/assets/mentorship-session.jpg";
 import partnershipMeeting from "@/assets/partnership-meeting.jpg";
 import capImpactPhoto from "@/assets/events/DSC_3145.jpg.asset.json";
@@ -390,6 +391,7 @@ const defaultPages: PageDef[] = [
     categoryLabel: "CAP Program", title: "Key Benefits & Outcomes", icon: GraduationCap, previewPath: "/programs/cap", fields: [
     { key: "badge", label: "Badge", type: "text", placeholder: "Benefits to Participants" },
     { key: "headline", label: "Headline", type: "text", placeholder: "What CAP provides" },
+    { key: "featured_image", label: "Featured Benefit Background", type: "image", placeholder: assetUrl(capClassroom) },
     { key: "benefits", label: "Benefits", type: "list", itemLabel: "Benefit", itemFields: [
       { key: "title", label: "Title", type: "text", placeholder: "" },
       { key: "description", label: "Description", type: "textarea", placeholder: "" },
@@ -728,6 +730,7 @@ const defaultPages: PageDef[] = [
     { key: "headline_pre", label: "Headline (before highlight)", type: "text", placeholder: "What You'll" },
     { key: "headline_accent", label: "Headline (highlighted)", type: "text", placeholder: "Gain" },
     { key: "description", label: "Description", type: "textarea", placeholder: "We provide comprehensive support and access to benefits that empower women to succeed in tech." },
+    { key: "featured_image", label: "Featured Benefit Background", type: "image", placeholder: flipWomanWhiteboard },
     { key: "benefits", label: "Benefits", type: "list", itemLabel: "Benefit", itemFields: [
       { key: "title", label: "Title", type: "text", placeholder: "" },
       { key: "description", label: "Description", type: "textarea", placeholder: "" },
