@@ -19,6 +19,8 @@ import { ScrollAnimation, StaggerContainer, StaggerItem } from "@/components/ui/
 import { assetUrl } from "@/lib/assetUrl";
 import mentorshipSession from "@/assets/mentorship-session.jpg";
 import graduatesCelebration from "@/assets/graduates-celebration.jpg";
+import studentsTechLab from "@/assets/students-tech-lab.jpg";
+
 
 // Icons are matched to the saved list by position and are not admin-editable.
 const activityIcons = [Lightbulb, BookOpen, Users, Compass, Share2, BriefcaseBusiness];
@@ -62,7 +64,9 @@ export default function ProgramGJP() {
     hero_headline_highlight: "Sessions",
     hero_description: "EJP supports continued learning through practical and experiential opportunities that complement participants' wider educational journeys.",
     hero_image: "",
+    activities_feature_image: "",
     journeys_image: "",
+
     apply_cta_label: "Express interest",
     evidence_cta_label: "See our impact evidence",
     no_guarantee_text: "Sara Foundation Africa does not guarantee or promise employment through EJP. Where employment, internship or placement outcomes are mentioned, they are examples of participants' continued journeys following learning, or referrals to opportunities held by other organisations.",
@@ -78,6 +82,10 @@ export default function ProgramGJP() {
   const evidence = c.evidence as typeof evidenceDefault;
   const heroImage = c.hero_image ? assetUrl(c.hero_image) : mentorshipSession;
   const journeysImage = c.journeys_image ? assetUrl(c.journeys_image) : graduatesCelebration;
+  const activitiesFeatureImage = c.activities_feature_image
+    ? assetUrl(c.activities_feature_image)
+    : studentsTechLab;
+
 
   return (
     <div className="min-h-screen bg-background">
@@ -178,12 +186,26 @@ export default function ProgramGJP() {
                     className={feature ? "sm:col-span-2 lg:col-span-2 lg:row-span-2" : ""}
                   >
                     <div
-                      className={`card-modern group h-full flex ${
+                      className={`card-modern group h-full flex relative overflow-hidden ${
                         feature
-                          ? "flex-col justify-between p-7 md:p-9 bg-primary text-primary-foreground border-primary"
+                          ? "flex-col justify-between p-7 md:p-9 min-h-[20rem] bg-primary text-primary-foreground border-primary"
                           : "flex-col p-6"
                       }`}
                     >
+                      {feature && (
+                        <>
+                          <img
+                            src={activitiesFeatureImage}
+                            alt=""
+                            aria-hidden="true"
+                            className="absolute inset-0 w-full h-full object-cover"
+                            loading="lazy"
+                          />
+                          <div className="absolute inset-0 bg-gradient-to-t from-primary via-primary/75 to-primary/25" />
+                        </>
+                      )}
+                      <div className="relative z-10 flex flex-col h-full">
+
                       <div className="flex items-start justify-between gap-4 mb-4">
                         <span
                           className={`inline-flex items-center justify-center w-11 h-11 rounded-xl ${
@@ -216,7 +238,9 @@ export default function ProgramGJP() {
                           {activity.desc}
                         </p>
                       </div>
+                      </div>
                     </div>
+
                   </StaggerItem>
                 );
               })}
@@ -226,46 +250,41 @@ export default function ProgramGJP() {
 
         {/* Evidence with context */}
         <section className="py-14 md:py-20">
-          <div className="section-container px-4 max-w-5xl">
-            <ScrollAnimation variant="fade-up" className="text-center mb-10">
-              <span className="section-badge mb-4">Historical Activity, In Context</span>
-              <h2 className="section-title text-foreground mb-4">What EJP activity has delivered</h2>
-              <p className="section-subtitle mx-auto max-w-2xl">
-                Every figure below is labelled with what it actually counts. Referrals, training places and
-                sessions measure different things and are not unique individuals.
-              </p>
-            </ScrollAnimation>
-            <StaggerContainer className="grid gap-4 md:gap-6 sm:grid-cols-2" staggerDelay={0.1}>
-              {evidence.map((item, i) => (
-                <StaggerItem
-                  key={item.label}
-                  variant="fade-up"
-                  className={i === 0 ? "sm:col-span-2" : ""}
-                >
-                  <div
-                    className={`card-modern h-full ${
-                      i === 0
-                        ? "p-6 md:p-8 bg-accent/5 border-accent/20 flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-8"
-                        : "p-6 flex flex-col"
-                    }`}
-                  >
-                    <div
-                      className={`font-bold font-display text-primary ${
-                        i === 0 ? "text-5xl md:text-6xl sm:w-44 flex-shrink-0" : "text-4xl mb-2"
-                      }`}
-                    >
-                      {item.value}
+          <div className="section-container px-4 max-w-6xl">
+            <div className="grid lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)] gap-8 md:gap-14 items-start">
+              <ScrollAnimation variant="fade-up" className="lg:sticky lg:top-28">
+                <span className="section-badge mb-4">Historical Activity, In Context</span>
+                <h2 className="section-title text-foreground mb-4">What EJP activity has delivered</h2>
+                <p className="section-subtitle">
+                  Every figure is labelled with what it actually counts. Referrals, training places and
+                  sessions measure different things and are not unique individuals.
+                </p>
+              </ScrollAnimation>
+
+              <StaggerContainer className="divide-y divide-border border-y border-border" staggerDelay={0.1}>
+                {evidence.map((item, i) => (
+                  <StaggerItem key={item.label} variant="fade-up">
+                    <div className="group py-6 md:py-7 flex gap-5 md:gap-8">
+                      <div className="flex-shrink-0 w-20 md:w-28">
+                        <div className="font-display text-3xl md:text-4xl font-bold text-primary tabular-nums leading-none">
+                          {item.value}
+                        </div>
+                        <div className="mt-2 text-[10px] font-semibold uppercase tracking-[0.18em] text-muted-foreground/60">
+                          {String(i + 1).padStart(2, "0")}
+                        </div>
+                      </div>
+                      <div className="min-w-0">
+                        <h3 className="font-display font-bold text-foreground mb-1.5">{item.label}</h3>
+                        <p className="text-sm text-muted-foreground leading-relaxed">{item.sub}</p>
+                      </div>
                     </div>
-                    <div>
-                      <h3 className="font-display font-bold text-foreground mb-2">{item.label}</h3>
-                      <p className="text-sm text-muted-foreground leading-relaxed">{item.sub}</p>
-                    </div>
-                  </div>
-                </StaggerItem>
-              ))}
-            </StaggerContainer>
+                  </StaggerItem>
+                ))}
+              </StaggerContainer>
+            </div>
           </div>
         </section>
+
 
 
         {/* Continued journeys */}
