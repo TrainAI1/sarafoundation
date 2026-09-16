@@ -16,6 +16,9 @@ import {
 import { usePageContent } from "@/hooks/usePageContent";
 import { assetUrl } from "@/lib/assetUrl";
 import mentorshipSession from "@/assets/mentorship-session.jpg";
+import techConference from "@/assets/tech-conference.jpg";
+import graduatesCelebration from "@/assets/graduates-celebration.jpg";
+import youngDeveloper from "@/assets/young-developer.jpg";
 
 // Icons are matched to the saved list by position and are not admin-editable.
 const activityIcons = [Lightbulb, BookOpen, Users, Compass, Share2, BriefcaseBusiness];
