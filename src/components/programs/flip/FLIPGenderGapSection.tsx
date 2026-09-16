@@ -2,6 +2,7 @@ import { Users, BookOpen, Heart, LucideIcon } from "lucide-react";
 import womenInTechWorkshop from "@/assets/success-stories/linkedin/linkedin-8.jpg.asset.json";
 import { usePageContent } from "@/hooks/usePageContent";
 import { assetUrl } from "@/lib/assetUrl";
+import { ScrollAnimation, StaggerContainer, StaggerItem } from "@/components/ui/scroll-animation";
 
 const approachIcons: LucideIcon[] = [Users, BookOpen, Heart];
 
@@ -39,50 +40,49 @@ export function FLIPGenderGapSection() {
   return (
     <section className="py-16 md:py-24 bg-accent/5">
       <div className="section-container">
-        <div className="text-center max-w-3xl mx-auto mb-10 md:mb-16 px-4">
+        <div className="grid lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] gap-8 md:gap-14 items-start px-4 lg:px-0">
+          <ScrollAnimation variant="fade-up" className="lg:sticky lg:top-28">
           <span className="section-badge mb-4 md:mb-6">{c.badge}</span>
           <h2 className="section-title text-foreground mb-4 md:mb-6">
             {c.headline_pre} <span className="gradient-text-accent">{c.headline_accent}</span>
           </h2>
-          <p className="section-subtitle mx-auto">
+          <p className="section-subtitle">
             {c.description}
           </p>
-        </div>
-
-        {/* Featured Image */}
-        <div className="max-w-4xl mx-auto mb-10 md:mb-16 px-4 lg:px-0">
-          <div className="rounded-2xl overflow-hidden shadow-lg">
+          <div className="rounded-2xl overflow-hidden shadow-lg mt-7">
             <img
               src={image}
               alt="Sara Foundation Women in Tech workshop announcement"
-              className="w-full h-48 md:h-72 object-cover"
+              className="w-full h-48 md:h-64 object-cover"
               onError={(e) => {
                 e.currentTarget.src = fallbackImage;
               }}
             />
           </div>
-        </div>
+          </ScrollAnimation>
 
-        <div className="grid md:grid-cols-3 gap-6 md:gap-8 px-4 lg:px-0">
+        <StaggerContainer className="divide-y divide-border border-y border-border" staggerDelay={0.1}>
           {approaches.map((approach, index) => {
             const Icon = approachIcons[index % approachIcons.length];
             return (
-              <div key={approach.title} className="card-modern p-6 md:p-8 text-center group">
-                <div className="w-14 h-14 md:w-16 md:h-16 mx-auto rounded-xl md:rounded-2xl bg-accent flex items-center justify-center mb-5 md:mb-6 shadow-lg group-hover:scale-110 transition-transform">
-                  <Icon className="w-7 h-7 md:w-8 md:h-8 text-white" />
+              <StaggerItem key={approach.title} variant="fade-up">
+              <div className="py-6 md:py-8 flex gap-5 md:gap-7 items-start group">
+                <div className="w-12 h-12 rounded-xl bg-accent/10 text-accent flex items-center justify-center flex-shrink-0">
+                  <Icon className="w-6 h-6" />
                 </div>
-                <div className="text-3xl md:text-4xl font-bold font-display text-accent/20 mb-2">
-                  0{index + 1}
-                </div>
+                <div>
                 <h3 className="font-display font-bold text-lg md:text-xl text-foreground mb-3">
                   {approach.title}
                 </h3>
                 <p className="text-muted-foreground text-sm">
                   {approach.description}
                 </p>
+                </div>
               </div>
+              </StaggerItem>
             );
           })}
+        </StaggerContainer>
         </div>
       </div>
     </section>
