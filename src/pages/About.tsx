@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import { Target, Heart, Lightbulb, Globe, Users, Award, ArrowRight, Eye, Quote, Trophy } from "lucide-react";
 import { usePageContent } from "@/hooks/usePageContent";
+import { usePathwayImages } from "@/hooks/usePathwayImages";
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import { assetUrl } from "@/lib/assetUrl";
@@ -109,13 +110,13 @@ const keyInitiatives = [
 ];
 
 const countries = [
-  { name: "Nigeria", flag: "🇳🇬" },
-  { name: "Ghana", flag: "🇬🇭" },
-  { name: "Kenya", flag: "🇰🇪" },
-  { name: "South Africa", flag: "🇿🇦" },
-  { name: "Uganda", flag: "🇺🇬" },
-  { name: "Zambia", flag: "🇿🇲" },
-  { name: "Togo", flag: "🇹🇬" },
+  { name: "Nigeria" },
+  { name: "Ghana" },
+  { name: "Kenya" },
+  { name: "South Africa" },
+  { name: "Uganda" },
+  { name: "Zambia" },
+  { name: "Togo" },
 ];
 
 export default function About() {
@@ -136,16 +137,21 @@ export default function About() {
   });
   const storyParagraph4 = "Together our pathways reach 11 unique African countries: CAP works across 8 countries with 35+ universities represented, and FLIP works across 6. CAP, FLIP and EJP translate our charitable purposes into clear learning pathways designed around public benefit.";
 
+  const pathwayImages = usePathwayImages();
+
   const { data: initiativesContent } = usePageContent("about-initiatives", {
     badge: "Key Initiatives",
     headline: "Our Learning Pathways",
     initiatives: keyInitiatives.map((i) => ({ ...i, image: "" })),
   });
+  const sharedPathwayImages = [pathwayImages.CAP, pathwayImages.FLIP, pathwayImages.EJP];
   const initiatives = (initiativesContent.initiatives?.length ? initiativesContent.initiatives : keyInitiatives).map(
     (item, index) => ({
       ...keyInitiatives[index],
       ...item,
-      image: item.image ? assetUrl(item.image) : keyInitiatives[index]?.image || keyInitiatives[0].image,
+      image: item.image
+        ? assetUrl(item.image)
+        : sharedPathwayImages[index] || keyInitiatives[index]?.image || keyInitiatives[0].image,
     })
   );
 
@@ -256,7 +262,6 @@ export default function About() {
             </span>
             {countries.map((country) => (
               <span key={country.name} className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.18em] text-primary">
-                <span className="text-base">{country.flag}</span>
                 {country.name}
               </span>
             ))}

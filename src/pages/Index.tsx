@@ -10,7 +10,7 @@ import { PartnersSection } from "@/components/sections/PartnersSection";
 import { StrategicPartnersSection } from "@/components/sections/StrategicPartnersSection";
 import { TestimonialsSection } from "@/components/sections/TestimonialsSection";
 import { FAQSection } from "@/components/sections/FAQSection";
-import { NewsletterSection } from "@/components/sections/NewsletterSection";
+
 import { CTASection } from "@/components/sections/CTASection";
 import { Helmet } from "react-helmet-async";
 
@@ -86,7 +86,7 @@ const Index = () => {
         <StrategicPartnersSection />
         <TestimonialsSection />
         <FAQSection />
-        <NewsletterSection />
+        
         <CTASection />
       </main>
       <Footer />

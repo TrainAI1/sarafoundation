@@ -1,5 +1,33 @@
-import { Award } from "lucide-react";
+import { Award, Handshake } from "lucide-react";
 import { usePageContent } from "@/hooks/usePageContent";
+import { useQuery } from "@tanstack/react-query";
+import { supabase } from "@/integrations/supabase/client";
+import scintillaImg from "@/assets/partners/scintilla.png";
+import farmilyImg from "@/assets/partners/farmily.jpg";
+import trainaiImg from "@/assets/partners/trainai.png";
+import nanaadeImg from "@/assets/partners/nanaade.png";
+import alxImg from "@/assets/partners/alx.png";
+import kadarabriteImg from "@/assets/partners/kadarabrite.png";
+import platformhubImg from "@/assets/partners/platformhub.png";
+
+// Same logo set the homepage Strategic Partners row uses.
+const logoFallbacks: Record<string, string> = {
+  "Scintilla Innovations": scintillaImg,
+  "Scintilla Africa": scintillaImg,
+  "Scintilla": scintillaImg,
+  "Farmily": farmilyImg,
+  "Train AI": trainaiImg,
+  "Nanaade AI": nanaadeImg,
+  "Nanaade": nanaadeImg,
+  "ALX": alxImg,
+  "KàdàràBrite": kadarabriteImg,
+  "Platform Hub": platformhubImg,
+};
+
+const findLogo = (name: string, dbLogos: Record<string, string>) => {
+  const key = Object.keys(dbLogos).find((n) => n.toLowerCase().startsWith(name.toLowerCase().split(" ")[0]));
+  return (key && dbLogos[key]) || logoFallbacks[name] || "";
+};
 
 export function CAPRecognitionSection() {
   const { data: c } = usePageContent("cap-recognition", {
@@ -20,6 +48,15 @@ export function CAPRecognitionSection() {
   });
 
   const partners = c.partners as { name: string; role: string }[];
+
+  const { data: dbLogos = {} } = useQuery({
+    queryKey: ["partners", "logos"],
+    queryFn: async () => {
+      const { data } = await supabase.from("partners").select("name, logo_url").eq("is_active", true);
+      return Object.fromEntries((data || []).filter((p) => p.logo_url).map((p) => [p.name, p.logo_url as string]));
+    },
+    staleTime: 1000 * 60 * 5,
+  });
 
   return (
     <section className="py-16 md:py-24 bg-secondary/50">
@@ -51,12 +88,27 @@ export function CAPRecognitionSection() {
         <div className="px-4 lg:px-0">
           <h3 className="font-display font-bold text-lg text-foreground text-center mb-6">{c.partners_title}</h3>
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
-            {partners.map((partner) => (
-              <div key={partner.name} className="card-modern p-5 md:p-6 text-center">
-                <h4 className="font-display font-bold text-base text-foreground mb-2">{partner.name}</h4>
-                <p className="text-muted-foreground text-xs">{partner.role}</p>
-              </div>
-            ))}
+            {partners.map((partner) => {
+              const logo = findLogo(partner.name, dbLogos);
+              return (
+                <div key={partner.name} className="card-modern p-5 md:p-6 text-center flex flex-col items-center">
+                  <div className="w-full h-20 mb-4 flex items-center justify-center">
+                    {logo ? (
+                      <img
+                        src={logo}
+                        alt={`${partner.name} logo`}
+                        loading="lazy"
+                        className="max-h-20 max-w-[70%] object-contain"
+                      />
+                    ) : (
+                      <Handshake className="w-8 h-8 text-muted-foreground" aria-hidden="true" />
+                    )}
+                  </div>
+                  <h4 className="font-display font-bold text-base text-foreground mb-2">{partner.name}</h4>
+                  <p className="text-muted-foreground text-xs">{partner.role}</p>
+                </div>
+              );
+            })}
           </div>
         </div>
 
