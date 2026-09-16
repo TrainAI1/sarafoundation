@@ -14,8 +14,6 @@ export function CAPCTASection() {
       { label: "Become a CAP Member", sublabel: "Young people & women", to: "/programs/cap/apply" },
       { label: "Get in Touch", sublabel: "Individuals & learners", to: "/contact" },
     ],
-    contact_line1: "info@sarafoundationafrica.com   sarafoundationafrica.com",
-    contact_line2: "+44 7435 126104 (UK) | +234 9076 66404 (NG)",
   });
 
   const actions = c.actions as { label: string; sublabel: string; to: string }[];
@@ -47,10 +45,6 @@ export function CAPCTASection() {
           })}
         </div>
 
-        <div className="text-white/50 text-xs space-y-1">
-          <p>{c.contact_line1}</p>
-          <p>{c.contact_line2}</p>
-        </div>
       </div>
     </section>
   );

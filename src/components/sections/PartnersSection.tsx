@@ -39,6 +39,11 @@ const defaultUniversities = [
   { name: "Asteven Energy Institute", country: "Nigeria", flag: "🇳🇬" },
 ];
 
+// Flag emoji render as plain blue letters on many devices, so they are stripped
+// from saved content and never rendered on the site.
+const stripEmoji = (value: string) =>
+  (value || "").replace(/[\u{1F1E6}-\u{1F1FF}\u{1F300}-\u{1FAFF}\u{2600}-\u{27BF}]/gu, "").replace(/\s{2,}/g, " ").trim();
+
 export function PartnersSection() {
   const { data: c } = usePageContent("home-partners-universities", {
     badge: "Our University Partners",
@@ -46,7 +51,7 @@ export function PartnersSection() {
     headline_accent: "35 African Universities",
     description:
       "We have established CAP Tech Hubs across 8 African countries, supporting young people on campus.",
-    countries_line: "Across Nigeria 🇳🇬 · Ghana 🇬🇭 · Kenya 🇰🇪 · South Africa 🇿🇦 · Uganda 🇺🇬 · Zambia 🇿🇲 · Togo 🇹🇬",
+    countries_line: "Across Nigeria · Ghana · Kenya · South Africa · Uganda · Zambia · Togo",
     universities: defaultUniversities,
   });
 
@@ -78,9 +83,11 @@ export function PartnersSection() {
               key={`a-${i}`}
               className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.18em] text-primary"
             >
-              <span className="text-lg" role="img" aria-label={`${uni.country} flag`}>{uni.flag}</span>
               <span className="text-sm font-medium text-foreground whitespace-nowrap">
                 {uni.name}
+              </span>
+              <span className="text-[10px] font-semibold uppercase tracking-[0.14em] text-muted-foreground whitespace-nowrap">
+                {uni.country}
               </span>
             </div>
           ))}
@@ -95,9 +102,11 @@ export function PartnersSection() {
               key={`b-${i}`}
               className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.18em] text-primary"
             >
-              <span className="text-lg" role="img" aria-label={`${uni.country} flag`}>{uni.flag}</span>
               <span className="text-sm font-medium text-foreground whitespace-nowrap">
                 {uni.name}
+              </span>
+              <span className="text-[10px] font-semibold uppercase tracking-[0.14em] text-muted-foreground whitespace-nowrap">
+                {uni.country}
               </span>
             </div>
           ))}
@@ -107,7 +116,7 @@ export function PartnersSection() {
       <div className="section-container">
         <ScrollAnimation variant="fade-in" className="text-center mt-10">
           <p className="text-muted-foreground text-sm">
-            {c.countries_line}
+            {stripEmoji(c.countries_line)}
           </p>
         </ScrollAnimation>
       </div>

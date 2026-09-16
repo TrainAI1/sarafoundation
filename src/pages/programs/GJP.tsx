@@ -92,47 +92,65 @@ export default function ProgramGJP() {
       <Navbar />
       <main id="main-content">
         {/* Hero */}
-        <section className="relative pt-28 md:pt-36 pb-16 md:pb-20 overflow-hidden bg-primary/5">
-          <div className="section-container relative px-4">
+        <section className="pt-24 md:pt-32 pb-12 md:pb-20 bg-primary relative overflow-hidden">
+          <div className="section-container relative z-10">
             <div className="grid lg:grid-cols-2 gap-8 md:gap-12 items-center">
-              <div className="text-left">
-                <span className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.18em] text-primary mb-5">
+              <div className="px-4 lg:px-0">
+                <span className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.18em] text-white/80 mb-6">
+                  <Compass className="w-3 h-3 md:w-4 md:h-4 text-accent" aria-hidden="true" />
                   {c.hero_badge}
                 </span>
-                <h1 className="font-display text-3xl md:text-5xl lg:text-6xl font-bold text-foreground tracking-tight leading-tight mb-5">
-                  {c.hero_headline_prefix} <span className="text-primary">{c.hero_headline_highlight}</span>
+                <h1 className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 md:mb-6 leading-tight">
+                  {c.hero_headline_prefix} {c.hero_headline_highlight}
                 </h1>
-                <p className="text-base md:text-lg text-muted-foreground max-w-2xl mx-0 mb-8">
+                <p className="text-base md:text-xl text-white/70 leading-relaxed mb-6 md:mb-8">
                   {c.hero_description}
                 </p>
-                <div className="flex flex-col sm:flex-row gap-3 justify-start">
-                  <Button asChild size="lg" className="rounded-xl glow-effect">
+                <div className="flex flex-col sm:flex-row gap-3 md:gap-4">
+                  <Button variant="hero" size="lg" className="group" asChild>
                     <Link to="/programs/gjp/apply">
-                      {c.apply_cta_label} <ArrowRight className="w-4 h-4" />
+                      {c.apply_cta_label}
+                      <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                     </Link>
                   </Button>
-                  <Button asChild size="lg" variant="outline" className="rounded-xl">
+                  <Button variant="heroSecondary" size="lg" asChild>
                     <Link to="/projects">{c.evidence_cta_label}</Link>
                   </Button>
                 </div>
-                <p className="text-xs text-muted-foreground mt-3">
+                <p className="text-xs text-white/60 mt-4">
                   Already applied?{" "}
-                  <Link to="/programs/gjp/status" className="text-primary hover:underline font-medium">
+                  <Link to="/programs/gjp/status" className="text-white underline underline-offset-4 font-medium">
                     Check your application status
                   </Link>
                 </p>
               </div>
-              <div className="mx-4 lg:mx-0">
-                <div className="rounded-2xl md:rounded-3xl overflow-hidden shadow-2xl">
+
+              <div className="relative mx-4 lg:mx-0">
+                <div className="rounded-2xl md:rounded-3xl overflow-hidden shadow-2xl mb-6 bg-white">
                   <img
                     src={heroImage}
                     alt="An EJP mentoring or knowledge session in progress"
-                    className="w-full h-56 md:h-80 object-cover"
+                    className="w-full max-h-64 md:max-h-80 object-contain"
                     loading="eager"
                     onError={(e) => {
                       e.currentTarget.src = mentorshipSession;
                     }}
                   />
+                </div>
+                <div className="glass-card-dark p-6 md:p-8 rounded-2xl md:rounded-3xl">
+                  <div className="grid grid-cols-3 gap-4 md:gap-6">
+                    {evidence.slice(0, 3).map((stat) => (
+                      <div key={stat.label} className="text-center p-2 md:p-4">
+                        <div className="text-2xl sm:text-3xl md:text-4xl font-bold font-display text-white mb-1 md:mb-2">
+                          {stat.value}
+                        </div>
+                        <div className="text-white/60 text-xs md:text-sm">{stat.label}</div>
+                      </div>
+                    ))}
+                  </div>
+                  <p className="text-center text-white/50 text-xs mt-4">
+                    Historical EJP activity. Referrals and training places are not confirmed placements.
+                  </p>
                 </div>
               </div>
             </div>

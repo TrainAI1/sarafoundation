@@ -6,6 +6,7 @@ import { Helmet } from "react-helmet-async";
 import { ArrowRight, GraduationCap, Users, Compass, Search, PenTool, Route, HeartHandshake, BarChart3 } from "lucide-react";
 import { usePageContent } from "@/hooks/usePageContent";
 import { assetUrl } from "@/lib/assetUrl";
+import { usePathwayImages } from "@/hooks/usePathwayImages";
 import studentsLabImg from "@/assets/students-tech-lab.jpg";
 import womenTechLeaders from "@/assets/women-tech-leaders.jpg";
 import graduatesCelebration from "@/assets/graduates-celebration.jpg";
@@ -19,6 +20,7 @@ const pathwayMeta: Record<string, { icon: typeof GraduationCap; image: string }>
 };
 
 const OurWork = () => {
+  const pathwayImages = usePathwayImages();
   const { data: c } = usePageContent("our-work-page", {
     hero_badge: "Our Work",
     hero_headline: "How We Turn Our Tech Learning, Inclusion and Community Purpose Into Action",
@@ -82,7 +84,8 @@ const OurWork = () => {
 
   const pathways = c.pathways.map((pathway: { code: string; title: string; description: string; image: string; imageAlt: string; href: string; cta: string }) => {
     const meta = pathwayMeta[pathway.code] ?? pathwayMeta.CAP;
-    return { ...pathway, icon: meta.icon, image: assetUrl(pathway.image || meta.image) };
+    const shared = pathwayImages[pathway.code as "CAP" | "FLIP" | "EJP"];
+    return { ...pathway, icon: meta.icon, image: shared || assetUrl(pathway.image || meta.image) };
   });
 
   return (
@@ -155,19 +158,22 @@ const OurWork = () => {
                 </li>
               ))}
             </ol>
-          </div>
-        </section>
 
-        {/* Access support */}
-        <section className="py-12 md:py-16 bg-secondary/50">
-          <div className="section-container">
-            <div className="max-w-3xl mx-auto text-center px-4">
-              <h2 className="font-display text-2xl md:text-3xl font-bold text-foreground mb-4">
-                {c.access_support_headline}
-              </h2>
-              <p className="text-muted-foreground leading-relaxed">
-                {c.access_support_description}
-              </p>
+            {/* Access support — part of how we deliver, not a standalone section */}
+            <div className="mt-8 md:mt-10 card-modern p-6 md:p-8 bg-secondary/50 border-primary/20">
+              <div className="flex flex-col md:flex-row md:items-start gap-4 md:gap-6">
+                <span className="inline-flex items-center justify-center w-11 h-11 rounded-xl bg-primary/10 text-primary flex-shrink-0">
+                  <HeartHandshake className="w-5 h-5" aria-hidden="true" />
+                </span>
+                <div>
+                  <h3 className="font-display text-xl md:text-2xl font-bold text-foreground mb-2">
+                    {c.access_support_headline}
+                  </h3>
+                  <p className="text-muted-foreground leading-relaxed">
+                    {c.access_support_description}
+                  </p>
+                </div>
+              </div>
             </div>
           </div>
         </section>
