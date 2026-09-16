@@ -14,6 +14,8 @@ import {
   BriefcaseBusiness,
 } from "lucide-react";
 import { usePageContent } from "@/hooks/usePageContent";
+import { ScrollAnimation, StaggerContainer, StaggerItem } from "@/components/ui/scroll-animation";
+
 import { assetUrl } from "@/lib/assetUrl";
 import mentorshipSession from "@/assets/mentorship-session.jpg";
 import graduatesCelebration from "@/assets/graduates-celebration.jpg";
