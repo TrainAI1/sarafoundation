@@ -19,6 +19,8 @@ import { ScrollAnimation, StaggerContainer, StaggerItem } from "@/components/ui/
 import { assetUrl } from "@/lib/assetUrl";
 import mentorshipSession from "@/assets/mentorship-session.jpg";
 import graduatesCelebration from "@/assets/graduates-celebration.jpg";
+import studentsTechLab from "@/assets/students-tech-lab.jpg";
+
 
 // Icons are matched to the saved list by position and are not admin-editable.
 const activityIcons = [Lightbulb, BookOpen, Users, Compass, Share2, BriefcaseBusiness];
