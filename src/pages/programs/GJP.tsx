@@ -16,6 +16,9 @@ import {
 import { usePageContent } from "@/hooks/usePageContent";
 import { assetUrl } from "@/lib/assetUrl";
 import mentorshipSession from "@/assets/mentorship-session.jpg";
+import techConference from "@/assets/tech-conference.jpg";
+import graduatesCelebration from "@/assets/graduates-celebration.jpg";
+import youngDeveloper from "@/assets/young-developer.jpg";
 
 // Icons are matched to the saved list by position and are not admin-editable.
 const activityIcons = [Lightbulb, BookOpen, Users, Compass, Share2, BriefcaseBusiness];
@@ -59,6 +62,9 @@ export default function ProgramGJP() {
     hero_headline_highlight: "Sessions",
     hero_description: "EJP supports continued learning through practical and experiential opportunities that complement participants' wider educational journeys.",
     hero_image: "",
+    activities_image: "",
+    evidence_image: "",
+    journeys_image: "",
     apply_cta_label: "Express interest",
     evidence_cta_label: "See our impact evidence",
     no_guarantee_text: "Sara Foundation Africa does not guarantee or promise employment through EJP. Where employment, internship or placement outcomes are mentioned, they are examples of participants' continued journeys following learning, or referrals to opportunities held by other organisations.",
@@ -73,6 +79,9 @@ export default function ProgramGJP() {
   }));
   const evidence = c.evidence as typeof evidenceDefault;
   const heroImage = c.hero_image ? assetUrl(c.hero_image) : mentorshipSession;
+  const activitiesImage = c.activities_image ? assetUrl(c.activities_image) : techConference;
+  const evidenceImage = c.evidence_image ? assetUrl(c.evidence_image) : youngDeveloper;
+  const journeysImage = c.journeys_image ? assetUrl(c.journeys_image) : graduatesCelebration;
 
   return (
     <div className="min-h-screen bg-background">
@@ -172,9 +181,22 @@ export default function ProgramGJP() {
         {/* Activities */}
         <section className="py-14 md:py-20">
           <div className="section-container px-4 max-w-5xl">
-            <div className="text-center mb-10 md:mb-14">
-              <span className="section-badge mb-4">What EJP Includes</span>
-              <h2 className="section-title text-foreground">Activities that extend learning</h2>
+            <div className="grid lg:grid-cols-2 gap-8 md:gap-12 items-center mb-10 md:mb-14">
+              <div className="rounded-2xl md:rounded-3xl overflow-hidden shadow-xl">
+                <img
+                  src={activitiesImage}
+                  alt="Participants taking part in an EJP knowledge session"
+                  className="w-full h-56 md:h-72 object-cover"
+                  loading="lazy"
+                  onError={(e) => {
+                    e.currentTarget.src = techConference;
+                  }}
+                />
+              </div>
+              <div>
+                <span className="section-badge mb-4">What EJP Includes</span>
+                <h2 className="section-title text-foreground">Activities that extend learning</h2>
+              </div>
             </div>
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
               {activities.map((activity) => (
@@ -210,31 +232,57 @@ export default function ProgramGJP() {
                 </div>
               ))}
             </div>
+            <div className="mt-8 md:mt-10 rounded-2xl md:rounded-3xl overflow-hidden shadow-xl">
+              <img
+                src={evidenceImage}
+                alt="An EJP participant working on a laptop during a work-readiness session"
+                className="w-full h-48 md:h-64 object-cover"
+                loading="lazy"
+                onError={(e) => {
+                  e.currentTarget.src = youngDeveloper;
+                }}
+              />
+            </div>
           </div>
         </section>
 
         {/* Continued journeys */}
         <section className="py-14 md:py-20">
-          <div className="section-container px-4 max-w-3xl text-center">
-            <span className="section-badge mb-4">Continued Journeys</span>
-            <h2 className="section-title text-foreground mb-5">
-              What participants have gone on to do
-            </h2>
-            <p className="text-muted-foreground text-base md:text-lg mb-6">
-              {c.continued_journeys_text}
-            </p>
-            <p className="text-xs text-muted-foreground mb-8">
-              Verified continued-journey outcomes are documented in our annual impact reports and participant spotlights.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-3 justify-center">
-              <Button asChild size="lg" className="rounded-xl glow-effect">
-                <Link to="/blog">
-                  Read learner stories <ArrowRight className="w-4 h-4" />
-                </Link>
-              </Button>
-              <Button asChild size="lg" variant="outline" className="rounded-xl">
-                <Link to="/partnership">Partner with us</Link>
-              </Button>
+          <div className="section-container px-4">
+            <div className="grid lg:grid-cols-2 gap-8 md:gap-12 items-center max-w-5xl mx-auto">
+              <div>
+                <span className="section-badge mb-4">Continued Journeys</span>
+                <h2 className="section-title text-foreground mb-5">
+                  What participants have gone on to do
+                </h2>
+                <p className="text-muted-foreground text-base md:text-lg mb-6">
+                  {c.continued_journeys_text}
+                </p>
+                <p className="text-xs text-muted-foreground mb-8">
+                  Verified continued-journey outcomes are documented in our annual impact reports and participant spotlights.
+                </p>
+                <div className="flex flex-col sm:flex-row gap-3">
+                  <Button asChild size="lg" className="rounded-xl glow-effect">
+                    <Link to="/blog">
+                      Read learner stories <ArrowRight className="w-4 h-4" />
+                    </Link>
+                  </Button>
+                  <Button asChild size="lg" variant="outline" className="rounded-xl">
+                    <Link to="/partnership">Partner with us</Link>
+                  </Button>
+                </div>
+              </div>
+              <div className="rounded-2xl md:rounded-3xl overflow-hidden shadow-xl order-first lg:order-last">
+                <img
+                  src={journeysImage}
+                  alt="Graduates celebrating after completing their learning journey"
+                  className="w-full h-56 md:h-80 object-cover"
+                  loading="lazy"
+                  onError={(e) => {
+                    e.currentTarget.src = graduatesCelebration;
+                  }}
+                />
+              </div>
             </div>
           </div>
         </section>
