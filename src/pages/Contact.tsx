@@ -165,15 +165,15 @@ export default function Contact() {
           <img 
             src={contactContent.hero_image ? assetUrl(contactContent.hero_image) : communityWorkshop} 
             alt="Sara Foundation community"
-            className="w-full h-full object-cover opacity-15"
+            className="w-full h-full object-cover"
             onError={(e) => { e.currentTarget.src = communityWorkshop; }}
           />
-          <div className="absolute inset-0 bg-primary" />
+          <div className="absolute inset-0 bg-primary/85" />
         </div>
         <div className="section-container relative z-10">
           <div className="max-w-3xl px-4">
             <span className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.18em] text-white/80 mb-4 mb-6">
-              <MessageSquare className="w-3 h-3 md:w-4 md:h-4 text-accent" />
+              <MessageSquare className="w-3 h-3 md:w-4 md:h-4 text-primary-foreground" />
               Get in Touch
             </span>
             <h1 className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 md:mb-6 leading-tight">

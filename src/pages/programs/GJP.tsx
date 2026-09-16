@@ -16,9 +16,7 @@ import {
 import { usePageContent } from "@/hooks/usePageContent";
 import { assetUrl } from "@/lib/assetUrl";
 import mentorshipSession from "@/assets/mentorship-session.jpg";
-import techConference from "@/assets/tech-conference.jpg";
 import graduatesCelebration from "@/assets/graduates-celebration.jpg";
-import youngDeveloper from "@/assets/young-developer.jpg";
 
 // Icons are matched to the saved list by position and are not admin-editable.
 const activityIcons = [Lightbulb, BookOpen, Users, Compass, Share2, BriefcaseBusiness];
@@ -62,8 +60,6 @@ export default function ProgramGJP() {
     hero_headline_highlight: "Sessions",
     hero_description: "EJP supports continued learning through practical and experiential opportunities that complement participants' wider educational journeys.",
     hero_image: "",
-    activities_image: "",
-    evidence_image: "",
     journeys_image: "",
     apply_cta_label: "Express interest",
     evidence_cta_label: "See our impact evidence",
@@ -79,8 +75,6 @@ export default function ProgramGJP() {
   }));
   const evidence = c.evidence as typeof evidenceDefault;
   const heroImage = c.hero_image ? assetUrl(c.hero_image) : mentorshipSession;
-  const activitiesImage = c.activities_image ? assetUrl(c.activities_image) : techConference;
-  const evidenceImage = c.evidence_image ? assetUrl(c.evidence_image) : youngDeveloper;
   const journeysImage = c.journeys_image ? assetUrl(c.journeys_image) : graduatesCelebration;
 
   return (
@@ -106,7 +100,7 @@ export default function ProgramGJP() {
             <div className="grid lg:grid-cols-2 gap-8 md:gap-12 items-center">
               <div className="px-4 lg:px-0">
                 <span className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.18em] text-white/80 mb-6">
-                  <Compass className="w-3 h-3 md:w-4 md:h-4 text-accent" aria-hidden="true" />
+                  <Compass className="w-3 h-3 md:w-4 md:h-4 text-primary-foreground" aria-hidden="true" />
                   {c.hero_badge}
                 </span>
                 <h1 className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 md:mb-6 leading-tight">
@@ -181,22 +175,9 @@ export default function ProgramGJP() {
         {/* Activities */}
         <section className="py-14 md:py-20">
           <div className="section-container px-4 max-w-5xl">
-            <div className="grid lg:grid-cols-2 gap-8 md:gap-12 items-center mb-10 md:mb-14">
-              <div className="rounded-2xl md:rounded-3xl overflow-hidden shadow-xl">
-                <img
-                  src={activitiesImage}
-                  alt="Participants taking part in an EJP knowledge session"
-                  className="w-full h-56 md:h-72 object-cover"
-                  loading="lazy"
-                  onError={(e) => {
-                    e.currentTarget.src = techConference;
-                  }}
-                />
-              </div>
-              <div>
-                <span className="section-badge mb-4">What EJP Includes</span>
-                <h2 className="section-title text-foreground">Activities that extend learning</h2>
-              </div>
+            <div className="max-w-3xl mb-10 md:mb-14">
+              <span className="section-badge mb-4">What EJP Includes</span>
+              <h2 className="section-title text-foreground">Activities that extend learning</h2>
             </div>
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
               {activities.map((activity) => (
@@ -231,17 +212,6 @@ export default function ProgramGJP() {
                   <p className="text-sm text-muted-foreground leading-relaxed">{item.sub}</p>
                 </div>
               ))}
-            </div>
-            <div className="mt-8 md:mt-10 rounded-2xl md:rounded-3xl overflow-hidden shadow-xl">
-              <img
-                src={evidenceImage}
-                alt="An EJP participant working on a laptop during a work-readiness session"
-                className="w-full h-48 md:h-64 object-cover"
-                loading="lazy"
-                onError={(e) => {
-                  e.currentTarget.src = youngDeveloper;
-                }}
-              />
             </div>
           </div>
         </section>

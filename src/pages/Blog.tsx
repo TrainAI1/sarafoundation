@@ -138,7 +138,7 @@ export default function Blog() {
           <div className="grid lg:grid-cols-2 gap-8 md:gap-12 items-center">
             <div>
               <span className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.18em] text-white/80 mb-4 mb-6">
-                <Newspaper className="w-3 h-3 md:w-4 md:h-4 text-accent" />
+                <Newspaper className="w-3 h-3 md:w-4 md:h-4 text-primary-foreground" />
                 {hero.badge}
               </span>
               <h1 className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 md:mb-6 leading-tight">
@@ -150,7 +150,7 @@ export default function Blog() {
 
               <div className="glass-card-dark p-4 md:p-6 rounded-2xl md:rounded-3xl max-w-lg">
                 <div className="flex items-center gap-2 mb-3">
-                  <Mail className="w-4 h-4 text-accent" aria-hidden="true" />
+                  <Mail className="w-4 h-4 text-primary-foreground" aria-hidden="true" />
                   <p className="text-white text-sm font-semibold">Get new stories in your inbox</p>
                 </div>
                 <form
