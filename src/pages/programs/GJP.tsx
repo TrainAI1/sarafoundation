@@ -181,9 +181,22 @@ export default function ProgramGJP() {
         {/* Activities */}
         <section className="py-14 md:py-20">
           <div className="section-container px-4 max-w-5xl">
-            <div className="text-center mb-10 md:mb-14">
-              <span className="section-badge mb-4">What EJP Includes</span>
-              <h2 className="section-title text-foreground">Activities that extend learning</h2>
+            <div className="grid lg:grid-cols-2 gap-8 md:gap-12 items-center mb-10 md:mb-14">
+              <div className="rounded-2xl md:rounded-3xl overflow-hidden shadow-xl">
+                <img
+                  src={activitiesImage}
+                  alt="Participants taking part in an EJP knowledge session"
+                  className="w-full h-56 md:h-72 object-cover"
+                  loading="lazy"
+                  onError={(e) => {
+                    e.currentTarget.src = techConference;
+                  }}
+                />
+              </div>
+              <div>
+                <span className="section-badge mb-4">What EJP Includes</span>
+                <h2 className="section-title text-foreground">Activities that extend learning</h2>
+              </div>
             </div>
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
               {activities.map((activity) => (
