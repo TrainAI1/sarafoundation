@@ -229,7 +229,7 @@ export default function About() {
                 {hero.description}
               </p>
               <div className="flex items-center gap-3 bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl px-4 py-3 max-w-md">
-                <Trophy className="w-8 h-8 text-accent flex-shrink-0" />
+                <Trophy className="w-8 h-8 text-primary-foreground flex-shrink-0" />
                 <div>
                   <p className="font-display font-bold text-white text-sm md:text-base leading-snug">
                     London & South East England Prestige Awards 2025/26

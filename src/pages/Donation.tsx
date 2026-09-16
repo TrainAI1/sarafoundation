@@ -117,7 +117,7 @@ export default function Donation() {
           <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
             <div className="max-w-xl px-4">
               <span className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.18em] text-white/80 mb-4 mb-6">
-                <Heart className="w-3 h-3 md:w-4 md:h-4 text-accent" />
+                <Heart className="w-3 h-3 md:w-4 md:h-4 text-primary-foreground" />
                 Donate
               </span>
               <h1 className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 md:mb-6 leading-tight">

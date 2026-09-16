@@ -34,8 +34,8 @@ export function FLIPHeroSection() {
       <div className="section-container relative z-10">
         <div className="grid lg:grid-cols-2 gap-8 md:gap-12 items-center">
           <div className="px-4 lg:px-0">
-            <span className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.18em] text-white/80 mb-4 mb-6">
-              <Users className="w-3 h-3 md:w-4 md:h-4" />
+            <span className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.18em] text-white/80 mb-6">
+              <Users className="w-3 h-3 md:w-4 md:h-4 text-primary-foreground" />
               {c.badge}
             </span>
             <h1 className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 md:mb-6 leading-tight">
