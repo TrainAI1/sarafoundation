@@ -89,7 +89,7 @@ export function FLIPInitiativesSection() {
         </div>
 
         <StaggerContainer className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 px-4 lg:px-0" staggerDelay={0.1}>
-          {initiatives.map((initiative, index) => {
+          {initiatives.map((initiative) => {
             const Icon = initiativeIcons[initiative.id] ?? Award;
             const fallbackImage = initiativeFallbackImages[initiative.id] ?? womenTechLeaders;
             const savedImage = initiative.image ? assetUrl(initiative.image) : "";
@@ -97,13 +97,13 @@ export function FLIPInitiativesSection() {
               ? savedImage
               : fallbackImage;
             return (
-              <StaggerItem key={initiative.id ?? initiative.name} variant="fade-up" className={index === 0 ? "md:col-span-2 lg:col-span-2" : ""}>
-              <article className={`card-modern overflow-hidden h-full ${index === 0 ? "md:grid md:grid-cols-2" : "flex flex-col"}`}>
+              <StaggerItem key={initiative.id ?? initiative.name} variant="fade-up">
+              <article className="card-modern overflow-hidden h-full flex flex-col">
                 <img
                   src={image}
                   alt={initiative.imageAlt}
                   loading="lazy"
-                  className={`w-full object-cover ${index === 0 ? "h-56 md:h-full min-h-72" : "h-44 md:h-48"}`}
+                  className="w-full h-44 md:h-48 object-cover"
                 />
                 <div className="p-6 flex flex-col flex-1">
                   <span className="inline-flex items-center justify-center w-11 h-11 rounded-xl bg-accent/10 text-accent mb-4">

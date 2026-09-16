@@ -15,3 +15,5 @@
 - [x] Refresh dense CAP page card grids while preserving all content.
 - [x] Refresh dense FLIP page card grids while preserving all content.
 - [x] Verify CAP and FLIP desktop and mobile layouts, images, and content.
+- [ ] Add editable photos to the featured CAP and FLIP benefit cards.
+- [ ] Restore the equal-card FLIP initiatives layout and verify card spacing.
