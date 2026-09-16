@@ -159,48 +159,112 @@ export default function ProgramGJP() {
         </section>
 
         {/* Activities */}
-        <section className="py-14 md:py-20">
-          <div className="section-container px-4 max-w-5xl">
-            <div className="max-w-3xl mb-10 md:mb-14">
+        <section className="py-14 md:py-20 bg-secondary/40 relative overflow-hidden">
+          <div className="section-container px-4 max-w-5xl relative z-10">
+            <ScrollAnimation variant="fade-up" className="max-w-3xl mb-10 md:mb-14">
               <span className="section-badge mb-4">What EJP Includes</span>
               <h2 className="section-title text-foreground">Activities that extend learning</h2>
-            </div>
-            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
-              {activities.map((activity) => (
-                <div key={activity.title} className="card-modern p-6 h-full">
-                  <span className="inline-flex items-center justify-center w-11 h-11 rounded-xl bg-primary/10 text-primary mb-4">
-                    <activity.icon className="w-5 h-5" aria-hidden="true" />
-                  </span>
-                  <h3 className="font-display font-bold text-foreground mb-2">{activity.title}</h3>
-                  <p className="text-sm text-muted-foreground leading-relaxed">{activity.desc}</p>
-                </div>
-              ))}
-            </div>
+            </ScrollAnimation>
+
+            <StaggerContainer className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6" staggerDelay={0.12}>
+              {activities.map((activity, i) => {
+                const feature = i === 0;
+                return (
+                  <StaggerItem
+                    key={activity.title}
+                    variant="fade-up"
+                    className={feature ? "sm:col-span-2 lg:col-span-2 lg:row-span-2" : ""}
+                  >
+                    <div
+                      className={`card-modern group h-full flex ${
+                        feature
+                          ? "flex-col justify-between p-7 md:p-9 bg-primary text-primary-foreground border-primary"
+                          : "flex-col p-6"
+                      }`}
+                    >
+                      <div className="flex items-start justify-between gap-4 mb-4">
+                        <span
+                          className={`inline-flex items-center justify-center w-11 h-11 rounded-xl ${
+                            feature ? "bg-white/15 text-white" : "bg-primary/10 text-primary"
+                          }`}
+                        >
+                          <activity.icon className="w-5 h-5" aria-hidden="true" />
+                        </span>
+                        <span
+                          className={`font-display text-sm font-bold tabular-nums ${
+                            feature ? "text-white/50" : "text-muted-foreground/50"
+                          }`}
+                        >
+                          {String(i + 1).padStart(2, "0")}
+                        </span>
+                      </div>
+                      <div className={feature ? "mt-auto" : ""}>
+                        <h3
+                          className={`font-display font-bold mb-2 ${
+                            feature ? "text-2xl md:text-3xl text-white" : "text-foreground"
+                          }`}
+                        >
+                          {activity.title}
+                        </h3>
+                        <p
+                          className={`leading-relaxed ${
+                            feature ? "text-base text-white/80 max-w-md" : "text-sm text-muted-foreground"
+                          }`}
+                        >
+                          {activity.desc}
+                        </p>
+                      </div>
+                    </div>
+                  </StaggerItem>
+                );
+              })}
+            </StaggerContainer>
           </div>
         </section>
 
         {/* Evidence with context */}
-        <section className="py-14 md:py-20 bg-secondary/30">
+        <section className="py-14 md:py-20">
           <div className="section-container px-4 max-w-5xl">
-            <div className="text-center mb-10">
+            <ScrollAnimation variant="fade-up" className="text-center mb-10">
               <span className="section-badge mb-4">Historical Activity, In Context</span>
               <h2 className="section-title text-foreground mb-4">What EJP activity has delivered</h2>
               <p className="section-subtitle mx-auto max-w-2xl">
                 Every figure below is labelled with what it actually counts. Referrals, training places and
                 sessions measure different things and are not unique individuals.
               </p>
-            </div>
-            <div className="grid sm:grid-cols-2 gap-4 md:gap-6">
-              {evidence.map((item) => (
-                <div key={item.label} className="card-modern p-6 h-full">
-                  <div className="text-4xl font-bold font-display text-primary mb-2">{item.value}</div>
-                  <h3 className="font-display font-bold text-foreground mb-2">{item.label}</h3>
-                  <p className="text-sm text-muted-foreground leading-relaxed">{item.sub}</p>
-                </div>
+            </ScrollAnimation>
+            <StaggerContainer className="grid gap-4 md:gap-6 sm:grid-cols-2" staggerDelay={0.1}>
+              {evidence.map((item, i) => (
+                <StaggerItem
+                  key={item.label}
+                  variant="fade-up"
+                  className={i === 0 ? "sm:col-span-2" : ""}
+                >
+                  <div
+                    className={`card-modern h-full ${
+                      i === 0
+                        ? "p-6 md:p-8 bg-accent/5 border-accent/20 flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-8"
+                        : "p-6 flex flex-col"
+                    }`}
+                  >
+                    <div
+                      className={`font-bold font-display text-primary ${
+                        i === 0 ? "text-5xl md:text-6xl sm:w-44 flex-shrink-0" : "text-4xl mb-2"
+                      }`}
+                    >
+                      {item.value}
+                    </div>
+                    <div>
+                      <h3 className="font-display font-bold text-foreground mb-2">{item.label}</h3>
+                      <p className="text-sm text-muted-foreground leading-relaxed">{item.sub}</p>
+                    </div>
+                  </div>
+                </StaggerItem>
               ))}
-            </div>
+            </StaggerContainer>
           </div>
         </section>
+
 
         {/* Continued journeys */}
         <section className="py-14 md:py-20">
