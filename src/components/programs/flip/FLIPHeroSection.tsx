@@ -57,26 +57,25 @@ export function FLIPHeroSection() {
             </div>
           </div>
 
-          {/* Stats with Image */}
           <div className="relative mx-4 lg:mx-0">
-            <div className="rounded-2xl md:rounded-3xl overflow-hidden shadow-2xl mb-6">
+            <div className="rounded-2xl md:rounded-3xl overflow-hidden shadow-2xl relative">
               <img
                 src={heroImage}
                 alt="Women taking part in a FLIP learning and mentoring session"
-                className="w-full h-48 md:h-64 object-cover"
+                className="w-full h-72 md:h-[27rem] object-cover"
                 onError={(e) => {
                   e.currentTarget.src = womenTechLeaders;
                 }}
               />
-            </div>
-            <div className="glass-card-dark p-6 md:p-8 rounded-2xl md:rounded-3xl">
-              <div className="grid grid-cols-2 gap-4 md:gap-6">
+              <div className="absolute inset-x-3 bottom-3 rounded-xl bg-accent/90 backdrop-blur-md p-4 md:p-5">
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
                 {stats.map((stat) => (
-                  <div key={stat.label} className="text-center p-2 md:p-4">
-                    <div className="text-2xl sm:text-3xl md:text-4xl font-bold font-display text-white mb-1 md:mb-2">{stat.value}</div>
-                    <div className="text-white/60 text-xs md:text-sm">{stat.label}</div>
+                  <div key={stat.label} className="text-center border-r border-accent-foreground/20 even:border-r-0 md:even:border-r md:last:border-r-0 px-1">
+                    <div className="text-xl md:text-2xl font-bold font-display text-accent-foreground mb-1">{stat.value}</div>
+                    <div className="text-accent-foreground/70 text-[10px] md:text-xs">{stat.label}</div>
                   </div>
                 ))}
+              </div>
               </div>
             </div>
           </div>

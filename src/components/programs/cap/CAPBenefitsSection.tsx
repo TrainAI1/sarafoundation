@@ -1,5 +1,6 @@
 import { BookOpen, Users, Presentation, Trophy, Wrench, MessagesSquare, Share2, Lightbulb, HeartHandshake } from "lucide-react";
 import { usePageContent } from "@/hooks/usePageContent";
+import { StaggerContainer, StaggerItem } from "@/components/ui/scroll-animation";
 
 const benefitIcons = [BookOpen, Users, Lightbulb, Trophy, Wrench, MessagesSquare, Presentation, Share2, HeartHandshake];
 
@@ -29,20 +30,23 @@ export function CAPBenefitsSection() {
           <span className="section-badge mb-4 md:mb-6">{c.badge}</span>
           <h2 className="section-title text-foreground mb-4 md:mb-6">{c.headline}</h2>
         </div>
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 px-4 lg:px-0">
+        <StaggerContainer className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 px-4 lg:px-0" staggerDelay={0.08}>
           {benefits.map((benefit, index) => {
             const Icon = benefitIcons[index % benefitIcons.length];
+            const featured = index === 0;
             return (
-              <div key={benefit.title} className="card-modern p-5 md:p-6 h-full">
-                <span className="inline-flex items-center justify-center w-11 h-11 rounded-xl bg-primary/10 text-primary mb-4">
+              <StaggerItem key={benefit.title} variant="fade-up" className={featured ? "sm:col-span-2 lg:col-span-2 lg:row-span-2" : ""}>
+              <div className={`card-modern p-5 md:p-6 h-full flex flex-col ${featured ? "bg-primary border-primary justify-end min-h-64 md:p-8" : ""}`}>
+                <span className={`inline-flex items-center justify-center w-11 h-11 rounded-xl mb-4 ${featured ? "bg-primary-foreground/15 text-primary-foreground" : "bg-primary/10 text-primary"}`}>
                   <Icon className="w-5 h-5" aria-hidden="true" />
                 </span>
-                <h3 className="font-display font-bold text-base text-foreground mb-2">{benefit.title}</h3>
-                <p className="text-muted-foreground text-sm leading-relaxed">{benefit.description}</p>
+                <h3 className={`font-display font-bold mb-2 ${featured ? "text-2xl md:text-3xl text-primary-foreground" : "text-base text-foreground"}`}>{benefit.title}</h3>
+                <p className={`text-sm leading-relaxed ${featured ? "text-primary-foreground/75 max-w-md" : "text-muted-foreground"}`}>{benefit.description}</p>
               </div>
+              </StaggerItem>
             );
           })}
-        </div>
+        </StaggerContainer>
       </div>
     </section>
   );

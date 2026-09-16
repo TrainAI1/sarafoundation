@@ -55,12 +55,12 @@ export function CAPImpactSection() {
           </ScrollAnimation>
         </div>
 
-        <StaggerContainer className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 px-4 lg:px-0" staggerDelay={0.08}>
+        <StaggerContainer className="grid sm:grid-cols-2 lg:grid-cols-3 gap-x-8 px-4 lg:px-0 border-y border-border" staggerDelay={0.08}>
           {stats.map((stat) => (
-            <StaggerItem key={stat.label} variant="scale-in">
-              <div className="card-modern p-5 md:p-6 text-center h-full">
-                <div className="text-3xl md:text-4xl font-bold font-display text-primary mb-2">{stat.value}</div>
-                <h3 className="font-display font-bold text-sm text-foreground mb-1">{stat.label}</h3>
+            <StaggerItem key={stat.label} variant="fade-up">
+              <div className="py-6 md:py-7 border-b border-border h-full">
+                <div className="text-3xl md:text-4xl font-bold font-display text-primary mb-3 tabular-nums">{stat.value}</div>
+                <h3 className="font-display font-bold text-sm text-foreground mb-1.5">{stat.label}</h3>
                 <p className="text-muted-foreground text-xs leading-relaxed">{stat.sub}</p>
               </div>
             </StaggerItem>

@@ -1,5 +1,6 @@
 import { GraduationCap, Crown, Network, Users, DollarSign, Megaphone, LucideIcon } from "lucide-react";
 import { usePageContent } from "@/hooks/usePageContent";
+import { StaggerContainer, StaggerItem } from "@/components/ui/scroll-animation";
 
 const benefitIcons: LucideIcon[] = [GraduationCap, Crown, Network, Users, DollarSign, Megaphone];
 
@@ -58,24 +59,27 @@ export function FLIPBenefitsSection() {
           </p>
         </div>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 px-4 lg:px-0">
+        <StaggerContainer className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 px-4 lg:px-0" staggerDelay={0.08}>
           {benefits.map((benefit, index) => {
             const Icon = benefitIcons[index % benefitIcons.length];
+            const featured = index === 0;
             return (
-              <div key={benefit.title} className="card-modern p-5 md:p-6 group">
-                <div className="w-12 h-12 md:w-14 md:h-14 rounded-xl bg-accent flex items-center justify-center mb-4 shadow-lg group-hover:scale-110 transition-transform">
-                  <Icon className="w-6 h-6 md:w-7 md:h-7 text-white" />
+              <StaggerItem key={benefit.title} variant="fade-up" className={featured ? "sm:col-span-2 lg:col-span-2 lg:row-span-2" : ""}>
+              <div className={`card-modern p-5 md:p-6 group h-full flex flex-col ${featured ? "bg-accent border-accent justify-end min-h-64 md:p-8" : ""}`}>
+                <div className={`w-12 h-12 md:w-14 md:h-14 rounded-xl flex items-center justify-center mb-4 transition-transform group-hover:scale-110 ${featured ? "bg-accent-foreground/15 text-accent-foreground" : "bg-accent/10 text-accent"}`}>
+                  <Icon className="w-6 h-6 md:w-7 md:h-7" />
                 </div>
-                <h3 className="font-display font-bold text-sm md:text-base text-foreground mb-2">
+                <h3 className={`font-display font-bold mb-2 ${featured ? "text-2xl md:text-3xl text-accent-foreground" : "text-sm md:text-base text-foreground"}`}>
                   {benefit.title}
                 </h3>
-                <p className="text-muted-foreground text-xs md:text-sm">
+                <p className={`text-xs md:text-sm ${featured ? "text-accent-foreground/75 max-w-md" : "text-muted-foreground"}`}>
                   {benefit.description}
                 </p>
               </div>
+              </StaggerItem>
             );
           })}
-        </div>
+        </StaggerContainer>
       </div>
     </section>
   );

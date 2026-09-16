@@ -53,30 +53,30 @@ export function CAPHeroSection() {
           </div>
 
           <div className="relative mx-4 lg:mx-0">
-            <div className="rounded-2xl md:rounded-3xl overflow-hidden shadow-2xl mb-6">
+            <div className="rounded-2xl md:rounded-3xl overflow-hidden shadow-2xl relative">
               <img
                 src={heroImage}
                 alt="CAP Tech Hub session in a university lecture hall with learners and a facilitator"
-                className="w-full h-48 md:h-64 object-cover"
+                className="w-full h-64 md:h-[25rem] object-cover"
                 onError={(e) => {
                   e.currentTarget.src = studentsLabImg;
                 }}
               />
-            </div>
-            <div className="glass-card-dark p-6 md:p-8 rounded-2xl md:rounded-3xl">
-              <div className="grid grid-cols-3 gap-4 md:gap-6">
+              <div className="absolute inset-x-3 bottom-3 rounded-xl bg-primary/90 backdrop-blur-md p-4 md:p-5">
+              <div className="grid grid-cols-3 gap-3 md:gap-5">
                 {c.stats.map((stat: { value: string; label: string }) => (
-                  <div key={stat.label} className="text-center p-2 md:p-4">
-                    <div className="text-2xl sm:text-3xl md:text-4xl font-bold font-display text-white mb-1 md:mb-2">
+                  <div key={stat.label} className="text-center border-r border-primary-foreground/20 last:border-r-0 px-1">
+                    <div className="text-xl sm:text-2xl md:text-3xl font-bold font-display text-primary-foreground mb-1">
                       {stat.value}
                     </div>
-                    <div className="text-white/60 text-xs md:text-sm">{stat.label}</div>
+                    <div className="text-primary-foreground/70 text-[10px] md:text-xs">{stat.label}</div>
                   </div>
                 ))}
               </div>
-              <p className="text-center text-white/50 text-xs mt-4">
+              <p className="text-center text-primary-foreground/60 text-[10px] mt-3">
                 {c.stats_caption}
               </p>
+              </div>
             </div>
           </div>
         </div>
